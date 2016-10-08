@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
+url: http://aobojaing.github.io
 title: My Octopress Blog
 subtitle: A blogging framework for hackers.
 author: Your Name
@@ -16,7 +16,7 @@ description:
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
+subscribe_rss: /git@github.com:AoboJaing/atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
