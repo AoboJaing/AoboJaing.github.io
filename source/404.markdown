@@ -1,0 +1,8 @@
+---
+layout: page
+title: "404 Not Found"
+date: 2016-10-9 17:52:37 +0800
+comments: fasle
+---
+
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
