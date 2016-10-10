@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-10T08:11:52+08:00</updated>
+  <updated>2016-10-10T10:10:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 自定义字体设置]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/"/>
+    <updated>2016-10-10T10:04:40+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>字体配置文件在 <code>octopress/sass/custom/</code> 文件里面：<code>_fonts.scss</code> 文件。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063413831.png" alt="Alt text" /></p>
+
+<p>默认情况下字体配置都是被注释掉的。我们将注释都去掉。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Optima", sans-serif;
+</span><span class='line'>$serif: "Baskerville", serif;
+</span><span class='line'>$mono: "Courier", monospace;
+</span><span class='line'>$heading-font-family: "Verdana", sans-serif;
+</span><span class='line'>$header-title-font-family: "Futura", sans-serif;
+</span><span class='line'>$header-subtitle-font-family: "Futura", sans-serif;</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>引号里面的是：<strong>字体名</strong>。后面跟的是：<code>sans-serif</code>(无衬线字体)、<code>serif</code>（衬线）、<code>monospace</code>（等宽字体）。</p></blockquote>
+
+<ul>
+<li><code>$sans</code>：定义的是无衬线正文的字体
+
+<ul>
+<li><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063715659.png" alt="Alt text" /></li>
+</ul>
+</li>
+<li><code>$serif</code>：定义的是衬线正文的字体</li>
+<li><code>$mono</code>：定义的是代码的字体</li>
+<li><code>$heading-font-family</code>：定义的是文章标题的字体</li>
+<li><code>$header-title-font-family</code>：定义的是博客标题的字体</li>
+<li><code>$header-subtitle-font-family</code>：定义的是博客子标题的字体</li>
+</ul>
+
+
+<p>我将它们修改为下面这样的配置。（就是将所有的字体都设置为：<code>Comic Sans MS</code>）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Comic Sans MS", sans-serif;
+</span><span class='line'>$serif: "Comic Sans MS", serif;
+</span><span class='line'>$mono: "Comic Sans MS", monospace;
+</span><span class='line'>$heading-font-family: "Comic Sans MS", sans-serif;
+</span><span class='line'>$header-title-font-family: "Comic Sans MS", sans-serif;
+</span><span class='line'>$header-subtitle-font-family: "Comic Sans MS", sans-serif;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在执行 <code>rake generate</code> 命令生成博客站点。在执行 <code>rake preview</code> 命令在本地开设4000端口。在浏览器中浏览 <code>localhost:4000</code> 端口进行预览。（效果不错。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064562554.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064543308.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>参考网站：
+利用Octopress和Github搭建个人博客（四）：自定义字体
+<a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决 GitHub for Windows 客户端软件中代码的中文显示乱码问题]]></title>

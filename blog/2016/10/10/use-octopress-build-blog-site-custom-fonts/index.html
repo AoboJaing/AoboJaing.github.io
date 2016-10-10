@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>AoboSir 的博客</title>
+  <title>Octopress 搭建静态博客站点 --- 自定义字体设置 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
@@ -25,7 +25,7 @@ $serif: "Baskerville", serif &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -70,15 +70,12 @@ $serif: "Baskerville", serif &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/">Octopress 搭建静态博客站点 --- 自定义字体设置</a></h1>
+      <h1 class="entry-title">Octopress 搭建静态博客站点 --- 自定义字体设置</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@ $serif: "Baskerville", serif &hellip;">
   </header>
 
 
-  <div class="entry-content"><hr />
+<div class="entry-content"><hr />
 
 <p>字体配置文件在 <code>octopress/sass/custom/</code> 文件里面：<code>_fonts.scss</code> 文件。</p>
 
@@ -161,79 +158,85 @@ $serif: "Baskerville", serif &hellip;">
 利用Octopress和Github搭建个人博客（四）：自定义字体
 <a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-10-10T10:04:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:04 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/">解决 GitHub for Windows 客户端软件中代码的中文显示乱码问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-10T07:47:34+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:47 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p><code>README.md</code> 文件里面是有中文的。在 <code>GitHub For Windows</code> 客户端软件里面显示中文是乱码的。</p>
-
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055346118.png" alt="Alt text" /></p>
-
-<p>解决办法：</p>
-
-<p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考这片博客来下载安装它。）</p>
-
-<p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
-
-<p><strong>Step 3 . </strong> 保存 <code>README.md</code> 文件</p>
-
-<p><strong>Step 4 . </strong> 将修改重新推送到 <strong>GitHub</strong> 远程。</p>
-
-<p>问题解决：</p>
-
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055880353.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p><strong>GitHub For Windows </strong> 客户端软件是一个非常好的软件，它实现了：即使你不会 <code>git</code> 命令行工具的时候，一样可以使用 <strong>GitHub For Windows </strong> 客户端软件里面简单点的点击按钮就可以一样将代码推送到 <strong>GitHub</strong> 远程。</p></blockquote>
-
-<hr />
-
-<blockquote><p>下载、安装、配置 <strong>GitHub For Windows </strong> 客户端软件的图文教程可以参考这篇博客。</p></blockquote>
-
-<hr />
-
-<blockquote><p>因为 <strong>GitHub</strong> 在推送代码到远程的时候，会自动将所有文件的编码方式转换为 <code>UTF-8</code> ，所有在网页里面浏览你的 <strong>GitHub</strong> 仓库的时候，中文是不会出现乱码的。
-但是在本地，要想在 <strong>GitHub For Windows</strong> 客户端软件里面也能正常看到 中文，而不是乱码，就要自己手动的将含有中文的文件转换为：<code>UTF-8</code>编码方法。（如果是 <strong>Windows</strong> 系统就要转为：<code>Utf-8 无 BOM</code> 编码格式）</p></blockquote>
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
 </div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/" title="Previous Post: 解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题">&laquo; 解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts" data-title="Octopress 搭建静态博客站点 --- 自定义字体设置" data-url="http://aobojaing.github.io /blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -257,6 +260,7 @@ $serif: "Baskerville", serif &hellip;">
 
   
 </aside>
+
 
     </div>
   </div>

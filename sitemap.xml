@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/</loc>
+<lastmod>2016-10-10T10:04:40+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/</loc>
 <lastmod>2016-10-10T07:47:34+08:00</lastmod>
 </url>
@@ -18,5 +22,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/git-slash-github/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/use-octopress-build-blog-site/</loc>
 </url>
 </urlset>
