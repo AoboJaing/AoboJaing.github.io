@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git/github | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/git-slash-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-10T10:10:04+08:00</updated>
+  <updated>2016-10-10T10:51:30+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -27,7 +27,7 @@
 <p>解决办法：</p>
 
 <p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考这片博客来下载安装它。）</p>
+（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://localhost:4000/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
 
 <p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
 

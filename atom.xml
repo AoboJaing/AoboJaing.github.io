@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-10T10:10:04+08:00</updated>
+  <updated>2016-10-10T10:51:30+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Windows系统 下载并安装 Notepad++ 图文教程]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++/"/>
+    <updated>2016-10-10T10:44:52+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>下载</h2>
+
+<p>（<strong>Notepad</strong> 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。）</p>
+
+<p>到这个网站下载：<a href="https://notepad-plus-plus.org/download/v7.html">https://notepad-plus-plus.org/download/v7.html</a></p>
+
+<p>点击相应的 <strong>安装包</strong> 进行下载：
+（我电脑是64位的，所以下载64位的。<strong>Installer</strong> 是安装包； <strong>压缩包</strong> 是绿色版的，下载解压后直接就能使用，无需安装。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993346774.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>安装</h2>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993288957.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993358700.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993364763.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993371316.png" alt="Alt text" /></p>
+
+<p>什么都不选，直接<strong>下一步</strong>。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993422195.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 自定义字体设置]]></title>
@@ -101,7 +141,7 @@
 <p>解决办法：</p>
 
 <p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考这片博客来下载安装它。）</p>
+（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://localhost:4000/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
 
 <p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
 
