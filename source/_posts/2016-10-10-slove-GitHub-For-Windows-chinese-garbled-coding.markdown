@@ -17,7 +17,7 @@ categories: [Git/GitHub]
 解决办法：
 
 **Step 1 . ** 将 `README.md` 文件使用 **Notepad++** 软件打开。
-（如果你的电脑上没有 **Notepad++** 软件，你可以参考这片博客来下载安装它。）
+（如果你的电脑上没有 **Notepad++** 软件，你可以参考[这篇博客](http://localhost:4000/blog/2016/10/10/Windows-install-Notepad++/)来下载安装它。）
 
 **Step 2 . ** 选择： **格式** -> **转为 Utf-8 无 BOM 编码格式**
 
