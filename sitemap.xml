@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/</loc>
+<lastmod>2016-10-11T15:09:45+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++/</loc>
 <lastmod>2016-10-10T10:44:52+08:00</lastmod>
 </url>
@@ -32,5 +36,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/ruan-jian-an-zhuang/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/sql/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/sql-server/</loc>
 </url>
 </urlset>
