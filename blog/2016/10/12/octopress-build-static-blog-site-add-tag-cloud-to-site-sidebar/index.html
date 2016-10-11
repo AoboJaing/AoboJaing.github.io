@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud） - AoboSir 的博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="下载 首先到 https://github.com/robbyedwards/octopress-tag-pages 和 https://github.com/robbyedwards/octopress-tag-cloud clone这两个项目的代码。 ```
+$ git clone &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 的博客</a></h1>
+  
+    <h2>胖爷，四年后见！ --- 2016年10月9日</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<h2>下载</h2>
+
+<p>首先到 <a href="https://github.com/robbyedwards/octopress-tag-pages">https://github.com/robbyedwards/octopress-tag-pages</a> 和 <a href="https://github.com/robbyedwards/octopress-tag-cloud">https://github.com/robbyedwards/octopress-tag-cloud</a> clone这两个项目的代码。</p>
+
+<pre><code>```
+$ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
+$ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
+```
+</code></pre>
+
+<hr />
+
+<h2>octopress-tag-pages</h2>
+
+<p><strong>Step 1 . </strong> 将 <code>octopress-tag-pages\plugins</code> 路径里面的 <code>tag_generator.rb</code> 文件复制到 <code>octopress\plugins\</code> 文件夹里面。</p>
+
+<p><strong>Step 2 . </strong> 将 <code>octopress-tag-pages\source\_includes\custom</code> 路径里面的 <code>tag_feed.xml</code> 文件复制到 <code>octopress\source\_includes\custom\</code> 文件夹。</p>
+
+<p><strong>Step 3 . </strong> 将 <code>octopress-tag-pages\source\_layouts</code> 路径里面的 <code>tag_index.html</code> 文件复制到 <code>octopress\source\_layouts\</code> 文件夹里。</p>
+
+<hr />
+
+<h2>octopress-tag-cloud</h2>
+
+<p><strong>Step 1 . </strong> 将 <code>octopress-tag-cloud\plugins</code>  路径里面的 <code>tag_cloud.rb</code>  文件复制到 <code>octopress\plugins\</code>  文件夹里面。</p>
+
+<p><strong>Step 2 . </strong> 将下面的代码复制到 <code>octopress\source\_includes\custom\asides\tags.html</code>。（这个文件需要你自己新建。）
+<strong>注意：</strong> 先去掉 <code>%</code> 前面的反斜杠。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;Tags&lt;/h1&gt;
+</span><span class='line'>  &lt;ul class="tag-cloud"&gt;
+</span><span class='line'>    {\% tag_cloud font-size: 90-210%, limit: 15, style: para \%}
+</span><span class='line'>  &lt;/ul&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解释上面这段代码：</p>
+
+<p><code>tag_cloud</code> 的参数中。 <code>font-size</code> 指定 <code>tag</code> 的大小范围；<code>limit</code> 限定 <code>15</code> 个 <code>tag</code> ；<code>style :para</code> 指定不使用 <code>li</code> 来分割。</p>
+
+<p><strong>Step 3 . </strong></p>
+
+<p>在 <code>octopress\_config.yml</code> 中的 <code>default_asides</code> 中添加 <code>custom/asides/tags.html</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [custom/asides/tags.html, .....]</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在执行 <code>rake generate</code> 生成博客。在使用 <code>rake preview</code> 在本地预览博客。</p>
+
+<p>你会发现，在导航栏里面出现了 <strong>Tags</strong> 字段，但是里面没有标签。（不用担心，你已经成功添加了标签云。只不过你的博文里面没有标签，所以在标签云里面就没有标签。）</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476209931221.png" alt="Alt text" /></p>
+
+<p>我们写一个带标签的博文。怎么写一个带标签的博文：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tags: [tag1, tag2, tag3]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476210344633.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>执行 <code>rake generate</code> 命令时出现了问题：</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211427887.png" alt="Alt text" /></p>
+
+<h2>解决：<code>comparison of Array with Array failed in _layouts/page.html</code> 错误</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Liquid Exception: comparison of Array with Array failed in _layouts/page.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 <code>octopress\plugins\tag_cloud.rb</code> 中第74行是这么写的:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if @limit &gt; 0 and @sort != 'rand'
+</span><span class='line'>    # sort the tag pairs by frequency in descending order
+</span><span class='line'>    weighted.sort! { |a,b| b[1] &lt;=&gt; a[1] }
+</span><span class='line'>    # then slice off the top @limit tag pairs
+</span><span class='line'>    weighted = weighted[0,@limit]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>weighted = weighted[0,@limit]</code> 应该就是取指定数目的标签。如果你的标签数量少于 <code>@limit</code> ，那么就会报错。</p>
+
+<p>所以我们修改第74行为:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  if @limit &gt; 0 and @sort != 'rand' and @limit &lt; weighted.length</span></code></pre></td></tr></table></div></figure>
+
+
+<p>同样的，将第95行修改为:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    if @limit &gt; 0 and @limit &lt; weighted.length</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在所有的修改都完成了，执行 <code>rake generate</code> 命令时，就不会再出现上面的错误了，但是现在却出现了下面的警告：</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211894282.png" alt="Alt text" /></p>
+
+<p>我们现在执行 <code>rake preview</code> 命令来预览看看。标签云是成功添加上去了:</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211997018.png" alt="Alt text" /></p>
+
+<h2>解决 <code>Build Warning: Layout 'nil' requested in tags/标签名/atom.xml does not exist.</code> 警告问题</h2>
+
+<p>将 <code>octopress\source\_includes\custom\tag_feed.xml</code> 文件里面 <code>nil</code> 改为 <code>null</code> ：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: null
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>搞定，现在再执行 <code>rake generate</code> 命令就不会出现这个警告了。不会出现任何问题。</p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>(扩充)为 octopress 添加标签云：
+<a href="http://yang3wei.github.io/blog/2013/01/30/zhuan-zai-wei-octopress-tian-jia-biao-qian-yun/">http://yang3wei.github.io/blog/2013/01/30/zhuan-zai-wei-octopress-tian-jia-biao-qian-yun/</a>
+分类标签：
+<a href="http://wiki.jikexueyuan.com/project/github-page/classification.html">http://wiki.jikexueyuan.com/project/github-page/classification.html</a>
+在Octopress中添加标签：
+<a href="http://devma.cn/blog/2016/04/02/zai-octopresszhong-tian-jia-biao-qian/">http://devma.cn/blog/2016/04/02/zai-octopresszhong-tian-jia-biao-qian/</a></p>
+
+<hr />
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/" title="Previous Post: SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束">&laquo; SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar" data-title="Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）" data-url="http://aobojaing.github.io /blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/">SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/10/Windows-install-Notepad++/">Windows系统 下载并安装 Notepad++ 图文教程</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/">Octopress 搭建静态博客站点 --- 自定义字体设置</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 90%" href="/tags/git/">Git</a>
+<a style="font-size: 90%" href="/tags/github/">GitHub</a>
+<a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
+<a style="font-size: 210%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 90%" href="/tags/sql/">SQL</a>
+<a style="font-size: 90%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
+<a style="font-size: 90%" href="/tags/windows/">Windows</a>
+<a style="font-size: 90%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
+<a style="font-size: 90%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

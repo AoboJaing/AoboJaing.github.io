@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Git/github | AoboSir 的博客]]></title>
-  <link href="http://aobojaing.github.io/blog/categories/git-slash-github/atom.xml" rel="self"/>
+  <title><![CDATA[Tag: Windows | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/windows/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
   <updated>2016-10-12T03:13:55+08:00</updated>
   <id>http://aobojaing.github.io/</id>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[解决 GitHub for Windows 客户端软件中代码的中文显示乱码问题]]></title>
+    <title type="html"><![CDATA[解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题]]></title>
     <link href="http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/"/>
     <updated>2016-10-10T07:47:34+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding</id>
