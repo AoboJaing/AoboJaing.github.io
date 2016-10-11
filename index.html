@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我们来介绍一下：数据库是如何存储数据的。 数据库是如何存储数据的 来看一个小例子 现在，假如我们现在想存储 员工的信息。也就是说：我们来通过这个例子来看看 字段、记录、表 是一个什么东西。 我们下面通过存储一个员工的信息，来把这些专业术语都来解释一遍。 假设有4个信息： | 员工姓名 | &hellip;">
+  <meta name="description" content="在库里面建表。所以我们现在需要先新建一个库，然后在库里面新建一个表。 所以，先建一个 库 ，取名为：test 输入新建库的名字：test 。 现在点击 确定 按钮。 如果你在创建库的时候，遇到了下面这个异常。请查看这篇博客解决问题。 新建成功： 我们现在在库里面在建表。 建表的方式有两种： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,243 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-11T23:49:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>在库里面建表。所以我们现在需要先新建一个库，然后在库里面新建一个表。</p>
+
+<p>所以，先建一个 <strong>库</strong> ，取名为：<code>test</code></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476180331922.png" alt="Alt text" /></p>
+
+<p>输入新建库的名字：<code>test</code> 。 现在点击 <strong>确定</strong> 按钮。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476180873442.png" alt="Alt text" /></p>
+
+<blockquote><p>如果你在创建库的时候，遇到了下面这个异常。请查看<a href="http://blog.csdn.net/u010800530/article/details/12093999">这篇博客</a>解决问题。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476180567450.png" alt="Alt text" /></p></blockquote>
+
+<p>新建成功：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476180912977.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>我们现在在库里面在建表。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476181053705.png" alt="Alt text" /></p>
+
+<p>建表的方式有两种：一种是鼠标点击的方式；一种是输入命令的方式。（但是不推荐鼠标去点。如果你想要这个命令正确的执行成功，并且它很稳定，一般都是使用命令去实现。）</p>
+
+<hr />
+
+<p>现在我们先来介绍如何使用鼠标来操作：</p>
+
+<h2>下面使用点击鼠标的方式（图形化界面 ）进行建表：</h2>
+
+<p>对着 <strong>库</strong> 的 <strong>表</strong>  点击右击，点击 <strong>表(T)&hellip;</strong></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476181347994.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476181423485.png" alt="Alt text" /></p>
+
+<p><strong>列</strong> 名这里使用英文，后面选择 <strong>数据类型</strong> 。</p>
+
+<p>目前第一个列取名为：<code>emp_ename</code> 。数据类型选择为：<code>nvarchar(MAX)</code> 。（表示的是：一个国际化编码可变的字符串。<code>n</code> 指的是：国际化，对汉字也支持；<code>var</code> 指的是：变量。所以：<code>nvarchar(MAX)</code> 指的是：可以存储汉字的字符串长度可以变化的字符串数据。）。后面的 <code>允许  Null 值</code>，如果你勾选了，意味着这一列的值可以是空的，所以我们不勾选。
+其它<strong>列</strong>按照员工表对应的输入。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476181807481.png" alt="Alt text" /></p>
+
+<p>最终建出来的表就是下面这个样子的。（我们现在还没有添加 <strong>部门编号</strong>，为什么不添加？因为现在我们还没有部门这个表。（所以，如果我们先新建部门表，再建员工表就好了。））</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476181822333.png" alt="Alt text" /></p>
+
+<blockquote><p><code>nchar</code> 中的 <code>n</code> 指的也是：支持国际化，支持汉字。</p></blockquote>
+
+<p>现在按 <strong>Ctrl + S</strong> 保存，将这个表取名为：<code>emp</code> 。 点击 <strong>确定</strong> 按钮。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476182492779.png" alt="Alt text" /></p>
+
+<p>现在这个 <strong>员工</strong> 表建立完成。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476182514880.png" alt="Alt text" /></p>
+
+<p>现在，我们就可以在：<strong>对象资源管理器</strong> 里面看到 <strong>test</strong>数据库里面的 <strong>表</strong> 选单里面多出来一个 <code>dbo.emp</code> 表。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476185855379.png" alt="Alt text" /></p>
+
+<blockquote><p>如果你没有在这里面看到刚刚新建的 <code>dbo.emp</code> 表。进行下面的操作：（刷新一下，就出现了。）</p>
+
+<p> <img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476186193963.png" alt="Alt text" /></p></blockquote>
+
+<p>展开 <code>dbo.emp</code> 表，你可以看到：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476189999622.png" alt="Alt text" /></p>
+
+<p>现在还没有添加主键。（刚刚并没有设置主键。）如果没有主键，数据就容易 <strong>冗余</strong>。</p>
+
+<p>举个例子：</p>
+
+<p>在表中添加内容：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190370338.png" alt="Alt text" /></p>
+
+<p>如果添加的两条记录一模一样，那么得到的数据就 <strong>冗余</strong> 了。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190501239.png" alt="Alt text" /></p>
+
+<blockquote><p>如何添加记录？</p>
+
+<p>数据添加完之后，点击框框中的地方：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190612519.png" alt="Alt text" /></p>
+
+<p>点击后，红色的叹号消失：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190654517.png" alt="Alt text" /></p>
+
+<p>如果你添加的是冗余的数据，还有在点击执行按钮，叹号才会消失。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190697805.png" alt="Alt text" /></p></blockquote>
+
+<p>在设计字段的时候，编号就是不能重复的，但是上面的两条冗余数据导致了编号的重复，所以现在编号就不能设置为主键了。不信，我们现在来试试。</p>
+
+<p>对表的结构进行修改，点击 <strong>设计</strong></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190945148.png" alt="Alt text" /></p>
+
+<p>对 <code>emp_id</code> 属性 右键 ，选择 ：<strong>设置主键(Y)</strong></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476190972850.png" alt="Alt text" /></p>
+
+<p>然后保存。（保存就会出错。）</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476191085152.png" alt="Alt text" /></p>
+
+<p>目前数据里面的 <code>emp_id</code> 属性有重复的数据，现在你又想将其设置为不可重复的主键，所以就出错了。</p>
+
+<p>现在，我需要将表里面的 <code>emp_id</code> 属性里的数据进行修改。目的就是：不能让里面的数据内容重复。（我使用图形界面（就是鼠标点击）的方式修改不了表里面的数据；我们修改数据使用敲命令的方法也是修改不了的，这说明了：数据不能有冗余。）</p>
+
+<p>我们现在只能将两条数据都删除。（使用图形界面（就是鼠标点击）的方式删除不了的；我们修改使用命令来删除）</p>
+
+<p>新建一个查询文件（<code>.sql</code> 后缀的文件）。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476191767692.png" alt="Alt text" /></p>
+
+<p>在里面输入下面的命令：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">delete</span> <span class="k">from</span> <span class="n">emp</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>点击 <strong>执行</strong> 按钮。</p>
+
+<p>现在数据还在。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476192430675.png" alt="Alt text" /></p>
+
+<p>点击 <strong>执行</strong> 图标。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476192471479.png" alt="Alt text" /></p>
+
+<p>数据消失。（这个软件真是好弱啊！）</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476192510506.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>折腾了一顿。</p>
+
+<h2>下面使用点击鼠标的方式（图形化界面 ）进行建主外键约束：</h2>
+
+<p>所以，我们应该先设置主键，然后 <code>Ctrl + S</code> 保存。接下来在添加数据。这才是正确的步骤。</p>
+
+<p>接着添加，数据：</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476192873680.png" alt="Alt text" /></p>
+
+<p>现在有了主键，导致了：主键里面的数据不能一样。</p>
+
+<hr />
+
+<p>现在，我们在写一个表： <strong>部门表</strong> 。并添加下面的数据，同时将 <code>dept_id</code> 属性设置为 <strong>主键</strong>。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476195050064.png" alt="Alt text" /></p>
+
+<p>按 <code>Ctrl + S</code> 保存此表，命名为：<code>dept</code></p>
+
+<blockquote><p>注意：数据是中文的无所谓。但是你不要把表的结构和库的结构也写成中文。</p></blockquote>
+
+<p>现在我们来到 <strong>emp</strong> 表。添加 <code>dept_id</code> 这个属性（注意：这个属性的 <code>允许Null值</code>要勾选）。（目的是：将其设置为<strong>外键</strong>）</p>
+
+<p>然后右键，点击 <strong>关系</strong></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197842775.png" alt="Alt text" /></p>
+
+<p>然后点击 <strong>添加</strong></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197065843.png" alt="Alt text" /></p>
+
+<p>点击 下面红框框里面的按钮。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197186532.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197233271.png" alt="Alt text" /></p>
+
+<p>设置为下面这个样子。将 <code>dept_id</code> 这个属性设置为 <strong>外键</strong>。</p>
+
+<p>解释一下：存在外键的表叫做 <strong>外键表</strong>，（<strong>外键</strong>：就是来自于另外一个表的<strong>主键</strong>）。 <code>emp</code>（员工） 表里面有一个<code>dept_id</code> （部门编号）这个外键，它就是 <code>dept</code> （部门）表的主键。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197347119.png" alt="Alt text" /></p>
+
+<p>点击 <strong>确定</strong>， 再点击 <strong>关闭</strong>。现在按 <code>Ctrl + S</code> 保存，会弹出下面的窗口。点击 <strong>是</strong> 按钮。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476197679992.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>我现在在 <code>dept</code> （部门）表里面添加数据。</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476198258461.png" alt="Alt text" /></p>
+
+<p>现在再来到 <code>emp</code> （员工）表里面，给<code>dept_id</code>（部门编号）（外键） 添加数据。（如果你打开<code>emp</code>表发现里面现在还没有<code>dept_id</code>这个属性，就关闭这个页面，重新打开这个<code>emp</code>表，就有了。（这个软件正弱！））</p>
+
+<p><img src="/images/2016-10-11-SQL-Learning-008-How-to-build-tables-and-build-primary-foreign-key-constraints-through-graphical-interface/1476198701835.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<p>我们来<strong>总结</strong>一下：应该先建部门表，然后在建员工表，是最好的。也就是说：先建<strong>主键表</strong>，然后再将<strong>外键表</strong>（因为<strong>外键表</strong>有数据来自另外的表（<strong>主键表</strong>））。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -452,7 +689,7 @@
 <p>解决办法：</p>
 
 <p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://localhost:4000/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
+（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
 
 <p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
 
@@ -494,6 +731,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/">SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键</a>
