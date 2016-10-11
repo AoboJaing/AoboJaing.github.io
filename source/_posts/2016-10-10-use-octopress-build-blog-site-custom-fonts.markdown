@@ -5,6 +5,7 @@ date: 2016-10-10 10:04:40 +0800
 comments: true
 sharing: true
 categories: [Use Octopress Build Blog Site]
+tags: [Octopress]
 ---
 
 
