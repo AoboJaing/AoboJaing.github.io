@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sql Server | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/sql-server/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-12T03:13:55+08:00</updated>
+  <updated>2016-10-12T11:24:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,11 +14,136 @@
 
   
   <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/"/>
+    <updated>2016-10-12T11:15:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p>之前，我们介绍了<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">如何使用图形化操作建表和主外键约束</a>。这一节我们来介绍如何使用<strong>命令</strong>来<strong>建表和主外键约束</strong>。</p>
+
+<hr />
+
+<h2>使用命令 建表</h2>
+
+<p><strong>Step 0 . </strong> 先把之前在<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">这篇博客</a>里面建的表删除，我们先使用命令重新建。（如果你没有看这篇博客，就不需要做这一步的操作了。）</p>
+
+<p><strong>Step 1 . </strong> 先选中（要建表的）库，然后点击 <strong>新建查询</strong>，输入下面的命令：（先建部门（<code>dept</code>）表，再建员工（<code>emp</code>）表）</p>
+
+<pre><code class="sql">create table dept
+(
+    dept_id int primary key,
+    dept_name nvarchar(100) not null,
+    dept_address nvarchar(100)
+)
+</code></pre>
+
+<p><strong>Step 2 . </strong> 现在点击 对号 图标（分析），看看有没有语法错误。然后点击 <strong>执行(X)</strong> 按钮，来生成表。现在在做出的 <strong>表</strong> 里面右键 ，选择 <strong>刷新</strong> 。现在你就看到了，创建了一个新的表 <code>dept</code> 。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239675315.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239692934.png" alt="Alt text" /></p>
+
+<p>解释：<code>--</code>后面跟注释信息。<strong>SQL</strong> 定义变量和 <strong>C++</strong> 定义变量是反着的。</p>
+
+<p><strong>Step 3 . </strong></p>
+
+<pre><code class="sql">create table emp
+( --不能写成{} ，C++才写成}
+    emp_id int constraint pk_emp_id_haha primary key,
+    emp_name nvarchar(20) not null,
+    emp_sex nchar(1),
+    dept_id int constraint fk_dept_id_heihei foreign key references dept(dept_id)
+)
+</code></pre>
+
+<p>解释：
+1. 对于<strong>约束</strong>（<code>constraint</code>），要写一个名字（<code>pk_emp_id_haha</code> 和 <code>fk_dept_id_heihei</code> 都是自定义的名字），如果你不写名字，系统会自动给它分配一个名字。
+2. <code>primary key</code> 是主键； <code>foreign key</code> 是外键。
+3. <code>create table</code> 最后一个字段的后面建议不要写 <code>,</code> （逗号）。</p>
+
+<p>选中这些命令。点击 <code>执行</code> 按钮。并刷新 <strong>表</strong>，<code>emp</code> 表就会出现。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240682691.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240702251.png" alt="Alt text" /></p>
+
+<p><code>PK</code> 指的是 <strong>主键</strong> ；<code>FK</code> 指的是 <code>外键</code>。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240725526.png" alt="Alt text" /></p>
+
+<p>下面的是我们刚刚定义的 <code>emp</code> 表的主键和外键的名字：</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240863958.png" alt="Alt text" /></p>
+
+<p>下面的是我们没有给取名字的 <code>dept</code> 表的主键的默认名字：</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240944813.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p>使用命令 <code>create table</code> 来建表。</p>
+
+<p><strong>Q：</strong> 什么是约束？
+<strong>A：</strong> <strong>主键约束</strong> 和 <strong>外键约束</strong> 的作用：</p>
+
+<ul>
+<li>定义
+
+<ul>
+<li>对一个表中的属性操作的限制叫做约束。</li>
+</ul>
+</li>
+<li>分类
+
+<ul>
+<li>主键约束
+
+<ul>
+<li>不允许重复元素 避免了数据的冗余。</li>
+</ul>
+</li>
+<li>外键约束
+
+<ul>
+<li>通过外键约束从语法上保证了本事物所关联的其他事物一定是存在的。（就是说：事物与事物之前的关系是通过外键来体现的）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>你要是感觉命令很难，就多敲，敲一敲就好了。</p>
+
+<hr />
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束]]></title>
     <link href="http://aobojaing.github.io/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/"/>
     <updated>2016-10-11T23:49:40+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI</id>
     <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
 
 <p>在库里面建表。所以我们现在需要先新建一个库，然后在库里面新建一个表。</p>
 
@@ -234,6 +359,14 @@
     <updated>2016-10-11T15:09:45+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key</id>
     <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
 
 <p>我们来介绍一下：数据库是如何存储数据的。</p>
 
