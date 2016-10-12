@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Octopress | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/octopress/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-12T11:24:04+08:00</updated>
+  <updated>2016-10-12T16:29:03+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/"/>
+    <updated>2016-10-12T16:15:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>一共三步，很简单。跟着走就可以。</p>
+
+<hr />
+
+<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
+
+<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
+
+<pre><code>module Jekyll
+  class CategoryListTag &lt; Liquid::Tag
+    def render(context)
+      html = ""
+      categories = context.registers[:site].categories.keys
+      categories.sort.each do |category|
+        posts_in_category = context.registers[:site].categories[category].size
+        category_dir = context.registers[:site].config['category_dir']
+        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://aobojaing.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+      end
+      html
+    end
+  end
+end
+
+Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)
+</code></pre>
+
+<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
+
+<hr />
+
+<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
+
+<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
+
+<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
+
+<pre><code class="html">&lt;section&gt;
+    &lt;h1&gt;Categories&lt;/h1&gt;
+    &lt;ul id="categories"&gt;
+        {\% category_list \%}
+    &lt;/ul&gt;
+&lt;/section&gt;
+</code></pre>
+
+<hr />
+
+<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
+
+<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
+
+<pre><code>default_asides: [asides/category_list.html, ......]
+</code></pre>
+
+<hr />
+
+<h2>搞定</h2>
+
+<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>为octopress添加分类(category)列表
+<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）]]></title>

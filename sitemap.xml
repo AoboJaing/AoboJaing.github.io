@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/</loc>
+<lastmod>2016-10-12T16:15:13+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/</loc>
 <lastmod>2016-10-12T11:15:01+08:00</lastmod>
 </url>

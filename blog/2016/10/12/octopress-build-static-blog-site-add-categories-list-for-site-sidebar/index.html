@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories） - AoboSir 的博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="一共三步，很简单。跟着走就可以。 Step 1 . 增加 category_list 插件 在 octopress\plugins\ 文件夹里面，新建一个文件，取名为：category_list_tag.rb。并将下面的代码粘贴到里面。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 的博客</a></h1>
+  
+    <h2>胖爷，四年后见！ --- 2016年10月9日</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<p>一共三步，很简单。跟着走就可以。</p>
+
+<hr />
+
+<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
+
+<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
+</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
+</span><span class='line'>    def render(context)
+</span><span class='line'>      html = ""
+</span><span class='line'>      categories = context.registers[:site].categories.keys
+</span><span class='line'>      categories.sort.each do |category|
+</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
+</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
+</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+</span><span class='line'>      end
+</span><span class='line'>      html
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
+
+<hr />
+
+<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
+
+<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
+
+<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      {\% category_list \%}
+</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
+
+<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [asides/category_list.html, ......]
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>搞定</h2>
+
+<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>为octopress添加分类(category)列表
+<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/" title="Previous Post: SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束">&laquo; SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar" data-title="Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）" data-url="http://aobojaing.github.io /blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/">SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">SQL 数据库 学习 008 如何通过图形化界面建表 和 建主外键约束</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/">SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
