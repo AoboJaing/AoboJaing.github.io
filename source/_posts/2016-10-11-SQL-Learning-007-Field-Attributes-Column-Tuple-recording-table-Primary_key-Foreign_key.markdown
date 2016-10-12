@@ -12,6 +12,12 @@ tags: [SQL, SQL Server]
 
 ---
 
+
+* 我的电脑系统：**Windows  10** 64位
+* **SQL Server** 软件版本： **SQL Server 2014 Express**
+
+---
+
 我们来介绍一下：数据库是如何存储数据的。
 
 ## 数据库是如何存储数据的

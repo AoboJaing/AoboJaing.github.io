@@ -5,9 +5,16 @@ date: 2016-10-11 23:49:40 +0800
 comments: true
 sharing: true
 categories: [SQL, SQL Server]
+tags: [SQL, SQL Server]
 ---
 
 
+
+---
+
+
+* 我的电脑系统：**Windows  10** 64位
+* **SQL Server** 软件版本： **SQL Server 2014 Express**
 
 ---
 
