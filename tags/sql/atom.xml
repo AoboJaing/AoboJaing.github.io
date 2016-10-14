@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-14T11:40:02+08:00</updated>
+  <updated>2016-10-14T21:19:27+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 011 关系、一对一、一对多、多对多]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/"/>
+    <updated>2016-10-14T21:18:48+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>什么是关系</h2>
+
+<p>定义：</p>
+
+<ul>
+<li>表和表之间的联系。</li>
+</ul>
+
+
+<p>实现方式：</p>
+
+<ul>
+<li>通过设置不同形式的外键来体现表和表的不同关系。</li>
+</ul>
+
+
+<h2>关系的分类（假设是A表和B表）</h2>
+
+<h2>第一种分类： 一对一  （详述一对一关系及其实现）</h2>
+
+<p> （一对一，几乎不使用。所以，我们就一句话带过。）</p>
+
+<p>一对一的实现：既可以把表A的主键充当表B的外键，也可以把表B的主键充当表A的外键。</p>
+
+<p>一对多 和 多对多 才是我们学习的重点。</p>
+
+<h2>第二种分类：一对多   （详述一对多关系及其实现）</h2>
+
+<p>一对多事怎么实现的？</p>
+
+<p>表A（一）与表B（多）（我们现在希望，表A中的一条记录对应表B中的多条记录）之间要是有关系，就必须要有外键。把表A的主键添加到表B里面，充当表B的外键。</p>
+
+<p>一对多的实现：在多的一方的表里面，添加外键。</p>
+
+<h2>第三种分类：多对多 （详述多对多关系及其实现）</h2>
+
+<p>现实中，什么事物和什么事物之间是多对多的关系？</p>
+
+<p>班级和老师的关系。（一个班级有很多老师上课，一个老师可以去很多班级上课。）</p>
+
+<p>多对多其实就是：一对多 和 多对一 的一个组合。</p>
+
+<p>多对多的实现：多对多 必须要通过单独的一张表来表示。</p>
+
+<ul>
+<li>班级是一张表</li>
+<li>教师是一张表</li>
+<li>班级和教师的关系也是一张表</li>
+</ul>
+
+
+<p>用一个实例来解释 多对多。</p>
+
+<pre><code class="sql">--班级表
+create table banji
+(
+    banji_id int primary key,
+    banji_num int not null,
+    banji_name nvarchar(100)
+)
+
+--教师
+create table jiaoshi
+(
+    jiaoshi_id int primary key,
+    jiaoshi_name nvarchar(200)
+)
+
+--第三张表：用来模拟班级和教师的关系
+create table banji_jiaoshi_mapping
+(
+    banji_id int constraint fk_banji_id foreign key references banji(bianji_id),
+    jiaoshi_id int foreign key references jiaoshi(jiaoshi_id),
+    kecheng nvarchar(20),
+    constraint pk_banji_id_jiaoshi_id primary key (banji_id, jiaoshi_id, kecheng)
+
+)
+</code></pre>
+
+<p>解释代码：</p>
+
+<p>其中<code>banji_id int constraint fk_banji_id foreign key references banji(bianji_id),</code> 代码中的 <code>fk_banji_id</code> 是约束的名字，<code>foreign key references banji(bianji_id)</code> 指的是：当前这个表里面的 <code>banji_id</code> 属性是来自 <code>banji</code> 表的主键 <code>banji_id</code>，也就是说：当前表中的 <code>banji_id</code> 是一个外键（<code>foreign key</code>）。</p>
+
+<p>其中<code>jiaoshi_id int foreign key references jiaoshi(jiaoshi_id),</code>里面，这里没有命名约束的名字，约束的名字可以省略不写，所以这里没有写也没有问题。同理上面那句代码。</p>
+
+<p>其中<code>constraint pk_banji_id_jiaoshi_id primary key (banji_id, jiaoshi_id, kecheng)</code>中的 <code>pk_banji_id_jiaoshi_id</code> 这个是约束的名字。<code>primary key (banji_id, jiaoshi_id, kecheng)</code> 是设置<code>jiaoshi_id</code> 和 <code>banji_id</code>  和 <code>kecheng</code> 三个属性的组合是一个<strong>主键</strong>（<code>primary key</code>）。</p>
+
+<p>现在<strong>执行</strong>，生成了3个表。</p>
+
+<p>现在我们在这3个表里面插入数据。</p>
+
+<p><strong>banji</strong></p>
+
+<p><img src="/images/2016-10-14-SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/1476450660605.png" alt="Alt text" /></p>
+
+<p><strong>jiaoshi</strong></p>
+
+<p><img src="/images/2016-10-14-SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/1476450683275.png" alt="Alt text" /></p>
+
+<p><strong>banji_jiaoshi_mapping</strong></p>
+
+<p><img src="/images/2016-10-14-SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/1476450197120.png" alt="Alt text" /></p>
+
+<p>都不会有错误，说明多对多生成成功。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 010 表和约束的区别、check约束、default约束、unique约束、not null约束]]></title>
