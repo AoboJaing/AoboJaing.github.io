@@ -5,17 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SQL 数据库 学习 015 开始学习查询 查询综述 - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 查询 是数据库里面最重要的知识点，而且知识点很多，下面我们将查询的知识点先列出来： scott 表介绍（例子表）
-计算列
-distinct
-between
-in
-top &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 top &mdash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +19,7 @@ top &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -74,7 +69,7 @@ top &hellip;">
   
   <header>
     
-      <h1 class="entry-title">SQL 数据库 学习 015 开始学习查询 查询综述</h1>
+      <h1 class="entry-title">SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录</h1>
     
     
       <p class="meta">
@@ -83,7 +78,7 @@ top &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-10-16T17:28:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
+<time class='entry-date' datetime='2016-10-17T00:55:57+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:55 am</span></time>
         
       </p>
     
@@ -100,41 +95,33 @@ top &hellip;">
 
 <hr />
 
-<p><strong>查询</strong> 是数据库里面最重要的知识点，而且知识点很多，下面我们将<strong>查询</strong>的知识点先列出来：</p>
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
 
-<ol>
-<li><code>scott</code> 表介绍（例子表）</li>
-<li>计算列</li>
-<li><code>distinct</code></li>
-<li><code>between</code></li>
-<li><code>in</code></li>
-<li><code>top</code></li>
-<li><code>null</code></li>
-<li><code>order by</code></li>
-<li>模糊查询</li>
-<li>聚合函数</li>
-<li><code>group by</code></li>
-<li><code>having</code></li>
-<li>链接查询
+<hr />
 
-<ul>
-<li>定义</li>
-<li>分类
+<h2><code>top</code> &mdash;  输出最前面的若干个记录</h2>
 
-<ul>
-<li>内连接</li>
-<li>外连接</li>
-<li>完全连接</li>
-<li>交叉连接</li>
-<li>字连接</li>
-<li>联合</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>嵌套查询（<code>orale</code> 中讲）</li>
-</ol>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">5</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，前5个元组</span>
+</span></code></pre></td></tr></table></div></figure>
 
+
+<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636796825.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">15</span> <span class="n">percent</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，15%的元组。（输出的是3个，不是2个）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
+
+<hr />
 </div>
 
 
@@ -150,7 +137,7 @@ top &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-10-16T17:28:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
+<time class='entry-date' datetime='2016-10-17T00:55:57+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:55 am</span></time>
       
 
 <span class="categories">
@@ -185,10 +172,8 @@ top &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention/" title="Previous Post: SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题">&laquo; SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题</a>
+        <a class="basic-alignment left" href="/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/" title="Previous Post: SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值">&laquo; SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/" title="Next Post: SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。">SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。 &raquo;</a>
       
     </p>
   </footer>
@@ -197,7 +182,7 @@ top &hellip;">
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary" data-title="SQL 数据库 学习 015 开始学习查询 查询综述" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage" data-title="SQL 数据库 学习 022 查询-05 top 的用法 --- 最前面的若干个记录" data-url="http://aobojaing.github.io /blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T00:39:24+08:00</updated>
+  <updated>2016-10-17T00:58:28+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/"/>
+    <updated>2016-10-17T00:55:57+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>top</code> &mdash;  输出最前面的若干个记录</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">5</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，前5个元组</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636796825.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">15</span> <span class="n">percent</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，15%的元组。（输出的是3个，不是2个）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值]]></title>
@@ -2096,46 +2141,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <p><img src="http://aobojaing.github.io/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474976186110.png" alt="Alt text" /></p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows系统 下载并安装 Notepad++ 图文教程]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++/"/>
-    <updated>2016-10-10T10:44:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>下载</h2>
-
-<p>（<strong>Notepad</strong> 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。）</p>
-
-<p>到这个网站下载：<a href="https://notepad-plus-plus.org/download/v7.html">https://notepad-plus-plus.org/download/v7.html</a></p>
-
-<p>点击相应的 <strong>安装包</strong> 进行下载：
-（我电脑是64位的，所以下载64位的。<strong>Installer</strong> 是安装包； <strong>压缩包</strong> 是绿色版的，下载解压后直接就能使用，无需安装。）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993346774.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993288957.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993358700.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993364763.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993371316.png" alt="Alt text" /></p>
-
-<p>什么都不选，直接<strong>下一步</strong>。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993422195.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   
