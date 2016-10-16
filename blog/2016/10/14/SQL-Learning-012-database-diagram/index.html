@@ -5,18 +5,28 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress 搭建静态博客站点 --- 自定义字体设置 - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 012 数据库关系图 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="字体配置文件在 octopress/sass/custom/ 文件里面：_fonts.scss 文件。 默认情况下字体配置都是被注释掉的。我们将注释都去掉。 1
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对多关系的表：（这段代码你可以在这篇博文里面看到它的代码解释。） 1
 2
 3
 4
 5
 6
-$sans: "Optima", sans-serif;
-$serif: "Baskerville", serif &hellip;">
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +35,7 @@ $serif: "Baskerville", serif &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/14/SQL-Learning-012-database-diagram/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -75,7 +85,7 @@ $serif: "Baskerville", serif &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Octopress 搭建静态博客站点 --- 自定义字体设置</h1>
+      <h1 class="entry-title">SQL 数据库 学习 012 数据库关系图</h1>
     
     
       <p class="meta">
@@ -84,7 +94,7 @@ $serif: "Baskerville", serif &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-10-10T10:04:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:04 am</span></time>
+<time class='entry-date' datetime='2016-10-14T21:18:48+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:18 pm</span></time>
         
       </p>
     
@@ -93,70 +103,79 @@ $serif: "Baskerville", serif &hellip;">
 
 <div class="entry-content"><hr />
 
-<p>字体配置文件在 <code>octopress/sass/custom/</code> 文件里面：<code>_fonts.scss</code> 文件。</p>
-
-<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063413831.png" alt="Alt text" /></p>
-
-<p>默认情况下字体配置都是被注释掉的。我们将注释都去掉。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Optima", sans-serif;
-</span><span class='line'>$serif: "Baskerville", serif;
-</span><span class='line'>$mono: "Courier", monospace;
-</span><span class='line'>$heading-font-family: "Verdana", sans-serif;
-</span><span class='line'>$header-title-font-family: "Futura", sans-serif;
-</span><span class='line'>$header-subtitle-font-family: "Futura", sans-serif;</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>引号里面的是：<strong>字体名</strong>。后面跟的是：<code>sans-serif</code>(无衬线字体)、<code>serif</code>（衬线）、<code>monospace</code>（等宽字体）。</p></blockquote>
-
 <ul>
-<li><code>$sans</code>：定义的是无衬线正文的字体
-
-<ul>
-<li><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063715659.png" alt="Alt text" /></li>
-</ul>
-</li>
-<li><code>$serif</code>：定义的是衬线正文的字体</li>
-<li><code>$mono</code>：定义的是代码的字体</li>
-<li><code>$heading-font-family</code>：定义的是文章标题的字体</li>
-<li><code>$header-title-font-family</code>：定义的是博客标题的字体</li>
-<li><code>$header-subtitle-font-family</code>：定义的是博客子标题的字体</li>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
 </ul>
 
-
-<p>我将它们修改为下面这样的配置。（就是将所有的字体都设置为：<code>Comic Sans MS</code>）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Comic Sans MS", sans-serif;
-</span><span class='line'>$serif: "Comic Sans MS", serif;
-</span><span class='line'>$mono: "Comic Sans MS", monospace;
-</span><span class='line'>$heading-font-family: "Comic Sans MS", sans-serif;
-</span><span class='line'>$header-title-font-family: "Comic Sans MS", sans-serif;
-</span><span class='line'>$header-subtitle-font-family: "Comic Sans MS", sans-serif;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在执行 <code>rake generate</code> 命令生成博客站点。在执行 <code>rake preview</code> 命令在本地开设4000端口。在浏览器中浏览 <code>localhost:4000</code> 端口进行预览。（效果不错。）</p>
-
-<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064562554.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064543308.png" alt="Alt text" /></p>
 
 <hr />
 
-<p>参考网站：
-利用Octopress和Github搭建个人博客（四）：自定义字体
-<a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
+<p>我们现在写一个 多对多关系的表：（这段代码你可以在<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">这篇博文</a>里面看到它的代码解释。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--班级表</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">banji_num</span> <span class="nb">int</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">banji_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--教师</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">jiaoshi</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">jiaoshi_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--第三张表：用来模拟班级和教师的关系</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji_jiaoshi_mapping</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_banji_id</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">banji</span><span class="p">(</span><span class="n">bianji_id</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">jiaoshi</span><span class="p">(</span><span class="n">jiaoshi_id</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">kecheng</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+</span><span class='line'>  <span class="k">constraint</span> <span class="n">pk_banji_id_jiaoshi_id</span> <span class="k">primary</span> <span class="k">key</span> <span class="p">(</span><span class="n">banji_id</span><span class="p">,</span> <span class="n">jiaoshi_id</span><span class="p">,</span> <span class="n">kecheng</span><span class="p">)</span>
+</span><span class='line'>  
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然，现在我们已经将表与表之间的关系都建好了。但是我现在怎么才能知道他们之间的关系到底有没有见好啊。
+<strong>SQL Server</strong> 为我们提供了另外一个工具：<strong>数据库关系图</strong>。</p>
+
+<p>我们新建一个：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602645224.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602656133.png" alt="Alt text" /></p>
+
+<p>外键添加到多的一方。</p>
+
+<hr />
 </div>
 
 
@@ -172,12 +191,12 @@ $serif: "Baskerville", serif &hellip;">
 
 
 
-<time class='entry-date' datetime='2016-10-10T10:04:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:04 am</span></time>
+<time class='entry-date' datetime='2016-10-14T21:18:48+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:18 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+    <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a>
   
 </span>
 
@@ -207,10 +226,8 @@ $serif: "Baskerville", serif &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/" title="Previous Post: 解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题">&laquo; 解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题</a>
+        <a class="basic-alignment left" href="/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/" title="Previous Post: SQL 数据库 学习 011 关系、一对一、一对多、多对多">&laquo; SQL 数据库 学习 011 关系、一对一、一对多、多对多</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/10/Windows-install-Notepad++/" title="Next Post: Windows系统 下载并安装 Notepad++ 图文教程">Windows系统 下载并安装 Notepad++ 图文教程 &raquo;</a>
       
     </p>
   </footer>
@@ -219,7 +236,7 @@ $serif: "Baskerville", serif &hellip;">
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts" data-title="Octopress 搭建静态博客站点 --- 自定义字体设置" data-url="http://aobojaing.github.io /blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/14/SQL-Learning-012-database-diagram" data-title="SQL 数据库 学习 012 数据库关系图" data-url="http://aobojaing.github.io /blog/2016/10/14/SQL-Learning-012-database-diagram/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
