@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T19:07:10+08:00</updated>
+  <updated>2016-10-16T19:40:50+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 017 查询-00 介绍 Scott 例子库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/"/>
+    <updated>2016-10-16T19:40:10+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p>我们要查数据，总先得有数据要查吧，所以我们需要先找一个例子库。<strong>Orale</strong>软件里面就有一个例子库，这个库很经典，就是：<code>scott</code> 库。</p>
+
+<h2>附加 <code>scott</code> 库</h2>
+
+<p>如何添加一个 <code>scott</code> 数据库 到服务器中，请参考<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这个网站</a>。</p>
+
+<hr />
+
+<h2>介绍 <code>scott</code> 库</h2>
+
+<p>要想查询一个表，第一件事情就必须十分了解一个库里面所有的表 和 表与表之间的关系。</p>
+
+<p>这个 <code>scott</code> 库里面一共有三个表：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476616454316.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>先看看 <code>emp</code> 表（<strong>员工表</strong>）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476616536461.png" alt="Alt text" /></p>
+
+<p>员工表里面有8个属性：</p>
+
+<p><code>EMPNO</code>（员工编号）、<code>ename</code>（姓名）、<code>job</code>（职称）、<code>mgr</code>（上级编号）、<code>hiredate</code>（雇佣日期）、<code>sal</code>（工资）、<code>comm</code>（奖金）、<code>deptno</code>（部门编号）。</p>
+
+<p>里面 <code>job</code> 属性里面的英文单词翻译：</p>
+
+<ul>
+<li><strong>CLERK</strong> ：普通职员</li>
+<li><strong>SALESMAN</strong> ：销售人员</li>
+<li><strong>MANAGER</strong> ：经理</li>
+<li><strong>ANALYST</strong> ：研究人员</li>
+<li><strong>PRESIDENT</strong> ：总统</li>
+</ul>
+
+
+<hr />
+
+<p>现在我们看看 <code>dept</code> 表 （<strong>部门表</strong>）：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476617073131.png" alt="Alt text" /></p>
+
+<p>部门表里面有3个属性：<code>deptno</code>（部门编号）、<code>dname</code>（部门名称）、<code>loc</code>（地址）。</p>
+
+<hr />
+
+<p>在看看最后一个表：<code>SALGRAGE</code> 表。（这个<strong>表</strong>表示的是<strong>工资的等级</strong>表。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476617149867.png" alt="Alt text" /></p>
+
+<p><code>SALGRADE</code> 表里面有3个属性：<code>GRADE</code>（等级）、<code>LOSAL</code>（下限）、<code>HISAL</code>（上限）。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 016 如何附加数据库]]></title>

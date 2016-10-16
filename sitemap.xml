@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/</loc>
+<lastmod>2016-10-16T19:40:10+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/</loc>
 <lastmod>2016-10-16T19:06:49+08:00</lastmod>
 </url>
@@ -67,6 +71,9 @@
 <url>
 <loc>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/</loc>
 <lastmod>2016-10-10T07:47:34+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library.html</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/404.html</loc>
@@ -151,5 +158,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/fu-jia-shu-ju-ku/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cha-xun/</loc>
 </url>
 </urlset>
