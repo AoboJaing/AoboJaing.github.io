@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 无法打开物理文件 | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/wu-fa-da-kai-wu-li-wen-jian/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-16T18:54:39+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/"/>
+    <updated>2016-10-16T18:52:33+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>在你 <strong>附加</strong>  一个外部数据库到服务器上是，出现下面的错误：</p>
+
+<p><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612776678.png" alt="Alt text | center" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612808460.png" alt="Alt text | center" /></p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<ol>
+<li><p>找到要附加的<code>.mdf</code>文件&mdash;&mdash;&mdash;>右键&mdash;&mdash;&mdash;>属性&mdash;&mdash;&mdash;>安全&mdash;&mdash;&mdash;>选择当前用户&mdash;&mdash;&mdash;>编辑&mdash;&mdash;&mdash;>完全控制。</p>
+
+<ul>
+<li><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613072444.png" alt="Alt text" /></li>
+<li><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613183163.png" alt="Alt text" /></li>
+</ul>
+</li>
+<li><p>对.<code>log</code>文件进行相同的处理。</p></li>
+</ol>
+
+
+<hr />
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://blog.csdn.net/justdb/article/details/8457487">http://blog.csdn.net/justdb/article/details/8457487</a></p>
+]]></content>
+  </entry>
+  
+</feed>
