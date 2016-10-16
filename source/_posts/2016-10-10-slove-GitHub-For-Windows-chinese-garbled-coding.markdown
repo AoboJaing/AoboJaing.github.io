@@ -4,7 +4,7 @@ title: "解决 GitHub For Windows 客户端软件中代码的中文显示乱码�
 date: 2016-10-10 07:47:34 +0800
 comments: true
 sharing: true
-categories: [Git/GitHub]
+categories: [Git_GitHub]
 tags: [Git, GitHub, Windows, 乱码, 解决问题]
 ---
 
