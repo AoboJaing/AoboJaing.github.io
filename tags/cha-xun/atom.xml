@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 查询 | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/cha-xun/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T02:31:45+08:00</updated>
+  <updated>2016-10-17T03:18:00+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 024 查询-07 order by 的用法 --- 以某个字段排序]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/"/>
+    <updated>2016-10-17T03:13:40+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>order by</code> &mdash; 以某个字段排序</h2>
+
+<p><strong>例子：</strong></p>
+
+<pre><code class="sql">select * from emp order by sal;
+    --默认是按照升序排序
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644715874.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select * from emp order by deptno, sal;
+    --先按照deptno排序，然后再按照sal排序
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644847648.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">--asc是升序的意思，默认可以不写 desc是降序
+select * from emp order by deptno desc, sal;
+    --先按照deptno降序排序，如果deptno相同，再按照sal升序排序
+    --记住sal是升序不是降序
+    --order by a desc, b, c, d   desc只对a产生影响，不会对后面的b, c, d 产生影响
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644919129.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select * from emp order by deptno, sal desc
+    --问题：desc是否会对deptno产生影响？
+    --答案：不会
+    --先按deptno升序，如果deptno相同，再按sal降序排序
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644983662.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p><code>order by a, b              --a和b都是升序</code> <br/>
+<code>order by a, b desc         --a升序 b降序</code>
+<code>order by a desc, b         --a降序 b升序</code>
+<code>order by a desc, b desc    --a和b都是降序</code></p>
+
+<p>文字描述：</p>
+
+<ul>
+<li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
+<li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
+<li>强烈建议为每一个字段都指定排序的标准</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 023 查询-06 null 的用法 --- 没有值 空值]]></title>
@@ -227,83 +305,6 @@ select * from emp
 
 <pre><code class="sql">select * from emp
     where sal not between 1500 and 3000
-</code></pre>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 019 查询-02 distinct 的用法 --- 不允许重复]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/"/>
-    <updated>2016-10-16T21:10:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>distinct</code> 的用法</h2>
-
-<p><code>distinct</code> 的意思是：不允许重复。</p>
-
-<pre><code class="sql">select deptno from emp;
-    -- 14行记录 不是3行记录
-</code></pre>
-
-<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623018150.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select 10000 from emp;
-    -- 也是14行记录
-</code></pre>
-
-<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623063142.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select distinct deptno from emp;
-    --distince deptno 会过滤掉重复的deptno
-</code></pre>
-
-<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623127746.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select distinct comm from emp;
-    --distince 也可以过滤掉重复的null。或者说如果有多个null，只输出一个
-</code></pre>
-
-<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623177137.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select distinct comm, deptno from emp;
-    --把 comm 和 deptno 的组合进行过滤
-</code></pre>
-
-<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623219322.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select deptno, distinct comm from emp;
-    --error 逻辑上有冲突
-</code></pre>
-
-<p>执行输出错误：</p>
-
-<pre><code>消息 156，级别 15，状态 1，第 11 行
-关键字 'distinct' 附近有语法错误。
 </code></pre>
 
 <hr />

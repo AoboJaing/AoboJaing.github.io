@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 null & &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 order by & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,121 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T03:13:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:13 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>order by</code> &mdash; 以某个字段排序</h2>
+
+<p><strong>例子：</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">sal</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--默认是按照升序排序</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644715874.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--先按照deptno排序，然后再按照sal排序</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644847648.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--asc是升序的意思，默认可以不写 desc是降序</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span> <span class="k">desc</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--先按照deptno降序排序，如果deptno相同，再按照sal升序排序</span>
+</span><span class='line'>  <span class="c1">--记住sal是升序不是降序</span>
+</span><span class='line'>  <span class="c1">--order by a desc, b, c, d   desc只对a产生影响，不会对后面的b, c, d 产生影响</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644919129.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span> <span class="k">desc</span>
+</span><span class='line'>  <span class="c1">--问题：desc是否会对deptno产生影响？</span>
+</span><span class='line'>  <span class="c1">--答案：不会</span>
+</span><span class='line'>  <span class="c1">--先按deptno升序，如果deptno相同，再按sal降序排序</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644983662.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p><code>order by a, b              --a和b都是升序</code> <br/>
+<code>order by a, b desc         --a升序 b降序</code>
+<code>order by a desc, b         --a降序 b升序</code>
+<code>order by a desc, b desc    --a和b都是降序</code></p>
+
+<p>文字描述：</p>
+
+<ul>
+<li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
+<li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
+<li>强烈建议为每一个字段都指定排序的标准</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -920,79 +1035,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/">SQL 数据库 学习 015 开始学习查询 查询综述</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T17:28:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p><strong>查询</strong> 是数据库里面最重要的知识点，而且知识点很多，下面我们将<strong>查询</strong>的知识点先列出来：</p>
-
-<ol>
-<li><code>scott</code> 表介绍（例子表）</li>
-<li>计算列</li>
-<li><code>distinct</code></li>
-<li><code>between</code></li>
-<li><code>in</code></li>
-<li><code>top</code></li>
-<li><code>null</code></li>
-<li><code>order by</code></li>
-<li>模糊查询</li>
-<li>聚合函数</li>
-<li><code>group by</code></li>
-<li><code>having</code></li>
-<li>链接查询
-
-<ul>
-<li>定义</li>
-<li>分类
-
-<ul>
-<li>内连接</li>
-<li>外连接</li>
-<li>完全连接</li>
-<li>交叉连接</li>
-<li>字连接</li>
-<li>联合</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>嵌套查询（<code>orale</code> 中讲）</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1006,6 +1048,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a>
@@ -1023,10 +1069,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
         <a href="/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage/">SQL 数据库 学习 020 查询-03 Between 的用法</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/">SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1036,7 +1078,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 90%" href="/tags/git/">Git</a>
 <a style="font-size: 90%" href="/tags/github/">GitHub</a>
 <a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
-<a style="font-size: 136%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 135%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -1045,12 +1087,13 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 90%" href="/tags/between/">between</a>
 <a style="font-size: 90%" href="/tags/distinct/">distinct</a>
 <a style="font-size: 90%" href="/tags/in/">in</a>
+<a style="font-size: 90%" href="/tags/order-by/">order by</a>
 <a style="font-size: 90%" href="/tags/top/">top</a>
 <a style="font-size: 90%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
 <a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
 <a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
-<a style="font-size: 171%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 175%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
 <a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
 <a style="font-size: 90%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -1063,8 +1106,8 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="categories">
     <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
-<li class='category'><a href='/blog/categories/sql/'>sql (18)</a></li>
-<li class='category'><a href='/blog/categories/sql-server/'>sql server (18)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (19)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (19)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
 <li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
 
