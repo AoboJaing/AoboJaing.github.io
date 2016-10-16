@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T21:11:51+08:00</updated>
+  <updated>2016-10-17T00:22:07+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 020 查询-03 between 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage/"/>
+    <updated>2016-10-17T00:20:53+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>between</code> 的用法</h2>
+
+<pre><code class="sql">--查找工资在1500到3000之间（包括1500和3000）的所有的员工的信息
+select * from emp
+    where sal&gt;=1500 and sal&lt;=300
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634590985.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>上面的指令等价于：</p>
+
+<pre><code class="sql">select * from emp
+    where sal between 1500 and 3000
+</code></pre>
+
+<hr />
+
+<pre><code class="sql">--查找工资在小于1500或大于3000之间的所有的员工的信息
+select * from emp
+    where sal&lt;1500 or sal&gt;3000
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634665094.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>上面的指令等价于：</p>
+
+<pre><code class="sql">select * from emp
+    where sal not between 1500 and 3000
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 019 查询-02 distinct 的用法 --- 不允许重复]]></title>
@@ -303,57 +360,6 @@
 <hr />
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/"/>
-    <updated>2016-10-16T18:52:33+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2>出现的问题</h2>
-
-<p>在你 <strong>附加</strong>  一个外部数据库到服务器上是，出现下面的错误：</p>
-
-<p><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612776678.png" alt="Alt text | center" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612808460.png" alt="Alt text | center" /></p>
-
-<hr />
-
-<h2>解决办法</h2>
-
-<ol>
-<li><p>找到要附加的<code>.mdf</code>文件&mdash;&mdash;&mdash;>右键&mdash;&mdash;&mdash;>属性&mdash;&mdash;&mdash;>安全&mdash;&mdash;&mdash;>选择当前用户&mdash;&mdash;&mdash;>编辑&mdash;&mdash;&mdash;>完全控制。</p>
-
-<ul>
-<li><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613072444.png" alt="Alt text" /></li>
-<li><img src="/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613183163.png" alt="Alt text" /></li>
-</ul>
-</li>
-<li><p>对.<code>log</code>文件进行相同的处理。</p></li>
-</ol>
-
-
-<hr />
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="http://blog.csdn.net/justdb/article/details/8457487">http://blog.csdn.net/justdb/article/details/8457487</a></p>
 ]]></content>
   </entry>
   

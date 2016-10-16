@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T21:11:51+08:00</updated>
+  <updated>2016-10-17T00:22:07+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 020 查询-03 Between 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage/"/>
+    <updated>2016-10-17T00:20:53+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>between</code> 的用法</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找工资在1500到3000之间（包括1500和3000）的所有的员工的信息</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&gt;=</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;=</span><span class="mi">300</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634590985.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>上面的指令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="k">between</span> <span class="mi">1500</span> <span class="k">and</span> <span class="mi">3000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找工资在小于1500或大于3000之间的所有的员工的信息</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">&gt;</span><span class="mi">3000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634665094.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>上面的指令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">between</span> <span class="mi">1500</span> <span class="k">and</span> <span class="mi">3000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复]]></title>
@@ -2065,47 +2136,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <p>参考网站：
 利用Octopress和Github搭建个人博客（四）：自定义字体
 <a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决 GitHub for Windows 客户端软件中代码的中文显示乱码问题]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/"/>
-    <updated>2016-10-10T07:47:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><code>README.md</code> 文件里面是有中文的。在 <code>GitHub For Windows</code> 客户端软件里面显示中文是乱码的。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055346118.png" alt="Alt text" /></p>
-
-<p>解决办法：</p>
-
-<p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
-
-<p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
-
-<p><strong>Step 3 . </strong> 保存 <code>README.md</code> 文件</p>
-
-<p><strong>Step 4 . </strong> 将修改重新推送到 <strong>GitHub</strong> 远程。</p>
-
-<p>问题解决：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055880353.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p><strong>GitHub For Windows </strong> 客户端软件是一个非常好的软件，它实现了：即使你不会 <code>git</code> 命令行工具的时候，一样可以使用 <strong>GitHub For Windows </strong> 客户端软件里面简单点的点击按钮就可以一样将代码推送到 <strong>GitHub</strong> 远程。</p></blockquote>
-
-<hr />
-
-<blockquote><p>下载、安装、配置 <strong>GitHub For Windows </strong> 客户端软件的图文教程可以参考这篇博客。</p></blockquote>
-
-<hr />
-
-<blockquote><p>因为 <strong>GitHub</strong> 在推送代码到远程的时候，会自动将所有文件的编码方式转换为 <code>UTF-8</code> ，所有在网页里面浏览你的 <strong>GitHub</strong> 仓库的时候，中文是不会出现乱码的。
-但是在本地，要想在 <strong>GitHub For Windows</strong> 客户端软件里面也能正常看到 中文，而不是乱码，就要自己手动的将含有中文的文件转换为：<code>UTF-8</code>编码方法。（如果是 <strong>Windows</strong> 系统就要转为：<code>Utf-8 无 BOM</code> 编码格式）</p></blockquote>
 ]]></content>
   </entry>
   
