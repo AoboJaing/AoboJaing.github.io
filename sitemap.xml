@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/</loc>
+<lastmod>2016-10-17T01:48:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/</loc>
 <lastmod>2016-10-17T00:55:57+08:00</lastmod>
 </url>

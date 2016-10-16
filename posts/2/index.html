@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 主键的具体定义 能够唯一标识一个事物的一个字段或者多个字段的组合，被称为主键 设计主键要注意的问题 含有主键的表叫做主键表
-主键通常都是整数，不建议使用字符串为主键。（ &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 外键的具体定义 如果一个表中的若干个字段是来自另外若干个表的主键或唯一键，则这若干个字段就是外键。（我们讲多对多的时候，一个表里面就有两个外键。） 设计外键要注意的问题 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,64 @@ SQL Server 软件版本： SQL Server 2014 Express 主键的具体定义 能够�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention/">SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-16T17:12:56+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:12 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>外键的具体定义</h2>
+
+<p>如果一个表中的若干个字段是来自另外若干个表的主键或唯一键，则这若干个字段就是外键。（我们讲<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">多对多</a>的时候，一个表里面就有两个外键。）</p>
+
+<h2>设计外键要注意的问题</h2>
+
+<ul>
+<li>外键通常是来自另外表的主键而不是唯一（<code>unique</code>）键，因为唯一键可能为<code>null</code>。</li>
+<li>外键不一定是来自另外的表，也可能来自本表的主键</li>
+<li>含有外键的表叫外键表，外键字段来自的那一张表叫做主键表</li>
+</ul>
+
+
+<hr />
+
+<h2>问题：</h2>
+
+<p><strong>Q：</strong> 先删除主键表还是先删除外键表？</p>
+
+<p><strong>A：</strong> 先删除外键表，再删主键表。如果先删除主键表，会报错，因为这会导致外键表中的数据引用失效。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1522,216 +1579,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/">SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-11T15:09:45+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:09 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p>我们来介绍一下：数据库是如何存储数据的。</p>
-
-<h2>数据库是如何存储数据的</h2>
-
-<p>来看一个小例子</p>
-
-<p>现在，假如我们现在想存储 员工的信息。也就是说：我们来通过这个例子来看看 <strong>字段</strong>、<strong>记录</strong>、<strong>表</strong> 是一个什么东西。</p>
-
-<p>我们下面通过存储一个员工的信息，来把这些专业术语都来解释一遍。</p>
-
-<p>假设有4个信息：</p>
-
-<p>| 员工姓名      |     员工工资 |   员工性别   | 员工年龄 |</p>
-
-<p>我们能不能这样去存储数据。比如举例：</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474946865354.png" alt="Alt text" /></p>
-
-<p>如果我们按照正常的思维，这样存储是没有问题的。（其实这个员工表还缺少一列数据）但是如果我们真的在数据库里面这样存储数据的话，是会出问题的。
-我们想象一下：如果你只是写了员工的姓名、工资、性别、年龄，将来可不可能会出现一个人和里面员工的人有一模一样的姓名。如果出现了一模一样的数据，数据库该如何辨别？</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474947092362.png" alt="Alt text" /></p>
-
-<p>所以，它需要设置一个东西，来标识唯一的<strong>记录</strong>（行）。</p>
-
-<p>如果信息（行）一样，那么保存起来就浪费了，术语叫：<strong>冗余</strong>。（简单的说：就是有两条数据彼此之间无法辨别了。）</p>
-
-<p><strong>Q：</strong> 那我们怎么办？</p>
-
-<p><strong>A：</strong> 我们在现实中，是使用编号来解决这个问题的。</p>
-
-<blockquote><p>不管是人也好，产品也好，都是使用编号来标识唯一的一个事物的。</p></blockquote>
-
-<h2>主键</h2>
-
-<p>所以：</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474947488293.png" alt="Alt text" /></p>
-
-<p>张三这个人之前有4个属性：姓名、工资、性别 和 年龄。而确定一个数据唯一性的属性，有一个专门的词：<strong>主键</strong>。（当前例子指的就是：<strong>学生编号</strong>。）（现在张三这个人有5个属性了。）</p>
-
-<p><strong>主键</strong>：它也是事物的一个属性，它是<strong>可以标识事物唯一性的属性</strong>。</p>
-
-<hr />
-
-<p>如果我们这样存放：</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474969612804.png" alt="Alt text" /></p>
-
-<p>那么 部门姓名 和 部门地址 还有 部门人数 都会重复的出现，这样存储太消耗空间了。</p>
-
-<p>所以我们将他们分开存储：</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474969757254.png" alt="Alt text" /></p>
-
-<p><strong>Q：</strong> 请问： 部门 需不需要 编号 这个属性呢？</p>
-
-<p><strong>A：</strong> 需要。</p>
-
-<p>记住：我们设计任何一个事物都需要<strong>主键</strong>（唯一的标识符）。如果没有唯一的标识符，那么事物和事物之间的区别就没有了。</p>
-
-<p>所以，只要你想存数据，数据就必须要有<strong>主键</strong>。没有主键，事物与事物之间没有办法区分。添加主键就是添加<strong>编号</strong>属性。</p>
-
-<p>比如说人。人的身份证算不算是一个人的属性，身份证是单独添加的。我们人有鼻子，眼睛，嘴。身份证严格上讲并不是一个人的属性，只不过是为了标识，使用编号是很方便的。所以每个人才有了身份证号这个属性。</p>
-
-<blockquote><p>编号（主键）是无意义的，但是因为它太普遍的，我们认为它有意义。</p></blockquote>
-
-<p>在保存数据的时候，都是单独添加一个没有实际意义的、只为了编号的 数据来充当主键。它只起个标识作用。（现实生活中我们就是这样使用的，在实际的设计库的时候，我们也是这样设计的，和我们日常中是一模一样的。）</p>
-
-<hr />
-
-<h2>外键</h2>
-
-<p><strong>Q：</strong> 员工和部门之间是有关系的，那么这个关系怎么去表达？</p>
-
-<p><strong>Q、：</strong> 如果，我们想要将现实生活中特别复杂的事物保存到硬盘上，我们要如何存储？</p>
-
-<p>你应该这样去考虑：</p>
-
-<p>第一：个体如何存储；</p>
-
-<p>第二：个体之间的关系如何存储。</p>
-
-<p>把这两个搞定了，基本就都搞定了。</p>
-
-<hr />
-
-<p>我们现在已经解决了<strong>个体</strong>如何存储。接下来就是<strong>个体之间的关系</strong>如何存储了。我们主流使用的数据库都是关系型数据库（就是一个二维表），而我们使用的编程语言是<strong>Java</strong>、<strong>C#</strong>这种面向对象的语言，这两种完全不同的解决问题的思想。</p>
-
-<p><strong>Q：</strong> 中间服务器是使用<strong>Java</strong> 或者 <strong>C#</strong> 实现的，后端是数据库实现的，它们之间如何进行交互的？</p>
-
-<p><strong>A：</strong> 是通过<strong>Hibernate</strong>实现 一个映射，日后的博客中会介绍它。（如果日后，我们的数据库也是使用面向对象的思想实现的，那么这个<strong>Hibernate</strong> 就没用了。但是现在没有面向对象的数据库，这种思想的数据库技术还不成熟，所以 <strong>Hibernate</strong>现在还是需要学习的。）</p>
-
-<p><strong>Q：</strong> 什么是面向对象，大家已经知道了。但是，什么是关系？</p>
-
-<p><strong>A：</strong> 面向对象思想是通过类来实现的，而关系型数据库是通过表来实现的。而表与表之间的关系是通过什么来实现的呢？是通过一个叫：<strong>外键</strong> 的东西来表示的。</p>
-
-<p>我们现在在员工表里面在添加一个：<strong>部门编号</strong>。</p>
-
-<blockquote><p><strong>扩展：</strong>（编号通常是整型数字，如果数据量太大，整型数字不够用的话，编号通常是字母和数字组合使用。当时我们推荐编号使用整型数字。因为整型查找的时候很快，而字符串查找的时候很慢。）</p></blockquote>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474974928303.png" alt="Alt text" /></p>
-
-<p>这个 <strong>部门编号</strong> 就是 <strong>外键</strong>。我们在员工表上添加了一列（部门编号），就解决了 <strong>表</strong>（员工表）与 <strong>表</strong>（部门表）之间的<strong>关系</strong>了。</p>
-
-<blockquote><p><strong>Q：</strong> 我们想象一下，如果我们不在员工表里面添加 <strong>部门编号</strong>。而是在 部门表里面添加 <strong>员工编号</strong>。这样行不行？</p>
-
-<p><strong>A：</strong> 当时是不行的，一个部门里面里面有很多的员工，并且员工的数量不同。所以，如果我们在部门表里面添加员工编号的话，有些部分的字段就很多，而有些部门的编号就很少，这样就不合适了吧。如果你想这样设计也可以，但是这样设计不好。</p></blockquote>
-
-<p>你在设计表之前，要想：员工与部门之间的关系是一对多还是多对一。意思就是：一个员工 对应 很多部门，还是 一个部门 对应 很多员工？
-是一个部分对应多个员工。我们会<strong>将外键添加到多的一方</strong>，这样是最合理的。</p>
-
-<blockquote><p>我们日后会讲：多对多，一对一，一对多 这样的情况下，都如何使用外键来表示关系。现在大概有个印象就可以。</p></blockquote>
-
-<p><strong>Q：</strong> 再解释一次：什么是外键？</p>
-
-<p><strong>A：</strong> 连接两个表的字段叫做外键。</p>
-
-<p>但是能不能再换一种更好的解释方式。主键是：标识唯一一个事物。而外键是：一个表中的数据来自另外一个表。（解释：员工表里面的一列数据（部门编号），它不是员工表本身的，它的数据是来自另外一个表（部门表）。）</p>
-
-<hr />
-
-<h2><strong>总结：</strong></h2>
-
-<p>在数据库里面的专业术语：</p>
-
-<p>这样的一列叫：<strong>列</strong> 或者 <strong>字段</strong>。模拟的是：一个事物的某一个静态的特征。<strong>列</strong>：字段的另一种称谓。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474975819543.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>这样的一行叫：<strong>记录</strong> 或者 <strong>元组</strong>。模拟的是：字段的组合，表示的是一个具体的事物。<strong>元组</strong>：记录的另一种称谓。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474975928980.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>这样的一行叫：<strong>记录</strong> 或者 <strong>元组</strong> 或者 <strong>属性</strong>。<strong>属性</strong>：<strong>记录</strong>的另一种称谓。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474975996931.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>这一个整体叫：<strong>表</strong>。记录的组合。模拟的是（表示的是）：同一类事物的一个集合。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474976030725.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>表、字段和记录的关系：</p>
-
-<ul>
-<li>字段是事物的属性</li>
-<li>记录是事物本身</li>
-<li>表示事物的集合</li>
-</ul>
-
-
-<hr />
-
-<p>表中唯一能辨别一个记录与另一个记录不同的字段叫：<strong>主键</strong>。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474976130605.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>如果有一个记录（列）不是来自于表本身的，是来自另外一个表的，它叫：<strong>外键</strong>。</p>
-
-<p><img src="/images/2016-10-11-SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/1474976186110.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1749,6 +1596,10 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/">SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录</a>
       </li>
     
@@ -1764,10 +1615,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
         <a href="/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/">SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/">SQL 数据库 学习 018 查询-01 计算列 的用法</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1777,7 +1624,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 90%" href="/tags/git/">Git</a>
 <a style="font-size: 90%" href="/tags/github/">GitHub</a>
 <a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
-<a style="font-size: 137%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 136%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -1791,7 +1638,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
 <a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
 <a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
-<a style="font-size: 166%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 171%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
 <a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
 <a style="font-size: 90%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -1804,8 +1651,8 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
   <ul id="categories">
     <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
-<li class='category'><a href='/blog/categories/sql/'>sql (17)</a></li>
-<li class='category'><a href='/blog/categories/sql-server/'>sql server (17)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (18)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (18)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
 <li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
 
