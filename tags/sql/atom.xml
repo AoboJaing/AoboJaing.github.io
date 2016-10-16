@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T18:54:39+08:00</updated>
+  <updated>2016-10-16T19:07:10+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 016 如何附加数据库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/"/>
+    <updated>2016-10-16T19:06:49+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p><strong>scott</strong> 例子库可以在下面的链接中下载：
+（百度云）</p>
+
+<p>链接：<a href="http://pan.baidu.com/s/1sl9zbm1">http://pan.baidu.com/s/1sl9zbm1</a> 密码：<code>nyly</code></p>
+
+<p>这个例子库可以通过 <strong>附加</strong> 的方式添加到 <strong>SQL Server</strong> 软件里面。（这个例子很经典。<strong>SQL Server</strong>软件 和 <code>Orale</code> 软件 都可以使用到这个例子库。）</p>
+
+<h2>添加 <code>scott</code> 库 到<strong>SQL Server</strong> 软件</h2>
+
+<p><strong>Step 1 . </strong> 鼠标右键点击 <strong>数据库</strong> -> <strong>附加(A)&hellip;</strong></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610765494.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610825463.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610863975.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610918053.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610933947.png" alt="Alt text" /></p>
+
+<blockquote><p>如果你遇到下面的问题，请访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/">这个网站</a>解决问题。</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610946090.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476612674466.png" alt="Alt text" /></p></blockquote>
+
+<p>成功添加：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476615669199.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。]]></title>
@@ -191,64 +245,6 @@
 </li>
 </ul>
 
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 012 数据库关系图]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-012-database-diagram/"/>
-    <updated>2016-10-16T15:47:58+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-012-database-diagram</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p>我们现在写一个 多对多关系的表：（这段代码你可以在<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">这篇博文</a>里面看到它的代码解释。）</p>
-
-<pre><code class="sql">--班级表
-create table banji
-(
-    banji_id int primary key,
-    banji_num int not null,
-    banji_name nvarchar(100)
-)
-
---教师
-create table jiaoshi
-(
-    jiaoshi_id int primary key,
-    jiaoshi_name nvarchar(200)
-)
-
---第三张表：用来模拟班级和教师的关系
-create table banji_jiaoshi_mapping
-(
-    banji_id int constraint fk_banji_id foreign key references banji(bianji_id),
-    jiaoshi_id int foreign key references jiaoshi(jiaoshi_id),
-    kecheng nvarchar(20),
-    constraint pk_banji_id_jiaoshi_id primary key (banji_id, jiaoshi_id, kecheng)
-
-)
-</code></pre>
-
-<p>虽然，现在我们已经将表与表之间的关系都建好了。但是我现在怎么才能知道他们之间的关系到底有没有见好啊。
-<strong>SQL Server</strong> 为我们提供了另外一个工具：<strong>数据库关系图</strong>。</p>
-
-<p>我们新建一个：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602645224.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602656133.png" alt="Alt text" /></p>
-
-<p>外键添加到多的一方。</p>
 
 <hr />
 ]]></content>

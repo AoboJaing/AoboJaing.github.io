@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Windows系统 下载并安装 Notepad++ 图文教程 - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 016 如何附加数据库 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="下载 （Notepad 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。） 到这个网站下载：https://notepad-plus-plus.org/download/v7.html 点击相应的 安装包 进行下载：
-（我电脑是64位的，所以下载64位的。Installer 是安装包； &hellip;">
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下面的链接中下载：
+（百度云） 链接：http://pan.baidu.com/s/1sl9zbm1 密码：nyly 这个例子库可以通过 附加 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -69,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Windows系统 下载并安装 Notepad++ 图文教程</h1>
+      <h1 class="entry-title">SQL 数据库 学习 016 如何附加数据库</h1>
     
     
       <p class="meta">
@@ -78,7 +79,7 @@
 
 
 
-<time class='entry-date' datetime='2016-10-10T10:44:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+<time class='entry-date' datetime='2016-10-16T19:06:49+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:06 pm</span></time>
         
       </p>
     
@@ -87,34 +88,48 @@
 
 <div class="entry-content"><hr />
 
-<h2>下载</h2>
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
 
-<p>（<strong>Notepad</strong> 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。）</p>
-
-<p>到这个网站下载：<a href="https://notepad-plus-plus.org/download/v7.html">https://notepad-plus-plus.org/download/v7.html</a></p>
-
-<p>点击相应的 <strong>安装包</strong> 进行下载：
-（我电脑是64位的，所以下载64位的。<strong>Installer</strong> 是安装包； <strong>压缩包</strong> 是绿色版的，下载解压后直接就能使用，无需安装。）</p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993346774.png" alt="Alt text" /></p>
 
 <hr />
 
-<h2>安装</h2>
+<p><strong>scott</strong> 例子库可以在下面的链接中下载：
+（百度云）</p>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993288957.png" alt="Alt text" /></p>
+<p>链接：<a href="http://pan.baidu.com/s/1sl9zbm1">http://pan.baidu.com/s/1sl9zbm1</a> 密码：<code>nyly</code></p>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993358700.png" alt="Alt text" /></p>
+<p>这个例子库可以通过 <strong>附加</strong> 的方式添加到 <strong>SQL Server</strong> 软件里面。（这个例子很经典。<strong>SQL Server</strong>软件 和 <code>Orale</code> 软件 都可以使用到这个例子库。）</p>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993364763.png" alt="Alt text" /></p>
+<h2>添加 <code>scott</code> 库 到<strong>SQL Server</strong> 软件</h2>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993371316.png" alt="Alt text" /></p>
+<p><strong>Step 1 . </strong> 鼠标右键点击 <strong>数据库</strong> -> <strong>附加(A)&hellip;</strong></p>
 
-<p>什么都不选，直接<strong>下一步</strong>。</p>
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610765494.png" alt="Alt text" /></p>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993422195.png" alt="Alt text" /></p>
+<p><strong>Step 2 . </strong></p>
 
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610825463.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610863975.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610918053.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610933947.png" alt="Alt text" /></p>
+
+<blockquote><p>如果你遇到下面的问题，请访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/">这个网站</a>解决问题。</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610946090.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476612674466.png" alt="Alt text" /></p></blockquote>
+
+<p>成功添加：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476615669199.png" alt="Alt text" /></p>
+
+<hr />
 
 <h2>搞定</h2>
 </div>
@@ -132,12 +147,12 @@
 
 
 
-<time class='entry-date' datetime='2016-10-10T10:44:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+<time class='entry-date' datetime='2016-10-16T19:06:49+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:06 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruan-jian-an-zhuang/'>软件安装</a>
+    <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a>
   
 </span>
 
@@ -167,10 +182,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/" title="Previous Post: Octopress 搭建静态博客站点 --- 自定义字体设置">&laquo; Octopress 搭建静态博客站点 --- 自定义字体设置</a>
+        <a class="basic-alignment left" href="/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/" title="Previous Post: SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。">&laquo; SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/11/SQL-Learning-007-Field-Attributes-Column-Tuple-recording-table-Primary_key-Foreign_key/" title="Next Post: SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键">SQL 数据库 学习 007 通过一个示例简单介绍什么是字段、属性、列、元组、记录、表、主键、外键 &raquo;</a>
       
     </p>
   </footer>
@@ -179,7 +192,7 @@
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/10/Windows-install-Notepad++" data-title="Windows系统 下载并安装 Notepad++ 图文教程" data-url="http://aobojaing.github.io /blog/2016/10/10/Windows-install-Notepad++/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database" data-title="SQL 数据库 学习 016 如何附加数据库" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
