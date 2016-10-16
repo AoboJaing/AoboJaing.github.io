@@ -5,28 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SQL 数据库 学习 012 数据库关系图 - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 015 开始学习查询 查询综述 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对多关系的表：（这段代码你可以在这篇博文里面看到它的代码解释。） 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 查询 是数据库里面最重要的知识点，而且知识点很多，下面我们将查询的知识点先列出来： scott 表介绍（例子表）
+计算列
+distinct
+between
+in
+top &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -35,7 +24,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-012-database-diagram/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -85,7 +74,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   
   <header>
     
-      <h1 class="entry-title">SQL 数据库 学习 012 数据库关系图</h1>
+      <h1 class="entry-title">SQL 数据库 学习 015 开始学习查询 查询综述</h1>
     
     
       <p class="meta">
@@ -94,7 +83,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 
 
-<time class='entry-date' datetime='2016-10-16T15:47:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:47 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T17:28:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
         
       </p>
     
@@ -111,71 +100,41 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 <hr />
 
-<p>我们现在写一个 多对多关系的表：（这段代码你可以在<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">这篇博文</a>里面看到它的代码解释。）</p>
+<p><strong>查询</strong> 是数据库里面最重要的知识点，而且知识点很多，下面我们将<strong>查询</strong>的知识点先列出来：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--班级表</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_num</span> <span class="nb">int</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--教师</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">jiaoshi</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">jiaoshi_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--第三张表：用来模拟班级和教师的关系</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji_jiaoshi_mapping</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_banji_id</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">banji</span><span class="p">(</span><span class="n">bianji_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">jiaoshi</span><span class="p">(</span><span class="n">jiaoshi_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">kecheng</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-</span><span class='line'>  <span class="k">constraint</span> <span class="n">pk_banji_id_jiaoshi_id</span> <span class="k">primary</span> <span class="k">key</span> <span class="p">(</span><span class="n">banji_id</span><span class="p">,</span> <span class="n">jiaoshi_id</span><span class="p">,</span> <span class="n">kecheng</span><span class="p">)</span>
-</span><span class='line'>  
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<ol>
+<li><code>scott</code> 表介绍（例子表）</li>
+<li>计算列</li>
+<li><code>distinct</code></li>
+<li><code>between</code></li>
+<li><code>in</code></li>
+<li><code>top</code></li>
+<li><code>null</code></li>
+<li><code>order by</code></li>
+<li>模糊查询</li>
+<li>聚合函数</li>
+<li><code>group by</code></li>
+<li><code>having</code></li>
+<li>链接查询
 
+<ul>
+<li>定义</li>
+<li>分类
 
-<p>虽然，现在我们已经将表与表之间的关系都建好了。但是我现在怎么才能知道他们之间的关系到底有没有见好啊。
-<strong>SQL Server</strong> 为我们提供了另外一个工具：<strong>数据库关系图</strong>。</p>
+<ul>
+<li>内连接</li>
+<li>外连接</li>
+<li>完全连接</li>
+<li>交叉连接</li>
+<li>字连接</li>
+<li>联合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>嵌套查询（<code>orale</code> 中讲）</li>
+</ol>
 
-<p>我们新建一个：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602645224.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602656133.png" alt="Alt text" /></p>
-
-<p>外键添加到多的一方。</p>
-
-<hr />
 </div>
 
 
@@ -191,7 +150,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 
 
-<time class='entry-date' datetime='2016-10-16T15:47:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:47 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T17:28:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
       
 
 <span class="categories">
@@ -226,10 +185,8 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/" title="Previous Post: SQL 数据库 学习 011 关系、一对一、一对多、多对多">&laquo; SQL 数据库 学习 011 关系、一对一、一对多、多对多</a>
+        <a class="basic-alignment left" href="/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention/" title="Previous Post: SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题">&laquo; SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention/" title="Next Post: SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题">SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题 &raquo;</a>
       
     </p>
   </footer>
@@ -238,7 +195,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-012-database-diagram" data-title="SQL 数据库 学习 012 数据库关系图" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-012-database-diagram/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary" data-title="SQL 数据库 学习 015 开始学习查询 查询综述" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

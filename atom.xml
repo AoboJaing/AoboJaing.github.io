@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T17:13:09+08:00</updated>
+  <updated>2016-10-16T17:28:35+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 015 开始学习查询 查询综述]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/"/>
+    <updated>2016-10-16T17:28:06+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p><strong>查询</strong> 是数据库里面最重要的知识点，而且知识点很多，下面我们将<strong>查询</strong>的知识点先列出来：</p>
+
+<ol>
+<li><code>scott</code> 表介绍（例子表）</li>
+<li>计算列</li>
+<li><code>distinct</code></li>
+<li><code>between</code></li>
+<li><code>in</code></li>
+<li><code>top</code></li>
+<li><code>null</code></li>
+<li><code>order by</code></li>
+<li>模糊查询</li>
+<li>聚合函数</li>
+<li><code>group by</code></li>
+<li><code>having</code></li>
+<li>链接查询
+
+<ul>
+<li>定义</li>
+<li>分类
+
+<ul>
+<li>内连接</li>
+<li>外连接</li>
+<li>完全连接</li>
+<li>交叉连接</li>
+<li>字连接</li>
+<li>联合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>嵌套查询（<code>orale</code> 中讲）</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题]]></title>
