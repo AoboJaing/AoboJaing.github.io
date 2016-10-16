@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T15:48:13+08:00</updated>
+  <updated>2016-10-16T16:51:29+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention/"/>
+    <updated>2016-10-16T16:50:11+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>主键的具体定义</h2>
+
+<p>能够唯一标识一个事物的一个字段或者多个字段的组合，被称为主键</p>
+
+<hr />
+
+<h2>设计主键要注意的问题</h2>
+
+<ul>
+<li>含有主键的表叫做主键表</li>
+<li>主键通常都是整数，不建议使用字符串为主键。（如果主键是用于集群式服务（指跨数据库服务，比如：跨行转账），才可以考虑用字符串当主键。）</li>
+<li>主键的值通常都不允许 修改，除非本记录被删除</li>
+<li>主键不要定义成<code>id</code>，而要定义成<code>表名id</code> 或者 <code>表名_id</code></li>
+<li>要用代理主键，不要用业务主键
+
+<ul>
+<li>任何一张表，强烈建议不要使用业务含义的字段充当主键，我们通常都是在表中单独添加一个整型的编号充当主键字段。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 012 数据库关系图]]></title>
