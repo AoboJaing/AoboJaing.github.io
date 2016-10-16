@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T19:40:50+08:00</updated>
+  <updated>2016-10-16T20:15:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 018 查询-01 计算列 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/"/>
+    <updated>2016-10-16T20:15:30+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>计算列</h2>
+
+<pre><code class="sql">select * from emp;
+    -- * 表示所有的
+    -- * from emp 表示从emp表查询
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619600875.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select empno, ename from emp;
+    -- 将员工表里面所有员工的 empno 和 ename 都输出出来
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619649220.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select ename, sal*12 as "年薪" from emp;
+    -- as 可以省略。 记住："年薪" 不要写成 '年薪' 、也不要写成 年薪
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619727923.png" alt="Alt text" /></p>
+
+<p><strong>注意：</strong> ： 在<strong>Oracle</strong>软件中字段的别名不允许用单引号括起来。但是 <strong>SQL Server</strong> 软件却允许，因此为了兼容性考虑，最好字段的别名用<code>""</code>（双引号）括起来，不要使用<code>''</code>（单引号）。</p>
+
+<p>上面这段命令 <code>select ename, sal*12 as "年薪" from emp</code> 就是计算列。解释：原本 <code>emp</code> 表里面没有 年薪 这个属性，我们使用 <code>sal*12 as "年薪"</code> 得到年薪的信息，这就是 <strong>计算列</strong>。</p>
+
+<hr />
+
+<pre><code class="sql">select 5 from emp;
+    -- ok，可以运行
+    --输出的行数是emp表的行数，每行只有一个字段，值是5
+    -- 5 就是一个值，仅此而已，没有实际意义
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619771628.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select 5;
+    --ok，可以运行
+    --但是不推荐
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619797016.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select ename, sal*12 as "年薪", sal "月薪", job from emp;
+</code></pre>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619867716.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 017 查询-00 介绍 scott 例子库]]></title>
@@ -240,44 +330,6 @@
 <li>嵌套查询（<code>orale</code> 中讲）</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention/"/>
-    <updated>2016-10-16T17:12:56+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2>外键的具体定义</h2>
-
-<p>如果一个表中的若干个字段是来自另外若干个表的主键或唯一键，则这若干个字段就是外键。（我们讲<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">多对多</a>的时候，一个表里面就有两个外键。）</p>
-
-<h2>设计外键要注意的问题</h2>
-
-<ul>
-<li>外键通常是来自另外表的主键而不是唯一（<code>unique</code>）键，因为唯一键可能为<code>null</code>。</li>
-<li>外键不一定是来自另外的表，也可能来自本表的主键</li>
-<li>含有外键的表叫外键表，外键字段来自的那一张表叫做主键表</li>
-</ul>
-
-
-<hr />
-
-<h2>问题：</h2>
-
-<p><strong>Q：</strong> 先删除主键表还是先删除外键表？</p>
-
-<p><strong>A：</strong> 先删除外键表，再删主键表。如果先删除主键表，会报错，因为这会导致外键表中的数据引用失效。</p>
 ]]></content>
   </entry>
   

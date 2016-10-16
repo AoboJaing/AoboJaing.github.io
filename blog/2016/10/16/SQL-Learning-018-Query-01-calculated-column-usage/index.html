@@ -5,28 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SQL 数据库 学习 012 数据库关系图 - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 018 查询-01 计算列 的用法 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对多关系的表：（这段代码你可以在这篇博文里面看到它的代码解释。） 1
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 计算列 1
 2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17 &hellip;">
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -35,7 +21,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-012-database-diagram/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -85,7 +71,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   
   <header>
     
-      <h1 class="entry-title">SQL 数据库 学习 012 数据库关系图</h1>
+      <h1 class="entry-title">SQL 数据库 学习 018 查询-01 计算列 的用法</h1>
     
     
       <p class="meta">
@@ -94,7 +80,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 
 
-<time class='entry-date' datetime='2016-10-16T15:47:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:47 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T20:15:30+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:15 pm</span></time>
         
       </p>
     
@@ -111,69 +97,97 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 <hr />
 
-<p>我们现在写一个 多对多关系的表：（这段代码你可以在<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">这篇博文</a>里面看到它的代码解释。）</p>
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>计算列</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- * 表示所有的</span>
+</span><span class='line'>  <span class="c1">-- * from emp 表示从emp表查询</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619600875.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 将员工表里面所有员工的 empno 和 ename 都输出出来</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619649220.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- as 可以省略。 记住：&quot;年薪&quot; 不要写成 &#39;年薪&#39; 、也不要写成 年薪</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619727923.png" alt="Alt text" /></p>
+
+<p><strong>注意：</strong> ： 在<strong>Oracle</strong>软件中字段的别名不允许用单引号括起来。但是 <strong>SQL Server</strong> 软件却允许，因此为了兼容性考虑，最好字段的别名用<code>""</code>（双引号）括起来，不要使用<code>''</code>（单引号）。</p>
+
+<p>上面这段命令 <code>select ename, sal*12 as "年薪" from emp</code> 就是计算列。解释：原本 <code>emp</code> 表里面没有 年薪 这个属性，我们使用 <code>sal*12 as "年薪"</code> 得到年薪的信息，这就是 <strong>计算列</strong>。</p>
+
+<hr />
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--班级表</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_num</span> <span class="nb">int</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--教师</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">jiaoshi</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">jiaoshi_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--第三张表：用来模拟班级和教师的关系</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji_jiaoshi_mapping</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_banji_id</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">banji</span><span class="p">(</span><span class="n">bianji_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">jiaoshi</span><span class="p">(</span><span class="n">jiaoshi_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">kecheng</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-</span><span class='line'>  <span class="k">constraint</span> <span class="n">pk_banji_id_jiaoshi_id</span> <span class="k">primary</span> <span class="k">key</span> <span class="p">(</span><span class="n">banji_id</span><span class="p">,</span> <span class="n">jiaoshi_id</span><span class="p">,</span> <span class="n">kecheng</span><span class="p">)</span>
-</span><span class='line'>  
-</span><span class='line'><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- ok，可以运行</span>
+</span><span class='line'>  <span class="c1">--输出的行数是emp表的行数，每行只有一个字段，值是5</span>
+</span><span class='line'>  <span class="c1">-- 5 就是一个值，仅此而已，没有实际意义</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>虽然，现在我们已经将表与表之间的关系都建好了。但是我现在怎么才能知道他们之间的关系到底有没有见好啊。
-<strong>SQL Server</strong> 为我们提供了另外一个工具：<strong>数据库关系图</strong>。</p>
+<p>执行输出：</p>
 
-<p>我们新建一个：</p>
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619771628.png" alt="Alt text" /></p>
 
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602645224.png" alt="Alt text" /></p>
+<hr />
 
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602656133.png" alt="Alt text" /></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--ok，可以运行</span>
+</span><span class='line'>  <span class="c1">--但是不推荐</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>外键添加到多的一方。</p>
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619797016.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span><span class="p">,</span> <span class="n">sal</span> <span class="ss">&quot;月薪&quot;</span><span class="p">,</span> <span class="n">job</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619867716.png" alt="Alt text" /></p>
 
 <hr />
 </div>
@@ -191,7 +205,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
 
 
 
-<time class='entry-date' datetime='2016-10-16T15:47:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:47 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T20:15:30+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:15 pm</span></time>
       
 
 <span class="categories">
@@ -226,10 +240,8 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/" title="Previous Post: SQL 数据库 学习 011 关系、一对一、一对多、多对多">&laquo; SQL 数据库 学习 011 关系、一对一、一对多、多对多</a>
+        <a class="basic-alignment left" href="/blog/2016/10/16/SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/" title="Previous Post: SQL 数据库 学习 017 查询-00 介绍 scott 例子库">&laquo; SQL 数据库 学习 017 查询-00 介绍 scott 例子库</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention/" title="Next Post: SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题">SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题 &raquo;</a>
       
     </p>
   </footer>
@@ -238,7 +250,7 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-012-database-diagram" data-title="SQL 数据库 学习 012 数据库关系图" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-012-database-diagram/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage" data-title="SQL 数据库 学习 018 查询-01 计算列 的用法" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T19:40:50+08:00</updated>
+  <updated>2016-10-16T20:15:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 018 查询-01 计算列 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/"/>
+    <updated>2016-10-16T20:15:30+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>计算列</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- * 表示所有的</span>
+</span><span class='line'>  <span class="c1">-- * from emp 表示从emp表查询</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619600875.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 将员工表里面所有员工的 empno 和 ename 都输出出来</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619649220.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- as 可以省略。 记住：&quot;年薪&quot; 不要写成 &#39;年薪&#39; 、也不要写成 年薪</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619727923.png" alt="Alt text" /></p>
+
+<p><strong>注意：</strong> ： 在<strong>Oracle</strong>软件中字段的别名不允许用单引号括起来。但是 <strong>SQL Server</strong> 软件却允许，因此为了兼容性考虑，最好字段的别名用<code>""</code>（双引号）括起来，不要使用<code>''</code>（单引号）。</p>
+
+<p>上面这段命令 <code>select ename, sal*12 as "年薪" from emp</code> 就是计算列。解释：原本 <code>emp</code> 表里面没有 年薪 这个属性，我们使用 <code>sal*12 as "年薪"</code> 得到年薪的信息，这就是 <strong>计算列</strong>。</p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- ok，可以运行</span>
+</span><span class='line'>  <span class="c1">--输出的行数是emp表的行数，每行只有一个字段，值是5</span>
+</span><span class='line'>  <span class="c1">-- 5 就是一个值，仅此而已，没有实际意义</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619771628.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--ok，可以运行</span>
+</span><span class='line'>  <span class="c1">--但是不推荐</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619797016.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span><span class="p">,</span> <span class="n">sal</span> <span class="ss">&quot;月薪&quot;</span><span class="p">,</span> <span class="n">job</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619867716.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 017 查询-00 介绍 Scott 例子库]]></title>
