@@ -5,23 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories） - AoboSir 的博客</title>
+  <title>SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复 - AoboSir 的博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="一共三步，很简单。跟着走就可以。 Step 1 . 增加 category_list 插件 在 octopress\plugins\ 文件夹里面，新建一个文件，取名为：category_list_tag.rb。并将下面的代码粘贴到里面。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13 &hellip;">
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 distinct &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -30,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
@@ -80,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）</h1>
+      <h1 class="entry-title">SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复</h1>
     
     
       <p class="meta">
@@ -89,7 +78,7 @@
 
 
 
-<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T21:10:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:10 pm</span></time>
         
       </p>
     
@@ -98,102 +87,94 @@
 
 <div class="entry-content"><hr />
 
-<p>一共三步，很简单。跟着走就可以。</p>
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
 
 <hr />
 
-<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
-
-<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
-</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
-</span><span class='line'>    def render(context)
-</span><span class='line'>      html = ""
-</span><span class='line'>      categories = context.registers[:site].categories.keys
-</span><span class='line'>      categories.sort.each do |category|
-</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
-</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
-</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
-</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-</span><span class='line'>      end
-</span><span class='line'>      html
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
 
 <hr />
 
-<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
+<h2><code>distinct</code> 的用法</h2>
 
-<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
-
-<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
+<p><code>distinct</code> 的意思是：不允许重复。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      {\% category_list \%}
-</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 14行记录 不是3行记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623018150.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">10000</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 也是14行记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623063142.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--distince deptno 会过滤掉重复的deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623127746.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--distince 也可以过滤掉重复的null。或者说如果有多个null，只输出一个</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623177137.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--把 comm 和 deptno 的组合进行过滤</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623219322.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--error 逻辑上有冲突</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出错误：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">消息</span> <span class="mi">156</span><span class="err">，级别</span> <span class="mi">15</span><span class="err">，状态</span> <span class="mi">1</span><span class="err">，第</span> <span class="mi">11</span> <span class="err">行</span>
+</span><span class='line'><span class="err">关键字</span> <span class="s1">&#39;distinct&#39;</span> <span class="err">附近有语法错误。</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <hr />
-
-<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
-
-<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [asides/category_list.html, ......]
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-
-<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
-
-<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<p>参考网站：</p>
-
-<p>为octopress添加分类(category)列表
-<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
 </div>
 
 
@@ -209,12 +190,12 @@
 
 
 
-<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
+<time class='entry-date' datetime='2016-10-16T21:10:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:10 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+    <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a>
   
 </span>
 
@@ -244,10 +225,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/" title="Previous Post: SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束">&laquo; SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束</a>
+        <a class="basic-alignment left" href="/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/" title="Previous Post: SQL 数据库 学习 018 查询-01 计算列 的用法">&laquo; SQL 数据库 学习 018 查询-01 计算列 的用法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/13/SQL-Learning-010-differences-tables-contraints-check-default-unique-not-null/" title="Next Post: SQL 数据库 学习 010 表和约束的区别、check约束、default约束、unique约束、not null约束">SQL 数据库 学习 010 表和约束的区别、check约束、default约束、unique约束、not null约束 &raquo;</a>
       
     </p>
   </footer>
@@ -256,7 +235,7 @@
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar" data-title="Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）" data-url="http://aobojaing.github.io /blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat" data-title="SQL 数据库 学习 019 查询-02 distinct 的用法 --- 不允许重复" data-url="http://aobojaing.github.io /blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

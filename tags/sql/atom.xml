@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T20:35:26+08:00</updated>
+  <updated>2016-10-16T21:11:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 019 查询-02 distinct 的用法 --- 不允许重复]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/"/>
+    <updated>2016-10-16T21:10:52+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>distinct</code> 的用法</h2>
+
+<p><code>distinct</code> 的意思是：不允许重复。</p>
+
+<pre><code class="sql">select deptno from emp;
+    -- 14行记录 不是3行记录
+</code></pre>
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623018150.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select 10000 from emp;
+    -- 也是14行记录
+</code></pre>
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623063142.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select distinct deptno from emp;
+    --distince deptno 会过滤掉重复的deptno
+</code></pre>
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623127746.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select distinct comm from emp;
+    --distince 也可以过滤掉重复的null。或者说如果有多个null，只输出一个
+</code></pre>
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623177137.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select distinct comm, deptno from emp;
+    --把 comm 和 deptno 的组合进行过滤
+</code></pre>
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623219322.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select deptno, distinct comm from emp;
+    --error 逻辑上有冲突
+</code></pre>
+
+<p>执行输出错误：</p>
+
+<pre><code>消息 156，级别 15，状态 1，第 11 行
+关键字 'distinct' 附近有语法错误。
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 018 查询-01 计算列 的用法]]></title>
@@ -277,59 +354,6 @@
 <p>参考网站：</p>
 
 <p><a href="http://blog.csdn.net/justdb/article/details/8457487">http://blog.csdn.net/justdb/article/details/8457487</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 015 开始学习查询 查询综述]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary/"/>
-    <updated>2016-10-16T17:28:06+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-015-getting-started-query-query-summary</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p><strong>查询</strong> 是数据库里面最重要的知识点，而且知识点很多，下面我们将<strong>查询</strong>的知识点先列出来：</p>
-
-<ol>
-<li><code>scott</code> 表介绍（例子表）</li>
-<li>计算列</li>
-<li><code>distinct</code></li>
-<li><code>between</code></li>
-<li><code>in</code></li>
-<li><code>top</code></li>
-<li><code>null</code></li>
-<li><code>order by</code></li>
-<li>模糊查询</li>
-<li>聚合函数</li>
-<li><code>group by</code></li>
-<li><code>having</code></li>
-<li>链接查询
-
-<ul>
-<li>定义</li>
-<li>分类
-
-<ul>
-<li>内连接</li>
-<li>外连接</li>
-<li>完全连接</li>
-<li>交叉连接</li>
-<li>字连接</li>
-<li>联合</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>嵌套查询（<code>orale</code> 中讲）</li>
-</ol>
-
 ]]></content>
   </entry>
   
