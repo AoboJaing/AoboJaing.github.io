@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sql Server | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/sql-server/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T00:22:07+08:00</updated>
+  <updated>2016-10-17T00:39:24+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/"/>
+    <updated>2016-10-17T00:39:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<pre><code class="sql">select * from emp where sal in (1500, 3000)
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select * from emp where sal in (1500, 3000, 5000)
+    --把sal里面是1500 和 3000 和 5000 的值都输出
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<pre><code class="sql">select * from emp
+    where sal=1500 or sal=3000 or sal=5000
+</code></pre>
+
+<hr />
+
+<hr />
+
+<pre><code class="sql">select * from emp where sal not in (1500, 3000, 5000)
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<pre><code class="sql">select * from emp
+    where sal&lt;&gt;1500 and sal&lt;&gt;3000 and sal&lt;&gt;5000
+        --在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种
+        --对或（or）取反是并且（and） 对并且（and）取反是或（or）
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 020 查询-03 Between 的用法]]></title>
@@ -306,60 +365,6 @@ select * from emp
 <p><code>SALGRADE</code> 表里面有3个属性：<code>GRADE</code>（等级）、<code>LOSAL</code>（下限）、<code>HISAL</code>（上限）。</p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 016 如何附加数据库]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/"/>
-    <updated>2016-10-16T19:06:49+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p><strong>scott</strong> 例子库可以在下面的链接中下载：
-（百度云）</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1sl9zbm1">http://pan.baidu.com/s/1sl9zbm1</a> 密码：<code>nyly</code></p>
-
-<p>这个例子库可以通过 <strong>附加</strong> 的方式添加到 <strong>SQL Server</strong> 软件里面。（这个例子很经典。<strong>SQL Server</strong>软件 和 <code>Orale</code> 软件 都可以使用到这个例子库。）</p>
-
-<h2>添加 <code>scott</code> 库 到<strong>SQL Server</strong> 软件</h2>
-
-<p><strong>Step 1 . </strong> 鼠标右键点击 <strong>数据库</strong> -> <strong>附加(A)&hellip;</strong></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610765494.png" alt="Alt text" /></p>
-
-<p><strong>Step 2 . </strong></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610825463.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610863975.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610918053.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610933947.png" alt="Alt text" /></p>
-
-<blockquote><p>如果你遇到下面的问题，请访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/">这个网站</a>解决问题。</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610946090.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476612674466.png" alt="Alt text" /></p></blockquote>
-
-<p>成功添加：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476615669199.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   

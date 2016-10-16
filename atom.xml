@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T00:22:07+08:00</updated>
+  <updated>2016-10-17T00:39:24+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/"/>
+    <updated>2016-10-17T00:39:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">--把sal里面是1500 和 3000 和 5000 的值都输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">=</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">3000</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">5000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">3000</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">5000</span>
+</span><span class='line'>      <span class="c1">--在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种</span>
+</span><span class='line'>      <span class="c1">--对或（or）取反是并且（and） 对并且（and）取反是或（or）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 020 查询-03 Between 的用法]]></title>
@@ -2062,80 +2136,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <p><img src="http://aobojaing.github.io/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 自定义字体设置]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/"/>
-    <updated>2016-10-10T10:04:40+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>字体配置文件在 <code>octopress/sass/custom/</code> 文件里面：<code>_fonts.scss</code> 文件。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063413831.png" alt="Alt text" /></p>
-
-<p>默认情况下字体配置都是被注释掉的。我们将注释都去掉。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Optima", sans-serif;
-</span><span class='line'>$serif: "Baskerville", serif;
-</span><span class='line'>$mono: "Courier", monospace;
-</span><span class='line'>$heading-font-family: "Verdana", sans-serif;
-</span><span class='line'>$header-title-font-family: "Futura", sans-serif;
-</span><span class='line'>$header-subtitle-font-family: "Futura", sans-serif;</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>引号里面的是：<strong>字体名</strong>。后面跟的是：<code>sans-serif</code>(无衬线字体)、<code>serif</code>（衬线）、<code>monospace</code>（等宽字体）。</p></blockquote>
-
-<ul>
-<li><code>$sans</code>：定义的是无衬线正文的字体
-
-<ul>
-<li><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063715659.png" alt="Alt text" /></li>
-</ul>
-</li>
-<li><code>$serif</code>：定义的是衬线正文的字体</li>
-<li><code>$mono</code>：定义的是代码的字体</li>
-<li><code>$heading-font-family</code>：定义的是文章标题的字体</li>
-<li><code>$header-title-font-family</code>：定义的是博客标题的字体</li>
-<li><code>$header-subtitle-font-family</code>：定义的是博客子标题的字体</li>
-</ul>
-
-
-<p>我将它们修改为下面这样的配置。（就是将所有的字体都设置为：<code>Comic Sans MS</code>）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Comic Sans MS", sans-serif;
-</span><span class='line'>$serif: "Comic Sans MS", serif;
-</span><span class='line'>$mono: "Comic Sans MS", monospace;
-</span><span class='line'>$heading-font-family: "Comic Sans MS", sans-serif;
-</span><span class='line'>$header-title-font-family: "Comic Sans MS", sans-serif;
-</span><span class='line'>$header-subtitle-font-family: "Comic Sans MS", sans-serif;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在执行 <code>rake generate</code> 命令生成博客站点。在执行 <code>rake preview</code> 命令在本地开设4000端口。在浏览器中浏览 <code>localhost:4000</code> 端口进行预览。（效果不错。）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064562554.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064543308.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>参考网站：
-利用Octopress和Github搭建个人博客（四）：自定义字体
-<a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
 ]]></content>
   </entry>
   
