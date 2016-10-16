@@ -151,6 +151,17 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 </span></code></pre></td></tr></table></div></figure>
 
 
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--正确的写法</span>
+</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="k">isnull</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--isnull(comm, 0) 如果comm是null，就返回为0，否则返回comm的值。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <hr />
 
 <p><strong>总结：</strong></p>

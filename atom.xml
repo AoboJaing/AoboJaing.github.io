@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T01:48:17+08:00</updated>
+  <updated>2016-10-17T02:31:45+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -81,6 +81,17 @@
 </pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出每一个员工的姓名、年薪（包含了奖金）、comm假设是一年的奖金</span>
 </span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="n">comm</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
 </span><span class='line'>  <span class="c1">--这段指令证明了：null不能参与任何数学运算，结果永远是null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--正确的写法</span>
+</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="k">isnull</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--isnull(comm, 0) 如果comm是null，就返回为0，否则返回comm的值。</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
