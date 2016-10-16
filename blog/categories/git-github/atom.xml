@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Git/github | AoboSir 的博客]]></title>
-  <link href="http://aobojaing.github.io/blog/categories/git-slash-github/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Git_github | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/blog/categories/git-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-16T20:15:47+08:00</updated>
+  <updated>2016-10-16T20:35:26+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
