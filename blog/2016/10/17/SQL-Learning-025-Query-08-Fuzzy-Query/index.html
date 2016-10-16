@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SQL 数据库 学习 025 查询-08 模糊查询 --- 怎样编写模糊查询语句 - AoboSir 的博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 怎样编写模糊查询语句 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 的博客</a></h1>
+  
+    <h2>胖爷，四年后见！ --- 2016年10月9日</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SQL 数据库 学习 025 查询-08 模糊查询 --- 怎样编写模糊查询语句</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T06:59:39+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:59 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>怎样编写模糊查询语句</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
+</span><span class='line'>  <span class="c1">--ename只要含有字母A就输出</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;A%&#39;</span>
+</span><span class='line'>  <span class="c1">--ename只要首字母是A的就输出</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A&#39;</span>
+</span><span class='line'>  <span class="c1">--ename只要尾字母是A的就输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658355448.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658371703.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658389550.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_A%&#39;</span>
+</span><span class='line'>  <span class="c1">--ename只要第二个字母是A的就输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658413951.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_[A-F]%&#39;</span>
+</span><span class='line'>  <span class="c1">--把ename中第二个字符是A或者B或者C或者D或者E或者F的记录输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658456248.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_[^A-F]%&#39;</span>
+</span><span class='line'>  <span class="c1">--把ename中第二个字符不是A也不是B也不是C也不是D也不是E也不是F的记录输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658507717.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>创建一个 <code>student</code> 表。（预备操作）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">age</span> <span class="nb">int</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">68</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="mi">66</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;a_b&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;c%d&#39;</span><span class="p">,</span> <span class="mi">44</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;abc_fe&#39;</span><span class="p">,</span> <span class="mi">56</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;haobin&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;HapBin&#39;</span><span class="p">,</span> <span class="mi">88</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;c%&#39;</span><span class="p">,</span> <span class="mi">66</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;long&#39;&#39;s&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658533004.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;%\%%&#39;</span> <span class="k">escape</span> <span class="s1">&#39;\&#39;</span>
+</span><span class='line'>  <span class="c1">--把name中包含有%的输出</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;%\_%&#39;</span> <span class="k">escape</span> <span class="s1">&#39;\&#39;</span>
+</span><span class='line'>  <span class="c1">--把name中包含有_的输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658590460.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658616954.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong> <strong>通配符：</strong></p>
+
+<p><strong>格式：</strong> <code>select 字段的集合 from 表名 where 某个字段的名字 like 匹配的条件</code></p>
+
+<blockquote><p>匹配的条件通常含有通配符</p></blockquote>
+
+<ul>
+<li><code>%</code>
+
+<ul>
+<li>表示任意0个或多个字符</li>
+</ul>
+</li>
+<li><code>_</code> （这个是下划线，不是减号）
+
+<ul>
+<li>表示任意单个字符</li>
+</ul>
+</li>
+<li><code>[a-f]</code>
+
+<ul>
+<li><code>a</code> 到 <code>f</code> 中的任意单个字符。只能是<code>a</code>、<code>b</code>、<code>c</code>、<code>d</code>、<code>e</code>、<code>f</code> 中的任意一个字符</li>
+</ul>
+</li>
+<li><code>[a, f]</code>
+
+<ul>
+<li><code>a</code> 或者 <code>f</code></li>
+</ul>
+</li>
+<li><code>[^a-c]</code>
+
+<ul>
+<li>不是<code>a</code>、也不是<code>b</code>，也不是<code>c</code>的任意单个字符</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p><strong>注意：</strong></p>
+
+<ul>
+<li>匹配的内容必须使用单引号括起来。不能省略，也不能改用双引号。</li>
+<li><code>escape '\'</code> 里面 <code>escape</code> 后面 <code>''</code> 里面的<code>\</code> 字符就自定义的：通配符。它可以替换成其他的字符（比如：<code>a</code>、<code>b</code>、<code>m</code> 等等）。</li>
+</ul>
+
+
+<hr />
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T06:59:39+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:59 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/" title="Previous Post: SQL 数据库 学习 024 查询-07 order by 的用法 --- 以某个字段排序">&laquo; SQL 数据库 学习 024 查询-07 order by 的用法 --- 以某个字段排序</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query" data-title="SQL 数据库 学习 025 查询-08 模糊查询 ---  怎样编写模糊查询语句" data-url="http://aobojaing.github.io /blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/">SQL 数据库 学习 025 查询-08 模糊查询 --- 怎样编写模糊查询语句</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/">SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/">SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 90%" href="/tags/eda/">EDA</a>
+<a style="font-size: 90%" href="/tags/git/">Git</a>
+<a style="font-size: 90%" href="/tags/github/">GitHub</a>
+<a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
+<a style="font-size: 134%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
+<a style="font-size: 90%" href="/tags/windows/">Windows</a>
+<a style="font-size: 90%" href="/tags/between/">between</a>
+<a style="font-size: 90%" href="/tags/distinct/">distinct</a>
+<a style="font-size: 90%" href="/tags/in/">in</a>
+<a style="font-size: 90%" href="/tags/order-by/">order by</a>
+<a style="font-size: 90%" href="/tags/top/">top</a>
+<a style="font-size: 90%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
+<a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
+<a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
+<a style="font-size: 178%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 90%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
+<a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
+<a style="font-size: 90%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 90%" href="/tags/cuo-wu-5120/">错误 5120</a>
+<a style="font-size: 90%" href="/tags/fu-jia-shu-ju-ku/">附加数据库</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (20)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (20)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
+<li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
+
+  </ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
