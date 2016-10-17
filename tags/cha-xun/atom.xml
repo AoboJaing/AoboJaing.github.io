@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 查询 | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/cha-xun/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T07:02:13+08:00</updated>
+  <updated>2016-10-17T11:10:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 026 查询-09 聚合函数 ---  怎样编写模糊查询语句]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/"/>
+    <updated>2016-10-17T11:05:58+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>函数的分类</h2>
+
+<p>单行函数</p>
+
+<ul>
+<li>每一行返回一个值</li>
+</ul>
+
+
+<hr />
+
+<p>多行函数</p>
+
+<ul>
+<li>多行返回一个值</li>
+<li>聚合函数是多行函数</li>
+</ul>
+
+
+<hr />
+
+<p>例子：</p>
+
+<pre><code class="sql">select lower(ename) from emp;
+    --最终返回的是14行
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672968757.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select max(sal) from emp;
+    --返回时1行 max() 是多行函数
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672998766.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>聚合函数的分类</h2>
+
+<ul>
+<li><code>max()</code> 求最大值</li>
+<li><code>min()</code> 求最小值</li>
+<li><code>avg()</code> 平均值</li>
+<li><code>count()</code> 求个数
+
+<ul>
+<li><code>count(*)</code> ：返回表中所有的记录的个数</li>
+<li><code>count(字段名)</code> : 返回字段值非空的记录的个数， 重复的记录也会被当做有效记录</li>
+<li><code>count(distinct 字段名)</code> ：返回字段不重复并且非空的记录的个数</li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code class="sql">select count(*) from emp;
+    --返回emp表所有记录的个数
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673037243.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select count(deptno) from emp;
+    --返回值是14，这说明deptno重复的记录也被当做有效的记录
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673083683.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select count(distinct deptno) from emp;
+    --返回值是3， 统计deptno不重复的记录的个数
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673123560.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select count(comm) from emp;
+    --返回值是4。 这说明comm为null的记录不会被当做有效的记录
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673148684.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>注意的问题</h2>
+
+<pre><code class="sql">select max(sal), min(sal), count(*) from emp;
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673188904.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select max(sal) "最高工资", min(sal) "最低工资", count(*) "员工人数" from emp;
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673238975.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select max(sal), lower(ename) from emp;
+    --error 单行函数和多行函数不能混用
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 025 查询-08 模糊查询 ---  怎样编写模糊查询语句]]></title>
@@ -345,65 +478,6 @@ select ename, sal*12+isnull(comm, 0) from emp;
 </code></pre>
 
 <p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/"/>
-    <updated>2016-10-17T00:39:00+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<pre><code class="sql">select * from emp where sal in (1500, 3000)
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select * from emp where sal in (1500, 3000, 5000)
-    --把sal里面是1500 和 3000 和 5000 的值都输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<pre><code class="sql">select * from emp
-    where sal=1500 or sal=3000 or sal=5000
-</code></pre>
-
-<hr />
-
-<hr />
-
-<pre><code class="sql">select * from emp where sal not in (1500, 3000, 5000)
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<pre><code class="sql">select * from emp
-    where sal&lt;&gt;1500 and sal&lt;&gt;3000 and sal&lt;&gt;5000
-        --在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种
-        --对或（or）取反是并且（and） 对并且（and）取反是或（or）
-</code></pre>
 
 <hr />
 ]]></content>

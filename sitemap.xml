@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/</loc>
+<lastmod>2016-10-17T11:05:58+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/</loc>
 <lastmod>2016-10-17T06:59:39+08:00</lastmod>
 </url>
@@ -214,5 +218,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/mo-hu-cha-xun/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/ju-he-han-shu/</loc>
 </url>
 </urlset>

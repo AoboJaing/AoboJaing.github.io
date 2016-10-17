@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T07:03:13+08:00</updated>
+  <updated>2016-10-17T11:10:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 026 查询-09 聚合函数 --- 怎样编写模糊查询语句]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/"/>
+    <updated>2016-10-17T11:05:58+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>函数的分类</h2>
+
+<p>单行函数</p>
+
+<ul>
+<li>每一行返回一个值</li>
+</ul>
+
+
+<hr />
+
+<p>多行函数</p>
+
+<ul>
+<li>多行返回一个值</li>
+<li>聚合函数是多行函数</li>
+</ul>
+
+
+<hr />
+
+<p>例子：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--最终返回的是14行</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672968757.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回时1行 max() 是多行函数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672998766.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>聚合函数的分类</h2>
+
+<ul>
+<li><code>max()</code> 求最大值</li>
+<li><code>min()</code> 求最小值</li>
+<li><code>avg()</code> 平均值</li>
+<li><code>count()</code> 求个数
+
+<ul>
+<li><code>count(*)</code> ：返回表中所有的记录的个数</li>
+<li><code>count(字段名)</code> : 返回字段值非空的记录的个数， 重复的记录也会被当做有效记录</li>
+<li><code>count(distinct 字段名)</code> ：返回字段不重复并且非空的记录的个数</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回emp表所有记录的个数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673037243.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是14，这说明deptno重复的记录也被当做有效的记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673083683.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="k">distinct</span> <span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是3， 统计deptno不重复的记录的个数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673123560.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是4。 这说明comm为null的记录不会被当做有效的记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673148684.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>注意的问题</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673188904.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最高工资&quot;</span><span class="p">,</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最低工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;员工人数&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673238975.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--error 单行函数和多行函数不能混用</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 025 查询-08 模糊查询 --- 怎样编写模糊查询语句]]></title>
@@ -1819,138 +1977,6 @@
 
 <p>为octopress添加分类(category)列表
 <a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/"/>
-    <updated>2016-10-12T11:15:01+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p>之前，我们介绍了<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">如何使用图形化操作建表和主外键约束</a>。这一节我们来介绍如何使用<strong>命令</strong>来<strong>建表和主外键约束</strong>。</p>
-
-<hr />
-
-<h2>使用命令 建表</h2>
-
-<p><strong>Step 0 . </strong> 先把之前在<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">这篇博客</a>里面建的表删除，我们先使用命令重新建。（如果你没有看这篇博客，就不需要做这一步的操作了。）</p>
-
-<p><strong>Step 1 . </strong> 先选中（要建表的）库，然后点击 <strong>新建查询</strong>，输入下面的命令：（先建部门（<code>dept</code>）表，再建员工（<code>emp</code>）表）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">dept</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">dept_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">dept_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">dept_address</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Step 2 . </strong> 现在点击 对号 图标（分析），看看有没有语法错误。然后点击 <strong>执行(X)</strong> 按钮，来生成表。现在在做出的 <strong>表</strong> 里面右键 ，选择 <strong>刷新</strong> 。现在你就看到了，创建了一个新的表 <code>dept</code> 。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239675315.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239692934.png" alt="Alt text" /></p>
-
-<p>解释：<code>--</code>后面跟注释信息。<strong>SQL</strong> 定义变量和 <strong>C++</strong> 定义变量是反着的。</p>
-
-<p><strong>Step 3 . </strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">emp</span>
-</span><span class='line'><span class="p">(</span> <span class="c1">--不能写成{} ，C++才写成}</span>
-</span><span class='line'>  <span class="n">emp_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">pk_emp_id_haha</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">emp_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">emp_sex</span> <span class="k">nchar</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">dept_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_dept_id_heihei</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">dept</span><span class="p">(</span><span class="n">dept_id</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解释：
-1. 对于<strong>约束</strong>（<code>constraint</code>），要写一个名字（<code>pk_emp_id_haha</code> 和 <code>fk_dept_id_heihei</code> 都是自定义的名字），如果你不写名字，系统会自动给它分配一个名字。
-2. <code>primary key</code> 是主键； <code>foreign key</code> 是外键。
-3. <code>create table</code> 最后一个字段的后面建议不要写 <code>,</code> （逗号）。</p>
-
-<p>选中这些命令。点击 <code>执行</code> 按钮。并刷新 <strong>表</strong>，<code>emp</code> 表就会出现。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240682691.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240702251.png" alt="Alt text" /></p>
-
-<p><code>PK</code> 指的是 <strong>主键</strong> ；<code>FK</code> 指的是 <code>外键</code>。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240725526.png" alt="Alt text" /></p>
-
-<p>下面的是我们刚刚定义的 <code>emp</code> 表的主键和外键的名字：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240863958.png" alt="Alt text" /></p>
-
-<p>下面的是我们没有给取名字的 <code>dept</code> 表的主键的默认名字：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240944813.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<p>使用命令 <code>create table</code> 来建表。</p>
-
-<p><strong>Q：</strong> 什么是约束？
-<strong>A：</strong> <strong>主键约束</strong> 和 <strong>外键约束</strong> 的作用：</p>
-
-<ul>
-<li>定义
-
-<ul>
-<li>对一个表中的属性操作的限制叫做约束。</li>
-</ul>
-</li>
-<li>分类
-
-<ul>
-<li>主键约束
-
-<ul>
-<li>不允许重复元素 避免了数据的冗余。</li>
-</ul>
-</li>
-<li>外键约束
-
-<ul>
-<li>通过外键约束从语法上保证了本事物所关联的其他事物一定是存在的。（就是说：事物与事物之前的关系是通过外键来体现的）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<p>你要是感觉命令很难，就多敲，敲一敲就好了。</p>
-
-<hr />
 ]]></content>
   </entry>
   
