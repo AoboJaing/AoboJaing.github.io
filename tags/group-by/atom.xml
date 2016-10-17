@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: group by | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/group-by/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-17T13:06:42+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 027 查询-10 group by ---  以某字段分组]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-027-Query-10-group-by/"/>
+    <updated>2016-10-17T13:05:12+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-027-Query-10-group-by</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>group by</code> &mdash; 以某字段分组</h2>
+
+<pre><code class="sql">--输出每个部门的编号 和 该部门的平均工资
+select deptno, avg(sal) as "部门平均工资"
+    from emp
+    group by deptno
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680047590.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">-- 判断下面语句是否正确
+select deptno, avg(sal) as "部门平均工资" ename
+    from emp
+    group by deptno
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680188160.png" alt="Alt text" /></p>
+
+<p>总结： 使用了 <code>group by</code> 之后， <code>select</code> 中只能出现分组后的整体信息，不能出现组内的详细信息。</p>
+
+<pre><code class="sql">--error
+select *
+    from emp
+    group by deptno, job
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680255640.png" alt="Alt text" /></p>
+
+<pre><code class="sql">--error
+select deptno, job, sal
+    from emp
+    group by deptno, job
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680302040.png" alt="Alt text" /></p>
+
+<pre><code class="sql">select deptno, job, avg(sal)
+    from emp
+    group by deptno, job
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680344010.png" alt="Alt text" /></p>
+
+<p>显示的不是很好，我们就对其进行排序。（没有实际的意义，我们就是讲讲语法。）</p>
+
+<pre><code class="sql">select deptno, job, avg(sal)
+    from emp
+    group by deptno, job
+    order by deptno
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680377389.png" alt="Alt text" /></p>
+
+<p>只要是聚合函数，在这里都可以使用。</p>
+
+<pre><code class="sql">select deptno, job, avg(sal), count(*), sum(sal),  min(sal)
+    from emp
+    group by deptno, job
+    order by deptno
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680445168.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">select deptno, job, avg(sal) "平均工资", count(*) "部门人数", sum(sal) "部门总工资",  min(sal) "部门最低工资"
+    from emp
+    group by deptno, job
+    order by deptno
+</code></pre>
+
+<p><img src="/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680508397.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p> <code>group by</code></p>
+
+<ul>
+<li>格式： <code>group by 字段的集合</code></li>
+<li>功能：把表中的记录按照字段分成不同的组</li>
+<li>注意：理解 <code>group by a, b, c</code> 的用法
+
+<ul>
+<li>先按 <code>a</code> 分组，如果 <code>a</code> 相同，再按 <code>b</code> 分组，如果 <code>b</code> 相同，再按 <code>c</code> 分组。最终统计的最小分组的信息。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-17T11:10:47+08:00</updated>
+  <updated>2016-10-17T13:06:42+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 027 查询-10 Group by --- 以某字段分组]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-027-Query-10-group-by/"/>
+    <updated>2016-10-17T13:05:12+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-027-Query-10-group-by</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>group by</code> &mdash; 以某字段分组</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出每个部门的编号 和 该部门的平均工资</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;部门平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680047590.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- 判断下面语句是否正确</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;部门平均工资&quot;</span> <span class="n">ename</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680188160.png" alt="Alt text" /></p>
+
+<p>总结： 使用了 <code>group by</code> 之后， <code>select</code> 中只能出现分组后的整体信息，不能出现组内的详细信息。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680255640.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">sal</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680302040.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680344010.png" alt="Alt text" /></p>
+
+<p>显示的不是很好，我们就对其进行排序。（没有实际的意义，我们就是讲讲语法。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680377389.png" alt="Alt text" /></p>
+
+<p>只要是聚合函数，在这里都可以使用。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span>  <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680445168.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;部门人数&quot;</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门总工资&quot;</span><span class="p">,</span>  <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门最低工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-027-Query-10-group-by/1476680508397.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p> <code>group by</code></p>
+
+<ul>
+<li>格式： <code>group by 字段的集合</code></li>
+<li>功能：把表中的记录按照字段分成不同的组</li>
+<li>注意：理解 <code>group by a, b, c</code> 的用法
+
+<ul>
+<li>先按 <code>a</code> 分组，如果 <code>a</code> 相同，再按 <code>b</code> 分组，如果 <code>b</code> 相同，再按 <code>c</code> 分组。最终统计的最小分组的信息。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 026 查询-09 聚合函数 --- 怎样编写模糊查询语句]]></title>
@@ -1871,112 +2026,6 @@
 
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/"/>
-    <updated>2016-10-12T16:15:13+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>一共三步，很简单。跟着走就可以。</p>
-
-<hr />
-
-<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
-
-<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
-</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
-</span><span class='line'>    def render(context)
-</span><span class='line'>      html = ""
-</span><span class='line'>      categories = context.registers[:site].categories.keys
-</span><span class='line'>      categories.sort.each do |category|
-</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
-</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
-</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
-</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://aobojaing.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-</span><span class='line'>      end
-</span><span class='line'>      html
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
-
-<hr />
-
-<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
-
-<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
-
-<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      {\% category_list \%}
-</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
-
-<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [asides/category_list.html, ......]
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-
-<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<p>参考网站：</p>
-
-<p>为octopress添加分类(category)列表
-<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
 ]]></content>
   </entry>
   
