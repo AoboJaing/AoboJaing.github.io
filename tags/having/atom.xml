@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: having | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/having/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-19T02:01:00+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 028 查询-11 having ---  对分组之后的信息进行过滤]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/"/>
+    <updated>2016-10-19T01:51:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering information after grouping</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>having</code> &mdash; 对分组之后的信息进行过滤</h2>
+
+<pre><code class="sql">--输出部门平均工资大于2000的部门的部门编号，部门的平均工资
+select deptno, avg(sal)
+    from emp
+    group by deptno
+    having avg(sal)&gt;2000;
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476809752037.png" alt="Alt text" /></p>
+
+<p>加入别名。</p>
+
+<pre><code class="sql">--判断下列sql语句是否正确
+select deptno, avg(sal) as "平均工资"
+    from emp
+    group by deptno
+    having avg(sal) &gt; 2000
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476809774694.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">--error
+select deptno, avg(sal) as "平均工资"
+    from emp
+    group by deptno
+    having "平均工资" &gt; 2000
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476809816010.png" alt="Alt text" /></p>
+
+<blockquote><p>正确的指令：
+<code>sql
+select deptno, avg(sal)
+    from emp
+    where ename not like '%A%'
+    group by deptno
+    having avg(sal) &gt; 2000
+</code></p></blockquote>
+
+<hr />
+
+<pre><code class="sql">--以部门编号分组后，显示组内元组大于3个元组的部门编号和平均工资
+select deptno, avg(sal) as "平均工资"
+    from emp
+    group by deptno
+    having count(*) &gt; 3
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476809854661.png" alt="Alt text" /></p>
+
+<hr />
+
+<pre><code class="sql">--error
+select deptno, avg(sal) as "平均工资"
+    from emp
+    group by deptno
+    having ename like '%A%'
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476810004416.png" alt="Alt text" /></p>
+
+<pre><code class="sql">select deptno, avg(sal) as "平均工资"
+    from emp
+    group by deptno
+    having deptno&gt;1
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476810222044.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2><code>having</code> 和 <code>where</code> 的异同</h2>
+
+<pre><code class="sql">--把姓名不包含`A`的所有的员工按部门编号分组，
+--统计输出部门平均工资大于2000的部门的部门编号、部门的平均工资
+select deptno, avg(sal)
+    from emp
+    where ename not like '%A%'
+    group by deptno
+    having avg(sal) &gt; 2000
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476810752203.png" alt="Alt text" /></p>
+
+<pre><code class="sql">--把工资大于2000，
+--统计输出部门平均工资大于3000的部门的部门编号、部门的平均工资、部门人数、部门最高工资
+select deptno, avg(sal) "平均工资", count(*) "部门人数", max(sal) "部门最高工资"
+    from emp
+    where sal &gt; 2000    --where是对原始的记录过滤
+    group by deptno   
+    having avg(sal) &gt; 3000   --对分组之后的记录过滤 
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476810986375.png" alt="Alt text" /></p>
+
+<p>如果参数的顺序变化了，执行的时候会不会受到影响？执行下面的指令，你就会知道答案。</p>
+
+<pre><code class="sql">--error
+select deptno, avg(sal) "平均工资", count(*) "部门人数", max(sal) "部门最高工资"
+    from emp
+    group by deptno
+    having avg(sal) &gt; 3000
+    where sal &gt; 2000
+</code></pre>
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/1476811293128.png" alt="Alt text" /></p>
+
+<p><strong>总结：</strong> 所有<code>select</code> 的参数的顺序是不允许变化的（所有的参数的位置都是固定的，你可以省略某个参数，但是不能变。），否则编译时出错。</p>
+
+<hr />
+
+<p><code>having</code> 和 <code>where</code> 的异同：</p>
+
+<ul>
+<li><strong>相同：</strong> 都是对数据过滤，只保留有效的数据。<code>where</code> 和 <code>having</code> 一样，都不允许出现字段的别名，只允许出现最原始的字段的名字。</li>
+</ul>
+
+
+<pre><code class="sql">--error where子句不应该出现聚合函数
+select deptno, avg(sal)
+    from emp
+    where avg(sal) &gt; 2000   --error 因为where是对原始的数据过滤，不能使用聚合函数
+</code></pre>
+
+<ul>
+<li><strong>不同：</strong> <code>where</code> 是对原始的记录过滤，<code>having</code> 是对分组之后的记录过滤。<code>where</code> 必须得写在<code>having</code>的前面，顺序不可颠倒，否则运行出错。</li>
+</ul>
+
+
+<hr />
+
+<h2>总结 <code>having</code> 的用法</h2>
+
+<ol>
+<li><code>having</code> 子句是用来对分组之后的数据进行过滤。因此使用<code>having</code>时通常都会先使用 <code>group by</code>。</li>
+<li>如果没有使用 <code>group by</code> ，而使用了 <code>having</code>，则意味着 <code>having</code> 把所有的记录当做一组来进行过滤。</li>
+</ol>
+
+
+<pre><code class="sql">select count(*) 
+    from emp
+    having avg(sal) &gt; 1000
+</code></pre>
+
+<ol>
+<li><code>having</code> 子句出现的字段必须得是分组之后的组的整体信息。<code>having</code> 子句不允许出现组内的详细信息。</li>
+</ol>
+
+
+<pre><code class="sql">--error
+select deptno avg(sal) as "平均工资", job
+    from emp
+    group by deptno
+</code></pre>
+
+<pre><code class="sql">--OK
+select deptno avg(sal) as "平均工资", count(*) as "部门人数"
+    from emp
+    group by deptno
+</code></pre>
+
+<ol>
+<li><p>尽管 <code>select</code>  字段中可以出现别名。但是<code>having</code> 子句中不能出现字段的别名，只能使用字段最原始的名字。（原因不得而知。）</p></li>
+<li><p>就是上面说的：<strong><code>having</code> 和 <code>where</code> 的异同</strong> 。（这里不重复说明了。）</p></li>
+</ol>
+
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

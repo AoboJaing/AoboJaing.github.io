@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/</loc>
+<lastmod>2016-10-19T01:51:13+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-027-Query-10-group-by/</loc>
 <lastmod>2016-10-17T13:05:12+08:00</lastmod>
 </url>
@@ -231,5 +235,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/fen-zu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/having/</loc>
 </url>
 </urlset>

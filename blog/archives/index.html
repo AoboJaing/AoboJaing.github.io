@@ -9,8 +9,9 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="Blog Archive 2016 SQL 数据库 学习 027 查询-10 Group by --- 以某字段分组
-Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合函数 --- 多行记录返回至一个值， &hellip;">
+  <meta name="description" content="Blog Archive 2016 SQL 数据库 学习 028 查询-11 Having --- 对分组之后的信息进行过滤
+Oct 19 2016 posted in sql, sql server SQL 数据库 学习 027 查询-10 Group by --- 以某字段分组
+Oct 17 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,20 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
 
   
   <h2>2016</h2>
+
+<article>
+  
+<h1><a href="/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/">SQL 数据库 学习 028 查询-11 Having --- 对分组之后的信息进行过滤</a></h1>
+<time datetime="2016-10-19T01:51:13+08:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2016</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a></span>
+</footer>
+
+
+</article>
+
+
 
 <article>
   
@@ -483,6 +498,10 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering%20information%20after%20grouping/">SQL 数据库 学习 028 查询-11 Having --- 对分组之后的信息进行过滤</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/17/SQL-Learning-027-Query-10-group-by/">SQL 数据库 学习 027 查询-10 Group by --- 以某字段分组</a>
       </li>
     
@@ -498,10 +517,6 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
         <a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -511,7 +526,7 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
 <a style="font-size: 90%" href="/tags/git/">Git</a>
 <a style="font-size: 90%" href="/tags/github/">GitHub</a>
 <a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
-<a style="font-size: 133%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 132%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -520,6 +535,7 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
 <a style="font-size: 90%" href="/tags/between/">between</a>
 <a style="font-size: 90%" href="/tags/distinct/">distinct</a>
 <a style="font-size: 90%" href="/tags/group-by/">group by</a>
+<a style="font-size: 90%" href="/tags/having/">having</a>
 <a style="font-size: 90%" href="/tags/in/">in</a>
 <a style="font-size: 90%" href="/tags/order-by/">order by</a>
 <a style="font-size: 90%" href="/tags/top/">top</a>
@@ -528,7 +544,7 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
 <a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
 <a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
 <a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
-<a style="font-size: 183%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 185%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 117%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
 <a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
@@ -543,8 +559,8 @@ Oct 17 2016 posted in sql, sql server SQL 数据库 学习 026 查询-09 聚合�
   <ul id="categories">
     <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
-<li class='category'><a href='/blog/categories/sql/'>sql (22)</a></li>
-<li class='category'><a href='/blog/categories/sql-server/'>sql server (22)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (23)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (23)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
 <li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
 
