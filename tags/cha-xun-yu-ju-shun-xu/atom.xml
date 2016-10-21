@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 查询语句顺序 | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/cha-xun-yu-ju-shun-xu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-21T20:56:53+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 030 查询-13 --- 查询语句的顺序]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/"/>
+    <updated>2016-10-21T20:54:28+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2><strong>SQL Server</strong> 查询语句的顺序</h2>
+
+<pre><code class="sql">select top ...
+    from A
+    join B
+    on ...
+    join C
+    on ...
+    where ...
+    group by ...
+    having ...
+    order by ...
+</code></pre>
+
+<hr />
+
+<h2>例子</h2>
+
+<blockquote><p>本例子里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<p><strong>求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
+
+<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
+--第1种写法：
+select top 1 deptno, avg(sal) "avg_sal"
+    from emp "E"
+    group by deptno
+    order by avg(sal) desc
+</code></pre>
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477040016720.png" alt="Alt text" /></p>
+
+<p>等价于：</p>
+
+<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
+--第2种写法：
+select "E".*
+    from (
+        select deptno, avg(sal) "avg_sal"
+            from emp
+            group by deptno
+    ) "E"
+    where "E"."avg_sal" = (
+        select max("avg_sal") 
+            from (
+                select deptno, avg(sal) "avg_sal" 
+                    from emp 
+                    group by deptno
+            ) "T"
+    )
+</code></pre>
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

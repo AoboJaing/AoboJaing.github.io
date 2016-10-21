@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 查询 | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/cha-xun/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-21T20:34:43+08:00</updated>
+  <updated>2016-10-21T20:56:53+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 030 查询-13 --- 查询语句的顺序]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/"/>
+    <updated>2016-10-21T20:54:28+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2><strong>SQL Server</strong> 查询语句的顺序</h2>
+
+<pre><code class="sql">select top ...
+    from A
+    join B
+    on ...
+    join C
+    on ...
+    where ...
+    group by ...
+    having ...
+    order by ...
+</code></pre>
+
+<hr />
+
+<h2>例子</h2>
+
+<blockquote><p>本例子里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<p><strong>求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
+
+<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
+--第1种写法：
+select top 1 deptno, avg(sal) "avg_sal"
+    from emp "E"
+    group by deptno
+    order by avg(sal) desc
+</code></pre>
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477040016720.png" alt="Alt text" /></p>
+
+<p>等价于：</p>
+
+<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
+--第2种写法：
+select "E".*
+    from (
+        select deptno, avg(sal) "avg_sal"
+            from emp
+            group by deptno
+    ) "E"
+    where "E"."avg_sal" = (
+        select max("avg_sal") 
+            from (
+                select deptno, avg(sal) "avg_sal" 
+                    from emp 
+                    group by deptno
+            ) "T"
+    )
+</code></pre>
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 029 查询-12 连接查询 ---  内连接]]></title>
@@ -979,158 +1054,6 @@ select deptno, job, sal
 </code></pre>
 
 <p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 025 查询-08 模糊查询 ---  怎样编写模糊查询语句]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/"/>
-    <updated>2016-10-17T06:59:39+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>怎样编写模糊查询语句</h2>
-
-<pre><code class="sql">select * from emp where ename like '%A%'
-    --ename只要含有字母A就输出
-select * from emp where ename like 'A%'
-    --ename只要首字母是A的就输出
-select * from emp where ename like '%A'
-    --ename只要尾字母是A的就输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658355448.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658371703.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658389550.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select * from emp where ename like '_A%'
-    --ename只要第二个字母是A的就输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658413951.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select * from emp where ename like '_[A-F]%'
-    --把ename中第二个字符是A或者B或者C或者D或者E或者F的记录输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658456248.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select * from emp where ename like '_[^A-F]%'
-    --把ename中第二个字符不是A也不是B也不是C也不是D也不是E也不是F的记录输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658507717.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>创建一个 <code>student</code> 表。（预备操作）</p>
-
-<pre><code class="sql">create table student
-(
-    name nvarchar(20) null,
-    age int
-);
-
-insert into student values ('张三', 68);
-insert into student values ('Tom', 66);
-insert into student values ('a_b', 22);
-insert into student values ('c%d', 44);
-insert into student values ('abc_fe', 56);
-insert into student values ('haobin', 25);
-insert into student values ('HapBin', 88);
-insert into student values ('c%', 66);
-insert into student values ('long''s', 100)
-
-select * from student;
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658533004.png" alt="Alt text" /></p>
-
-<hr />
-
-<pre><code class="sql">select * from student where name like '%\%%' escape '\'
-    --把name中包含有%的输出
-select * from student where name like '%\_%' escape '\'
-    --把name中包含有_的输出
-</code></pre>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658590460.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658616954.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong> <strong>通配符：</strong></p>
-
-<p><strong>格式：</strong> <code>select 字段的集合 from 表名 where 某个字段的名字 like 匹配的条件</code></p>
-
-<blockquote><p>匹配的条件通常含有通配符</p></blockquote>
-
-<ul>
-<li><code>%</code>
-
-<ul>
-<li>表示任意0个或多个字符</li>
-</ul>
-</li>
-<li><code>_</code> （这个是下划线，不是减号）
-
-<ul>
-<li>表示任意单个字符</li>
-</ul>
-</li>
-<li><code>[a-f]</code>
-
-<ul>
-<li><code>a</code> 到 <code>f</code> 中的任意单个字符。只能是<code>a</code>、<code>b</code>、<code>c</code>、<code>d</code>、<code>e</code>、<code>f</code> 中的任意一个字符</li>
-</ul>
-</li>
-<li><code>[a, f]</code>
-
-<ul>
-<li><code>a</code> 或者 <code>f</code></li>
-</ul>
-</li>
-<li><code>[^a-c]</code>
-
-<ul>
-<li>不是<code>a</code>、也不是<code>b</code>，也不是<code>c</code>的任意单个字符</li>
-</ul>
-</li>
-</ul>
-
-
-<hr />
-
-<p><strong>注意：</strong></p>
-
-<ul>
-<li>匹配的内容必须使用单引号括起来。不能省略，也不能改用双引号。</li>
-<li><code>escape '\'</code> 里面 <code>escape</code> 后面 <code>''</code> 里面的<code>\</code> 字符就自定义的：通配符。它可以替换成其他的字符（比如：<code>a</code>、<code>b</code>、<code>m</code> 等等）。</li>
-</ul>
-
 
 <hr />
 ]]></content>
