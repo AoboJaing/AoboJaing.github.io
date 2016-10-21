@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL Server | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql-server/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-21T20:27:25+08:00</updated>
+  <updated>2016-10-21T20:34:43+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -96,12 +96,16 @@ select * from emp, dept
 
 <p><code>select ... from A, B where ...</code> 中的 <code>where</code> 是对 <code>select * from emp, dept</code> 产生的<code>dept</code> 和 <code>emp</code> 两个表进行笛卡尔积后得到的临时表进行过滤。</p>
 
-<p><strong>注意：</strong>
-<code>select * from emp, dept where 1-1</code> 输出70行 11列
-<code>select * from emp, dept where empno = 7369</code>  5行
-<code>select * from emp, dept where deptno = 10</code> error
-<code>select * from emp, dept where emp.deptno = 10</code> 5行的倍数
-<code>select * from emp, dept where dept.deptno = 10</code> 14行</p>
+<p><strong>注意：</strong></p>
+
+<ul>
+<li><code>select * from emp, dept where 1-1</code> 输出70行 11列</li>
+<li><code>select * from emp, dept where empno = 7369</code>  5行</li>
+<li><code>select * from emp, dept where deptno = 10</code> error</li>
+<li><code>select * from emp, dept where emp.deptno = 10</code> 5行的倍数</li>
+<li><code>select * from emp, dept where dept.deptno = 10</code> 14行</li>
+</ul>
+
 
 <hr />
 
