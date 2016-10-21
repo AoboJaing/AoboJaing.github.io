@@ -1,0 +1,576 @@
+---
+layout: post
+title: "SQL 数据库 学习 029 查询-12 连接查询 ---  内连接"
+date: 2016-10-21 20:25:37 +0800
+comments: true
+sharing: true
+categories: [SQL, SQL Server]
+tags: [SQL, SQL Server, 查询, 连接查询, 内连接, join on, from where]
+---
+
+
+
+---
+
+* 我的电脑系统：**Windows  10** 64位
+* **SQL Server** 软件版本： **SQL Server 2014 Express**
+
+---
+
+> 本篇博客里面使用了 `scott` 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问[这篇博文](http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/)来在你的服务器里面附加`scott`库。
+
+---
+
+# 连接查询
+
+**定义：** 
+
+将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。
+
+
+## 一 . 内连接 --- 知识点 （重点中的重点）
+
+**牛刀小试**
+
+```sql
+select "E".ename "员工姓名", "D".dname "部门名称"
+	from emp "E"
+	join dept "D"
+	on "E".deptno = "D".deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476814366731.png)
+
+---
+
+需要学的知识点：
+
+1. `select ... from A, B` 的用法
+2. `select ... from A, B where ...` 的用法
+3. `select ... from A join B on ...` 的用法
+4. `select ... from A, B where ...`  与 `select ... from A join B on ...` 的比较
+5. `select`、`from`、`where`、`join`、`on`、`group`、`order`、`top`、`having` 的混合使用。
+
+---
+
+
+---
+
+## 1 .  `select ... from A, B` 的用法 --- 笛卡尔积
+
+
+```sql
+--emp是14行； dept是5行3列
+select * from emp, dept
+	--输出是70行。不任何条件，进行笛卡尔积连接。
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476853766304.png)
+
+
+`A` 表里面没有个元组都会连接 `B` 表一个元组，这样就导致 `B` 表中的每一个元组都连接了 `A` 表中的没有个元组。
+
+产生的结果： 行数是 A和B的乘积；列数是A和B之和。或者说：把A表的每一条记录都和B表的每一条记录组合在一起，形成的是个笛卡尔积。
+
+---
+
+## 2 .  `select ... from A, B where ...` 的用法
+
+```sql
+select *
+	from emp, dept
+	where empno = 7369
+	--输出5行，11列
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476854396475.png)
+
+> 其中有两个列`deptno` 属性，一列是来自 `dept` 表，一列是来自 `emp` 表。
+
+`select ... from A, B where ...` 中的 `where` 是对 `select * from emp, dept` 产生的`dept` 和 `emp` 两个表进行笛卡尔积后得到的临时表进行过滤。
+
+**注意：**
+
+* `select * from emp, dept where 1-1` 输出70行 11列
+* `select * from emp, dept where empno = 7369`  5行
+* `select * from emp, dept where deptno = 10` error
+* `select * from emp, dept where emp.deptno = 10` 5行的倍数
+* `select * from emp, dept where dept.deptno = 10` 14行
+
+---
+
+## 3 . `select ... from A join B on ...` 的用法
+
+```sql
+select "E".ename "员工姓名", "D".dname "部门名称"
+	from emp "E"   --"E" 是别名
+	join dept "D"  --"D" 是别名 join是连接
+	on "E".deptno = "D".deptno  ---on 表示：连接条件
+	--连接条件是：两个表里面的deptno属性相同，才能连接
+	--所以现在得到的结果不是70行。
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952525122.png)
+
+
+```sql
+select *
+	from emp "E"
+	join dept "D"
+	on "E".deptno = "D".deptno
+	--输出是11列（有两列(deptno)是重复的）
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952554733.png)
+
+
+---
+
+下面的两个指令输出都是一样的结果。
+
+```sql
+select "E".ename "员工姓名", "D".dname "部门名称"
+	from emp "E"
+	join dept "D"
+	on 1=1   --连接条件是 1=1 表示永远为真，所以执行后得到的结果是70行2列。
+```
+
+
+```sql
+select "E".ename "员工姓名", "D".dname "部门名称"
+	from emp "E"
+	join dept "D"
+	on 3>2   --连接条件是 3>2 表示永远为真，所以执行后得到的结果是70行2列。
+```
+
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952613838.png)
+
+---
+
+`on` 不能省略，有 `join` 就必须有 `on`。
+
+
+```sql
+--error 多个表里面有相同的属性，就必须指定是哪个表的属性，否则报错。
+select deptno
+	from emp "E"
+	join dept "D"
+	on 1=1   
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952843787.png)
+
+别名取中文也可以：
+
+```sql
+select "部门表".deptno "部门编号"
+	from emp "员工表"
+	join dept "部门表"
+	on 1=1 
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952937185.png)
+
+---
+
+## 4 .  `from where` 和 `join on` 的区别
+
+* `select ... from A, B where ...` 是**sql92标准**。
+* `select ... join A, B where ...` 是 **sql99标准**。
+
+输出结果是一样的，但是推荐使用**SQL99标准**。
+
+原因：
+
+1. **sql99** 更容易理解。
+2. 在**sql99标准**中，`on` 和 `where` 可以做不同的分工。`on` 指定连接条件，而`where` 是对连接之后临时表的数据进行过滤。
+
+```sql
+select *
+	from emp, dept
+	where emp.deptno = dept.deptno
+```
+
+等价于
+
+```sql
+select *
+	from emp
+	join dept
+	on emp.deptno = dept.deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953046957.png)
+
+---
+
+## 5 . `where` 是否可以写在 `join on` 的前面
+
+```sql
+--error
+select "E".ename, "D".dname, "S".grade
+	from emp "E"
+	where "E".sal > 2000
+	join dept "D"
+	on "E".deptno = "D".deptno
+	join SALGRADE "S"
+	on "E".sal >= "S".losal and "E".sal <= "S".hisal
+	--我只知道where写在join on前面是错的。但是我也不知道，为什么。
+	--关键字的顺序都是固定的，是死的。
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953442977.png)
+
+```sql
+--OK
+select "E".ename, "D".dname, "S".grade
+	from emp "E"
+	join dept "D"
+	on "E".deptno = "D".deptno
+	join SALGRADE "S"
+	on "E".sal >= "S".losal and "E".sal <= "S".hisal
+	where "E".sal > 2000
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953463959.png)
+
+---
+
+## 6 . 判断下列两个语句的输出结果
+
+`select ... from A join B on ...` 的用法：`A` 和 `B` 互换， 输出结果不变。
+
+`select ... from A, B where ...` 的用法： `A` 和 `B`  互换，输出结果不变。
+
+下面的四个指令，输出的结果都是一样的。
+
+```sql
+select *
+	from emp
+	join dept
+	on emp.deptno = dept.deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953696204.png)
+
+
+```sql
+select *
+	from dept
+	join emp
+	on emp.deptno = dept.deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953661325.png)
+
+```sql
+select *
+	from emp, dept
+	where emp.deptno = dept.deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953591899.png)
+
+```sql
+select *
+	from dept， emp
+	where emp.deptno = dept.deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953572304.png)
+
+
+
+
+---
+
+## 7 . **sql92标准** 的语句如何用**sql99**的语句实现
+
+```sql
+--输出
+select * from emp, dept
+	where dept.deptno = 10
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953771643.png)
+
+
+考虑如何把上面的**sql**语句用**sql99**来实现。
+
+```sql
+--这个sql语句和上面的sql语句输出结果是一模一样的
+select *
+	from emp
+	join dept  --join 是连接
+	on 1=1  --on 后面是连接条件
+	where dept.deptno = 10  -- where 是对数据进行过滤
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953833629.png)
+
+---
+
+## 二 . 内连接 --- 练习
+
+1. 输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
+2. 输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
+3. 求出每个员工的姓名、部门编号、薪水、薪水等级
+4. 查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级
+5. 查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级
+6. 求出`emp`表中所有领导的姓名
+7. 求出平均薪水最好的部门的标号和部门的平均工资
+8. 有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。
+
+---
+
+**1  . 输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称**
+
+```sql
+--输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
+select top 3 "E".ename, "E".sal, "S".grade, "D".dname
+	from emp "E"
+	join dept "D"
+	on "E".deptno = "D".deptno
+	join SALGRADE "S"
+	on "E".sal between "S".LOSAL and "S".hisal
+	order by "E".sal desc
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954077454.png)
+
+
+---
+
+**2 . 输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称**
+
+```sql
+--输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
+select top 3 "E".ename, "E".sal, "S".grade, "D".dname
+	from emp "E"
+	join dept "D"
+	on "E".deptno = "D".deptno
+	join SALGRADE "S"
+	on "E".sal between "S".LOSAL and "S".hisal
+	where "E".ename not like '%A%'
+	order by "E".sal desc
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954761563.png)
+
+---
+
+**3 . 求出每个员工的姓名、部门编号、薪水、薪水等级**
+
+```sql
+--求出每个员工的姓名、部门编号、薪水 和 薪水的等级
+select "E".ename, "E".deptno, "E".sal, "S".grade
+	from emp "E"
+	join SALGRADE "S"
+	on "E".sal >= "S".losal and "E".sal <= "S".hisal
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476955432131.png)
+
+---
+
+**4 . 查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级**
+
+先要将部门的平均工资找出来。
+
+```sql
+--输出部门的平均工资
+select deptno, avg(sal) as "avg_sal"
+	from emp
+	group by deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477036365811.png)
+
+接下来是输出部门平均工资的等级。做法很简单，上面的指令生成了一张部门平均工资的临时表，接下来我们就对这个临时表通过`join ... on ...`  的`join` 关键字将这个临时表和 `SALGRADE` 表通过`on` 关键字后面的条件来得到部门平均工资的等级。
+
+
+```sql
+--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级
+select "T".deptno, "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
+	from SALGRADE "S"
+	join (
+		select deptno, avg(sal) as "avg_sal"
+			from emp
+			group by deptno
+	) "T"
+	on "T"."avg_sal" between "S".LOSAL and "S".HISAL
+```
+
+等价于
+
+```sql
+--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级
+select "T".deptno, "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
+	from SALGRADE "S", (
+		select deptno, avg(sal) as "avg_sal"
+			from emp
+			group by deptno
+	) "T"
+	where "T"."avg_sal" between "S".LOSAL and "S".HISAL
+```
+
+输出结果都是：
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476969060536.png)
+
+---
+
+**5 . 查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级**
+
+```sql
+--查找每一个部门的编号、部门名称、该部门所有员工的平举工资、平均工资的等级
+select "T".deptno, "D".dname "部门名称", "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
+	from SALGRADE "S"
+	join (
+		select deptno, avg(sal) as "avg_sal"
+			from emp
+			group by deptno
+	) "T"
+	on "T"."avg_sal" between "S".LOSAL and "S".HISAL
+	join dept "D"
+	on "T".deptno = "D".deptno
+```
+
+其中 `on` 后面跟的是 **表与表之间的连接条件**。
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037406640.png)
+
+
+---
+
+
+**6 . 求出 emp 表领导的姓名**
+
+
+```sql
+--先把emp表列出来
+select * from emp
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037635859.png)
+
+
+```sql
+--求出`emp`表领导的姓名
+select ename from emp
+	where empno in (select mgr from emp) --如果员工编号在领导编号里面，就输出
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037907549.png)
+
+
+```sql
+--求出emp表中所有非领导的信息
+--error
+select * from emp
+	where empno not in (select mgr from emp)
+```
+
+这样写是不对的，我们需要注意：`in` 与 `null` 的组合所带来的问题。
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037999159.png)
+
+---
+
+**7 . 求出平均薪水最好的部门的标号和部门的平均工资**
+
+
+```sql
+--先得到部门平均工资的临时表
+select deptno, avg(sal) "avg_sal"
+	from emp "E"
+	group by deptno
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477039859743.png)
+
+
+然后排序，在输出第1个。
+
+```sql
+--求出平均薪水最好的部门的标号和部门的平均工资
+--第1种写法：
+select top 1 deptno, avg(sal) "avg_sal"
+	from emp "E"
+	group by deptno
+	order by avg(sal) desc
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040016720.png)
+
+等价于：
+
+```sql
+--求出平均薪水最好的部门的标号和部门的平均工资
+--第2种写法：
+select "E".*
+	from (
+		select deptno, avg(sal) "avg_sal"
+			from emp
+			group by deptno
+	) "E"
+	where "E"."avg_sal" = (
+		select max("avg_sal") 
+			from (
+				select deptno, avg(sal) "avg_sal" 
+					from emp 
+					group by deptno
+			) "T"
+	)
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477044470627.png)
+
+---
+
+**8 . 有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。**
+
+先得到工资最低的那个人的工资。
+
+```sql
+select min(sal) from emp
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040384906.png)
+
+去掉工资最低的那个人：
+
+```sql
+--有一个人工资最低，把这个人排除掉
+select *
+	from emp
+	where sal > (select min(sal) from emp)
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043113884.png)
+
+
+```sql
+--有一个人工资最低，把这个人排除掉，
+--剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。
+select top 3 "T".ename, "T".sal, "T".deptno, "D".dname, "S".grade
+	from (
+		select *
+			from emp
+			where sal > (select min(sal) from emp)
+	) "T"
+	join dept "D"
+	on "T".deptno = "D".deptno
+	join SALGRADE "S"
+	on "T".sal between "S".LOSAL and "S".HISAL
+	order by "T".sal asc
+```
+
+![Alt text](/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043240086.png)
+
+
+---
+
+**搞定**
+

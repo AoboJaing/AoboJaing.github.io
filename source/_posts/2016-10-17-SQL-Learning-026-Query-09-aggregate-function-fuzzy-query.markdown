@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SQL 数据库 学习 026 查询-09 聚合函数 ---  怎样编写模糊查询语句"
+title: "SQL 数据库 学习 026 查询-09 聚合函数 ---  多行记录返回至一个值，通常用于统计分组的信息"
 date: 2016-10-17 11:05:58 +0800
 comments: true
 sharing: true
