@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/</loc>
+<lastmod>2016-10-22T18:17:33+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/</loc>
 <lastmod>2016-10-21T20:54:28+08:00</lastmod>
 </url>
@@ -261,5 +265,23 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/cha-xun-yu-ju-shun-xu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/left-join/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/right-join/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/full-join/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cross-join/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/innor-join/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/union/</loc>
 </url>
 </urlset>

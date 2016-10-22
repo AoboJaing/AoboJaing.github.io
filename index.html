@@ -10,17 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express SQL Server 查询语句的顺序 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-select top ... from A join B on ... join C on &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 连接查询 定义： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +66,234 @@ select top ... from A join B on ... join C on &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/">SQL 数据库 学习 031 查询-14 连接查询 --- 左（右）外连接、完全连接、交叉连接、联合</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-22T18:17:33+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>6:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h1>连接查询</h1>
+
+<p><strong>定义：</strong></p>
+
+<p>将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。</p>
+
+<hr />
+
+<h2>内连接 （<code>innor join</code> 或者 <code>join</code>）</h2>
+
+<p>请看这篇博客：<a href="http://www.aobosir.com/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection/">SQL 数据库学习 查询 &mdash; 内连接</a>。</p>
+
+<hr />
+
+<h2>左（右）外连接 （<code>left join</code> 和 <code>right join</code>）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
+</span><span class='line'>  <span class="k">left</span> <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
+</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131219555.png" alt="Alt text" /></p>
+
+<p>实现的步骤：</p>
+
+<ol>
+<li>用左表的第一行分别和右表的所有行进行的连接，如果有匹配的行，则一起输出，如果右表有多行匹配，则结果集输出多行，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第一行内容，右边全部输出<code>null</code>。</li>
+<li>然后再用左表第二行和右边所有行进行连接，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第二行内容，右边全部输出<code>null</code>。</li>
+<li>以此类推，直至左边所有行连接完毕。</li>
+<li>因为右边很可能出现有多行和左边的某一行匹配，所以左连接产生的结果集的行数很可能大于 <code>left join</code> 左边表的记录的总数。</li>
+<li>帮助文档：左向外连接的结果集包括<code>LEFT OUTER</code> 子句中指定的左表的所有行，而不仅仅是连接列所匹配的行。如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表均为空值。</li>
+</ol>
+
+
+<hr />
+
+<p>左外连接的实际意义</p>
+
+<ul>
+<li>返回一个事情及其该事物的相关信息，如果该事物没有相关信息，则输出<code>null</code></li>
+<li>例子：
+
+<ul>
+<li>已知条件： <code>productStocks</code> 货物库存表、 <code>orderform</code> 订单表、<code>pID</code> 是产品的编号</li>
+<li><strong>sql语句</strong></li>
+<li><code>select productStocks.*, orderform.* from productStocks left join orderform on productStocks.pID=orderform.pID</code></li>
+<li>实际意义： 返回仓库中现存货物的信息及其该货物的订单信息，如果该货物没有订单信息，在把该货物的订单信息全部输出为<code>null</code>。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<h2>完全连接（<code>full join</code>）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">productStocks</span>
+</span><span class='line'>  <span class="k">full</span> <span class="k">join</span> <span class="n">orderform</span>
+</span><span class='line'>  <span class="k">on</span> <span class="n">productStocks</span><span class="p">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">orderform</span><span class="p">.</span><span class="n">pid</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131238849.png" alt="Alt text" /></p>
+
+<p>结果集中包含三部分内容：</p>
+
+<ol>
+<li>两个表中匹配的所有行记录</li>
+<li>左表中那些在右表中找不到匹配的行的记录。这些记录的右边全为<code>null</code></li>
+<li>右表中那些在左表中找不到匹配的行的记录。这些记录的左边全为<code>null</code></li>
+</ol>
+
+
+<hr />
+
+<h2>交叉连接（<code>cross join</code>）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">cross</span> <span class="k">join</span> <span class="n">dept</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>效果都是将两个表进行笛卡尔积。</p>
+
+<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131282846.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>自连接</h2>
+
+<p><strong>定义：</strong> 一张表自己和自己连接起来查询数据。</p>
+
+<p>例子：不准用聚合函数 求薪水最高的员工的信息。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--用聚合函数 求出薪水最高的员工的信息</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--不准用聚合函数 求出薪水最高的员工的信息</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span>
+</span><span class='line'>      <span class="k">select</span> <span class="k">distinct</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">empno</span>
+</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span>
+</span><span class='line'>      <span class="k">join</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
+</span><span class='line'>      <span class="k">on</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">sal</span>
+</span><span class='line'>  <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477063139982.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>联合（<code>union</code>）</h2>
+
+<p><strong>例子：</strong></p>
+
+<p>输出每一个员工的姓名、工资、上司的姓名。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span><span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">as</span> <span class="ss">&quot;员工工资&quot;</span><span class="p">,</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;上司姓名&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span><span class="p">,</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
+</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">mgr</span> <span class="o">=</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">EMPNO</span>
+</span><span class='line'><span class="k">union</span>
+</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="s1">&#39;已是最大老板&#39;</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">mgr</span> <span class="k">is</span> <span class="k">null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477130066693.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>定义：</strong></p>
+
+<p>表和表之间的数据以纵向的方式连接在一起。注意：我们以前讲的所有的连接是以横向的方式连接在一起的。</p>
+
+<p><strong>注意：</strong></p>
+
+<p>联合就是：若干个<code>select</code> 子句要联合成功的话，必须得满足两个条件：</p>
+
+<ol>
+<li>这若干个 <code>select</code> 子句输出的列数必须是相等的。</li>
+<li>这若干个 <code>select</code> 子句输出列的数据类型至少是兼容的。</li>
+</ol>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2143,100 +2361,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/">SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T00:39:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:39 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">--把sal里面是1500 和 3000 和 5000 的值都输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">=</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">3000</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">5000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">3000</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">5000</span>
-</span><span class='line'>      <span class="c1">--在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种</span>
-</span><span class='line'>      <span class="c1">--对或（or）取反是并且（and） 对并且（and）取反是或（or）</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2250,6 +2374,10 @@ select deptno, avg(sal)
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/">SQL 数据库 学习 031 查询-14 连接查询 --- 左（右）外连接、完全连接、交叉连接、联合</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/">SQL 数据库 学习 030 查询-13 --- 查询语句的顺序</a>
@@ -2267,10 +2395,6 @@ select deptno, avg(sal)
         <a href="/blog/2016/10/17/SQL-Learning-027-Query-10-group-by/">SQL 数据库 学习 027 查询-10 Group by --- 以某字段分组</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/">SQL 数据库 学习 026 查询-09 聚合函数 --- 多行记录返回至一个值，通常用于统计分组的信息</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2280,28 +2404,34 @@ select deptno, avg(sal)
 <a style="font-size: 90%" href="/tags/git/">Git</a>
 <a style="font-size: 90%" href="/tags/github/">GitHub</a>
 <a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
-<a style="font-size: 131%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 130%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
 <a style="font-size: 90%" href="/tags/windows/">Windows</a>
 <a style="font-size: 90%" href="/tags/between/">between</a>
+<a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/distinct/">distinct</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
+<a style="font-size: 90%" href="/tags/full-join/">full join</a>
 <a style="font-size: 90%" href="/tags/group-by/">group by</a>
 <a style="font-size: 90%" href="/tags/having/">having</a>
 <a style="font-size: 90%" href="/tags/in/">in</a>
+<a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
 <a style="font-size: 90%" href="/tags/join-on/">join on</a>
+<a style="font-size: 90%" href="/tags/left-join/">left join</a>
 <a style="font-size: 90%" href="/tags/order-by/">order by</a>
+<a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/top/">top</a>
+<a style="font-size: 90%" href="/tags/union/">union</a>
 <a style="font-size: 90%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
 <a style="font-size: 90%" href="/tags/fen-zu/">分组</a>
 <a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
 <a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
 <a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
-<a style="font-size: 188%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 190%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
 <a style="font-size: 116%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
@@ -2318,8 +2448,8 @@ select deptno, avg(sal)
   <ul id="categories">
     <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
-<li class='category'><a href='/blog/categories/sql/'>sql (25)</a></li>
-<li class='category'><a href='/blog/categories/sql-server/'>sql server (25)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (26)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (26)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
 <li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
 
