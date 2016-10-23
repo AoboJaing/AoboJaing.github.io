@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: identity | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/identity/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-24T05:31:37+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 032 identity的用法 --- 如何设置主键自动增长（用户不需要为identity修饰的主键赋值）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-032-identity-usage-how-to-set-the-primary-key-auto-growth/"/>
+    <updated>2016-10-24T05:28:22+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-032-identity-usage-how-to-set-the-primary-key-auto-growth</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>identity</code> 的用法 &mdash; 如何设置主键自动增长（用户不需要为identity修饰的主键赋值）</h2>
+
+<pre><code class="sql">create table student3
+(
+    student_id int primary key identity (100, 5),
+    student_name nvarchar(200) not null
+)
+
+select * from student3
+insert into student3 (student_name) values ('张三');
+insert into student3 values ('李四');  -- ok
+delete from student3 where student_name = '李四';
+insert into student3 (student_name) values ('王五');
+</code></pre>
+
+<h2>如何重新设置<code>identity</code> 字段的值</h2>
+
+<p>表中删除数据又插入数据会导致主键不连续递增 怎么办？</p>
+
+<p>不重要。主键是否连续增长不是非常重要。</p>
+
+<p>如果对表中数据进行了删除操作，如何让 <code>identity</code> 字段重新从某个值开始自增？</p>
+
+<pre><code class="sql">create table emp
+(
+    empid int identity(1, 1),
+    ename nvarchar(20) not null
+);
+
+insert into emp values('aaaa');
+insert into emp values('bbbb');
+insert into emp values('cccc');
+insert into emp values('dddd'); -- 10行
+select * from emp
+delete from emp where emp where wmpid=4 -- 删除empid为4的记录
+select * from emp
+insert into emp values('eeee') -- 因为执行10行时empid为4，所以执行本句时，empid为5
+select * from emp
+delete from emp where empid=5
+dbcc checkident('emp', reseed, 3) -- 17行 把emp表中identity字段的初始值重新设置为3
+
+insert into emp values('eeee') -- 此时插入记录时。empid为4，因为17行代码把empid设置成了3
+select * from emp
+</code></pre>
+
+<pre><code class="sql">dbcc checkident('emp', reseed, 0)
+</code></pre>
+
+<p>种子的值也可以是零，这样设置的话，用户插入值时，种子的初始值将从1开始。</p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p><code>identity</code> 表示该字段的值会自动更新，不需要我们维护，通常情况下我们不可以直接给 <code>identity</code> 修饰的字符赋值，否则编译时会报错。</p>
+
+<p>语法格式为：</p>
+
+<ul>
+<li><code>identity [(m, n)]</code></li>
+<li><code>m</code> 表示的是初始值，<code>n</code> 表示的是每次自动增加的值</li>
+<li>要么同时指定 <code>m</code> 和 <code>n</code> 的值，要么 <code>m</code> 和 <code>n</code> 都不指定，不能只写其中一个值。如：<code>identity(3,2)</code>、<code>identity</code>  都是正确的，但是 <code>identity(3)</code>、<code>identity(2)</code>、<code>identity</code> 都是错误的。</li>
+<li>如果 <code>m</code> 和 <code>n</code> 都未指定，则取默认值<code>(1, 1)</code></li>
+</ul>
+
+
+<p>数据类型是整型的列才能被定义成标识列：</p>
+
+<ul>
+<li><code>int</code>、<code>bigint</code>、<code>smallint</code> 列都可以被定义成 <code>identity</code></li>
+<li>不含有小数位的 <code>decimal</code> 和 <code>numeric</code> 也可以被标记为 <code>identity</code>。如：<code>decimal</code>、<code>decimal(6, 0)</code> 字段都可以被标记为 <code>identity</code>，但是 <code>decimal(6, 2)</code> 字段就不能被标记为  <code>identity</code></li>
+</ul>
+
+
+<p>标识列通常与 <code>primary key</code> 约束一起用作表的唯一行标识符：</p>
+
+<ul>
+<li>非主键也是可以被定义为 <code>identity</code>的，但不推荐。</li>
+</ul>
+
+
+<hr />
+
+<h2>如何向 <code>identity</code> 字段插入数据</h2>
+
+<p>通常<code>identity</code>标记的字段我们是不需要插入数据的，即我们不需要维护 <code>identity</code> 字段的值，它会自动更新，如果我们需要向<code>identity</code>修饰的字段插入值，则必须满足如下两点：</p>
+
+<ol>
+<li>先得执行 <code>set identity_insert [database.[owner.]] {table} {on | off}</code></li>
+<li>插入数据时必须得指定 <code>identity</code> 修饰的字段的名字</li>
+</ol>
+
+
+<hr />
+
+<h2>如何向 <code>identity</code> 字段插入数据示例</h2>
+
+<pre><code class="sql">create database Test
+use test;
+create table dept
+(
+    deptid decimal(6, 0) identity,
+    deptname varchar(20),
+);
+set identity_insert test.dbo.dept on
+    --执行本语句的目的是：希望可以向identity修饰的字段插入值
+    --不可以改为set identity_insert dept on
+    --不可以改为set identity_insert dbo.test.dept on
+    --不可以改为set identity_insert dbo.test.dept.on
+insert into dept (deptid, deptname) values (1, 'zhangsan')
+    --不能改为：insert into dept values (1, 'zhangsan') -- 13
+</code></pre>
+
+<p>默认情况下，使用<code>identity</code>关键字修饰的主键是自动增长的，如果想手动设置主键的值，需要先将目标表打开：<code>set identity_insert test.dbo.dept on</code>，然后再使用<code>insert into dept (deptid, deptname) values (1, 'zhangsan')</code> 命令来手动设置主键的值。</p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
