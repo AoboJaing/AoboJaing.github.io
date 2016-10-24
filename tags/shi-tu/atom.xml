@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 视图 | AoboSir 的博客]]></title>
+  <link href="http://aobojaing.github.io/tags/shi-tu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-24T09:16:06+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 033 视图]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-033-View/"/>
+    <updated>2016-10-24T09:13:55+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-033-View</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要视图</h2>
+
+<p>以一个例子为例：</p>
+
+<p><strong>求出平均工资最高的部门的编号和部门的平均工资。</strong></p>
+
+<pre><code class="sql">--使用我们目前所知道的方法去编写查询代码。
+select *
+    from (
+        select deptno, avg(sal) "avg_sal"
+            from emp
+            group by deptno
+    ) "T"
+    where "T"."avg_sal" = (
+        select max("E"."avg_sal") from (
+            select deptno, avg(sal) "avg_sal"
+                from emp
+                group by deptno
+        ) "E"
+    )
+</code></pre>
+
+<p>上面的查询代码中，有下面的一段代码，这段代码是创建一个临时表。我们可以将这个临时表创建为一个视图：</p>
+
+<pre><code class="sql">        select deptno, avg(sal) "avg_sal"
+            from emp
+            group by deptno
+</code></pre>
+
+<p>创建了一个视图：</p>
+
+<pre><code class="sql">create view v$_emp_1
+as
+    select deptno, avg(sal) "avg_sal"
+        from emp
+        group by deptno
+</code></pre>
+
+<p>输出这个视图中的数据信息：</p>
+
+<pre><code class="sql">select * from v$_emp_1
+</code></pre>
+
+<p>下面的代码的输出同上面<strong>使用目前所知道的方法去编写查询代码</strong>。</p>
+
+<pre><code class="sql">select * from v$_emp_1
+    where avg_sal = (select max(avg_sal) from v$_emp_1)
+</code></pre>
+
+<p><strong>总结：</strong> 视图的优点是可以简化查询代码。（简化查询）。即避免了代码的冗余；避免了属性大量重复的<strong>sql</strong>语法。</p>
+
+<hr />
+
+<h2>什么是视图</h2>
+
+<ul>
+<li>视图从代码上看视图是一个<code>select</code>语句。</li>
+<li>视图从逻辑上被当做一个虚拟表看待。</li>
+</ul>
+
+
+<hr />
+
+<h2>如何创建视图</h2>
+
+<p>视图的格式</p>
+
+<pre><code class="sql">create view 视图的名字
+    as
+        --select的前面不能添加begin
+        select
+        --select的后面不能添加end
+</code></pre>
+
+<hr />
+
+<h2>视图的优点</h2>
+
+<ol>
+<li>视图的优点是可以简化查询代码。</li>
+<li>增加数据的保密性</li>
+</ol>
+
+
+<pre><code class="sql">--屏蔽了入职日期和员工工资 这两个属性。
+create view v$_emp2
+as
+    select empno, ename, job, mgr, comm, deptno 
+        from emp
+</code></pre>
+
+<hr />
+
+<h2>视图的缺点</h2>
+
+<ol>
+<li>增加了数据库维护的成本。
+
+<ul>
+<li>原表里面的属性被改了，那么视图就会报错。</li>
+</ul>
+</li>
+<li>视图只是简化了查询的代码，但是并不能加快查询的速度，这也是视图使用不足的地方。</li>
+</ol>
+
+
+<hr />
+
+<h2>使用视图要注意的三个问题</h2>
+
+<p>1 . 创建视图的<code>select</code>语句必须得为所有的计算列指定别名</p>
+
+<pre><code class="sql">--error
+create view v$_a
+as
+    select avg(sal) from emp;
+</code></pre>
+
+<pre><code class="sql">--ok
+create view v$_a
+as
+    select avg(sal) as "avg_sal" from emp;
+</code></pre>
+
+<p>2 . 视图不是物理表，而是虚拟表</p>
+
+<p>3 . 不建议通过视图更新视图所依赖的原始表的数据和结果。（因为很麻烦，有许多语法的限制。）</p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
