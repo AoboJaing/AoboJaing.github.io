@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SQL 数据库 学习 034 事务 - AoboSir 的博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 为什么需要事务 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-034-Transactions/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 的博客</a></h1>
+  
+    <h2>胖爷，四年后见！ --- 2016年10月9日</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SQL 数据库 学习 034 事务</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T13:20:24+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要事务</h2>
+
+<p>事务主要用来保证数据的合理性和并发处理的能力！</p>
+
+<p>通俗的说：</p>
+
+<ul>
+<li>事务可以保证避免数据处于一种不合理的中间状态</li>
+<li>利用事务可以实现多个用户对共享资源的同时访问</li>
+</ul>
+
+
+<p>例子：</p>
+
+<p>银行中的转账操作，账户A把一定数量的款项转到账户B上，这个操作包括两个步骤，一个是从账户A上把存款减去一定数量，二是在账户B上把存款加上相同的数量。这两个步骤显然要么都完成，要么都取消，否则银行就会受损失。显然，这个转账操作中的两个步骤就构成一个事务。</p>
+
+<p>假设A和B用户都希望查询修改M表数据，A用户不应该刚把M表的数据改成5，查询时显示的数据却是8（因为B用户修改M表的数据成8了）。事务必须得保证多个用户对共享资源同时访问时，数据库给用户的反应是合理的。</p>
+
+<p>事务就是专门解决这个问题的。</p>
+
+<hr />
+
+<h2>什么是事务</h2>
+
+<p>一系列操作要么全部执行成功，要么全部执行失败，这就是事务。</p>
+
+<hr />
+
+<h2>如何创建事务</h2>
+
+<p><strong>T-SQL</strong> 使用下列语句管理事务：</p>
+
+<ul>
+<li>开启事务：<code>begin transaction</code></li>
+<li>提交事务：<code>commit transaction</code></li>
+<li>回滚（撤销）事务：<code>rollback transaction</code></li>
+</ul>
+
+
+<p>一旦事务提交或回滚，则事务结束。</p>
+
+<p>判断某条语句执行是否出错：</p>
+
+<ul>
+<li>使用全局变量 <code>@@error</code></li>
+<li><code>@@error</code> 只能判断当前一条<strong>T-SQL</strong>语句执行是否有错，为了判断事务中所有<strong>T-SQL</strong>语句是否有错，我们需要对错误进行累计。如：<code>set @errorSum=@errorSum+@@error</code></li>
+</ul>
+
+
+<hr />
+
+<h2>初学者必须要掌握的三个问题：</h2>
+
+<p>一 . 事务时用来研究什么的：</p>
+
+<ul>
+<li>避免数据处于不合理的中间状态。（比如：转账）</li>
+<li>怎样避免多用户同时访问时，呈现给用户的数据是合理的。</li>
+</ul>
+
+
+<p>二 . 事务和线程的关系：</p>
+
+<p>事务也是通过锁来解决很多问题的。（线程同步就是通过锁来解决的 <code>sychronized</code>）</p>
+
+<p>三 . 事务和第三方插件的关系：</p>
+
+<ul>
+<li>直接使用事务库技术难度很大，很多人是借助第三方插件来实现。（因为我们一般人不需要细细的研究数据库中事务的语法细节。）</li>
+<li>第三方插件要想完成预期的功能，一般必须得借助数据库中的事务机制。</li>
+</ul>
+
+
+<hr />
+
+<h2>事务 &mdash; 总结 和 实例</h2>
+
+<p>总结事务的四大特性：事务必须具备以下四个属性，简称<strong>ACID</strong>属性。</p>
+
+<ul>
+<li>原子性：事务是一个完整的操作。事务的各步操作是不可分的（原子的）；要么都执行，要么都不执行。</li>
+<li>一致性：当事务完成时，数据必须处于一致状态，要么处于开始状态要么处于结束状态，不允许出现中间状态！</li>
+<li>隔离性：指当前的事务与其他未完成的事务是隔离的。在不同的隔离级别下，事务的读取操作，可以得到的结果是不同的。</li>
+<li>持久性：事务完成后，它对数据库的修改被永久保持，事务日志能够保持事务的永久性。</li>
+</ul>
+
+
+<p><strong>一个例子：</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--创建Test库</span>
+</span><span class='line'><span class="k">create</span> <span class="k">database</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--进入Test库</span>
+</span><span class='line'><span class="n">use</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--创建一个bank表</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">bank</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">customerEname</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">currrentMoney</span> <span class="n">money</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="c1">--插入数据</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1">--给bank表中的currentMoney属性添加一个约束</span>
+</span><span class='line'><span class="k">alter</span> <span class="k">table</span> <span class="n">bank</span> <span class="k">add</span> <span class="k">constraint</span> <span class="n">check_currentMoney</span> <span class="k">check</span><span class="p">(</span><span class="n">currentMoney</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在我要将张三的1000打给李四。（这样做会失败，因为上面已经给<code>check_currentMoney</code>属性添加了一个约束：<code>currentMoney&gt;=1</code>）。</p>
+
+<p>普通的查询指令进行转账：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用事务实现进行转账：（不重要，掌握就可以，语法怪异，实用性不强。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">begin</span> <span class="n">transaction</span>
+</span><span class='line'><span class="k">declare</span> <span class="o">@</span><span class="n">errorSum</span> <span class="nb">int</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="n">if</span> <span class="p">(</span><span class="o">@</span><span class="n">errorSum</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账失败&#39;</span>
+</span><span class='line'>      <span class="k">rollback</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账成功&#39;</span>
+</span><span class='line'>      <span class="k">commit</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T13:20:24+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-server/'>sql server</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/10/24/SQL-Learning-033-View/" title="Previous Post: SQL 数据库 学习 033 视图">&laquo; SQL 数据库 学习 033 视图</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/10/24/SQL-Learning-034-Transactions" data-title="SQL 数据库 学习 034 事务" data-url="http://aobojaing.github.io /blog/2016/10/24/SQL-Learning-034-Transactions/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/24/SQL-Learning-034-Transactions/">SQL 数据库 学习 034 事务</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/24/SQL-Learning-033-View/">SQL 数据库 学习 033 视图</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/24/SQL-Learning-032-identity-usage-how-to-set-the-primary-key-auto-growth/">SQL 数据库 学习 032 Identity的用法 --- 如何设置主键自动增长（用户不需要为identity修饰的主键赋值）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/">SQL 数据库 学习 031 查询-14 连接查询 --- 左（右）外连接、完全连接、交叉连接、联合</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/">SQL 数据库 学习 030 查询-13 --- 查询语句的顺序</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 90%" href="/tags/eda/">EDA</a>
+<a style="font-size: 90%" href="/tags/git/">Git</a>
+<a style="font-size: 90%" href="/tags/github/">GitHub</a>
+<a style="font-size: 90%" href="/tags/notepad-plus-plus/">Notepad++</a>
+<a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
+<a style="font-size: 90%" href="/tags/windows/">Windows</a>
+<a style="font-size: 90%" href="/tags/between/">between</a>
+<a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
+<a style="font-size: 90%" href="/tags/distinct/">distinct</a>
+<a style="font-size: 90%" href="/tags/from-where/">from where</a>
+<a style="font-size: 90%" href="/tags/full-join/">full join</a>
+<a style="font-size: 90%" href="/tags/group-by/">group by</a>
+<a style="font-size: 90%" href="/tags/having/">having</a>
+<a style="font-size: 90%" href="/tags/identity/">identity</a>
+<a style="font-size: 90%" href="/tags/in/">in</a>
+<a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
+<a style="font-size: 90%" href="/tags/join-on/">join on</a>
+<a style="font-size: 90%" href="/tags/left-join/">left join</a>
+<a style="font-size: 90%" href="/tags/order-by/">order by</a>
+<a style="font-size: 90%" href="/tags/right-join/">right join</a>
+<a style="font-size: 90%" href="/tags/top/">top</a>
+<a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
+<a style="font-size: 90%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
+<a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
+<a style="font-size: 90%" href="/tags/fen-zu/">分组</a>
+<a style="font-size: 90%" href="/tags/ju-jue-fang-wen/">拒绝访问</a>
+<a style="font-size: 90%" href="/tags/cao-zuo-xi-tong-cuo-wu/">操作系统错误</a>
+<a style="font-size: 90%" href="/tags/wu-fa-da-kai-wu-li-wen-jian/">无法打开物理文件</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
+<a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 90%" href="/tags/jie-jue-wen-ti/">解决问题</a>
+<a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
+<a style="font-size: 90%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 90%" href="/tags/lian-jie-cha-xun/">连接查询</a>
+<a style="font-size: 90%" href="/tags/cuo-wu-5120/">错误 5120</a>
+<a style="font-size: 90%" href="/tags/fu-jia-shu-ju-ku/">附加数据库</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>
+<li class='category'><a href='/blog/categories/软件安装/'>软件安装 (1)</a></li>
+
+  </ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

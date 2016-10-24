@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-034-Transactions/</loc>
+<lastmod>2016-10-24T13:20:24+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-033-View/</loc>
 <lastmod>2016-10-24T09:13:55+08:00</lastmod>
 </url>
@@ -300,5 +304,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/shi-tu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/shi-wu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/transaction/</loc>
 </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SQL Server | AoboSir 的博客]]></title>
   <link href="http://aobojaing.github.io/tags/sql-server/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-24T09:16:06+08:00</updated>
+  <updated>2016-10-24T13:21:32+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL 数据库 学习 034 事务]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-034-Transactions/"/>
+    <updated>2016-10-24T13:20:24+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-034-Transactions</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要事务</h2>
+
+<p>事务主要用来保证数据的合理性和并发处理的能力！</p>
+
+<p>通俗的说：</p>
+
+<ul>
+<li>事务可以保证避免数据处于一种不合理的中间状态</li>
+<li>利用事务可以实现多个用户对共享资源的同时访问</li>
+</ul>
+
+
+<p>例子：</p>
+
+<p>银行中的转账操作，账户A把一定数量的款项转到账户B上，这个操作包括两个步骤，一个是从账户A上把存款减去一定数量，二是在账户B上把存款加上相同的数量。这两个步骤显然要么都完成，要么都取消，否则银行就会受损失。显然，这个转账操作中的两个步骤就构成一个事务。</p>
+
+<p>假设A和B用户都希望查询修改M表数据，A用户不应该刚把M表的数据改成5，查询时显示的数据却是8（因为B用户修改M表的数据成8了）。事务必须得保证多个用户对共享资源同时访问时，数据库给用户的反应是合理的。</p>
+
+<p>事务就是专门解决这个问题的。</p>
+
+<hr />
+
+<h2>什么是事务</h2>
+
+<p>一系列操作要么全部执行成功，要么全部执行失败，这就是事务。</p>
+
+<hr />
+
+<h2>如何创建事务</h2>
+
+<p><strong>T-SQL</strong> 使用下列语句管理事务：</p>
+
+<ul>
+<li>开启事务：<code>begin transaction</code></li>
+<li>提交事务：<code>commit transaction</code></li>
+<li>回滚（撤销）事务：<code>rollback transaction</code></li>
+</ul>
+
+
+<p>一旦事务提交或回滚，则事务结束。</p>
+
+<p>判断某条语句执行是否出错：</p>
+
+<ul>
+<li>使用全局变量 <code>@@error</code></li>
+<li><code>@@error</code> 只能判断当前一条<strong>T-SQL</strong>语句执行是否有错，为了判断事务中所有<strong>T-SQL</strong>语句是否有错，我们需要对错误进行累计。如：<code>set @errorSum=@errorSum+@@error</code></li>
+</ul>
+
+
+<hr />
+
+<h2>初学者必须要掌握的三个问题：</h2>
+
+<p>一 . 事务时用来研究什么的：</p>
+
+<ul>
+<li>避免数据处于不合理的中间状态。（比如：转账）</li>
+<li>怎样避免多用户同时访问时，呈现给用户的数据是合理的。</li>
+</ul>
+
+
+<p>二 . 事务和线程的关系：</p>
+
+<p>事务也是通过锁来解决很多问题的。（线程同步就是通过锁来解决的 <code>sychronized</code>）</p>
+
+<p>三 . 事务和第三方插件的关系：</p>
+
+<ul>
+<li>直接使用事务库技术难度很大，很多人是借助第三方插件来实现。（因为我们一般人不需要细细的研究数据库中事务的语法细节。）</li>
+<li>第三方插件要想完成预期的功能，一般必须得借助数据库中的事务机制。</li>
+</ul>
+
+
+<hr />
+
+<h2>事务 &mdash; 总结 和 实例</h2>
+
+<p>总结事务的四大特性：事务必须具备以下四个属性，简称<strong>ACID</strong>属性。</p>
+
+<ul>
+<li>原子性：事务是一个完整的操作。事务的各步操作是不可分的（原子的）；要么都执行，要么都不执行。</li>
+<li>一致性：当事务完成时，数据必须处于一致状态，要么处于开始状态要么处于结束状态，不允许出现中间状态！</li>
+<li>隔离性：指当前的事务与其他未完成的事务是隔离的。在不同的隔离级别下，事务的读取操作，可以得到的结果是不同的。</li>
+<li>持久性：事务完成后，它对数据库的修改被永久保持，事务日志能够保持事务的永久性。</li>
+</ul>
+
+
+<p><strong>一个例子：</strong></p>
+
+<pre><code class="sql">--创建Test库
+create database Test
+--进入Test库
+use Test
+--创建一个bank表
+create table bank
+(
+    customerEname nvarchar(200),
+    currrentMoney money
+)
+--插入数据
+insert into bank values ('张三', 1000)
+insert into bank values ('李四', 1)
+--给bank表中的currentMoney属性添加一个约束
+alter table bank add constraint check_currentMoney check(currentMoney&gt;=1)
+</code></pre>
+
+<p>现在我要将张三的1000打给李四。（这样做会失败，因为上面已经给<code>check_currentMoney</code>属性添加了一个约束：<code>currentMoney&gt;=1</code>）。</p>
+
+<p>普通的查询指令进行转账：</p>
+
+<pre><code class="sql">update bank set currentMoney=currentMoney-1000 where customerEname='张三'
+update bank set currentMoney=currentMoney+1000 where customerEname='李四'
+</code></pre>
+
+<p>使用事务实现进行转账：（不重要，掌握就可以，语法怪异，实用性不强。）</p>
+
+<pre><code class="sql">begin transaction
+declare @errorSum int
+set @errorSum = 0
+update bank set currentMoney=currentMoney-1000
+    where customerEname='张三'
+set @errorSum = @errorSum + @@error
+update bank bank set currentMoney=currentMoney+1000
+    where customerEname='李四'
+set @errorSum = @errorSum + @@error
+if (@errorSum &lt;&gt; 0)
+    begin
+        print '转账失败'
+        rollback transaction
+    end
+else
+    begin
+        print '转账成功'
+        commit transaction
+    end
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 033 视图]]></title>
@@ -546,535 +704,6 @@ select "E".*
 <p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 029 查询-12 连接查询 ---  内连接]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection/"/>
-    <updated>2016-10-21T20:25:37+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h1>连接查询</h1>
-
-<p><strong>定义：</strong></p>
-
-<p>将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。</p>
-
-<h2>一 . 内连接 &mdash; 知识点 （重点中的重点）</h2>
-
-<p><strong>牛刀小试</strong></p>
-
-<pre><code class="sql">select "E".ename "员工姓名", "D".dname "部门名称"
-    from emp "E"
-    join dept "D"
-    on "E".deptno = "D".deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476814366731.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>需要学的知识点：</p>
-
-<ol>
-<li><code>select ... from A, B</code> 的用法</li>
-<li><code>select ... from A, B where ...</code> 的用法</li>
-<li><code>select ... from A join B on ...</code> 的用法</li>
-<li><code>select ... from A, B where ...</code>  与 <code>select ... from A join B on ...</code> 的比较</li>
-<li><code>select</code>、<code>from</code>、<code>where</code>、<code>join</code>、<code>on</code>、<code>group</code>、<code>order</code>、<code>top</code>、<code>having</code> 的混合使用。</li>
-</ol>
-
-
-<hr />
-
-<hr />
-
-<h2>1 .  <code>select ... from A, B</code> 的用法 &mdash; 笛卡尔积</h2>
-
-<pre><code class="sql">--emp是14行； dept是5行3列
-select * from emp, dept
-    --输出是70行。不任何条件，进行笛卡尔积连接。
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476853766304.png" alt="Alt text" /></p>
-
-<p><code>A</code> 表里面没有个元组都会连接 <code>B</code> 表一个元组，这样就导致 <code>B</code> 表中的每一个元组都连接了 <code>A</code> 表中的没有个元组。</p>
-
-<p>产生的结果： 行数是 A和B的乘积；列数是A和B之和。或者说：把A表的每一条记录都和B表的每一条记录组合在一起，形成的是个笛卡尔积。</p>
-
-<hr />
-
-<h2>2 .  <code>select ... from A, B where ...</code> 的用法</h2>
-
-<pre><code class="sql">select *
-    from emp, dept
-    where empno = 7369
-    --输出5行，11列
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476854396475.png" alt="Alt text" /></p>
-
-<blockquote><p>其中有两个列<code>deptno</code> 属性，一列是来自 <code>dept</code> 表，一列是来自 <code>emp</code> 表。</p></blockquote>
-
-<p><code>select ... from A, B where ...</code> 中的 <code>where</code> 是对 <code>select * from emp, dept</code> 产生的<code>dept</code> 和 <code>emp</code> 两个表进行笛卡尔积后得到的临时表进行过滤。</p>
-
-<p><strong>注意：</strong></p>
-
-<ul>
-<li><code>select * from emp, dept where 1-1</code> 输出70行 11列</li>
-<li><code>select * from emp, dept where empno = 7369</code>  5行</li>
-<li><code>select * from emp, dept where deptno = 10</code> error</li>
-<li><code>select * from emp, dept where emp.deptno = 10</code> 5行的倍数</li>
-<li><code>select * from emp, dept where dept.deptno = 10</code> 14行</li>
-</ul>
-
-
-<hr />
-
-<h2>3 . <code>select ... from A join B on ...</code> 的用法</h2>
-
-<pre><code class="sql">select "E".ename "员工姓名", "D".dname "部门名称"
-    from emp "E"   --"E" 是别名
-    join dept "D"  --"D" 是别名 join是连接
-    on "E".deptno = "D".deptno  ---on 表示：连接条件
-    --连接条件是：两个表里面的deptno属性相同，才能连接
-    --所以现在得到的结果不是70行。
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952525122.png" alt="Alt text" /></p>
-
-<pre><code class="sql">select *
-    from emp "E"
-    join dept "D"
-    on "E".deptno = "D".deptno
-    --输出是11列（有两列(deptno)是重复的）
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952554733.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>下面的两个指令输出都是一样的结果。</p>
-
-<pre><code class="sql">select "E".ename "员工姓名", "D".dname "部门名称"
-    from emp "E"
-    join dept "D"
-    on 1=1   --连接条件是 1=1 表示永远为真，所以执行后得到的结果是70行2列。
-</code></pre>
-
-<pre><code class="sql">select "E".ename "员工姓名", "D".dname "部门名称"
-    from emp "E"
-    join dept "D"
-    on 3&gt;2   --连接条件是 3&gt;2 表示永远为真，所以执行后得到的结果是70行2列。
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952613838.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><code>on</code> 不能省略，有 <code>join</code> 就必须有 <code>on</code>。</p>
-
-<pre><code class="sql">--error 多个表里面有相同的属性，就必须指定是哪个表的属性，否则报错。
-select deptno
-    from emp "E"
-    join dept "D"
-    on 1=1   
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952843787.png" alt="Alt text" /></p>
-
-<p>别名取中文也可以：</p>
-
-<pre><code class="sql">select "部门表".deptno "部门编号"
-    from emp "员工表"
-    join dept "部门表"
-    on 1=1 
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952937185.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>4 .  <code>from where</code> 和 <code>join on</code> 的区别</h2>
-
-<ul>
-<li><code>select ... from A, B where ...</code> 是<strong>sql92标准</strong>。</li>
-<li><code>select ... join A, B where ...</code> 是 <strong>sql99标准</strong>。</li>
-</ul>
-
-
-<p>输出结果是一样的，但是推荐使用<strong>SQL99标准</strong>。</p>
-
-<p>原因：</p>
-
-<ol>
-<li><strong>sql99</strong> 更容易理解。</li>
-<li>在<strong>sql99标准</strong>中，<code>on</code> 和 <code>where</code> 可以做不同的分工。<code>on</code> 指定连接条件，而<code>where</code> 是对连接之后临时表的数据进行过滤。</li>
-</ol>
-
-
-<pre><code class="sql">select *
-    from emp, dept
-    where emp.deptno = dept.deptno
-</code></pre>
-
-<p>等价于</p>
-
-<pre><code class="sql">select *
-    from emp
-    join dept
-    on emp.deptno = dept.deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953046957.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>5 . <code>where</code> 是否可以写在 <code>join on</code> 的前面</h2>
-
-<pre><code class="sql">--error
-select "E".ename, "D".dname, "S".grade
-    from emp "E"
-    where "E".sal &gt; 2000
-    join dept "D"
-    on "E".deptno = "D".deptno
-    join SALGRADE "S"
-    on "E".sal &gt;= "S".losal and "E".sal &lt;= "S".hisal
-    --我只知道where写在join on前面是错的。但是我也不知道，为什么。
-    --关键字的顺序都是固定的，是死的。
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953442977.png" alt="Alt text" /></p>
-
-<pre><code class="sql">--OK
-select "E".ename, "D".dname, "S".grade
-    from emp "E"
-    join dept "D"
-    on "E".deptno = "D".deptno
-    join SALGRADE "S"
-    on "E".sal &gt;= "S".losal and "E".sal &lt;= "S".hisal
-    where "E".sal &gt; 2000
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953463959.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>6 . 判断下列两个语句的输出结果</h2>
-
-<p><code>select ... from A join B on ...</code> 的用法：<code>A</code> 和 <code>B</code> 互换， 输出结果不变。</p>
-
-<p><code>select ... from A, B where ...</code> 的用法： <code>A</code> 和 <code>B</code>  互换，输出结果不变。</p>
-
-<p>下面的四个指令，输出的结果都是一样的。</p>
-
-<pre><code class="sql">select *
-    from emp
-    join dept
-    on emp.deptno = dept.deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953696204.png" alt="Alt text" /></p>
-
-<pre><code class="sql">select *
-    from dept
-    join emp
-    on emp.deptno = dept.deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953661325.png" alt="Alt text" /></p>
-
-<pre><code class="sql">select *
-    from emp, dept
-    where emp.deptno = dept.deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953591899.png" alt="Alt text" /></p>
-
-<pre><code class="sql">select *
-    from dept， emp
-    where emp.deptno = dept.deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953572304.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>7 . <strong>sql92标准</strong> 的语句如何用<strong>sql99</strong>的语句实现</h2>
-
-<pre><code class="sql">--输出
-select * from emp, dept
-    where dept.deptno = 10
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953771643.png" alt="Alt text" /></p>
-
-<p>考虑如何把上面的<strong>sql</strong>语句用<strong>sql99</strong>来实现。</p>
-
-<pre><code class="sql">--这个sql语句和上面的sql语句输出结果是一模一样的
-select *
-    from emp
-    join dept  --join 是连接
-    on 1=1  --on 后面是连接条件
-    where dept.deptno = 10  -- where 是对数据进行过滤
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953833629.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>二 . 内连接 &mdash; 练习</h2>
-
-<ol>
-<li>输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</li>
-<li>输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</li>
-<li>求出每个员工的姓名、部门编号、薪水、薪水等级</li>
-<li>查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</li>
-<li>查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级</li>
-<li>求出<code>emp</code>表中所有领导的姓名</li>
-<li>求出平均薪水最好的部门的标号和部门的平均工资</li>
-<li>有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。</li>
-</ol>
-
-
-<hr />
-
-<p><strong>1  . 输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</strong></p>
-
-<pre><code class="sql">--输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
-select top 3 "E".ename, "E".sal, "S".grade, "D".dname
-    from emp "E"
-    join dept "D"
-    on "E".deptno = "D".deptno
-    join SALGRADE "S"
-    on "E".sal between "S".LOSAL and "S".hisal
-    order by "E".sal desc
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954077454.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>2 . 输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</strong></p>
-
-<pre><code class="sql">--输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称
-select top 3 "E".ename, "E".sal, "S".grade, "D".dname
-    from emp "E"
-    join dept "D"
-    on "E".deptno = "D".deptno
-    join SALGRADE "S"
-    on "E".sal between "S".LOSAL and "S".hisal
-    where "E".ename not like '%A%'
-    order by "E".sal desc
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954761563.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>3 . 求出每个员工的姓名、部门编号、薪水、薪水等级</strong></p>
-
-<pre><code class="sql">--求出每个员工的姓名、部门编号、薪水 和 薪水的等级
-select "E".ename, "E".deptno, "E".sal, "S".grade
-    from emp "E"
-    join SALGRADE "S"
-    on "E".sal &gt;= "S".losal and "E".sal &lt;= "S".hisal
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476955432131.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>4 . 查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</strong></p>
-
-<p>先要将部门的平均工资找出来。</p>
-
-<pre><code class="sql">--输出部门的平均工资
-select deptno, avg(sal) as "avg_sal"
-    from emp
-    group by deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477036365811.png" alt="Alt text" /></p>
-
-<p>接下来是输出部门平均工资的等级。做法很简单，上面的指令生成了一张部门平均工资的临时表，接下来我们就对这个临时表通过<code>join ... on ...</code>  的<code>join</code> 关键字将这个临时表和 <code>SALGRADE</code> 表通过<code>on</code> 关键字后面的条件来得到部门平均工资的等级。</p>
-
-<pre><code class="sql">--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级
-select "T".deptno, "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
-    from SALGRADE "S"
-    join (
-        select deptno, avg(sal) as "avg_sal"
-            from emp
-            group by deptno
-    ) "T"
-    on "T"."avg_sal" between "S".LOSAL and "S".HISAL
-</code></pre>
-
-<p>等价于</p>
-
-<pre><code class="sql">--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级
-select "T".deptno, "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
-    from SALGRADE "S", (
-        select deptno, avg(sal) as "avg_sal"
-            from emp
-            group by deptno
-    ) "T"
-    where "T"."avg_sal" between "S".LOSAL and "S".HISAL
-</code></pre>
-
-<p>输出结果都是：</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476969060536.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>5 . 查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级</strong></p>
-
-<pre><code class="sql">--查找每一个部门的编号、部门名称、该部门所有员工的平举工资、平均工资的等级
-select "T".deptno, "D".dname "部门名称", "T"."avg_sal" "部门平均工资", "S".grade "工资等级"
-    from SALGRADE "S"
-    join (
-        select deptno, avg(sal) as "avg_sal"
-            from emp
-            group by deptno
-    ) "T"
-    on "T"."avg_sal" between "S".LOSAL and "S".HISAL
-    join dept "D"
-    on "T".deptno = "D".deptno
-</code></pre>
-
-<p>其中 <code>on</code> 后面跟的是 <strong>表与表之间的连接条件</strong>。</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037406640.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>6 . 求出 emp 表领导的姓名</strong></p>
-
-<pre><code class="sql">--先把emp表列出来
-select * from emp
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037635859.png" alt="Alt text" /></p>
-
-<pre><code class="sql">--求出`emp`表领导的姓名
-select ename from emp
-    where empno in (select mgr from emp) --如果员工编号在领导编号里面，就输出
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037907549.png" alt="Alt text" /></p>
-
-<pre><code class="sql">--求出emp表中所有非领导的信息
---error
-select * from emp
-    where empno not in (select mgr from emp)
-</code></pre>
-
-<p>这样写是不对的，我们需要注意：<code>in</code> 与 <code>null</code> 的组合所带来的问题。</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037999159.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>7 . 求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
-
-<pre><code class="sql">--先得到部门平均工资的临时表
-select deptno, avg(sal) "avg_sal"
-    from emp "E"
-    group by deptno
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477039859743.png" alt="Alt text" /></p>
-
-<p>然后排序，在输出第1个。</p>
-
-<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
---第1种写法：
-select top 1 deptno, avg(sal) "avg_sal"
-    from emp "E"
-    group by deptno
-    order by avg(sal) desc
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040016720.png" alt="Alt text" /></p>
-
-<p>等价于：</p>
-
-<pre><code class="sql">--求出平均薪水最好的部门的标号和部门的平均工资
---第2种写法：
-select "E".*
-    from (
-        select deptno, avg(sal) "avg_sal"
-            from emp
-            group by deptno
-    ) "E"
-    where "E"."avg_sal" = (
-        select max("avg_sal") 
-            from (
-                select deptno, avg(sal) "avg_sal" 
-                    from emp 
-                    group by deptno
-            ) "T"
-    )
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477044470627.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>8 . 有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。</strong></p>
-
-<p>先得到工资最低的那个人的工资。</p>
-
-<pre><code class="sql">select min(sal) from emp
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040384906.png" alt="Alt text" /></p>
-
-<p>去掉工资最低的那个人：</p>
-
-<pre><code class="sql">--有一个人工资最低，把这个人排除掉
-select *
-    from emp
-    where sal &gt; (select min(sal) from emp)
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043113884.png" alt="Alt text" /></p>
-
-<pre><code class="sql">--有一个人工资最低，把这个人排除掉，
---剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。
-select top 3 "T".ename, "T".sal, "T".deptno, "D".dname, "S".grade
-    from (
-        select *
-            from emp
-            where sal &gt; (select min(sal) from emp)
-    ) "T"
-    join dept "D"
-    on "T".deptno = "D".deptno
-    join SALGRADE "S"
-    on "T".sal between "S".LOSAL and "S".HISAL
-    order by "T".sal asc
-</code></pre>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043240086.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>搞定</strong></p>
 ]]></content>
   </entry>
   
