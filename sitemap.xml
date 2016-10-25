@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model/</loc>
+<lastmod>2016-10-26T01:13:33+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/10/25/Auto-Control-001-Principle-of-automatic-control-general-concept/</loc>
 <lastmod>2016-10-25T20:28:35+08:00</lastmod>
 </url>
@@ -333,5 +337,20 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/zi-dong-kong-zhi-de-gai-nian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/chuan-di-han-shu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/dong-tai-jie-gou-tu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/xin-hao-liu-tu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/wei-fen-fang-cheng/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/shu-xue-mo-xing/</loc>
 </url>
 </urlset>

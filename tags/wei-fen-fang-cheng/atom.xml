@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 微分方程 | AoboSir 我可以...]]></title>
+  <link href="http://aobojaing.github.io/tags/wei-fen-fang-cheng/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-10-26T03:26:28+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Auto Control 002 自动控制原理 自动控制的数学模型]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model/"/>
+    <updated>2016-10-26T01:13:33+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model</id>
+    <content type="html"><![CDATA[<p>博客转到：</p>
+]]></content>
+  </entry>
+  
+</feed>
