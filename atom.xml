@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 我可以...]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-25T02:40:47+08:00</updated>
+  <updated>2016-10-25T19:22:42+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Auto Control 000 自动控制原理 为什么要学]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/10/25/Auto-Control-Principle-of-automatic-control-Why-Learn/"/>
+    <updated>2016-10-25T19:16:06+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/10/25/Auto-Control-Principle-of-automatic-control-Why-Learn</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>无论是学什么技术，你第一件事情就要搞清楚：为什么要学它；学它可以解决那些问题。</p></blockquote>
+
+<h2>为什么要学习 自动控制原理</h2>
+
+<p>如果你做个平衡车或者四轴飞机或者倒立摆，你肯定会使用<strong>PID</strong>控制函数，它很神奇吧，没错，它就是最简单的自动控制原理其中的一个原理。</p>
+
+<p>如果你停留在PID的程度，你会觉得控制就是调参数；学了极点配置之后，你起码对稳定性有了理解；学了lqr之后，你对怎么处理扰动、怎么track referance有了理解；学了mpc之后，你就会怎么处理约束；学了robust和adaptive时候，你懂得uncertainty怎么处理；而现在的control研究已经进展到与传统control完全不同的程度。比如：机器人这种十几个自由度的非线性系统如何稳定，如何让它稳定地走路。</p>
+
+<blockquote><p>我现在所知道的就是这些，&mdash; 2016年10月25日 &mdash; 不断完善中&hellip;。</p></blockquote>
+
+<p>我们接下来都是学习经典自动控制原理。而我学它的目的是：做机器人、替代人力机器。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-25-Auto-Control-Principle-of-automatic-control-Why-Learn/095350a5fc9fd60.gif" alt="Alt Image" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-10-25-Auto-Control-Principle-of-automatic-control-Why-Learn/1477392429765.png" alt="Alt text" /></p>
+
+<p>既然决心要学，那定会认真的学。</p>
+
+<hr />
+
+<p>图片来源于：<a href="http://www.acznw.com/archives/13854.html">http://www.acznw.com/archives/13854.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL 数据库 学习 034 事务]]></title>
@@ -3176,57 +3207,6 @@ select deptno, avg(sal)
 <hr />
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 解决问题：无法打开物理文件 "XXX.mdf"。操作系统错误 5:"5(拒绝访问。)"。 (Microsoft SQL Server，错误: 5120) --- 附加数据库时出错。有关详细信息，请单击“消息”列中的超链接。]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/"/>
-    <updated>2016-10-16T18:52:33+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2>出现的问题</h2>
-
-<p>在你 <strong>附加</strong>  一个外部数据库到服务器上是，出现下面的错误：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612776678.png" alt="Alt text | center" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476612808460.png" alt="Alt text | center" /></p>
-
-<hr />
-
-<h2>解决办法</h2>
-
-<ol>
-<li><p>找到要附加的<code>.mdf</code>文件&mdash;&mdash;&mdash;>右键&mdash;&mdash;&mdash;>属性&mdash;&mdash;&mdash;>安全&mdash;&mdash;&mdash;>选择当前用户&mdash;&mdash;&mdash;>编辑&mdash;&mdash;&mdash;>完全控制。</p>
-
-<ul>
-<li><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613072444.png" alt="Alt text" /></li>
-<li><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Solve-problem-Microsoft-SQL-Server-error-5120/1476613183163.png" alt="Alt text" /></li>
-</ul>
-</li>
-<li><p>对.<code>log</code>文件进行相同的处理。</p></li>
-</ol>
-
-
-<hr />
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="http://blog.csdn.net/justdb/article/details/8457487">http://blog.csdn.net/justdb/article/details/8457487</a></p>
 ]]></content>
   </entry>
   
