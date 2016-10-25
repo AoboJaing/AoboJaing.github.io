@@ -25,10 +25,10 @@ tags: [自动控制原理, Auto Control]
 我们接下来都是学习经典自动控制原理。而我学它的目的是：做机器人、替代人力机器。
 
 
-![Alt Image](/images/2016-10-25-Auto-Control-Principle-of-automatic-control-Why-Learn/095350a5fc9fd60.gif)
+![Alt Image](http://nviki1.qiniudn.com/wp-content/uploads/2015/06/095350a5fc9fd60.gif)
 
 
-![Alt text](/images/2016-10-25-Auto-Control-Principle-of-automatic-control-Why-Learn/1477392429765.png)
+![Alt text](/images/2016-10-25-Auto-Control-000-Principle-of-automatic-control-Why-Learn/1477392429765.png)
 
 既然决心要学，那定会认真的学。
 
