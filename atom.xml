@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-10-29T02:27:10+08:00</updated>
+  <updated>2016-11-13T13:56:09+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error/"/>
+    <updated>2016-11-13T13:54:49+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>先添加一个控件。比如添加一个<code>GroupBox</code>控件。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479014826968.png" alt="Alt text" /></p>
+
+<p>当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步：</p>
+
+<p><strong>Step 1 . </strong> 在 <code>Form11.cs</code> 文件中，将这个控件所有的事件函数删除。对于我们这个例子，删除的代码是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">private</span> <span class="k">void</span> <span class="nf">groupBox1_Enter</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果这个时候，你运行程序会出错：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="err">错误</span>    <span class="m">1</span>    <span class="err">“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”不包含“</span><span class="n">groupBox1_Enter</span><span class="err">”的定义，并且找不到可接受类型为“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”的第一个参数的扩展方法“</span><span class="n">groupBox1_Enter</span><span class="err">”</span><span class="p">(</span><span class="err">是否缺少</span> <span class="k">using</span> <span class="err">指令或程序集引用?) </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>它提示你：你已经给<code>groupBox1</code>这个控件对象定义了一个<code>groupBox1_Enter</code>的方法了，但是编译器却没有找到这个函数。为什么没有找到？因为刚刚我们给它删除了。所以第2步：</p>
+
+<p><strong>Step 2 . </strong> 在<strong>解决方案资源管理器</strong>，打开：<code>Form1.Designer.cs</code>文件：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015257166.png" alt="Alt text" /></p>
+
+<p>你会看到，一个小加号：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015310058.png" alt="Alt text" /></p>
+
+<p>点开这个小加号，里面就是所有空间的参数和方法的定义汇总。我们找到对应控件的事件函数：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015437616.png" alt="Alt text" /></p>
+
+<p><strong>VS</strong> 软件已经将有错误的地方，用波浪线标注了。我们直接删除这一行，即可：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">groupBox1</span><span class="p">.</span><span class="n">Enter</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">EventHandler</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">groupBox1_Enter</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，再运行程序，就不会有错误了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Auto Control 003 自动控制原理 自动控制的数学模型 ---实例讲解]]></title>
@@ -3806,104 +3864,6 @@ select deptno, avg(sal)
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
 </span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">between</span> <span class="mi">1500</span> <span class="k">and</span> <span class="mi">3000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/"/>
-    <updated>2016-10-16T21:10:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>distinct</code> 的用法</h2>
-
-<p><code>distinct</code> 的意思是：不允许重复。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- 14行记录 不是3行记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623018150.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">10000</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- 也是14行记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623063142.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--distince deptno 会过滤掉重复的deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623127746.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--distince 也可以过滤掉重复的null。或者说如果有多个null，只输出一个</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623177137.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--把 comm 和 deptno 的组合进行过滤</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623219322.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--error 逻辑上有冲突</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出错误：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">消息</span> <span class="mi">156</span><span class="err">，级别</span> <span class="mi">15</span><span class="err">，状态</span> <span class="mi">1</span><span class="err">，第</span> <span class="mi">11</span> <span class="err">行</span>
-</span><span class='line'><span class="err">关键字</span> <span class="s1">&#39;distinct&#39;</span> <span class="err">附近有语法错误。</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 删除事件函数 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/shan-chu-shi-jian-han-shu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-13T13:56:09+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误：	“A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 using 指令或程序集引用?)]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error/"/>
+    <updated>2016-11-13T13:54:49+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>先添加一个控件。比如添加一个<code>GroupBox</code>控件。</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479014826968.png" alt="Alt text" /></p>
+
+<p>当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步：</p>
+
+<p><strong>Step 1 . </strong> 在 <code>Form11.cs</code> 文件中，将这个控件所有的事件函数删除。对于我们这个例子，删除的代码是：</p>
+
+<pre><code class="csharp">        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+</code></pre>
+
+<p>如果这个时候，你运行程序会出错：</p>
+
+<pre><code>错误  1   “WindowsFormsApplication1_demo.Form1”不包含“groupBox1_Enter”的定义，并且找不到可接受类型为“WindowsFormsApplication1_demo.Form1”的第一个参数的扩展方法“groupBox1_Enter”(是否缺少 using 指令或程序集引用?)   
+</code></pre>
+
+<p>它提示你：你已经给<code>groupBox1</code>这个控件对象定义了一个<code>groupBox1_Enter</code>的方法了，但是编译器却没有找到这个函数。为什么没有找到？因为刚刚我们给它删除了。所以第2步：</p>
+
+<p><strong>Step 2 . </strong> 在<strong>解决方案资源管理器</strong>，打开：<code>Form1.Designer.cs</code>文件：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015257166.png" alt="Alt text" /></p>
+
+<p>你会看到，一个小加号：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015310058.png" alt="Alt text" /></p>
+
+<p>点开这个小加号，里面就是所有空间的参数和方法的定义汇总。我们找到对应控件的事件函数：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015437616.png" alt="Alt text" /></p>
+
+<p><strong>VS</strong> 软件已经将有错误的地方，用波浪线标注了。我们直接删除这一行，即可：</p>
+
+<pre><code class="csharp">            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+</code></pre>
+
+<p>现在，再运行程序，就不会有错误了。</p>
+]]></content>
+  </entry>
+  
+</feed>
