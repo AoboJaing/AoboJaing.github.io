@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-18T00:49:18+08:00</updated>
+  <updated>2016-11-18T04:43:40+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,284 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 013 按行读取文件（逐行读取） --- 按行写入文件（逐行写入） --- 实战：从字幕文件中提取字幕内容]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line/"/>
+    <updated>2016-11-18T04:41:50+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>使用的开发集成环境：PyCharm 2016.1.4
+使用的Python的版本：python 2.7.10</p>
+
+<hr />
+
+<h2>知识点：Python 按行读取文件</h2>
+
+<h3>读取整个文件的内容</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span> <span class="n">text</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>读取一行的内容（按行读文件的内容）</h3>
+
+<p>参考网站：</p>
+
+<p>Python逐行读取文件内容
+<a href="http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html">http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+</span><span class='line'>  <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span><span class='line'>  <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+</span><span class='line'>      <span class="k">break</span>
+</span><span class='line'>  <span class="k">print</span> <span class="n">text</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>缺点：它依赖于前后文的关系，所以不能获取指定行的内容。</p>
+
+<h3>读取一行的内容 和 行号</h3>
+
+<p>参考网站：</p>
+
+<p>python读取文件同时输出行号和内容
+<a href="http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content">http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>  <span class="k">print</span> <span class="s">&quot;line number&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s">&quot;is:&quot;</span><span class="p">,</span> <span class="n">value</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>缺点：虽然这段代码可以获取到指定行的内容，但是，使用<code>enumerate()</code>函数获取指定行内容的代价是：需要对所有<strong>行</strong>依次进行编号，可想运算量之大。</p>
+
+<h3>读取指定行的内容</h3>
+
+<p>参考网站：</p>
+
+<p>Python 从指定行读取数据
+<a href="http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802">http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">num</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class='line'><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>优点：读取的是缓存内的数据，速度快，并且代码简单。</p>
+
+<hr />
+
+<h2>知识点：Python 按行写入文件</h2>
+
+<p>参考网站：</p>
+
+<p>Python文件读写
+<a href="http://cxymrzero.github.io/blog/2015/03/19/python-file/">http://cxymrzero.github.io/blog/2015/03/19/python-file/</a>
+Python读写文件
+<a href="http://blog.csdn.net/adupt/article/details/4435615">http://blog.csdn.net/adupt/article/details/4435615</a></p>
+
+<h3>写一行（新建文件、替换现有文件）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the first line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the sencond line: &#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;this is also the second line.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="k">print</span> <span class="n">text</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
+</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>f = open('namefile.txt', 'w')</code>这段代码的执行：如果有这个<code>namefile.txt</code>文件，那就将现有的<code>namefile.txt</code>文件里面的内容全部自动清空；如果没有这个<code>namefile.txt</code>文件，那就自动新建一个<code>namefile.txt</code>文件。</p>
+
+<h3>写一行（在原有文件后面追加写入）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the last line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="k">print</span> <span class="n">text</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
+</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
+</span><span class='line'><span class="n">the</span> <span class="n">last</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>实战：从字幕文件中提取字幕内容</h2>
+
+<p>github源代码网址：<a href="https://github.com/AoboJaing/youtube-srt-to-txt">https://github.com/AoboJaing/youtube-srt-to-txt</a></p>
+
+<h3>如何获取字幕文件</h3>
+
+<p>参考网站：<a href="https://www.youtube.com/watch?v=d9ctCc2AXCw">https://www.youtube.com/watch?v=d9ctCc2AXCw</a></p>
+
+<p>视频网站： <a href="https://www.youtube.com/">https://www.youtube.com/</a></p>
+
+<p>字幕提取网站：<a href="http://mo.dbxdb.com/setting.html">http://mo.dbxdb.com/setting.html</a></p>
+
+<h3>设计思路</h3>
+
+<p>输入是英文字幕文件和中文字幕文件，输出是英文配中文的txt文件</p>
+
+<p>英文字幕文件</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414135007.png" alt="Alt text" /></p>
+
+<p>中文字幕文件</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414161811.png" alt="Alt text" /></p>
+
+<p>输出：英文配中文的txt文件</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414198952.png" alt="Alt text" /></p>
+
+<h3>代码</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># coding : utf-8</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">file_srt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">file_txt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cout</span><span class="o">=</span><span class="mi">1</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_srt</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">cout</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;en-Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">file_srt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="n">file_txt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>运行输出</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
+</span><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
+</span><span class='line'><span class="n">In</span> <span class="n">this</span> <span class="n">video</span> <span class="n">I</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">explain</span> <span class="n">the</span> <span class="n">functionality</span> <span class="n">of</span> <span class="n">servos</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">conventional</span> <span class="n">DC</span> <span class="n">motors</span> <span class="n">into</span> <span class="n">homebuilt</span> <span class="n">servos</span><span class="o">.</span>
+</span><span class='line'><span class="err">在这部影片中，我想解释一下舵机以及如何传统的直流电动机转换成自制伺服系统的功能。</span>
+</span><span class='line'><span class="n">A</span> <span class="n">servo</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">device</span> <span class="n">that</span> <span class="n">produces</span> <span class="n">motion</span> <span class="n">accordant</span> <span class="n">to</span> <span class="n">a</span> <span class="n">command</span> <span class="n">signal</span> <span class="kn">from</span> <span class="nn">a</span> <span class="nn">control</span> <span class="nn">system.</span>
+</span><span class='line'><span class="err">伺服是，从一个控制系统产生运动一致来的命令信号的装置。</span>
+</span><span class='line'><span class="n">Usually</span> <span class="n">an</span> <span class="n">electric</span> <span class="n">motor</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">mechanical</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">servomechanism</span> <span class="n">rotates</span> <span class="n">at</span> <span class="n">a</span> <span class="n">velocity</span> <span class="n">that</span> <span class="n">approximates</span> <span class="n">the</span> <span class="n">command</span> <span class="n">signal</span><span class="o">.</span>
+</span><span class='line'><span class="err">一般的电动机被用来创建一个机械力和伺服机构在近似于指令信号的速度旋转。</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PyCharm 软件 安装 插件（ Plugins） --- 举例：安装Markdown 插件（即：让PyCharm 软件支持 .md 文件）]]></title>
@@ -3834,51 +4112,6 @@ select deptno, avg(sal)
 <li>null不能参与任何数学运算，结果永远是null</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/"/>
-    <updated>2016-10-17T00:55:57+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>top</code> &mdash;  输出最前面的若干个记录</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">5</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出从emp表的上面数，前5个元组</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636796825.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">15</span> <span class="n">percent</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出从emp表的上面数，15%的元组。（输出的是3个，不是2个）</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
-
-<hr />
 ]]></content>
   </entry>
   

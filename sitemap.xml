@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line/</loc>
+<lastmod>2016-11-18T04:41:50+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin/</loc>
 <lastmod>2016-11-18T00:42:45+08:00</lastmod>
 </url>
@@ -211,6 +215,9 @@
 <loc>http://aobojaing.github.io/blog/categories/c-number/</loc>
 </url>
 <url>
+<loc>http://aobojaing.github.io/blog/categories/python/</loc>
+</url>
+<url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
 </url>
 <url>
@@ -407,5 +414,14 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/markdown/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/python/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/zi-mu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/youtube/</loc>
 </url>
 </urlset>
