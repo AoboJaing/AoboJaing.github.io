@@ -9,7 +9,9 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="先添加一个控件。比如添加一个GroupBox控件。 当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步： Step 1 . 在 Form11.cs 文件中，将这个控件所有的事件函数删除。对于我们这个例子， &hellip;">
+  <meta name="description" content="GitHub源代码地址：
+https://github.com/AoboJaing/Browse_Open_file_folder 准备工作 设计GUI界面： 参考网站：
+http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +68,125 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/17/cs-002-Browse-Open-file-folder/">C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-17T16:26:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:26 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><strong>GitHub</strong>源代码地址：
+<a href="https://github.com/AoboJaing/Browse_Open_file_folder">https://github.com/AoboJaing/Browse_Open_file_folder</a></p>
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>设计GUI界面：</p>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/1479359628032.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>参考网站：
+<a href="http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html">http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html</a></p></blockquote>
+
+<h2>浏览（或叫：选择）文件夹（或叫：目录）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">FolderBrowserDialog</span> <span class="n">dialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FolderBrowserDialog</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">dialog</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;请选择文件路径&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">dialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">string</span> <span class="n">foldPath</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">SelectedPath</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">foldPath</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>打开 文件夹</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;Explorer.exe&quot;</span><span class="p">,</span> <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>浏览（或叫：选择）文件</h2>
+
+<p>双击 <strong>Button2</strong>（浏览）按钮，将下面的代码复制到<code>button2_Click()</code>事件函数里面：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">OpenFileDialog</span> <span class="n">fileDialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">OpenFileDialog</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Multiselect</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;请选择文件&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Filter</span><span class="p">=</span><span class="s">&quot;所有文件(*.*)|*.*&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">fileDialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">string</span> <span class="n">file</span> <span class="p">=</span> <span class="n">fileDialog</span><span class="p">.</span><span class="n">FileName</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">file</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>打开文件</h2>
+
+<p>参考网站：<a href="https://zhidao.baidu.com/question/413230762.html">https://zhidao.baidu.com/question/413230762.html</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="c1">//System.Diagnostics.Process.Start(&quot;notepad++.exe&quot;, textBox2.Text);</span>
+</span><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;XMP.exe&quot;</span><span class="p">,</span> <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这是一个使用<code>C#</code>来使用其他软件打开响应的文件的函数：<code>System.Diagnostics.Process.Start()</code></p>
+
+<p>其他软件：<code>notepad.exe</code>是记事本、<code>notepad++.exe</code>是<strong>notepad++</strong>文本编辑器软件、<code>XMP.exe</code>是迅雷看看播放器软件。</p>
+
+<h2>运行效果</h2>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/demo14.gif" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2074,136 +2195,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/">SQL 数据库 学习 030 查询-13 --- 查询语句的顺序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-21T20:54:28+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2><strong>SQL Server</strong> 查询语句的顺序</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">A</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">B</span>
-</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">join</span> <span class="k">C</span>
-</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">where</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">having</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="p">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>例子</h2>
-
-<blockquote><p>本例子里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<p><strong>求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第1种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">1</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">desc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477040016720.png" alt="Alt text" /></p>
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第2种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span>
-</span><span class='line'>          <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>              <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>                  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>                  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>          <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2217,6 +2208,10 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/17/cs-002-Browse-Open-file-folder/">C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/11/13/cs-001-delete-event-function-resolve-error/">C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)</a>
@@ -2234,22 +2229,18 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
         <a href="/blog/2016/10/25/Auto-Control-001-Principle-of-automatic-control-general-concept/">Auto Control 001 自动控制原理 自动控制的一般概念</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/25/Auto-Control-000-Principle-of-automatic-control-Why-Learn/">Auto Control 000 自动控制原理 为什么要学</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 115%" href="/tags/c-number/">C#</a>
 <a style="font-size: 90%" href="/tags/eda/">EDA</a>
 <a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
-<a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
 <a style="font-size: 90%" href="/tags/between/">between</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/distinct/">distinct</a>
@@ -2294,7 +2285,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/c-/'>c# (1)</a></li>
+<li class='category'><a href='/blog/categories/c-/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 打开 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/da-kai/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-17T16:33:09+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/17/cs-002-Browse-Open-file-folder/"/>
+    <updated>2016-11-17T16:26:51+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/17/cs-002-Browse-Open-file-folder</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><strong>GitHub</strong>源代码地址：
+<a href="https://github.com/AoboJaing/Browse_Open_file_folder">https://github.com/AoboJaing/Browse_Open_file_folder</a></p>
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>设计GUI界面：</p>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/1479359628032.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>参考网站：
+<a href="http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html">http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html</a></p></blockquote>
+
+<h2>浏览（或叫：选择）文件夹（或叫：目录）</h2>
+
+<pre><code class="csharp">            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择文件路径";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string foldPath = dialog.SelectedPath;
+                textBox1.Text = foldPath;
+            }
+</code></pre>
+
+<h2>打开 文件夹</h2>
+
+<pre><code class="csharp">            System.Diagnostics.Process.Start("Explorer.exe", textBox1.Text);
+</code></pre>
+
+<hr />
+
+<h2>浏览（或叫：选择）文件</h2>
+
+<p>双击 <strong>Button2</strong>（浏览）按钮，将下面的代码复制到<code>button2_Click()</code>事件函数里面：</p>
+
+<pre><code class="csharp">            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = true;
+            fileDialog.Title = "请选择文件";
+            fileDialog.Filter="所有文件(*.*)|*.*";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string file = fileDialog.FileName;
+                textBox2.Text = file;
+            }
+</code></pre>
+
+<h2>打开文件</h2>
+
+<p>参考网站：<a href="https://zhidao.baidu.com/question/413230762.html">https://zhidao.baidu.com/question/413230762.html</a></p>
+
+<pre><code class="csharp">            //System.Diagnostics.Process.Start("notepad++.exe", textBox2.Text);
+            System.Diagnostics.Process.Start("XMP.exe", textBox2.Text);
+</code></pre>
+
+<p>这是一个使用<code>C#</code>来使用其他软件打开响应的文件的函数：<code>System.Diagnostics.Process.Start()</code></p>
+
+<p>其他软件：<code>notepad.exe</code>是记事本、<code>notepad++.exe</code>是<strong>notepad++</strong>文本编辑器软件、<code>XMP.exe</code>是迅雷看看播放器软件。</p>
+
+<h2>运行效果</h2>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/demo14.gif" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

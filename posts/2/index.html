@@ -10,7 +10,17 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 连接查询 定义： &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express SQL Server 查询语句的顺序 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+select top ... from A join B on ... join C on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +77,136 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/">SQL 数据库 学习 030 查询-13 --- 查询语句的顺序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-21T20:54:28+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2><strong>SQL Server</strong> 查询语句的顺序</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">A</span>
+</span><span class='line'>  <span class="k">join</span> <span class="n">B</span>
+</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">join</span> <span class="k">C</span>
+</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">where</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">having</span> <span class="p">...</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="p">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>例子</h2>
+
+<blockquote><p>本例子里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<p><strong>求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
+</span><span class='line'><span class="c1">--第1种写法：</span>
+</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">1</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">desc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477040016720.png" alt="Alt text" /></p>
+
+<p>等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
+</span><span class='line'><span class="c1">--第2种写法：</span>
+</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="o">*</span>
+</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
+</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
+</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span>
+</span><span class='line'>          <span class="k">from</span> <span class="p">(</span>
+</span><span class='line'>              <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>                  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>                  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>          <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2098,97 +2238,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-020-Query-03-between-usage/">SQL 数据库 学习 020 查询-03 Between 的用法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T00:20:53+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:20 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>between</code> 的用法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找工资在1500到3000之间（包括1500和3000）的所有的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&gt;=</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;=</span><span class="mi">300</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634590985.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>上面的指令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="k">between</span> <span class="mi">1500</span> <span class="k">and</span> <span class="mi">3000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找工资在小于1500或大于3000之间的所有的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">&gt;</span><span class="mi">3000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-020-Query-03-between-usage/1476634665094.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>上面的指令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">between</span> <span class="mi">1500</span> <span class="k">and</span> <span class="mi">3000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -2206,6 +2255,10 @@ select deptno, avg(sal)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/17/cs-002-Browse-Open-file-folder/">C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/13/cs-001-delete-event-function-resolve-error/">C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)</a>
       </li>
     
@@ -2221,22 +2274,18 @@ select deptno, avg(sal)
         <a href="/blog/2016/10/25/Auto-Control-001-Principle-of-automatic-control-general-concept/">Auto Control 001 自动控制原理 自动控制的一般概念</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/10/25/Auto-Control-000-Principle-of-automatic-control-Why-Learn/">Auto Control 000 自动控制原理 为什么要学</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 115%" href="/tags/c-number/">C#</a>
 <a style="font-size: 90%" href="/tags/eda/">EDA</a>
 <a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/quartus/">Quartus</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
-<a style="font-size: 90%" href="/tags/tag-clud/">Tag Clud</a>
 <a style="font-size: 90%" href="/tags/between/">between</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/distinct/">distinct</a>
@@ -2281,7 +2330,7 @@ select deptno, avg(sal)
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/c-/'>c# (1)</a></li>
+<li class='category'><a href='/blog/categories/c-/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
