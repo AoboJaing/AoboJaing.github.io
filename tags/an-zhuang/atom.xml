@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 安装 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/an-zhuang/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-18T00:49:18+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PyCharm 软件 安装 插件（ plugins） --- 举例：安装Markdown 插件（即：让PyCharm 软件支持 .md 文件）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin/"/>
+    <updated>2016-11-18T00:42:45+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的 PyCharm 软件的版本：<strong>2016.1.4</strong></p>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html">https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html</a></p>
+
+<hr />
+
+<h2>给 <strong>PyCharm</strong> 软件添加 <strong>plugins</strong> 的图文操作（这里以添加 <strong>Markdown</strong> 插件）</h2>
+
+<p><strong>Step 1 . </strong> 启动 <strong>PyCharm</strong> 软件</p>
+
+<p><strong>Step 2 . </strong> 打开 <strong>设置</strong>（<strong>Setting</strong>） 窗口。（操作：File -> Setting  或者 按快捷键 <code>Ctrl + Alt + S</code>）</p>
+
+<p><strong>Step 3 . </strong> 在搜索框里面搜索： <strong>plugins</strong></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295440117.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 点击 <strong>Install JetBrains plugins&hellip;</strong></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295565571.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 在新弹出来的窗口的搜索框里，输入：<strong>Markdown</strong>。 点击 <strong>Install</strong> ，进行安装。</p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295705867.png" alt="Alt text" /></p>
+
+<p><strong>Step 6 . </strong> 下载需要翻墙</p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296063133.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296084779.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296102153.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 安装完成 <strong>Markdown</strong> 插件后，需要重启 <strong>PyCharm</strong> 软件，插件才能生效</p>
+
+<blockquote><p>注意： 安装成功的插件会自动使能（<strong>enable</strong>）</p></blockquote>
+
+<hr />
+
+<h2>测试</h2>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296298464.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

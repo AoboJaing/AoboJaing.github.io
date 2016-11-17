@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-17T16:33:09+08:00</updated>
+  <updated>2016-11-18T00:49:18+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PyCharm 软件 安装 插件（ Plugins） --- 举例：安装Markdown 插件（即：让PyCharm 软件支持 .md 文件）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin/"/>
+    <updated>2016-11-18T00:42:45+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的 PyCharm 软件的版本：<strong>2016.1.4</strong></p>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html">https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html</a></p>
+
+<hr />
+
+<h2>给 <strong>PyCharm</strong> 软件添加 <strong>plugins</strong> 的图文操作（这里以添加 <strong>Markdown</strong> 插件）</h2>
+
+<p><strong>Step 1 . </strong> 启动 <strong>PyCharm</strong> 软件</p>
+
+<p><strong>Step 2 . </strong> 打开 <strong>设置</strong>（<strong>Setting</strong>） 窗口。（操作：File -> Setting  或者 按快捷键 <code>Ctrl + Alt + S</code>）</p>
+
+<p><strong>Step 3 . </strong> 在搜索框里面搜索： <strong>plugins</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295440117.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 点击 <strong>Install JetBrains plugins&hellip;</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295565571.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 在新弹出来的窗口的搜索框里，输入：<strong>Markdown</strong>。 点击 <strong>Install</strong> ，进行安装。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295705867.png" alt="Alt text" /></p>
+
+<p><strong>Step 6 . </strong> 下载需要翻墙</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296063133.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296084779.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296102153.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 安装完成 <strong>Markdown</strong> 插件后，需要重启 <strong>PyCharm</strong> 软件，插件才能生效</p>
+
+<blockquote><p>注意： 安装成功的插件会自动使能（<strong>enable</strong>）</p></blockquote>
+
+<hr />
+
+<h2>测试</h2>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296298464.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）]]></title>
@@ -3820,80 +3877,6 @@ select deptno, avg(sal)
 
 
 <p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/"/>
-    <updated>2016-10-17T00:39:00+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">--把sal里面是1500 和 3000 和 5000 的值都输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">=</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">3000</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">5000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
-
-<p>上面的命令等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">3000</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">5000</span>
-</span><span class='line'>      <span class="c1">--在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种</span>
-</span><span class='line'>      <span class="c1">--对或（or）取反是并且（and） 对并且（and）取反是或（or）</span>
-</span></code></pre></td></tr></table></div></figure>
-
 
 <hr />
 ]]></content>
