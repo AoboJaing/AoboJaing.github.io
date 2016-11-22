@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3/</loc>
+<lastmod>2016-11-23T00:24:01+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line/</loc>
 <lastmod>2016-11-18T04:41:50+08:00</lastmod>
 </url>
@@ -423,5 +427,14 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/youtube/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/python2/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pip/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/python3/</loc>
 </url>
 </urlset>

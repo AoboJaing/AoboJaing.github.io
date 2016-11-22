@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-18T04:54:45+08:00</updated>
+  <updated>2016-11-23T00:31:32+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 014 使用 Pip 工具的注意事项 --- 混淆的python2 和 Python3]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3/"/>
+    <updated>2016-11-23T00:24:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><strong>Q : </strong> 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
+
+<p><strong>A : </strong> 如果你先安装的是python2，后安装的python3，那么系统默认使用python2的pip；反之，如果你先安装的是python3，后安装的python2，那么系统默认安装的是python3的pip。</p>
+
+<p><strong>解决方法 ： </strong> 为了避开这个问题，我们在使用 pip 工具时，使用绝对路径：</p>
+
+<p><strong>使用 python2 的 pip</strong></p>
+
+<pre><code>cd C:\Python27\Scripts
+pip.exe install some-package-name
+</code></pre>
+
+<p><strong>使用 python3 的 pip</strong></p>
+
+<pre><code>cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
+pip.exe install some-package-name
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 013 按行读取文件（逐行读取） --- 按行写入文件（逐行写入） --- 实战：从字幕文件中提取字幕内容]]></title>

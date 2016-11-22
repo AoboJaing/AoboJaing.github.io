@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-18T04:54:45+08:00</updated>
+  <updated>2016-11-23T00:31:32+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 014 使用 Pip 工具的注意事项 --- 混淆的python2 和 Python3]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3/"/>
+    <updated>2016-11-23T00:24:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><strong>Q : </strong> 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
+
+<p><strong>A : </strong> 如果你先安装的是python2，后安装的python3，那么系统默认使用python2的pip；反之，如果你先安装的是python3，后安装的python2，那么系统默认安装的是python3的pip。</p>
+
+<p><strong>解决方法 ： </strong> 为了避开这个问题，我们在使用 pip 工具时，使用绝对路径：</p>
+
+<p><strong>使用 python2 的 pip</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd C:\Python27\Scripts
+</span><span class='line'>pip.exe install some-package-name</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>使用 python3 的 pip</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
+</span><span class='line'>pip.exe install some-package-name</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 013 按行读取文件（逐行读取） --- 按行写入文件（逐行写入） --- 实战：从字幕文件中提取字幕内容]]></title>
@@ -4013,103 +4046,6 @@ select deptno, avg(sal)
 <li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
 <li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
 <li>强烈建议为每一个字段都指定排序的标准</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/"/>
-    <updated>2016-10-17T01:48:03+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>null</code> &mdash; 没有值、空值</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null不能参与&lt;&gt; != = 运算</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">&lt;&gt;</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emo</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">!=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null 可以参与is 、 not is </span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出奖金为空的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出奖金不为空的员工的信息</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--任何类型的数据都允许为null</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">t1</span> <span class="p">(</span><span class="n">name</span> <span class="n">nvachar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">cnt</span> <span class="nb">int</span><span class="p">,</span> <span class="n">riqi</span> <span class="n">datetime</span><span class="p">)</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">t1</span> <span class="k">values</span> <span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t1</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出每一个员工的姓名、年薪（包含了奖金）、comm假设是一年的奖金</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="n">comm</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--这段指令证明了：null不能参与任何数学运算，结果永远是null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--正确的写法</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="k">isnull</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--isnull(comm, 0) 如果comm是null，就返回为0，否则返回comm的值。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<ul>
-<li><code>0</code> 和 <code>null</code> 是不一样的，<code>null</code> 表示空值，没有值，<code>0</code>表示一个确定的值</li>
-<li><code>null</code> 不能参与如下运算：<code>&lt;&gt;</code>、<code>!=</code>、<code>=</code></li>
-<li><code>null</code> 可以参与如下运算：<code>is</code>、<code>not is</code></li>
-<li>任何类型的数据都允许为<code>null</code></li>
-<li>null不能参与任何数学运算，结果永远是null</li>
 </ul>
 
 ]]></content>
