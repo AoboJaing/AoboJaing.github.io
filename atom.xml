@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-23T00:31:32+08:00</updated>
+  <updated>2016-11-23T02:06:28+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一个超好的命令行串口软件 --- PowerCmd --- 汉化破解版]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/23/powercmd-install/"/>
+    <updated>2016-11-23T02:01:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/23/powercmd-install</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
+
+<blockquote><p>你可以到官网下载，但是官网下载来的是英文的。下载地址：<a href="http://www.powercmd.com/">http://www.powercmd.com/</a></p></blockquote>
+
+<p>这里有一个汉化破解的PowerCmd软件：</p>
+
+<p>链接：<a href="http://pan.baidu.com/s/1i4SxSUT">http://pan.baidu.com/s/1i4SxSUT</a> 密码：r5w1</p>
+
+<p>下载解压后，之间双击 <strong>PowerCmd.exe</strong> 就可以运行。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-23-powercmd-install/1479837423293.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 014 使用 Pip 工具的注意事项 --- 混淆的python2 和 Python3]]></title>
@@ -3950,104 +3971,6 @@ select deptno, avg(sal)
 
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/"/>
-    <updated>2016-10-17T03:13:40+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>order by</code> &mdash; 以某个字段排序</h2>
-
-<p><strong>例子：</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--默认是按照升序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644715874.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno排序，然后再按照sal排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644847648.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--asc是升序的意思，默认可以不写 desc是降序</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span> <span class="k">desc</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno降序排序，如果deptno相同，再按照sal升序排序</span>
-</span><span class='line'>  <span class="c1">--记住sal是升序不是降序</span>
-</span><span class='line'>  <span class="c1">--order by a desc, b, c, d   desc只对a产生影响，不会对后面的b, c, d 产生影响</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644919129.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span> <span class="k">desc</span>
-</span><span class='line'>  <span class="c1">--问题：desc是否会对deptno产生影响？</span>
-</span><span class='line'>  <span class="c1">--答案：不会</span>
-</span><span class='line'>  <span class="c1">--先按deptno升序，如果deptno相同，再按sal降序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644983662.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<ul>
-<li><code>order by a, b                --a和b都是升序</code></li>
-<li><code>order by a, b desc           --a升序 b降序</code></li>
-<li><code>order by a desc, b           --a降序 b升序</code></li>
-<li><code>order by a desc, b desc  --a和b都是降序</code></li>
-</ul>
-
-
-<p>文字描述：</p>
-
-<ul>
-<li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
-<li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
-<li>强烈建议为每一个字段都指定排序的标准</li>
-</ul>
-
 ]]></content>
   </entry>
   

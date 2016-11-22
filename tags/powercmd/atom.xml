@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: PowerCmd | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/powercmd/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-23T02:06:28+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[一个超好的命令行串口软件 --- PowerCmd --- 汉化破解版]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/23/powercmd-install/"/>
+    <updated>2016-11-23T02:01:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/23/powercmd-install</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
+
+<blockquote><p>你可以到官网下载，但是官网下载来的是英文的。下载地址：<a href="http://www.powercmd.com/">http://www.powercmd.com/</a></p></blockquote>
+
+<p>这里有一个汉化破解的PowerCmd软件：</p>
+
+<p>链接：<a href="http://pan.baidu.com/s/1i4SxSUT">http://pan.baidu.com/s/1i4SxSUT</a> 密码：r5w1</p>
+
+<p>下载解压后，之间双击 <strong>PowerCmd.exe</strong> 就可以运行。</p>
+
+<p><img src="/images/2016-11-23-powercmd-install/1479837423293.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>

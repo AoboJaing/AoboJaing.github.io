@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/23/powercmd-install/</loc>
+<lastmod>2016-11-23T02:01:13+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3/</loc>
 <lastmod>2016-11-23T00:24:01+08:00</lastmod>
 </url>
@@ -436,5 +440,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/python3/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/powercmd/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/ming-ling-xing-gong-ju-ruan-jian/</loc>
 </url>
 </urlset>
