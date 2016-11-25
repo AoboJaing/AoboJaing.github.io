@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T06:36:47+08:00</updated>
+  <updated>2016-11-26T06:40:37+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,177 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python --- Scrapy 命令]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python-Scrapy-command/"/>
+    <updated>2016-11-26T06:39:53+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python-Scrapy-command</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>Scrapy 命令 分为两种：<strong>全局命令</strong> 和 <strong>项目命令</strong>。</p>
+
+<p>全局命令：在哪里都能使用。</p>
+
+<p>项目命令：必须在爬虫项目里面才能使用。</p>
+
+<h2>全局命令</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO&gt;scrapy -h
+</span><span class='line'>Scrapy 1.2.1 - no active project
+</span><span class='line'>
+</span><span class='line'>Usage:
+</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
+</span><span class='line'>
+</span><span class='line'>Available commands:
+</span><span class='line'>  bench         Run quick benchmark test
+</span><span class='line'>  commands
+</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
+</span><span class='line'>  genspider     Generate new spider using pre-defined templates
+</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
+</span><span class='line'>  settings      Get settings values
+</span><span class='line'>  shell         Interactive scraping console
+</span><span class='line'>  startproject  Create new project
+</span><span class='line'>  version       Print Scrapy version
+</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
+</span><span class='line'>
+</span><span class='line'>  [ more ]      More commands available when run from project directory
+</span><span class='line'>
+</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>startproject</strong>：创建一个爬虫项目：<code>scrapy startproject demo</code>（<code>demo</code> 创建的爬虫项目的名字）</li>
+<li><strong>runspider</strong> 运用单独一个爬虫文件：<code>scrapy runspider abc.py</code></li>
+<li><strong>veiw</strong> 下载一个网页的源代码，并在默认的文本编辑器中打开这个源代码：<code>scrapy view http://www.aobossir.com/</code></li>
+<li><strong>shell</strong> 进入交互终端，用于爬虫的调试（如果你不调试，那么就不常用）：<code>scrapy shell http://www.baidu.com --nolog</code>（<code>--nolog</code> 不显示日志信息）</li>
+<li><strong>version</strong> 查看版本：（<code>scrapy version</code>）</li>
+<li><strong>bench</strong> 测试本地硬件性能（工作原理：）：<code>scrapy bench</code> （如果遇到问题：解决问题:  <code>import win32api ImportError: DLL load failed</code>，到这里查看解决办法。）</li>
+</ul>
+
+
+<hr />
+
+<h2>项目命令</h2>
+
+<p>（进入项目路径，才能看到项目命令）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy -h
+</span><span class='line'>Scrapy 1.2.1 - project: first
+</span><span class='line'>
+</span><span class='line'>Usage:
+</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
+</span><span class='line'>
+</span><span class='line'>Available commands:
+</span><span class='line'>  bench         Run quick benchmark test
+</span><span class='line'>  check         Check spider contracts
+</span><span class='line'>  commands
+</span><span class='line'>  crawl         Run a spider
+</span><span class='line'>  edit          Edit spider
+</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
+</span><span class='line'>  genspider     Generate new spider using pre-defined templates
+</span><span class='line'>  list          List available spiders
+</span><span class='line'>  parse         Parse URL (using its spider) and print the results
+</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
+</span><span class='line'>  settings      Get settings values
+</span><span class='line'>  shell         Interactive scraping console
+</span><span class='line'>  startproject  Create new project
+</span><span class='line'>  version       Print Scrapy version
+</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
+</span><span class='line'>
+</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command
+</span><span class='line'>
+</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>genspider</strong> 创建一个爬虫文件，我们在爬虫项目里面才能创建爬虫文件（这个命令用的非常多）（<strong>startproject</strong>：创建一个爬虫项目）。创建爬虫文件是按照以下模板来创建的，使用<code>scrapy genspider -l</code> 命令查看有哪些模板。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy genspider -l
+</span><span class='line'>Available templates:
+</span><span class='line'>  basic
+</span><span class='line'>  crawl
+</span><span class='line'>  csvfeed
+</span><span class='line'>  xmlfeed
+</span><span class='line'>
+</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><code>basic</code> 基础
+<code>crawl</code>自动爬虫
+<code>csvfeed</code>用来处理csv文件
+<code>xmlfeed</code>用来处理xml文件</p>
+
+<p>按照<code>basic</code>模板创建一个名为<code>f1</code>的爬虫文件：<code>scrapy genspider -t basic f1</code> ，创建了一个<code>f1.py</code>文件。</p></blockquote>
+
+<ul>
+<li><p><strong>check</strong> 测试爬虫文件、或者说：检测一个爬虫，如果结果是：OK，那么说明结果没有问题。：<code>scrapy check f1</code></p></li>
+<li><p><strong>crawl</strong> 运行一个爬虫文件。：<code>scrapy crawl f1</code> 或者 <code>scrapy crawl f1 --nolog</code></p></li>
+<li><p><strong>list</strong> 列出当前爬虫项目下所有的爬虫文件： <code>scrapy list</code></p></li>
+<li><p><strong>edit</strong> 使用编辑器打开爬虫文件 （Windows上似乎有问题，Linux上没有问题）：<code>scrapy edit f1</code></p></li>
+</ul>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 001 --- 搭建开发环境]]></title>
@@ -3796,278 +3967,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <hr />
 
 <p><strong>搞定</strong></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 028 查询-11 Having --- 对分组之后的信息进行过滤]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering-information-after-grouping/"/>
-    <updated>2016-10-19T01:51:13+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering-information-after-grouping</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>having</code> &mdash; 对分组之后的信息进行过滤</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出部门平均工资大于2000的部门的部门编号，部门的平均工资</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2000</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809752037.png" alt="Alt text" /></p>
-
-<p>加入别名。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--判断下列sql语句是否正确</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809774694.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="ss">&quot;平均工资&quot;</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809816010.png" alt="Alt text" /></p>
-
-<blockquote><p>正确的指令：
-<code>sql
-select deptno, avg(sal)
-    from emp
-    where ename not like '%A%'
-    group by deptno
-    having avg(sal) &gt; 2000
-</code></p></blockquote>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--以部门编号分组后，显示组内元组大于3个元组的部门编号和平均工资</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809854661.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810004416.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="n">deptno</span><span class="o">&gt;</span><span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810222044.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2><code>having</code> 和 <code>where</code> 的异同</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--把姓名不包含`A`的所有的员工按部门编号分组，</span>
-</span><span class='line'><span class="c1">--统计输出部门平均工资大于2000的部门的部门编号、部门的平均工资</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">ename</span> <span class="k">not</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810752203.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--把工资大于2000，</span>
-</span><span class='line'><span class="c1">--统计输出部门平均工资大于3000的部门的部门编号、部门的平均工资、部门人数、部门最高工资</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;部门人数&quot;</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门最高工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>    <span class="c1">--where是对原始的记录过滤</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3000</span>   <span class="c1">--对分组之后的记录过滤 </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810986375.png" alt="Alt text" /></p>
-
-<p>如果参数的顺序变化了，执行的时候会不会受到影响？执行下面的指令，你就会知道答案。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;部门人数&quot;</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门最高工资&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3000</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476811293128.png" alt="Alt text" /></p>
-
-<p><strong>总结：</strong> 所有<code>select</code> 的参数的顺序是不允许变化的（所有的参数的位置都是固定的，你可以省略某个参数，但是不能变。），否则编译时出错。</p>
-
-<hr />
-
-<p><code>having</code> 和 <code>where</code> 的异同：</p>
-
-<ul>
-<li><strong>相同：</strong> 都是对数据过滤，只保留有效的数据。<code>where</code> 和 <code>having</code> 一样，都不允许出现字段的别名，只允许出现最原始的字段的名字。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error where子句不应该出现聚合函数</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>   <span class="c1">--error 因为where是对原始的数据过滤，不能使用聚合函数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>不同：</strong> <code>where</code> 是对原始的记录过滤，<code>having</code> 是对分组之后的记录过滤。<code>where</code> 必须得写在<code>having</code>的前面，顺序不可颠倒，否则运行出错。</li>
-</ul>
-
-
-<hr />
-
-<h2>总结 <code>having</code> 的用法</h2>
-
-<ol>
-<li><code>having</code> 子句是用来对分组之后的数据进行过滤。因此使用<code>having</code>时通常都会先使用 <code>group by</code>。</li>
-<li>如果没有使用 <code>group by</code> ，而使用了 <code>having</code>，则意味着 <code>having</code> 把所有的记录当做一组来进行过滤。</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li><code>having</code> 子句出现的字段必须得是分组之后的组的整体信息。<code>having</code> 子句不允许出现组内的详细信息。</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="n">job</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--OK</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;部门人数&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li><p>尽管 <code>select</code>  字段中可以出现别名。但是<code>having</code> 子句中不能出现字段的别名，只能使用字段最原始的名字。（原因不得而知。）</p></li>
-<li><p>就是上面说的：<strong><code>having</code> 和 <code>where</code> 的异同</strong> 。（这里不重复说明了。）</p></li>
-</ol>
-
-
-<hr />
 ]]></content>
   </entry>
   

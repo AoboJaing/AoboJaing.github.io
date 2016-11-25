@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/26/python-Scrapy-command/</loc>
+<lastmod>2016-11-26T06:39:53+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/</loc>
 <lastmod>2016-11-26T06:28:27+08:00</lastmod>
 </url>
@@ -482,5 +486,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/lxml/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/scrapy/</loc>
 </url>
 </urlset>
