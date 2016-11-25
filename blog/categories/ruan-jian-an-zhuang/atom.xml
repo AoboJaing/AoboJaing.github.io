@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 软件安装 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/ruan-jian-an-zhuang/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T05:56:19+08:00</updated>
+  <updated>2016-11-26T06:34:29+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python Pip 解决问题： Error: Unable to Find vcvarsall.bat]]></title>
+    <title type="html"><![CDATA[Python3 Pip 解决问题： Error: Unable to Find vcvarsall.bat]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat/"/>
     <updated>2016-11-26T05:50:14+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat</id>
