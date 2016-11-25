@@ -4,8 +4,8 @@ title: "Python3 pip 解决问题：  error: Unable to find vcvarsall.bat"
 date: 2016-11-26 05:50:14 +0800
 comments: true
 sharing: true
-categories: [软件安装]
-tags: [Visual Studio 2015, Windows, VS2015]
+categories: [Python3 大型网络爬虫实战]
+tags: [Visual Studio 2015, Windows, VS2015,error, pip, python3, vcvarsall.bat]
 ---
 
 
