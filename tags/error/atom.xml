@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: error | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/error/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-26T06:36:47+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 pip 解决问题：  error: Unable to find vcvarsall.bat]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat/"/>
+    <updated>2016-11-26T05:50:14+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>当我给 <strong>python3.5</strong> 安装 第三方库 <code>charset</code> 时：<code>pip install charset</code>，出现了错误：</p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480092727015.png" alt="Alt text" /></p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;pip install charset
+Collecting charset
+  Downloading charset-1.0.1.tar.gz (189kB)
+    100% |████████████████████████████████| 194kB 3.9kB/s
+Collecting chardet (from charset)
+  Using cached chardet-2.3.0.tar.gz
+Installing collected packages: chardet, charset
+  Running setup.py install for chardet ... done
+  Running setup.py install for charset ... error
+    Complete output from command c:\users\aobo\appdata\local\programs\python\python35\python.exe -u -c "import setuptools, tokenize;__file__='C:\\Users\\AOBO\\AppData\\Local\\Temp\\pip-build-ydv8oep3\\charset\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record C:\Users\AOBO\AppData\Local\Temp\pip-hlxpja30-record\install-record.txt --single-version-externally-managed --compile:
+    running install
+    running build
+    running build_py
+    creating build
+    creating build\lib.win-amd64-3.5
+    creating build\lib.win-amd64-3.5\charset
+    copying charset\cmd.py -&gt; build\lib.win-amd64-3.5\charset
+    copying charset\__init__.py -&gt; build\lib.win-amd64-3.5\charset
+    running egg_info
+    writing charset.egg-info\PKG-INFO
+    writing top-level names to charset.egg-info\top_level.txt
+    writing dependency_links to charset.egg-info\dependency_links.txt
+    writing requirements to charset.egg-info\requires.txt
+    writing entry points to charset.egg-info\entry_points.txt
+    warning: manifest_maker: standard file '-c' not found
+
+    reading manifest file 'charset.egg-info\SOURCES.txt'
+    reading manifest template 'MANIFEST.in'
+    warning: no files found matching '*.txt' under directory 'docs'
+    warning: no files found matching '*.txt' under directory 'languagedet\data'
+    warning: no files found matching '*.pickle' under directory 'languagedet\data'
+    warning: no files found matching '*.conf' under directory 'languagedet\data'
+    writing manifest file 'charset.egg-info\SOURCES.txt'
+    running build_ext
+    building 'charset.detector' extension
+    error: Unable to find vcvarsall.bat
+
+    ----------------------------------------
+Command "c:\users\aobo\appdata\local\programs\python\python35\python.exe -u -c "import setuptools, tokenize;__file__='C:\\Users\\AOBO\\AppData\\Local\\Temp\\pip-build-ydv8oep3\\charset\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record C:\Users\AOBO\AppData\Local\Temp\pip-hlxpja30-record\install-record.txt --single-version-externally-managed --compile" failed with error code 1 in C:\Users\AOBO\AppData\Local\Temp\pip-build-ydv8oep3\charset\
+</code></pre>
+
+<hr />
+
+<h2>为什么出现这个问题？</h2>
+
+<p>在命令行中执行：python，看看当前使用的python的版本，和它所需要的Vs软件的编译器的版本：</p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480095090271.png" alt="Alt text" /></p>
+
+<p>当前python版本是：python3.5.0；当前需要的Vs编译器的版本是：MSC v. 1900</p>
+
+<p>查看下面的表格，对于版本的Visual C ++使用的编译器版本如下：（<a href="http://stackoverflow.com/questions/2676763/what-version-of-visual-studio-is-python-on-my-computer-compiled-with">表的参考网站</a>）</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> Visual C ++版本 </th>
+<th style="text-align:right;">     编译器版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> Visual C++ 4.x </td>
+<td style="text-align:right;">   MSC_VER=1000 </td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 5                   </td>
+<td style="text-align:right;"> MSC_VER=1100</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 6                   </td>
+<td style="text-align:right;"> MSC_VER=1200</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ .NET               </td>
+<td style="text-align:right;">  MSC_VER=1300</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ .NET 2003         </td>
+<td style="text-align:right;">   MSC_VER=1310</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2005  (8.0)      </td>
+<td style="text-align:right;">    MSC_VER=1400</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2008  (9.0)     </td>
+<td style="text-align:right;">     MSC_VER=1500</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2010 (10.0)    </td>
+<td style="text-align:right;">      MSC_VER=1600</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2012 (11.0)   </td>
+<td style="text-align:right;">       MSC_VER=1700</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2013 (12.0)  </td>
+<td style="text-align:right;">        MSC_VER=1800</td>
+</tr>
+<tr>
+<td style="text-align:left;">Visual C++ 2015 (14.0) </td>
+<td style="text-align:right;">         MSC_VER=1900</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>所以解决这个 <code>error: Unable to find vcvarsall.bat</code> 问题的方法就是：下载并安装 Visual Studio 2015 软件，问题即可解决。</p>
+
+<h2>解决办法 &mdash; 安装：<strong>Python Tools 2.2.5 for Visual Studio 2015</strong></h2>
+
+<p><strong>Step 1 . </strong> 下载 Visual Studio 2015 软件。</p>
+
+<p>下载和安装 Visual Studio 2015 软件 的详细步骤请到这个博客查看：<a href="http://www.aobosir.com/blog/2016/11/26/download-install-Miarosoft-Visual-Studio-2015-software-tutorial/">下载和安装 Visual Studio 2015 软件 的详细步骤图文教程</a>。（<strong>我们按照这个网站的方法安装VS2015，但不按照这个博客里面说的安装。</strong>）</p>
+
+<blockquote><p>如果安装上面的网站的方法安装VS2015软件，那么问题还是不能解决。（<code>error: Unable to find vcvarsall.bat</code>）</p></blockquote>
+
+<p><strong>Step 2 . </strong> 安装 Visual Studio 2015 软件</p>
+
+<p>这个VS2015，安装时需要选择：<strong>自定义安装</strong>。（<a href="http://jingyan.baidu.com/article/adc815138162e8f723bf7387.html">参考网站</a>）</p>
+
+<p>参考网站：</p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480108534366.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480108637845.png" alt="Alt text" /></p>
+
+<p>我们的目的就是安装这个软件：<strong>Python Tools 2.2.5 for Visual Studio 2015</strong> 。现在，这个软件已经安装完了。</p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109167911.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>注意：</strong></p>
+
+<p> 如果一直停留在：“正在配置您的系统，这可能需要一些时间”</p>
+
+<p> <img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109561343.png" alt="Alt text" /></p>
+
+<p>  解决：关掉VS的所有进程。</p></blockquote>
+
+<h2>搞定，问题解决</h2>
+
+<hr />
+
+<p>现在再执行：<code>pip install charset</code>。问题解决。</p>
+
+<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109745990.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
