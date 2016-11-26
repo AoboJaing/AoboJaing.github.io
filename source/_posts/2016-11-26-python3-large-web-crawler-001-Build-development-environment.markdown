@@ -261,7 +261,7 @@ PowerCmd 是一款Windows CMD 的增强工具。
 
 ---
 
-接下来，我们[学习 Scrapy 的命令](http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/)。了解了**Scrapy** 命令后，我学习：scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客。
+接下来，我们[学习 Scrapy 的命令](http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/)。了解了**Scrapy** 命令后，我学习：[scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客](http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/)。
 
 
 ---
