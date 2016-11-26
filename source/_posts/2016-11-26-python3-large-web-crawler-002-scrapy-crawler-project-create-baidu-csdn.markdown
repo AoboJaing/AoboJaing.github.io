@@ -18,7 +18,7 @@ tags: [python3 ,Scrapy, 爬虫, 实战, 创建爬虫项目, 创建爬虫文件]
 * PyCharm软件版本：pycharm-professional-2016.1.4
 * 电脑系统：Windows 10 64位
 
-如果你还没有搭建好开发环境，请到这篇博客：。
+如果你还没有搭建好开发环境，请到[这篇博客](http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/)。
 
 ---
 
