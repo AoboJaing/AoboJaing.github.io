@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Twisted、pywin32、scrapy | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/twisted,-pywin32,-scrapy/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T18:20:50+08:00</updated>
+  <updated>2016-11-26T18:24:55+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -257,7 +257,7 @@ C:\Users\AOBO&gt;
 
 <hr />
 
-<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客。</p>
+<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客</a>。</p>
 
 <hr />
 ]]></content>

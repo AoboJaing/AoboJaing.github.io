@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T18:20:50+08:00</updated>
+  <updated>2016-11-26T18:24:55+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,94 +14,9 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python --- Xpath 表达式 --- Ongoing]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
-    <updated>2016-11-26T18:00:15+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>什么是 <strong>XPath</strong>？</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
-
-<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
-
-<h2>xpath 表达式 语法讲解</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
-
-<p>例如，现在有这些信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt;
-</span><span class='line'>&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-</span><span class='line'>&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
-</span><span class='line'>&lt;/head&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 表达式</th>
-<th style="text-align:right;">     意思</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">/ </td>
-<td style="text-align:right;">寻找指定标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">//</td>
-<td style="text-align:right;"> 寻找所有标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">@</td>
-<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
-</tr>
-</tbody>
-</table>
-
-
-<hr />
-
-<p><strong>例子：</strong></p>
-
-<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">/</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>表示：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">CSDN</span><span class="o">.</span><span class="n">NET</span> <span class="o">-</span> <span class="err">全球最大中文</span><span class="n">IT</span><span class="err">社区，为</span><span class="n">IT</span><span class="err">专业技术人员提供最全面的信息传播和服务平台</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/"/>
-    <updated>2016-11-26T17:37:35+08:00</updated>
+    <updated>2016-11-26T18:22:27+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn</id>
     <content type="html"><![CDATA[<hr />
 
@@ -728,6 +643,91 @@
 <hr />
 
 <p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python --- Xpath 表达式 --- Ongoing]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
+    <updated>2016-11-26T18:00:15+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>什么是 <strong>XPath</strong>？</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
+
+<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
+
+<h2>xpath 表达式 语法讲解</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
+
+<p>例如，现在有这些信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt;
+</span><span class='line'>&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+</span><span class='line'>&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
+</span><span class='line'>&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
+</span><span class='line'>&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
+</span><span class='line'>&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
+</span><span class='line'>&lt;/head&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 表达式</th>
+<th style="text-align:right;">     意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">/ </td>
+<td style="text-align:right;">寻找指定标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">//</td>
+<td style="text-align:right;"> 寻找所有标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">@</td>
+<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
+</tr>
+</tbody>
+</table>
+
+
+<hr />
+
+<p><strong>例子：</strong></p>
+
+<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">/</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>表示：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">CSDN</span><span class="o">.</span><span class="n">NET</span> <span class="o">-</span> <span class="err">全球最大中文</span><span class="n">IT</span><span class="err">社区，为</span><span class="n">IT</span><span class="err">专业技术人员提供最全面的信息传播和服务平台</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
+
+<hr />
 ]]></content>
   </entry>
   
@@ -1898,7 +1898,7 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 
 <hr />
 
-<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客。</p>
+<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客</a>。</p>
 
 <hr />
 ]]></content>
