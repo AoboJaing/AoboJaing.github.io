@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/</loc>
+<lastmod>2016-11-26T17:37:35+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/</loc>
 <lastmod>2016-11-26T07:04:25+08:00</lastmod>
 </url>
@@ -502,5 +506,20 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/importerror/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/unicodeencodeerror/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/slash-xa0/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/nbsp/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/bian-ma-wen-ti/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/unicode/</loc>
 </url>
 </urlset>
