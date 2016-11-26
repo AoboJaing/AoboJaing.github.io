@@ -10,23 +10,8 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对多关系的表：（这段代码你可以在这篇博文里面看到它的代码解释。） 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 主键的具体定义 能够唯一标识一个事物的一个字段或者多个字段的组合，被称为主键 设计主键要注意的问题 含有主键的表叫做主键表
+主键通常都是整数，不建议使用字符串为主键。（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +68,67 @@ SQL Server 软件版本： SQL Server 2014 Express 我们现在写一个 多对�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention/">SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-16T16:50:11+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:50 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>主键的具体定义</h2>
+
+<p>能够唯一标识一个事物的一个字段或者多个字段的组合，被称为主键</p>
+
+<hr />
+
+<h2>设计主键要注意的问题</h2>
+
+<ul>
+<li>含有主键的表叫做主键表</li>
+<li>主键通常都是整数，不建议使用字符串为主键。（如果主键是用于集群式服务（指跨数据库服务，比如：跨行转账），才可以考虑用字符串当主键。）</li>
+<li>主键的值通常都不允许 修改，除非本记录被删除</li>
+<li>主键不要定义成<code>id</code>，而要定义成<code>表名id</code> 或者 <code>表名_id</code></li>
+<li>要用代理主键，不要用业务主键
+
+<ul>
+<li>任何一张表，强烈建议不要使用业务含义的字段充当主键，我们通常都是在表中单独添加一个整型的编号充当主键字段。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1687,66 +1733,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/10/Windows-install-Notepad++/">Windows系统 下载并安装 Notepad++ 图文教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-10T10:44:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>下载</h2>
-
-<p>（<strong>Notepad</strong> 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。）</p>
-
-<p>到这个网站下载：<a href="https://notepad-plus-plus.org/download/v7.html">https://notepad-plus-plus.org/download/v7.html</a></p>
-
-<p>点击相应的 <strong>安装包</strong> 进行下载：
-（我电脑是64位的，所以下载64位的。<strong>Installer</strong> 是安装包； <strong>压缩包</strong> 是绿色版的，下载解压后直接就能使用，无需安装。）</p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993346774.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993288957.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993358700.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993364763.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993371316.png" alt="Alt text" /></p>
-
-<p>什么都不选，直接<strong>下一步</strong>。</p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993422195.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -1768,6 +1754,10 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
       </li>
     
       <li class="post">
+        <a href="/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/">Python3 解决编码问题： `UnicodeEncodeError: 'Gbk' Codec Can't Encode Character ' ' in Position 10: Illegal Multibyte Sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
       </li>
     
@@ -1779,10 +1769,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
         <a href="/blog/2016/11/26/python-Scrapy-command/">Python --- Scrapy 命令</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">Python3 大型网络爬虫实战 001 --- 搭建开发环境</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1791,7 +1777,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 115%" href="/tags/c-number/">C#</a>
 <a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
-<a style="font-size: 90%" href="/tags/python2/">Python2</a>
+<a style="font-size: 90%" href="/tags/powercmd/">PowerCmd</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
@@ -1799,7 +1785,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 139%" href="/tags/windows/">Windows</a>
 <a style="font-size: 90%" href="/tags/between/">between</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
-<a style="font-size: 90%" href="/tags/distinct/">distinct</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
 <a style="font-size: 90%" href="/tags/group-by/">group by</a>
@@ -1812,7 +1797,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 90%" href="/tags/order-by/">order by</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 139%" href="/tags/python/">python</a>
-<a style="font-size: 129%" href="/tags/python3/">python3</a>
+<a style="font-size: 139%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/top/">top</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
@@ -1828,11 +1813,12 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
 <a style="font-size: 90%" href="/tags/lian-jie-cha-xun/">连接查询</a>
-<a style="font-size: 90%" href="/tags/fu-jia-shu-ju-ku/">附加数据库</a>
 
   </ul>
 </section><section>
@@ -1843,7 +1829,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
-<li class='category'><a href='/blog/categories/python3-大型网络爬虫实战/'>python3 大型网络爬虫实战 (6)</a></li>
+<li class='category'><a href='/blog/categories/python3-大型网络爬虫实战/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (3)</a></li>

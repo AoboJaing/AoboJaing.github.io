@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 创建爬虫项目 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/chuang-jian-pa-chong-xiang-mu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-26T18:20:50+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 002 --- scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/"/>
+    <updated>2016-11-26T17:37:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到这篇博客：。</p>
+
+<hr />
+
+<h1>1 知识点：scrapy 爬虫项目的创建及爬虫的创建</h1>
+
+<h2>1.1 scrapy 爬虫项目的创建</h2>
+
+<p>接下来我们为大家创建一个Scrapy爬虫项目，并在爬虫项目下创建一个Scrapy爬虫文件。</p>
+
+<pre><code>scrapy startproject &lt;projectname&gt; 
+</code></pre>
+
+<h2>1.2 scrapy 爬虫文件的创建</h2>
+
+<pre><code>cd demo
+scrapy genspider -t basic &lt;filename&gt; &lt;domain&gt;
+</code></pre>
+
+<blockquote><p>更多 <strong>Scrapy</strong> 命令的介绍请到<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">这篇博客</a>查看。</p></blockquote>
+
+<hr />
+
+<h1>2 实例：爬取百度标题和CSDN博客</h1>
+
+<p>我们创建一个爬虫项目，在里面创建一个爬虫文件来爬取百度，并再创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<hr />
+
+<p>先创建一个Scrapy爬虫项目：</p>
+
+<pre><code>scrapy startproject firstDemo
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler&gt;scrapy startproject firstdemo
+New Scrapy project 'firstdemo', using template directory 'c:\\users\\aobo\\appdata\\local\\programs\\python\\python35\\lib\\site-packages\\scrapy\\templates\\project', created in:
+    D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo
+
+You can start your first spider with:
+    cd firstdemo
+    scrapy genspider example example.com
+
+D:\WorkSpace\python_ws\python-large-web-crawler&gt;
+</code></pre>
+
+<h2>2-1.1 使用Scrapy爬虫 爬取百度标题</h2>
+
+<p>创建一个爬虫文件来爬取百度</p>
+
+<pre><code>cd firstDemo
+scrapy genspider -t basic baidu baidu.com
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler&gt;cd firstdemo
+
+D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;scrapy genspider -t basic baidu baidu.com
+Created spider 'baidu' using template 'basic' in module:
+  firstdemo.spiders.baidu
+
+D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/1480084611306.png" alt="Alt text" /></p>
+
+<p>打开 <strong>PyCharm</strong> 软件，用 <strong>PyCharm</strong> 软件打开刚刚创建的 <code>firstdemo</code> 爬虫项目。</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084757859.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084783287.png" alt="Alt text" /></p>
+
+<p>打开这 <code>baidu.py</code> 爬虫文件，你会看到自动生成的代码：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084952255.png" alt="Alt text" /></p>
+
+<h2>2-1.2 观察 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页源代码</h2>
+
+<p>（源代码太多，列出重点的。）</p>
+
+<pre><code class="http">&lt;html xmlns="http://www.w3.org/1999/xhtml" class="cye-enabled cye-nm sui-componentWrap"&gt;
+    &lt;head&gt;
+        &lt;title&gt;百度一下，你就知道 &lt;/title&gt;
+    &lt;/head&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>源代码中的标题通过标签逐步定位： <code>/html/head/title</code></p>
+
+<h2>2-1.3 写代码</h2>
+
+<p>我们现在要提取出 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页 的标题：<strong>百度一下，你就知道</strong>。</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<p>这里我们使用 <code>xpath</code> 来提取，<code>xpath</code> 的知识点，请到<a href="http://www.aobosir.com/blog/2016/11/26/python-xpath/">这篇博客</a>中查看。</p>
+
+<hr />
+
+<p>下面的编写代码的步骤：</p>
+
+<p><strong>Step 1 . </strong> 设置我们的爬虫不遵循 <code>robots.txt</code> 规定。（什么是<code>robots.txt</code>规定，请到<a href="http://blog.csdn.net/github_35160620/article/details/52586126">这个博客</a>查看。）</p>
+
+<p>打开 <code>settings.py</code> 文件，将里面的<code>ROBOTSTXT_OBEY</code> 设为：<code>False</code></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480086841701.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  打开 <code>items.py</code> 文件，在里面<code>FirstdemoItem()</code>函数里添加一项：</p>
+
+<pre><code>    title = scrapy.Field()
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087390745.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong>  在 <code>baidu.py</code> 文件里面，使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>先从核心目录（<code>firstdemo</code>）定位到<code>items.py</code> 文件里面的<code>FirstdemoItem</code>函数。</p>
+
+<p>然后使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>最后，返回。</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from firstdemo.items import FirstdemoItem
+
+class BaiduSpider(scrapy.Spider):
+    name = "baidu"
+    allowed_domains = ["baidu.com"]
+    start_urls = ['http://baidu.com/']
+
+    def parse(self, response):
+        item = FirstdemoItem()
+        item['title'] = response.xpath('/html/head/title/text()').extract()
+        yield item
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088827529.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong>
+在 <code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数，添加打印信息的代码：</p>
+
+<pre><code class="python">        print(item['title'])
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087767661.png" alt="Alt text" /></p>
+
+<p>但是，现在运行程序，是不能输出任何信息的，还需要做<strong>Step 5</strong>。</p>
+
+<p><strong>Step 5 . </strong> 开启<code>piplines</code>（默认<code>piplines</code>是关闭的。）
+在 <code>settings.py</code> 文件，将里面的<code>ITEM_PIPELINES</code> 项的注释去掉。并从核心目录开始定位，定位到<code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数 ，就应该是：<code>firstdemo.pipelines.FirstdemoPipeline</code>：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088423683.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<p>在 <strong>DOS窗口</strong> 中，先将路劲切换到当前爬虫项目<code>firstdemo</code>路径下，然后在执行爬虫文件 <code>baidy</code></p>
+
+<pre><code>D:
+cd D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo
+scrapy crawl baidu --nolog
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089009819.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>2-2.1 使用Scrapy爬虫CSDN的博客文章</h2>
+
+<p>创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<pre><code>scrapy genspider -t basic csdn blog.csdn.net
+</code></pre>
+
+<p>输出:</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089722224.png" alt="Alt text" /></p>
+
+<h2>2-2.2 观察 <a href="http://blog.csdn.net/">http://blog.csdn.net/</a> 网页源代码</h2>
+
+<p>（网页源代码太多，这里就不贴出了。）</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<h2>2-2.3 写代码</h2>
+
+<p><strong>Step 1 . </strong>  在<code>items.py</code> 文件中的<code>FirstdemoItem()</code>函数中添加新的项。其他的文件会使用这几个对象：</p>
+
+<pre><code class="python">    detail = scrapy.Field()
+    link = scrapy.Field()
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089896612.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  在 <code>csdn.py</code> 文件里面，使用<code>xpath 表达式</code> 提取csdn博客网页的博文标题、介绍、链接地址。</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from firstdemo.items import FirstdemoItem
+
+
+class CsdnSpider(scrapy.Spider):
+    name = "csdn"
+    allowed_domains = ["blog.csdn.net"]
+    start_urls = ['http://blog.csdn.net/']
+
+    def parse(self, response):
+        item = FirstdemoItem()
+        item['title'] = response.xpath("//h3[@class='tracking-ad']/a/text()").extract()
+        item['detail'] = response.xpath("//div[@class='blog_list_c']/text()").extract()
+        item['link'] = response.xpath("//h3[@class='tracking-ad']/a/@href").extract()
+        yield item
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090250536.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 在 <code>piplines.py</code> 文件中，添加下面的代码，输出显示爬取到的信息。</p>
+
+<pre><code class="python">        for i in range(0, len(item['title'])):
+            print('第' + str(i+1) + '篇文章：')
+            print(item['title'][i])
+            print(item['detail'][i])
+            print(item['link'][i])
+            print('---------')
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090494545.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<pre><code>scrapy crawl csdn --nolog
+</code></pre>
+
+<blockquote><p>执行输出的信息太少，说明程序有问题。</p>
+
+<pre><code>scrapy crawl csdn
+</code></pre>
+
+<p>如果你在执行的时候，找到错误提示信息：</p>
+
+<pre><code>UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence
+</code></pre>
+
+<p>这个问题经常会遇到，是一个常见的问题，解决办法<a href="http://www.aobosir.com/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can%27t-encode-character-xa0/">在这里</a>可以找到。</p>
+
+<pre><code class="python">         print(item['detail'][i].replace(u'\xa0 ', u' '))
+</code></pre></blockquote>
+
+<p>输出：</p>
+
+<pre><code>第1篇文章：
+微信小程序：小程序，新场景
+前言：我们频繁进入的地方，是场景。手机，是场景；浏览器，是场景；其实，微信，也是场景……微信要做的是占据更多用户时间、占
+据更多应用场景、占据更多服务入口，这是商业本质想去垄断要做的事情。对于大家来讲，...
+http://blog.csdn.net/liujia216/article/details/53350247
+---------
+第2篇文章：
+Android四大组件——BroadcastReceiver普通广播、有序广播、拦截广播、本地广播、Sticky广播、系统广播
+BroadcastReceiver普通广播、有序广播、拦截广播、本地广播、Sticky广播、系统广播
+  本篇文章包括以下内容：
+
+
+  前言
+  BroadcastReceiver的简介
+ ...
+http://blog.csdn.net/qq_30379689/article/details/53341313
+---------
+第3篇文章：
+Gif格式简要介绍
+Gif格式的介绍
+
+为什么有的Gif图不能够循环播放及处理办法
+http://blog.csdn.net/shiroh_ms08/article/details/53347873
+---------
+第4篇文章：
+win10 uwp 打包第三方字体到应用
+有时候我们会把一些特殊字体打包到软件，因为如果找不到我们的字体会变为默认，现在很多字体图标我们用得好，有时候我们的应用会
+用很漂亮的字体，需要我们自己打包，因为用户一般是没有字体。UWP使用第三方字体首...
+http://blog.csdn.net/lindexi_gd/article/details/52716655
+---------
+第5篇文章：
+话说智能指针发展之路
+动态创建内存的管理太麻烦，于是乎，这个世界变成11派人：
+一派人勤勤恳恳按照教科书的说法做，时刻小心翼翼，苦逼连连；
+一派人忘记教科书的教导，随便乱来，搞得代码处处bug，后期维护骂声连连；
+最...
+http://blog.csdn.net/jacketinsysu/article/details/53343534
+---------
+第6篇文章：
+安卓自定义控件（二）BitmapShader、ShapeDrawable、Shape
+第一篇博客中，我已经对常用的一些方法做了汇总，这篇文章主要介绍BitmapShader位图渲染、ComposeShader组合渲染，然后看看Xferm
+ode如何实际应用。不过本文还是只重写onDraw...
+http://blog.csdn.net/chen413203144/article/details/53343209
+---------
+第7篇文章：
+JSTL 标签大全详解
+1、什么是JSTL？    JSTL是apache对EL表达式的扩展（也就是说JSTL依赖EL），JSTL是标签语言！JSTL标签使用以来非常方便，它与JSP
+动作标签一样，只不过它不是JSP内...
+http://blog.csdn.net/qq_25827845/article/details/53311722
+---------
+第8篇文章：
+Android调试大法 自定义IDE默认签名文件
+你是否为调试第三方SDK时debug签名和release签名发生冲突而烦恼？你是否在debug时第三方功能测试通过，而release时无法使用？你
+是否在为对接微信、支付宝、地图因签名导致的问题而烦恼？...
+http://blog.csdn.net/yanzhenjie1003/article/details/53334071
+---------
+第9篇文章：
+Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图
+Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图
+  接上篇，今天要说的，和上篇的类似，只是方向是有相反的两面，我们先看下效果  实际上这样就导致了我们的代码是...
+http://blog.csdn.net/qq_26787115/article/details/53333270
+---------
+第10篇文章：
+一步步手动实现热修复(二)-类的加载机制简要介绍
+一个类在被加载到内存之前要经过加载、验证、准备等过程。经过这些过程之后，虚拟机才会从方法区将代表类的运行时数据结构转换为
+内存中的Class。
+
+我们这节内容的重点在于一个类是如何被加载的，所以我们从类...
+http://blog.csdn.net/sahadev_/article/details/53334911
+---------
+第11篇文章：
+仿射变换详解 warpAffine
+今天遇到一个问题是关于仿射变换的，但是由于没有将仿射变换的具体原理型明白，看别人的代码看的很费解，最后终于在师兄的帮助下
+将原理弄明白了，我觉得最重要的是理解仿射变换可以看成是几种简单变换的复合实现，
+...
+http://blog.csdn.net/q123456789098/article/details/53330484
+---------
+第12篇文章：
+React Native嵌入Android原生应用中
+开发环境准备首先你要搭建好React Native for Android开发环境， 没有搭建好的可以参考：React Native for Android Windows环境
+搭建  用Android...
+http://blog.csdn.net/u011965040/article/details/53331859
+---------
+第13篇文章：
+TCP三次握手四次挥手详解
+TCP三次握手四次挥手详解
+http://blog.csdn.net/u010913001/article/details/53331863
+---------
+第14篇文章：
+腾讯Android面经
+秋招收官最后一战。
+腾讯一面（电话）：
+自我介绍
+项目，平时怎么学习？
+设计模式
+（1）知道哪些设计模式？设计模式在Android、Java中是怎么应用的，每个都说一下？
+（2）InputStre...
+http://blog.csdn.net/kesarchen/article/details/53332157
+---------
+第15篇文章：
+轻松实现部分背景半透明的呈现效果
+实现一个简单的呈现/解散动画效果，当呈现时，呈现的主要内容和背景要明显区分，背景呈现一个半透明遮罩效果，透过背景可以看到
+下层 View Controller 的内容
+http://blog.csdn.net/kmyhy/article/details/53322669
+---------
+第16篇文章：
+APP自动化框架LazyAndroid使用手册（4）--测试模板工程详解
+概述前面的3篇博文分别对lazyAndroid的框架简介、元素抓取和核心API进行了说明，本文将基于框架给出的测试模板工程，详细阐述下
+使用该框架进行安卓UI自动化测试的步骤。
+http://blog.csdn.net/kaka1121/article/details/53325265
+---------
+第17篇文章：
+Android使用getIdentifier()方法根据资源名来获取资源id
+有时候我们想动态的根据一个资源名获得到对应的资源id，就可以使用getResources().getIdentifier()方法来获取该id。然后再使用该
+id进行相关的操作。
+1、Demo示例
+  下...
+http://blog.csdn.net/ouyang_peng/article/details/53328000
+---------
+第18篇文章：
+Android基于RecyclerView实现高亮搜索列表
+这篇应该是RecycleView的第四篇了，RecycleView真是新生代的宠儿能做这么多的事情。转载请注明作者AndroidMsky及原文链接
+http://blog.csdn.net/and...
+http://blog.csdn.net/androidmsky/article/details/53306657
+---------
+第19篇文章：
+使用Git Hooks实现开发部署任务自动化
+提供：ZStack云计算 前言版本控制，这是现代软件开发的核心需求之一。有了它，软件项目可以安全的跟踪代码变更并执行回溯、完整
+性检查、协同开发等多种操作。在各种版本控制软件中，git是近年来最流行的软...
+http://blog.csdn.net/zstack_org/article/details/53331077
+---------
+第20篇文章：
+Andromeda OS 来了，Android 再见？
+相信有部分同学已经有耳闻了，前几天炒的很火一个消息，就是 Google 要推出一种全新的操作系统，取名 Andromeda，这款新型的操作
+系统融合了 Android 和 Chrome OS，据称已经有...
+http://blog.csdn.net/googdev/article/details/53331364
+---------
+</code></pre>
+
+<hr />
+
+<p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
+]]></content>
+  </entry>
+  
+</feed>

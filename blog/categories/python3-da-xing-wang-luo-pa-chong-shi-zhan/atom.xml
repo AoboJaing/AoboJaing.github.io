@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python3 大型网络爬虫实战 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T18:02:12+08:00</updated>
+  <updated>2016-11-26T18:20:50+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -84,6 +84,420 @@
 <p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
 
 <hr />
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/"/>
+    <updated>2016-11-26T17:37:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到这篇博客：。</p>
+
+<hr />
+
+<h1>1 知识点：scrapy 爬虫项目的创建及爬虫的创建</h1>
+
+<h2>1.1 scrapy 爬虫项目的创建</h2>
+
+<p>接下来我们为大家创建一个Scrapy爬虫项目，并在爬虫项目下创建一个Scrapy爬虫文件。</p>
+
+<pre><code>scrapy startproject &lt;projectname&gt; 
+</code></pre>
+
+<h2>1.2 scrapy 爬虫文件的创建</h2>
+
+<pre><code>cd demo
+scrapy genspider -t basic &lt;filename&gt; &lt;domain&gt;
+</code></pre>
+
+<blockquote><p>更多 <strong>Scrapy</strong> 命令的介绍请到<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">这篇博客</a>查看。</p></blockquote>
+
+<hr />
+
+<h1>2 实例：爬取百度标题和CSDN博客</h1>
+
+<p>我们创建一个爬虫项目，在里面创建一个爬虫文件来爬取百度，并再创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<hr />
+
+<p>先创建一个Scrapy爬虫项目：</p>
+
+<pre><code>scrapy startproject firstDemo
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler&gt;scrapy startproject firstdemo
+New Scrapy project 'firstdemo', using template directory 'c:\\users\\aobo\\appdata\\local\\programs\\python\\python35\\lib\\site-packages\\scrapy\\templates\\project', created in:
+    D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo
+
+You can start your first spider with:
+    cd firstdemo
+    scrapy genspider example example.com
+
+D:\WorkSpace\python_ws\python-large-web-crawler&gt;
+</code></pre>
+
+<h2>2-1.1 使用Scrapy爬虫 爬取百度标题</h2>
+
+<p>创建一个爬虫文件来爬取百度</p>
+
+<pre><code>cd firstDemo
+scrapy genspider -t basic baidu baidu.com
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler&gt;cd firstdemo
+
+D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;scrapy genspider -t basic baidu baidu.com
+Created spider 'baidu' using template 'basic' in module:
+  firstdemo.spiders.baidu
+
+D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/1480084611306.png" alt="Alt text" /></p>
+
+<p>打开 <strong>PyCharm</strong> 软件，用 <strong>PyCharm</strong> 软件打开刚刚创建的 <code>firstdemo</code> 爬虫项目。</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084757859.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084783287.png" alt="Alt text" /></p>
+
+<p>打开这 <code>baidu.py</code> 爬虫文件，你会看到自动生成的代码：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084952255.png" alt="Alt text" /></p>
+
+<h2>2-1.2 观察 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页源代码</h2>
+
+<p>（源代码太多，列出重点的。）</p>
+
+<pre><code class="http">&lt;html xmlns="http://www.w3.org/1999/xhtml" class="cye-enabled cye-nm sui-componentWrap"&gt;
+    &lt;head&gt;
+        &lt;title&gt;百度一下，你就知道 &lt;/title&gt;
+    &lt;/head&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>源代码中的标题通过标签逐步定位： <code>/html/head/title</code></p>
+
+<h2>2-1.3 写代码</h2>
+
+<p>我们现在要提取出 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页 的标题：<strong>百度一下，你就知道</strong>。</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<p>这里我们使用 <code>xpath</code> 来提取，<code>xpath</code> 的知识点，请到<a href="http://www.aobosir.com/blog/2016/11/26/python-xpath/">这篇博客</a>中查看。</p>
+
+<hr />
+
+<p>下面的编写代码的步骤：</p>
+
+<p><strong>Step 1 . </strong> 设置我们的爬虫不遵循 <code>robots.txt</code> 规定。（什么是<code>robots.txt</code>规定，请到<a href="http://blog.csdn.net/github_35160620/article/details/52586126">这个博客</a>查看。）</p>
+
+<p>打开 <code>settings.py</code> 文件，将里面的<code>ROBOTSTXT_OBEY</code> 设为：<code>False</code></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480086841701.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  打开 <code>items.py</code> 文件，在里面<code>FirstdemoItem()</code>函数里添加一项：</p>
+
+<pre><code>    title = scrapy.Field()
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087390745.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong>  在 <code>baidu.py</code> 文件里面，使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>先从核心目录（<code>firstdemo</code>）定位到<code>items.py</code> 文件里面的<code>FirstdemoItem</code>函数。</p>
+
+<p>然后使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>最后，返回。</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from firstdemo.items import FirstdemoItem
+
+class BaiduSpider(scrapy.Spider):
+    name = "baidu"
+    allowed_domains = ["baidu.com"]
+    start_urls = ['http://baidu.com/']
+
+    def parse(self, response):
+        item = FirstdemoItem()
+        item['title'] = response.xpath('/html/head/title/text()').extract()
+        yield item
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088827529.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong>
+在 <code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数，添加打印信息的代码：</p>
+
+<pre><code class="python">        print(item['title'])
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087767661.png" alt="Alt text" /></p>
+
+<p>但是，现在运行程序，是不能输出任何信息的，还需要做<strong>Step 5</strong>。</p>
+
+<p><strong>Step 5 . </strong> 开启<code>piplines</code>（默认<code>piplines</code>是关闭的。）
+在 <code>settings.py</code> 文件，将里面的<code>ITEM_PIPELINES</code> 项的注释去掉。并从核心目录开始定位，定位到<code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数 ，就应该是：<code>firstdemo.pipelines.FirstdemoPipeline</code>：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088423683.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<p>在 <strong>DOS窗口</strong> 中，先将路劲切换到当前爬虫项目<code>firstdemo</code>路径下，然后在执行爬虫文件 <code>baidy</code></p>
+
+<pre><code>D:
+cd D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo
+scrapy crawl baidu --nolog
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089009819.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>2-2.1 使用Scrapy爬虫CSDN的博客文章</h2>
+
+<p>创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<pre><code>scrapy genspider -t basic csdn blog.csdn.net
+</code></pre>
+
+<p>输出:</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089722224.png" alt="Alt text" /></p>
+
+<h2>2-2.2 观察 <a href="http://blog.csdn.net/">http://blog.csdn.net/</a> 网页源代码</h2>
+
+<p>（网页源代码太多，这里就不贴出了。）</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<h2>2-2.3 写代码</h2>
+
+<p><strong>Step 1 . </strong>  在<code>items.py</code> 文件中的<code>FirstdemoItem()</code>函数中添加新的项。其他的文件会使用这几个对象：</p>
+
+<pre><code class="python">    detail = scrapy.Field()
+    link = scrapy.Field()
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089896612.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  在 <code>csdn.py</code> 文件里面，使用<code>xpath 表达式</code> 提取csdn博客网页的博文标题、介绍、链接地址。</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from firstdemo.items import FirstdemoItem
+
+
+class CsdnSpider(scrapy.Spider):
+    name = "csdn"
+    allowed_domains = ["blog.csdn.net"]
+    start_urls = ['http://blog.csdn.net/']
+
+    def parse(self, response):
+        item = FirstdemoItem()
+        item['title'] = response.xpath("//h3[@class='tracking-ad']/a/text()").extract()
+        item['detail'] = response.xpath("//div[@class='blog_list_c']/text()").extract()
+        item['link'] = response.xpath("//h3[@class='tracking-ad']/a/@href").extract()
+        yield item
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090250536.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 在 <code>piplines.py</code> 文件中，添加下面的代码，输出显示爬取到的信息。</p>
+
+<pre><code class="python">        for i in range(0, len(item['title'])):
+            print('第' + str(i+1) + '篇文章：')
+            print(item['title'][i])
+            print(item['detail'][i])
+            print(item['link'][i])
+            print('---------')
+</code></pre>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090494545.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<pre><code>scrapy crawl csdn --nolog
+</code></pre>
+
+<blockquote><p>执行输出的信息太少，说明程序有问题。</p>
+
+<pre><code>scrapy crawl csdn
+</code></pre>
+
+<p>如果你在执行的时候，找到错误提示信息：</p>
+
+<pre><code>UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence
+</code></pre>
+
+<p>这个问题经常会遇到，是一个常见的问题，解决办法<a href="http://www.aobosir.com/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can%27t-encode-character-xa0/">在这里</a>可以找到。</p>
+
+<pre><code class="python">         print(item['detail'][i].replace(u'\xa0 ', u' '))
+</code></pre></blockquote>
+
+<p>输出：</p>
+
+<pre><code>第1篇文章：
+微信小程序：小程序，新场景
+前言：我们频繁进入的地方，是场景。手机，是场景；浏览器，是场景；其实，微信，也是场景……微信要做的是占据更多用户时间、占
+据更多应用场景、占据更多服务入口，这是商业本质想去垄断要做的事情。对于大家来讲，...
+http://blog.csdn.net/liujia216/article/details/53350247
+---------
+第2篇文章：
+Android四大组件——BroadcastReceiver普通广播、有序广播、拦截广播、本地广播、Sticky广播、系统广播
+BroadcastReceiver普通广播、有序广播、拦截广播、本地广播、Sticky广播、系统广播
+  本篇文章包括以下内容：
+
+
+  前言
+  BroadcastReceiver的简介
+ ...
+http://blog.csdn.net/qq_30379689/article/details/53341313
+---------
+第3篇文章：
+Gif格式简要介绍
+Gif格式的介绍
+
+为什么有的Gif图不能够循环播放及处理办法
+http://blog.csdn.net/shiroh_ms08/article/details/53347873
+---------
+第4篇文章：
+win10 uwp 打包第三方字体到应用
+有时候我们会把一些特殊字体打包到软件，因为如果找不到我们的字体会变为默认，现在很多字体图标我们用得好，有时候我们的应用会
+用很漂亮的字体，需要我们自己打包，因为用户一般是没有字体。UWP使用第三方字体首...
+http://blog.csdn.net/lindexi_gd/article/details/52716655
+---------
+第5篇文章：
+话说智能指针发展之路
+动态创建内存的管理太麻烦，于是乎，这个世界变成11派人：
+一派人勤勤恳恳按照教科书的说法做，时刻小心翼翼，苦逼连连；
+一派人忘记教科书的教导，随便乱来，搞得代码处处bug，后期维护骂声连连；
+最...
+http://blog.csdn.net/jacketinsysu/article/details/53343534
+---------
+第6篇文章：
+安卓自定义控件（二）BitmapShader、ShapeDrawable、Shape
+第一篇博客中，我已经对常用的一些方法做了汇总，这篇文章主要介绍BitmapShader位图渲染、ComposeShader组合渲染，然后看看Xferm
+ode如何实际应用。不过本文还是只重写onDraw...
+http://blog.csdn.net/chen413203144/article/details/53343209
+---------
+第7篇文章：
+JSTL 标签大全详解
+1、什么是JSTL？    JSTL是apache对EL表达式的扩展（也就是说JSTL依赖EL），JSTL是标签语言！JSTL标签使用以来非常方便，它与JSP
+动作标签一样，只不过它不是JSP内...
+http://blog.csdn.net/qq_25827845/article/details/53311722
+---------
+第8篇文章：
+Android调试大法 自定义IDE默认签名文件
+你是否为调试第三方SDK时debug签名和release签名发生冲突而烦恼？你是否在debug时第三方功能测试通过，而release时无法使用？你
+是否在为对接微信、支付宝、地图因签名导致的问题而烦恼？...
+http://blog.csdn.net/yanzhenjie1003/article/details/53334071
+---------
+第9篇文章：
+Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图
+Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图
+  接上篇，今天要说的，和上篇的类似，只是方向是有相反的两面，我们先看下效果  实际上这样就导致了我们的代码是...
+http://blog.csdn.net/qq_26787115/article/details/53333270
+---------
+第10篇文章：
+一步步手动实现热修复(二)-类的加载机制简要介绍
+一个类在被加载到内存之前要经过加载、验证、准备等过程。经过这些过程之后，虚拟机才会从方法区将代表类的运行时数据结构转换为
+内存中的Class。
+
+我们这节内容的重点在于一个类是如何被加载的，所以我们从类...
+http://blog.csdn.net/sahadev_/article/details/53334911
+---------
+第11篇文章：
+仿射变换详解 warpAffine
+今天遇到一个问题是关于仿射变换的，但是由于没有将仿射变换的具体原理型明白，看别人的代码看的很费解，最后终于在师兄的帮助下
+将原理弄明白了，我觉得最重要的是理解仿射变换可以看成是几种简单变换的复合实现，
+...
+http://blog.csdn.net/q123456789098/article/details/53330484
+---------
+第12篇文章：
+React Native嵌入Android原生应用中
+开发环境准备首先你要搭建好React Native for Android开发环境， 没有搭建好的可以参考：React Native for Android Windows环境
+搭建  用Android...
+http://blog.csdn.net/u011965040/article/details/53331859
+---------
+第13篇文章：
+TCP三次握手四次挥手详解
+TCP三次握手四次挥手详解
+http://blog.csdn.net/u010913001/article/details/53331863
+---------
+第14篇文章：
+腾讯Android面经
+秋招收官最后一战。
+腾讯一面（电话）：
+自我介绍
+项目，平时怎么学习？
+设计模式
+（1）知道哪些设计模式？设计模式在Android、Java中是怎么应用的，每个都说一下？
+（2）InputStre...
+http://blog.csdn.net/kesarchen/article/details/53332157
+---------
+第15篇文章：
+轻松实现部分背景半透明的呈现效果
+实现一个简单的呈现/解散动画效果，当呈现时，呈现的主要内容和背景要明显区分，背景呈现一个半透明遮罩效果，透过背景可以看到
+下层 View Controller 的内容
+http://blog.csdn.net/kmyhy/article/details/53322669
+---------
+第16篇文章：
+APP自动化框架LazyAndroid使用手册（4）--测试模板工程详解
+概述前面的3篇博文分别对lazyAndroid的框架简介、元素抓取和核心API进行了说明，本文将基于框架给出的测试模板工程，详细阐述下
+使用该框架进行安卓UI自动化测试的步骤。
+http://blog.csdn.net/kaka1121/article/details/53325265
+---------
+第17篇文章：
+Android使用getIdentifier()方法根据资源名来获取资源id
+有时候我们想动态的根据一个资源名获得到对应的资源id，就可以使用getResources().getIdentifier()方法来获取该id。然后再使用该
+id进行相关的操作。
+1、Demo示例
+  下...
+http://blog.csdn.net/ouyang_peng/article/details/53328000
+---------
+第18篇文章：
+Android基于RecyclerView实现高亮搜索列表
+这篇应该是RecycleView的第四篇了，RecycleView真是新生代的宠儿能做这么多的事情。转载请注明作者AndroidMsky及原文链接
+http://blog.csdn.net/and...
+http://blog.csdn.net/androidmsky/article/details/53306657
+---------
+第19篇文章：
+使用Git Hooks实现开发部署任务自动化
+提供：ZStack云计算 前言版本控制，这是现代软件开发的核心需求之一。有了它，软件项目可以安全的跟踪代码变更并执行回溯、完整
+性检查、协同开发等多种操作。在各种版本控制软件中，git是近年来最流行的软...
+http://blog.csdn.net/zstack_org/article/details/53331077
+---------
+第20篇文章：
+Andromeda OS 来了，Android 再见？
+相信有部分同学已经有耳闻了，前几天炒的很火一个消息，就是 Google 要推出一种全新的操作系统，取名 Andromeda，这款新型的操作
+系统融合了 Android 和 Chrome OS，据称已经有...
+http://blog.csdn.net/googdev/article/details/53331364
+---------
+</code></pre>
+
+<hr />
+
+<p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
 ]]></content>
   </entry>
   
@@ -574,256 +988,6 @@ D:\BaiduYunDownload\first&gt;
 <li><p><strong>edit</strong> 使用编辑器打开爬虫文件 （Windows上似乎有问题，Linux上没有问题）：<code>scrapy edit f1</code></p></li>
 </ul>
 
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python3 大型网络爬虫实战 001 --- 搭建开发环境]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/"/>
-    <updated>2016-11-26T06:28:27+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我使用的电脑： Windows 10 64位</p>
-
-<h2>前言</h2>
-
-<p>开发Python爬虫有很多种方式，从程序的复杂程度的角度来说，可以分为：爬虫项目和爬虫文件。
-相信有些朋友玩过Python的urllib模块，一般我们可以用该模块写一些爬虫文件，实现起来非常方便，但做大型项目的时候，会发现效率不是太好、并且程序的稳定性也不是太好。
-Scrapy是一个Python的爬虫框架，使用Scrapy可以提高开发效率，并且非常适合做一些中大型爬虫项目。
-简单来说，urllib库更适合写爬虫文件，scrapy更适合做爬虫项目。</p>
-
-<p>本套专栏，就来讲解如何做爬虫项目。本篇博客是第一篇博客：搭建开发环境。</p>
-
-<h2>1 . 安装Python3</h2>
-
-<p>到官网下载就可以了，下载一个Python3.5版本就可以，傻瓜式安装。</p>
-
-<blockquote><p>Python 3 被默认安装在：<code>C:\Users\[Username]\AppData\Local\Programs\Python\Python35</code> 这个路径里面。</p></blockquote>
-
-<h2>2 . 安装Python程序开发集成开发环境 &mdash; PyCharm IDE 2016.1.4</h2>
-
-<p>软件下载：<a href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a></p>
-
-<p>注意：</p>
-
-<p>Professional是完整版的，但是需要注册码</p>
-
-<p>注册方法：<a href="http://blog.csdn.net/tianzhaixing2013/article/details/44997881">http://blog.csdn.net/tianzhaixing2013/article/details/44997881</a></p>
-
-<p>我这次安装的是PyCharm 2016。</p>
-
-<blockquote><p>Community是免费版的，但是软件里面的Terminal是不能使用的。</p></blockquote>
-
-<h2>3 . 安装 Visual Studio 2015 软件</h2>
-
-<p>要知道：为什么需要 Visual Studio 软件了。（参考<a href="https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/">这个网站</a>）</p>
-
-<p>如果不安装，当中你执行<code>pip install third-package-name</code>时，有时会出现下面这个错误：<code> error: Unable to find vcvarsall.bat</code></p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1480104934562.png" alt="Alt text" /></p>
-
-<p>安装Visual Studio 2015 软件是为了安装里面的<strong>Python Tools 2.2.5 for Visual Studio 2015</strong>软件。</p>
-
-<p><strong>下载和安装 Visual Studio 2015 软件 的方法在</strong><a href="http://www.aobosir.com/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat/"><strong>这里</strong></a>。</p>
-
-<h2>4 . 升级 pip 工具</h2>
-
-<p>在DOS窗口中执行下面的命令来升级pip工具。</p>
-
-<pre><code>python -m pip install --upgrade pip
-</code></pre>
-
-<h2>5 . 安装一些第三方库</h2>
-
-<p>lxml、Twisted、pywin32、scrapy</p>
-
-<p>lxml是一种可以迅速、灵活地处理 XML。
-Twisted是用Python实现的基于事件驱动的网络引擎框架。
-pywin32提供win32api。
-Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架。</p>
-
-<hr />
-
-<p>我们安装的是python3.5，并且我的电脑是64位的，所以：下载：</p>
-
-<p>lxml‑3.6.4‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>Twisted‑16.5.0‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>pywin32‑220.1‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>scrapy(直接使用命令：<code>pip.exe install scrapy</code> 来安装。)</p>
-
-<hr />
-
-<p>Python安装第三方库的方法：<a href="http://blog.csdn.net/github_35160620/article/details/52203682">http://blog.csdn.net/github_35160620/article/details/52203682</a></p>
-
-<blockquote><p>注意：如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
-
-<p>这个问题，你可以在这篇博客里得到解决答案：<a href="http://www.aobosir.com/blog/2016/11/23/pip-install-python2-python3/">http://www.aobosir.com/blog/2016/11/23/pip-install-python2-python3/</a></p></blockquote>
-
-<hr />
-
-<p>下载后，在我的电脑上是这样安装：</p>
-
-<p>安装 lxml：</p>
-
-<pre><code>C:\Users\AOBO&gt;cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
-C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\lxml-3.6.4-cp35-cp35m-win_amd64.whl
-Processing d:\software_install_package_win\python\some-python-third-packages\lxml-3.6.4-cp35-cp35m-win_amd64.whl
-Installing collected packages: lxml
-Successfully installed lxml-3.6.4
-</code></pre>
-
-<p>安装 Twisted ：（执行到<code>Collecting constantly&gt;=15.1 (from Twisted==16.5.0)</code>这句时，卡住了，我按了 Ctrl+C 才继续执行下去。自动下载了下面的：constantly、incremental、zope.interface 这三个依赖库）</p>
-
-<pre><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\Twisted-16.5.0-cp35-cp35m-win_amd64.whl
-Processing d:\software_install_package_win\python\some-python-third-packages\twisted-16.5.0-cp35-cp35m-win_amd64.whl
-Collecting constantly&gt;=15.1 (from Twisted==16.5.0)
-#(执行到这卡住了，我按了 Ctrl+C 才继续执行下去。自动下载了下面的：constantly、incremental、zope.interface 这三个依赖库)
-  Downloading constantly-15.1.0-py2.py3-none-any.whl
-Collecting incremental&gt;=16.10.1 (from Twisted==16.5.0)
-  Downloading incremental-16.10.1-py2.py3-none-any.whl
-Collecting zope.interface&gt;=4.0.2 (from Twisted==16.5.0)
-  Downloading zope.interface-4.3.2-cp35-cp35m-win_amd64.whl (136kB)
-    100% |████████████████████████████████| 143kB 7.1kB/s
-Requirement already satisfied: setuptools in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from zope.interface&gt;=4.0.2-&gt;Twisted==16.5.0)
-Installing collected packages: constantly, incremental, zope.interface, Twisted
-Successfully installed Twisted-16.5.0 constantly-15.1.0 incremental-16.10.1 zope.interface-4.3.2
-</code></pre>
-
-<p>安装pywin32：</p>
-
-<pre><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\pywin32-220.1-cp35-cp35m-win_amd64.whl
-Processing d:\software_install_package_win\python\some-python-third-packages\pywin32-220.1-cp35-cp35m-win_amd64.whl
-Installing collected packages: pywin32
-Successfully installed pywin32-220.1
-</code></pre>
-
-<p>安装scropy：</p>
-
-<pre><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install scrapy
-Collecting scrapy
-  Downloading Scrapy-1.2.1-py2.py3-none-any.whl (294kB)
-    100% |████████████████████████████████| 296kB 338kB/s
-Collecting service-identity (from scrapy)
-  Downloading service_identity-16.0.0-py2.py3-none-any.whl
-Collecting six&gt;=1.5.2 (from scrapy)
-  Downloading six-1.10.0-py2.py3-none-any.whl
-Collecting w3lib&gt;=1.15.0 (from scrapy)
-  Downloading w3lib-1.16.0-py2.py3-none-any.whl
-Collecting PyDispatcher&gt;=2.0.5 (from scrapy)
-  Downloading PyDispatcher-2.0.5.tar.gz
-Requirement already satisfied: Twisted&gt;=10.0.0 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from scrapy)
-Requirement already satisfied: lxml in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from scrapy)
-Collecting cssselect&gt;=0.9 (from scrapy)
-  Downloading cssselect-1.0.0-py2.py3-none-any.whl
-Collecting parsel&gt;=0.9.3 (from scrapy)
-  Downloading parsel-1.1.0-py2.py3-none-any.whl
-Collecting queuelib (from scrapy)
-  Downloading queuelib-1.4.2-py2.py3-none-any.whl
-Collecting pyOpenSSL (from scrapy)
-  Downloading pyOpenSSL-16.2.0-py2.py3-none-any.whl (43kB)
-    100% |████████████████████████████████| 51kB 4.7MB/s
-Collecting pyasn1 (from service-identity-&gt;scrapy)
-  Downloading pyasn1-0.1.9-py2.py3-none-any.whl
-Collecting pyasn1-modules (from service-identity-&gt;scrapy)
-  Downloading pyasn1_modules-0.0.8-py2.py3-none-any.whl
-Collecting attrs (from service-identity-&gt;scrapy)
-  Downloading attrs-16.2.0-py2.py3-none-any.whl
-Requirement already satisfied: constantly&gt;=15.1 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-Requirement already satisfied: zope.interface&gt;=4.0.2 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-Requirement already satisfied: incremental&gt;=16.10.1 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-Collecting cryptography&gt;=1.3.4 (from pyOpenSSL-&gt;scrapy)
-  Downloading cryptography-1.6-cp35-cp35m-win_amd64.whl (1.3MB)
-    100% |████████████████████████████████| 1.3MB 257kB/s
-Requirement already satisfied: setuptools in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from zope.interface&gt;=4.0.2-&gt;Twisted&gt;=10.0.0-&gt;scrapy)
-Collecting cffi&gt;=1.4.1 (from cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-  Downloading cffi-1.9.1-cp35-cp35m-win_amd64.whl (158kB)
-    100% |████████████████████████████████| 163kB 322kB/s
-Collecting idna&gt;=2.0 (from cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-  Downloading idna-2.1-py2.py3-none-any.whl (54kB)
-    100% |████████████████████████████████| 61kB 4.4MB/s
-Collecting pycparser (from cffi&gt;=1.4.1-&gt;cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-  Downloading pycparser-2.17.tar.gz (231kB)
-    100% |████████████████████████████████| 235kB 311kB/s
-Installing collected packages: six, pycparser, cffi, pyasn1, idna, cryptography, pyOpenSSL, pyasn1-modules, attrs, service-identity, w3lib, PyDispatcher, cssselect, parsel, queuelib, scrapy
-  Running setup.py install for pycparser ... done
-  Running setup.py install for PyDispatcher ... done
-Successfully installed PyDispatcher-2.0.5 attrs-16.2.0 cffi-1.9.1 cryptography-1.6 cssselect-1.0.0 idna-2.1 parsel-1.1.0 pyOpenSSL-16.2.0 pyasn1-0.1.9 pyasn1-modules-0.0.8 pycparser-2.17 queuelib-1.4.2 scrapy-1.2.1 service-identity-16.0.0 six-1.10.0 w3lib-1.16.0
-</code></pre>
-
-<hr />
-
-<p>查看 <code>scrapy</code> 是否安装成功：（执行<code>scrapy -h</code> 命令，如果能输出信息，说明安装成功）</p>
-
-<pre><code>C:\Users\AOBO&gt;scrapy -h
-Scrapy 1.2.1 - no active project
-
-Usage:
-  scrapy &lt;command&gt; [options] [args]
-
-Available commands:
-  bench         Run quick benchmark test
-  commands
-  fetch         Fetch a URL using the Scrapy downloader
-  genspider     Generate new spider using pre-defined templates
-  runspider     Run a self-contained spider (without creating a project)
-  settings      Get settings values
-  shell         Interactive scraping console
-  startproject  Create new project
-  version       Print Scrapy version
-  view          Open URL in browser, as seen by Scrapy
-
-  [ more ]      More commands available when run from project directory
-
-Use "scrapy &lt;command&gt; -h" to see more info about a command
-
-C:\Users\AOBO&gt;
-</code></pre>
-
-<hr />
-
-<p>检查所有刚刚安装的库是否安装成功：</p>
-
-<p>启动<strong>PyCharm</strong> 软件，新建一个工程：</p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479835108332.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479835159526.png" alt="Alt text" /></p>
-
-<p>刚刚安装的库在这里可以看到：</p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479840214905.png" alt="Alt text" /></p>
-
-<p>安装成功。</p>
-
-<hr />
-
-<h2>6 . 一个超好的命令行串口软件 &mdash; PowerCmd</h2>
-
-<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
-
-<p>下载安装地址：<a href="http://www.aobosir.com/blog/2016/11/23/powercmd-install/">http://www.aobosir.com/blog/2016/11/23/powercmd-install/</a></p>
-
-<blockquote><p>这个软件真的很喽，像我执行<code>scrapy -h</code> 这样的命令，都打印不出信息，在DOS窗口里面是有信息打印出来的。</p></blockquote>
-
-<hr />
-
-<hr />
-
-<h2>测试环境</h2>
-
-<p>1 . 执行 <code>scrapy -h</code>，如果有打印出来信息，说明Scrapy  安装成功。</p>
-
-<p>2 . 执行 <code>scrapy bench</code> ，如果遇到问题，说明pywin32库还有需要完成的步骤。（解决问题:  import win32api ImportError: DLL load failed，到这里查看解决办法。）</p>
-
-<hr />
-
-<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客。</p>
 
 <hr />
 ]]></content>
