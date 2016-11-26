@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T17:43:07+08:00</updated>
+  <updated>2016-11-26T18:02:12+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python --- xpath 表达式 --- Ongoing]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
+    <updated>2016-11-26T18:00:15+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>什么是 <strong>XPath</strong>？</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
+
+<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
+
+<h2>xpath 表达式 语法讲解</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
+
+<p>例如，现在有这些信息：</p>
+
+<pre><code>&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
+&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
+&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
+&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
+&lt;/head&gt;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 表达式</th>
+<th style="text-align:right;">     意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">/ </td>
+<td style="text-align:right;">寻找指定标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">//</td>
+<td style="text-align:right;"> 寻找所有标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">@</td>
+<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
+</tr>
+</tbody>
+</table>
+
+
+<hr />
+
+<p><strong>例子：</strong></p>
+
+<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
+
+<pre><code class="python">/title.text()
+</code></pre>
+
+<p>表示：</p>
+
+<pre><code>CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台
+</code></pre>
+
+<hr />
+
+<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决问题： pywin32 安装后出现 import win32api ImportError  DLL load failed]]></title>

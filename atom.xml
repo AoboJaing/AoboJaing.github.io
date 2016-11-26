@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T17:43:07+08:00</updated>
+  <updated>2016-11-26T18:02:12+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,11 +14,101 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python 解决编码问题： `UnicodeEncodeError: 'Gbk' Codec Can't Encode Character ' ' in Position 10: Illegal Multibyte Sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
+    <title type="html"><![CDATA[Python --- Xpath 表达式 --- Ongoing]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
+    <updated>2016-11-26T18:00:15+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>什么是 <strong>XPath</strong>？</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
+
+<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
+
+<h2>xpath 表达式 语法讲解</h2>
+
+<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
+
+<p>例如，现在有这些信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt;
+</span><span class='line'>&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+</span><span class='line'>&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
+</span><span class='line'>&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
+</span><span class='line'>&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
+</span><span class='line'>&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
+</span><span class='line'>&lt;/head&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 表达式</th>
+<th style="text-align:right;">     意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">/ </td>
+<td style="text-align:right;">寻找指定标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">//</td>
+<td style="text-align:right;"> 寻找所有标签</td>
+</tr>
+<tr>
+<td style="text-align:left;">@</td>
+<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
+</tr>
+</tbody>
+</table>
+
+
+<hr />
+
+<p><strong>例子：</strong></p>
+
+<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">/</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>表示：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">CSDN</span><span class="o">.</span><span class="n">NET</span> <span class="o">-</span> <span class="err">全球最大中文</span><span class="n">IT</span><span class="err">社区，为</span><span class="n">IT</span><span class="err">专业技术人员提供最全面的信息传播和服务平台</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 解决编码问题： `UnicodeEncodeError: 'Gbk' Codec Can't Encode Character ' ' in Position 10: Illegal Multibyte Sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/"/>
     <updated>2016-11-26T17:37:35+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0</id>
-    <content type="html"><![CDATA[<hr />
+    <content type="html"><![CDATA[<ul>
+<li>Python 版本：python-3.5.0-amd64</li>
+</ul>
+
+
+<hr />
 
 <p>目标网站：<a href="http://blog.csdn.net/">http://blog.csdn.net/</a></p>
 
@@ -3537,214 +3627,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
 
 <p>默认情况下，使用<code>identity</code>关键字修饰的主键是自动增长的，如果想手动设置主键的值，需要先将目标表打开：<code>set identity_insert test.dbo.dept on</code>，然后再使用<code>insert into dept (deptid, deptname) values (1, 'zhangsan')</code> 命令来手动设置主键的值。</p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 031 查询-14 连接查询 --- 左（右）外连接、完全连接、交叉连接、联合]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/"/>
-    <updated>2016-10-22T18:17:33+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h1>连接查询</h1>
-
-<p><strong>定义：</strong></p>
-
-<p>将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。</p>
-
-<hr />
-
-<h2>内连接 （<code>innor join</code> 或者 <code>join</code>）</h2>
-
-<p>请看这篇博客：<a href="http://www.aobosir.com/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection/">SQL 数据库学习 查询 &mdash; 内连接</a>。</p>
-
-<hr />
-
-<h2>左（右）外连接 （<code>left join</code> 和 <code>right join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">left</span> <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131219555.png" alt="Alt text" /></p>
-
-<p>实现的步骤：</p>
-
-<ol>
-<li>用左表的第一行分别和右表的所有行进行的连接，如果有匹配的行，则一起输出，如果右表有多行匹配，则结果集输出多行，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第一行内容，右边全部输出<code>null</code>。</li>
-<li>然后再用左表第二行和右边所有行进行连接，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第二行内容，右边全部输出<code>null</code>。</li>
-<li>以此类推，直至左边所有行连接完毕。</li>
-<li>因为右边很可能出现有多行和左边的某一行匹配，所以左连接产生的结果集的行数很可能大于 <code>left join</code> 左边表的记录的总数。</li>
-<li>帮助文档：左向外连接的结果集包括<code>LEFT OUTER</code> 子句中指定的左表的所有行，而不仅仅是连接列所匹配的行。如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表均为空值。</li>
-</ol>
-
-
-<hr />
-
-<p>左外连接的实际意义</p>
-
-<ul>
-<li>返回一个事情及其该事物的相关信息，如果该事物没有相关信息，则输出<code>null</code></li>
-<li>例子：
-
-<ul>
-<li>已知条件： <code>productStocks</code> 货物库存表、 <code>orderform</code> 订单表、<code>pID</code> 是产品的编号</li>
-<li><strong>sql语句</strong></li>
-<li><code>select productStocks.*, orderform.* from productStocks left join orderform on productStocks.pID=orderform.pID</code></li>
-<li>实际意义： 返回仓库中现存货物的信息及其该货物的订单信息，如果该货物没有订单信息，在把该货物的订单信息全部输出为<code>null</code>。</li>
-</ul>
-</li>
-</ul>
-
-
-<hr />
-
-<h2>完全连接（<code>full join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">productStocks</span>
-</span><span class='line'>  <span class="k">full</span> <span class="k">join</span> <span class="n">orderform</span>
-</span><span class='line'>  <span class="k">on</span> <span class="n">productStocks</span><span class="p">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">orderform</span><span class="p">.</span><span class="n">pid</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131238849.png" alt="Alt text" /></p>
-
-<p>结果集中包含三部分内容：</p>
-
-<ol>
-<li>两个表中匹配的所有行记录</li>
-<li>左表中那些在右表中找不到匹配的行的记录。这些记录的右边全为<code>null</code></li>
-<li>右表中那些在左表中找不到匹配的行的记录。这些记录的左边全为<code>null</code></li>
-</ol>
-
-
-<hr />
-
-<h2>交叉连接（<code>cross join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">cross</span> <span class="k">join</span> <span class="n">dept</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果都是将两个表进行笛卡尔积。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131282846.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>自连接</h2>
-
-<p><strong>定义：</strong> 一张表自己和自己连接起来查询数据。</p>
-
-<p>例子：不准用聚合函数 求薪水最高的员工的信息。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--用聚合函数 求出薪水最高的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--不准用聚合函数 求出薪水最高的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">distinct</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">empno</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span>
-</span><span class='line'>      <span class="k">join</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
-</span><span class='line'>      <span class="k">on</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">sal</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477063139982.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>联合（<code>union</code>）</h2>
-
-<p><strong>例子：</strong></p>
-
-<p>输出每一个员工的姓名、工资、上司的姓名。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span><span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">as</span> <span class="ss">&quot;员工工资&quot;</span><span class="p">,</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;上司姓名&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span><span class="p">,</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">mgr</span> <span class="o">=</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">EMPNO</span>
-</span><span class='line'><span class="k">union</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="s1">&#39;已是最大老板&#39;</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">mgr</span> <span class="k">is</span> <span class="k">null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477130066693.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>定义：</strong></p>
-
-<p>表和表之间的数据以纵向的方式连接在一起。注意：我们以前讲的所有的连接是以横向的方式连接在一起的。</p>
-
-<p><strong>注意：</strong></p>
-
-<p>联合就是：若干个<code>select</code> 子句要联合成功的话，必须得满足两个条件：</p>
-
-<ol>
-<li>这若干个 <code>select</code> 子句输出的列数必须是相等的。</li>
-<li>这若干个 <code>select</code> 子句输出列的数据类型至少是兼容的。</li>
-</ol>
-
 
 <hr />
 ]]></content>
