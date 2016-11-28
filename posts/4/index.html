@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 top &mdash &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 null & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,123 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T01:48:03+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:48 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>null</code> &mdash; 没有值、空值</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null不能参与&lt;&gt; != = 运算</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">&lt;&gt;</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emo</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">!=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null 可以参与is 、 not is </span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出奖金为空的员工的信息</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出奖金不为空的员工的信息</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--任何类型的数据都允许为null</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">t1</span> <span class="p">(</span><span class="n">name</span> <span class="n">nvachar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">cnt</span> <span class="nb">int</span><span class="p">,</span> <span class="n">riqi</span> <span class="n">datetime</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">t1</span> <span class="k">values</span> <span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出每一个员工的姓名、年薪（包含了奖金）、comm假设是一年的奖金</span>
+</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="n">comm</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--这段指令证明了：null不能参与任何数学运算，结果永远是null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--正确的写法</span>
+</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="k">isnull</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--isnull(comm, 0) 如果comm是null，就返回为0，否则返回comm的值。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<ul>
+<li><code>0</code> 和 <code>null</code> 是不一样的，<code>null</code> 表示空值，没有值，<code>0</code>表示一个确定的值</li>
+<li><code>null</code> 不能参与如下运算：<code>&lt;&gt;</code>、<code>!=</code>、<code>=</code></li>
+<li><code>null</code> 可以参与如下运算：<code>is</code>、<code>not is</code></li>
+<li>任何类型的数据都允许为<code>null</code></li>
+<li>null不能参与任何数学运算，结果永远是null</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -877,64 +994,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-014-foreign-key-specific-definition-and-attention/">SQL 数据库 学习 014 外键的具体定义 设计外键要注意的问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T17:12:56+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:12 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2>外键的具体定义</h2>
-
-<p>如果一个表中的若干个字段是来自另外若干个表的主键或唯一键，则这若干个字段就是外键。（我们讲<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">多对多</a>的时候，一个表里面就有两个外键。）</p>
-
-<h2>设计外键要注意的问题</h2>
-
-<ul>
-<li>外键通常是来自另外表的主键而不是唯一（<code>unique</code>）键，因为唯一键可能为<code>null</code>。</li>
-<li>外键不一定是来自另外的表，也可能来自本表的主键</li>
-<li>含有外键的表叫外键表，外键字段来自的那一张表叫做主键表</li>
-</ul>
-
-
-<hr />
-
-<h2>问题：</h2>
-
-<p><strong>Q：</strong> 先删除主键表还是先删除外键表？</p>
-
-<p><strong>A：</strong> 先删除外键表，再删主键表。如果先删除主键表，会报错，因为这会导致外键表中的数据引用失效。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -952,6 +1011,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git(Github) 001 介绍和下载安装图文教程 for Windows</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客</a>
       </li>
     
@@ -967,10 +1030,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
         <a href="/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">解决问题： Pywin32 安装后出现 Import Win32api ImportError DLL Load Failed</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/26/python-Scrapy-command/">Python --- Scrapy 命令</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -978,14 +1037,15 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 115%" href="/tags/c-number/">C#</a>
+<a style="font-size: 115%" href="/tags/git/">Git</a>
+<a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 90%" href="/tags/powercmd/">PowerCmd</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 139%" href="/tags/windows/">Windows</a>
-<a style="font-size: 90%" href="/tags/between/">between</a>
+<a style="font-size: 147%" href="/tags/windows/">Windows</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
@@ -1001,7 +1061,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 139%" href="/tags/python/">python</a>
 <a style="font-size: 139%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
-<a style="font-size: 90%" href="/tags/top/">top</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
@@ -1019,7 +1078,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
-<a style="font-size: 90%" href="/tags/ji-suan-lie/">计算列</a>
+<a style="font-size: 115%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 <a style="font-size: 90%" href="/tags/lian-jie-cha-xun/">连接查询</a>
 
   </ul>
@@ -1029,7 +1088,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
-<li class='category'><a href='/blog/categories/git-github/'>git_github (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
 <li class='category'><a href='/blog/categories/python3-大型网络爬虫实战/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

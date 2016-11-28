@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-26T18:24:55+08:00</updated>
+  <updated>2016-11-29T04:33:57+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(Github) 001 介绍和下载安装图文教程 for Windows]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/"/>
+    <updated>2016-11-29T04:29:52+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的电脑：Windows 10 系统 64位</p>
+
+<hr />
+
+<h2>介绍</h2>
+
+<p>Git for Windows 软件就是 Git；GitHub For Windows 软件是GitHub公司做的一个超级低门槛的使用软件，非常好。</p>
+
+<hr />
+
+<h2>安装</h2>
+
+<p>在Windows上</p>
+
+<p>下载：<a href="https://desktop.github.com/">https://desktop.github.com/</a></p>
+
+<p>安装时，不管是<strong>以普通用户的身份</strong>，还是<strong>以管理员的身份</strong>运行 <strong>GitHubSetup.exe</strong> 软件。都会出现下面的结果：</p>
+
+<p>（这是在线下载，国内防火墙的原因，导致下载速度巨慢，最后连资源都找不到了。）
+<img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067064738.png" alt="Alt text" /></p>
+
+<p>是没有办法成功安装的。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067095197.png" alt="Alt text" /></p>
+
+<p>点击 <strong>详细信息(D)&hellip;</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067512031.png" alt="Alt text" /></p>
+
+<p>如果你看到的内容大致和我的一样的话，那么下面的解决方法很适合你。</p>
+
+<hr />
+
+<h2>Step 1 不使用Github 官方的这个在线下载软件，而是去我的百度云盘里下载离线版的Github For Windows软件</h2>
+
+<blockquote><p>Github For Windows软件：你可以使用GUI可视化界面来使用GitHub，而不需要使用一些繁琐的Git命令，只需点点鼠标即可。</p></blockquote>
+
+<p>我在我的百度云盘里面有离线版的Github For Windows 文件，你可以去那下载。但是版本不是最新的，是2015/09/08 时候的版本。</p>
+
+<p>链接：<a href="http://pan.baidu.com/s/1o8CSgI2">http://pan.baidu.com/s/1o8CSgI2</a> 密码：cbos</p>
+
+<p>下载后，解压，直接双击里面的 <strong>GitHub.application</strong> 文件，进行安装。</p>
+
+<p>安装后，自动出现下面的窗口。
+<img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068914780.png" alt="Alt text" /></p>
+
+<p>现在你输入你的Github 用户名和密码，并点击 <strong>Log in</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069085322.png" alt="Alt text" /></p>
+
+<p>点击 <strong>Continue</strong> 按钮。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069097529.png" alt="Alt text" /></p>
+
+<p>&hellip;</p>
+
+<hr />
+
+<p>现在你就可以使用它了。
+<img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070434905.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>Step 2 下载安装 Git For Windows</h2>
+
+<blockquote><p>Git For Windows 软件：你可以在任何文件夹里面空白的位置，点击鼠标右键，里面会有两项：Git Bash  和 Git GUI 。其中 最常用的就是 <strong>Git Bash</strong> ，它就是 一个命令行终端，你需要使用繁琐的<strong>Git</strong>命令来将你的工程代码放到<strong>Github</strong>网站里面管理。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070635983.png" alt="Alt text" /></p></blockquote>
+
+<p>我们下载 Git For Windows 。现在路径：<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a></p>
+
+<p>下载完，直接双击安装，一路 <strong>下一步</strong>，所有选项全部默认即可。</p>
+
+<hr />
+
+<p><strong>启动：</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068623495.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<blockquote><p><strong>总结：</strong></p>
+
+<p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
+
+<p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客]]></title>
@@ -30,7 +128,7 @@
 </ul>
 
 
-<p>如果你还没有搭建好开发环境，请到这篇博客：。</p>
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
 
 <hr />
 
@@ -3869,209 +3967,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL 数据库 学习 033 视图]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-033-View/"/>
-    <updated>2016-10-24T09:13:55+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/24/SQL-Learning-033-View</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>为什么需要视图</h2>
-
-<p>以一个例子为例：</p>
-
-<p><strong>求出平均工资最高的部门的编号和部门的平均工资。</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--使用我们目前所知道的方法去编写查询代码。</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span> <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>          <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>              <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>              <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>      <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的查询代码中，有下面的一段代码，这段代码是创建一个临时表。我们可以将这个临时表创建为一个视图：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>创建了一个视图：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出这个视图中的数据信息：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面的代码的输出同上面<strong>使用目前所知道的方法去编写查询代码</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">avg_sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">avg_sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>总结：</strong> 视图的优点是可以简化查询代码。（简化查询）。即避免了代码的冗余；避免了属性大量重复的<strong>sql</strong>语法。</p>
-
-<hr />
-
-<h2>什么是视图</h2>
-
-<ul>
-<li>视图从代码上看视图是一个<code>select</code>语句。</li>
-<li>视图从逻辑上被当做一个虚拟表看待。</li>
-</ul>
-
-
-<hr />
-
-<h2>如何创建视图</h2>
-
-<p>视图的格式</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="err">视图的名字</span>
-</span><span class='line'>  <span class="k">as</span>
-</span><span class='line'>      <span class="c1">--select的前面不能添加begin</span>
-</span><span class='line'>      <span class="k">select</span>
-</span><span class='line'>      <span class="c1">--select的后面不能添加end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>视图的优点</h2>
-
-<ol>
-<li>视图的优点是可以简化查询代码。</li>
-<li>增加数据的保密性</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--屏蔽了入职日期和员工工资 这两个属性。</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp2</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">mgr</span><span class="p">,</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>视图的缺点</h2>
-
-<ol>
-<li>增加了数据库维护的成本。
-
-<ul>
-<li>原表里面的属性被改了，那么视图就会报错。</li>
-</ul>
-</li>
-<li>视图只是简化了查询的代码，但是并不能加快查询的速度，这也是视图使用不足的地方。</li>
-</ol>
-
-
-<hr />
-
-<h2>使用视图要注意的三个问题</h2>
-
-<p>1 . 创建视图的<code>select</code>语句必须得为所有的计算列指定别名</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--ok</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2 . 视图不是物理表，而是虚拟表</p>
-
-<p>3 . 不建议通过视图更新视图所依赖的原始表的数据和结果。（因为很麻烦，有许多语法的限制。）</p>
-
-<hr />
 ]]></content>
   </entry>
   
