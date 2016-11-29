@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="前言 之前，我是按照我写的这篇博客为Octopress站点侧边栏添加分类列表（Categories）。 出现的问题 基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。 解决思路 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>守候为了三世的臣子，话说我觉醒在这一代。祖先为我起的名字，注定我将文武全才。代码划分了我的世界，从老子出生起就打算征服天地。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T13:49:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<h2>前言</h2>
+
+<p>之前，我是按照我写的<a href="http://www.aobosir.com/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">这篇博客</a>为<strong>Octopress</strong>站点侧边栏添加分类列表（Categories）。</p>
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。</p>
+
+<hr />
+
+<h2>解决思路</h2>
+
+<p>中文取拼音。</p>
+
+<hr />
+
+<h2>解决方法</h2>
+
+<p>参考网站：<a href="http://jiankg.github.io/2014/10/16/jie-jue-octopressfen-lei-mu-lu-zhi-chi-zhong-wen-de-wen-ti/">解决Octopress分类目录支持中文的问题</a></p>
+
+<p><code>/plugins/category_sidebar.rb</code> (若没有，自行创建)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;stringex&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
+</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
+</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/blog/categories/</span><span class="si">#{</span><span class="n">category</span><span class="o">.</span><span class="n">to_url</span><span class="o">.</span><span class="n">downcase</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">html</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_sidebar&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>搞定</h2>
+
+<p>现在你可以重新执行<code>rake generate</code>和<code>rake preview</code>、 <code>rake deploy</code>，分类列表中有中文字符的分类，就可以正常打开了，而实际的链接就是对应的拼音。</p>
+
+<hr />
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T13:49:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:49 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/" title="Previous Post: Octopress 搭建静态博客站点 --- 添加访客统计">&laquo; Octopress 搭建静态博客站点 --- 添加访客统计</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found" data-title="Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用" data-url="http://aobojaing.github.io /blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/">Octopress 搭建静态博客站点 --- 添加访客统计</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/">在 JetBrains PyCharm 软件上使用 Git(Github)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件（professional版 专业版）在Windows系统上的下载、安装、破解图文教程</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git(Github) 001 介绍和下载安装图文教程 for Windows</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 115%" href="/tags/c-number/">C#</a>
+<a style="font-size: 129%" href="/tags/git/">Git</a>
+<a style="font-size: 115%" href="/tags/github/">GitHub</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 159%" href="/tags/windows/">Windows</a>
+<a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
+<a style="font-size: 90%" href="/tags/from-where/">from where</a>
+<a style="font-size: 90%" href="/tags/full-join/">full join</a>
+<a style="font-size: 90%" href="/tags/group-by/">group by</a>
+<a style="font-size: 90%" href="/tags/having/">having</a>
+<a style="font-size: 90%" href="/tags/identity/">identity</a>
+<a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
+<a style="font-size: 90%" href="/tags/join-on/">join on</a>
+<a style="font-size: 90%" href="/tags/left-join/">left join</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 139%" href="/tags/python/">python</a>
+<a style="font-size: 139%" href="/tags/python3/">python3</a>
+<a style="font-size: 90%" href="/tags/right-join/">right join</a>
+<a style="font-size: 90%" href="/tags/top/">top</a>
+<a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/vcvarsall-dot-bat/">vcvarsall.bat</a>
+<a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
+<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
+<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
+<a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
+<a style="font-size: 90%" href="/tags/fen-zu/">分组</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
+<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 90%" href="/tags/lian-jie-cha-xun/">连接查询</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

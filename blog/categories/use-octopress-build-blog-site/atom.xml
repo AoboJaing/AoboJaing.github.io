@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Use Octopress Build Blog Site | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/use-octopress-build-blog-site/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-29T13:27:34+08:00</updated>
+  <updated>2016-11-29T13:50:02+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/"/>
+    <updated>2016-11-29T13:49:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>前言</h2>
+
+<p>之前，我是按照我写的<a href="http://www.aobosir.com/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">这篇博客</a>为<strong>Octopress</strong>站点侧边栏添加分类列表（Categories）。</p>
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。</p>
+
+<hr />
+
+<h2>解决思路</h2>
+
+<p>中文取拼音。</p>
+
+<hr />
+
+<h2>解决方法</h2>
+
+<p>参考网站：<a href="http://jiankg.github.io/2014/10/16/jie-jue-octopressfen-lei-mu-lu-zhi-chi-zhong-wen-de-wen-ti/">解决Octopress分类目录支持中文的问题</a></p>
+
+<p><code>/plugins/category_sidebar.rb</code> (若没有，自行创建)</p>
+
+<pre><code class="ruby">require 'stringex'
+
+module Jekyll
+  class CategoryListTag &lt; Liquid::Tag
+    def render(context)
+      html = ""
+      categories = context.registers[:site].categories.keys
+      categories.sort.each do |category|
+        posts_in_category = context.registers[:site].categories[category].size
+        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://aobojaing.github.io/blog/categories/#{category.to_url.downcase}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+      end
+      html
+    end
+  end
+end
+
+Liquid::Template.register_tag('category_sidebar', Jekyll::CategoryListTag)
+</code></pre>
+
+<h2>搞定</h2>
+
+<p>现在你可以重新执行<code>rake generate</code>和<code>rake preview</code>、 <code>rake deploy</code>，分类列表中有中文字符的分类，就可以正常打开了，而实际的链接就是对应的拼音。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 添加访客统计]]></title>
