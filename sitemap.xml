@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/</loc>
+<lastmod>2016-11-29T19:18:27+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/</loc>
 <lastmod>2016-11-29T13:49:25+08:00</lastmod>
 </url>
@@ -591,5 +595,17 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/zhong-wen-cuo-wu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/unicodedecodeerror/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/gbk/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/du-qu-wen-jian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/bian-ma/</loc>
 </url>
 </urlset>

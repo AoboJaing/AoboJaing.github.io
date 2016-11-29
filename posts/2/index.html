@@ -9,8 +9,28 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的电脑： Windows 10 64位 前言 开发Python爬虫有很多种方式，从程序的复杂程度的角度来说，可以分为：爬虫项目和爬虫文件。
-相信有些朋友玩过Python的urllib模块，一般我们可以用该模块写一些爬虫文件，实现起来非常方便，但做大型项目的时候，会发现效率不是太好、 &hellip;">
+  <meta name="description" content="Scrapy 命令 分为两种：全局命令 和 项目命令。 全局命令：在哪里都能使用。 项目命令：必须在爬虫项目里面才能使用。 全局命令 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+C:\Users\AOBO&gt;scrapy -h &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +87,197 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/26/python-Scrapy-command/">Python --- Scrapy 命令</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-26T06:39:53+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>Scrapy 命令 分为两种：<strong>全局命令</strong> 和 <strong>项目命令</strong>。</p>
+
+<p>全局命令：在哪里都能使用。</p>
+
+<p>项目命令：必须在爬虫项目里面才能使用。</p>
+
+<h2>全局命令</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO&gt;scrapy -h
+</span><span class='line'>Scrapy 1.2.1 - no active project
+</span><span class='line'>
+</span><span class='line'>Usage:
+</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
+</span><span class='line'>
+</span><span class='line'>Available commands:
+</span><span class='line'>  bench         Run quick benchmark test
+</span><span class='line'>  commands
+</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
+</span><span class='line'>  genspider     Generate new spider using pre-defined templates
+</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
+</span><span class='line'>  settings      Get settings values
+</span><span class='line'>  shell         Interactive scraping console
+</span><span class='line'>  startproject  Create new project
+</span><span class='line'>  version       Print Scrapy version
+</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
+</span><span class='line'>
+</span><span class='line'>  [ more ]      More commands available when run from project directory
+</span><span class='line'>
+</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>startproject</strong>：创建一个爬虫项目：<code>scrapy startproject demo</code>（<code>demo</code> 创建的爬虫项目的名字）</li>
+<li><strong>runspider</strong> 运用单独一个爬虫文件：<code>scrapy runspider abc.py</code></li>
+<li><strong>veiw</strong> 下载一个网页的源代码，并在默认的文本编辑器中打开这个源代码：<code>scrapy view http://www.aobossir.com/</code></li>
+<li><strong>shell</strong> 进入交互终端，用于爬虫的调试（如果你不调试，那么就不常用）：<code>scrapy shell http://www.baidu.com --nolog</code>（<code>--nolog</code> 不显示日志信息）</li>
+<li><strong>version</strong> 查看版本：（<code>scrapy version</code>）</li>
+<li><strong>bench</strong> 测试本地硬件性能（工作原理：）：<code>scrapy bench</code> （如果遇到问题：解决问题:  <code>import win32api ImportError: DLL load failed</code>，到<a href="http://www.aobosir.com/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">这里</a>查看解决办法。）</li>
+</ul>
+
+
+<hr />
+
+<h2>项目命令</h2>
+
+<p>（进入项目路径，才能看到项目命令）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy -h
+</span><span class='line'>Scrapy 1.2.1 - project: first
+</span><span class='line'>
+</span><span class='line'>Usage:
+</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
+</span><span class='line'>
+</span><span class='line'>Available commands:
+</span><span class='line'>  bench         Run quick benchmark test
+</span><span class='line'>  check         Check spider contracts
+</span><span class='line'>  commands
+</span><span class='line'>  crawl         Run a spider
+</span><span class='line'>  edit          Edit spider
+</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
+</span><span class='line'>  genspider     Generate new spider using pre-defined templates
+</span><span class='line'>  list          List available spiders
+</span><span class='line'>  parse         Parse URL (using its spider) and print the results
+</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
+</span><span class='line'>  settings      Get settings values
+</span><span class='line'>  shell         Interactive scraping console
+</span><span class='line'>  startproject  Create new project
+</span><span class='line'>  version       Print Scrapy version
+</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
+</span><span class='line'>
+</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command
+</span><span class='line'>
+</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>genspider</strong> 创建一个爬虫文件，我们在爬虫项目里面才能创建爬虫文件（这个命令用的非常多）（<strong>startproject</strong>：创建一个爬虫项目）。创建爬虫文件是按照以下模板来创建的，使用<code>scrapy genspider -l</code> 命令查看有哪些模板。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy genspider -l
+</span><span class='line'>Available templates:
+</span><span class='line'>  basic
+</span><span class='line'>  crawl
+</span><span class='line'>  csvfeed
+</span><span class='line'>  xmlfeed
+</span><span class='line'>
+</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><code>basic</code> 基础
+<code>crawl</code>自动爬虫
+<code>csvfeed</code>用来处理csv文件
+<code>xmlfeed</code>用来处理xml文件</p>
+
+<p>按照<code>basic</code>模板创建一个名为<code>f1</code>的爬虫文件：<code>scrapy genspider -t basic f1</code> ，创建了一个<code>f1.py</code>文件。</p></blockquote>
+
+<ul>
+<li><p><strong>check</strong> 测试爬虫文件、或者说：检测一个爬虫，如果结果是：OK，那么说明结果没有问题。：<code>scrapy check f1</code></p></li>
+<li><p><strong>crawl</strong> 运行一个爬虫文件。：<code>scrapy crawl f1</code> 或者 <code>scrapy crawl f1 --nolog</code></p></li>
+<li><p><strong>list</strong> 列出当前爬虫项目下所有的爬虫文件： <code>scrapy list</code></p></li>
+<li><p><strong>edit</strong> 使用编辑器打开爬虫文件 （Windows上似乎有问题，Linux上没有问题）：<code>scrapy edit f1</code></p></li>
+</ul>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1395,469 +1606,6 @@ Python读写文件
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/26/Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/">Auto Control 003 自动控制原理 自动控制的数学模型 ---实例讲解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-26T20:47:46+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>本篇博客中的公式支持不完整，请您访问这个链接：<a href="http://blog.csdn.net/github_35160620/article/details/52938197">http://blog.csdn.net/github_35160620/article/details/52938197</a></p></blockquote>
-
-<hr />
-
-<p> 这篇博客，在<a href="http://www.aobosir.com/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model/">上一篇</a>的基础上，针对 <strong>自动控制的数学模型</strong> 的重要考点，举一些典型的例题，加以解析，巩固大家对 <strong>自动控制的数学模型</strong>的掌握。</p>
-
-<h2><strong>PID调节器</strong> &mdash; 自动控制原理中最简单、最经典、最有用的调节器</h2>
-
-<p>我们先来看第一道题：</p>
-
-<p>一有源网络如下图所示，要求：</p>
-
-<ol>
-<li>写出系统的微分方程；</li>
-<li>求系统的传递函数；</li>
-<li>说明此电网络在校正中的作用。</li>
-</ol>
-
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477447993321.png" alt="Alt text" /></p>
-
-<p>解：</p>
-
-<p>这一道题，给了一个有源网络，要求建立它的两种形式的数学模型（一种是在时域当时所对应的微分方程；还有一种是复频域当中所对应的传递函数）。并且让我们分析：如果这个电网络放在了系统当中，将会给系统的性能产生何种的校正作用。</p>
-
-<p>这种类型的题，我们会经常见到。要么是以有源网络的形式，要么是以无源网络的形式出现。 要解决这样的一类问题，一般有两种方法。</p>
-
-<p>第一种方法：先写出在时域中所对应的微分方程组。比如是针对这样的有源网络而言，我们要充分利用到这个理想运算放大器它的续断和虚段的原理，根据：流入A节点的电流和流出这个节点的电流相同，同时在运算放大器的同向和反向输入端又没有电流流入。这样的话，我们可以在时域当中列出它的方程，然后消去中间变量。最终得到一个只和输入和输出有关的微分方程。</p>
-
-<p>还有一种方法，是我们在<a href="http://www.aobosir.com/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model/">上一篇博客</a>当中提醒大家，在考试中经常会使用到的方法。这种方式是这样的：不管是有源还是无源网络，我们都可以利用复阻抗的方法，将电网络当中所对应的电阻、电感、电容用复阻抗来表示，然后用运算法直接列出复频域当中所对应的方程组，然后在直接的消元或者结合框框图，求出系统的传递函数。</p>
-
-<blockquote><p>一般情况下，遇到的电网络，不管是有源还是无源，我们都提议使用第二种方法会比较简单。</p></blockquote>
-
-<p>我们现在来看看这道题。对于这样的有源网络而言。由于表述这个系统的数学模型：微分方程和传递函数之间是可以相互转换的，所以我们不管是求出来哪一种形式的数学模型，传递函数也好、微分方程也好，只要求出来一种，另外一种也就没有问题了。对于这样道题，我们来看看。</p>
-
-<p>首先我们把这个有源网络当中所有的<strong>R、C </strong> 全部用 <strong>复阻抗</strong>   的形式来表示。所对应的电阻是不变的，而电容将它转换为 $\frac  {1}{CS}$  。这样，不管是输出信号、输入信号就都可以使用复频域的形式来表示了。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477447752143.png" alt="Alt text" /></p>
-
-<p>当把电路转换为这样的形式之后，我们就可以接着往下做了。对于 <strong>A</strong> 点而言，由于<strong>流入它的电流</strong>等于<strong>流出它的电流</strong>。所以我们有：</p>
-
-<p>$$\frac{u<em>{r}(s) - u</em>{A}(s)}{R<em>{3}} = \frac{u</em>{A}(s) - u_1(s)}{R<em>{1} + \frac{1}{C</em>{1}S}}$$</p>
-
-<p>（这样就得到的复频域里面的第一个方程了。）</p>
-
-<p>我们在往下看 ，对于<strong>C</strong>点而言，这是一个电网络，所以对于<strong>C</strong> 点，我们一样可以利用基尔霍夫电流定律：流入 <strong>C</strong> 点的电流应该等于流出 <strong>C</strong> 点的电流之和。</p>
-
-<p>$$\frac{u<em>{A}(s) - u_1(s)}{R</em>{1} + \frac{1}{C<em>{1}S}} = \frac{u</em>{1}(s) - 0}{\frac{1}{C<em>{2}S}} + \frac{u</em>{1}(s) - u<em>{C}(s)}{R</em>{2}}$$</p>
-
-<p>这样对于 <strong>A</strong> 和 <strong>C </strong> 这两点而言，我们都列写出来的它们所对应的电流平衡方程，而理想的有源运放同时又满足：<strong>A</strong> 点 和 <strong>B</strong> 点 是等电位的，等于0。</p>
-
-<p>$$u<em>{A} = u</em>{B} = 0$$</p>
-
-<p>这样的话，由这样的三个方程，我们消去中间变量，<strong>$u_{1}(s)$</strong>、<strong>$u_{A}(s)$</strong>，这样可以得到下面的关系式：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474810531698.png" alt="Alt text" />
-这里有一个负号，这里我们要做一个特别说明 ：由于现在这个题中的有源运放的输入信号是加在反向输入端（$-$），所以会有一个负号存在，但是这样的一个元器件，或者说这样的一个有源网络加在电路当中以后，我们知道信号一旦进过它（有源运放的反向输入端）以后，会产生一个反向作用就可以了，我们并不需要再传递函数当中额外的留意负号的存在，所以这个传递函数，我们可以进一步将它化简为：</p>
-
-<p>系统的传递函数，最终化简得到：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474810840555.png" alt="Alt text" /></p>
-
-<p>一旦这个有源网络给定了，所以 <strong>R1</strong>、<strong>R2</strong>、<strong>R3</strong>的参数也就确定下来了。所以这个组合，只要有源网络不变，它们的 组合的值就不会发生改变，在<strong>典型环节</strong>当中，我们认为它是一个<strong>比例环节</strong> （<strong>P</strong>）</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474810953249.png" alt="Alt text" /></p>
-
-<p>而公式中间的部分，我们观察它，它是一个：一个常数 乘以 一个所对应的微分环节，我们在<strong>典型环节</strong>中把它叫做：<strong>微分环节</strong>（D = ($K_{I}S$)）</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474811075174.png" alt="Alt text" /></p>
-
-<p>在来看最后一部分，我们可以将它写做：$K_{I}\frac{1}{s}$ 。相当于一个积分常数 与 积分环节相乘。典型环节当中，我们把它叫做积分环节（<strong>I</strong>）。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474811169357.png" alt="Alt text" /></p>
-
-<p>所以，这样的一个有源网络，它们组合起来以后，形成了一个经典控制理论当中最重要的调节器：我们把它叫做：<strong>PID调节器</strong>。</p>
-
-<p>这个<strong>PID</strong>可以这样来理解：在经典控制理论当中，我们所有的问题基本上，都是围绕着这样的一种调节器展开的，而这种调节器在整个控制领域的应是非常非常的广泛。</p>
-
-<p>好，现在我们已经建立了这个图中有源网络的传递函数，并且分析了这样一个有源网络在系统当中实际上就是一个<strong>PID</strong>调节器。那么这个<strong>PID</strong>调节器的每一个部分对系统性能的影响表现在哪里呢？</p>
-
-<p>首先，我们来看<strong>P</strong> 比例部分。比例部分的存在可以改变一个系统的系统增益，而一个系统的系统增益发生了改变，那么所对应的稳态性能（比如说：是否稳定），或者稳态误差的大小，都有可能会改变。</p>
-
-<p>而微分部分的存在，它可以加快系统的响应速度。</p>
-
-<p>而积分 部分的存在，它可以降低系统的误差。</p>
-
-<p>所以，每一个部分在系统中的影响，你需要格外的清楚，当然<strong>PID</strong>调节器，我们在日后的博客中，还会再次介绍。</p>
-
-<p>当我们建立起来了系统的传递函数以后，再想求它时域当中的数学模型 &mdash; 微分方程，就没有什么困难了。我们可以将传递函数当中所有的 复变量<strong>s</strong>用<strong>微分算子</strong>    来代替。也就是说，把所有的s置换成$\frac {d}{dt} \leftarrow s$</p>
-
-<p>我们可以得到传递函数
-将上面的比例部分使用$K<em>{P}$ 来表示、微分部分使用$K</em>{D}s$来表示、积分部分使用$K_{I} \frac {1}{s}$来表示。</p>
-
-<p>$$\varphi (s) = \frac {u<em>{c}(s)}{u</em>{r}(s)} = K<em>{P} + K</em>{D}s + K_{I} \frac {1}{s}$$</p>
-
-<p>现在，我们就可以还原回时域当中。这样，我们就可以得到时域当中所对应的微分方程：</p>
-
-<p>$$u<em>{c}(t) = K</em>{P}u<em>{r}(t) + K</em>{D} \frac {du<em>{r}(t)}{d</em>{t}} + K<em>{I}\int u</em>{r}(t)d_{t}$$</p>
-
-<p>（当然，在微分方程当中，积分符号的存在，在微分方程中是不常见的。所以，我们可以对微分方程的两侧再求一次导。）
-可以得到：</p>
-
-<p>$$\frac {du<em>{c}(t)}{dt} = K</em>{P} \frac {du<em>{r}(t)}{dt} +  K</em>{D} \frac {d^{2}u<em>{r}(t)}{dt^{2}} + K</em>{I} u_{r}(t)$$</p>
-
-<p>那这样是一个微分方程是不是我们时域当中微分方程的标准形式呢？不是。
-微分方程应该在右侧的公式里面，通过求导从高到底的形式来表示。</p>
-
-<p>$$\frac {du<em>{c}(t)}{dt} = K</em>{D} \frac {d^{2}u<em>{r}(t)}{dt^{2}} + K</em>{P} \frac {du<em>{r}(t)}{dt} + K</em>{I} u_{r}(t)$$</p>
-
-<p>所以现在，我们得到了一个二阶的常系数的线性的微分方程。这是这个有源网络在时域当中所对应的数学模型（微分方程）。</p>
-
-<h2>第2道</h2>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474812401676.png" alt="Alt text" /></p>
-
-<blockquote><p>我们<a href="http://www.aobosir.com/blog/2016/10/26/Auto-Control-002-Principle-of-automatic-control-Mathematical-Model/">上一篇博客</a>里面有说过：如何来建立系统的动态结构图。我们说过：可以分两步走：第一步：<strong>化整为零</strong>；第二步：<strong>积零为整</strong>。</p>
-
-<p>所谓化整为零：把一个复杂的系统划分为若干个子系统，列出来每一个子系统所对应的微分方程或者复频域当中的代数方程。要注意的是：前后两个子系统之间是不是存在信号的彼此联系，也就是说：后一个子系统是不是前一个子系统所对应的负载。在完成了<strong>化整为零</strong>这一步之后，就开始做<strong>积零为整</strong>这一步，我们需要按照信号流动的单向性把我们所对应的环节相互连接起来，构成我们整个系统的动态结构图。</p></blockquote>
-
-<p>我们现在解的这道典型例题，系统不再是以原理图的形式给你了。而是以微分方程或者是代数方程的形式给你的，那么系统的微分方程一旦了解以后，我们应如何建立系统的动态结构图？并且进一步求取系统的传递函数呢？并且在传递函数中，我们要注意，这个系统的传递函数不止一个： $\frac {C(s)}{R(s)}$ 、$\frac {C(s)}{N<em>{1}(s)}$、$\frac {C(s)}{N</em>{2}(s)}$</p>
-
-<p>这些传递函数，我们来观察一下，从它的表型形式，我们发现。这道题最终得到的动态结构图，它的输入信号肯定是不止一个的，它既有给定参考输入$R(s)$，同时也会存在扰动输入$N<em>{1}(s)$、$N</em>{2}(s)$ ，那么对于此类的题型，我们要如何解决呢？
-其实这种问题也非常简单。我们来观察一下这一组微分方程，在我们动态结构图当中，常见到的组成部分有这样几个：</p>
-
-<p><strong>比较环节</strong></p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474812749949.png" alt="Alt text" /></p>
-
-<p>所谓的比较环节，是指两个或者两个以上的信号在这一点相遇以后，（什么点？比较点，我们使用小圈来表示。）所对应的比较点的输出（输出将会是输入信号的叠加）。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474812839262.png" alt="Alt text" /></p>
-
-<p>除了比较点之外，再我们的动态结构图当中，还有一个重要的组成部分：方框：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474812883905.png" alt="Alt text" /></p>
-
-<p>而方框的存在相当于一个乘法器。它表示：任意的信号在经过方框以后，所对应的输出都应该用这个信号乘以方框所对应的传递函数。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474813021853.png" alt="Alt text" /></p>
-
-<p>动态结构图除了这两个组成部分之外，还有一个组成部分，我们把它叫做：引出点。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474813034526.png" alt="Alt text" /></p>
-
-<p>引出点是指：从同一个信号线上面的不同位置引出来几路信号，而引出来的这几路信号它的大小、性质是完全一样的。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474813139801.png" alt="Alt text" /></p>
-
-<p>我们的动态结构图也就这三个基本组成部分。那么这三个组成部分对应我们微分方程中运算是什么呢？</p>
-
-<p>比较点：对应 <strong>加减运算</strong>。</p>
-
-<p>方框： 对应 <strong>乘法运算</strong>。</p>
-
-<p>引出点：<strong>相同的信号</strong>，从哪个位置出来，我们就清楚了。</p>
-
-<p>现在我们回到这道题当中来，我们来看看第一个微分方程（$x<em>{1}(t) = r(t) - c(t) + n</em>{1}(t)$）。这个微分方程实质上是一个代数方程。在这个方程中只涉及到了加和减的计算，这个计算在我们动态结构图当中，实际上就相当于只遇到了比较点。</p>
-
-<p>这个比较点的输出信号我们假设是 $x<em>{1}(t)$ ，这个比较点的信号是有三路信号叠加而成的，一路我们假设是参考输入信号$r(t)$，还有一路是来至于系统的输出$c(t)$ 。注意 $r(t)$ 和 $c(t)$ 之间是减的关系，所以$c(t)$ 在这里有一个负号；此外，还有一路信号是来至 $n</em>{1}(t)$。</p>
-
-<p>现在，我们就利用了一个比较点，将第一个代数方程所描述的关系已经表达出来了。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474813571341.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>怎么由$x<em>{1}(t)$得到$x</em>{2}(t)$？</p>
-
-<p>它是经过了一个比例环节（$x<em>{2}(t) = K</em>{1}x<em>{1}(t)$），也就是说 $x</em>{1}(t)$ 这个信号经过了<strong>K1</strong> 倍的放大以后，得到了 $x_{2}(t)$。</p>
-
-<p> <img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474813871699.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>再来看第三个方程（$X<em>{3}(t) = x</em>{2}(t) - x_{5}(t)$），第三个方程仍然涉及到的是一个叠加运算。仍然是遇到了一个比较环节，这个比较环节是哪两个信号进行比较呢？</p>
-
-<p>$x<em>{2}(t)$ 和负的 $x</em>{5}(t)$  。这两路信号在这里做了一个比较。比较以后的输出是 $x_{3}(t)$。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474814149128.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>继续看第4个方程（$T \frac {dx<em>{4}(t)}{dt} = x</em>{3}(t)$）。  如何从$x<em>{3}$ 变成 $x</em>{4}$ 呢？</p>
-
-<p>我们可以考虑对这样的式子做一个变形。 我们将它转换到复频域当中，这样，我们有：
-一阶微分对应的是一个 <code>s</code>。也就是说，如果我们想通过 $x<em>{3}$得到$x</em>{4}$，实际上，我们需要经过一个环节的传递，这个环节是一个积分环节。我们现在把这样的积分环节带到动态结构图当前去。
-$x<em>{3}(t)$ 经过了一个积分环节（$\frac{1}{TS}$）之后，得到了一个输出信号： $x</em>{4}(t)$。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474814573802.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>在来观察一下第5个方程（$x<em>{5}(t) = x</em>{4}(t) - K<em>{2}n</em>{2}(t)$）：</p>
-
-<p>在这个方程当中，所对应的输出信号是$x<em>{5}(t)$，这个方程又是两路信号的叠加。
-哪两路呢？一路是来至于 $x</em>{4}(t)$，还有一路是来至于$n<em>{2}(t)$，并且这个$n</em>{2}(t)$ 是经历了一个比例环节 $K<em>{2}$，这样的两个环节相互比较得到了输出信号 $x</em>{5}(t)$
-<img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474815792767.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>最后一个方程（$K<em>{0}x</em>{5}(t) = \frac {d^{2}c(t)}{dt^{2}} + \frac {dc(t)}{dt}$）。最后这个方程里面仍然有微分符的存在。我们在动态结构图当中，每一个方框里出现的只能使传递函数，所以，我们要这个微分方程所对应的传递函数找到。它的传递函数是什么呢？</p>
-
-<p>现在这个环节，它的输出是$c(s)$ ，输入是$x_{5}(s)$ 。从这个方程中我们可以得到：</p>
-
-<p>传递函数就是这样的： $G(s) = \frac {K_{0}}{s^{2} + s}$。</p>
-
-<p>现在我们就发现了。从 $x_{5}(t)$ 经过一个二阶环节以后得到的整个系统的输出 $c(s)$。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474816043957.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>我们现在来观察一下整个系统的动态结构图。在前面也有一个 $c(t)$。最后一步就是：<strong>相同的信号进行合并</strong>。同理$x_{5}(t)$ 的两个信号线也要进行合并。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474816168971.png" alt="Alt text" /></p>
-
-<p>这样整个系统的动态结构图，我们就画出来了。</p>
-
-<hr />
-
-<blockquote><p>再画结构图的时候，大家要注意一点：如果在遇到微分符号的 存在，就是给你的是微分方程，你需要先把它单个的微分方程做拉氏变换，求出单个环节所对应的传递函数，把这个传递函数写到相应的方框里面去。</p></blockquote>
-
-<p>在画出了这个系统的动态结构图之后， 我们继续看下面的问题：要求系统的传递函数。如何求呢？</p>
-
-<p>这个系统有三个输入信号，分别是：参考输入 $r(t)$、扰动信号 $n<em>{1}(t)$、和扰动信号 $n</em>{2}(t)$。而我们需要求的传递函数就是分别针对于这三个输入信号的。</p>
-
-<blockquote><p>一般 情况下，如果没有特加说明，我们经典控制理论当中所涉及到的系统都是线性控制系统。线性系统有它非常重要的两个性质：叠加性 和 齐次性。</p>
-
-<p>只有同时满足了 叠加性 和 齐次性 的系统才叫做：线性系统。</p>
-
-<p>其中 这个叠加性意味着：如果这个线性系统它在多个信号的作用下，那么这个时候系统的输出就应该等于：这多个信号各自单独作用所对应输出的叠加。也就是说在这样的一个系统当中，整个系统的输出应该等于：$C(t) = C<em>{r}(t) + C</em>{n1}(t) + C_{n2}(t)$。</p></blockquote>
-
-<p>这个时候，如果我们要求某个信号单独作用所对应的传递函数，对于线性系统而言，我们可以假设：其他的输入信号都等于<code>0</code>.</p>
-
-<p>也就是说：如果我们要求参考输入 $r(s)$所对应的输出，我们可以先假设：$n<em>{1}(t) = n</em>{2}(t) = 0$（表示：此刻他们都不存在，都等于零）。那么这个时候，只有参考输入信号单独作用在系统上，而求这个传递函数，我们是不是需要对这样的一个动态结构图进行简化呢？当时是可以的。但是我们更提倡大家使用<strong>Mason</strong>公式直接来做，因为<strong>Mason</strong>公式只要我们能找到<strong>前向通道</strong>，找到<strong>独立回路</strong>，这个时候多么复杂的系统，它的传递函数我们都可以很容易的获得。</p>
-
-<p>比如说，我们现在来求：参考输入作用下，系统的传递函数（$\frac {C(s)}{R(s)}$），我们来观察一下：从参考输入到系统的输出，所经过的<strong>前向通道</strong>只有一个。<strong>这条前向通道它的增益</strong>是多少呢？就等于：<strong>这条前向通道所经历的所有环节传递函数的乘积。</strong></p>
-
-<p>$$n<em>{1}(t) = n</em>{2}(t) = 0$$
-$$P<em>{1} = K</em>{1} \cdot \frac {1}{Ts}  \cdot \frac {K<em>{0}}{s(s+1)} =  \frac {K</em>{0}K_{1}}{Ts^{2}(s+1)}$$</p>
-
-<p>好了前向通道只有一条。接着我们在来看看独立回路：在这个系统中，它存在两个独立回路。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1474817291008.png" alt="Alt text" /></p>
-
-<p>这两个回路所对应的回路增益分别是多少呢？</p>
-
-<p>首先看回路1。回路1所对应的回路增益它等于：</p>
-
-<p>$$L<em>{1} = -\frac{1}{Ts}$$
-$$L</em>{2} = -K<em>{1} \cdot \frac {1}{Ts} \cdot \frac{K</em>{0}}{s^{2} + s} = -\frac {K<em>{0}K</em>{1}}{Ts^{2}(s+1)}$$</p>
-
-<p>而且我们发现：这个两个回路之间有相互接触的部分，所以我们很容易的得到这个系统的特征多项式等于：</p>
-
-<p>$$\triangle = 1 - L<em>{1} - L</em>{2} = 1 + \frac {1}{Ts} + \frac {K<em>{0}K</em>{1}}{Ts^{2}(s+1)}$$</p>
-
-<p>这条系统只有一条前向通道，而且这条前向通道和两个回路多有接触部分，所以它所对应的<strong>余因式</strong>就等于<code>1</code>：</p>
-
-<p>$$\triangle _{1} = 1$$</p>
-
-<p>这样话，我们可以得到这个系统在<strong>参考输入信号</strong>作用下，系统的<strong>传递函数</strong>等于：<strong>前向通道增益</strong>乘上<strong>它所对应的余因式</strong> 比上 <strong>系统的特征多项式</strong>。</p>
-
-<p>$$\frac {C(s)}{R(s)} = \frac {P<em>{1}\cdot \triangle </em>{1}}{\triangle} $$</p>
-
-<p>将 $\triangle$ 、$P<em>{1}$、$\triangle</em>{1}$ 代入上式，也就等于：（整理）</p>
-
-<p>$$\frac {C(s)}{R(s)} = \frac {P<em>{1}\cdot \triangle </em>{1}}{\triangle} = \frac {K<em>{0}K</em>{1}}{Ts^{2}(s+1) + s(s+1) + K<em>{0}K</em>{1}}$$</p>
-
-<p>这给式子就是我们来求的第一个传递函数（$\frac {C(s)}{R(s)}$）。</p>
-
-<p>我们发现，这是一个三阶系统。（其实，我们在微分方程组里面也能发现。构成这个微分方程有一个1阶的，有一个2阶的  ，这些信号（<code>x1</code>、<code>x2</code>、<code>x5</code>）之间是彼此串联的。所以：这个是一个一阶系统串联了一个二阶系统，构成了一个三阶系统。）</p>
-
-<hr />
-
-<p>接下来我们再来看看，在扰动信号 <code>n1</code> 作用下的传递函数。</p>
-
-<p>当我们求扰动信号作用下的传递函数，我们此时可以假设 ：参考输入信号等于零，另外一个扰动信号也等于零（$r(t) = 0 、 n_{2}(t) = 0$）。</p>
-
-<p>这个时候我们来观察，从扰动信号<code>n1</code>输入到系统的输出<code>C</code>，我们发现，<code>n1</code> 和 <code>r</code> 所处的位置是完全一样的，所以<code>n1</code>的传递函数是和<code>r</code>的传递函数是完全一样的。（$\frac {C(s)}{R(s)}$ 已经求得了。）</p>
-
-<p>$$\frac {C(s)}{N_{1}(s)} = \frac {C(s)}{R(s)}$$</p>
-
-<hr />
-
-<p>现在再来看 <code>n2</code>  的传递函数。求这个扰动的传递函数，我们可以先假设，<code>r</code> 和 <code>n1</code> 的参考输入都不存在。即等于零（$r(t) = 0 、 n_{1}(t) = 0$）。</p>
-
-<p>从<code>n2</code> 到达系统的输出，它所通过的前向通道，我们发现只有一个。</p>
-
-<p>这条前向通道的增益等于：</p>
-
-<p>$$P<em>{1} = - K</em>{2} \cdot \frac {K_{0}}{s(s+1)}$$</p>
-
-<p>再来看，系统的回路没有变。所以，不管是哪个参考信号作用下，系统的传递函数，只要系统的结构不变，它的传递函数的分母多项式，也就是系统它的特征多项式是不会发生改变的。 （这一点，我们会在结果中，会得到验证。）</p>
-
-<p>我们现在在观察，从 <code>n2</code> 到输出 <code>c</code> ，它的前向通道前面也有和两个回路相互接触的部分，所以对应的余因式仍然是等于<code>1</code>。</p>
-
-<p>$$\triangle_{1} = 1$$</p>
-
-<p>因此，所对应的传递函数，仍然等于：（分母是刚刚求出来的特征多项式。）</p>
-
-<p>$$\frac {C(s)}{N<em>{2}(s)} = \frac {P</em>{1}\cdot \triangle _{1}}{\triangle}$$</p>
-
-<p>$$\frac {C(s)}{N<em>{2}(s)} =  \frac {- K</em>{2} \cdot \frac {K<em>{0}}{s(s+1)}}{1 + \frac {1}{Ts} + \frac {K</em>{0}K_{1}}{Ts^{2}(s+1)}}$$</p>
-
-<blockquote><p>这样，我们对这样的单输出多输入的系统， 对每一个输入信号作用下的传递函数，我们都很容易获取了。</p></blockquote>
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<p>这道题，我们要掌握这样几个问题：</p>
-
-<ol>
-<li>首先是怎么样从微分方程来建立动态结构图，这种建立只要按照信号流动的单向性，我们把每一个方程所对应的典型的环节都画出来，然后按照信号流图的单向性，相互连接。整个系统的动态结构图，我们就知道了。</li>
-<li>建立起了动态结构图以后，只要能够牢牢的把握线性系统的叠加性原理，那么每一个信号单独作用下的传递函数，我们就知道了。</li>
-</ol>
-
-
-<hr />
-
-<h2>再来一道例题</h2>
-
-<p>系统的方框图如下，试求系统的闭环传递函数。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477483362637.png" alt="Alt text" /></p>
-
-<blockquote><p>题型分析：本题是从结构图求传递函数的一般题型，这种题型一般有三种方法可以解决：即结构图变换、<strong>Mason</strong> 公式，以及变量代换的方法。</p></blockquote>
-
-<p><strong>解题：</strong></p>
-
-<p>给了我们系统的动态结构图，让我们求系统的闭环传递函数。</p>
-
-<p>一般，遇到这样的题型，我们的解决办法有三种：</p>
-
-<p>1 . 我们可以<strong>通过对动态结构图进行化简，从而求得系统的闭环传递函数</strong>。但是这种方法在遇到了一些问题的时候， 并不好用。什么样的问题呢？ 在这个题当中，涉及到了引出点和比较点。</p>
-
-<p>（引出点，比较点，引出点）</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477483503178.png" alt="Alt text" /></p>
-
-<p>它们之间是相互交叉的，也就是说：不管我们是做比较点的前移和后移，还是做引出点的前移和后移，是必会经过一些比较点或者是引出点。那么在这个时候，就非常容易出错。所以，这种方法只有对一些简单的动态结构图，我们可以采用。如果遇到较为复杂的，像现在这种，引出点和比较点相互交叉的情况下呢，我们不提倡大家用这种方法。</p>
-
-<p>2 . 还有一种方法，就是<strong>使用 Mason 公式的方法</strong>。这种方法，不管针对于动态结构图也好，信号流图也能使用。我们只要在动态结构图或者信号流图当中，能够找到从输入到输出所对应的前向通道以及所对应的单独回路，那么这个时候，牢记公式就应该可以很容易的求解系统的传递函数。</p>
-
-<p>3 . 第三种方法：<strong>变量代换</strong>。它和我们高中学过的代数很像。我们之前讲过：构成系统动态结构图的环节有三种：比较点、引出点、还有方框。比较点相当于我们代数运算当中的加或者减，而方框相当于我们代数运算当中的乘法。所以，我们只要运用一些中间变量，把我们的方框也好，比较点也好，还原为原来的代数运算。那么这个时候，只要列出来了所对应的这组代数方程，消去中间变量，就可以求得系统的传递函数。但是这种方法不是我们在大学阶段应该掌握的，所以就不提倡大家使用。</p>
-
-<p>所以这样的话，只要遇到了<strong>动态结构图的化简或者 信号流图的化简</strong>，我们提倡大家就<strong>使用Mason公式</strong>。</p>
-
-<p>那么对于这道题，我们来观察一下，我们现在要求系统的闭环函数，这个时候，系统的输入信号是<code>r(s)</code> ，输出信号是 <code>c(s)</code>  。从输入到输出，所进过的<strong>前向通道</strong>有几条？有三条 。</p>
-
-<p>第一条前向通道：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477483929649.png" alt="Alt text" /></p>
-
-<p>所对应的前向通道的增益是：$P<em>{1} = G</em>{2}(s)$ 。</p>
-
-<blockquote><p>前向通道的增益的求法：我们使用前向通道所进过的所有环节所对应的传递函数乘起来，就是该前向通道的通道增益了。</p></blockquote>
-
-<p>第二条前向通道：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477483894772.png" alt="Alt text" /></p>
-
-<p>所对应的前向通道的增益是：</p>
-
-<p>$$P<em>{2} = G</em>{1}G_{2}$$</p>
-
-<p>第三条前向通道：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477484022577.png" alt="Alt text" /></p>
-
-<p>所对应的前向通道的增益是：</p>
-
-<p>$$P<em>{3} = G</em>{1}$$</p>
-
-<p>现在，前向通道现在我们找完了。现在看看系统当中有没有回路。首先，我们来观察一下，这有一个小回路</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477484183441.png" alt="Alt text" /></p>
-
-<p>所对应的回路增益，我们使用 $L_{1}$  来表示：</p>
-
-<p>$$L<em>{1} = -G</em>{1}$$</p>
-
-<p>除了这个小回路之外，还存在一个大回路，$L_{2}$</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477484284591.png" alt="Alt text" /></p>
-
-<p>它所对应的回路增益是：</p>
-
-<p>$$L<em>{2} = -G</em>{1}G_{2}$$</p>
-
-<p>第三个回路：</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477484396439.png" alt="Alt text" /></p>
-
-<p>增益：</p>
-
-<p>$$L<em>{3} = -G</em>{1}$$</p>
-
-<blockquote><p>按照回路的定义，信号的流动都是单项流动的，所以所有的回路我们就找完了。</p></blockquote>
-
-<hr />
-
-<blockquote><p>（<strong>注意：</strong> 往往我们习惯犯的错误是：先把动态结构图转换为信号流图，再在信号流图中使用<strong>Mason</strong>公式。这个时候就非常容易出现一种错误。我们拿到了动态结构图之后，我们不提倡把它转为信号流图，我们只需要在动态结构图中，使用信号流图的单向性来找前向通道，来找独立回路，就可以了）</p></blockquote>
-
-<p>刚刚，我们已经找到了前向通道和独立回路， 那么这个时候，我们观察这三个独立回路之前在下面这段是相互接触的。所以不存在两两或者三三互不接触的回路。</p>
-
-<p><img src="/images/2016-10-26-Auto-Control-003-Principle-of-automatic-control-Mathematical-Model-Examples/1477484628480.png" alt="Alt text" /></p>
-
-<p>因此，所对应的特征式就等于：</p>
-
-<p>$$\triangle = 1 = L<em>{1} - L</em>{2} - L<em>{3} = 1 + 2G</em>{1} + G<em>{1}G</em>{2}$$</p>
-
-<p>而我们刚才的三条前向通道，它和我们三个回路之间都存在相互交叉的部分，因此所对应的余因式 都等于 <code>1</code>。</p>
-
-<p>$$\triangle<em>{1} = \triangle</em>{2} = \triangle_{3} = 1$$</p>
-
-<hr />
-
-<p>这样，整个系统的闭环传递函数，我们就很容易的可以获得。（利用了 <strong>Mason</strong> 公式 ）</p>
-
-<p>$$\varphi(s) = \frac {C(s)}{R(s)} = \frac {P<em>{1} \triangle</em>{1} + P<em>{2} \triangle</em>{2} + P<em>{3} \triangle</em>{3}}{\triangle} = \frac {G<em>{2} + G</em>{1}G<em>{2} + G</em>{1}}{1 + 2G<em>{1} + G</em>{1}G_{2}}$$</p>
-
-<hr />
-
-<hr />
-
-<h2><strong>总结：</strong></h2>
-
-<p>这个系统一定要是一个线性系统。只要是线性系统，它就一定满足叠加性的原理。</p>
-
-<p>所谓的叠加性：在<strong>参考给定</strong>，以及<strong>扰动输入</strong>共同作用下的<strong>输出</strong>，就应该等于，<strong>参考输入单独作用下的输出</strong> 叠加上 <strong>扰动输入单独作用下的输出</strong>。</p>
-
-<p>而在分布求他们各自的传递函数的时候，我们要把握一点，求某一个信号单独作用的时候，我们要假设其他的输入是等于<code>0</code>的。</p>
-
-<h1>完</h1>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1875,6 +1623,10 @@ $$L</em>{2} = -K<em>{1} \cdot \frac {1}{Ts} \cdot \frac{K</em>{0}}{s^{2} + s} = 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a>
       </li>
     
@@ -1888,10 +1640,6 @@ $$L</em>{2} = -K<em>{1} \cdot \frac {1}{Ts} \cdot \frac{K</em>{0}}{s^{2} + s} = 
     
       <li class="post">
         <a href="/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件（professional版 专业版）在Windows系统上的下载、安装、破解图文教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git(Github) 001 介绍和下载安装图文教程 for Windows</a>
       </li>
     
   </ul>
@@ -1920,13 +1668,13 @@ $$L</em>{2} = -K<em>{1} \cdot \frac {1}{Ts} \cdot \frac{K</em>{0}}{s^{2} + s} = 
 <a style="font-size: 90%" href="/tags/join-on/">join on</a>
 <a style="font-size: 90%" href="/tags/left-join/">left join</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
-<a style="font-size: 139%" href="/tags/python/">python</a>
+<a style="font-size: 147%" href="/tags/python/">python</a>
 <a style="font-size: 139%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
-<a style="font-size: 90%" href="/tags/top/">top</a>
+<a style="font-size: 90%" href="/tags/scrapy/">scrapy</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
-<a style="font-size: 90%" href="/tags/vcvarsall-dot-bat/">vcvarsall.bat</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
+<a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
@@ -1953,7 +1701,7 @@ $$L</em>{2} = -K<em>{1} \cdot \frac {1}{Ts} \cdot \frac{K</em>{0}}{s^{2} + s} = 
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (3)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
