@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Use Octopress Build Blog Site | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/use-octopress-build-blog-site/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-29T12:44:34+08:00</updated>
+  <updated>2016-11-29T13:27:34+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 添加访客统计]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/"/>
+    <updated>2016-11-29T13:26:33+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：<a href="http://tianweili.github.io/blog/2015/01/11/setup-octopress-blog/#h28">Octopress博客的个性化配置：添加访客统计</a></p>
+
+<hr />
+
+<p><strong>Step 1 . </strong> 本博客的访客统计系统使用的是<strong>Flag Counter</strong>，所以要先去<a href="http://www.flagcounter.com/"><strong>Flag Counter</strong></a>获取代码。</p>
+
+<p><strong>Step 2 . </strong> 拿到代码后添加<code>.\source\_includes\custom\asides\flag_counter.html</code>文件：</p>
+
+<pre><code>&lt;section&gt;
+  &lt;h1&gt;访客统计&lt;/h1&gt;
+  &lt;br/&gt;
+  &lt;a href="http://s07.flagcounter.com/more/2SH"&gt;&lt;img src="http://s07.flagcounter.com/count/2SH/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_12/viewers_0/labels_0/pageviews_1/flags_0/" alt="Flag Counter" border="0"&gt;&lt;/a&gt;
+&lt;/section&gt;
+</code></pre>
+
+<p><strong>Step 3 . </strong> 将页面添加到侧边栏，在<code>./_config.yml</code>配置文件中添加下面一行配置：</p>
+
+<pre><code>default_asides: [……, custom/asides/flag_counter.html]
+</code></pre>
+
+<p><strong>Step 4 . </strong> 最后添加控制开关，在<code>./_config.yml</code>配置文件中添加下面一行配置：</p>
+
+<pre><code># Flag Counter
+flag_counter: true
+</code></pre>
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>现在执行 <code>rake generate</code> 来生成博客站点。</p>
+
+<blockquote><p>如果你在执行这一步的时候不到了下面这个问题：</p>
+
+<pre><code>  Liquid Exception: invalid byte sequence in UTF-8 in _layouts/page.html
+jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
+</code></pre>
+
+<p><img src="/images/2016-11-29-octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/1480394392417.png" alt="Alt text" /></p>
+
+<p>解决办法：</p>
+
+<p><code>.\source\_includes\custom\asides\flag_counter.html</code> 文件使用 <a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/"><strong>Notepad++</strong> 软件</a> 转换为UTF-8无BOM编码格式，即可解决问题。</p>
+
+<p><img src="/images/2016-11-29-octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/1480394475393.png" alt="Alt text" /></p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）]]></title>

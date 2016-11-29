@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/</loc>
+<lastmod>2016-11-29T13:26:33+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/</loc>
 <lastmod>2016-11-29T11:44:46+08:00</lastmod>
 </url>
@@ -565,5 +569,14 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/ruan-jian-shi-yong/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/fang-ke-tong-ji/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/flag-counter/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/liquid-exception/</loc>
 </url>
 </urlset>
