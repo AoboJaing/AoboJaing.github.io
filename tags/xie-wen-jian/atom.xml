@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 写文件 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/xie-wen-jian/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-11-29T20:14:57+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/"/>
+    <updated>2016-11-29T20:13:51+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>学习这个知识点的原因</h2>
+
+<p>举一个实例：</p>
+
+<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
+
+<p><img src="/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
+
+<pre><code>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
+  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt
+</code></pre>
+
+<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
+
+<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
+
+<p>其实很简单，我们只需要这样做：</p>
+
+<pre><code class="python">file = open(file_path, 'w', encoding='utf-8')
+</code></pre>
+
+<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
+
+<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>

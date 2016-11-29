@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-29T19:21:14+08:00</updated>
+  <updated>2016-11-29T20:14:57+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/"/>
+    <updated>2016-11-29T20:13:51+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>学习这个知识点的原因</h2>
+
+<p>举一个实例：</p>
+
+<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
+</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
+
+<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
+
+<p>其实很简单，我们只需要这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
+
+<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误]]></title>
@@ -3152,64 +3199,6 @@ Python读写文件
 <p><img src="http://aobojaing.github.io/images/2016-11-17-cs-002-Browse-Open-file-folder/demo14.gif" alt="Alt text" /></p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error/"/>
-    <updated>2016-11-13T13:54:49+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/13/cs-001-delete-event-function-resolve-error</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>先添加一个控件。比如添加一个<code>GroupBox</code>控件。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479014826968.png" alt="Alt text" /></p>
-
-<p>当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步：</p>
-
-<p><strong>Step 1 . </strong> 在 <code>Form11.cs</code> 文件中，将这个控件所有的事件函数删除。对于我们这个例子，删除的代码是：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">private</span> <span class="k">void</span> <span class="nf">groupBox1_Enter</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果这个时候，你运行程序会出错：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="err">错误</span>    <span class="m">1</span>    <span class="err">“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”不包含“</span><span class="n">groupBox1_Enter</span><span class="err">”的定义，并且找不到可接受类型为“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”的第一个参数的扩展方法“</span><span class="n">groupBox1_Enter</span><span class="err">”</span><span class="p">(</span><span class="err">是否缺少</span> <span class="k">using</span> <span class="err">指令或程序集引用?) </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>它提示你：你已经给<code>groupBox1</code>这个控件对象定义了一个<code>groupBox1_Enter</code>的方法了，但是编译器却没有找到这个函数。为什么没有找到？因为刚刚我们给它删除了。所以第2步：</p>
-
-<p><strong>Step 2 . </strong> 在<strong>解决方案资源管理器</strong>，打开：<code>Form1.Designer.cs</code>文件：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015257166.png" alt="Alt text" /></p>
-
-<p>你会看到，一个小加号：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015310058.png" alt="Alt text" /></p>
-
-<p>点开这个小加号，里面就是所有空间的参数和方法的定义汇总。我们找到对应控件的事件函数：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015437616.png" alt="Alt text" /></p>
-
-<p><strong>VS</strong> 软件已经将有错误的地方，用波浪线标注了。我们直接删除这一行，即可：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">groupBox1</span><span class="p">.</span><span class="n">Enter</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">EventHandler</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">groupBox1_Enter</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在，再运行程序，就不会有错误了。</p>
 ]]></content>
   </entry>
   
