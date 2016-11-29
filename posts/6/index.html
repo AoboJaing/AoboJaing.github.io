@@ -9,8 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以我们现在需要先新建一个库，然后在库里面新建一个表。 所以，先建一个 库 ，取名为：test 输入新建库的名字：test 。 现在点击 确定 按钮。 &hellip;">
+  <meta name="description" content="下载 首先到 https://github.com/robbyedwards/octopress-tag-pages 和 https://github.com/robbyedwards/octopress-tag-cloud clone这两个项目的代码。 ```
+$ git clone &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,187 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/12/octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加标签云（Tag Cloud）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T00:00:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>下载</h2>
+
+<p>首先到 <a href="https://github.com/robbyedwards/octopress-tag-pages">https://github.com/robbyedwards/octopress-tag-pages</a> 和 <a href="https://github.com/robbyedwards/octopress-tag-cloud">https://github.com/robbyedwards/octopress-tag-cloud</a> clone这两个项目的代码。</p>
+
+<pre><code>```
+$ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
+$ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
+```
+</code></pre>
+
+<hr />
+
+<h2>octopress-tag-pages</h2>
+
+<p><strong>Step 1 . </strong> 将 <code>octopress-tag-pages\plugins</code> 路径里面的 <code>tag_generator.rb</code> 文件复制到 <code>octopress\plugins\</code> 文件夹里面。</p>
+
+<p><strong>Step 2 . </strong> 将 <code>octopress-tag-pages\source\_includes\custom</code> 路径里面的 <code>tag_feed.xml</code> 文件复制到 <code>octopress\source\_includes\custom\</code> 文件夹。</p>
+
+<p><strong>Step 3 . </strong> 将 <code>octopress-tag-pages\source\_layouts</code> 路径里面的 <code>tag_index.html</code> 文件复制到 <code>octopress\source\_layouts\</code> 文件夹里。</p>
+
+<hr />
+
+<h2>octopress-tag-cloud</h2>
+
+<p><strong>Step 1 . </strong> 将 <code>octopress-tag-cloud\plugins</code>  路径里面的 <code>tag_cloud.rb</code>  文件复制到 <code>octopress\plugins\</code>  文件夹里面。</p>
+
+<p><strong>Step 2 . </strong> 将下面的代码复制到 <code>octopress\source\_includes\custom\asides\tags.html</code>。（这个文件需要你自己新建。）
+<strong>注意：</strong> 先去掉 <code>%</code> 前面的反斜杠。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;Tags&lt;/h1&gt;
+</span><span class='line'>  &lt;ul class="tag-cloud"&gt;
+</span><span class='line'>    {\% tag_cloud font-size: 90-210%, limit: 15, style: para \%}
+</span><span class='line'>  &lt;/ul&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解释上面这段代码：</p>
+
+<p><code>tag_cloud</code> 的参数中。 <code>font-size</code> 指定 <code>tag</code> 的大小范围；<code>limit</code> 限定 <code>15</code> 个 <code>tag</code> ；<code>style :para</code> 指定不使用 <code>li</code> 来分割。</p>
+
+<p><strong>Step 3 . </strong></p>
+
+<p>在 <code>octopress\_config.yml</code> 中的 <code>default_asides</code> 中添加 <code>custom/asides/tags.html</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [custom/asides/tags.html, .....]</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在执行 <code>rake generate</code> 生成博客。在使用 <code>rake preview</code> 在本地预览博客。</p>
+
+<p>你会发现，在导航栏里面出现了 <strong>Tags</strong> 字段，但是里面没有标签。（不用担心，你已经成功添加了标签云。只不过你的博文里面没有标签，所以在标签云里面就没有标签。）</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476209931221.png" alt="Alt text" /></p>
+
+<p>我们写一个带标签的博文。怎么写一个带标签的博文：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tags: [tag1, tag2, tag3]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476210344633.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>执行 <code>rake generate</code> 命令时出现了问题：</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211427887.png" alt="Alt text" /></p>
+
+<h2>解决：<code>comparison of Array with Array failed in _layouts/page.html</code> 错误</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Liquid Exception: comparison of Array with Array failed in _layouts/page.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 <code>octopress\plugins\tag_cloud.rb</code> 中第74行是这么写的:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if @limit &gt; 0 and @sort != 'rand'
+</span><span class='line'>    # sort the tag pairs by frequency in descending order
+</span><span class='line'>    weighted.sort! { |a,b| b[1] &lt;=&gt; a[1] }
+</span><span class='line'>    # then slice off the top @limit tag pairs
+</span><span class='line'>    weighted = weighted[0,@limit]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>weighted = weighted[0,@limit]</code> 应该就是取指定数目的标签。如果你的标签数量少于 <code>@limit</code> ，那么就会报错。</p>
+
+<p>所以我们修改第74行为:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  if @limit &gt; 0 and @sort != 'rand' and @limit &lt; weighted.length</span></code></pre></td></tr></table></div></figure>
+
+
+<p>同样的，将第95行修改为:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    if @limit &gt; 0 and @limit &lt; weighted.length</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在所有的修改都完成了，执行 <code>rake generate</code> 命令时，就不会再出现上面的错误了，但是现在却出现了下面的警告：</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211894282.png" alt="Alt text" /></p>
+
+<p>我们现在执行 <code>rake preview</code> 命令来预览看看。标签云是成功添加上去了:</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-tag-cloud-to-site-sidebar/1476211997018.png" alt="Alt text" /></p>
+
+<h2>解决 <code>Build Warning: Layout 'nil' requested in tags/标签名/atom.xml does not exist.</code> 警告问题</h2>
+
+<p>将 <code>octopress\source\_includes\custom\tag_feed.xml</code> 文件里面 <code>nil</code> 改为 <code>null</code> ：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: null
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>搞定，现在再执行 <code>rake generate</code> 命令就不会出现这个警告了。不会出现任何问题。</p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>(扩充)为 octopress 添加标签云：
+<a href="http://yang3wei.github.io/blog/2013/01/30/zhuan-zai-wei-octopress-tian-jia-biao-qian-yun/">http://yang3wei.github.io/blog/2013/01/30/zhuan-zai-wei-octopress-tian-jia-biao-qian-yun/</a>
+分类标签：
+<a href="http://wiki.jikexueyuan.com/project/github-page/classification.html">http://wiki.jikexueyuan.com/project/github-page/classification.html</a>
+在Octopress中添加标签：
+<a href="http://devma.cn/blog/2016/04/02/zai-octopresszhong-tian-jia-biao-qian/">http://devma.cn/blog/2016/04/02/zai-octopresszhong-tian-jia-biao-qian/</a></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -753,6 +934,10 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/">在 JetBrains PyCharm 软件上使用 Git(Github)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件（professional版 专业版）在Windows系统上的下载、安装、破解图文教程</a>
       </li>
     
@@ -768,10 +953,6 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
         <a href="/blog/2016/11/26/python-xpath/">Python --- Xpath 表达式 --- Ongoing</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/">Python3 解决编码问题： `UnicodeEncodeError: 'Gbk' Codec Can't Encode Character ' ' in Position 10: Illegal Multibyte Sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -779,16 +960,15 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 115%" href="/tags/c-number/">C#</a>
-<a style="font-size: 115%" href="/tags/git/">Git</a>
+<a style="font-size: 129%" href="/tags/git/">Git</a>
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 129%" href="/tags/octopress/">Octopress</a>
-<a style="font-size: 90%" href="/tags/powercmd/">PowerCmd</a>
-<a style="font-size: 115%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 154%" href="/tags/windows/">Windows</a>
+<a style="font-size: 159%" href="/tags/windows/">Windows</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
@@ -811,6 +991,7 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
 <a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
 <a style="font-size: 90%" href="/tags/fen-zu/">分组</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 90%" href="/tags/ming-ling-xing-gong-ju-ruan-jian/">命令行工具软件</a>
 <a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
@@ -830,7 +1011,7 @@ SQL Server 软件版本： SQL Server 2014 Express 在库里面建表。所以�
     <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
-<li class='category'><a href='/blog/categories/git-github/'>git_github (2)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (2)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

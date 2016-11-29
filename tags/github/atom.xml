@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tag: GitHub | AoboSir 博客]]></title>
+  <title><![CDATA[Tag: Github | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-29T07:34:40+08:00</updated>
+  <updated>2016-11-29T11:45:52+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,141 +14,132 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git(Github) 001 介绍和下载安装图文教程 For Windows]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/"/>
-    <updated>2016-11-29T04:29:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial</id>
+    <title type="html"><![CDATA[在 JetBrains PyCharm 软件上使用 Git(Github)]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/"/>
+    <updated>2016-11-29T11:44:46+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows</id>
     <content type="html"><![CDATA[<hr />
 
-<p>我的电脑：Windows 10 系统 64位</p>
+<ul>
+<li>我的电脑：Windows 10 64位</li>
+<li>PyCharm 软件的版本：PyCharm 2016.1.4</li>
+<li>Git For Windows版本：Git-2.10.0-64-bit</li>
+<li>GitHub For Windows软件版：GitHub For Windows 3.0.5.2</li>
+</ul>
+
 
 <hr />
 
-<h2>介绍</h2>
+<p>参考网站：<a href="https://www.youtube.com/watch?v=bsN7ogDz02g">How to Use PyCharm with Github</a></p>
 
-<p>Git for Windows 软件就是 Git；GitHub For Windows 软件是GitHub公司做的一个超级低门槛的使用软件，非常好。</p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p>在Windows上</p>
-
-<p>下载：<a href="https://desktop.github.com/">https://desktop.github.com/</a></p>
-
-<p>安装时，不管是<strong>以普通用户的身份</strong>，还是<strong>以管理员的身份</strong>运行 <strong>GitHubSetup.exe</strong> 软件。都会出现下面的结果：</p>
-
-<p>（这是在线下载，国内防火墙的原因，导致下载速度巨慢，最后连资源都找不到了。）
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067064738.png" alt="Alt text" /></p>
-
-<p>是没有办法成功安装的。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067095197.png" alt="Alt text" /></p>
-
-<p>点击 <strong>详细信息(D)&hellip;</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067512031.png" alt="Alt text" /></p>
-
-<p>如果你看到的内容大致和我的一样的话，那么下面的解决方法很适合你。</p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480361358084.png" alt="Alt text" /></p>
 
 <hr />
 
-<h2>Step 1 不使用Github 官方的这个在线下载软件，而是去我的百度云盘里下载离线版的Github For Windows软件</h2>
-
-<blockquote><p>Github For Windows软件：你可以使用GUI可视化界面来使用GitHub，而不需要使用一些繁琐的Git命令，只需点点鼠标即可。</p></blockquote>
-
-<p>我在我的百度云盘里面有离线版的Github For Windows 文件，你可以去那下载。但是版本不是最新的，是2015/09/08 时候的版本。</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1o8CSgI2">http://pan.baidu.com/s/1o8CSgI2</a> 密码：cbos</p>
-
-<p>下载后，解压，直接双击里面的 <strong>GitHub.application</strong> 文件，进行安装。</p>
-
-<p>安装后，自动出现下面的窗口。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068914780.png" alt="Alt text" /></p>
-
-<p>现在你输入你的Github 用户名和密码，并点击 <strong>Log in</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069085322.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Continue</strong> 按钮。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069097529.png" alt="Alt text" /></p>
-
-<p>&hellip;</p>
+<p>在 JetBrains PyCharm 软件上使用 Git(Github)，开发项目时，推送代码修改到远程库会变得更加便捷。</p>
 
 <hr />
 
-<p>现在你就可以使用它了。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070434905.png" alt="Alt text" /></p>
+<h2>准备工作</h2>
+
+<p>你的电脑里面需要有的软件：</p>
+
+<ul>
+<li>Git For Windows</li>
+<li>GitHub For Windows</li>
+<li>JetBrains PyCharm</li>
+</ul>
+
+
+<p>你可以到这里查看如何下载和安装这些软件的图文教程：</p>
+
+<ul>
+<li><a href="http://www.aobosir.com/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git For Windows 和 GitHub For Windows 这两个软件的下载和安装的教程</a></li>
+<li><a href="http://www.aobosir.com/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件的下载、安装、破解教程</a></li>
+</ul>
+
 
 <hr />
 
-<h2>Step 2 下载安装 Git For Windows</h2>
+<h2>在 JetBrains PyCharm 软件上使用 Git(Github)</h2>
 
-<blockquote><p>Git For Windows 软件：你可以在任何文件夹里面空白的位置，点击鼠标右键，里面会有两项：Git Bash  和 Git GUI 。其中 最常用的就是 <strong>Git Bash</strong> ，它就是 一个命令行终端，你需要使用繁琐的<strong>Git</strong>命令来将你的工程代码放到<strong>Github</strong>网站里面管理。</p>
+<p>对于已有项目文件夹，</p>
 
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070635983.png" alt="Alt text" /></p></blockquote>
+<p><strong>Step 1 . </strong> 在文件夹里面打开命令行，执行 <code>git init</code> 命令，将这个项目文件夹做成本地库。</p>
 
-<p>我们下载 Git For Windows 。现在路径：<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a></p>
+<p><strong>Step 2 . </strong> 使用<strong>GitHub For Windows</strong> 软件克隆本地库，忽略一些文件，并上传到GitHub远程。</p>
 
-<p>下载完，直接双击安装，一路 <strong>下一步</strong>，所有选项全部默认即可。</p>
+<p>具体详细的步骤如下：</p>
 
-<hr />
+<p>克隆本地库：</p>
 
-<p><strong>启动：</strong></p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384008856.png" alt="Alt text" /></p>
 
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068623495.png" alt="Alt text" /></p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384665342.png" alt="Alt text" /></p>
 
-<hr />
+<p>添加<code>ignorefile</code> 文件</p>
 
-<hr />
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384713963.png" alt="Alt text" /></p>
 
-<blockquote><p><strong>总结：</strong></p>
+<p>点击 <strong>+ Add a default .gitignore file.</strong> 按钮</p>
 
-<p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386549071.png" alt="Alt text" /></p>
 
-<p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决 GitHub For Windows 客户端软件中代码的中文显示乱码问题]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/"/>
-    <updated>2016-10-10T07:47:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding</id>
-    <content type="html"><![CDATA[<hr />
+<p>我们这个项目使用的开发软件是 <strong>JetBrains PyCharm</strong> 软件，所以我们需要写一个符合 <strong>JetBrains PyCharm</strong> 软件 的 <code>.gitignore</code> 文件。</p>
 
-<p><code>README.md</code> 文件里面是有中文的。在 <code>GitHub For Windows</code> 客户端软件里面显示中文是乱码的。</p>
+<p>其实我们不需要自己写 <code>.gitignore</code> 文件，GitHub 官方已经为我们写好很多的  <code>.gitignore</code> 文件。</p>
 
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055346118.png" alt="Alt text" /></p>
+<p>点击 <strong>example</strong>：</p>
 
-<p>解决办法：</p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386671756.png" alt="Alt text" /></p>
 
-<p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
+<p>弹出一个网页，将里面的<code>gitignore/Global/JetBrains.gitignore</code> 的内容复制粘贴：</p>
 
-<p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
+<p>（我们再在里面添加一行：<code>.idea/*</code>）</p>
 
-<p><strong>Step 3 . </strong> 保存 <code>README.md</code> 文件</p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387492001.png" alt="Alt text" /></p>
 
-<p><strong>Step 4 . </strong> 将修改重新推送到 <strong>GitHub</strong> 远程。</p>
+<p>现在，直接点击 <code>OK</code> 就可以了。</p>
 
-<p>问题解决：</p>
+<p>现在，你可以发现，只有3个改变的文件了：（这是因为一些文件被忽略，不需要上传到远程。）</p>
 
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055880353.png" alt="Alt text" /></p>
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387512124.png" alt="Alt text" /></p>
 
-<hr />
+<p>输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。</p>
 
-<blockquote><p><strong>GitHub For Windows </strong> 客户端软件是一个非常好的软件，它实现了：即使你不会 <code>git</code> 命令行工具的时候，一样可以使用 <strong>GitHub For Windows </strong> 客户端软件里面简单点的点击按钮就可以一样将代码推送到 <strong>GitHub</strong> 远程。</p></blockquote>
+<p>最后点击 <strong>Publish</strong> 按钮，推送到远程库。</p>
 
-<hr />
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387792020.png" alt="Alt text" /></p>
 
-<blockquote><p>下载、安装、配置 <strong>GitHub For Windows </strong> 客户端软件的图文教程可以参考这篇博客。</p></blockquote>
+<p>第一次推送，需要填写下面的信息。注意：<code>Name</code> 默认不变；<code>Description</code> 里面输入好描述信息（中英文都可以）。</p>
 
-<hr />
+<p>同时选中好要推送到的GitHub账号。</p>
 
-<blockquote><p>因为 <strong>GitHub</strong> 在推送代码到远程的时候，会自动将所有文件的编码方式转换为 <code>UTF-8</code> ，所有在网页里面浏览你的 <strong>GitHub</strong> 仓库的时候，中文是不会出现乱码的。
-但是在本地，要想在 <strong>GitHub For Windows</strong> 客户端软件里面也能正常看到 中文，而不是乱码，就要自己手动的将含有中文的文件转换为：<code>UTF-8</code>编码方法。（如果是 <strong>Windows</strong> 系统就要转为：<code>Utf-8 无 BOM</code> 编码格式）</p></blockquote>
+<p>填好之后点击 <strong>Pubish xxx</strong> 按钮。（可能会失败，白天可能是因为GitHub官网服务器的原因，晚上会好一点。解决办法就是：多试几次。）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387921240.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 使用 <strong>PyCharm</strong> 软件打开看看那个python项目。</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388438196.png" alt="Alt text" /></p>
+
+<p>你会看到：</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388544163.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 当你对项目进行增减代码后，你想要将修改推送到远程库时。</p>
+
+<p>方法1 ： 就点击上图中红圈里面的图标。然后进行推送。</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388727382.png" alt="Alt text" /></p>
+
+<p>方法2 ： 你也可以使用 <strong>GitHub For Windows</strong> 软件进行推送。</p>
+
+<p>（推送方法：输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。最后点击 <strong>Sync</strong> 按钮，推送到远程库。）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388817420.png" alt="Alt text" /></p>
+
+<blockquote><p>两个方法互不干扰，你使用了其中任意一种方法推送了修改，那么另外一种方法里面也好显示推送完成，没有修改的文件了。</p></blockquote>
 ]]></content>
   </entry>
   
