@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-30T23:18:07+08:00</updated>
+  <updated>2016-12-01T04:13:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 020 Pass 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-pass/"/>
+    <updated>2016-12-01T04:12:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-pass</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>pass 的用法</h2>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
+
+<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
+
+<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
+
+<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
+
+<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
+
+<pre><code class="cpp">while(1){
+}
+</code></pre>
+
+<p>换成Python，这样写：</p>
+
+<pre><code class="python">while True:
+    pass
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 019 生成器（Generators）和 Yield]]></title>
@@ -452,87 +494,6 @@ while True:
 <p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
 
 <blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/"/>
-    <updated>2016-11-29T19:18:27+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>出现的错误</h2>
-
-<p>读取文件时，出现<strong>乱码</strong>或者<code>UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX in position XX: incomplete multibyte sequence</code> 错误</p>
-
-<hr />
-
-<h2>出现错误的原因</h2>
-
-<p>这两个错误可能会出现一个，两个错误的出现的原因是一样的：当我们使用了一个不正确的编码方式去读取一个不是用这个编码方式编码的文件时，轻者出现乱码，重者出现<code>UnicodeDecodeError</code>错误。</p>
-
-<hr />
-
-<h2>模拟错误发生现场</h2>
-
-<pre><code class="python">file = open('newfile.txt', 'w', encoding='utf-8')
-file.write('你好，AoboSir.')
-file.close()
-file = open('newfile.txt', 'r')
-print(file.read())
-file.close()
-</code></pre>
-
-<p>运行输出：</p>
-
-<pre><code>浣犲ソ锛孉oboSir.
-</code></pre>
-
-<hr />
-
-<pre><code class="python">file = open('newfile.txt', 'w', encoding='utf-8')
-file.write('你好，AoboSir。')
-file.close()
-file = open('newfile.txt', 'r')
-print(file.read())
-file.close()
-</code></pre>
-
-<p>运行输出：</p>
-
-<pre><code>Traceback (most recent call last):
-  File "D:/WorkSpace/test_ws/demo/learning_python_15.py", line 6, in &lt;module&gt;
-    print(file.read())
-UnicodeDecodeError: 'gbk' codec can't decode byte 0x82 in position 35: incomplete multibyte sequence
-</code></pre>
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>读取文件时，指定正确的编码方式：</p>
-
-<pre><code class="python">file = open('newfile.txt', 'r', encoding='utf-8')
-</code></pre>
-
-<p>现在再运行，就正常了：</p>
-
-<pre><code>你好，AoboSir。
-</code></pre>
-
-<hr />
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   

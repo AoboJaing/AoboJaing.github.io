@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: pass | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/pass/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-01T04:13:19+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 020 pass 的用法]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-pass/"/>
+    <updated>2016-12-01T04:12:13+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-pass</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>pass 的用法</h2>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
+
+<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
+
+<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
+
+<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
+
+<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
+
+<pre><code class="cpp">while(1){
+}
+</code></pre>
+
+<p>换成Python，这样写：</p>
+
+<pre><code class="python">while True:
+    pass
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
