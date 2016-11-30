@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T04:13:19+08:00</updated>
+  <updated>2016-12-01T04:46:22+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 021 创建文件夹、创建文件]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-create-file-create-folder-open/"/>
+    <updated>2016-12-01T04:45:53+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-create-file-create-folder-open</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<h2>Python 创建文件夹</h2>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.qttc.net/201209207.html">Python创建目录文件夹</a></li>
+<li><a href="http://www.cnblogs.com/zhoujie/archive/2013/04/10/python7.html">python学习笔记（七）——文件和目录操作</a></li>
+</ul>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
+</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/test_ws/&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>注意：如果想要创建的文件夹是已经存在的，那么执行上面的程序会出现下面的错误：<code>FileExistsError: [WinError 183] 当文件已存在时，无法创建该文件。</code></p></blockquote>
+
+<p>所以这段代码容易出现错误：如果文件夹已存在或者文件夹名中有不允许使用的字符时，<code>os.mkdir()</code>函数都会执行失败。所以，这段代码需要进行异常处理：</p>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样，在运行程序的时候就不会再出现错误了。但是当你给定的文件名中有非法字符时，创建文件夹是不会成功的，但是程序不会报错。</p>
+
+<h2>Python 创建文件</h2>
+
+<p>参考网站：<a href="https://blog.linuxeye.com/365.html">Python文件处理 open()</a></p>
+
+<p>比如你想在<code>F:\</code>根目录里面创建一个名为 <code>data.txt</code> 文件，你可以这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">file_path</span> <span class="o">=</span> <span class="s">r&#39;F:\data.txt&#39;</span>
+</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第二个参数 <code>'w'</code> 也可以写成：<code>'wt'</code>。它们等价。</p>
+
+<p>或者</p>
+
+<p>如果你想创建以指定编码的文件，请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 020 Pass 的用法]]></title>
@@ -3275,27 +3364,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103243428.png" alt="Alt text" /></p>
 
 <p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103384488.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一个超好的命令行串口软件 --- PowerCmd --- 汉化破解版]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/23/powercmd-install/"/>
-    <updated>2016-11-23T02:01:13+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/23/powercmd-install</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
-
-<blockquote><p>你可以到官网下载，但是官网下载来的是英文的。下载地址：<a href="http://www.powercmd.com/">http://www.powercmd.com/</a></p></blockquote>
-
-<p>这里有一个汉化破解的PowerCmd软件：</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1i4SxSUT">http://pan.baidu.com/s/1i4SxSUT</a> 密码：r5w1</p>
-
-<p>下载解压后，之间双击 <strong>PowerCmd.exe</strong> 就可以运行。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-23-powercmd-install/1479837423293.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

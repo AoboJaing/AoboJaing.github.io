@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 为什么需要视图 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 为什么需要事务 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,225 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-034-Transactions/">SQL 数据库 学习 034 事务</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T13:20:24+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要事务</h2>
+
+<p>事务主要用来保证数据的合理性和并发处理的能力！</p>
+
+<p>通俗的说：</p>
+
+<ul>
+<li>事务可以保证避免数据处于一种不合理的中间状态</li>
+<li>利用事务可以实现多个用户对共享资源的同时访问</li>
+</ul>
+
+
+<p>例子：</p>
+
+<p>银行中的转账操作，账户A把一定数量的款项转到账户B上，这个操作包括两个步骤，一个是从账户A上把存款减去一定数量，二是在账户B上把存款加上相同的数量。这两个步骤显然要么都完成，要么都取消，否则银行就会受损失。显然，这个转账操作中的两个步骤就构成一个事务。</p>
+
+<p>假设A和B用户都希望查询修改M表数据，A用户不应该刚把M表的数据改成5，查询时显示的数据却是8（因为B用户修改M表的数据成8了）。事务必须得保证多个用户对共享资源同时访问时，数据库给用户的反应是合理的。</p>
+
+<p>事务就是专门解决这个问题的。</p>
+
+<hr />
+
+<h2>什么是事务</h2>
+
+<p>一系列操作要么全部执行成功，要么全部执行失败，这就是事务。</p>
+
+<hr />
+
+<h2>如何创建事务</h2>
+
+<p><strong>T-SQL</strong> 使用下列语句管理事务：</p>
+
+<ul>
+<li>开启事务：<code>begin transaction</code></li>
+<li>提交事务：<code>commit transaction</code></li>
+<li>回滚（撤销）事务：<code>rollback transaction</code></li>
+</ul>
+
+
+<p>一旦事务提交或回滚，则事务结束。</p>
+
+<p>判断某条语句执行是否出错：</p>
+
+<ul>
+<li>使用全局变量 <code>@@error</code></li>
+<li><code>@@error</code> 只能判断当前一条<strong>T-SQL</strong>语句执行是否有错，为了判断事务中所有<strong>T-SQL</strong>语句是否有错，我们需要对错误进行累计。如：<code>set @errorSum=@errorSum+@@error</code></li>
+</ul>
+
+
+<hr />
+
+<h2>初学者必须要掌握的三个问题：</h2>
+
+<p>一 . 事务时用来研究什么的：</p>
+
+<ul>
+<li>避免数据处于不合理的中间状态。（比如：转账）</li>
+<li>怎样避免多用户同时访问时，呈现给用户的数据是合理的。</li>
+</ul>
+
+
+<p>二 . 事务和线程的关系：</p>
+
+<p>事务也是通过锁来解决很多问题的。（线程同步就是通过锁来解决的 <code>sychronized</code>）</p>
+
+<p>三 . 事务和第三方插件的关系：</p>
+
+<ul>
+<li>直接使用事务库技术难度很大，很多人是借助第三方插件来实现。（因为我们一般人不需要细细的研究数据库中事务的语法细节。）</li>
+<li>第三方插件要想完成预期的功能，一般必须得借助数据库中的事务机制。</li>
+</ul>
+
+
+<hr />
+
+<h2>事务 &mdash; 总结 和 实例</h2>
+
+<p>总结事务的四大特性：事务必须具备以下四个属性，简称<strong>ACID</strong>属性。</p>
+
+<ul>
+<li>原子性：事务是一个完整的操作。事务的各步操作是不可分的（原子的）；要么都执行，要么都不执行。</li>
+<li>一致性：当事务完成时，数据必须处于一致状态，要么处于开始状态要么处于结束状态，不允许出现中间状态！</li>
+<li>隔离性：指当前的事务与其他未完成的事务是隔离的。在不同的隔离级别下，事务的读取操作，可以得到的结果是不同的。</li>
+<li>持久性：事务完成后，它对数据库的修改被永久保持，事务日志能够保持事务的永久性。</li>
+</ul>
+
+
+<p><strong>一个例子：</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--创建Test库</span>
+</span><span class='line'><span class="k">create</span> <span class="k">database</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--进入Test库</span>
+</span><span class='line'><span class="n">use</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--创建一个bank表</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">bank</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">customerEname</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">currrentMoney</span> <span class="n">money</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="c1">--插入数据</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1">--给bank表中的currentMoney属性添加一个约束</span>
+</span><span class='line'><span class="k">alter</span> <span class="k">table</span> <span class="n">bank</span> <span class="k">add</span> <span class="k">constraint</span> <span class="n">check_currentMoney</span> <span class="k">check</span><span class="p">(</span><span class="n">currentMoney</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在我要将张三的1000打给李四。（这样做会失败，因为上面已经给<code>check_currentMoney</code>属性添加了一个约束：<code>currentMoney&gt;=1</code>）。</p>
+
+<p>普通的查询指令进行转账：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用事务实现进行转账：（不重要，掌握就可以，语法怪异，实用性不强。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">begin</span> <span class="n">transaction</span>
+</span><span class='line'><span class="k">declare</span> <span class="o">@</span><span class="n">errorSum</span> <span class="nb">int</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="n">if</span> <span class="p">(</span><span class="o">@</span><span class="n">errorSum</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账失败&#39;</span>
+</span><span class='line'>      <span class="k">rollback</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账成功&#39;</span>
+</span><span class='line'>      <span class="k">commit</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2495,124 +2714,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T03:13:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>order by</code> &mdash; 以某个字段排序</h2>
-
-<p><strong>例子：</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--默认是按照升序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644715874.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno排序，然后再按照sal排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644847648.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--asc是升序的意思，默认可以不写 desc是降序</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span> <span class="k">desc</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno降序排序，如果deptno相同，再按照sal升序排序</span>
-</span><span class='line'>  <span class="c1">--记住sal是升序不是降序</span>
-</span><span class='line'>  <span class="c1">--order by a desc, b, c, d   desc只对a产生影响，不会对后面的b, c, d 产生影响</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644919129.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span> <span class="k">desc</span>
-</span><span class='line'>  <span class="c1">--问题：desc是否会对deptno产生影响？</span>
-</span><span class='line'>  <span class="c1">--答案：不会</span>
-</span><span class='line'>  <span class="c1">--先按deptno升序，如果deptno相同，再按sal降序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644983662.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<ul>
-<li><code>order by a, b                --a和b都是升序</code></li>
-<li><code>order by a, b desc           --a升序 b降序</code></li>
-<li><code>order by a desc, b           --a降序 b升序</code></li>
-<li><code>order by a desc, b desc  --a和b都是降序</code></li>
-</ul>
-
-
-<p>文字描述：</p>
-
-<ul>
-<li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
-<li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
-<li>强烈建议为每一个字段都指定排序的标准</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -2630,6 +2731,10 @@ select deptno, avg(sal)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/01/python-create-file-create-folder-open/">Learning Python 021 创建文件夹、创建文件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/01/python-pass/">Learning Python 020 Pass 的用法</a>
       </li>
     
@@ -2645,10 +2750,6 @@ select deptno, avg(sal)
         <a href="/blog/2016/11/30/python2-python3-Memory-release-gc/">Learning Python 017 — Python2 和 Python3 的内存释放</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2660,7 +2761,7 @@ select deptno, avg(sal)
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
-<a style="font-size: 147%" href="/tags/python/">Python</a>
+<a style="font-size: 154%" href="/tags/python/">Python</a>
 <a style="font-size: 139%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -2670,17 +2771,16 @@ select deptno, avg(sal)
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
-<a style="font-size: 90%" href="/tags/having/">having</a>
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
 <a style="font-size: 90%" href="/tags/join-on/">join on</a>
 <a style="font-size: 90%" href="/tags/left-join/">left join</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 147%" href="/tags/python/">python</a>
 <a style="font-size: 139%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
-<a style="font-size: 90%" href="/tags/xpath/">xpath</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
@@ -2688,6 +2788,7 @@ select deptno, avg(sal)
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 90%" href="/tags/shi-zhan/">实战</a>
 <a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
@@ -2708,7 +2809,7 @@ select deptno, avg(sal)
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (8)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (9)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
