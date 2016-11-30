@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T04:46:22+08:00</updated>
+  <updated>2016-12-01T06:02:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/"/>
+    <updated>2016-12-01T05:47:12+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<hr />
+
+<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
+
+<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>copy "F:\原文件夹\*" "F:\目标文件夹\"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
+
+<ol>
+<li>构造命令字符串。</li>
+<li>使用<code>os.system()</code>函数执行命令字符串。</li>
+</ol>
+
+
+<hr />
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
+
+<p>适合在Python3中执行的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">org_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\原文件夹&#39;</span>
+</span><span class='line'><span class="n">res_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\目标文件夹&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 构造命令字符串</span>
+</span><span class='line'><span class="n">copy_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">org_folder</span> <span class="o">+</span> <span class="s">r&#39;\*&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">res_folder</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
+</span><span class='line'><span class="c"># copy_command = copy_command.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span> <span class="c"># 如果你使用的是Python2，需要将这一行的注释去掉。</span>
+</span><span class='line'><span class="c"># print(copy_command)</span>
+</span><span class='line'><span class="c"># 使用os.system()函数执行命令字符串</span>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\鍘熸枃浠跺す\*&quot;</span> <span class="s">&quot;F:\鐩爣鏂囦欢澶筡&quot;</span>
+</span><span class='line'><span class="err">系统找不到指定的路径。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹\*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\&quot;</span>
+</span><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹</span><span class="se">\\</span><span class="s">*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\\</span><span class="s">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:/原文件夹/*&quot;</span> <span class="s">&quot;F:/目标文件夹/&quot;</span>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F://原文件夹//*&quot;</span> <span class="s">&quot;F://目标文件夹//&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p><strong>第二件事 .</strong> 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\&#39;</span>
+</span><span class='line'><span class="c"># 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace\test_ws\\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes,但是不是我们要的结果</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace   est_ws\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 021 创建文件夹、创建文件]]></title>
@@ -3313,57 +3478,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <p><img src="http://aobojaing.github.io/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109745990.png" alt="Alt text" /></p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[下载和安装 Visual Studio 2015 软件 的详细步骤图文教程]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/download-install-Miarosoft-Visual-Studio-2015-software-tutorial/"/>
-    <updated>2016-11-26T03:53:41+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/download-install-Miarosoft-Visual-Studio-2015-software-tutorial</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我的电脑系统：Windows 10 64位</p>
-
-<h2>下载：</h2>
-
-<p>下载网站：<a href="https://www.visualstudio.com/zh-hans/downloads/">https://www.visualstudio.com/zh-hans/downloads/</a></p>
-
-<p>选择 <strong>ISO</strong>（离线安装包），选择 <strong>简体中文</strong>，点击下载。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480096481409.png" alt="Alt text" /></p>
-
-<p>下载一个7.1G的安装包，请耐心等待。（用迅雷下载，速度很快）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480096585421.png" alt="Alt text" /></p>
-
-<h2>安装</h2>
-
-<p>双击 <strong>vs2015.3.com_chs.iso</strong> ，进行安装</p>
-
-<p>全程傻瓜式安装。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097828432.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097804088.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097963562.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480099125653.png" alt="Alt text" /></p>
-
-<blockquote><p>如果遇到问题：
-下载Microsoft.net framework 4.6.2
-<a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=53344">https://www.microsoft.com/zh-CN/download/details.aspx?id=53344</a></p></blockquote>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480102421690.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-
-<p>手动重新启动电脑后，打开<strong>Visual Microsoft 2015</strong> 软件：（需要几分钟）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103243428.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103384488.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

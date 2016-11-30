@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Learning Python 020 Pass 的用法 - AoboSir 博客</title>
+  <title>Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令 - AoboSir 博客</title>
   <meta name="author" content="Aobo Jaing">
 
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 pass 的用法 参考网站：Python pass 语句 Python2 和 Python3 中 pass &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 本篇博客对 Python2 和 Python3 都适用。 实例：调用Windows里面的copy命令 比如现在， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/01/python-pass/">
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
@@ -71,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">Learning Python 020 Pass 的用法</h1>
+      <h1 class="entry-title">Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令</h1>
     
     
       <p class="meta">
@@ -80,7 +80,7 @@
 
 
 
-<time class='entry-date' datetime='2016-12-01T04:12:13+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 am</span></time>
+<time class='entry-date' datetime='2016-12-01T05:47:12+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:47 am</span></time>
         
       </p>
     
@@ -98,31 +98,148 @@
 
 <hr />
 
-<h2>pass 的用法</h2>
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
 
-<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
+<hr />
 
-<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
+<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
 
-<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
+<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
 
-<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>copy "F:\原文件夹\*" "F:\目标文件夹\"</span></code></pre></td></tr></table></div></figure>
 
-<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
+
+<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
+
+<ol>
+<li>构造命令字符串。</li>
+<li>使用<code>os.system()</code>函数执行命令字符串。</li>
+</ol>
+
+
+<hr />
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
+
+<p>适合在Python3中执行的代码：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'><span class="p">}</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">org_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\原文件夹&#39;</span>
+</span><span class='line'><span class="n">res_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\目标文件夹&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 构造命令字符串</span>
+</span><span class='line'><span class="n">copy_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">org_folder</span> <span class="o">+</span> <span class="s">r&#39;\*&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">res_folder</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
+</span><span class='line'><span class="c"># copy_command = copy_command.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span> <span class="c"># 如果你使用的是Python2，需要将这一行的注释去掉。</span>
+</span><span class='line'><span class="c"># print(copy_command)</span>
+</span><span class='line'><span class="c"># 使用os.system()函数执行命令字符串</span>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>换成Python，这样写：</p>
+<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\鍘熸枃浠跺す\*&quot;</span> <span class="s">&quot;F:\鐩爣鏂囦欢澶筡&quot;</span>
+</span><span class='line'><span class="err">系统找不到指定的路径。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹\*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\&quot;</span>
+</span><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹</span><span class="se">\\</span><span class="s">*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\\</span><span class="s">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:/原文件夹/*&quot;</span> <span class="s">&quot;F:/目标文件夹/&quot;</span>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F://原文件夹//*&quot;</span> <span class="s">&quot;F://目标文件夹//&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p><strong>第二件事 .</strong> 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\&#39;</span>
+</span><span class='line'><span class="c"># 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace\test_ws\\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes,但是不是我们要的结果</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace   est_ws\</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -142,7 +259,7 @@
 
 
 
-<time class='entry-date' datetime='2016-12-01T04:12:13+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 am</span></time>
+<time class='entry-date' datetime='2016-12-01T05:47:12+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:47 am</span></time>
       
 
 <span class="categories">
@@ -177,10 +294,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/11/30/python2-python3-Generators-yield/" title="Previous Post: Learning Python 019 生成器（Generators）和 yield">&laquo; Learning Python 019 生成器（Generators）和 yield</a>
+        <a class="basic-alignment left" href="/blog/2016/12/01/python-create-file-create-folder-open/" title="Previous Post: Learning Python 021 创建文件夹、创建文件">&laquo; Learning Python 021 创建文件夹、创建文件</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/12/01/python-create-file-create-folder-open/" title="Next Post: Learning Python 021 创建文件夹、创建文件">Learning Python 021 创建文件夹、创建文件 &raquo;</a>
       
     </p>
   </footer>
@@ -189,7 +304,7 @@
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2016/12/01/python-pass" data-title="Learning Python 020 pass 的用法" data-url="http://aobojaing.github.io /blog/2016/12/01/python-pass/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2016/12/01/python-DOS-system-windows-Command-Line-os" data-title="Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令" data-url="http://aobojaing.github.io /blog/2016/12/01/python-DOS-system-windows-Command-Line-os/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

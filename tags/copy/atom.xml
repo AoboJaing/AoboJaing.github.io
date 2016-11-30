@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: copy | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/copy/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T05:48:02+08:00</updated>
+  <updated>2016-12-01T06:02:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -37,7 +37,7 @@
 
 <p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
 
-<pre><code class="dos">copy "F:\原文件夹\*" "F:\目标文件夹\"
+<pre><code>copy "F:\原文件夹\*" "F:\目标文件夹\"
 </code></pre>
 
 <p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
@@ -82,7 +82,7 @@ os.system(copy_command)
 
 <p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
 
-<pre><code class="dos"># Succesfull
+<pre><code># Succesfull
 copy "F:\原文件夹\*" "F:\目标文件夹\"
 # Succesfull
 copy "F:\原文件夹\\*" "F:\目标文件夹\\"
