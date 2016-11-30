@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-30T13:39:33+08:00</updated>
+  <updated>2016-11-30T23:18:07+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,200 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 019 生成器（Generators）和 Yield]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield/"/>
+    <updated>2016-11-30T23:17:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>知识点：生成器</h2>
+
+<p><a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c04/p03_create_new_iteration_with_generators.html">生成器只能用于迭代操作。</a></p>
+
+<p>一个函数，其中带 <code>yield</code>    关键字的代码，它不会执行，只是记下有这个操作；其他代码正常的执行。而被记下的这些操作会像队列一样存起来，这个“队列”就是 <strong>生成器</strong>，并且会类似于<code>return</code>一样返回。</p>
+
+<p>一个函数的代码里面有 <code>yield</code> 关键字，那么这个函数就是一个<strong>制造生成器的函数</strong>。</p>
+
+<blockquote><p>生成器是Python中的高级特性。我之前学习过，还写了一个博客：<a href="http://blog.csdn.net/github_35160620/article/details/51985596?locationNum=1&amp;fps=1">Learning Python 011 高级特性 2</a></p></blockquote>
+
+<hr />
+
+<h2>Python3 例子</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">1</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">2</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">3</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="n">f</span> <span class="n">at</span> <span class="mh">0x0000023B63151258</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">generator</span><span class="s">&#39;&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span class='line'><span class="ne">StopIteration</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">counter</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;Run to the &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; yield&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;start!&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;Done!&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="n">f</span> <span class="n">at</span> <span class="mh">0x000001D4843E1258</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">start</span><span class="err">!</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">1</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">2</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">3</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Done</span><span class="err">!</span>
+</span><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span class='line'><span class="ne">StopIteration</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">start</span><span class="err">!</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">1</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">2</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">3</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Done</span><span class="err">!</span>
+</span><span class='line'><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Python2 实例</h2>
+
+<p>生成器在 python2 的用法和在python3中的用法一样，唯一的区别是：</p>
+
+<ul>
+<li>python2 中 可以使用<code>next(g)</code> 或者 <code>g.next()</code>。 这样两个等价</li>
+<li>python3 中 只有<code>next(g)</code>，没有<code>g.next()</code>。</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：<a href="http://wiki.jikexueyuan.com/project/start-learning-python/215.html">生成器</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 018 Python2 和 Python3 中 Range()函数的使用]]></title>
@@ -3086,284 +3280,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 </span><span class='line'>pip.exe install some-package-name</span></code></pre></td></tr></table></div></figure>
 
 
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 013 按行读取文件（逐行读取） --- 按行写入文件（逐行写入） --- 实战：从字幕文件中提取字幕内容]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line/"/>
-    <updated>2016-11-18T04:41:50+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/18/Learning-python-013-read-and-write-one-line</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10</p>
-
-<hr />
-
-<h2>知识点：Python 按行读取文件</h2>
-
-<h3>读取整个文件的内容</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>读取一行的内容（按行读文件的内容）</h3>
-
-<p>参考网站：</p>
-
-<p>Python逐行读取文件内容
-<a href="http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html">http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span><span class='line'>  <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
-</span><span class='line'>      <span class="k">break</span>
-</span><span class='line'>  <span class="k">print</span> <span class="n">text</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>缺点：它依赖于前后文的关系，所以不能获取指定行的内容。</p>
-
-<h3>读取一行的内容 和 行号</h3>
-
-<p>参考网站：</p>
-
-<p>python读取文件同时输出行号和内容
-<a href="http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content">http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-</span><span class='line'>  <span class="k">print</span> <span class="s">&quot;line number&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s">&quot;is:&quot;</span><span class="p">,</span> <span class="n">value</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>缺点：虽然这段代码可以获取到指定行的内容，但是，使用<code>enumerate()</code>函数获取指定行内容的代价是：需要对所有<strong>行</strong>依次进行编号，可想运算量之大。</p>
-
-<h3>读取指定行的内容</h3>
-
-<p>参考网站：</p>
-
-<p>Python 从指定行读取数据
-<a href="http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802">http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">num</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span class='line'><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>优点：读取的是缓存内的数据，速度快，并且代码简单。</p>
-
-<hr />
-
-<h2>知识点：Python 按行写入文件</h2>
-
-<p>参考网站：</p>
-
-<p>Python文件读写
-<a href="http://cxymrzero.github.io/blog/2015/03/19/python-file/">http://cxymrzero.github.io/blog/2015/03/19/python-file/</a>
-Python读写文件
-<a href="http://blog.csdn.net/adupt/article/details/4435615">http://blog.csdn.net/adupt/article/details/4435615</a></p>
-
-<h3>写一行（新建文件、替换现有文件）</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the first line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the sencond line: &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;this is also the second line.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>f = open('namefile.txt', 'w')</code>这段代码的执行：如果有这个<code>namefile.txt</code>文件，那就将现有的<code>namefile.txt</code>文件里面的内容全部自动清空；如果没有这个<code>namefile.txt</code>文件，那就自动新建一个<code>namefile.txt</code>文件。</p>
-
-<h3>写一行（在原有文件后面追加写入）</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the last line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">last</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>实战：从字幕文件中提取字幕内容</h2>
-
-<p>github源代码网址：<a href="https://github.com/AoboJaing/youtube-srt-to-txt">https://github.com/AoboJaing/youtube-srt-to-txt</a></p>
-
-<h3>如何获取字幕文件</h3>
-
-<p>参考网站：<a href="https://www.youtube.com/watch?v=d9ctCc2AXCw">https://www.youtube.com/watch?v=d9ctCc2AXCw</a></p>
-
-<p>视频网站： <a href="https://www.youtube.com/">https://www.youtube.com/</a></p>
-
-<p>字幕提取网站：<a href="http://mo.dbxdb.com/setting.html">http://mo.dbxdb.com/setting.html</a></p>
-
-<h3>设计思路</h3>
-
-<p>输入是英文字幕文件和中文字幕文件，输出是英文配中文的txt文件</p>
-
-<p>英文字幕文件</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414135007.png" alt="Alt text" /></p>
-
-<p>中文字幕文件</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414161811.png" alt="Alt text" /></p>
-
-<p>输出：英文配中文的txt文件</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414198952.png" alt="Alt text" /></p>
-
-<h3>代码</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># coding : utf-8</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">file_srt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">file_txt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cout</span><span class="o">=</span><span class="mi">1</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_srt</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">cout</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;en-Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">cout</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">file_srt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="n">file_txt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>运行输出</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'><span class="n">In</span> <span class="n">this</span> <span class="n">video</span> <span class="n">I</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">explain</span> <span class="n">the</span> <span class="n">functionality</span> <span class="n">of</span> <span class="n">servos</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">conventional</span> <span class="n">DC</span> <span class="n">motors</span> <span class="n">into</span> <span class="n">homebuilt</span> <span class="n">servos</span><span class="o">.</span>
-</span><span class='line'><span class="err">在这部影片中，我想解释一下舵机以及如何传统的直流电动机转换成自制伺服系统的功能。</span>
-</span><span class='line'><span class="n">A</span> <span class="n">servo</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">device</span> <span class="n">that</span> <span class="n">produces</span> <span class="n">motion</span> <span class="n">accordant</span> <span class="n">to</span> <span class="n">a</span> <span class="n">command</span> <span class="n">signal</span> <span class="kn">from</span> <span class="nn">a</span> <span class="nn">control</span> <span class="nn">system.</span>
-</span><span class='line'><span class="err">伺服是，从一个控制系统产生运动一致来的命令信号的装置。</span>
-</span><span class='line'><span class="n">Usually</span> <span class="n">an</span> <span class="n">electric</span> <span class="n">motor</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">mechanical</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">servomechanism</span> <span class="n">rotates</span> <span class="n">at</span> <span class="n">a</span> <span class="n">velocity</span> <span class="n">that</span> <span class="n">approximates</span> <span class="n">the</span> <span class="n">command</span> <span class="n">signal</span><span class="o">.</span>
-</span><span class='line'><span class="err">一般的电动机被用来创建一个机械力和伺服机构在近似于指令信号的速度旋转。</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'><span class="o">...</span>
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

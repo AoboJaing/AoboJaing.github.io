@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learning Python 019 生成器（Generators）和 Yield - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="使用的电脑系统：Windows 10 64位
+使用的开发集成环境：PyCharm 2016.1.4
+使用的Python的版本：python 2.7.10 和 python 3.5.0 知识点：生成器 生成器只能用于迭代操作。 一个函数，其中带 yield 关键字的代码，它不会执行， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>守候为了三世的臣子，话说我觉醒在这一代。祖先为我起的名字，注定我将文武全才。代码划分了我的世界，从老子出生起就打算征服天地。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Learning Python 019 生成器（Generators）和 Yield</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-30T23:17:17+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>知识点：生成器</h2>
+
+<p><a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c04/p03_create_new_iteration_with_generators.html">生成器只能用于迭代操作。</a></p>
+
+<p>一个函数，其中带 <code>yield</code>    关键字的代码，它不会执行，只是记下有这个操作；其他代码正常的执行。而被记下的这些操作会像队列一样存起来，这个“队列”就是 <strong>生成器</strong>，并且会类似于<code>return</code>一样返回。</p>
+
+<p>一个函数的代码里面有 <code>yield</code> 关键字，那么这个函数就是一个<strong>制造生成器的函数</strong>。</p>
+
+<blockquote><p>生成器是Python中的高级特性。我之前学习过，还写了一个博客：<a href="http://blog.csdn.net/github_35160620/article/details/51985596?locationNum=1&amp;fps=1">Learning Python 011 高级特性 2</a></p></blockquote>
+
+<hr />
+
+<h2>Python3 例子</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">1</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">2</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="mi">3</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="n">f</span> <span class="n">at</span> <span class="mh">0x0000023B63151258</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">generator</span><span class="s">&#39;&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span class='line'><span class="ne">StopIteration</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">counter</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;Run to the &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; yield&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;start!&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">yield</span> <span class="n">counter</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;Done!&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="n">f</span> <span class="n">at</span> <span class="mh">0x000001D4843E1258</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">start</span><span class="err">!</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">1</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">2</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">3</span> <span class="k">yield</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">Done</span><span class="err">!</span>
+</span><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span class='line'><span class="ne">StopIteration</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="p">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span><span class='line'><span class="n">start</span><span class="err">!</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">1</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">2</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Run</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">3</span> <span class="k">yield</span>
+</span><span class='line'><span class="n">Done</span><span class="err">!</span>
+</span><span class='line'><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Python2 实例</h2>
+
+<p>生成器在 python2 的用法和在python3中的用法一样，唯一的区别是：</p>
+
+<ul>
+<li>python2 中 可以使用<code>next(g)</code> 或者 <code>g.next()</code>。 这样两个等价</li>
+<li>python3 中 只有<code>next(g)</code>，没有<code>g.next()</code>。</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：<a href="http://wiki.jikexueyuan.com/project/start-learning-python/215.html">生成器</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-11-30T23:17:17+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:17 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>python</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/11/30/python2-python3-range-function/" title="Previous Post: Learning Python 018 Python2 和 Python3 中 range()函数的使用">&laquo; Learning Python 018 Python2 和 Python3 中 range()函数的使用</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/11/30/python2-python3-Generators-yield" data-title="Learning Python 019 生成器（Generators）和 yield" data-url="http://aobojaing.github.io /blog/2016/11/30/python2-python3-Generators-yield/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-Generators-yield/">Learning Python 019 生成器（Generators）和 Yield</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-range-function/">Learning Python 018 Python2 和 Python3 中 Range()函数的使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-Memory-release-gc/">Learning Python 017 — Python2 和 Python3 的内存释放</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 115%" href="/tags/c-number/">C#</a>
+<a style="font-size: 129%" href="/tags/git/">Git</a>
+<a style="font-size: 115%" href="/tags/github/">GitHub</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 139%" href="/tags/python/">Python</a>
+<a style="font-size: 139%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 159%" href="/tags/windows/">Windows</a>
+<a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
+<a style="font-size: 90%" href="/tags/from-where/">from where</a>
+<a style="font-size: 90%" href="/tags/full-join/">full join</a>
+<a style="font-size: 90%" href="/tags/having/">having</a>
+<a style="font-size: 90%" href="/tags/identity/">identity</a>
+<a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
+<a style="font-size: 90%" href="/tags/join-on/">join on</a>
+<a style="font-size: 90%" href="/tags/left-join/">left join</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 147%" href="/tags/python/">python</a>
+<a style="font-size: 139%" href="/tags/python3/">python3</a>
+<a style="font-size: 90%" href="/tags/right-join/">right join</a>
+<a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/xpath/">xpath</a>
+<a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
+<a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
+<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
+<a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
+<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 90%" href="/tags/lian-jie-cha-xun/">连接查询</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (7)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -9,7 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="什么是 XPath？ 参考网站：http://www.w3school.com.cn/xpath/xpath_intro.asp XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。 xpath 表达式 语法讲解 参考网站：http:// &hellip;">
+  <meta name="description" content="开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
+Python 版本：python-3.5.0-amd64
+PyCharm软件版本：pycharm-professional-2016.1.4
+电脑系统：Windows 10 64位 如果你还没有搭建好开发环境 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,659 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-26T18:22:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<h1>1 知识点：scrapy 爬虫项目的创建及爬虫的创建</h1>
+
+<h2>1.1 scrapy 爬虫项目的创建</h2>
+
+<p>接下来我们为大家创建一个Scrapy爬虫项目，并在爬虫项目下创建一个Scrapy爬虫文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy startproject &lt;projectname&gt; </span></code></pre></td></tr></table></div></figure>
+
+
+<h2>1.2 scrapy 爬虫文件的创建</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd demo
+</span><span class='line'>scrapy genspider -t basic &lt;filename&gt; &lt;domain&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>更多 <strong>Scrapy</strong> 命令的介绍请到<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">这篇博客</a>查看。</p></blockquote>
+
+<hr />
+
+<h1>2 实例：爬取百度标题和CSDN博客</h1>
+
+<p>我们创建一个爬虫项目，在里面创建一个爬虫文件来爬取百度，并再创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<hr />
+
+<p>先创建一个Scrapy爬虫项目：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy startproject firstDemo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\WorkSpace\python_ws\python-large-web-crawler&gt;scrapy startproject firstdemo
+</span><span class='line'>New Scrapy project 'firstdemo', using template directory 'c:\\users\\aobo\\appdata\\local\\programs\\python\\python35\\lib\\site-packages\\scrapy\\templates\\project', created in:
+</span><span class='line'>    D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo
+</span><span class='line'>
+</span><span class='line'>You can start your first spider with:
+</span><span class='line'>    cd firstdemo
+</span><span class='line'>    scrapy genspider example example.com
+</span><span class='line'>
+</span><span class='line'>D:\WorkSpace\python_ws\python-large-web-crawler&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2-1.1 使用Scrapy爬虫 爬取百度标题</h2>
+
+<p>创建一个爬虫文件来爬取百度</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd firstDemo
+</span><span class='line'>scrapy genspider -t basic baidu baidu.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\WorkSpace\python_ws\python-large-web-crawler&gt;cd firstdemo
+</span><span class='line'>
+</span><span class='line'>D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;scrapy genspider -t basic baidu baidu.com
+</span><span class='line'>Created spider 'baidu' using template 'basic' in module:
+</span><span class='line'>  firstdemo.spiders.baidu
+</span><span class='line'>
+</span><span class='line'>D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/1480084611306.png" alt="Alt text" /></p>
+
+<p>打开 <strong>PyCharm</strong> 软件，用 <strong>PyCharm</strong> 软件打开刚刚创建的 <code>firstdemo</code> 爬虫项目。</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084757859.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084783287.png" alt="Alt text" /></p>
+
+<p>打开这 <code>baidu.py</code> 爬虫文件，你会看到自动生成的代码：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480084952255.png" alt="Alt text" /></p>
+
+<h2>2-1.2 观察 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页源代码</h2>
+
+<p>（源代码太多，列出重点的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='http'><span class='line'><span class="err">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; class=&quot;cye-enabled cye-nm sui-componentWrap&quot;&gt;</span>
+</span><span class='line'><span class="err">    &lt;head&gt;</span>
+</span><span class='line'><span class="err">        &lt;title&gt;百度一下，你就知道 &lt;/title&gt;</span>
+</span><span class='line'><span class="err">    &lt;/head&gt;</span>
+</span><span class='line'><span class="err">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>源代码中的标题通过标签逐步定位： <code>/html/head/title</code></p>
+
+<h2>2-1.3 写代码</h2>
+
+<p>我们现在要提取出 <a href="https://www.baidu.com/">https://www.baidu.com/</a> 网页 的标题：<strong>百度一下，你就知道</strong>。</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<p>这里我们使用 <code>xpath</code> 来提取，<code>xpath</code> 的知识点，请到<a href="http://www.aobosir.com/blog/2016/11/26/python-xpath/">这篇博客</a>中查看。</p>
+
+<hr />
+
+<p>下面的编写代码的步骤：</p>
+
+<p><strong>Step 1 . </strong> 设置我们的爬虫不遵循 <code>robots.txt</code> 规定。（什么是<code>robots.txt</code>规定，请到<a href="http://blog.csdn.net/github_35160620/article/details/52586126">这个博客</a>查看。）</p>
+
+<p>打开 <code>settings.py</code> 文件，将里面的<code>ROBOTSTXT_OBEY</code> 设为：<code>False</code></p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480086841701.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  打开 <code>items.py</code> 文件，在里面<code>FirstdemoItem()</code>函数里添加一项：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='http'><span class='line'><span class="err">title = scrapy.Field()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087390745.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong>  在 <code>baidu.py</code> 文件里面，使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>先从核心目录（<code>firstdemo</code>）定位到<code>items.py</code> 文件里面的<code>FirstdemoItem</code>函数。</p>
+
+<p>然后使用<code>xpath 表达式</code> 提取百度网页的标题。</p>
+
+<p>最后，返回。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">scrapy</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">firstdemo.items</span> <span class="kn">import</span> <span class="n">FirstdemoItem</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">BaiduSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;baidu&quot;</span>
+</span><span class='line'>    <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;baidu.com&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://baidu.com/&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">item</span> <span class="o">=</span> <span class="n">FirstdemoItem</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&#39;/html/head/title/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088827529.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong>
+在 <code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数，添加打印信息的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480087767661.png" alt="Alt text" /></p>
+
+<p>但是，现在运行程序，是不能输出任何信息的，还需要做<strong>Step 5</strong>。</p>
+
+<p><strong>Step 5 . </strong> 开启<code>piplines</code>（默认<code>piplines</code>是关闭的。）
+在 <code>settings.py</code> 文件，将里面的<code>ITEM_PIPELINES</code> 项的注释去掉。并从核心目录开始定位，定位到<code>pipelines.py</code> 文件里面的<code>FirstdemoPipeline()</code>函数 ，就应该是：<code>firstdemo.pipelines.FirstdemoPipeline</code>：</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480088423683.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<p>在 <strong>DOS窗口</strong> 中，先将路劲切换到当前爬虫项目<code>firstdemo</code>路径下，然后在执行爬虫文件 <code>baidy</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>
+</span><span class='line'><span class="n">cd</span> <span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">firstdemo</span>
+</span><span class='line'><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">baidu</span> <span class="o">--</span><span class="n">nolog</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089009819.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>2-2.1 使用Scrapy爬虫CSDN的博客文章</h2>
+
+<p>创建一个爬虫文件爬取CSDN博客文章。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">scrapy</span> <span class="n">genspider</span> <span class="o">-</span><span class="n">t</span> <span class="n">basic</span> <span class="n">csdn</span> <span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出:</p>
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089722224.png" alt="Alt text" /></p>
+
+<h2>2-2.2 观察 <a href="http://blog.csdn.net/">http://blog.csdn.net/</a> 网页源代码</h2>
+
+<p>（网页源代码太多，这里就不贴出了。）</p>
+
+<p>提取信息，一般使用 <code>xpath</code> 或者 <strong>正则表达式</strong> 来提取。</p>
+
+<h2>2-2.3 写代码</h2>
+
+<p><strong>Step 1 . </strong>  在<code>items.py</code> 文件中的<code>FirstdemoItem()</code>函数中添加新的项。其他的文件会使用这几个对象：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">detail</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</span><span class='line'><span class="n">link</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480089896612.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong>  在 <code>csdn.py</code> 文件里面，使用<code>xpath 表达式</code> 提取csdn博客网页的博文标题、介绍、链接地址。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">scrapy</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">firstdemo.items</span> <span class="kn">import</span> <span class="n">FirstdemoItem</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CsdnSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;csdn&quot;</span>
+</span><span class='line'>    <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;blog.csdn.net&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://blog.csdn.net/&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">item</span> <span class="o">=</span> <span class="n">FirstdemoItem</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//h3[@class=&#39;tracking-ad&#39;]/a/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">item</span><span class="p">[</span><span class="s">&#39;detail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;blog_list_c&#39;]/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">item</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//h3[@class=&#39;tracking-ad&#39;]/a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090250536.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 在 <code>piplines.py</code> 文件中，添加下面的代码，输出显示爬取到的信息。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])):</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;第&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;篇文章：&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;detail&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;---------&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-26-python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn//1480090494545.png" alt="Alt text" /></p>
+
+<h2>2-1.4 运行</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">csdn</span> <span class="o">--</span><span class="n">nolog</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>执行输出的信息太少，说明程序有问题。</p>
+
+<pre><code>scrapy crawl csdn
+</code></pre>
+
+<p>如果你在执行的时候，找到错误提示信息：</p>
+
+<pre><code>UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence
+</code></pre>
+
+<p>这个问题经常会遇到，是一个常见的问题，解决办法<a href="http://www.aobosir.com/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can%27t-encode-character-xa0/">在这里</a>可以找到。</p>
+
+<pre><code class="python">         print(item['detail'][i].replace(u'\xa0 ', u' '))
+</code></pre></blockquote>
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">第</span><span class="mi">1</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">微信小程序：小程序，新场景</span>
+</span><span class='line'><span class="err">前言：我们频繁进入的地方，是场景。手机，是场景；浏览器，是场景；其实，微信，也是场景……微信要做的是占据更多用户时间、占</span>
+</span><span class='line'><span class="err">据更多应用场景、占据更多服务入口，这是商业本质想去垄断要做的事情。对于大家来讲，</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">liujia216</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53350247</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">2</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Android</span><span class="err">四大组件——</span><span class="n">BroadcastReceiver</span><span class="err">普通广播、有序广播、拦截广播、本地广播、</span><span class="n">Sticky</span><span class="err">广播、系统广播</span>
+</span><span class='line'><span class="n">BroadcastReceiver</span><span class="err">普通广播、有序广播、拦截广播、本地广播、</span><span class="n">Sticky</span><span class="err">广播、系统广播</span>
+</span><span class='line'>  <span class="err">本篇文章包括以下内容：</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="err">前言</span>
+</span><span class='line'>  <span class="n">BroadcastReceiver</span><span class="err">的简介</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">qq_30379689</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53341313</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">3</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Gif</span><span class="err">格式简要介绍</span>
+</span><span class='line'><span class="n">Gif</span><span class="err">格式的介绍</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">为什么有的</span><span class="n">Gif</span><span class="err">图不能够循环播放及处理办法</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">shiroh_ms08</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53347873</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">4</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">win10</span> <span class="n">uwp</span> <span class="err">打包第三方字体到应用</span>
+</span><span class='line'><span class="err">有时候我们会把一些特殊字体打包到软件，因为如果找不到我们的字体会变为默认，现在很多字体图标我们用得好，有时候我们的应用会</span>
+</span><span class='line'><span class="err">用很漂亮的字体，需要我们自己打包，因为用户一般是没有字体。</span><span class="n">UWP</span><span class="err">使用第三方字体首</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">lindexi_gd</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">52716655</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">5</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">话说智能指针发展之路</span>
+</span><span class='line'><span class="err">动态创建内存的管理太麻烦，于是乎，这个世界变成</span><span class="mi">11</span><span class="err">派人：</span>
+</span><span class='line'><span class="err">一派人勤勤恳恳按照教科书的说法做，时刻小心翼翼，苦逼连连；</span>
+</span><span class='line'><span class="err">一派人忘记教科书的教导，随便乱来，搞得代码处处</span><span class="n">bug</span><span class="err">，后期维护骂声连连；</span>
+</span><span class='line'><span class="err">最</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">jacketinsysu</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53343534</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">6</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">安卓自定义控件（二）</span><span class="n">BitmapShader</span><span class="err">、</span><span class="n">ShapeDrawable</span><span class="err">、</span><span class="n">Shape</span>
+</span><span class='line'><span class="err">第一篇博客中，我已经对常用的一些方法做了汇总，这篇文章主要介绍</span><span class="n">BitmapShader</span><span class="err">位图渲染、</span><span class="n">ComposeShader</span><span class="err">组合渲染，然后看看</span><span class="n">Xferm</span>
+</span><span class='line'><span class="n">ode</span><span class="err">如何实际应用。不过本文还是只重写</span><span class="n">onDraw</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">chen413203144</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53343209</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">7</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">JSTL</span> <span class="err">标签大全详解</span>
+</span><span class='line'><span class="mi">1</span><span class="err">、什么是</span><span class="n">JSTL</span><span class="err">？</span>    <span class="n">JSTL</span><span class="err">是</span><span class="n">apache</span><span class="err">对</span><span class="n">EL</span><span class="err">表达式的扩展（也就是说</span><span class="n">JSTL</span><span class="err">依赖</span><span class="n">EL</span><span class="err">），</span><span class="n">JSTL</span><span class="err">是标签语言！</span><span class="n">JSTL</span><span class="err">标签使用以来非常方便，它与</span><span class="n">JSP</span>
+</span><span class='line'><span class="err">动作标签一样，只不过它不是</span><span class="n">JSP</span><span class="err">内</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">qq_25827845</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53311722</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">8</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Android</span><span class="err">调试大法</span> <span class="err">自定义</span><span class="n">IDE</span><span class="err">默认签名文件</span>
+</span><span class='line'><span class="err">你是否为调试第三方</span><span class="n">SDK</span><span class="err">时</span><span class="n">debug</span><span class="err">签名和</span><span class="n">release</span><span class="err">签名发生冲突而烦恼？你是否在</span><span class="n">debug</span><span class="err">时第三方功能测试通过，而</span><span class="n">release</span><span class="err">时无法使用？你</span>
+</span><span class='line'><span class="err">是否在为对接微信、支付宝、地图因签名导致的问题而烦恼？</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">yanzhenjie1003</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53334071</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">9</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Android</span><span class="err">图表库</span><span class="n">MPAndroidChart</span><span class="p">(</span><span class="err">十二</span><span class="p">)</span><span class="err">——来点不一样的，正负堆叠条形图</span>
+</span><span class='line'><span class="n">Android</span><span class="err">图表库</span><span class="n">MPAndroidChart</span><span class="p">(</span><span class="err">十二</span><span class="p">)</span><span class="err">——来点不一样的，正负堆叠条形图</span>
+</span><span class='line'>  <span class="err">接上篇，今天要说的，和上篇的类似，只是方向是有相反的两面，我们先看下效果</span>  <span class="err">实际上这样就导致了我们的代码是</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">qq_26787115</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53333270</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">10</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">一步步手动实现热修复</span><span class="p">(</span><span class="err">二</span><span class="p">)</span><span class="o">-</span><span class="err">类的加载机制简要介绍</span>
+</span><span class='line'><span class="err">一个类在被加载到内存之前要经过加载、验证、准备等过程。经过这些过程之后，虚拟机才会从方法区将代表类的运行时数据结构转换为</span>
+</span><span class='line'><span class="err">内存中的</span><span class="n">Class</span><span class="err">。</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">我们这节内容的重点在于一个类是如何被加载的，所以我们从类</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">sahadev_</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53334911</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">11</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">仿射变换详解</span> <span class="n">warpAffine</span>
+</span><span class='line'><span class="err">今天遇到一个问题是关于仿射变换的，但是由于没有将仿射变换的具体原理型明白，看别人的代码看的很费解，最后终于在师兄的帮助下</span>
+</span><span class='line'><span class="err">将原理弄明白了，我觉得最重要的是理解仿射变换可以看成是几种简单变换的复合实现，</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">q123456789098</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53330484</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">12</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">React</span> <span class="n">Native</span><span class="err">嵌入</span><span class="n">Android</span><span class="err">原生应用中</span>
+</span><span class='line'><span class="err">开发环境准备首先你要搭建好</span><span class="n">React</span> <span class="n">Native</span> <span class="k">for</span> <span class="n">Android</span><span class="err">开发环境，</span> <span class="err">没有搭建好的可以参考：</span><span class="n">React</span> <span class="n">Native</span> <span class="k">for</span> <span class="n">Android</span> <span class="n">Windows</span><span class="err">环境</span>
+</span><span class='line'><span class="err">搭建</span>  <span class="err">用</span><span class="n">Android</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">u011965040</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53331859</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">13</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">TCP</span><span class="err">三次握手四次挥手详解</span>
+</span><span class='line'><span class="n">TCP</span><span class="err">三次握手四次挥手详解</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">u010913001</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53331863</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">14</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">腾讯</span><span class="n">Android</span><span class="err">面经</span>
+</span><span class='line'><span class="err">秋招收官最后一战。</span>
+</span><span class='line'><span class="err">腾讯一面（电话）：</span>
+</span><span class='line'><span class="err">自我介绍</span>
+</span><span class='line'><span class="err">项目，平时怎么学习？</span>
+</span><span class='line'><span class="err">设计模式</span>
+</span><span class='line'><span class="err">（</span><span class="mi">1</span><span class="err">）知道哪些设计模式？设计模式在</span><span class="n">Android</span><span class="err">、</span><span class="n">Java</span><span class="err">中是怎么应用的，每个都说一下？</span>
+</span><span class='line'><span class="err">（</span><span class="mi">2</span><span class="err">）</span><span class="n">InputStre</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">kesarchen</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53332157</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">15</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">轻松实现部分背景半透明的呈现效果</span>
+</span><span class='line'><span class="err">实现一个简单的呈现</span><span class="o">/</span><span class="err">解散动画效果，当呈现时，呈现的主要内容和背景要明显区分，背景呈现一个半透明遮罩效果，透过背景可以看到</span>
+</span><span class='line'><span class="err">下层</span> <span class="n">View</span> <span class="n">Controller</span> <span class="err">的内容</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">kmyhy</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53322669</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">16</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">APP</span><span class="err">自动化框架</span><span class="n">LazyAndroid</span><span class="err">使用手册（</span><span class="mi">4</span><span class="err">）</span><span class="o">--</span><span class="err">测试模板工程详解</span>
+</span><span class='line'><span class="err">概述前面的</span><span class="mi">3</span><span class="err">篇博文分别对</span><span class="n">lazyAndroid</span><span class="err">的框架简介、元素抓取和核心</span><span class="n">API</span><span class="err">进行了说明，本文将基于框架给出的测试模板工程，详细阐述下</span>
+</span><span class='line'><span class="err">使用该框架进行安卓</span><span class="n">UI</span><span class="err">自动化测试的步骤。</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">kaka1121</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53325265</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">17</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Android</span><span class="err">使用</span><span class="n">getIdentifier</span><span class="p">()</span><span class="err">方法根据资源名来获取资源</span><span class="nb">id</span>
+</span><span class='line'><span class="err">有时候我们想动态的根据一个资源名获得到对应的资源</span><span class="nb">id</span><span class="err">，就可以使用</span><span class="n">getResources</span><span class="p">()</span><span class="o">.</span><span class="n">getIdentifier</span><span class="p">()</span><span class="err">方法来获取该</span><span class="nb">id</span><span class="err">。然后再使用该</span>
+</span><span class='line'><span class="nb">id</span><span class="err">进行相关的操作。</span>
+</span><span class='line'><span class="mi">1</span><span class="err">、</span><span class="n">Demo</span><span class="err">示例</span>
+</span><span class='line'>  <span class="err">下</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">ouyang_peng</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53328000</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">18</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Android</span><span class="err">基于</span><span class="n">RecyclerView</span><span class="err">实现高亮搜索列表</span>
+</span><span class='line'><span class="err">这篇应该是</span><span class="n">RecycleView</span><span class="err">的第四篇了，</span><span class="n">RecycleView</span><span class="err">真是新生代的宠儿能做这么多的事情。转载请注明作者</span><span class="n">AndroidMsky</span><span class="err">及原文链接</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="ow">and</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">androidmsky</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53306657</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">19</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="err">使用</span><span class="n">Git</span> <span class="n">Hooks</span><span class="err">实现开发部署任务自动化</span>
+</span><span class='line'><span class="err">提供：</span><span class="n">ZStack</span><span class="err">云计算</span> <span class="err">前言版本控制，这是现代软件开发的核心需求之一。有了它，软件项目可以安全的跟踪代码变更并执行回溯、完整</span>
+</span><span class='line'><span class="err">性检查、协同开发等多种操作。在各种版本控制软件中，</span><span class="n">git</span><span class="err">是近年来最流行的软</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">zstack_org</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53331077</span>
+</span><span class='line'><span class="o">---------</span>
+</span><span class='line'><span class="err">第</span><span class="mi">20</span><span class="err">篇文章：</span>
+</span><span class='line'><span class="n">Andromeda</span> <span class="n">OS</span> <span class="err">来了，</span><span class="n">Android</span> <span class="err">再见？</span>
+</span><span class='line'><span class="err">相信有部分同学已经有耳闻了，前几天炒的很火一个消息，就是</span> <span class="n">Google</span> <span class="err">要推出一种全新的操作系统，取名</span> <span class="n">Andromeda</span><span class="err">，这款新型的操作</span>
+</span><span class='line'><span class="err">系统融合了</span> <span class="n">Android</span> <span class="err">和</span> <span class="n">Chrome</span> <span class="n">OS</span><span class="err">，据称已经有</span><span class="o">...</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">googdev</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53331364</span>
+</span><span class='line'><span class="o">---------</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1813,304 +2469,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/18/Learning-python-013-read-and-write-one-line/">Learning Python 013 按行读取文件（逐行读取） --- 按行写入文件（逐行写入） --- 实战：从字幕文件中提取字幕内容</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-18T04:41:50+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:41 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10</p>
-
-<hr />
-
-<h2>知识点：Python 按行读取文件</h2>
-
-<h3>读取整个文件的内容</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>读取一行的内容（按行读文件的内容）</h3>
-
-<p>参考网站：</p>
-
-<p>Python逐行读取文件内容
-<a href="http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html">http://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span><span class='line'>  <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
-</span><span class='line'>      <span class="k">break</span>
-</span><span class='line'>  <span class="k">print</span> <span class="n">text</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>缺点：它依赖于前后文的关系，所以不能获取指定行的内容。</p>
-
-<h3>读取一行的内容 和 行号</h3>
-
-<p>参考网站：</p>
-
-<p>python读取文件同时输出行号和内容
-<a href="http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content">http://outofmemory.cn/code-snippet/3222/python-duqu-file-tongshi-output-xinghao-content</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-</span><span class='line'>  <span class="k">print</span> <span class="s">&quot;line number&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s">&quot;is:&quot;</span><span class="p">,</span> <span class="n">value</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>缺点：虽然这段代码可以获取到指定行的内容，但是，使用<code>enumerate()</code>函数获取指定行内容的代价是：需要对所有<strong>行</strong>依次进行编号，可想运算量之大。</p>
-
-<h3>读取指定行的内容</h3>
-
-<p>参考网站：</p>
-
-<p>Python 从指定行读取数据
-<a href="http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802">http://blog.163.com/xiaowei_090513/blog/static/11771835920140251257802</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">num</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span class='line'><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>优点：读取的是缓存内的数据，速度快，并且代码简单。</p>
-
-<hr />
-
-<h2>知识点：Python 按行写入文件</h2>
-
-<p>参考网站：</p>
-
-<p>Python文件读写
-<a href="http://cxymrzero.github.io/blog/2015/03/19/python-file/">http://cxymrzero.github.io/blog/2015/03/19/python-file/</a>
-Python读写文件
-<a href="http://blog.csdn.net/adupt/article/details/4435615">http://blog.csdn.net/adupt/article/details/4435615</a></p>
-
-<h3>写一行（新建文件、替换现有文件）</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the first line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the sencond line: &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;this is also the second line.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>f = open('namefile.txt', 'w')</code>这段代码的执行：如果有这个<code>namefile.txt</code>文件，那就将现有的<code>namefile.txt</code>文件里面的内容全部自动清空；如果没有这个<code>namefile.txt</code>文件，那就自动新建一个<code>namefile.txt</code>文件。</p>
-
-<h3>写一行（在原有文件后面追加写入）</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;the last line: hello world in the new file.</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;namefile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="k">print</span> <span class="n">text</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">the</span> <span class="n">first</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">sencond</span> <span class="n">line</span><span class="p">:</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">the</span> <span class="n">second</span> <span class="n">line</span><span class="o">.</span>
-</span><span class='line'><span class="n">the</span> <span class="n">last</span> <span class="n">line</span><span class="p">:</span> <span class="n">hello</span> <span class="n">world</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">file</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>实战：从字幕文件中提取字幕内容</h2>
-
-<p>github源代码网址：<a href="https://github.com/AoboJaing/youtube-srt-to-txt">https://github.com/AoboJaing/youtube-srt-to-txt</a></p>
-
-<h3>如何获取字幕文件</h3>
-
-<p>参考网站：<a href="https://www.youtube.com/watch?v=d9ctCc2AXCw">https://www.youtube.com/watch?v=d9ctCc2AXCw</a></p>
-
-<p>视频网站： <a href="https://www.youtube.com/">https://www.youtube.com/</a></p>
-
-<p>字幕提取网站：<a href="http://mo.dbxdb.com/setting.html">http://mo.dbxdb.com/setting.html</a></p>
-
-<h3>设计思路</h3>
-
-<p>输入是英文字幕文件和中文字幕文件，输出是英文配中文的txt文件</p>
-
-<p>英文字幕文件</p>
-
-<p><img src="/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414135007.png" alt="Alt text" /></p>
-
-<p>中文字幕文件</p>
-
-<p><img src="/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414161811.png" alt="Alt text" /></p>
-
-<p>输出：英文配中文的txt文件</p>
-
-<p><img src="/images/2016-11-18-Learning-python-013-read-and-write-one-line/1479414198952.png" alt="Alt text" /></p>
-
-<h3>代码</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># coding : utf-8</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">linecache</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">file_srt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">file_txt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cout</span><span class="o">=</span><span class="mi">1</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_srt</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">cout</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">cout</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="s">&#39;en-Servos - working principle and homemade types.srt&#39;</span><span class="p">,</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>        <span class="n">file_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">cout</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">file_srt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="n">file_txt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>运行输出</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'><span class="n">Youtube</span> <span class="n">subtitles</span> <span class="n">download</span> <span class="n">by</span> <span class="n">mo</span><span class="o">.</span><span class="n">dbxdb</span><span class="o">.</span><span class="n">com</span>
-</span><span class='line'><span class="n">In</span> <span class="n">this</span> <span class="n">video</span> <span class="n">I</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">explain</span> <span class="n">the</span> <span class="n">functionality</span> <span class="n">of</span> <span class="n">servos</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">conventional</span> <span class="n">DC</span> <span class="n">motors</span> <span class="n">into</span> <span class="n">homebuilt</span> <span class="n">servos</span><span class="o">.</span>
-</span><span class='line'><span class="err">在这部影片中，我想解释一下舵机以及如何传统的直流电动机转换成自制伺服系统的功能。</span>
-</span><span class='line'><span class="n">A</span> <span class="n">servo</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">device</span> <span class="n">that</span> <span class="n">produces</span> <span class="n">motion</span> <span class="n">accordant</span> <span class="n">to</span> <span class="n">a</span> <span class="n">command</span> <span class="n">signal</span> <span class="kn">from</span> <span class="nn">a</span> <span class="nn">control</span> <span class="nn">system.</span>
-</span><span class='line'><span class="err">伺服是，从一个控制系统产生运动一致来的命令信号的装置。</span>
-</span><span class='line'><span class="n">Usually</span> <span class="n">an</span> <span class="n">electric</span> <span class="n">motor</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">mechanical</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">servomechanism</span> <span class="n">rotates</span> <span class="n">at</span> <span class="n">a</span> <span class="n">velocity</span> <span class="n">that</span> <span class="n">approximates</span> <span class="n">the</span> <span class="n">command</span> <span class="n">signal</span><span class="o">.</span>
-</span><span class='line'><span class="err">一般的电动机被用来创建一个机械力和伺服机构在近似于指令信号的速度旋转。</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'><span class="o">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -2128,6 +2486,10 @@ Python读写文件
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-Generators-yield/">Learning Python 019 生成器（Generators）和 Yield</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/30/python2-python3-range-function/">Learning Python 018 Python2 和 Python3 中 Range()函数的使用</a>
       </li>
     
@@ -2143,10 +2505,6 @@ Python读写文件
         <a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2158,8 +2516,8 @@ Python读写文件
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
-<a style="font-size: 129%" href="/tags/python/">Python</a>
-<a style="font-size: 129%" href="/tags/python3/">Python3</a>
+<a style="font-size: 139%" href="/tags/python/">Python</a>
+<a style="font-size: 139%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
@@ -2178,13 +2536,13 @@ Python读写文件
 <a style="font-size: 139%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/xpath/">xpath</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 90%" href="/tags/nei-lian-jie/">内连接</a>
-<a style="font-size: 90%" href="/tags/fen-zu/">分组</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
@@ -2192,7 +2550,7 @@ Python读写文件
 <a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
-<a style="font-size: 90%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
 <a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -2206,7 +2564,7 @@ Python读写文件
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (6)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (7)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 生成器 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/sheng-cheng-qi/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-30T13:39:33+08:00</updated>
+  <updated>2016-11-30T23:18:07+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 019 生成器（Generators）和 yield]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield/"/>
+    <updated>2016-11-30T23:17:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>知识点：生成器</h2>
+
+<p><a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c04/p03_create_new_iteration_with_generators.html">生成器只能用于迭代操作。</a></p>
+
+<p>一个函数，其中带 <code>yield</code>    关键字的代码，它不会执行，只是记下有这个操作；其他代码正常的执行。而被记下的这些操作会像队列一样存起来，这个“队列”就是 <strong>生成器</strong>，并且会类似于<code>return</code>一样返回。</p>
+
+<p>一个函数的代码里面有 <code>yield</code> 关键字，那么这个函数就是一个<strong>制造生成器的函数</strong>。</p>
+
+<blockquote><p>生成器是Python中的高级特性。我之前学习过，还写了一个博客：<a href="http://blog.csdn.net/github_35160620/article/details/51985596?locationNum=1&amp;fps=1">Learning Python 011 高级特性 2</a></p></blockquote>
+
+<hr />
+
+<h2>Python3 例子</h2>
+
+<pre><code class="python">&gt;&gt;&gt; def f():
+...     yield 1
+...     yield 2
+...     yield 3
+...
+</code></pre>
+
+<pre><code class="python">&gt;&gt;&gt; g = f()
+&gt;&gt;&gt; g
+&lt;generator object f at 0x0000023B63151258&gt;
+&gt;&gt;&gt; type(g)
+&lt;class 'generator'&gt;
+&gt;&gt;&gt; next(g)
+1
+&gt;&gt;&gt; next(g)
+2
+&gt;&gt;&gt; next(g)
+3
+&gt;&gt;&gt; next(g)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt; list(g)
+[]
+&gt;&gt;&gt; g = f()
+&gt;&gt;&gt; list(g)
+[1, 2, 3]
+&gt;&gt;&gt; list(g)
+[]
+&gt;&gt;&gt;
+</code></pre>
+
+<hr />
+
+<pre><code class="python">&gt;&gt;&gt; def counter(num):
+...     print('Run to the ' + str(num) + ' yield')
+...
+&gt;&gt;&gt; def f():
+...     print('start!')
+...     yield counter(1)
+...     yield counter(2)
+...     yield counter(3)
+...     print('Done!')
+...
+</code></pre>
+
+<pre><code class="python">&gt;&gt;&gt; g = f()
+&gt;&gt;&gt; g
+&lt;generator object f at 0x000001D4843E1258&gt;
+&gt;&gt;&gt; next(g)
+start!
+Run to the 1 yield
+&gt;&gt;&gt; next(g)
+Run to the 2 yield
+&gt;&gt;&gt; next(g)
+Run to the 3 yield
+&gt;&gt;&gt; next(g)
+Done!
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt; list(g)
+[]
+&gt;&gt;&gt; g = f()
+&gt;&gt;&gt; list(g)
+start!
+Run to the 1 yield
+Run to the 2 yield
+Run to the 3 yield
+Done!
+[None, None, None]
+&gt;&gt;&gt;
+</code></pre>
+
+<hr />
+
+<h2>Python2 实例</h2>
+
+<p>生成器在 python2 的用法和在python3中的用法一样，唯一的区别是：</p>
+
+<ul>
+<li>python2 中 可以使用<code>next(g)</code> 或者 <code>g.next()</code>。 这样两个等价</li>
+<li>python3 中 只有<code>next(g)</code>，没有<code>g.next()</code>。</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：<a href="http://wiki.jikexueyuan.com/project/start-learning-python/215.html">生成器</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 018 Python2 和 Python3 中 range()函数的使用]]></title>

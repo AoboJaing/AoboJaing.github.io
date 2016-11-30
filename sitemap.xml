@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/11/30/python2-python3-Generators-yield/</loc>
+<lastmod>2016-11-30T23:17:17+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/11/30/python2-python3-range-function/</loc>
 <lastmod>2016-11-30T13:37:04+08:00</lastmod>
 </url>
@@ -649,5 +653,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/sheng-cheng-qi/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/generators/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/yield/</loc>
 </url>
 </urlset>
