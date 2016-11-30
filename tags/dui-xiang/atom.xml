@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 对象 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/dui-xiang/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-01T07:09:08+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 023 类编程]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/class-programming-object/"/>
+    <updated>2016-12-01T07:03:26+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/class-programming-object</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h1>怎么使用python编写一个 <strong>类</strong></h1>
+
+<p>参考网站：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p01_change_string_representation_of_instances.html">Python3-cookbook 类与对象</a></p>
+
+<p>随便编写一个Python类，类里面至少有下面三个函数：</p>
+
+<pre><code class="python">class Pair:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return 'Pair({0.x!r}, {0.y!r})'.format(self)
+
+    def __str__(self):
+        return '({0.x!s}, {0.y!s})'.format(self)
+</code></pre>
+
+<ul>
+<li><code>__init__()</code> 函数就是类的构造函数。</li>
+<li><code>__repr__()</code>  和 <code>__str__()</code> 函数 都是用来输出字符串用的。</li>
+</ul>
+
+
+<pre><code class="python">&gt;&gt;&gt; p = Pair(3, 4)
+&gt;&gt;&gt; p
+Pair(3, 4) # __repr__() output
+&gt;&gt;&gt; print(p)
+(3, 4) # __str__() output
+&gt;&gt;&gt;
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

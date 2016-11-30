@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/01/class-programming-object/</loc>
+<lastmod>2016-12-01T07:03:26+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/</loc>
 <lastmod>2016-12-01T05:47:12+08:00</lastmod>
 </url>
@@ -692,5 +696,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/copy/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/lei-bian-cheng/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/dui-xiang/</loc>
 </url>
 </urlset>
