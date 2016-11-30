@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Windows | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/windows/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T04:46:22+08:00</updated>
+  <updated>2016-12-01T05:48:02+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/"/>
+    <updated>2016-12-01T05:47:12+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<hr />
+
+<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
+
+<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
+
+<pre><code class="dos">copy "F:\原文件夹\*" "F:\目标文件夹\"
+</code></pre>
+
+<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
+
+<ol>
+<li>构造命令字符串。</li>
+<li>使用<code>os.system()</code>函数执行命令字符串。</li>
+</ol>
+
+
+<hr />
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
+
+<p>适合在Python3中执行的代码：</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+
+import os
+
+org_folder = r'F:\原文件夹'
+res_folder = r'F:\目标文件夹'
+
+# 构造命令字符串
+copy_command = 'copy "' + org_folder + r'\*" "' + res_folder + r'\"'
+# copy_command = copy_command.decode('utf-8').encode('GB18030')
+print(copy_command) # 如果你使用的是Python2，需要将这一行的注释去掉。
+# print(copy_command)
+# 使用os.system()函数执行命令字符串
+os.system(copy_command)
+</code></pre>
+
+<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
+
+<pre><code>copy "F:\鍘熸枃浠跺す\*" "F:\鐩爣鏂囦欢澶筡"
+系统找不到指定的路径。
+</code></pre>
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<pre><code class="dos"># Succesfull
+copy "F:\原文件夹\*" "F:\目标文件夹\"
+# Succesfull
+copy "F:\原文件夹\\*" "F:\目标文件夹\\"
+
+# error
+copy "F:/原文件夹/*" "F:/目标文件夹/"
+# error
+copy "F://原文件夹//*" "F://目标文件夹//"
+</code></pre>
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p><strong>第二件事 .</strong> 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<pre><code class="python"># error
+str = r'D:\WorkSpace\test_ws\'
+# 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /
+</code></pre>
+
+<pre><code class="python"># succes
+str = r'D:\WorkSpace\test_ws\\'
+print(str)
+# 输出：D:\WorkSpace\test_ws\\
+</code></pre>
+
+<pre><code class="python"># succes,但是不是我们要的结果
+str = 'D:\WorkSpace\test_ws\\'
+print(str)
+# 输出：D:\WorkSpace est_ws\
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 JetBrains PyCharm 软件上使用 Git(Github)]]></title>
@@ -520,170 +638,6 @@ C:\Users\AOBO&gt;
 <hr />
 
 <p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客</a>。</p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python3 pip 解决问题：  error: Unable to find vcvarsall.bat]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat/"/>
-    <updated>2016-11-26T05:50:14+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>当我给 <strong>python3.5</strong> 安装 第三方库 <code>charset</code> 时：<code>pip install charset</code>，出现了错误：</p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480092727015.png" alt="Alt text" /></p>
-
-<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler\firstdemo&gt;pip install charset
-Collecting charset
-  Downloading charset-1.0.1.tar.gz (189kB)
-    100% |████████████████████████████████| 194kB 3.9kB/s
-Collecting chardet (from charset)
-  Using cached chardet-2.3.0.tar.gz
-Installing collected packages: chardet, charset
-  Running setup.py install for chardet ... done
-  Running setup.py install for charset ... error
-    Complete output from command c:\users\aobo\appdata\local\programs\python\python35\python.exe -u -c "import setuptools, tokenize;__file__='C:\\Users\\AOBO\\AppData\\Local\\Temp\\pip-build-ydv8oep3\\charset\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record C:\Users\AOBO\AppData\Local\Temp\pip-hlxpja30-record\install-record.txt --single-version-externally-managed --compile:
-    running install
-    running build
-    running build_py
-    creating build
-    creating build\lib.win-amd64-3.5
-    creating build\lib.win-amd64-3.5\charset
-    copying charset\cmd.py -&gt; build\lib.win-amd64-3.5\charset
-    copying charset\__init__.py -&gt; build\lib.win-amd64-3.5\charset
-    running egg_info
-    writing charset.egg-info\PKG-INFO
-    writing top-level names to charset.egg-info\top_level.txt
-    writing dependency_links to charset.egg-info\dependency_links.txt
-    writing requirements to charset.egg-info\requires.txt
-    writing entry points to charset.egg-info\entry_points.txt
-    warning: manifest_maker: standard file '-c' not found
-
-    reading manifest file 'charset.egg-info\SOURCES.txt'
-    reading manifest template 'MANIFEST.in'
-    warning: no files found matching '*.txt' under directory 'docs'
-    warning: no files found matching '*.txt' under directory 'languagedet\data'
-    warning: no files found matching '*.pickle' under directory 'languagedet\data'
-    warning: no files found matching '*.conf' under directory 'languagedet\data'
-    writing manifest file 'charset.egg-info\SOURCES.txt'
-    running build_ext
-    building 'charset.detector' extension
-    error: Unable to find vcvarsall.bat
-
-    ----------------------------------------
-Command "c:\users\aobo\appdata\local\programs\python\python35\python.exe -u -c "import setuptools, tokenize;__file__='C:\\Users\\AOBO\\AppData\\Local\\Temp\\pip-build-ydv8oep3\\charset\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record C:\Users\AOBO\AppData\Local\Temp\pip-hlxpja30-record\install-record.txt --single-version-externally-managed --compile" failed with error code 1 in C:\Users\AOBO\AppData\Local\Temp\pip-build-ydv8oep3\charset\
-</code></pre>
-
-<hr />
-
-<h2>为什么出现这个问题？</h2>
-
-<p>在命令行中执行：python，看看当前使用的python的版本，和它所需要的Vs软件的编译器的版本：</p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480095090271.png" alt="Alt text" /></p>
-
-<p>当前python版本是：python3.5.0；当前需要的Vs编译器的版本是：MSC v. 1900</p>
-
-<p>查看下面的表格，对于版本的Visual C ++使用的编译器版本如下：（<a href="http://stackoverflow.com/questions/2676763/what-version-of-visual-studio-is-python-on-my-computer-compiled-with">表的参考网站</a>）</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> Visual C ++版本 </th>
-<th style="text-align:right;">     编译器版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> Visual C++ 4.x </td>
-<td style="text-align:right;">   MSC_VER=1000 </td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 5                   </td>
-<td style="text-align:right;"> MSC_VER=1100</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 6                   </td>
-<td style="text-align:right;"> MSC_VER=1200</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ .NET               </td>
-<td style="text-align:right;">  MSC_VER=1300</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ .NET 2003         </td>
-<td style="text-align:right;">   MSC_VER=1310</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2005  (8.0)      </td>
-<td style="text-align:right;">    MSC_VER=1400</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2008  (9.0)     </td>
-<td style="text-align:right;">     MSC_VER=1500</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2010 (10.0)    </td>
-<td style="text-align:right;">      MSC_VER=1600</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2012 (11.0)   </td>
-<td style="text-align:right;">       MSC_VER=1700</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2013 (12.0)  </td>
-<td style="text-align:right;">        MSC_VER=1800</td>
-</tr>
-<tr>
-<td style="text-align:left;">Visual C++ 2015 (14.0) </td>
-<td style="text-align:right;">         MSC_VER=1900</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>所以解决这个 <code>error: Unable to find vcvarsall.bat</code> 问题的方法就是：下载并安装 Visual Studio 2015 软件，问题即可解决。</p>
-
-<h2>解决办法 &mdash; 安装：<strong>Python Tools 2.2.5 for Visual Studio 2015</strong></h2>
-
-<p><strong>Step 1 . </strong> 下载 Visual Studio 2015 软件。</p>
-
-<p>下载和安装 Visual Studio 2015 软件 的详细步骤请到这个博客查看：<a href="http://www.aobosir.com/blog/2016/11/26/download-install-Miarosoft-Visual-Studio-2015-software-tutorial/">下载和安装 Visual Studio 2015 软件 的详细步骤图文教程</a>。（<strong>我们按照这个网站的方法安装VS2015，但不按照这个博客里面说的安装。</strong>）</p>
-
-<blockquote><p>如果安装上面的网站的方法安装VS2015软件，那么问题还是不能解决。（<code>error: Unable to find vcvarsall.bat</code>）</p></blockquote>
-
-<p><strong>Step 2 . </strong> 安装 Visual Studio 2015 软件</p>
-
-<p>这个VS2015，安装时需要选择：<strong>自定义安装</strong>。（<a href="http://jingyan.baidu.com/article/adc815138162e8f723bf7387.html">参考网站</a>）</p>
-
-<p>参考网站：</p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480108534366.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480108637845.png" alt="Alt text" /></p>
-
-<p>我们的目的就是安装这个软件：<strong>Python Tools 2.2.5 for Visual Studio 2015</strong> 。现在，这个软件已经安装完了。</p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109167911.png" alt="Alt text" /></p>
-
-<blockquote><p><strong>注意：</strong></p>
-
-<p> 如果一直停留在：“正在配置您的系统，这可能需要一些时间”</p>
-
-<p> <img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109561343.png" alt="Alt text" /></p>
-
-<p>  解决：关掉VS的所有进程。</p></blockquote>
-
-<h2>搞定，问题解决</h2>
-
-<hr />
-
-<p>现在再执行：<code>pip install charset</code>。问题解决。</p>
-
-<p><img src="/images/2016-11-26-Python-pip-error-Unable-to-find-vcvarsall-bat/1480109745990.png" alt="Alt text" /></p>
 
 <hr />
 ]]></content>

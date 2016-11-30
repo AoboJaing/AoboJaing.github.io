@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: os | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/os/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T04:46:22+08:00</updated>
+  <updated>2016-12-01T05:48:02+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/"/>
+    <updated>2016-12-01T05:47:12+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<hr />
+
+<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
+
+<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
+
+<pre><code class="dos">copy "F:\原文件夹\*" "F:\目标文件夹\"
+</code></pre>
+
+<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
+
+<ol>
+<li>构造命令字符串。</li>
+<li>使用<code>os.system()</code>函数执行命令字符串。</li>
+</ol>
+
+
+<hr />
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
+
+<p>适合在Python3中执行的代码：</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+
+import os
+
+org_folder = r'F:\原文件夹'
+res_folder = r'F:\目标文件夹'
+
+# 构造命令字符串
+copy_command = 'copy "' + org_folder + r'\*" "' + res_folder + r'\"'
+# copy_command = copy_command.decode('utf-8').encode('GB18030')
+print(copy_command) # 如果你使用的是Python2，需要将这一行的注释去掉。
+# print(copy_command)
+# 使用os.system()函数执行命令字符串
+os.system(copy_command)
+</code></pre>
+
+<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
+
+<pre><code>copy "F:\鍘熸枃浠跺す\*" "F:\鐩爣鏂囦欢澶筡"
+系统找不到指定的路径。
+</code></pre>
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<pre><code class="dos"># Succesfull
+copy "F:\原文件夹\*" "F:\目标文件夹\"
+# Succesfull
+copy "F:\原文件夹\\*" "F:\目标文件夹\\"
+
+# error
+copy "F:/原文件夹/*" "F:/目标文件夹/"
+# error
+copy "F://原文件夹//*" "F://目标文件夹//"
+</code></pre>
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p><strong>第二件事 .</strong> 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<pre><code class="python"># error
+str = r'D:\WorkSpace\test_ws\'
+# 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /
+</code></pre>
+
+<pre><code class="python"># succes
+str = r'D:\WorkSpace\test_ws\\'
+print(str)
+# 输出：D:\WorkSpace\test_ws\\
+</code></pre>
+
+<pre><code class="python"># succes,但是不是我们要的结果
+str = 'D:\WorkSpace\test_ws\\'
+print(str)
+# 输出：D:\WorkSpace est_ws\
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 021 创建文件夹、创建文件]]></title>

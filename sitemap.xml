@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/</loc>
+<lastmod>2016-12-01T05:47:12+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/01/python-create-file-create-folder-open/</loc>
 <lastmod>2016-12-01T04:45:53+08:00</lastmod>
 </url>
@@ -682,5 +686,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/mkdir/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/dos/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/copy/</loc>
 </url>
 </urlset>
