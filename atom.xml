@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-11-29T20:14:57+08:00</updated>
+  <updated>2016-11-30T13:39:33+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,328 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 018 Python2 和 Python3 中 Range()函数的使用]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/30/python2-python3-range-function/"/>
+    <updated>2016-11-30T13:37:04+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/30/python2-python3-range-function</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2><code>range()</code> 函数</h2>
+
+<ul>
+<li>Python2中：用来创建一个列表（list）。</li>
+<li>Python3中：用来创建一个可以生成list或者tuple的生成器。</li>
+</ul>
+
+
+<h2>Python2 <code>range()</code>函数 知识点</h2>
+
+<p>Python2 中的<code>range()</code> 函数可以生成一个list。（分配内存空间）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>Python2 中的<code>xrange()</code>函数不是生成一个list，而是生成一个生成器，不分配内存。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># xrange(10)</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Python3 <code>range()</code>函数 知识点</h2>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># range(0, 10)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：（打印出来的不是一个列表，而是一个生成器）。</p>
+
+<p>Python3 选择这样做的原因：可以节约内存空间，详情请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-Memory-release-gc/">Python2和Python3的内存释放</a>。</p>
+
+<p>Python3中的<code>range()</code>函数的功能和Python2中的<code>xrange()</code>函数一样，所以在Python3中没有<code>xrange()</code>函数。</p>
+
+<hr />
+
+<p>要想生成<strong>list</strong>或者<strong>tuple</strong>，这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (4, 5, 6, 7, 8, 9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2><code>range()</code>函数的使用</h2>
+
+<p>下面这段代码在Python2 和 Python3中得到的运行结果都是一样的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mi">0</span>
+</span><span class='line'><span class="mi">1</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="mi">4</span>
+</span><span class='line'><span class="mi">5</span>
+</span><span class='line'><span class="mi">6</span>
+</span><span class='line'><span class="mi">7</span>
+</span><span class='line'><span class="mi">8</span>
+</span><span class='line'><span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果是一样的，但是运行的原理不同：</p>
+
+<ul>
+<li>Python2：在第一次执行 <code>range(10)</code>，就生成了一个<code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code>列表。</li>
+<li>Python3：在每次执行<code>range(10)</code>时，生成一个元素<code>i</code>。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 017 — Python2 和 Python3 的内存释放]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/11/30/python2-python3-Memory-release-gc/"/>
+    <updated>2016-11-30T13:34:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/11/30/python2-python3-Memory-release-gc</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>学习Python的内存释放知识点的动机</h2>
+
+<p>之前我学过很多Python的程序，偶然的一次，我打开任务管理器，看到我写的程序，运行时占用了大量的内存，所以，我希望学会如何释放内存，来优化我的程序，也不给电脑照成太大的负担，所以，我想学会：Python的内存释放这个知识点。</p>
+
+<hr />
+
+<p>参考网站： <a href="http://qinqianshan.com/python-memory-the-gc-module-released/">gc模块–Python内存释放</a></p>
+
+<p>下面写几个实验程序，里面都是使用<code>range()</code> 函数来分配内存空间的。<code>range()</code>函数的详细介绍，请见这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-range-function/">range()函数在python2 和 python3中的使用介绍</a>。</p>
+
+<h2>Python2 内存释放</h2>
+
+<p>未优化前的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480424648330.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>优化内存的代码：</p>
+
+<p>使用手动释放内存的方法来优化内存。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看出，占用的内存空间明显减小了。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480424705571.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>既优化了内存，也优化了CPU 的代码</p>
+
+<p>使用睡眠来优化CPU运行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480424877933.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>Python3 内存释放</h2>
+
+<p>未优化前的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用Python3库运行未优化的代码，所需要的消耗的内存空间和使用Python2运行优化内存的代码消耗的内存空间 差不多。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480433041923.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>优化内存的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看出，所暂用的内存空间没有任何增减。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480432975323.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>既优化了内存，也优化了CPU 的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-11-30-python2-python3-Memory-release-gc/1480432888777.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>总结</h2>
+
+<p>Python3 真的是比 Python2 更加的完善了，从这一点上也可以看出来，Python语言是第4代语言里面非常杰出的语言。随着它的不断发展，它会运行速度慢和内存消耗大的缺点会慢慢的消失（因为：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/chapters/p15_c_extensions.html">许多Python内置库是用C语言写的</a>）。我看好Python。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）]]></title>
@@ -3043,162 +3365,6 @@ Python读写文件
 </span><span class='line'><span class="o">...</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PyCharm 软件 安装 插件（ Plugins） --- 举例：安装Markdown 插件（即：让PyCharm 软件支持 .md 文件）]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin/"/>
-    <updated>2016-11-18T00:42:45+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我使用的 PyCharm 软件的版本：<strong>2016.1.4</strong></p>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html">https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html</a></p>
-
-<hr />
-
-<h2>给 <strong>PyCharm</strong> 软件添加 <strong>plugins</strong> 的图文操作（这里以添加 <strong>Markdown</strong> 插件）</h2>
-
-<p><strong>Step 1 . </strong> 启动 <strong>PyCharm</strong> 软件</p>
-
-<p><strong>Step 2 . </strong> 打开 <strong>设置</strong>（<strong>Setting</strong>） 窗口。（操作：File -> Setting  或者 按快捷键 <code>Ctrl + Alt + S</code>）</p>
-
-<p><strong>Step 3 . </strong> 在搜索框里面搜索： <strong>plugins</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295440117.png" alt="Alt text" /></p>
-
-<p><strong>Step 4 . </strong> 点击 <strong>Install JetBrains plugins&hellip;</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295565571.png" alt="Alt text" /></p>
-
-<p><strong>Step 5 . </strong> 在新弹出来的窗口的搜索框里，输入：<strong>Markdown</strong>。 点击 <strong>Install</strong> ，进行安装。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295705867.png" alt="Alt text" /></p>
-
-<p><strong>Step 6 . </strong> 下载需要翻墙</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296063133.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296084779.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296102153.png" alt="Alt text" /></p>
-
-<p><strong>Step 7 . </strong> 安装完成 <strong>Markdown</strong> 插件后，需要重启 <strong>PyCharm</strong> 软件，插件才能生效</p>
-
-<blockquote><p>注意： 安装成功的插件会自动使能（<strong>enable</strong>）</p></blockquote>
-
-<hr />
-
-<h2>测试</h2>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296298464.png" alt="Alt text" /></p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/17/cs-002-Browse-Open-file-folder/"/>
-    <updated>2016-11-17T16:26:51+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/17/cs-002-Browse-Open-file-folder</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><strong>GitHub</strong>源代码地址：
-<a href="https://github.com/AoboJaing/Browse_Open_file_folder">https://github.com/AoboJaing/Browse_Open_file_folder</a></p>
-
-<hr />
-
-<h2>准备工作</h2>
-
-<p>设计GUI界面：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-17-cs-002-Browse-Open-file-folder/1479359628032.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p>参考网站：
-<a href="http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html">http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html</a></p></blockquote>
-
-<h2>浏览（或叫：选择）文件夹（或叫：目录）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">FolderBrowserDialog</span> <span class="n">dialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FolderBrowserDialog</span><span class="p">();</span>
-</span><span class='line'>        <span class="n">dialog</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;请选择文件路径&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">dialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="kt">string</span> <span class="n">foldPath</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">SelectedPath</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">foldPath</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>打开 文件夹</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;Explorer.exe&quot;</span><span class="p">,</span> <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>浏览（或叫：选择）文件</h2>
-
-<p>双击 <strong>Button2</strong>（浏览）按钮，将下面的代码复制到<code>button2_Click()</code>事件函数里面：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">OpenFileDialog</span> <span class="n">fileDialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">OpenFileDialog</span><span class="p">();</span>
-</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Multiselect</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;请选择文件&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Filter</span><span class="p">=</span><span class="s">&quot;所有文件(*.*)|*.*&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">fileDialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="kt">string</span> <span class="n">file</span> <span class="p">=</span> <span class="n">fileDialog</span><span class="p">.</span><span class="n">FileName</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">file</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>打开文件</h2>
-
-<p>参考网站：<a href="https://zhidao.baidu.com/question/413230762.html">https://zhidao.baidu.com/question/413230762.html</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="c1">//System.Diagnostics.Process.Start(&quot;notepad++.exe&quot;, textBox2.Text);</span>
-</span><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;XMP.exe&quot;</span><span class="p">,</span> <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这是一个使用<code>C#</code>来使用其他软件打开响应的文件的函数：<code>System.Diagnostics.Process.Start()</code></p>
-
-<p>其他软件：<code>notepad.exe</code>是记事本、<code>notepad++.exe</code>是<strong>notepad++</strong>文本编辑器软件、<code>XMP.exe</code>是迅雷看看播放器软件。</p>
-
-<h2>运行效果</h2>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-17-cs-002-Browse-Open-file-folder/demo14.gif" alt="Alt text" /></p>
-
-<hr />
 ]]></content>
   </entry>
   

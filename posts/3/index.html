@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="先添加一个控件。比如添加一个GroupBox控件。 当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步： Step 1 . 在 Form11.cs 文件中，将这个控件所有的事件函数删除。对于我们这个例子， &hellip;">
+  <meta name="description" content="我使用的 PyCharm 软件的版本：2016.1.4 参考网站： https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html 给 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,202 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/18/PyCharm-install-plugins-example-install-Markdown-plugin/">PyCharm 软件 安装 插件（ Plugins） --- 举例：安装Markdown 插件（即：让PyCharm 软件支持 .md 文件）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-18T00:42:45+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>我使用的 PyCharm 软件的版本：<strong>2016.1.4</strong></p>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html">https://www.jetbrains.com/help/pycharm/2016.1/installing-updating-and-uninstalling-repository-plugins.html</a></p>
+
+<hr />
+
+<h2>给 <strong>PyCharm</strong> 软件添加 <strong>plugins</strong> 的图文操作（这里以添加 <strong>Markdown</strong> 插件）</h2>
+
+<p><strong>Step 1 . </strong> 启动 <strong>PyCharm</strong> 软件</p>
+
+<p><strong>Step 2 . </strong> 打开 <strong>设置</strong>（<strong>Setting</strong>） 窗口。（操作：File -> Setting  或者 按快捷键 <code>Ctrl + Alt + S</code>）</p>
+
+<p><strong>Step 3 . </strong> 在搜索框里面搜索： <strong>plugins</strong></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295440117.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 点击 <strong>Install JetBrains plugins&hellip;</strong></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295565571.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 在新弹出来的窗口的搜索框里，输入：<strong>Markdown</strong>。 点击 <strong>Install</strong> ，进行安装。</p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479295705867.png" alt="Alt text" /></p>
+
+<p><strong>Step 6 . </strong> 下载需要翻墙</p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296063133.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296084779.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296102153.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 安装完成 <strong>Markdown</strong> 插件后，需要重启 <strong>PyCharm</strong> 软件，插件才能生效</p>
+
+<blockquote><p>注意： 安装成功的插件会自动使能（<strong>enable</strong>）</p></blockquote>
+
+<hr />
+
+<h2>测试</h2>
+
+<p><img src="/images/2016-11-18-PyCharm-install-plugins-example-install-Markdown-plugin/1479296298464.png" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/17/cs-002-Browse-Open-file-folder/">C# 002 浏览（或叫：选择）、打开 文件和文件夹（或叫：目录）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-17T16:26:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:26 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><strong>GitHub</strong>源代码地址：
+<a href="https://github.com/AoboJaing/Browse_Open_file_folder">https://github.com/AoboJaing/Browse_Open_file_folder</a></p>
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>设计GUI界面：</p>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/1479359628032.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>参考网站：
+<a href="http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html">http://www.cnblogs.com/szytwo/archive/2012/03/21/2410041.html</a></p></blockquote>
+
+<h2>浏览（或叫：选择）文件夹（或叫：目录）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">FolderBrowserDialog</span> <span class="n">dialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FolderBrowserDialog</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">dialog</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;请选择文件路径&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">dialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">string</span> <span class="n">foldPath</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">SelectedPath</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">foldPath</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>打开 文件夹</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;Explorer.exe&quot;</span><span class="p">,</span> <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>浏览（或叫：选择）文件</h2>
+
+<p>双击 <strong>Button2</strong>（浏览）按钮，将下面的代码复制到<code>button2_Click()</code>事件函数里面：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="n">OpenFileDialog</span> <span class="n">fileDialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">OpenFileDialog</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Multiselect</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;请选择文件&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">fileDialog</span><span class="p">.</span><span class="n">Filter</span><span class="p">=</span><span class="s">&quot;所有文件(*.*)|*.*&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">fileDialog</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">()</span> <span class="p">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">string</span> <span class="n">file</span> <span class="p">=</span> <span class="n">fileDialog</span><span class="p">.</span><span class="n">FileName</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">file</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>打开文件</h2>
+
+<p>参考网站：<a href="https://zhidao.baidu.com/question/413230762.html">https://zhidao.baidu.com/question/413230762.html</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="c1">//System.Diagnostics.Process.Start(&quot;notepad++.exe&quot;, textBox2.Text);</span>
+</span><span class='line'>        <span class="n">System</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&quot;XMP.exe&quot;</span><span class="p">,</span> <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这是一个使用<code>C#</code>来使用其他软件打开响应的文件的函数：<code>System.Diagnostics.Process.Start()</code></p>
+
+<p>其他软件：<code>notepad.exe</code>是记事本、<code>notepad++.exe</code>是<strong>notepad++</strong>文本编辑器软件、<code>XMP.exe</code>是迅雷看看播放器软件。</p>
+
+<h2>运行效果</h2>
+
+<p><img src="/images/2016-11-17-cs-002-Browse-Open-file-folder/demo14.gif" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1846,364 +2042,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/22/SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/">SQL 数据库 学习 031 查询-14 连接查询 --- 左（右）外连接、完全连接、交叉连接、联合</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-22T18:17:33+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>6:17 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h1>连接查询</h1>
-
-<p><strong>定义：</strong></p>
-
-<p>将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。</p>
-
-<hr />
-
-<h2>内连接 （<code>innor join</code> 或者 <code>join</code>）</h2>
-
-<p>请看这篇博客：<a href="http://www.aobosir.com/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection/">SQL 数据库学习 查询 &mdash; 内连接</a>。</p>
-
-<hr />
-
-<h2>左（右）外连接 （<code>left join</code> 和 <code>right join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">left</span> <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131219555.png" alt="Alt text" /></p>
-
-<p>实现的步骤：</p>
-
-<ol>
-<li>用左表的第一行分别和右表的所有行进行的连接，如果有匹配的行，则一起输出，如果右表有多行匹配，则结果集输出多行，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第一行内容，右边全部输出<code>null</code>。</li>
-<li>然后再用左表第二行和右边所有行进行连接，如果没有匹配行，则结果集中只输出一行，该输出行左边为左表第二行内容，右边全部输出<code>null</code>。</li>
-<li>以此类推，直至左边所有行连接完毕。</li>
-<li>因为右边很可能出现有多行和左边的某一行匹配，所以左连接产生的结果集的行数很可能大于 <code>left join</code> 左边表的记录的总数。</li>
-<li>帮助文档：左向外连接的结果集包括<code>LEFT OUTER</code> 子句中指定的左表的所有行，而不仅仅是连接列所匹配的行。如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表均为空值。</li>
-</ol>
-
-
-<hr />
-
-<p>左外连接的实际意义</p>
-
-<ul>
-<li>返回一个事情及其该事物的相关信息，如果该事物没有相关信息，则输出<code>null</code></li>
-<li>例子：
-
-<ul>
-<li>已知条件： <code>productStocks</code> 货物库存表、 <code>orderform</code> 订单表、<code>pID</code> 是产品的编号</li>
-<li><strong>sql语句</strong></li>
-<li><code>select productStocks.*, orderform.* from productStocks left join orderform on productStocks.pID=orderform.pID</code></li>
-<li>实际意义： 返回仓库中现存货物的信息及其该货物的订单信息，如果该货物没有订单信息，在把该货物的订单信息全部输出为<code>null</code>。</li>
-</ul>
-</li>
-</ul>
-
-
-<hr />
-
-<h2>完全连接（<code>full join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">productStocks</span>
-</span><span class='line'>  <span class="k">full</span> <span class="k">join</span> <span class="n">orderform</span>
-</span><span class='line'>  <span class="k">on</span> <span class="n">productStocks</span><span class="p">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">orderform</span><span class="p">.</span><span class="n">pid</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131238849.png" alt="Alt text" /></p>
-
-<p>结果集中包含三部分内容：</p>
-
-<ol>
-<li>两个表中匹配的所有行记录</li>
-<li>左表中那些在右表中找不到匹配的行的记录。这些记录的右边全为<code>null</code></li>
-<li>右表中那些在左表中找不到匹配的行的记录。这些记录的左边全为<code>null</code></li>
-</ol>
-
-
-<hr />
-
-<h2>交叉连接（<code>cross join</code>）</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">cross</span> <span class="k">join</span> <span class="n">dept</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果都是将两个表进行笛卡尔积。</p>
-
-<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477131282846.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>自连接</h2>
-
-<p><strong>定义：</strong> 一张表自己和自己连接起来查询数据。</p>
-
-<p>例子：不准用聚合函数 求薪水最高的员工的信息。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--用聚合函数 求出薪水最高的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--不准用聚合函数 求出薪水最高的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">distinct</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">empno</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span>
-</span><span class='line'>      <span class="k">join</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
-</span><span class='line'>      <span class="k">on</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">sal</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477063139982.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>联合（<code>union</code>）</h2>
-
-<p><strong>例子：</strong></p>
-
-<p>输出每一个员工的姓名、工资、上司的姓名。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span><span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">as</span> <span class="ss">&quot;员工工资&quot;</span><span class="p">,</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">as</span> <span class="ss">&quot;上司姓名&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E1&quot;</span><span class="p">,</span> <span class="n">emp</span> <span class="ss">&quot;E2&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E1&quot;</span><span class="p">.</span><span class="n">mgr</span> <span class="o">=</span> <span class="ss">&quot;E2&quot;</span><span class="p">.</span><span class="n">EMPNO</span>
-</span><span class='line'><span class="k">union</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="s1">&#39;已是最大老板&#39;</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">mgr</span> <span class="k">is</span> <span class="k">null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-22-SQL-Learning-31-Query-14-Join-Query-Left-Right-Join-Full-Join-Cross-Join-Union/1477130066693.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>定义：</strong></p>
-
-<p>表和表之间的数据以纵向的方式连接在一起。注意：我们以前讲的所有的连接是以横向的方式连接在一起的。</p>
-
-<p><strong>注意：</strong></p>
-
-<p>联合就是：若干个<code>select</code> 子句要联合成功的话，必须得满足两个条件：</p>
-
-<ol>
-<li>这若干个 <code>select</code> 子句输出的列数必须是相等的。</li>
-<li>这若干个 <code>select</code> 子句输出列的数据类型至少是兼容的。</li>
-</ol>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/21/SQL-Learning-030-Query-13-Query-order-of-order/">SQL 数据库 学习 030 查询-13 --- 查询语句的顺序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-21T20:54:28+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2><strong>SQL Server</strong> 查询语句的顺序</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">A</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">B</span>
-</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">join</span> <span class="k">C</span>
-</span><span class='line'>  <span class="k">on</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">where</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">having</span> <span class="p">...</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="p">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>例子</h2>
-
-<blockquote><p>本例子里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<p><strong>求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第1种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">1</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">desc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477040016720.png" alt="Alt text" /></p>
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第2种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span>
-</span><span class='line'>          <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>              <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>                  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>                  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>          <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-030-Query-13-Query-order-of-order/1477044470627.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -2221,6 +2059,14 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-range-function/">Learning Python 018 Python2 和 Python3 中 Range()函数的使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/30/python2-python3-Memory-release-gc/">Learning Python 017 — Python2 和 Python3 的内存释放</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>
       </li>
     
@@ -2232,14 +2078,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
         <a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/">Octopress 搭建静态博客站点 --- 添加访客统计</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/">在 JetBrains PyCharm 软件上使用 Git(Github)</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2249,9 +2087,10 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 115%" href="/tags/c-number/">C#</a>
 <a style="font-size: 129%" href="/tags/git/">Git</a>
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
-<a style="font-size: 90%" href="/tags/importerror/">ImportError</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 129%" href="/tags/python/">Python</a>
+<a style="font-size: 129%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
@@ -2260,7 +2099,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
 <a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
-<a style="font-size: 90%" href="/tags/group-by/">group by</a>
 <a style="font-size: 90%" href="/tags/having/">having</a>
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
@@ -2285,7 +2123,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 90%" href="/tags/cha-xun-yu-ju-shun-xu/">查询语句顺序</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
-<a style="font-size: 90%" href="/tags/ju-he-han-shu/">聚合函数</a>
+<a style="font-size: 90%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
 <a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -2299,7 +2137,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (3)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (4)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (6)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
