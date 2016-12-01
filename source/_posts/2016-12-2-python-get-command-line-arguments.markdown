@@ -91,3 +91,33 @@ Options:
   -d DNAME    specify dictionary file
 
 ```
+
+----------
+
+## 注意：如果传入的参数是`string`类型的，最好使用`""` 引上
+
+为什么？ 因为字符串里面难免可能会有 ` ` （空格），所以，最好使用`""`（双引号）引上。
+
+```
+>python learningpython28.py -f "aobo fd g" -d "ava,dssd,hg"
+zname is  aobo fd g
+dname is  ava,dssd,hg
+dlist is  ['ava', 'dssd', 'hg']
+```
+
+如果你用单引号或者不用引号，虽然说运行不会报错，但是运行的结果就不是你想要的。
+
+```
+>python learningpython28.py -f 'aobo fd g' -d 'ava,dssd,hg'
+zname is  'aobo
+dname is  'ava,dssd,hg'
+dlist is  ["'ava", 'dssd', "hg'"]
+```
+
+```
+>python learningpython28.py -f aobo fd g -d ava,dssd,hg
+zname is  aobo
+dname is  ava,dssd,hg
+dlist is  ['ava', 'dssd', 'hg']
+```
+
