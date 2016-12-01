@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git_github | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/git-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T07:09:08+08:00</updated>
+  <updated>2016-12-01T08:05:14+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/GitHub-For-Windows-Adding-tag/"/>
+    <updated>2016-12-01T08:04:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/GitHub-For-Windows-Adding-tag</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">git 创建标签</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">git 操作标签</a></li>
+<li><a href="http://stackoverflow.com/questions/13862517/github-for-windows-adding-tags">Github for Windows - Adding tags</a></li>
+</ul>
+
+
+<hr />
+
+<p>要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 <strong>Git 命令行窗口</strong>，还是要使用命令行工具来完成这个工作。</p>
+
+<p><img src="/images/2016-12-1-GitHub-For-Windows-Adding-tag/1480548346142.png" alt="Alt text" /></p>
+
+<pre><code>git tag -a v1.0 -m "description information"
+git push origin v1.0
+</code></pre>
+
+<hr />
+
+<p>当你执行完<code>git tag -a v1.0 -m "description information"</code>，想要查看一下，你可以执行：</p>
+
+<pre><code>git show v1.0
+</code></pre>
+
+<p>如果你执行完<code>git tag -a v1.0 -m "description information"</code>，想要删除这个标签，可以执行：</p>
+
+<pre><code>git tag -d v1.0
+</code></pre>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 JetBrains PyCharm 软件上使用 Git(Github)]]></title>
