@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T09:03:54+08:00</updated>
+  <updated>2016-12-01T17:11:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,15 +14,72 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Learning Python 025 字符串分割]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-split/"/>
+    <updated>2016-12-01T17:06:32+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-split</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
+</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Learning Python 024 判断文件和文件夹是否存在]]></title>
     <link href="http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist/"/>
     <updated>2016-12-01T08:46:09+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist</id>
-    <content type="html"><![CDATA[<h1>Learning Python 024 判断文件和文件夹是否存在 &mdash; Over &mdash; 2016年12月1日 星期四</h1>
-
-<p>@(Learning Python)</p>
-
-<hr />
+    <content type="html"><![CDATA[<hr />
 
 <ul>
 <li>使用的电脑系统：Windows 10 64位</li>
@@ -2700,236 +2757,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <p><a href="https://www.zhihu.com/question/20899988">https://www.zhihu.com/question/20899988</a></p>
 
 <p><a href="http://blog.csdn.net/jim7424994/article/details/22675759">http://blog.csdn.net/jim7424994/article/details/22675759</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决问题： Pywin32 安装后出现 Import Win32api ImportError DLL Load Failed]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/"/>
-    <updated>2016-11-26T07:04:25+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>执行 <code>scrapy bench</code> 命令时 出现错误。（之前安装了pywin32库）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\defer.py", line 1260, in _inlineCallbacks
-</span><span class='line'>    result = g.send(result)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 72, in crawl
-</span><span class='line'>    self.engine = self._create_engine()
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 97, in _create_engine
-</span><span class='line'>    return ExecutionEngine(self, lambda _: self.stop())
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\engine.py", line 68, in __init__
-</span><span class='line'>    self.downloader = downloader_cls(crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\downloader\__init__.py", line 88, in __init__
-</span><span class='line'>    self.middleware = DownloaderMiddlewareManager.from_crawler(crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 58, in from_crawler
-</span><span class='line'>    return cls.from_settings(crawler.settings, crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 34, in from_settings
-</span><span class='line'>    mwcls = load_object(clspath)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\utils\misc.py", line 44, in load_object
-</span><span class='line'>    mod = import_module(module)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\importlib\__init__.py", line 126, in import_module
-</span><span class='line'>    return _bootstrap._gcd_import(name[level:], package, level)
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 986, in _gcd_import
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 969, in _find_and_load
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 958, in _find_and_load_unlocked
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 673, in _load_unlocked
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap_external&gt;", line 662, in exec_module
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 222, in _call_with_frames_removed
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\downloadermiddlewares\retry.py", line 23, in &lt;module&gt;
-</span><span class='line'>    from scrapy.xlib.tx import ResponseFailed
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\xlib\tx\__init__.py", line 3, in &lt;module&gt;
-</span><span class='line'>    from twisted.web import client
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\web\client.py", line 42, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet.endpoints import TCP4ClientEndpoint, SSL4ClientEndpoint
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\endpoints.py", line 36, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet.stdio import StandardIO, PipeAddress
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\stdio.py", line 30, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet import _win32stdio
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\_win32stdio.py", line 9, in &lt;module&gt;
-</span><span class='line'>    import win32api
-</span><span class='line'>ImportError: DLL load failed: 找不到指定的模块。</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解决办法：</h2>
-
-<p>参考网站：</p>
-
-<p><a href="http://blog.csdn.net/mtt_sky/article/details/50445938">http://blog.csdn.net/mtt_sky/article/details/50445938</a>
-<a href="http://blog.sina.com.cn/s/blog_5a81b7990101l225.html">http://blog.sina.com.cn/s/blog_5a81b7990101l225.html</a></p>
-
-<p><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Lib\site-packages\pywin32_system32</code></p>
-
-<p>里面的所有的文件复制到：<code>C:\Windows\System32</code></p>
-
-<p>现在，问题解决。无需重新打开DOS窗口，直接执行：<code>scrapy bench</code>。</p>
-
-<p>输出正常：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy bench
-</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Scrapy 1.2.1 started (bot: first)
-</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'first.spiders', 'CLOSESPIDER_TIMEOUT': 10, 'LOGSTATS_INTERVAL': 1, 'LOG_LEVEL': 'INFO', 'BOT_NAME': 'first', 'SPIDER_MODULES': ['first.spiders']}
-</span><span class='line'>2016-11-23 13:56:47 [scrapy] INFO: Enabled extensions:
-</span><span class='line'>['scrapy.extensions.corestats.CoreStats',
-</span><span class='line'> 'scrapy.extensions.telnet.TelnetConsole',
-</span><span class='line'> 'scrapy.extensions.closespider.CloseSpider',
-</span><span class='line'> 'scrapy.extensions.logstats.LogStats']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled downloader middlewares:
-</span><span class='line'>['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.stats.DownloaderStats']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled spider middlewares:
-</span><span class='line'>['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.referer.RefererMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.depth.DepthMiddleware']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled item pipelines:
-</span><span class='line'>['first.pipelines.FirstPipeline']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Spider opened
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:49 [scrapy] INFO: Crawled 69 pages (at 4140 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:50 [scrapy] INFO: Crawled 141 pages (at 4320 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:51 [scrapy] INFO: Crawled 205 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:52 [scrapy] INFO: Crawled 269 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:53 [scrapy] INFO: Crawled 325 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:54 [scrapy] INFO: Crawled 373 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:55 [scrapy] INFO: Crawled 429 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:56 [scrapy] INFO: Crawled 477 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:57 [scrapy] INFO: Crawled 533 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Crawled 581 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Closing spider (closespider_timeout)
-</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Dumping Scrapy stats:
-</span><span class='line'>{'downloader/request_bytes': 265444,
-</span><span class='line'> 'downloader/request_count': 597,
-</span><span class='line'> 'downloader/request_method_count/GET': 597,
-</span><span class='line'> 'downloader/response_bytes': 1833261,
-</span><span class='line'> 'downloader/response_count': 597,
-</span><span class='line'> 'downloader/response_status_count/200': 597,
-</span><span class='line'> 'finish_reason': 'closespider_timeout',
-</span><span class='line'> 'finish_time': datetime.datetime(2016, 11, 23, 5, 56, 59, 266168),
-</span><span class='line'> 'log_count/INFO': 17,
-</span><span class='line'> 'request_depth_max': 20,
-</span><span class='line'> 'response_received_count': 597,
-</span><span class='line'> 'scheduler/dequeued': 597,
-</span><span class='line'> 'scheduler/dequeued/memory': 597,
-</span><span class='line'> 'scheduler/enqueued': 11938,
-</span><span class='line'> 'scheduler/enqueued/memory': 11938,
-</span><span class='line'> 'start_time': datetime.datetime(2016, 11, 23, 5, 56, 48, 450531)}
-</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Spider closed (closespider_timeout)
-</span><span class='line'>
-</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
 ]]></content>
   </entry>
   

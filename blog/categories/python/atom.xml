@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T09:03:54+08:00</updated>
+  <updated>2016-12-01T17:11:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,15 +14,62 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Learning Python 025 字符串分割]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-split/"/>
+    <updated>2016-12-01T17:06:32+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-split</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<pre><code class="python">zifuchuang.split(str, num)
+</code></pre>
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<pre><code class="python">str = r'D:\WorkSpace\test_ws\Git(GitHub)'
+l = str.split('\\')
+print(l)
+print(str.split('\\', 1))
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>['D:', 'WorkSpace', 'test_ws', 'Git(GitHub)']
+['D:', 'WorkSpace\\test_ws\\Git(GitHub)']
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Learning Python 024 判断文件和文件夹是否存在]]></title>
     <link href="http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist/"/>
     <updated>2016-12-01T08:46:09+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist</id>
-    <content type="html"><![CDATA[<h1>Learning Python 024 判断文件和文件夹是否存在 &mdash; Over &mdash; 2016年12月1日 星期四</h1>
-
-<p>@(Learning Python)</p>
-
-<hr />
+    <content type="html"><![CDATA[<hr />
 
 <ul>
 <li>使用的电脑系统：Windows 10 64位</li>
@@ -297,48 +344,6 @@ file = open(file_path, 'w')
 <p>或者</p>
 
 <p>如果你想创建以指定编码的文件，请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 020 Pass 的用法]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/python-pass/"/>
-    <updated>2016-12-01T04:12:13+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/python-pass</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>pass 的用法</h2>
-
-<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
-
-<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
-
-<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
-
-<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
-
-<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
-
-<pre><code class="cpp">while(1){
-}
-</code></pre>
-
-<p>换成Python，这样写：</p>
-
-<pre><code class="python">while True:
-    pass
-</code></pre>
-
-<hr />
 ]]></content>
   </entry>
   

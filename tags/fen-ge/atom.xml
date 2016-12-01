@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 分割 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/fen-ge/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-01T17:11:19+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 025 字符串分割]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-split/"/>
+    <updated>2016-12-01T17:06:32+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-split</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<pre><code class="python">zifuchuang.split(str, num)
+</code></pre>
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<pre><code class="python">str = r'D:\WorkSpace\test_ws\Git(GitHub)'
+l = str.split('\\')
+print(l)
+print(str.split('\\', 1))
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>['D:', 'WorkSpace', 'test_ws', 'Git(GitHub)']
+['D:', 'WorkSpace\\test_ws\\Git(GitHub)']
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
