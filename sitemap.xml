@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist/</loc>
+<lastmod>2016-12-01T08:46:09+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/01/GitHub-For-Windows-Adding-tag/</loc>
 <lastmod>2016-12-01T08:04:17+08:00</lastmod>
 </url>
@@ -712,5 +716,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/tag/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pan-duan/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/exists/</loc>
 </url>
 </urlset>
