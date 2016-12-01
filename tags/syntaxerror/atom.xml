@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: SyntaxError | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/syntaxerror/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-01T17:38:46+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 027 解决错误：SyntaxError: Non-UTF-8 code starting with '\xc8' in file xxxx.py]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/"/>
+    <updated>2016-12-01T17:37:34+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>出现这个错误，是因为<code>xxxx.py</code> 文件里面有中文字符。</p>
+
+<p>解决办法：在文件第一行，加上下面的代码：</p>
+
+<pre><code class="python"># -!- coding: utf-8 -!-
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
