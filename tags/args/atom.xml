@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: args | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/args/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-02T02:08:16+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 028 获取命令行参数]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/02/python-get-command-line-arguments/"/>
+    <updated>2016-12-02T02:07:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/02/python-get-command-line-arguments</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<pre><code class="python">import optparse
+
+def main():
+    parser = optparse.OptionParser('usage%prog ' +\
+                                   '-f &lt;zipfile&gt; -d &lt;dictionary&gt;')
+    parser.add_option('-f', dest='zname', type='string',\
+                      help='specify zip file')
+    parser.add_option('-d', dest='dname', type='string',\
+                      help='specify dictionary file')
+    (options, args) = parser.parse_args()
+    if (options.zname == None) | (options.dname == None):
+        print(parser.usage)
+        exit(0)
+        pass
+    else:
+        zname = options.zname
+        dname = options.dname
+        dlist = dname.split(',')
+        pass
+    print('zname is ', zname)
+    print('dname is ', dname)
+    print('dlist is ', dlist)
+    pass
+
+if __name__ == '__main__':
+    main()
+    pass
+</code></pre>
+
+<p>Python3 的运行结果：</p>
+
+<pre><code>&gt;python learningpython28.py -f aobo  -d sir,patty,re
+zname is  aobo
+dname is  sir,patty,re
+dlist is  ['sir', 'patty', 're']
+</code></pre>
+
+<p>Python2 的运行结果：</p>
+
+<pre><code>&gt;C:\Python27\python.exe learningpython28.py -f aobo -d sir,patty,re
+('zname is ', 'aobo')
+('dname is ', 'sir,patty,re')
+('dlist is ', ['sir', 'patty', 're'])
+</code></pre>
+
+<p>下面这个几个命令运行的效果是一样的：（Python2 和 Python3 运行的效果都一样）</p>
+
+<pre><code>&gt;python learningpython28.py -h
+&gt;python learningpython28.py --h
+&gt;python learningpython28.py --help
+&gt;python learningpython28.py -help
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre><code>Usage: usagelearningpython28.py -f &lt;zipfile&gt; -d &lt;dictionary&gt;
+
+Options:
+  -h, --help  show this help message and exit
+  -f ZNAME    specify zip file
+  -d DNAME    specify dictionary file
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
