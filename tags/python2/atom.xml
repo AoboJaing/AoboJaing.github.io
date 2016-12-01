@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tag: Python2 | AoboSir 博客]]></title>
+  <title><![CDATA[Tag: python2 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/python2/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T17:38:46+08:00</updated>
+  <updated>2016-12-01T19:04:27+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,28 +14,41 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Learning Python 014 使用 pip 工具的注意事项 --- 混淆的python2 和 python3]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3/"/>
-    <updated>2016-11-23T00:24:01+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/23/pip-install-python2-python3</id>
+    <title type="html"><![CDATA[Learning Python 026 字符串连接]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-join/"/>
+    <updated>2016-12-01T19:03:50+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-join</id>
     <content type="html"><![CDATA[<hr />
 
-<p><strong>Q : </strong> 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
 
-<p><strong>A : </strong> 如果你先安装的是python2，后安装的python3，那么系统默认使用python2的pip；反之，如果你先安装的是python3，后安装的python2，那么系统默认安装的是python3的pip。</p>
 
-<p><strong>解决方法 ： </strong> 为了避开这个问题，我们在使用 pip 工具时，使用绝对路径：</p>
+<hr />
 
-<p><strong>使用 python2 的 pip</strong></p>
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
 
-<pre><code>cd C:\Python27\Scripts
-pip.exe install some-package-name
+<hr />
+
+<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
+
+<pre><code class="python"># -!- coding: utf-8 -!-
+
+path = r'D:\WorkSpace\test_ws\笔记\text.md'
+delimiter = '\\'
+
+mylist = path.split(delimiter)
+res_path = delimiter.join(mylist[:-1])
+# res_path = res_path.decode('utf-8').encode('GB18030') # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码
+print(res_path)
 </code></pre>
 
-<p><strong>使用 python3 的 pip</strong></p>
+<p>运行输出：</p>
 
-<pre><code>cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
-pip.exe install some-package-name
+<pre><code>D:\WorkSpace\test_ws\笔记
 </code></pre>
 ]]></content>
   </entry>

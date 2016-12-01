@@ -10,7 +10,8 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 between &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 1
+select &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,100 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-021-Query-04-in-the-usage/">SQL 数据库 学习 021 查询-04 in 的用法 --- 属于若干个孤立的值</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T00:39:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635565178.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">--把sal里面是1500 和 3000 和 5000 的值都输出</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635600379.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">=</span><span class="mi">1500</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">3000</span> <span class="k">or</span> <span class="n">sal</span><span class="o">=</span><span class="mi">5000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">sal</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-021-Query-04-in-the-usage/1476635684012.png" alt="Alt text" /></p>
+
+<p>上面的命令等价于：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">1500</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">3000</span> <span class="k">and</span> <span class="n">sal</span><span class="o">&lt;&gt;</span><span class="mi">5000</span>
+</span><span class='line'>      <span class="c1">--在数据库中 不等号有两种表示： != 和 &lt;&gt; ，推荐使用第二种</span>
+</span><span class='line'>      <span class="c1">--对或（or）取反是并且（and） 对并且（and）取反是或（or）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -837,109 +932,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-012-database-diagram/">SQL 数据库 学习 012 数据库关系图</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T15:47:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p>我们现在写一个 多对多关系的表：（这段代码你可以在<a href="http://www.aobosir.com/blog/2016/10/14/SQL-Learning-011-relationship-one-to-one-one-to-many-many-to-many/">这篇博文</a>里面看到它的代码解释。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--班级表</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_num</span> <span class="nb">int</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">banji_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--教师</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">jiaoshi</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">jiaoshi_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">--第三张表：用来模拟班级和教师的关系</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">banji_jiaoshi_mapping</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">banji_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_banji_id</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">banji</span><span class="p">(</span><span class="n">bianji_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">jiaoshi_id</span> <span class="nb">int</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">jiaoshi</span><span class="p">(</span><span class="n">jiaoshi_id</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">kecheng</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-</span><span class='line'>  <span class="k">constraint</span> <span class="n">pk_banji_id_jiaoshi_id</span> <span class="k">primary</span> <span class="k">key</span> <span class="p">(</span><span class="n">banji_id</span><span class="p">,</span> <span class="n">jiaoshi_id</span><span class="p">,</span> <span class="n">kecheng</span><span class="p">)</span>
-</span><span class='line'>  
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>虽然，现在我们已经将表与表之间的关系都建好了。但是我现在怎么才能知道他们之间的关系到底有没有见好啊。
-<strong>SQL Server</strong> 为我们提供了另外一个工具：<strong>数据库关系图</strong>。</p>
-
-<p>我们新建一个：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602645224.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-012-database-diagram/1476602656133.png" alt="Alt text" /></p>
-
-<p>外键添加到多的一方。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -957,6 +949,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/01/python-string-join/">Learning Python 026 字符串连接</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/">Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py</a>
       </li>
     
@@ -970,10 +966,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     
       <li class="post">
         <a href="/blog/2016/12/01/GitHub-For-Windows-Adding-tag/">Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/01/class-programming-object/">Learning Python 023 类编程</a>
       </li>
     
   </ul>
@@ -995,7 +987,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 164%" href="/tags/windows/">Windows</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
-<a style="font-size: 90%" href="/tags/from-where/">from where</a>
 <a style="font-size: 90%" href="/tags/full-join/">full join</a>
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
@@ -1004,16 +995,16 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 159%" href="/tags/python/">python</a>
-<a style="font-size: 154%" href="/tags/python3/">python3</a>
+<a style="font-size: 159%" href="/tags/python3/">python3</a>
 <a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
-<a style="font-size: 90%" href="/tags/zhong-wen-cuo-wu/">中文错误</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
@@ -1025,6 +1016,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 90%" href="/tags/du-qu-wen-jian/">读取文件</a>
 <a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
@@ -1035,7 +1027,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (14)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (15)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>

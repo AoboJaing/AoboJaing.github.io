@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 连接 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/lian-jie/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-01T19:04:27+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 026 字符串连接]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-join/"/>
+    <updated>2016-12-01T19:03:50+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-join</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
+
+<pre><code class="python"># -!- coding: utf-8 -!-
+
+path = r'D:\WorkSpace\test_ws\笔记\text.md'
+delimiter = '\\'
+
+mylist = path.split(delimiter)
+res_path = delimiter.join(mylist[:-1])
+# res_path = res_path.decode('utf-8').encode('GB18030') # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码
+print(res_path)
+</code></pre>
+
+<p>运行输出：</p>
+
+<pre><code>D:\WorkSpace\test_ws\笔记
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

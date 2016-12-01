@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-01T17:38:46+08:00</updated>
+  <updated>2016-12-01T19:04:27+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 026 字符串连接]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/01/python-string-join/"/>
+    <updated>2016-12-01T19:03:50+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/01/python-string-join</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\笔记\text.md&#39;</span>
+</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mylist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+</span><span class='line'><span class="n">res_path</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mylist</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="c"># res_path = res_path.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;) # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">res_path</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">test_ws</span>\<span class="err">笔记</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py]]></title>
@@ -2280,91 +2332,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <hr />
 
 <p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python --- Xpath 表达式 --- Ongoing]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
-    <updated>2016-11-26T18:00:15+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>什么是 <strong>XPath</strong>？</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
-
-<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
-
-<h2>xpath 表达式 语法讲解</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
-
-<p>例如，现在有这些信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt;
-</span><span class='line'>&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-</span><span class='line'>&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
-</span><span class='line'>&lt;/head&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 表达式</th>
-<th style="text-align:right;">     意思</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">/ </td>
-<td style="text-align:right;">寻找指定标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">//</td>
-<td style="text-align:right;"> 寻找所有标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">@</td>
-<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
-</tr>
-</tbody>
-</table>
-
-
-<hr />
-
-<p><strong>例子：</strong></p>
-
-<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">/</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>表示：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">CSDN</span><span class="o">.</span><span class="n">NET</span> <span class="o">-</span> <span class="err">全球最大中文</span><span class="n">IT</span><span class="err">社区，为</span><span class="n">IT</span><span class="err">专业技术人员提供最全面的信息传播和服务平台</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
-
-<hr />
 ]]></content>
   </entry>
   
