@@ -11,6 +11,9 @@ tags: [C#, 浏览, 打开, 文件, 文件夹]
 
 ---
 
+* 我使用的电脑：Windows 10 64位
+* 使用的Visual Studio 软件： VS2010
+
 
 **GitHub**源代码地址：
 https://github.com/AoboJaing/Browse_Open_file_folder
