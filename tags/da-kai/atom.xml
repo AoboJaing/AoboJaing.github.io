@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 打开 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/da-kai/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-02T08:00:20+08:00</updated>
+  <updated>2016-12-02T08:06:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -19,6 +19,12 @@
     <updated>2016-11-17T16:26:51+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/17/cs-002-Browse-Open-file-folder</id>
     <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我使用的电脑：Windows 10 64位</li>
+<li>使用的Visual Studio 软件： VS2010</li>
+</ul>
+
 
 <p><strong>GitHub</strong>源代码地址：
 <a href="https://github.com/AoboJaing/Browse_Open_file_folder">https://github.com/AoboJaing/Browse_Open_file_folder</a></p>
