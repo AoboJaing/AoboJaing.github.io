@@ -11,6 +11,11 @@ tags: [C#, CMD, 命令行, 参数, args]
 
 ---
 
+* 我使用的电脑：Windows 10 64位
+* 使用的Visual Studio 软件： VS2010
+
+---
+
 参考网站：[C#程序调用cmd.exe执行命令](http://www.cnblogs.com/njl041x/p/3881550.html)
 
 创建一个文件，名为：`RunCmd.cs`。将下面的代码拷贝到里面。
