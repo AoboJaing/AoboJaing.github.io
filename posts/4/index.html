@@ -9,14 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 知识点：Python 按行读取文件 读取整个文件的内容 1
-2
-3
-4
-5
-f = open(&#39;filename.txt&#39;, &#39;r&#39;)
-text = f. &hellip;">
+  <meta name="description" content="Q : 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行pip install some-package-name命令的时候，系统会使用哪个pip工具呢？是python2的pip， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +66,59 @@ text = f. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/23/pip-install-python2-python3/">Learning Python 014 使用 Pip 工具的注意事项 --- 混淆的python2 和 Python3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-23T00:24:01+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>12:24 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><strong>Q : </strong> 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
+
+<p><strong>A : </strong> 如果你先安装的是python2，后安装的python3，那么系统默认使用python2的pip；反之，如果你先安装的是python3，后安装的python2，那么系统默认安装的是python3的pip。</p>
+
+<p><strong>解决方法 ： </strong> 为了避开这个问题，我们在使用 pip 工具时，使用绝对路径：</p>
+
+<p><strong>使用 python2 的 pip</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd C:\Python27\Scripts
+</span><span class='line'>pip.exe install some-package-name</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>使用 python3 的 pip</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
+</span><span class='line'>pip.exe install some-package-name</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1914,229 +1960,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-033-View/">SQL 数据库 学习 033 视图</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-24T09:13:55+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>为什么需要视图</h2>
-
-<p>以一个例子为例：</p>
-
-<p><strong>求出平均工资最高的部门的编号和部门的平均工资。</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--使用我们目前所知道的方法去编写查询代码。</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span> <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>          <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>              <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>              <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>      <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的查询代码中，有下面的一段代码，这段代码是创建一个临时表。我们可以将这个临时表创建为一个视图：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>创建了一个视图：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出这个视图中的数据信息：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面的代码的输出同上面<strong>使用目前所知道的方法去编写查询代码</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">avg_sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">avg_sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>总结：</strong> 视图的优点是可以简化查询代码。（简化查询）。即避免了代码的冗余；避免了属性大量重复的<strong>sql</strong>语法。</p>
-
-<hr />
-
-<h2>什么是视图</h2>
-
-<ul>
-<li>视图从代码上看视图是一个<code>select</code>语句。</li>
-<li>视图从逻辑上被当做一个虚拟表看待。</li>
-</ul>
-
-
-<hr />
-
-<h2>如何创建视图</h2>
-
-<p>视图的格式</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="err">视图的名字</span>
-</span><span class='line'>  <span class="k">as</span>
-</span><span class='line'>      <span class="c1">--select的前面不能添加begin</span>
-</span><span class='line'>      <span class="k">select</span>
-</span><span class='line'>      <span class="c1">--select的后面不能添加end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>视图的优点</h2>
-
-<ol>
-<li>视图的优点是可以简化查询代码。</li>
-<li>增加数据的保密性</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--屏蔽了入职日期和员工工资 这两个属性。</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp2</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">mgr</span><span class="p">,</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span>
-</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>视图的缺点</h2>
-
-<ol>
-<li>增加了数据库维护的成本。
-
-<ul>
-<li>原表里面的属性被改了，那么视图就会报错。</li>
-</ul>
-</li>
-<li>视图只是简化了查询的代码，但是并不能加快查询的速度，这也是视图使用不足的地方。</li>
-</ol>
-
-
-<hr />
-
-<h2>使用视图要注意的三个问题</h2>
-
-<p>1 . 创建视图的<code>select</code>语句必须得为所有的计算列指定别名</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--ok</span>
-</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
-</span><span class='line'><span class="k">as</span>
-</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2 . 视图不是物理表，而是虚拟表</p>
-
-<p>3 . 不建议通过视图更新视图所依赖的原始表的数据和结果。（因为很麻烦，有许多语法的限制。）</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -2154,6 +1977,10 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/02/python-get-command-line-arguments/">Learning Python 028 获取命令行参数</a>
       </li>
     
@@ -2169,17 +1996,13 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
         <a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
-<a style="font-size: 115%" href="/tags/c-number/">C#</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
@@ -2191,18 +2014,16 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 164%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 90%" href="/tags/cross-join/">cross join</a>
-<a style="font-size: 90%" href="/tags/full-join/">full join</a>
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 90%" href="/tags/innor-join/">innor join</a>
-<a style="font-size: 90%" href="/tags/left-join/">left join</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 164%" href="/tags/python3/">python3</a>
-<a style="font-size: 90%" href="/tags/right-join/">right join</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
@@ -2210,6 +2031,8 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 90%" href="/tags/ming-ling-xing-gong-ju-ruan-jian/">命令行工具软件</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
@@ -2229,7 +2052,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/c-number/'>c# (2)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>

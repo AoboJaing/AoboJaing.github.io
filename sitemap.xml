@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/</loc>
+<lastmod>2016-12-02T07:57:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/02/python-get-command-line-arguments/</loc>
 <lastmod>2016-12-02T02:07:35+08:00</lastmod>
 </url>
@@ -777,5 +781,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/args/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cmd/</loc>
 </url>
 </urlset>
