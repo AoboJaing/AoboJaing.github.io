@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: linux | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/linux/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-04T23:19:12+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Linux 命令 001 cp 复制]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/04/Linux-commands-cp-copy/"/>
+    <updated>2016-12-04T23:18:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/04/Linux-commands-cp-copy</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>将单个文件 <code>file</code> 复制到指定目录<code>dir</code>里面：</p>
+
+<pre><code>cp file dir
+</code></pre>
+
+<blockquote><p>当你使用<code>cp</code>命令的时候，如果出现下面的错误：</p>
+
+<pre><code>cp: omitting directory ‘file’
+</code></pre>
+
+<p>说明：<code>file</code> 不是单个文件，是一个目录，你如果要复制目录，需要给<code>cp</code>命令加一个参数 <code>-r</code> 。</p></blockquote>
+
+<p>将目录 <code>dir1</code> 复制到 指定目录 <code>dir2</code> 里面：</p>
+
+<pre><code>cp -r dir1 dir2
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
