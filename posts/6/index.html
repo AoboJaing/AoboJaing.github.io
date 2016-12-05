@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 group by & &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 having & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,298 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/19/SQL-Learning-028-Query-11-having-filtering-information-after-grouping/">SQL 数据库 学习 028 查询-11 Having --- 对分组之后的信息进行过滤</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-19T01:51:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:51 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>having</code> &mdash; 对分组之后的信息进行过滤</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出部门平均工资大于2000的部门的部门编号，部门的平均工资</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2000</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809752037.png" alt="Alt text" /></p>
+
+<p>加入别名。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--判断下列sql语句是否正确</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809774694.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="ss">&quot;平均工资&quot;</span> <span class="o">&gt;</span> <span class="mi">2000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809816010.png" alt="Alt text" /></p>
+
+<blockquote><p>正确的指令：
+<code>sql
+select deptno, avg(sal)
+    from emp
+    where ename not like '%A%'
+    group by deptno
+    having avg(sal) &gt; 2000
+</code></p></blockquote>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--以部门编号分组后，显示组内元组大于3个元组的部门编号和平均工资</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476809854661.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810004416.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="n">deptno</span><span class="o">&gt;</span><span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810222044.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2><code>having</code> 和 <code>where</code> 的异同</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--把姓名不包含`A`的所有的员工按部门编号分组，</span>
+</span><span class='line'><span class="c1">--统计输出部门平均工资大于2000的部门的部门编号、部门的平均工资</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">ename</span> <span class="k">not</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810752203.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--把工资大于2000，</span>
+</span><span class='line'><span class="c1">--统计输出部门平均工资大于3000的部门的部门编号、部门的平均工资、部门人数、部门最高工资</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;部门人数&quot;</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门最高工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>    <span class="c1">--where是对原始的记录过滤</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3000</span>   <span class="c1">--对分组之后的记录过滤 </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476810986375.png" alt="Alt text" /></p>
+
+<p>如果参数的顺序变化了，执行的时候会不会受到影响？执行下面的指令，你就会知道答案。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;部门人数&quot;</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;部门最高工资&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-19-SQL-Learning-028-Query-11-having-filtering-information-after-grouping/1476811293128.png" alt="Alt text" /></p>
+
+<p><strong>总结：</strong> 所有<code>select</code> 的参数的顺序是不允许变化的（所有的参数的位置都是固定的，你可以省略某个参数，但是不能变。），否则编译时出错。</p>
+
+<hr />
+
+<p><code>having</code> 和 <code>where</code> 的异同：</p>
+
+<ul>
+<li><strong>相同：</strong> 都是对数据过滤，只保留有效的数据。<code>where</code> 和 <code>having</code> 一样，都不允许出现字段的别名，只允许出现最原始的字段的名字。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error where子句不应该出现聚合函数</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">where</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2000</span>   <span class="c1">--error 因为where是对原始的数据过滤，不能使用聚合函数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>不同：</strong> <code>where</code> 是对原始的记录过滤，<code>having</code> 是对分组之后的记录过滤。<code>where</code> 必须得写在<code>having</code>的前面，顺序不可颠倒，否则运行出错。</li>
+</ul>
+
+
+<hr />
+
+<h2>总结 <code>having</code> 的用法</h2>
+
+<ol>
+<li><code>having</code> 子句是用来对分组之后的数据进行过滤。因此使用<code>having</code>时通常都会先使用 <code>group by</code>。</li>
+<li>如果没有使用 <code>group by</code> ，而使用了 <code>having</code>，则意味着 <code>having</code> 把所有的记录当做一组来进行过滤。</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><code>having</code> 子句出现的字段必须得是分组之后的组的整体信息。<code>having</code> 子句不允许出现组内的详细信息。</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--OK</span>
+</span><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;平均工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;部门人数&quot;</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>尽管 <code>select</code>  字段中可以出现别名。但是<code>having</code> 子句中不能出现字段的别名，只能使用字段最原始的名字。（原因不得而知。）</p></li>
+<li><p>就是上面说的：<strong><code>having</code> 和 <code>where</code> 的异同</strong> 。（这里不重复说明了。）</p></li>
+</ol>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1235,137 +1527,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-018-Query-01-calculated-column-usage/">SQL 数据库 学习 018 查询-01 计算列 的用法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T20:15:30+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:15 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>计算列</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- * 表示所有的</span>
-</span><span class='line'>  <span class="c1">-- * from emp 表示从emp表查询</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619600875.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- 将员工表里面所有员工的 empno 和 ename 都输出出来</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619649220.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- as 可以省略。 记住：&quot;年薪&quot; 不要写成 &#39;年薪&#39; 、也不要写成 年薪</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619727923.png" alt="Alt text" /></p>
-
-<p><strong>注意：</strong> ： 在<strong>Oracle</strong>软件中字段的别名不允许用单引号括起来。但是 <strong>SQL Server</strong> 软件却允许，因此为了兼容性考虑，最好字段的别名用<code>""</code>（双引号）括起来，不要使用<code>''</code>（单引号）。</p>
-
-<p>上面这段命令 <code>select ename, sal*12 as "年薪" from emp</code> 就是计算列。解释：原本 <code>emp</code> 表里面没有 年薪 这个属性，我们使用 <code>sal*12 as "年薪"</code> 得到年薪的信息，这就是 <strong>计算列</strong>。</p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">-- ok，可以运行</span>
-</span><span class='line'>  <span class="c1">--输出的行数是emp表的行数，每行只有一个字段，值是5</span>
-</span><span class='line'>  <span class="c1">-- 5 就是一个值，仅此而已，没有实际意义</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619771628.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">5</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--ok，可以运行</span>
-</span><span class='line'>  <span class="c1">--但是不推荐</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619797016.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span> <span class="k">as</span> <span class="ss">&quot;年薪&quot;</span><span class="p">,</span> <span class="n">sal</span> <span class="ss">&quot;月薪&quot;</span><span class="p">,</span> <span class="n">job</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行输出：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-018-Query-01-calculated-column-usage/1476619867716.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1383,6 +1544,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a>
       </li>
     
@@ -1398,10 +1563,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
         <a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1414,9 +1575,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
-<a style="font-size: 139%" href="/tags/python3/">Python3</a>
+<a style="font-size: 147%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 164%" href="/tags/windows/">Windows</a>
@@ -1430,8 +1592,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 164%" href="/tags/python3/">python3</a>
-<a style="font-size: 90%" href="/tags/range/">range()</a>
-<a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/vcvarsall-dot-bat/">vcvarsall.bat</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
@@ -1447,7 +1608,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
-<a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
@@ -1464,7 +1625,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
-<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (8)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

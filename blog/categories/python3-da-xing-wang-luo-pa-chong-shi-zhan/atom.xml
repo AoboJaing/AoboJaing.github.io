@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python3 大型网络爬虫实战 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-05T22:23:38+08:00</updated>
+  <updated>2016-12-06T00:05:28+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/"/>
+    <updated>2016-12-06T00:04:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>所有的设置都是在scrapy爬虫项目中的<code>settings.py</code> 文件中进行设置。</p>
+
+<p><strong>Step 1 . </strong> 设置爬虫不遵循 <code>robots.txt</code>协议</p>
+
+<pre><code># Obey robots.txt rules
+ROBOTSTXT_OBEY = False
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952600971.png" alt="Alt text" /></p>
+
+<blockquote><p>想要了解什么是<code>robots.txt</code>协议，请访问这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52586126">解析 robots.txt 文件</a>。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 设置取消<strong>Cookies</strong></p>
+
+<pre><code class="python"># Disable cookies (enabled by default)
+COOKIES_ENABLED = False
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952959564.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>Cookies</strong>：</p>
+
+<p> 简单的说，Cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机。当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookie 会帮你在网站上所打的文字或是一些选择，都记录下来。当下次你再光临同一个网站，Web服务器会先看看有没有它上次留下的Cookie资料，有的话，就会依据Cookie里的内容来判断使用者，送出特定的网页内容给你。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 设置用户代理值（<code>USER_AGENT</code>）</p>
+
+<pre><code class="python"># Crawl responsibly by identifying yourself (and your website) on the user-agent
+USER_AGENT = 'Mozilla/xxx (Windows xxx; Winxx; xxx) AppleWebKit/xxx (KHTML, like Gecko) Chrome/xxxx Safari/xxx'
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953048379.png" alt="Alt text" /></p>
+
+<p>这个 用户代理可以在浏览器里面找到：</p>
+
+<p>随便浏览一个网页，按<strong>F12</strong> -> <strong>Network</strong> -> <strong>F5</strong>，随便点击一项，你都能看到有 <strong>User-agent</strong> 这一项，将这里面的内容拷贝就可以。</p>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953359818.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 设置IP</p>
+
+<p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 002 --- Scrapy 爬虫项目的创建及爬虫的创建 --- 实例：爬取百度标题和CSDN博客]]></title>
@@ -872,122 +937,6 @@ ImportError: DLL load failed: 找不到指定的模块。
 
 D:\BaiduYunDownload\first&gt;
 </code></pre>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python --- Scrapy 命令]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/python-Scrapy-command/"/>
-    <updated>2016-11-26T06:39:53+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/python-Scrapy-command</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>Scrapy 命令 分为两种：<strong>全局命令</strong> 和 <strong>项目命令</strong>。</p>
-
-<p>全局命令：在哪里都能使用。</p>
-
-<p>项目命令：必须在爬虫项目里面才能使用。</p>
-
-<h2>全局命令</h2>
-
-<pre><code>C:\Users\AOBO&gt;scrapy -h
-Scrapy 1.2.1 - no active project
-
-Usage:
-  scrapy &lt;command&gt; [options] [args]
-
-Available commands:
-  bench         Run quick benchmark test
-  commands
-  fetch         Fetch a URL using the Scrapy downloader
-  genspider     Generate new spider using pre-defined templates
-  runspider     Run a self-contained spider (without creating a project)
-  settings      Get settings values
-  shell         Interactive scraping console
-  startproject  Create new project
-  version       Print Scrapy version
-  view          Open URL in browser, as seen by Scrapy
-
-  [ more ]      More commands available when run from project directory
-
-Use "scrapy &lt;command&gt; -h" to see more info about a command
-</code></pre>
-
-<ul>
-<li><strong>startproject</strong>：创建一个爬虫项目：<code>scrapy startproject demo</code>（<code>demo</code> 创建的爬虫项目的名字）</li>
-<li><strong>runspider</strong> 运用单独一个爬虫文件：<code>scrapy runspider abc.py</code></li>
-<li><strong>veiw</strong> 下载一个网页的源代码，并在默认的文本编辑器中打开这个源代码：<code>scrapy view http://www.aobossir.com/</code></li>
-<li><strong>shell</strong> 进入交互终端，用于爬虫的调试（如果你不调试，那么就不常用）：<code>scrapy shell http://www.baidu.com --nolog</code>（<code>--nolog</code> 不显示日志信息）</li>
-<li><strong>version</strong> 查看版本：（<code>scrapy version</code>）</li>
-<li><strong>bench</strong> 测试本地硬件性能（工作原理：）：<code>scrapy bench</code> （如果遇到问题：解决问题:  <code>import win32api ImportError: DLL load failed</code>，到<a href="http://www.aobosir.com/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">这里</a>查看解决办法。）</li>
-</ul>
-
-
-<hr />
-
-<h2>项目命令</h2>
-
-<p>（进入项目路径，才能看到项目命令）</p>
-
-<pre><code>D:\BaiduYunDownload\first&gt;scrapy -h
-Scrapy 1.2.1 - project: first
-
-Usage:
-  scrapy &lt;command&gt; [options] [args]
-
-Available commands:
-  bench         Run quick benchmark test
-  check         Check spider contracts
-  commands
-  crawl         Run a spider
-  edit          Edit spider
-  fetch         Fetch a URL using the Scrapy downloader
-  genspider     Generate new spider using pre-defined templates
-  list          List available spiders
-  parse         Parse URL (using its spider) and print the results
-  runspider     Run a self-contained spider (without creating a project)
-  settings      Get settings values
-  shell         Interactive scraping console
-  startproject  Create new project
-  version       Print Scrapy version
-  view          Open URL in browser, as seen by Scrapy
-
-Use "scrapy &lt;command&gt; -h" to see more info about a command
-
-D:\BaiduYunDownload\first&gt;
-</code></pre>
-
-<ul>
-<li><strong>genspider</strong> 创建一个爬虫文件，我们在爬虫项目里面才能创建爬虫文件（这个命令用的非常多）（<strong>startproject</strong>：创建一个爬虫项目）。创建爬虫文件是按照以下模板来创建的，使用<code>scrapy genspider -l</code> 命令查看有哪些模板。</li>
-</ul>
-
-
-<pre><code>D:\BaiduYunDownload\first&gt;scrapy genspider -l
-Available templates:
-  basic
-  crawl
-  csvfeed
-  xmlfeed
-
-D:\BaiduYunDownload\first&gt;
-</code></pre>
-
-<blockquote><p><code>basic</code> 基础
-<code>crawl</code>自动爬虫
-<code>csvfeed</code>用来处理csv文件
-<code>xmlfeed</code>用来处理xml文件</p>
-
-<p>按照<code>basic</code>模板创建一个名为<code>f1</code>的爬虫文件：<code>scrapy genspider -t basic f1</code> ，创建了一个<code>f1.py</code>文件。</p></blockquote>
-
-<ul>
-<li><p><strong>check</strong> 测试爬虫文件、或者说：检测一个爬虫，如果结果是：OK，那么说明结果没有问题。：<code>scrapy check f1</code></p></li>
-<li><p><strong>crawl</strong> 运行一个爬虫文件。：<code>scrapy crawl f1</code> 或者 <code>scrapy crawl f1 --nolog</code></p></li>
-<li><p><strong>list</strong> 列出当前爬虫项目下所有的爬虫文件： <code>scrapy list</code></p></li>
-<li><p><strong>edit</strong> 使用编辑器打开爬虫文件 （Windows上似乎有问题，Linux上没有问题）：<code>scrapy edit f1</code></p></li>
-</ul>
-
 
 <hr />
 ]]></content>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/</loc>
+<lastmod>2016-12-06T00:04:35+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/05/pcduino-programming-system-ubuntu-14/</loc>
 <lastmod>2016-12-05T22:19:23+08:00</lastmod>
 </url>
@@ -827,5 +831,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/ubuntu-14/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/fang-fan-pa/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/settings/</loc>
 </url>
 </urlset>

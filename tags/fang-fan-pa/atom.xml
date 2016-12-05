@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 防反爬 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/fang-fan-pa/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-06T00:05:28+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 — 给 scrapy 爬虫项目设置为防反爬]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/"/>
+    <updated>2016-12-06T00:04:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>所有的设置都是在scrapy爬虫项目中的<code>settings.py</code> 文件中进行设置。</p>
+
+<p><strong>Step 1 . </strong> 设置爬虫不遵循 <code>robots.txt</code>协议</p>
+
+<pre><code># Obey robots.txt rules
+ROBOTSTXT_OBEY = False
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952600971.png" alt="Alt text" /></p>
+
+<blockquote><p>想要了解什么是<code>robots.txt</code>协议，请访问这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52586126">解析 robots.txt 文件</a>。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 设置取消<strong>Cookies</strong></p>
+
+<pre><code class="python"># Disable cookies (enabled by default)
+COOKIES_ENABLED = False
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952959564.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>Cookies</strong>：</p>
+
+<p> 简单的说，Cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机。当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookie 会帮你在网站上所打的文字或是一些选择，都记录下来。当下次你再光临同一个网站，Web服务器会先看看有没有它上次留下的Cookie资料，有的话，就会依据Cookie里的内容来判断使用者，送出特定的网页内容给你。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 设置用户代理值（<code>USER_AGENT</code>）</p>
+
+<pre><code class="python"># Crawl responsibly by identifying yourself (and your website) on the user-agent
+USER_AGENT = 'Mozilla/xxx (Windows xxx; Winxx; xxx) AppleWebKit/xxx (KHTML, like Gecko) Chrome/xxxx Safari/xxx'
+</code></pre>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953048379.png" alt="Alt text" /></p>
+
+<p>这个 用户代理可以在浏览器里面找到：</p>
+
+<p>随便浏览一个网页，按<strong>F12</strong> -> <strong>Network</strong> -> <strong>F5</strong>，随便点击一项，你都能看到有 <strong>User-agent</strong> 这一项，将这里面的内容拷贝就可以。</p>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953359818.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 设置IP</p>
+
+<p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
+]]></content>
+  </entry>
+  
+</feed>
