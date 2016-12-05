@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下面的链接中下载：
-（百度云） 链接：http://pan.baidu.com/s/1sl9zbm1 密码：nyly 这个例子库可以通过 附加 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 我们要查数据，总先得有数据要查吧，所以我们需要先找一个例子库。Orale软件里面就有一个例子库，这个库很经典，就是：scott 库。 附加 scott 库 如何添加一个 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,98 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/">SQL 数据库 学习 017 查询-00 介绍 Scott 例子库</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-16T19:40:10+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p>我们要查数据，总先得有数据要查吧，所以我们需要先找一个例子库。<strong>Orale</strong>软件里面就有一个例子库，这个库很经典，就是：<code>scott</code> 库。</p>
+
+<h2>附加 <code>scott</code> 库</h2>
+
+<p>如何添加一个 <code>scott</code> 数据库 到服务器中，请参考<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这个网站</a>。</p>
+
+<hr />
+
+<h2>介绍 <code>scott</code> 库</h2>
+
+<p>要想查询一个表，第一件事情就必须十分了解一个库里面所有的表 和 表与表之间的关系。</p>
+
+<p>这个 <code>scott</code> 库里面一共有三个表：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476616454316.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>先看看 <code>emp</code> 表（<strong>员工表</strong>）</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476616536461.png" alt="Alt text" /></p>
+
+<p>员工表里面有8个属性：</p>
+
+<p><code>EMPNO</code>（员工编号）、<code>ename</code>（姓名）、<code>job</code>（职称）、<code>mgr</code>（上级编号）、<code>hiredate</code>（雇佣日期）、<code>sal</code>（工资）、<code>comm</code>（奖金）、<code>deptno</code>（部门编号）。</p>
+
+<p>里面 <code>job</code> 属性里面的英文单词翻译：</p>
+
+<ul>
+<li><strong>CLERK</strong> ：普通职员</li>
+<li><strong>SALESMAN</strong> ：销售人员</li>
+<li><strong>MANAGER</strong> ：经理</li>
+<li><strong>ANALYST</strong> ：研究人员</li>
+<li><strong>PRESIDENT</strong> ：总统</li>
+</ul>
+
+
+<hr />
+
+<p>现在我们看看 <code>dept</code> 表 （<strong>部门表</strong>）：</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476617073131.png" alt="Alt text" /></p>
+
+<p>部门表里面有3个属性：<code>deptno</code>（部门编号）、<code>dname</code>（部门名称）、<code>loc</code>（地址）。</p>
+
+<hr />
+
+<p>在看看最后一个表：<code>SALGRAGE</code> 表。（这个<strong>表</strong>表示的是<strong>工资的等级</strong>表。）</p>
+
+<p><img src="/images/2016-10-16-SQL-Learning-017-Query-00-Introdiction-scott-Sample-Library/1476617149867.png" alt="Alt text" /></p>
+
+<p><code>SALGRADE</code> 表里面有3个属性：<code>GRADE</code>（等级）、<code>LOSAL</code>（下限）、<code>HISAL</code>（上限）。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1095,132 +1186,6 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>一共三步，很简单。跟着走就可以。</p>
-
-<hr />
-
-<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
-
-<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
-</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
-</span><span class='line'>    def render(context)
-</span><span class='line'>      html = ""
-</span><span class='line'>      categories = context.registers[:site].categories.keys
-</span><span class='line'>      categories.sort.each do |category|
-</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
-</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
-</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
-</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-</span><span class='line'>      end
-</span><span class='line'>      html
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
-
-<hr />
-
-<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
-
-<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
-
-<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      {\% category_list \%}
-</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
-
-<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [asides/category_list.html, ......]
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-
-<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
-
-<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<p>参考网站：</p>
-
-<p>为octopress添加分类(category)列表
-<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1238,6 +1203,10 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/05/pcduino-programming-sysytem-Ubuntu-NAND-image/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统</a>
       </li>
     
@@ -1251,10 +1220,6 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
     
       <li class="post">
         <a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/02/python-get-command-line-arguments/">Learning Python 028 获取命令行参数</a>
       </li>
     
   </ul>
@@ -1279,17 +1244,17 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
-<a style="font-size: 115%" href="/tags/pcduino/">pcduino</a>
-<a style="font-size: 115%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 164%" href="/tags/python3/">python3</a>
+<a style="font-size: 90%" href="/tags/range/">range()</a>
 <a style="font-size: 90%" href="/tags/union/">union</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
-<a style="font-size: 90%" href="/tags/you-hua-nei-cun-kong-jian/">优化内存空间</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
@@ -1317,7 +1282,7 @@ SQL Server 软件版本： SQL Server 2014 Express scott 例子库可以在下�
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
-<li class='category'><a href='/blog/categories/pcduino/'>pcduino (2)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

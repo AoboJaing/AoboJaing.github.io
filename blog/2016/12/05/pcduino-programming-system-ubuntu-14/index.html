@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu 14系统 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="我使用的pcduino板卡型号：pcduino 3B
+我使用的TF卡大小：32G 参考网站： Installing Ubuntu 14 on a pcDuino3B 下载需要的东西 下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器） 以我现在使用的板子（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>代码在暴走，一切抛到脑后。Party开始，欢迎来到我的王国，跟着这flow，这个空间没有对错。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T22:19:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<ul>
+<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
+<li>我使用的TF卡大小：32G</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
+</ul>
+
+
+<hr />
+
+<h2>下载需要的东西</h2>
+
+<p>下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
+
+<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
+
+<ol>
+<li>一个是系统镜像文件。</li>
+<li>一个烧写工具。</li>
+</ol>
+
+
+<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载镜像文件</p>
+
+<p>镜像文件选择下面的 Ubuntu 14 下载：（注意，这个Ubuntu 14 只需要下载这个文件即可，因为它是一个 <strong>内核+系统</strong> 的镜像文件。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480946917168.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 下载烧写工具</p>
+
+<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947440669.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
+
+<hr />
+
+<h2>给pcduino板子烧写Ubuntu 14系统</h2>
+
+<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
+
+<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件。</p>
+
+<p>点击<strong>镜像文件</strong>按钮，选择刚刚下载解压后的镜像文件。</p>
+
+<p>然后点击 <strong>烧录</strong> 按钮，进行烧录。（大于5分钟时间。）</p>
+
+<p><strong>Step 3 . </strong> 将TF卡插到pcduino板子上，只给板子供电即可。</p>
+
+<blockquote><p>注意：</p>
+
+<ul>
+<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
+<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
+<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
+</ul>
+</blockquote>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947234663.png" alt="Alt text" /></p>
+
+<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核和系统程序（pcduino板子全自动烧写），大约不到3分钟左右，中间这个LED不再闪烁（熄灭），说明：内核和系统烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
+
+<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
+
+<p>Ubuntu 14系统成功运行。</p>
+
+<h2>搞定</h2>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T22:19:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:19 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pcduino/'>pcduino</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/12/05/pcduino-programming-sysytem-Ubuntu-NAND-image/" title="Previous Post: Learning pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统">&laquo; Learning pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/12/05/pcduino-programming-system-ubuntu-14" data-title="Learning pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu 14系统" data-url="http://aobojaing.github.io /blog/2016/12/05/pcduino-programming-system-ubuntu-14/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/05/pcduino-programming-sysytem-Ubuntu-NAND-image/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/05/pcduino-3B-Board-Introduction/">Learning Pcduino 000 Pcduino板卡介绍 — Pcduino 3B</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 139%" href="/tags/git/">Git</a>
+<a style="font-size: 115%" href="/tags/github/">GitHub</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 139%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 164%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 90%" href="/tags/identity/">identity</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
+<a style="font-size: 115%" href="/tags/os/">os</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 159%" href="/tags/python/">python</a>
+<a style="font-size: 115%" href="/tags/python2/">python2</a>
+<a style="font-size: 164%" href="/tags/python3/">python3</a>
+<a style="font-size: 90%" href="/tags/range/">range()</a>
+<a style="font-size: 90%" href="/tags/union/">union</a>
+<a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
+<a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
+<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
+<a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
+<a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
+<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
+<a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
+<a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
+<li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (7)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
