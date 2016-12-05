@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/05/pcduino-3B-Board-Introduction/</loc>
+<lastmod>2016-12-05T19:17:30+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/04/Linux-commands-cp-copy/</loc>
 <lastmod>2016-12-04T23:18:23+08:00</lastmod>
 </url>
@@ -350,6 +354,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/linux-ming-ling/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/pcduino/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -800,5 +807,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/fu-zhi/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pcduino/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pcduino3b/</loc>
 </url>
 </urlset>

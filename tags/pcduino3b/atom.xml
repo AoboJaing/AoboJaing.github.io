@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: pcduino3B | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/pcduino3b/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-05T19:18:34+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning pcduino 000 pcduino板卡介绍 — pcduino 3B]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/05/pcduino-3B-Board-Introduction/"/>
+    <updated>2016-12-05T19:17:30+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/05/pcduino-3B-Board-Introduction</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>什么是pcduino</h2>
+
+<p>pcduino = mini PC + Arduino</p>
+
+<p>简单的说，就是一个板子，它所具有的功能 等价于：一个装有系统的微型笔记本电脑再连接一个Arduino UNO 的板子。</p>
+
+<h2>pcduino 3B</h2>
+
+<p><img src="/images/2016-12-5-pcduino-3B-Board-Introduction/1480743252811.png" alt="Alt text" /></p>
+
+<p>购买网站：<a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10306272528.14.xr2Mrd&amp;id=42881071231">pcDuino3B A20开发板</a></p>
+
+<p>pcduino3 与 pcduino3B 的唯一区别就是：pcduino3B有一个大型集成的RJ45网络端口。（其他和pcduino3一模一样）</p>
+
+<p><img src="/images/2016-12-5-pcduino-3B-Board-Introduction/1480784084302.png" alt="Alt text" /></p>
+
+<p>pcduino 3B 的官方介绍网站： <a href="http://www.linksprite.com/linksprite-pcduino3/">LinkSprite pcDuino3</a> （pcduino3 包括：pcduino3 和 pcduino3B）</p>
+
+<p>pcduino 官网的教程资料网站：<a href="http://www.linksprite.com/quick-start/">LinkSprite pcDuino Quick Start</a></p>
+
+<p>pcduino 中文教程网站：<a href="http://www.pcduino.com/wiki/index.php?title=%E4%B8%AD%E6%96%87%E4%B9%A6">维基 pcduino 中文书</a></p>
+
+<p>pcduino 教学的pdf:</p>
+
+<ul>
+<li><a href="https://s3.amazonaws.com/pcduino/book/pcDuinov3%E5%8F%8Anano%E6%95%99%E7%A8%8B%EF%BC%88%E4%BC%98%E5%A3%A4%E6%95%99%E8%82%B2%EF%BC%89.pdf">pcDuinov3及nano教程（优壤教育）</a></li>
+<li><a href="https://s3.amazonaws.com/pcduino/book/CPK_pcDuino3.pdf">18 Projects with CuteDigi Project Kit for pcDuino3</a></li>
+<li><a href="http://cnlearn.linksprite.com/wp-content/uploads/2014/03/%E3%80%8A-%E7%88%B1%E4%B8%8A-pcDuino-%E3%80%8B.pdf">爱上-pcDuino</a></li>
+</ul>
+
+
+<p>pcduino sparkfun网站的tutorials：<a href="https://learn.sparkfun.com/tutorials/programming-the-pcduino">Programming the pcDuino</a></p>
+
+<p><a href="http://learn.linksprite.com/?s=pcduino3b">Search Results for &ldquo;pcduino3b&rdquo;</a></p>
+]]></content>
+  </entry>
+  
+</feed>
