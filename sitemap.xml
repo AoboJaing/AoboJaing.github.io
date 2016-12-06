@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/</loc>
+<lastmod>2016-12-06T13:51:56+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/</loc>
+<lastmod>2016-12-06T13:46:35+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/</loc>
 <lastmod>2016-12-06T13:37:20+08:00</lastmod>
 </url>
@@ -853,5 +861,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/qu-dong/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/ubuntu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/linux/</loc>
 </url>
 </urlset>

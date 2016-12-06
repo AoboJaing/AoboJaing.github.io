@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="使用的虚拟机软件：VMware 11
+我的Ubuntu系统：Ubuntu 14.04.10 TLS
+Arduino 软件的版本：Arduino 1.6.11
+Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的Ubuntu 系统的界面。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>代码在暴走，一切抛到脑后。Party开始，欢迎来到我的王国，跟着这flow，这个空间没有对错。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:51:56+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>使用的虚拟机软件：<strong>VMware 11</strong>
+我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong>
+<strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong>
+<strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></p>
+
+<p><strong>Step 0 . </strong> 来到 <strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面。</p>
+
+<p><strong>Step 1 . </strong> 将 <strong>Arduino</strong> 板子通过USB线插到电脑上。</p>
+
+<p><strong>Step 2 . </strong> 在终端中执行下面的命令，来启动 <strong>Arduino</strong> 软件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong>
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong>
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
+
+<blockquote><p>你可以看到：<strong>Arduino</strong> 软件右下角有当前被选中的端口号和被选中的<strong>Arduino</strong>板卡的信息。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660193423.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 6 . </strong> 给端口添加权限。</p>
+
+<blockquote><p>如果，这时你给 <strong>Arduino</strong> 开发板下载程序，发现下载出错。原因就是没有给端口添加权限。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" />
+输出的 <strong>error</strong> 提示：
+<code>
+avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
+</code></p></blockquote>
+
+<p>在终端中执行下面的命令，来给当前选中的端口添加权限。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chmod a+rw /dev/ttyACM0</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>端口号都在<code>/dev/</code> 目录里面。执行下面的命令可以查看：
+<code>
+cd /dev/
+ls
+</code>
+输出 如下图所示：
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。
+解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
+
+<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
+
+<blockquote><p>其实，可以不用点击 <strong>编译</strong> 按钮，直接点击 <strong>上传</strong> 按钮就可以。因为点击完 <strong>上传</strong> 按钮后，它会再编译一遍，在将程序烧写到板子上。</p></blockquote>
+
+<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:51:56+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:51 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arduino/'>arduino</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/" title="Previous Post: Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境">&laquo; Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program" data-title="Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序" data-url="http://aobojaing.github.io /blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 129%" href="/tags/arduino/">Arduino</a>
+<a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 139%" href="/tags/git/">Git</a>
+<a style="font-size: 115%" href="/tags/github/">GitHub</a>
+<a style="font-size: 129%" href="/tags/ide/">IDE</a>
+<a style="font-size: 115%" href="/tags/linux/">Linux</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 147%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 168%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
+<a style="font-size: 115%" href="/tags/os/">os</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 159%" href="/tags/python/">python</a>
+<a style="font-size: 115%" href="/tags/python2/">python2</a>
+<a style="font-size: 164%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
+<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
+<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
+<a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
+<a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
+<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
+<a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (3)</a></li>
+<li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
+<li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (8)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

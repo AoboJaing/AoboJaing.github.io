@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Arduino | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/arduino/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-06T13:38:05+08:00</updated>
+  <updated>2016-12-06T13:54:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/"/>
+    <updated>2016-12-06T13:51:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program</id>
+    <content type="html"><![CDATA[<p>使用的虚拟机软件：<strong>VMware 11</strong>
+我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong>
+<strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong>
+<strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></p>
+
+<p><strong>Step 0 . </strong> 来到 <strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面。</p>
+
+<p><strong>Step 1 . </strong> 将 <strong>Arduino</strong> 板子通过USB线插到电脑上。</p>
+
+<p><strong>Step 2 . </strong> 在终端中执行下面的命令，来启动 <strong>Arduino</strong> 软件。
+<code>
+arduino
+</code></p>
+
+<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong>
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong>
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
+
+<blockquote><p>你可以看到：<strong>Arduino</strong> 软件右下角有当前被选中的端口号和被选中的<strong>Arduino</strong>板卡的信息。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660193423.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 6 . </strong> 给端口添加权限。</p>
+
+<blockquote><p>如果，这时你给 <strong>Arduino</strong> 开发板下载程序，发现下载出错。原因就是没有给端口添加权限。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" />
+输出的 <strong>error</strong> 提示：
+<code>
+avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
+</code></p></blockquote>
+
+<p>在终端中执行下面的命令，来给当前选中的端口添加权限。
+<code>
+sudo chmod a+rw /dev/ttyACM0
+</code></p>
+
+<blockquote><p>端口号都在<code>/dev/</code> 目录里面。执行下面的命令可以查看：
+<code>
+cd /dev/
+ls
+</code>
+输出 如下图所示：
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。
+解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
+
+<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
+
+<blockquote><p>其实，可以不用点击 <strong>编译</strong> 按钮，直接点击 <strong>上传</strong> 按钮就可以。因为点击完 <strong>上传</strong> 按钮后，它会再编译一遍，在将程序烧写到板子上。</p></blockquote>
+
+<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/"/>
+    <updated>2016-12-06T13:46:35+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE</id>
+    <content type="html"><![CDATA[<p>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS 32位</strong>
+需要安装的<strong>Arduino</strong>的版本：<strong>Arduino 1.6.11（最新版本） Linux 32位</strong></p>
+
+<h2>1. 下载 最新的 <strong>Arduino</strong> 开发软件</h2>
+
+<p><strong>Step 1 . </strong> 到<strong>Arduino</strong>官网下载 <strong>linux 32位</strong> 的 <strong>Arduino</strong> 开发软件：
+Web：<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a></p>
+
+<h2>2. 解压</h2>
+
+<p><strong>Step 2 . </strong> 解压<strong>arduino-1.6.11-linux32.tar.xz</strong>
+<code>
+cd ~/Downloads
+tar -xvJf arduino-1.6.11-linux32.tar.xz
+</code>
+<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642224393.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 将解压后的文件（<code>arduino-1.6.11</code>）移动到 <code>/opt</code>  目录下：</p>
+
+<pre><code>cd ~/Downloads
+sudo mv arduino-1.6.6 /opt
+</code></pre>
+
+<p><strong>Step 4 . </strong> 进入 <code>/opt/arduino-1.6.11</code> 文件夹，将<strong>Files</strong>窗口最大化。选中 <strong>arduino</strong> 文件，再在<strong>菜单栏</strong>中选择：<strong>Edits</strong> -> <strong>Preferences</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642888060.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 这时弹出下面的窗口。选择：<strong>Behavior</strong> 选项卡，将<strong>Executable Text Files</strong>项里面，勾选：<strong>Ask each time</strong> 单选框。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642984839.png" alt="Alt text" /></p>
+
+<h2>3. 运行 <strong>Arduino</strong></h2>
+
+<p>现在你有两种方法运行 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>方法一：</strong> 双击 <strong>arduino</strong> 文件： 弹出一个对话框，点击<strong>Run</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555757325.png" alt="Alt text" /></p>
+
+<p><strong>方法二：</strong>打开一个终端：路径切换到<strong>arduino</strong>文件所在路径（<code>/opt/arduino-1.6.11/</code>），运行它：</p>
+
+<pre><code>cd /opt/arduino-1.6.11/
+./arduino
+</code></pre>
+
+<p>现在，恭喜你，已经安装成功了：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555815898.png" alt="Alt text" /></p>
+
+<h2>4. 做一些配置，实现在终端的任何路径下，都可以运行 <strong>Arduino</strong> 软件</h2>
+
+<p>使用<code>ln</code> 命令(给文件创建软链接文件) Web：<a href="http://roclinux.cn/?p=752">http://roclinux.cn/?p=752</a></p>
+
+<p>我们希望在终端的任何路径下，输入 <code>arduino</code> 都可以启动 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>Step 6 . </strong> 操作如下，打开一个终端，执行下面的命令。将 <code>/opt/arduino-1.6.6/arduino</code> 文件在 <code>/bin/</code> 路径下创建一个软链接文件。</p>
+
+<pre><code>sudo ln -s /opt/arduino-1.6.11/arduino /bin/
+</code></pre>
+
+<p>搞定，这样就可以在终端中，不管当前路径是什么，都可以启动<strong>Arduino</strong>了。</p>
+
+<p>试试看。现在，在终端中直接执行：</p>
+
+<pre><code>arduino
+</code></pre>
+
+<h2>5. 如何给 <strong>Arduino</strong> 板子，烧写程序</h2>
+
+<p>请见博客：Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 。</p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动]]></title>
