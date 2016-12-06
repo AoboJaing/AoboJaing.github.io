@@ -8,22 +8,26 @@ categories: [Arduino]
 tags: [Arduino, Ubuntu, Linux, IDE, 软件安装]
 ---
 
-我的**Ubuntu**系统：**Ubuntu 14.04.10 TLS 32位**
-需要安装的**Arduino**的版本：**Arduino 1.6.11（最新版本） Linux 32位**
+
+* 我的**Ubuntu**系统：**Ubuntu 14.04.10 TLS 32位**
+* 需要安装的**Arduino**的版本：**Arduino 1.6.11（最新版本） Linux 32位**
 
 
 ## 1. 下载 最新的 **Arduino** 开发软件
 
 **Step 1 . ** 到**Arduino**官网下载 **linux 32位** 的 **Arduino** 开发软件：
+
 Web：https://www.arduino.cc/en/Main/Software
 
 ## 2. 解压
 
 **Step 2 . ** 解压**arduino-1.6.11-linux32.tar.xz**
+
 ```
 cd ~/Downloads
 tar -xvJf arduino-1.6.11-linux32.tar.xz
 ```
+
 ![Alt text](/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642224393.png)
 
 **Step 3 . ** 将解压后的文件（`arduino-1.6.11`）移动到 `/opt`  目录下：
