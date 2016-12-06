@@ -88,10 +88,13 @@ Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的U
   </header>
 
 
-<div class="entry-content"><p>使用的虚拟机软件：<strong>VMware 11</strong>
-我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong>
-<strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong>
-<strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></p>
+<div class="entry-content"><ul>
+<li>使用的虚拟机软件：<strong>VMware 11</strong></li>
+<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong></li>
+<li><strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong></li>
+<li><strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></li>
+</ul>
+
 
 <p><strong>Step 0 . </strong> 来到 <strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面。</p>
 
@@ -103,14 +106,17 @@ Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的U
 </pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
+<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：</p>
 
-<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong>
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
 
-<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong>
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
+<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
 
 <blockquote><p>你可以看到：<strong>Arduino</strong> 软件右下角有当前被选中的端口号和被选中的<strong>Arduino</strong>板卡的信息。</p>
 
@@ -120,11 +126,12 @@ Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的U
 
 <blockquote><p>如果，这时你给 <strong>Arduino</strong> 开发板下载程序，发现下载出错。原因就是没有给端口添加权限。</p>
 
-<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" />
-输出的 <strong>error</strong> 提示：
-<code>
-avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
-</code></p></blockquote>
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" /></p>
+
+<p>输出的 <strong>error</strong> 提示：</p>
+
+<pre><code>avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
+</code></pre></blockquote>
 
 <p>在终端中执行下面的命令，来给当前选中的端口添加权限。</p>
 
@@ -137,24 +144,29 @@ avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
 cd /dev/
 ls
 </code>
-输出 如下图所示：
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
+输出 如下图所示：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
 
 <hr />
 
-<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。
-解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
+<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。</p>
 
-<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+<p>解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
 
-<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
+<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
 
 <blockquote><p>其实，可以不用点击 <strong>编译</strong> 按钮，直接点击 <strong>上传</strong> 按钮就可以。因为点击完 <strong>上传</strong> 按钮后，它会再编译一遍，在将程序烧写到板子上。</p></blockquote>
 
-<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。
-<img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
+<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
 
 <h2>搞定</h2>
 </div>
@@ -210,6 +222,8 @@ ls
         <a class="basic-alignment left" href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/" title="Previous Post: Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境">&laquo; Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
       
       
+        <a class="basic-alignment right" href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/" title="Next Post: Arduino 004 Windows上给Arduino IDE添加模块库">Arduino 004 Windows上给Arduino IDE添加模块库 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -244,6 +258,10 @@ var duoshuoQuery = {short_name:"aobosir"};
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</a>
       </li>
     
@@ -259,21 +277,17 @@ var duoshuoQuery = {short_name:"aobosir"};
         <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 129%" href="/tags/arduino/">Arduino</a>
+    <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
-<a style="font-size: 129%" href="/tags/ide/">IDE</a>
+<a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -296,9 +310,9 @@ var duoshuoQuery = {short_name:"aobosir"};
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 164%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
-<a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 90%" href="/tags/chuang-jian-wen-jian-jia/">创建文件夹</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
@@ -318,7 +332,7 @@ var duoshuoQuery = {short_name:"aobosir"};
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/arduino/'>arduino (3)</a></li>
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>

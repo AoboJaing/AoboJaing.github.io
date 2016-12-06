@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: module | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/module/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-06T14:01:45+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 004 Windows上给Arduino IDE添加模块库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-add-module-libraries/"/>
+    <updated>2016-12-06T13:54:54+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-add-module-libraries</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>在我的Windows电脑里面，Arduino IDE软件安装在<code>C:\Program Files (x86)\Arduino</code>路径里面。</p>
+
+<p>我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。</p>
+
+<h2>添加 I2Cdev 及其相关模块库到Arduino IDE软件里面</h2>
+
+<p><strong>Step 0 . </strong> 关闭 Arduino IDE 软件</p>
+
+<p><strong>Step 1 . </strong> 下载 i2cdev 及其相关的模块库</p>
+
+<p>到<a href="https://github.com/jrowberg/i2cdevlib">这个网址</a>里面下载所有i2cdev相关的模块库。</p>
+
+<p><strong>Step 2 . </strong> 下载后，解压，将<code>/Arduino/</code>路径里面的所有文件夹复制，并拷贝到：<code>C:\Program Files (x86)\Arduino\libraries</code>路径里面。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001787595.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 启动Arduino IDE 软件。在 <strong>文件</strong> -> <strong>示例</strong> 里面就可以看到刚刚添加到Arduino IDE的模块库。（现在就可以正常使用了）</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001851166.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>注意：</p>
+
+<p>如果是Ubuntu系统，Arduino IDE 一般被安装在：<code>/opt/arduino/</code></p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>
