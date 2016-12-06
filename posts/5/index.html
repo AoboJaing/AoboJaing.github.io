@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="本篇博客中的公式支持不完整，请您访问这个链接：http://blog.csdn.net/github_35160620/article/details/52938197 这篇博客，在上一篇的基础上，针对 自动控制的数学模型 的重要考点，举一些典型的例题，加以解析，巩固大家对 &hellip;">
+  <meta name="description" content="先添加一个控件。比如添加一个GroupBox控件。 当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步： Step 1 . 在 Form11.cs 文件中，将这个控件所有的事件函数删除。对于我们这个例子， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/13/cs-001-delete-event-function-resolve-error/">C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-13T13:54:49+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>先添加一个控件。比如添加一个<code>GroupBox</code>控件。</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479014826968.png" alt="Alt text" /></p>
+
+<p>当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步：</p>
+
+<p><strong>Step 1 . </strong> 在 <code>Form11.cs</code> 文件中，将这个控件所有的事件函数删除。对于我们这个例子，删除的代码是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">private</span> <span class="k">void</span> <span class="nf">groupBox1_Enter</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果这个时候，你运行程序会出错：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="err">错误</span>    <span class="m">1</span>    <span class="err">“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”不包含“</span><span class="n">groupBox1_Enter</span><span class="err">”的定义，并且找不到可接受类型为“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”的第一个参数的扩展方法“</span><span class="n">groupBox1_Enter</span><span class="err">”</span><span class="p">(</span><span class="err">是否缺少</span> <span class="k">using</span> <span class="err">指令或程序集引用?) </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>它提示你：你已经给<code>groupBox1</code>这个控件对象定义了一个<code>groupBox1_Enter</code>的方法了，但是编译器却没有找到这个函数。为什么没有找到？因为刚刚我们给它删除了。所以第2步：</p>
+
+<p><strong>Step 2 . </strong> 在<strong>解决方案资源管理器</strong>，打开：<code>Form1.Designer.cs</code>文件：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015257166.png" alt="Alt text" /></p>
+
+<p>你会看到，一个小加号：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015310058.png" alt="Alt text" /></p>
+
+<p>点开这个小加号，里面就是所有空间的参数和方法的定义汇总。我们找到对应控件的事件函数：</p>
+
+<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015437616.png" alt="Alt text" /></p>
+
+<p><strong>VS</strong> 软件已经将有错误的地方，用波浪线标注了。我们直接删除这一行，即可：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">groupBox1</span><span class="p">.</span><span class="n">Enter</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">EventHandler</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">groupBox1_Enter</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，再运行程序，就不会有错误了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2126,786 +2204,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/21/SQL-Learning-029-Query-12-Connection-query-the-connection/">SQL 数据库 学习 029 查询-12 连接查询 --- 内连接</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-21T20:25:37+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:25 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h1>连接查询</h1>
-
-<p><strong>定义：</strong></p>
-
-<p>将两个表或者两个以上的表以一定的连接条件连接起来。从中检索出满足条件的数据。</p>
-
-<h2>一 . 内连接 &mdash; 知识点 （重点中的重点）</h2>
-
-<p><strong>牛刀小试</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span> <span class="ss">&quot;部门名称&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476814366731.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>需要学的知识点：</p>
-
-<ol>
-<li><code>select ... from A, B</code> 的用法</li>
-<li><code>select ... from A, B where ...</code> 的用法</li>
-<li><code>select ... from A join B on ...</code> 的用法</li>
-<li><code>select ... from A, B where ...</code>  与 <code>select ... from A join B on ...</code> 的比较</li>
-<li><code>select</code>、<code>from</code>、<code>where</code>、<code>join</code>、<code>on</code>、<code>group</code>、<code>order</code>、<code>top</code>、<code>having</code> 的混合使用。</li>
-</ol>
-
-
-<hr />
-
-<hr />
-
-<h2>1 .  <code>select ... from A, B</code> 的用法 &mdash; 笛卡尔积</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--emp是14行； dept是5行3列</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="c1">--输出是70行。不任何条件，进行笛卡尔积连接。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476853766304.png" alt="Alt text" /></p>
-
-<p><code>A</code> 表里面没有个元组都会连接 <code>B</code> 表一个元组，这样就导致 <code>B</code> 表中的每一个元组都连接了 <code>A</code> 表中的没有个元组。</p>
-
-<p>产生的结果： 行数是 A和B的乘积；列数是A和B之和。或者说：把A表的每一条记录都和B表的每一条记录组合在一起，形成的是个笛卡尔积。</p>
-
-<hr />
-
-<h2>2 .  <code>select ... from A, B where ...</code> 的用法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="o">=</span> <span class="mi">7369</span>
-</span><span class='line'>  <span class="c1">--输出5行，11列</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476854396475.png" alt="Alt text" /></p>
-
-<blockquote><p>其中有两个列<code>deptno</code> 属性，一列是来自 <code>dept</code> 表，一列是来自 <code>emp</code> 表。</p></blockquote>
-
-<p><code>select ... from A, B where ...</code> 中的 <code>where</code> 是对 <code>select * from emp, dept</code> 产生的<code>dept</code> 和 <code>emp</code> 两个表进行笛卡尔积后得到的临时表进行过滤。</p>
-
-<p><strong>注意：</strong></p>
-
-<ul>
-<li><code>select * from emp, dept where 1-1</code> 输出70行 11列</li>
-<li><code>select * from emp, dept where empno = 7369</code>  5行</li>
-<li><code>select * from emp, dept where deptno = 10</code> error</li>
-<li><code>select * from emp, dept where emp.deptno = 10</code> 5行的倍数</li>
-<li><code>select * from emp, dept where dept.deptno = 10</code> 14行</li>
-</ul>
-
-
-<hr />
-
-<h2>3 . <code>select ... from A join B on ...</code> 的用法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span> <span class="ss">&quot;部门名称&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>   <span class="c1">--&quot;E&quot; 是别名</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>  <span class="c1">--&quot;D&quot; 是别名 join是连接</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>  <span class="c1">---on 表示：连接条件</span>
-</span><span class='line'>  <span class="c1">--连接条件是：两个表里面的deptno属性相同，才能连接</span>
-</span><span class='line'>  <span class="c1">--所以现在得到的结果不是70行。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952525122.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="c1">--输出是11列（有两列(deptno)是重复的）</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952554733.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>下面的两个指令输出都是一样的结果。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span> <span class="ss">&quot;部门名称&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span>   <span class="c1">--连接条件是 1=1 表示永远为真，所以执行后得到的结果是70行2列。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="ss">&quot;员工姓名&quot;</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span> <span class="ss">&quot;部门名称&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="mi">3</span><span class="o">&gt;</span><span class="mi">2</span>   <span class="c1">--连接条件是 3&gt;2 表示永远为真，所以执行后得到的结果是70行2列。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952613838.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><code>on</code> 不能省略，有 <code>join</code> 就必须有 <code>on</code>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error 多个表里面有相同的属性，就必须指定是哪个表的属性，否则报错。</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952843787.png" alt="Alt text" /></p>
-
-<p>别名取中文也可以：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="ss">&quot;部门表&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="ss">&quot;部门编号&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;员工表&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;部门表&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476952937185.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>4 .  <code>from where</code> 和 <code>join on</code> 的区别</h2>
-
-<ul>
-<li><code>select ... from A, B where ...</code> 是<strong>sql92标准</strong>。</li>
-<li><code>select ... join A, B where ...</code> 是 <strong>sql99标准</strong>。</li>
-</ul>
-
-
-<p>输出结果是一样的，但是推荐使用<strong>SQL99标准</strong>。</p>
-
-<p>原因：</p>
-
-<ol>
-<li><strong>sql99</strong> 更容易理解。</li>
-<li>在<strong>sql99标准</strong>中，<code>on</code> 和 <code>where</code> 可以做不同的分工。<code>on</code> 指定连接条件，而<code>where</code> 是对连接之后临时表的数据进行过滤。</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">on</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953046957.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>5 . <code>where</code> 是否可以写在 <code>join on</code> 的前面</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&gt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">losal</span> <span class="k">and</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">hisal</span>
-</span><span class='line'>  <span class="c1">--我只知道where写在join on前面是错的。但是我也不知道，为什么。</span>
-</span><span class='line'>  <span class="c1">--关键字的顺序都是固定的，是死的。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953442977.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--OK</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&gt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">losal</span> <span class="k">and</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">hisal</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&gt;</span> <span class="mi">2000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953463959.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>6 . 判断下列两个语句的输出结果</h2>
-
-<p><code>select ... from A join B on ...</code> 的用法：<code>A</code> 和 <code>B</code> 互换， 输出结果不变。</p>
-
-<p><code>select ... from A, B where ...</code> 的用法： <code>A</code> 和 <code>B</code>  互换，输出结果不变。</p>
-
-<p>下面的四个指令，输出的结果都是一样的。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">on</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953696204.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">on</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953661325.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953591899.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">dept</span><span class="err">，</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">emp</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953572304.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>7 . <strong>sql92标准</strong> 的语句如何用<strong>sql99</strong>的语句实现</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">,</span> <span class="n">dept</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="mi">10</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953771643.png" alt="Alt text" /></p>
-
-<p>考虑如何把上面的<strong>sql</strong>语句用<strong>sql99</strong>来实现。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--这个sql语句和上面的sql语句输出结果是一模一样的</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span>  <span class="c1">--join 是连接</span>
-</span><span class='line'>  <span class="k">on</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span>  <span class="c1">--on 后面是连接条件</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">dept</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1">-- where 是对数据进行过滤</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476953833629.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>二 . 内连接 &mdash; 练习</h2>
-
-<ol>
-<li>输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</li>
-<li>输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</li>
-<li>求出每个员工的姓名、部门编号、薪水、薪水等级</li>
-<li>查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</li>
-<li>查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级</li>
-<li>求出<code>emp</code>表中所有领导的姓名</li>
-<li>求出平均薪水最好的部门的标号和部门的平均工资</li>
-<li>有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。</li>
-</ol>
-
-
-<hr />
-
-<p><strong>1  . 输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">3</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">hisal</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">desc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954077454.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>2 . 输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出姓名不包含A工资最高的前三名的每一个员工的姓名、工资、工资等级 和 部门名称</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">3</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">hisal</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span> <span class="k">not</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">desc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476954761563.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>3 . 求出每个员工的姓名、部门编号、薪水、薪水等级</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出每个员工的姓名、部门编号、薪水 和 薪水的等级</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&gt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">losal</span> <span class="k">and</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="o">&lt;=</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">hisal</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476955432131.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>4 . 查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</strong></p>
-
-<p>先要将部门的平均工资找出来。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出部门的平均工资</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477036365811.png" alt="Alt text" /></p>
-
-<p>接下来是输出部门平均工资的等级。做法很简单，上面的指令生成了一张部门平均工资的临时表，接下来我们就对这个临时表通过<code>join ... on ...</code>  的<code>join</code> 关键字将这个临时表和 <code>SALGRADE</code> 表通过<code>on</code> 关键字后面的条件来得到部门平均工资的等级。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="ss">&quot;部门平均工资&quot;</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span> <span class="ss">&quot;工资等级&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">HISAL</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找每个部门的编号、该部门所有员工的平均工资、平均工资的等级</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="ss">&quot;部门平均工资&quot;</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span> <span class="ss">&quot;工资等级&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span><span class="p">,</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">HISAL</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出结果都是：</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1476969060536.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>5 . 查找每一个部门的编号、部门名称、该部门所有员工的平均工资、平均工资的等级</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--查找每一个部门的编号、部门名称、该部门所有员工的平举工资、平均工资的等级</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span> <span class="ss">&quot;部门名称&quot;</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="ss">&quot;部门平均工资&quot;</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span> <span class="ss">&quot;工资等级&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">HISAL</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中 <code>on</code> 后面跟的是 <strong>表与表之间的连接条件</strong>。</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037406640.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>6 . 求出 emp 表领导的姓名</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--先把emp表列出来</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037635859.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出`emp`表领导的姓名</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span> <span class="n">mgr</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span> <span class="c1">--如果员工编号在领导编号里面，就输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037907549.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出emp表中所有非领导的信息</span>
-</span><span class='line'><span class="c1">--error</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">empno</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span> <span class="n">mgr</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样写是不对的，我们需要注意：<code>in</code> 与 <code>null</code> 的组合所带来的问题。</p>
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477037999159.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>7 . 求出平均薪水最好的部门的标号和部门的平均工资</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--先得到部门平均工资的临时表</span>
-</span><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477039859743.png" alt="Alt text" /></p>
-
-<p>然后排序，在输出第1个。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第1种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">1</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">desc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040016720.png" alt="Alt text" /></p>
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--求出平均薪水最好的部门的标号和部门的平均工资</span>
-</span><span class='line'><span class="c1">--第2种写法：</span>
-</span><span class='line'><span class="k">select</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
-</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span>
-</span><span class='line'>          <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>              <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
-</span><span class='line'>                  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>                  <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
-</span><span class='line'>          <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477044470627.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>8 . 有一个人工资最低，把这个人排除掉，剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。</strong></p>
-
-<p>先得到工资最低的那个人的工资。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477040384906.png" alt="Alt text" /></p>
-
-<p>去掉工资最低的那个人：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--有一个人工资最低，把这个人排除掉</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>  <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">select</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043113884.png" alt="Alt text" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--有一个人工资最低，把这个人排除掉，</span>
-</span><span class='line'><span class="c1">--剩下的人中工资最低的前3个人的姓名、工资、部门编号、部门名称、工资等级 输出。</span>
-</span><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">3</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">sal</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">dname</span><span class="p">,</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">grade</span>
-</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
-</span><span class='line'>      <span class="k">select</span> <span class="o">*</span>
-</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
-</span><span class='line'>          <span class="k">where</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">select</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">dept</span> <span class="ss">&quot;D&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="ss">&quot;D&quot;</span><span class="p">.</span><span class="n">deptno</span>
-</span><span class='line'>  <span class="k">join</span> <span class="n">SALGRADE</span> <span class="ss">&quot;S&quot;</span>
-</span><span class='line'>  <span class="k">on</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">between</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">LOSAL</span> <span class="k">and</span> <span class="ss">&quot;S&quot;</span><span class="p">.</span><span class="n">HISAL</span>
-</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="n">sal</span> <span class="k">asc</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-21-SQL-Learning-029-Query-12-Connection-query-the-connection/1477043240086.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>搞定</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -2923,6 +2221,10 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
       </li>
     
@@ -2938,10 +2240,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
         <a href="/blog/2016/12/05/pcduino-3B-Board-Introduction/">Learning Pcduino 000 Pcduino板卡介绍 — Pcduino 3B</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2949,6 +2247,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <ul class="tag-cloud">
     <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 90%" href="/tags/generators/">Generators</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
@@ -2960,7 +2259,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 164%" href="/tags/windows/">Windows</a>
+<a style="font-size: 168%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 90%" href="/tags/identity/">identity</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
@@ -2971,7 +2270,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 164%" href="/tags/python3/">python3</a>
-<a style="font-size: 90%" href="/tags/vcvarsall-dot-bat/">vcvarsall.bat</a>
 <a style="font-size: 90%" href="/tags/zhu-jian/">主键</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 90%" href="/tags/shi-wu/">事务</a>
@@ -2991,13 +2289,14 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 90%" href="/tags/shi-tu/">视图</a>
-<a style="font-size: 129%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 139%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (1)</a></li>
+<li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>

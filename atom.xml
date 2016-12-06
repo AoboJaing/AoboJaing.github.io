@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-06T00:05:28+08:00</updated>
+  <updated>2016-12-06T13:38:05+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/"/>
+    <updated>2016-12-06T13:37:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
+
+<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
+
+<h2>2. 下载Arduino IDE软件</h2>
+
+<p>然后，到这个网站<a href="https://www.arduino.cc/en/Main/Software%EF%BC%88%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E6%89%93%E5%BC%80%E6%97%B6%EF%BC%8C%E6%9C%89%E7%82%B9%E6%85%A2%E3%80%82%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Arduino">https://www.arduino.cc/en/Main/Software%EF%BC%88%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E6%89%93%E5%BC%80%E6%97%B6%EF%BC%8C%E6%9C%89%E7%82%B9%E6%85%A2%E3%80%82%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Arduino</a> IDE 软件。（记住安装路径，因为后面要用上。）
+<img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
+
+<h2>3. 安装驱动</h2>
+
+<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口
+<img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" />
+驱动已经安装成功。</p>
+
+<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
+
+<h3>选择办卡：Arduino/Genuino Uno</h3>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
+
+<h3>然后，选择端口：</h3>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
+
+<h3>测试：随便导入一个程序：<code>Blink</code></h3>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>验证</strong></h3>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>上传</strong></h3>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
+
+<h2>实验现象</h2>
+
+<p>现在看到的实验现象就是：
+板子上的A13的LED在闪烁。</p>
+
+<h1>搞定</h1>
+
+<hr />
+
+<p>参考网站：
+<a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
+
+<p>其他网站，没有用上：
+<a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬]]></title>
@@ -1930,53 +1995,6 @@
 <h2>总结</h2>
 
 <p>Python3 真的是比 Python2 更加的完善了，从这一点上也可以看出来，Python语言是第4代语言里面非常杰出的语言。随着它的不断发展，它会运行速度慢和内存消耗大的缺点会慢慢的消失（因为：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/chapters/p15_c_extensions.html">许多Python内置库是用C语言写的</a>）。我看好Python。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/"/>
-    <updated>2016-11-29T20:13:51+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>学习这个知识点的原因</h2>
-
-<p>举一个实例：</p>
-
-<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
-</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
-
-<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
-
-<p>其实很简单，我们只需要这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
-
-<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
 ]]></content>
   </entry>
   

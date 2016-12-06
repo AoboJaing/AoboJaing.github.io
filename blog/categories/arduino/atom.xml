@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Arduino | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/blog/categories/arduino/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-06T13:38:05+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/"/>
+    <updated>2016-12-06T13:37:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
+
+<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
+
+<h2>2. 下载Arduino IDE软件</h2>
+
+<p>然后，到这个网站<a href="https://www.arduino.cc/en/Main/Software%EF%BC%88%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E6%89%93%E5%BC%80%E6%97%B6%EF%BC%8C%E6%9C%89%E7%82%B9%E6%85%A2%E3%80%82%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Arduino">https://www.arduino.cc/en/Main/Software%EF%BC%88%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E6%89%93%E5%BC%80%E6%97%B6%EF%BC%8C%E6%9C%89%E7%82%B9%E6%85%A2%E3%80%82%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Arduino</a> IDE 软件。（记住安装路径，因为后面要用上。）
+<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
+
+<h2>3. 安装驱动</h2>
+
+<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口
+<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" />
+驱动已经安装成功。</p>
+
+<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
+
+<h3>选择办卡：Arduino/Genuino Uno</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
+
+<h3>然后，选择端口：</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
+
+<h3>测试：随便导入一个程序：<code>Blink</code></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>验证</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>上传</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
+
+<h2>实验现象</h2>
+
+<p>现在看到的实验现象就是：
+板子上的A13的LED在闪烁。</p>
+
+<h1>搞定</h1>
+
+<hr />
+
+<p>参考网站：
+<a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
+
+<p>其他网站，没有用上：
+<a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>
