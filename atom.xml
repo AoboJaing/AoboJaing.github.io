@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-08T07:07:24+08:00</updated>
+  <updated>2016-12-08T07:26:52+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed/"/>
+    <updated>2016-12-08T07:24:18+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当我在使用正则表达式去提取网页源代码中的有效数据的时候。发现：我要提取的有效数据所需要使用的正则表达式中有换行。那么这个时候，正则表达式要怎么写？</p>
+
+<p>目标网站：<a href="http://blog.csdn.net/github_35160620/article/details/53512977">http://blog.csdn.net/github_35160620/article/details/53512977</a></p>
+
+<p>要提取的有效信息：访问的数量</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152435523.png" alt="Alt text" /></p>
+
+<p>查看网页源代码：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152530825.png" alt="Alt text" /></p>
+
+<p>所以，如果我们想提取出访问数量，需要使用的正则表达式中会存在换行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>'''&lt;dt class="item"&gt;(.^?)&lt;/dt&gt;
+</span><span class='line'>            &lt;dd class="item_name"&gt;访问'''</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是这样是不能匹配到结果。而正确的正则表达式是下面这样的：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>'&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>使用转义字符 <code>\r\n</code> 来表示换行。</p></blockquote>
+
+<p>代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def next(self, response):
+</span><span class='line'>    pattam_visits = '&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'
+</span><span class='line'>    # print('response.body type is ', type(response.body))
+</span><span class='line'>    # print('response.body.decode type is ', type(response.body.decode('utf-8', 'ignore')))
+</span><span class='line'>
+</span><span class='line'>    body_data = response.body.decode('utf-8', 'ignore') # .replace(u'\xa9', u'')
+</span><span class='line'>    visits = re.compile(pattam_visits).findall(body_data)[0]
+</span><span class='line'>    print('当前访问量为：', visits)
+</span><span class='line'>    print('-------------------')
+</span><span class='line'>    pass</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><code>compile()</code> 函数的使用方法<a href="http://www.aobosir.com/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">在这里</a>可以了解。</p></blockquote>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 008 正则表达式-005 Compile模板的使用]]></title>
@@ -1597,76 +1676,6 @@ ls
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>git tag -d v1.0</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 023 类编程]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/class-programming-object/"/>
-    <updated>2016-12-01T07:03:26+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/class-programming-object</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h1>怎么使用python编写一个 <strong>类</strong></h1>
-
-<p>参考网站：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p01_change_string_representation_of_instances.html">Python3-cookbook 类与对象</a></p>
-
-<p>随便编写一个Python类，类里面至少有下面三个函数：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Pair</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;Pair({0.x!r}, {0.y!r})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;({0.x!s}, {0.y!s})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>__init__()</code> 函数就是类的构造函数。</li>
-<li><code>__repr__()</code>  和 <code>__str__()</code> 函数 都是用来输出字符串用的。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span>
-</span><span class='line'><span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __repr__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __str__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
 <hr />

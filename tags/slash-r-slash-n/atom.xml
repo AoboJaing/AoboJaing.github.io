@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: \r\n | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/slash-r-slash-n/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-08T07:26:52+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed/"/>
+    <updated>2016-12-08T07:24:18+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当我在使用正则表达式去提取网页源代码中的有效数据的时候。发现：我要提取的有效数据所需要使用的正则表达式中有换行。那么这个时候，正则表达式要怎么写？</p>
+
+<p>目标网站：<a href="http://blog.csdn.net/github_35160620/article/details/53512977">http://blog.csdn.net/github_35160620/article/details/53512977</a></p>
+
+<p>要提取的有效信息：访问的数量</p>
+
+<p><img src="/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152435523.png" alt="Alt text" /></p>
+
+<p>查看网页源代码：</p>
+
+<p><img src="/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152530825.png" alt="Alt text" /></p>
+
+<p>所以，如果我们想提取出访问数量，需要使用的正则表达式中会存在换行：</p>
+
+<pre><code>'''&lt;dt class="item"&gt;(.^?)&lt;/dt&gt;
+            &lt;dd class="item_name"&gt;访问'''
+</code></pre>
+
+<p>但是这样是不能匹配到结果。而正确的正则表达式是下面这样的：</p>
+
+<pre><code>'&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'
+</code></pre>
+
+<blockquote><p>使用转义字符 <code>\r\n</code> 来表示换行。</p></blockquote>
+
+<p>代码：</p>
+
+<pre><code>    def next(self, response):
+        pattam_visits = '&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'
+        # print('response.body type is ', type(response.body))
+        # print('response.body.decode type is ', type(response.body.decode('utf-8', 'ignore')))
+
+        body_data = response.body.decode('utf-8', 'ignore') # .replace(u'\xa9', u'')
+        visits = re.compile(pattam_visits).findall(body_data)[0]
+        print('当前访问量为：', visits)
+        print('-------------------')
+        pass
+</code></pre>
+
+<blockquote><p><code>compile()</code> 函数的使用方法<a href="http://www.aobosir.com/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">在这里</a>可以了解。</p></blockquote>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
