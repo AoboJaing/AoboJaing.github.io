@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: SR300 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/sr300/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-07T12:19:45+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Intel RealSense 001 Windows安装 Intel RealSense SDK]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/"/>
+    <updated>2016-12-07T12:18:38+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的Intel RealSense 硬件：SR300 摄像头</p>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=dFVUiwyWyFo&amp;list=PLg-UKERBljNwbHO7R9t0mnIA52xd65LUT&amp;index=6">Downloading and Installing the Intel® RealSense SDK</a></li>
+<li><a href="https://software.intel.com/blogs/2015/09/13/detailed-instructions-for-getting-started-with-intel-realsense-app-development?utm_source=ISTV&amp;utm_medium=Video&amp;utm_campaign=ISTV_2016&amp;utm_content=Video">Getting Started with Intel® RealSense™ App Development: Step-by-Step Install Instructions</a></li>
+</ul>
+
+
+<h2><a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">下载</a> 并安装</h2>
+
+<p><strong>Step 0 . </strong> 先将SR300摄像头通过USB3.0接口插到电脑上。</p>
+
+<blockquote><p>注意：</p>
+
+<ol>
+<li>必须要将SR300摄像头连接到USB3.0接口上。（这是一个非常重要的步骤）</li>
+<li>不要通过USB延长线连接。</li>
+</ol>
+</blockquote>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009695299.png" alt="Alt text" /></p>
+
+<p>等待大约5分钟，驱动就自动安装完成了。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009996712.png" alt="Alt text" /></p>
+
+<blockquote><p>如果电脑没有帮你自动安装，你需要手动安装：<strong>Step 1</strong>。电脑帮你自动安装了SR300 摄像头的驱动程序，你就可以跳过<strong>Step 1</strong>。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">SR300 深度摄像头管理程序</a>（intel_rs_dcm_sr300_3.3.27.5718.exe）</p>
+
+<blockquote><p><strong>DCM</strong> 是全称：Depth Camera Manager</p></blockquote>
+
+<p>安装：按照提示，一步一步的进行操作即可。</p>
+
+<blockquote><p>如果你需要这个问题：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481008202698.png" alt="Alt text" /></p>
+
+<p>说明：SR300 摄像头没有与电脑连接，请先将SR300 摄像头于电脑通过USB3.0接口连接。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 下载 <a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">英特尔® 实感™ 软件开发套件（必备）</a>（Intel® RealSense™ SDK for Windows*）</p>
+
+<blockquote><p>下载这里，你需要先注册一个inteld的用户，才能下载它。</p></blockquote>
+
+<p>安装：intel_rs_sdk_offline_package_10.0.26.0396.exe</p>
+
+<p>一步一步的安装，即可。</p>
+
+<blockquote><p>如果你在安装的时候遇到这个问题：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481021331695.png" alt="Alt text" /></p>
+
+<p><strong>The Installer failed to detect OpenCL™ 1.2 support on your system. Certain SDK samples/modules may not be functional. Please upgrade your graphics driver for full SDK functionalities.</strong></p>
+
+<p>点击<strong>Next</strong> 按钮忽略即可。</p>
+
+<h2>出现这个问题的原因：</h2>
+
+<p>你先下载 <a href="http://www.ozone3d.net/gpu_caps_viewer/">GPU Caps Viewer</a> 软件来查看<strong>我当前的电脑安装的OpenCL的版本</strong>和<strong>我的电脑有没有GPU</strong>。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048947084.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048958442.png" alt="Alt text" /> <img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049035444.png" alt="Alt text" /></p>
+
+<p>通过GPU Caps Viewer软件得到的结果，我知道了：</p>
+
+<ul>
+<li>我的电脑里面是有GPU的：(NVIDIA CUDA公司的)<a href="http://www.geforce.com/hardware/notebook-gpus/geforce-705m/specifications">GeForce GT 705</a>。</li>
+<li>这个显卡（GPU）支持的OpenCL版本是1.1</li>
+</ul>
+
+
+<p>现在你应该大概知道了：安装的 Intel RealSense SDK 提示的安装问题的原因了吧：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049133289.png" alt="Alt text" /></p>
+
+<p>它说：您当前电脑的显卡太喽了，Intel RealSense SDK需要的是OpenCL1.2，而你的电脑里面没有，你电脑里面的显卡所支持的OpenCL版本是OpenCL1.1。</p>
+
+<h2>解决办法</h2>
+
+<p>没有办法，唯一可以解决下面这个问题的办法就是：提升（换一个好的）图形驱动硬件。（即：支持OpenCL1.2以上的显卡）。我们直接直接忽略这个问题也可以。对后面基本没有什么影响。</p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>总结：</strong> 对于你的电脑，你想检测是否有GPU（显卡）（不管是<strong>NVIDIA CUDA 公司</strong>的还是 <strong>Intel公司</strong>的 都可以）。然后查看GPU（显卡）支持的OpenCL版本，必须要大于等于OpenCL1.2，否则 Intel RealSense SDK 安装不能成功。</p></blockquote>
+
+<hr />
+
+<p>注意安装的时候要连着网，因为在安装的时候会从网上下载一下安装包。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481072982805.png" alt="Alt text" /></p>
+
+<p>如果你想要拥有 <strong>China</strong> 的语音识别和合成包，可以将下面的选项勾选。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481073189997.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<h2>测试</h2>
+
+<p>启动 <strong>Intel RealSense SDK Sample Browser</strong></p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083199264.png" alt="Alt text" /></p>
+
+<p>里面有很多的示例可以运行：（每个程序都运行一下，试试看。）</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083256629.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>学习文档：<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/documentation">英特尔® 实感™ SDK 文档</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/</loc>
+<lastmod>2016-12-07T12:18:38+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-add-module-libraries/</loc>
 <lastmod>2016-12-06T13:54:54+08:00</lastmod>
 </url>
@@ -388,6 +392,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/arduino/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/intel-realsense/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -877,5 +884,17 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/module/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/intel-realsense/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/sdk/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/an-zhuang-ruan-jian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/sr300/</loc>
 </url>
 </urlset>

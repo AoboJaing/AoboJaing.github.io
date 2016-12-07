@@ -9,7 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="在我的Windows电脑里面，Arduino IDE软件安装在C:\Program Files (x86)\Arduino路径里面。 我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。 添加 I2Cdev 及其相关模块库到Arduino IDE软件里面 Step 0 . 关闭 &hellip;">
+  <meta name="description" content="我使用的Intel RealSense 硬件：SR300 摄像头 参考网站： Downloading and Installing the Intel® RealSense SDK
+Getting Started with Intel® RealSense™ App Development: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,151 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-07T12:18:38+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>我使用的Intel RealSense 硬件：SR300 摄像头</p>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=dFVUiwyWyFo&amp;list=PLg-UKERBljNwbHO7R9t0mnIA52xd65LUT&amp;index=6">Downloading and Installing the Intel® RealSense SDK</a></li>
+<li><a href="https://software.intel.com/blogs/2015/09/13/detailed-instructions-for-getting-started-with-intel-realsense-app-development?utm_source=ISTV&amp;utm_medium=Video&amp;utm_campaign=ISTV_2016&amp;utm_content=Video">Getting Started with Intel® RealSense™ App Development: Step-by-Step Install Instructions</a></li>
+</ul>
+
+
+<h2><a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">下载</a> 并安装</h2>
+
+<p><strong>Step 0 . </strong> 先将SR300摄像头通过USB3.0接口插到电脑上。</p>
+
+<blockquote><p>注意：</p>
+
+<ol>
+<li>必须要将SR300摄像头连接到USB3.0接口上。（这是一个非常重要的步骤）</li>
+<li>不要通过USB延长线连接。</li>
+</ol>
+</blockquote>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009695299.png" alt="Alt text" /></p>
+
+<p>等待大约5分钟，驱动就自动安装完成了。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009996712.png" alt="Alt text" /></p>
+
+<blockquote><p>如果电脑没有帮你自动安装，你需要手动安装：<strong>Step 1</strong>。电脑帮你自动安装了SR300 摄像头的驱动程序，你就可以跳过<strong>Step 1</strong>。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">SR300 深度摄像头管理程序</a>（intel_rs_dcm_sr300_3.3.27.5718.exe）</p>
+
+<blockquote><p><strong>DCM</strong> 是全称：Depth Camera Manager</p></blockquote>
+
+<p>安装：按照提示，一步一步的进行操作即可。</p>
+
+<blockquote><p>如果你需要这个问题：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481008202698.png" alt="Alt text" /></p>
+
+<p>说明：SR300 摄像头没有与电脑连接，请先将SR300 摄像头于电脑通过USB3.0接口连接。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 下载 <a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">英特尔® 实感™ 软件开发套件（必备）</a>（Intel® RealSense™ SDK for Windows*）</p>
+
+<blockquote><p>下载这里，你需要先注册一个inteld的用户，才能下载它。</p></blockquote>
+
+<p>安装：intel_rs_sdk_offline_package_10.0.26.0396.exe</p>
+
+<p>一步一步的安装，即可。</p>
+
+<blockquote><p>如果你在安装的时候遇到这个问题：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481021331695.png" alt="Alt text" /></p>
+
+<p><strong>The Installer failed to detect OpenCL™ 1.2 support on your system. Certain SDK samples/modules may not be functional. Please upgrade your graphics driver for full SDK functionalities.</strong></p>
+
+<p>点击<strong>Next</strong> 按钮忽略即可。</p>
+
+<h2>出现这个问题的原因：</h2>
+
+<p>你先下载 <a href="http://www.ozone3d.net/gpu_caps_viewer/">GPU Caps Viewer</a> 软件来查看<strong>我当前的电脑安装的OpenCL的版本</strong>和<strong>我的电脑有没有GPU</strong>。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048947084.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048958442.png" alt="Alt text" /> <img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049035444.png" alt="Alt text" /></p>
+
+<p>通过GPU Caps Viewer软件得到的结果，我知道了：</p>
+
+<ul>
+<li>我的电脑里面是有GPU的：(NVIDIA CUDA公司的)<a href="http://www.geforce.com/hardware/notebook-gpus/geforce-705m/specifications">GeForce GT 705</a>。</li>
+<li>这个显卡（GPU）支持的OpenCL版本是1.1</li>
+</ul>
+
+
+<p>现在你应该大概知道了：安装的 Intel RealSense SDK 提示的安装问题的原因了吧：</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049133289.png" alt="Alt text" /></p>
+
+<p>它说：您当前电脑的显卡太喽了，Intel RealSense SDK需要的是OpenCL1.2，而你的电脑里面没有，你电脑里面的显卡所支持的OpenCL版本是OpenCL1.1。</p>
+
+<h2>解决办法</h2>
+
+<p>没有办法，唯一可以解决下面这个问题的办法就是：提升（换一个好的）图形驱动硬件。（即：支持OpenCL1.2以上的显卡）。我们直接直接忽略这个问题也可以。对后面基本没有什么影响。</p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>总结：</strong> 对于你的电脑，你想检测是否有GPU（显卡）（不管是<strong>NVIDIA CUDA 公司</strong>的还是 <strong>Intel公司</strong>的 都可以）。然后查看GPU（显卡）支持的OpenCL版本，必须要大于等于OpenCL1.2，否则 Intel RealSense SDK 安装不能成功。</p></blockquote>
+
+<hr />
+
+<p>注意安装的时候要连着网，因为在安装的时候会从网上下载一下安装包。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481072982805.png" alt="Alt text" /></p>
+
+<p>如果你想要拥有 <strong>China</strong> 的语音识别和合成包，可以将下面的选项勾选。</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481073189997.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<h2>测试</h2>
+
+<p>启动 <strong>Intel RealSense SDK Sample Browser</strong></p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083199264.png" alt="Alt text" /></p>
+
+<p>里面有很多的示例可以运行：（每个程序都运行一下，试试看。）</p>
+
+<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083256629.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>学习文档：<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/documentation">英特尔® 实感™ SDK 文档</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -930,235 +1076,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-02T07:57:03+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>7:57 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我使用的电脑：Windows 10 64位</li>
-<li>使用的Visual Studio 软件： VS2010</li>
-</ul>
-
-
-<hr />
-
-<p>参考网站：<a href="http://www.cnblogs.com/njl041x/p/3881550.html">C#程序调用cmd.exe执行命令</a></p>
-
-<p>创建一个文件，名为：<code>RunCmd.cs</code>。将下面的代码拷贝到里面。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">AoboSir</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">RunCmd</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">public</span> <span class="nf">RunCmd</span><span class="p">()</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">CmdPath</span> <span class="p">=</span> <span class="s">@&quot;C:\Windows\System32\cmd.exe&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">/// &lt;summary&gt;</span>
-</span><span class='line'>        <span class="c1">/// 执行cmd命令</span>
-</span><span class='line'>        <span class="c1">/// 多命令请使用批处理命令连接符：</span>
-</span><span class='line'>        <span class="c1">/// &lt;![CDATA[</span>
-</span><span class='line'>        <span class="c1">/// &amp;:同时执行两个命令</span>
-</span><span class='line'>        <span class="c1">/// |:将上一个命令的输出,作为下一个命令的输入</span>
-</span><span class='line'>        <span class="c1">/// &amp;&amp;：当&amp;&amp;前的命令成功时,才执行&amp;&amp;后的命令</span>
-</span><span class='line'>        <span class="c1">/// ||：当||前的命令失败时,才执行||后的命令]]&gt;</span>
-</span><span class='line'>        <span class="c1">/// 其他请百度</span>
-</span><span class='line'>        <span class="c1">/// &lt;/summary&gt;</span>
-</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;cmd&quot;&gt;&lt;/param&gt;</span>
-</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;output&quot;&gt;&lt;/param&gt;</span>
-</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">run</span><span class="p">(</span><span class="kt">string</span> <span class="n">cmd</span><span class="p">,</span> <span class="k">out</span> <span class="kt">string</span> <span class="n">output</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">cmd</span> <span class="p">=</span> <span class="n">cmd</span><span class="p">.</span><span class="n">Trim</span><span class="p">().</span><span class="n">TrimEnd</span><span class="p">(</span><span class="sc">&#39;&amp;&#39;</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;&amp;exit&quot;</span><span class="p">;</span><span class="c1">//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态</span>
-</span><span class='line'>            <span class="k">using</span> <span class="p">(</span><span class="n">Process</span> <span class="n">p</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Process</span><span class="p">())</span>
-</span><span class='line'>            <span class="p">{</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">FileName</span> <span class="p">=</span> <span class="n">CmdPath</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">UseShellExecute</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>        <span class="c1">//是否使用操作系统shell启动</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardInput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//接受来自调用程序的输入信息</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardOutput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>  <span class="c1">//由调用程序获取输出信息</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardError</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//重定向标准错误输出</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">CreateNoWindow</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>          <span class="c1">//不显示程序窗口</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span><span class="c1">//启动程序</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//向cmd窗口写入命令</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">AutoFlush</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>                <span class="c1">//p.StandardInput.WriteLine(&quot;exit&quot;);</span>
-</span><span class='line'>                <span class="c1">//向标准输入写入要执行的命令。这里使用&amp;是批处理命令的符号，表示前面一个命令不管是否执行成功都执行后面(exit)命令，如果不执行exit命令，后面调用ReadToEnd()方法会假死</span>
-</span><span class='line'>                <span class="c1">//同类的符号还有&amp;&amp;和||前者表示必须前一个命令执行成功才会执行后面的命令，后者表示必须前一个命令执行失败才会执行后面的命令</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//获取cmd窗口的输出信息</span>
-</span><span class='line'>                <span class="n">output</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="n">StandardOutput</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">WaitForExit</span><span class="p">();</span><span class="c1">//等待程序执行完退出进程</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们可以这样使用这个<code>RunCmd</code> 类：</p>
-
-<p>在GUI界面里面添加一个按钮，然后在对应的<code>.cs</code> 文件的程序，就类似于下面这个样子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.ComponentModel</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Data</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Drawing</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Windows.Forms</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">AoboSir</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">learningcs003</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">Form1</span> <span class="p">:</span> <span class="n">Form</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">public</span> <span class="nf">Form1</span><span class="p">()</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">InitializeComponent</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">RunCmd</span> <span class="n">runcmd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RunCmd</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">private</span> <span class="k">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="kt">string</span> <span class="n">commond</span><span class="p">,</span> <span class="n">output</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">commond</span> <span class="p">=</span> <span class="s">@&quot;notepad.exe&quot;</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">runcmd</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">commond</span><span class="p">,</span> <span class="k">out</span> <span class="n">output</span><span class="p">);</span>
-</span><span class='line'>            <span class="c1">//MessageBox.Show(output);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行的功能是：启动 <strong>记事本</strong> 软件。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1174,6 +1091,10 @@ ls
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a>
       </li>
     
@@ -1187,10 +1108,6 @@ ls
     
       <li class="post">
         <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
       </li>
     
   </ul>
@@ -1215,8 +1132,9 @@ ls
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 168%" href="/tags/windows/">Windows</a>
+<a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 90%" href="/tags/mkdir/">mkdir</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -1228,7 +1146,6 @@ ls
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
-<a style="font-size: 90%" href="/tags/chuang-jian-wen-jian-jia/">创建文件夹</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
@@ -1253,6 +1170,7 @@ ls
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
+<li class='category'><a href='/blog/categories/intel-realsense/'>intel realsense (1)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>

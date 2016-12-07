@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 知识点：生成器 生成器只能用于迭代操作。 一个函数，其中带 yield 关键字的代码，它不会执行， &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 pass 的用法 参考网站：Python pass 语句 Python2 和 Python3 中 pass &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-pass/">Learning Python 020 Pass 的用法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T04:12:13+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>pass 的用法</h2>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
+
+<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
+
+<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
+
+<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
+
+<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>换成Python，这样写：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1223,124 +1291,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git(Github) 001 介绍和下载安装图文教程 for Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T04:29:52+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:29 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>我的电脑：Windows 10 系统 64位</p>
-
-<hr />
-
-<h2>介绍</h2>
-
-<p>Git for Windows 软件就是 Git；GitHub For Windows 软件是GitHub公司做的一个超级低门槛的使用软件，非常好。</p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p>在Windows上</p>
-
-<p>下载：<a href="https://desktop.github.com/">https://desktop.github.com/</a></p>
-
-<p>安装时，不管是<strong>以普通用户的身份</strong>，还是<strong>以管理员的身份</strong>运行 <strong>GitHubSetup.exe</strong> 软件。都会出现下面的结果：</p>
-
-<p>（这是在线下载，国内防火墙的原因，导致下载速度巨慢，最后连资源都找不到了。）
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067064738.png" alt="Alt text" /></p>
-
-<p>是没有办法成功安装的。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067095197.png" alt="Alt text" /></p>
-
-<p>点击 <strong>详细信息(D)&hellip;</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067512031.png" alt="Alt text" /></p>
-
-<p>如果你看到的内容大致和我的一样的话，那么下面的解决方法很适合你。</p>
-
-<hr />
-
-<h2>Step 1 不使用Github 官方的这个在线下载软件，而是去我的百度云盘里下载离线版的Github For Windows软件</h2>
-
-<blockquote><p>Github For Windows软件：你可以使用GUI可视化界面来使用GitHub，而不需要使用一些繁琐的Git命令，只需点点鼠标即可。</p></blockquote>
-
-<p>我在我的百度云盘里面有离线版的Github For Windows 文件，你可以去那下载。但是版本不是最新的，是2015/09/08 时候的版本。</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1o8CSgI2">http://pan.baidu.com/s/1o8CSgI2</a> 密码：cbos</p>
-
-<p>下载后，解压，直接双击里面的 <strong>GitHub.application</strong> 文件，进行安装。</p>
-
-<p>安装后，自动出现下面的窗口。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068914780.png" alt="Alt text" /></p>
-
-<p>现在你输入你的Github 用户名和密码，并点击 <strong>Log in</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069085322.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Continue</strong> 按钮。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069097529.png" alt="Alt text" /></p>
-
-<p>&hellip;</p>
-
-<hr />
-
-<p>现在你就可以使用它了。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070434905.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>Step 2 下载安装 Git For Windows</h2>
-
-<blockquote><p>Git For Windows 软件：你可以在任何文件夹里面空白的位置，点击鼠标右键，里面会有两项：Git Bash  和 Git GUI 。其中 最常用的就是 <strong>Git Bash</strong> ，它就是 一个命令行终端，你需要使用繁琐的<strong>Git</strong>命令来将你的工程代码放到<strong>Github</strong>网站里面管理。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070635983.png" alt="Alt text" /></p></blockquote>
-
-<p>我们下载 Git For Windows 。现在路径：<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a></p>
-
-<p>下载完，直接双击安装，一路 <strong>下一步</strong>，所有选项全部默认即可。</p>
-
-<hr />
-
-<p><strong>启动：</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068623495.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<blockquote><p><strong>总结：</strong></p>
-
-<p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
-
-<p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1358,6 +1308,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a>
       </li>
     
@@ -1371,10 +1325,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a>
       </li>
     
   </ul>
@@ -1399,8 +1349,9 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 168%" href="/tags/windows/">Windows</a>
+<a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 90%" href="/tags/mkdir/">mkdir</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -1412,7 +1363,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
-<a style="font-size: 90%" href="/tags/chuang-jian-wen-jian-jia/">创建文件夹</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
@@ -1437,6 +1387,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
+<li class='category'><a href='/blog/categories/intel-realsense/'>intel realsense (1)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
