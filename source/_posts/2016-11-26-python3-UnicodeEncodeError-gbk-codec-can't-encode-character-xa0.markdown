@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误"
+title: "Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character '\\xa0' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误"
 date: 2016-11-26 17:37:35 +0800
 comments: true
 sharing: true
