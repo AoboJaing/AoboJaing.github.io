@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 本篇博客对 Python2 和 Python3 都适用。 Python 创建文件夹 参考网站： &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 本篇博客对 Python2 和 Python3 都适用。 实例：调用Windows里面的copy命令 比如现在， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,191 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/">Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T05:47:12+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:47 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<hr />
+
+<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
+
+<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>copy "F:\原文件夹\*" "F:\目标文件夹\"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
+
+<ol>
+<li>构造命令字符串。</li>
+<li>使用<code>os.system()</code>函数执行命令字符串。</li>
+</ol>
+
+
+<hr />
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
+
+<p>适合在Python3中执行的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">org_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\原文件夹&#39;</span>
+</span><span class='line'><span class="n">res_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\目标文件夹&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 构造命令字符串</span>
+</span><span class='line'><span class="n">copy_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">org_folder</span> <span class="o">+</span> <span class="s">r&#39;\*&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">res_folder</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
+</span><span class='line'><span class="c"># copy_command = copy_command.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span> <span class="c"># 如果你使用的是Python2，需要将这一行的注释去掉。</span>
+</span><span class='line'><span class="c"># print(copy_command)</span>
+</span><span class='line'><span class="c"># 使用os.system()函数执行命令字符串</span>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\鍘熸枃浠跺す\*&quot;</span> <span class="s">&quot;F:\鐩爣鏂囦欢澶筡&quot;</span>
+</span><span class='line'><span class="err">系统找不到指定的路径。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹\*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\&quot;</span>
+</span><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹</span><span class="se">\\</span><span class="s">*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\\</span><span class="s">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:/原文件夹/*&quot;</span> <span class="s">&quot;F:/目标文件夹/&quot;</span>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F://原文件夹//*&quot;</span> <span class="s">&quot;F://目标文件夹//&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p><strong>第二件事 .</strong> 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\&#39;</span>
+</span><span class='line'><span class="c"># 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace\test_ws\\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes,但是不是我们要的结果</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace   est_ws\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1194,156 +1379,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/">在 JetBrains PyCharm 软件上使用 Git(Github)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T11:44:46+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:44 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑：Windows 10 64位</li>
-<li>PyCharm 软件的版本：PyCharm 2016.1.4</li>
-<li>Git For Windows版本：Git-2.10.0-64-bit</li>
-<li>GitHub For Windows软件版：GitHub For Windows 3.0.5.2</li>
-</ul>
-
-
-<hr />
-
-<p>参考网站：<a href="https://www.youtube.com/watch?v=bsN7ogDz02g">How to Use PyCharm with Github</a></p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480361358084.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>在 JetBrains PyCharm 软件上使用 Git(Github)，开发项目时，推送代码修改到远程库会变得更加便捷。</p>
-
-<hr />
-
-<h2>准备工作</h2>
-
-<p>你的电脑里面需要有的软件：</p>
-
-<ul>
-<li>Git For Windows</li>
-<li>GitHub For Windows</li>
-<li>JetBrains PyCharm</li>
-</ul>
-
-
-<p>你可以到这里查看如何下载和安装这些软件的图文教程：</p>
-
-<ul>
-<li><a href="http://www.aobosir.com/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git For Windows 和 GitHub For Windows 这两个软件的下载和安装的教程</a></li>
-<li><a href="http://www.aobosir.com/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件的下载、安装、破解教程</a></li>
-</ul>
-
-
-<hr />
-
-<h2>在 JetBrains PyCharm 软件上使用 Git(Github)</h2>
-
-<p>对于已有项目文件夹，</p>
-
-<p><strong>Step 1 . </strong> 在文件夹里面打开命令行，执行 <code>git init</code> 命令，将这个项目文件夹做成本地库。</p>
-
-<p><strong>Step 2 . </strong> 使用<strong>GitHub For Windows</strong> 软件克隆本地库，忽略一些文件，并上传到GitHub远程。</p>
-
-<p>具体详细的步骤如下：</p>
-
-<p>克隆本地库：</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384008856.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384665342.png" alt="Alt text" /></p>
-
-<p>添加<code>ignorefile</code> 文件</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384713963.png" alt="Alt text" /></p>
-
-<p>点击 <strong>+ Add a default .gitignore file.</strong> 按钮</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386549071.png" alt="Alt text" /></p>
-
-<p>我们这个项目使用的开发软件是 <strong>JetBrains PyCharm</strong> 软件，所以我们需要写一个符合 <strong>JetBrains PyCharm</strong> 软件 的 <code>.gitignore</code> 文件。</p>
-
-<p>其实我们不需要自己写 <code>.gitignore</code> 文件，GitHub 官方已经为我们写好很多的  <code>.gitignore</code> 文件。</p>
-
-<p>点击 <strong>example</strong>：</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386671756.png" alt="Alt text" /></p>
-
-<p>弹出一个网页，将里面的<code>gitignore/Global/JetBrains.gitignore</code> 的内容复制粘贴：</p>
-
-<p>（我们再在里面添加一行：<code>.idea/*</code>）</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387492001.png" alt="Alt text" /></p>
-
-<p>现在，直接点击 <code>OK</code> 就可以了。</p>
-
-<p>现在，你可以发现，只有3个改变的文件了：（这是因为一些文件被忽略，不需要上传到远程。）</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387512124.png" alt="Alt text" /></p>
-
-<p>输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。</p>
-
-<p>最后点击 <strong>Publish</strong> 按钮，推送到远程库。</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387792020.png" alt="Alt text" /></p>
-
-<p>第一次推送，需要填写下面的信息。注意：<code>Name</code> 默认不变；<code>Description</code> 里面输入好描述信息（中英文都可以）。</p>
-
-<p>同时选中好要推送到的GitHub账号。</p>
-
-<p>填好之后点击 <strong>Pubish xxx</strong> 按钮。（可能会失败，白天可能是因为GitHub官网服务器的原因，晚上会好一点。解决办法就是：多试几次。）</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387921240.png" alt="Alt text" /></p>
-
-<p><strong>Step 3 . </strong> 使用 <strong>PyCharm</strong> 软件打开看看那个python项目。</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388438196.png" alt="Alt text" /></p>
-
-<p>你会看到：</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388544163.png" alt="Alt text" /></p>
-
-<p><strong>Step 4 . </strong> 当你对项目进行增减代码后，你想要将修改推送到远程库时。</p>
-
-<p>方法1 ： 就点击上图中红圈里面的图标。然后进行推送。</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388727382.png" alt="Alt text" /></p>
-
-<p>方法2 ： 你也可以使用 <strong>GitHub For Windows</strong> 软件进行推送。</p>
-
-<p>（推送方法：输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。最后点击 <strong>Sync</strong> 按钮，推送到远程库。）</p>
-
-<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388817420.png" alt="Alt text" /></p>
-
-<blockquote><p>两个方法互不干扰，你使用了其中任意一种方法推送了修改，那么另外一种方法里面也好显示推送完成，没有修改的文件了。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1361,6 +1396,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">Learning Python 008 正则表达式-005 Compile模板的使用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
       </li>
     
@@ -1374,10 +1413,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
       </li>
     
   </ul>
@@ -1410,7 +1445,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
 <a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
-<a style="font-size: 159%" href="/tags/python/">python</a>
+<a style="font-size: 164%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
@@ -1443,11 +1478,12 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/intel-realsense/'>intel realsense (1)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (17)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
 <li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-08T06:40:25+08:00</updated>
+  <updated>2016-12-08T07:07:24+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 008 正则表达式-005 Compile模板的使用]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/08/python-compile-Regular-Expressions-pattam/"/>
+    <updated>2016-12-08T07:05:09+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/08/python-compile-Regular-Expressions-pattam</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>compile()函数的用法</h2>
+
+<pre><code class="python">import re
+str = 'fdfgdrthxxi--gdfgexxlove--dsdfwesdxxyou--dfgdf'
+pattam_str = 'xx(.*?)--'
+result = re.compile(pattam_str).findall(str)
+print(result)
+</code></pre>
+
+<p>运行：</p>
+
+<pre><code>&gt;python learningpython29.py
+['i', 'love', 'you']
+</code></pre>
+
+<p>解释：</p>
+
+<ul>
+<li>其中<code>pattam_str</code> 就是<strong>正则表达式</strong>字符串。</li>
+<li><code>str</code> 就是目标字符串</li>
+<li><code>result</code> 就是得到的结果</li>
+</ul>
+
+
+<p>代码中的</p>
+
+<pre><code class="python">result = re.compile(pattam_str).findall(str)
+print(result)
+</code></pre>
+
+<p>等价于：</p>
+
+<pre><code class="python">result = re.findall(pattam_str, str)
+</code></pre>
+
+<p>运行输出的结果是一样的。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 028 获取命令行参数]]></title>
@@ -240,47 +297,6 @@ print(str.split('\\', 1))
 
 <pre><code>['D:', 'WorkSpace', 'test_ws', 'Git(GitHub)']
 ['D:', 'WorkSpace\\test_ws\\Git(GitHub)']
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 024 判断文件和文件夹是否存在]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist/"/>
-    <updated>2016-12-01T08:46:09+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>判断文件</h2>
-
-<pre><code class="python">import os
-a = os.path.isfile(r'D:\WorkSpace\test_ws\ao.txt')
-print(a)
-</code></pre>
-
-<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
-
-<pre><code class="python">import os
-a = os.path.exists(r'D:\WorkSpace\test_ws\ao.txt')
-print(a)
-</code></pre>
-
-<hr />
-
-<h2>判断文件夹</h2>
-
-<pre><code class="python">import os
-a = os.path.exists(r'D:\WorkSpace\test_ws')
-print(a)
 </code></pre>
 ]]></content>
   </entry>
