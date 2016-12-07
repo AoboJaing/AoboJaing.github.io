@@ -9,24 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的电脑：Windows 10 64位
-使用的Visual Studio 软件： VS2010 参考网站：C#程序调用cmd.exe执行命令 创建一个文件，名为：RunCmd.cs。将下面的代码拷贝到里面。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17 &hellip;">
+  <meta name="description" content="将单个文件 file 复制到指定目录dir里面： 1
+cp file dir 当你使用cp命令的时候，如果出现下面的错误： cp: omitting directory ‘file’ 说明：file 不是单个文件，是一个目录，你如果要复制目录，需要给cp命令加一个参数 -r 。 将目录 dir1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +67,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-04T23:18:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>将单个文件 <code>file</code> 复制到指定目录<code>dir</code>里面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp file dir</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>当你使用<code>cp</code>命令的时候，如果出现下面的错误：</p>
+
+<pre><code>cp: omitting directory ‘file’
+</code></pre>
+
+<p>说明：<code>file</code> 不是单个文件，是一个目录，你如果要复制目录，需要给<code>cp</code>命令加一个参数 <code>-r</code> 。</p></blockquote>
+
+<p>将目录 <code>dir1</code> 复制到 指定目录 <code>dir2</code> 里面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp -r dir1 dir2</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1133,115 +1167,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-create-file-create-folder-open/">Learning Python 021 创建文件夹、创建文件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T04:45:53+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:45 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
-
-<h2>Python 创建文件夹</h2>
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="http://www.qttc.net/201209207.html">Python创建目录文件夹</a></li>
-<li><a href="http://www.cnblogs.com/zhoujie/archive/2013/04/10/python7.html">python学习笔记（七）——文件和目录操作</a></li>
-</ul>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
-</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/test_ws/&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意：如果想要创建的文件夹是已经存在的，那么执行上面的程序会出现下面的错误：<code>FileExistsError: [WinError 183] 当文件已存在时，无法创建该文件。</code></p></blockquote>
-
-<p>所以这段代码容易出现错误：如果文件夹已存在或者文件夹名中有不允许使用的字符时，<code>os.mkdir()</code>函数都会执行失败。所以，这段代码需要进行异常处理：</p>
-
-<p>参考网站：<a href="http://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">try</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
-</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样，在运行程序的时候就不会再出现错误了。但是当你给定的文件名中有非法字符时，创建文件夹是不会成功的，但是程序不会报错。</p>
-
-<h2>Python 创建文件</h2>
-
-<p>参考网站：<a href="https://blog.linuxeye.com/365.html">Python文件处理 open()</a></p>
-
-<p>比如你想在<code>F:\</code>根目录里面创建一个名为 <code>data.txt</code> 文件，你可以这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">file_path</span> <span class="o">=</span> <span class="s">r&#39;F:\data.txt&#39;</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第二个参数 <code>'w'</code> 也可以写成：<code>'wt'</code>。它们等价。</p>
-
-<p>或者</p>
-
-<p>如果你想创建以指定编码的文件，请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1259,6 +1184,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a>
       </li>
     
@@ -1274,10 +1203,6 @@
         <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1287,7 +1212,6 @@
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
-<a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
@@ -1298,11 +1222,12 @@
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
+<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
-<a style="font-size: 90%" href="/tags/mkdir/">mkdir</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -1310,9 +1235,8 @@
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
-<a style="font-size: 164%" href="/tags/python3/">python3</a>
+<a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
-<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
@@ -1326,6 +1250,7 @@
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
@@ -1342,7 +1267,7 @@
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
-<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (8)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

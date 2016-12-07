@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="Q : 如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行pip install some-package-name命令的时候，系统会使用哪个pip工具呢？是python2的pip， &hellip;">
+  <meta name="description" content="PowerCmd 是一款Windows CMD 的增强工具。 你可以到官网下载，但是官网下载来的是英文的。下载地址：http://www.powercmd.com/ 这里有一个汉化破解的PowerCmd软件： 链接：http://pan.baidu.com/s/1i4SxSUT 密码：r5w1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/23/powercmd-install/">一个超好的命令行串口软件 --- PowerCmd --- 汉化破解版</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-23T02:01:13+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>2:01 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
+
+<blockquote><p>你可以到官网下载，但是官网下载来的是英文的。下载地址：<a href="http://www.powercmd.com/">http://www.powercmd.com/</a></p></blockquote>
+
+<p>这里有一个汉化破解的PowerCmd软件：</p>
+
+<p>链接：<a href="http://pan.baidu.com/s/1i4SxSUT">http://pan.baidu.com/s/1i4SxSUT</a> 密码：r5w1</p>
+
+<p>下载解压后，之间双击 <strong>PowerCmd.exe</strong> 就可以运行。</p>
+
+<p><img src="/images/2016-11-23-powercmd-install/1479837423293.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1747,225 +1788,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-034-Transactions/">SQL 数据库 学习 034 事务</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-24T13:20:24+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>为什么需要事务</h2>
-
-<p>事务主要用来保证数据的合理性和并发处理的能力！</p>
-
-<p>通俗的说：</p>
-
-<ul>
-<li>事务可以保证避免数据处于一种不合理的中间状态</li>
-<li>利用事务可以实现多个用户对共享资源的同时访问</li>
-</ul>
-
-
-<p>例子：</p>
-
-<p>银行中的转账操作，账户A把一定数量的款项转到账户B上，这个操作包括两个步骤，一个是从账户A上把存款减去一定数量，二是在账户B上把存款加上相同的数量。这两个步骤显然要么都完成，要么都取消，否则银行就会受损失。显然，这个转账操作中的两个步骤就构成一个事务。</p>
-
-<p>假设A和B用户都希望查询修改M表数据，A用户不应该刚把M表的数据改成5，查询时显示的数据却是8（因为B用户修改M表的数据成8了）。事务必须得保证多个用户对共享资源同时访问时，数据库给用户的反应是合理的。</p>
-
-<p>事务就是专门解决这个问题的。</p>
-
-<hr />
-
-<h2>什么是事务</h2>
-
-<p>一系列操作要么全部执行成功，要么全部执行失败，这就是事务。</p>
-
-<hr />
-
-<h2>如何创建事务</h2>
-
-<p><strong>T-SQL</strong> 使用下列语句管理事务：</p>
-
-<ul>
-<li>开启事务：<code>begin transaction</code></li>
-<li>提交事务：<code>commit transaction</code></li>
-<li>回滚（撤销）事务：<code>rollback transaction</code></li>
-</ul>
-
-
-<p>一旦事务提交或回滚，则事务结束。</p>
-
-<p>判断某条语句执行是否出错：</p>
-
-<ul>
-<li>使用全局变量 <code>@@error</code></li>
-<li><code>@@error</code> 只能判断当前一条<strong>T-SQL</strong>语句执行是否有错，为了判断事务中所有<strong>T-SQL</strong>语句是否有错，我们需要对错误进行累计。如：<code>set @errorSum=@errorSum+@@error</code></li>
-</ul>
-
-
-<hr />
-
-<h2>初学者必须要掌握的三个问题：</h2>
-
-<p>一 . 事务时用来研究什么的：</p>
-
-<ul>
-<li>避免数据处于不合理的中间状态。（比如：转账）</li>
-<li>怎样避免多用户同时访问时，呈现给用户的数据是合理的。</li>
-</ul>
-
-
-<p>二 . 事务和线程的关系：</p>
-
-<p>事务也是通过锁来解决很多问题的。（线程同步就是通过锁来解决的 <code>sychronized</code>）</p>
-
-<p>三 . 事务和第三方插件的关系：</p>
-
-<ul>
-<li>直接使用事务库技术难度很大，很多人是借助第三方插件来实现。（因为我们一般人不需要细细的研究数据库中事务的语法细节。）</li>
-<li>第三方插件要想完成预期的功能，一般必须得借助数据库中的事务机制。</li>
-</ul>
-
-
-<hr />
-
-<h2>事务 &mdash; 总结 和 实例</h2>
-
-<p>总结事务的四大特性：事务必须具备以下四个属性，简称<strong>ACID</strong>属性。</p>
-
-<ul>
-<li>原子性：事务是一个完整的操作。事务的各步操作是不可分的（原子的）；要么都执行，要么都不执行。</li>
-<li>一致性：当事务完成时，数据必须处于一致状态，要么处于开始状态要么处于结束状态，不允许出现中间状态！</li>
-<li>隔离性：指当前的事务与其他未完成的事务是隔离的。在不同的隔离级别下，事务的读取操作，可以得到的结果是不同的。</li>
-<li>持久性：事务完成后，它对数据库的修改被永久保持，事务日志能够保持事务的永久性。</li>
-</ul>
-
-
-<p><strong>一个例子：</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--创建Test库</span>
-</span><span class='line'><span class="k">create</span> <span class="k">database</span> <span class="n">Test</span>
-</span><span class='line'><span class="c1">--进入Test库</span>
-</span><span class='line'><span class="n">use</span> <span class="n">Test</span>
-</span><span class='line'><span class="c1">--创建一个bank表</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">bank</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">customerEname</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">currrentMoney</span> <span class="n">money</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'><span class="c1">--插入数据</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="c1">--给bank表中的currentMoney属性添加一个约束</span>
-</span><span class='line'><span class="k">alter</span> <span class="k">table</span> <span class="n">bank</span> <span class="k">add</span> <span class="k">constraint</span> <span class="n">check_currentMoney</span> <span class="k">check</span><span class="p">(</span><span class="n">currentMoney</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在我要将张三的1000打给李四。（这样做会失败，因为上面已经给<code>check_currentMoney</code>属性添加了一个约束：<code>currentMoney&gt;=1</code>）。</p>
-
-<p>普通的查询指令进行转账：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
-</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使用事务实现进行转账：（不重要，掌握就可以，语法怪异，实用性不强。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">begin</span> <span class="n">transaction</span>
-</span><span class='line'><span class="k">declare</span> <span class="o">@</span><span class="n">errorSum</span> <span class="nb">int</span>
-</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
-</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
-</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span>
-</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
-</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
-</span><span class='line'><span class="n">if</span> <span class="p">(</span><span class="o">@</span><span class="n">errorSum</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">begin</span>
-</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账失败&#39;</span>
-</span><span class='line'>      <span class="k">rollback</span> <span class="n">transaction</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="k">begin</span>
-</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账成功&#39;</span>
-</span><span class='line'>      <span class="k">commit</span> <span class="n">transaction</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -1983,6 +1805,10 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a>
       </li>
     
@@ -1998,10 +1824,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
         <a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2011,7 +1833,6 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
-<a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
@@ -2022,11 +1843,12 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
+<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
-<a style="font-size: 90%" href="/tags/mkdir/">mkdir</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -2034,9 +1856,8 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 129%" href="/tags/pip/">pip</a>
 <a style="font-size: 159%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
-<a style="font-size: 164%" href="/tags/python3/">python3</a>
+<a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
-<a style="font-size: 115%" href="/tags/chuan-di-han-shu/">传递函数</a>
 <a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
 <a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
@@ -2050,6 +1871,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
 <a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
@@ -2066,7 +1888,7 @@ $$  = X</em>{1}(s)\cdot G(s) \pm X_{2}(s)$$</p>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (16)</a></li>
-<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (8)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

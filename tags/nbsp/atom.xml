@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: nbsp | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/nbsp/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-07T12:19:45+08:00</updated>
+  <updated>2016-12-08T06:40:25+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character ' ' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
+    <title type="html"><![CDATA[Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/"/>
     <updated>2016-11-26T17:37:35+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0</id>

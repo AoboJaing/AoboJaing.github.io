@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/</loc>
+<lastmod>2016-12-08T06:38:45+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/</loc>
 <lastmod>2016-12-07T12:18:38+08:00</lastmod>
 </url>
@@ -896,5 +900,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/sr300/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/slash-xa9/</loc>
 </url>
 </urlset>

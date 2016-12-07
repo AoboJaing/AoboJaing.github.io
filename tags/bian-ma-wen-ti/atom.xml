@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 编码问题 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/bian-ma-wen-ti/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-07T12:19:45+08:00</updated>
+  <updated>2016-12-08T06:40:25+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,7 +14,69 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character ' ' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
+    <title type="html"><![CDATA[Python3 解决编码问题：  UnicodeEncodeError: 'gbk' codec can't encode character '\xa9' in position xxx: illegal multibyte sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/"/>
+    <updated>2016-12-08T06:38:45+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当使用Scrapy写爬虫项目的时候，当我们爬取某些中文网站，然后在DOS终端中打印爬取的网页源代码的时候，会出现各式各样的编码错误，今天，我又遇到一种编码错误，下面我将这个错误和对应的解决办法记录下来。</p>
+
+<p>爬取的目标网址：<a href="http://blog.csdn.net/github_35160620/article/details/53353672">http://blog.csdn.net/github_35160620/article/details/53353672</a></p>
+
+<p>出现错误的代码：</p>
+
+<pre><code class="python">    def next(self, response):
+        body_data = response.body.decode('utf-8', 'ignore')
+        print(body_data)
+        pass
+</code></pre>
+
+<p>执行：来到对应的爬虫项目路径下，执行：</p>
+
+<pre><code>scrapy crawl 爬虫名字
+</code></pre>
+
+<p>在出现的调试信息中你可以看到一个编码错误：</p>
+
+<pre><code>    print(body_data)
+UnicodeEncodeError: 'gbk' codec can't encode character '\xa9' in position 6732: illegal multibyte sequence
+</code></pre>
+
+<p>通过查看，这个<a href="http://www.codetable.net/hex/a9"><code>u'xa9'</code> Unicode编码所表示的字符是：<code>©</code></a>。</p>
+
+<p><img src="/images/2016-12-8-python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/1481149755580.png" alt="Alt text" /></p>
+
+<p>可以解决这个错误的方法：</p>
+
+<p>将上面的代码修改为：</p>
+
+<pre><code class="python">    def next(self, response):
+        body_data = response.body.decode('utf-8', 'ignore').replace(u'\xa9', u'')
+        print(body_data)
+        pass
+</code></pre>
+
+<p>现在运行这个程序<code>scrapy crawl 爬虫名字 --nolog</code>，上面的编码错误就没有。成功的输出了爬取的网页的源代码。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 解决编码问题：  `UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 10: illegal multibyte sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/"/>
     <updated>2016-11-26T17:37:35+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0</id>
