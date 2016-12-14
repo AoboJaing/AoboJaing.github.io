@@ -54,7 +54,7 @@ SR300 只有：
 ## R200
 
 
-参考网站：[Developing for the Intel® RealSense™ Camera (R200)](https://software.intel.com/en-us/realsense/r200camera)
+参考网站：[Developing for the Intel® RealSense™ Camera (R200)](https://software.intel.com/en-us/articles/realsense-r200-camera)
 
 外部：
 
