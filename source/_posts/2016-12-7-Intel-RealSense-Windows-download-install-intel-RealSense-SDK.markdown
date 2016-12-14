@@ -11,7 +11,10 @@ tags: [Intel RealSense, Windows, SDK, 安装软件,SR300]
 
 ----------
 
-我使用的Intel RealSense 硬件：SR300 摄像头
+
+* 我使用的Intel RealSense 硬件：[SR300 摄像头](http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/)
+* 电脑系统：Windows 10 64位
+* 电脑必须要有USB3.0接口
 
 参考网站：
 
@@ -34,7 +37,7 @@ tags: [Intel RealSense, Windows, SDK, 安装软件,SR300]
 
 ![Alt text](/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009996712.png)
 
-> 如果电脑没有帮你自动安装，你需要手动安装：**Step 1**。电脑帮你自动安装了SR300 摄像头的驱动程序，你就可以跳过**Step 1**。
+> 如果电脑没有帮你自动安装，你需要将SR300模块与电脑断开，然后重插，电脑会帮你自动安装了SR300 摄像头的驱动程序。如果还是不行，重新启动试试看。
 
 
 **Step 1 . ** 下载[SR300 深度摄像头管理程序](https://software.intel.com/zh-cn/intel-realsense-sdk/download)（intel_rs_dcm_sr300_3.3.27.5718.exe）
