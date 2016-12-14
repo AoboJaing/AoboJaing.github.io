@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Intel RealSense | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/intel-realsense/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-08T07:26:52+08:00</updated>
+  <updated>2016-12-14T18:50:17+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/"/>
+    <updated>2016-12-14T18:47:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200</id>
+    <content type="html"><![CDATA[<hr />
+
+<hr />
+
+<p>目前的Intel RealSense摄像头一共有三款：<strong>F200</strong>、<strong>SR300</strong>、<strong>R200</strong>。</p>
+
+<ul>
+<li>SR300 和 F200 都属于：近距离摄像头（Front Facing）。</li>
+<li>R200 属于：远距离摄像头（Rear Facing）</li>
+<li>在Intel RealSense 官方示例程序中，总会在程序的前缀出现：<code>FF_</code>、<code>RF_</code>或者<code>DF_</code>，它们分别表示：<strong>适用于近距离摄像头</strong>（Front Facing）、<strong>适用于远距离摄像头</strong>（Rear Facing） 和 <strong>两者都适用</strong>（Dual Facing）。</li>
+</ul>
+
+
+<hr />
+
+<h2>SR300</h2>
+
+<p>官网介绍：<a href="https://software.intel.com/en-us/articles/introducing-the-intel-realsense-camera-sr300">Introducing the Intel® RealSense™ Camera SR300</a></p>
+
+<p>外部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614405367.png" alt="Alt text" /></p>
+
+<p>内部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614321225.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614483853.png" alt="Alt text" /></p>
+
+<p>SR300 只有：</p>
+
+<ul>
+<li>测量范围：0.2m ~ 1.2m （要求：室内，并且）</li>
+<li>深度摄像头（640x480 60fps）</li>
+<li>彩色摄像头（1080p 30fps 或者 720p 60fps 可调）</li>
+<li>红外线摄像头（640x480 200fps ）</li>
+<li>无<strong>左</strong>（left）、<strong>右</strong>（right）摄像头</li>
+</ul>
+
+
+<hr />
+
+<h2>R200</h2>
+
+<p>参考网站：<a href="https://software.intel.com/en-us/realsense/r200camera">Developing for the Intel® RealSense™ Camera (R200)</a></p>
+
+<p>外部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707509944.png" alt="Alt text" /></p>
+
+<p>内部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707878472.png" alt="Alt text" /></p>
+
+<p>R200 有：</p>
+
+<ul>
+<li>测量范围：</li>
+</ul>
+
+
+<hr />
+
+<h2><a href="https://software.intel.com/en-us/articles/intel-realsense-data-ranges">Intel RealSense 测量范围</a></h2>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481708072967.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Intel RealSense 001 Windows安装 Intel RealSense SDK]]></title>

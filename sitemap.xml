@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/</loc>
+<lastmod>2016-12-14T18:47:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed/</loc>
 <lastmod>2016-12-08T07:24:18+08:00</lastmod>
 </url>
@@ -406,10 +410,13 @@
 <loc>http://aobojaing.github.io/blog/categories/arduino/</loc>
 </url>
 <url>
-<loc>http://aobojaing.github.io/blog/categories/intel-realsense/</loc>
+<loc>http://aobojaing.github.io/blog/categories/learning-intel-realsense-sdk/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/zheng-ze-biao-da-shi/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/learning-intel-realsense-librealsense/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -932,5 +939,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/slash-r-slash-n/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/f200/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/r200/</loc>
 </url>
 </urlset>

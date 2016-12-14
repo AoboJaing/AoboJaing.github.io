@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="参考网站：Octopress博客的个性化配置：添加访客统计 Step 1 . 本博客的访客统计系统使用的是Flag Counter，所以要先去Flag Counter获取代码。 Step 2 . 拿到代码后添加.\source\_includes\custom\asides\ &hellip;">
+  <meta name="description" content="前言 之前，我是按照我写的这篇博客为Octopress站点侧边栏添加分类列表（Categories）。 出现的问题 基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。 解决思路 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T13:49:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>前言</h2>
+
+<p>之前，我是按照我写的<a href="http://www.aobosir.com/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">这篇博客</a>为<strong>Octopress</strong>站点侧边栏添加分类列表（Categories）。</p>
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。</p>
+
+<hr />
+
+<h2>解决思路</h2>
+
+<p>中文取拼音。</p>
+
+<hr />
+
+<h2>解决方法</h2>
+
+<p>参考网站：<a href="http://jiankg.github.io/2014/10/16/jie-jue-octopressfen-lei-mu-lu-zhi-chi-zhong-wen-de-wen-ti/">解决Octopress分类目录支持中文的问题</a></p>
+
+<p><code>/plugins/category_sidebar.rb</code> (若没有，自行创建)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;stringex&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
+</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
+</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/blog/categories/</span><span class="si">#{</span><span class="n">category</span><span class="o">.</span><span class="n">to_url</span><span class="o">.</span><span class="n">downcase</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">html</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_sidebar&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>搞定</h2>
+
+<p>现在你可以重新执行<code>rake generate</code>和<code>rake preview</code>、 <code>rake deploy</code>，分类列表中有中文字符的分类，就可以正常打开了，而实际的链接就是对应的拼音。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2118,373 +2214,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">Python3 大型网络爬虫实战 001 --- 搭建开发环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T06:28:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:28 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>我使用的电脑： Windows 10 64位</p>
-
-<h2>前言</h2>
-
-<p>开发Python爬虫有很多种方式，从程序的复杂程度的角度来说，可以分为：爬虫项目和爬虫文件。
-相信有些朋友玩过Python的urllib模块，一般我们可以用该模块写一些爬虫文件，实现起来非常方便，但做大型项目的时候，会发现效率不是太好、并且程序的稳定性也不是太好。
-Scrapy是一个Python的爬虫框架，使用Scrapy可以提高开发效率，并且非常适合做一些中大型爬虫项目。
-简单来说，urllib库更适合写爬虫文件，scrapy更适合做爬虫项目。</p>
-
-<p>本套专栏，就来讲解如何做爬虫项目。本篇博客是第一篇博客：搭建开发环境。</p>
-
-<h2>1 . 安装Python3</h2>
-
-<p>到官网下载就可以了，下载一个Python3.5版本就可以，傻瓜式安装。</p>
-
-<blockquote><p>Python 3 被默认安装在：<code>C:\Users\[Username]\AppData\Local\Programs\Python\Python35</code> 这个路径里面。</p></blockquote>
-
-<h2>2 . 安装Python程序开发集成开发环境 &mdash; PyCharm IDE 2016.1.4</h2>
-
-<p>软件下载：<a href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a></p>
-
-<p>注意：</p>
-
-<p>Professional是完整版的，但是需要注册码</p>
-
-<p>注册方法：<a href="http://blog.csdn.net/tianzhaixing2013/article/details/44997881">http://blog.csdn.net/tianzhaixing2013/article/details/44997881</a></p>
-
-<p>我这次安装的是PyCharm 2016。</p>
-
-<blockquote><p>Community是免费版的，但是软件里面的Terminal是不能使用的。</p></blockquote>
-
-<h2>3 . 安装 Visual Studio 2015 软件</h2>
-
-<p>要知道：为什么需要 Visual Studio 软件了。（参考<a href="https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/">这个网站</a>）</p>
-
-<p>如果不安装，当中你执行<code>pip install third-package-name</code>时，有时会出现下面这个错误：<code> error: Unable to find vcvarsall.bat</code></p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1480104934562.png" alt="Alt text" /></p>
-
-<p>安装Visual Studio 2015 软件是为了安装里面的<strong>Python Tools 2.2.5 for Visual Studio 2015</strong>软件。</p>
-
-<p><strong>下载和安装 Visual Studio 2015 软件 的方法在</strong><a href="http://www.aobosir.com/blog/2016/11/26/Python-pip-error-Unable-to-find-vcvarsall-bat/"><strong>这里</strong></a>。</p>
-
-<h2>4 . 升级 pip 工具</h2>
-
-<p>在DOS窗口中执行下面的命令来升级pip工具。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>python -m pip install --upgrade pip</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5 . 安装一些第三方库</h2>
-
-<p>lxml、Twisted、pywin32、scrapy</p>
-
-<p>lxml是一种可以迅速、灵活地处理 XML。
-Twisted是用Python实现的基于事件驱动的网络引擎框架。
-pywin32提供win32api。
-Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架。</p>
-
-<hr />
-
-<p>我们安装的是python3.5，并且我的电脑是64位的，所以：下载：</p>
-
-<p>lxml‑3.6.4‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>Twisted‑16.5.0‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>pywin32‑220.1‑cp35‑cp35m‑win_amd64.whl</p>
-
-<p>scrapy(直接使用命令：<code>pip.exe install scrapy</code> 来安装。)</p>
-
-<hr />
-
-<p>Python安装第三方库的方法：<a href="http://blog.csdn.net/github_35160620/article/details/52203682">http://blog.csdn.net/github_35160620/article/details/52203682</a></p>
-
-<blockquote><p>注意：如果你的电脑之前安装了Python2，那么Python2 有自己的pip工具，Python3 也是有自己的pip工具，所以，如果你在DOS命令行上执行<code>pip install some-package-name</code>命令的时候，系统会使用哪个pip工具呢？是python2的pip，还是python3的pip？</p>
-
-<p>这个问题，你可以在这篇博客里得到解决答案：<a href="http://www.aobosir.com/blog/2016/11/23/pip-install-python2-python3/">http://www.aobosir.com/blog/2016/11/23/pip-install-python2-python3/</a></p></blockquote>
-
-<hr />
-
-<p>下载后，在我的电脑上是这样安装：</p>
-
-<p>安装 lxml：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO&gt;cd C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts
-</span><span class='line'>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\lxml-3.6.4-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Processing d:\software_install_package_win\python\some-python-third-packages\lxml-3.6.4-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Installing collected packages: lxml
-</span><span class='line'>Successfully installed lxml-3.6.4
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装 Twisted ：（执行到<code>Collecting constantly&gt;=15.1 (from Twisted==16.5.0)</code>这句时，卡住了，我按了 Ctrl+C 才继续执行下去。自动下载了下面的：constantly、incremental、zope.interface 这三个依赖库）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\Twisted-16.5.0-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Processing d:\software_install_package_win\python\some-python-third-packages\twisted-16.5.0-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Collecting constantly&gt;=15.1 (from Twisted==16.5.0)
-</span><span class='line'>#(执行到这卡住了，我按了 Ctrl+C 才继续执行下去。自动下载了下面的：constantly、incremental、zope.interface 这三个依赖库)
-</span><span class='line'>  Downloading constantly-15.1.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting incremental&gt;=16.10.1 (from Twisted==16.5.0)
-</span><span class='line'>  Downloading incremental-16.10.1-py2.py3-none-any.whl
-</span><span class='line'>Collecting zope.interface&gt;=4.0.2 (from Twisted==16.5.0)
-</span><span class='line'>  Downloading zope.interface-4.3.2-cp35-cp35m-win_amd64.whl (136kB)
-</span><span class='line'>    100% |████████████████████████████████| 143kB 7.1kB/s
-</span><span class='line'>Requirement already satisfied: setuptools in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from zope.interface&gt;=4.0.2-&gt;Twisted==16.5.0)
-</span><span class='line'>Installing collected packages: constantly, incremental, zope.interface, Twisted
-</span><span class='line'>Successfully installed Twisted-16.5.0 constantly-15.1.0 incremental-16.10.1 zope.interface-4.3.2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装pywin32：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install D:\software_install_package_win\python\some-Python-third-packages\pywin32-220.1-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Processing d:\software_install_package_win\python\some-python-third-packages\pywin32-220.1-cp35-cp35m-win_amd64.whl
-</span><span class='line'>Installing collected packages: pywin32
-</span><span class='line'>Successfully installed pywin32-220.1</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装scropy：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Scripts&gt;pip.exe install scrapy
-</span><span class='line'>Collecting scrapy
-</span><span class='line'>  Downloading Scrapy-1.2.1-py2.py3-none-any.whl (294kB)
-</span><span class='line'>    100% |████████████████████████████████| 296kB 338kB/s
-</span><span class='line'>Collecting service-identity (from scrapy)
-</span><span class='line'>  Downloading service_identity-16.0.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting six&gt;=1.5.2 (from scrapy)
-</span><span class='line'>  Downloading six-1.10.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting w3lib&gt;=1.15.0 (from scrapy)
-</span><span class='line'>  Downloading w3lib-1.16.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting PyDispatcher&gt;=2.0.5 (from scrapy)
-</span><span class='line'>  Downloading PyDispatcher-2.0.5.tar.gz
-</span><span class='line'>Requirement already satisfied: Twisted&gt;=10.0.0 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from scrapy)
-</span><span class='line'>Requirement already satisfied: lxml in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from scrapy)
-</span><span class='line'>Collecting cssselect&gt;=0.9 (from scrapy)
-</span><span class='line'>  Downloading cssselect-1.0.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting parsel&gt;=0.9.3 (from scrapy)
-</span><span class='line'>  Downloading parsel-1.1.0-py2.py3-none-any.whl
-</span><span class='line'>Collecting queuelib (from scrapy)
-</span><span class='line'>  Downloading queuelib-1.4.2-py2.py3-none-any.whl
-</span><span class='line'>Collecting pyOpenSSL (from scrapy)
-</span><span class='line'>  Downloading pyOpenSSL-16.2.0-py2.py3-none-any.whl (43kB)
-</span><span class='line'>    100% |████████████████████████████████| 51kB 4.7MB/s
-</span><span class='line'>Collecting pyasn1 (from service-identity-&gt;scrapy)
-</span><span class='line'>  Downloading pyasn1-0.1.9-py2.py3-none-any.whl
-</span><span class='line'>Collecting pyasn1-modules (from service-identity-&gt;scrapy)
-</span><span class='line'>  Downloading pyasn1_modules-0.0.8-py2.py3-none-any.whl
-</span><span class='line'>Collecting attrs (from service-identity-&gt;scrapy)
-</span><span class='line'>  Downloading attrs-16.2.0-py2.py3-none-any.whl
-</span><span class='line'>Requirement already satisfied: constantly&gt;=15.1 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-</span><span class='line'>Requirement already satisfied: zope.interface&gt;=4.0.2 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-</span><span class='line'>Requirement already satisfied: incremental&gt;=16.10.1 in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from Twisted&gt;=10.0.0-&gt;scrapy)
-</span><span class='line'>Collecting cryptography&gt;=1.3.4 (from pyOpenSSL-&gt;scrapy)
-</span><span class='line'>  Downloading cryptography-1.6-cp35-cp35m-win_amd64.whl (1.3MB)
-</span><span class='line'>    100% |████████████████████████████████| 1.3MB 257kB/s
-</span><span class='line'>Requirement already satisfied: setuptools in c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages (from zope.interface&gt;=4.0.2-&gt;Twisted&gt;=10.0.0-&gt;scrapy)
-</span><span class='line'>Collecting cffi&gt;=1.4.1 (from cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-</span><span class='line'>  Downloading cffi-1.9.1-cp35-cp35m-win_amd64.whl (158kB)
-</span><span class='line'>    100% |████████████████████████████████| 163kB 322kB/s
-</span><span class='line'>Collecting idna&gt;=2.0 (from cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-</span><span class='line'>  Downloading idna-2.1-py2.py3-none-any.whl (54kB)
-</span><span class='line'>    100% |████████████████████████████████| 61kB 4.4MB/s
-</span><span class='line'>Collecting pycparser (from cffi&gt;=1.4.1-&gt;cryptography&gt;=1.3.4-&gt;pyOpenSSL-&gt;scrapy)
-</span><span class='line'>  Downloading pycparser-2.17.tar.gz (231kB)
-</span><span class='line'>    100% |████████████████████████████████| 235kB 311kB/s
-</span><span class='line'>Installing collected packages: six, pycparser, cffi, pyasn1, idna, cryptography, pyOpenSSL, pyasn1-modules, attrs, service-identity, w3lib, PyDispatcher, cssselect, parsel, queuelib, scrapy
-</span><span class='line'>  Running setup.py install for pycparser ... done
-</span><span class='line'>  Running setup.py install for PyDispatcher ... done
-</span><span class='line'>Successfully installed PyDispatcher-2.0.5 attrs-16.2.0 cffi-1.9.1 cryptography-1.6 cssselect-1.0.0 idna-2.1 parsel-1.1.0 pyOpenSSL-16.2.0 pyasn1-0.1.9 pyasn1-modules-0.0.8 pycparser-2.17 queuelib-1.4.2 scrapy-1.2.1 service-identity-16.0.0 six-1.10.0 w3lib-1.16.0</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>查看 <code>scrapy</code> 是否安装成功：（执行<code>scrapy -h</code> 命令，如果能输出信息，说明安装成功）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO&gt;scrapy -h
-</span><span class='line'>Scrapy 1.2.1 - no active project
-</span><span class='line'>
-</span><span class='line'>Usage:
-</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
-</span><span class='line'>
-</span><span class='line'>Available commands:
-</span><span class='line'>  bench         Run quick benchmark test
-</span><span class='line'>  commands
-</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
-</span><span class='line'>  genspider     Generate new spider using pre-defined templates
-</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
-</span><span class='line'>  settings      Get settings values
-</span><span class='line'>  shell         Interactive scraping console
-</span><span class='line'>  startproject  Create new project
-</span><span class='line'>  version       Print Scrapy version
-</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
-</span><span class='line'>
-</span><span class='line'>  [ more ]      More commands available when run from project directory
-</span><span class='line'>
-</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command
-</span><span class='line'>
-</span><span class='line'>C:\Users\AOBO&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>检查所有刚刚安装的库是否安装成功：</p>
-
-<p>启动<strong>PyCharm</strong> 软件，新建一个工程：</p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479835108332.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479835159526.png" alt="Alt text" /></p>
-
-<p>刚刚安装的库在这里可以看到：</p>
-
-<p><img src="/images/2016-11-26-python3-large-web-crawler-001-Build-development-environment/1479840214905.png" alt="Alt text" /></p>
-
-<p>安装成功。</p>
-
-<hr />
-
-<h2>6 . 一个超好的命令行串口软件 &mdash; PowerCmd</h2>
-
-<p>PowerCmd 是一款Windows CMD 的增强工具。</p>
-
-<p>下载安装地址：<a href="http://www.aobosir.com/blog/2016/11/23/powercmd-install/">http://www.aobosir.com/blog/2016/11/23/powercmd-install/</a></p>
-
-<blockquote><p>这个软件真的很喽，像我执行<code>scrapy -h</code> 这样的命令，都打印不出信息，在DOS窗口里面是有信息打印出来的。</p></blockquote>
-
-<hr />
-
-<hr />
-
-<h2>测试环境</h2>
-
-<p>1 . 执行 <code>scrapy -h</code>，如果有打印出来信息，说明Scrapy  安装成功。</p>
-
-<p>2 . 执行 <code>scrapy bench</code> ，如果遇到问题，说明pywin32库还有需要完成的步骤。（解决问题:  import win32api ImportError: DLL load failed，到这里查看解决办法。）</p>
-
-<hr />
-
-<p>接下来，我们<a href="http://www.aobosir.com/blog/2016/11/26/python-Scrapy-command/">学习 Scrapy 的命令</a>。了解了<strong>Scrapy</strong> 命令后，我学习：<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-002-scrapy-crawler-project-create-baidu-csdn/">scrapy 爬虫项目的创建及爬虫的创建 &mdash; 实例：爬取百度标题和CSDN博客</a>。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -2502,6 +2231,10 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/08/python-Regular-Expressions-Line-feed/">Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写</a>
       </li>
     
@@ -2517,10 +2250,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
         <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 001 Windows安装 Intel RealSense SDK</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2530,8 +2259,8 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
-<a style="font-size: 115%" href="/tags/github/">GitHub</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
+<a style="font-size: 115%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -2539,6 +2268,7 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 147%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
 <a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
@@ -2546,6 +2276,7 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 172%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
@@ -2555,11 +2286,9 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
-<a style="font-size: 115%" href="/tags/luan-ma/">乱码</a>
-<a style="font-size: 115%" href="/tags/xin-hao-liu-tu/">信号流图</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
-<a style="font-size: 115%" href="/tags/wei-fen-fang-cheng/">微分方程</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
@@ -2581,7 +2310,8 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
-<li class='category'><a href='/blog/categories/intel-realsense/'>intel realsense (1)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (1)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
