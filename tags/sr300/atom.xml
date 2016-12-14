@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SR300 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/sr300/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-15T05:30:58+08:00</updated>
+  <updated>2016-12-15T05:58:53+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -96,7 +96,12 @@
     <id>http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK</id>
     <content type="html"><![CDATA[<hr />
 
-<p>我使用的Intel RealSense 硬件：SR300 摄像头</p>
+<ul>
+<li>我使用的Intel RealSense 硬件：<a href="http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">SR300 摄像头</a></li>
+<li>电脑系统：Windows 10 64位</li>
+<li>电脑必须要有USB3.0接口</li>
+</ul>
+
 
 <p>参考网站：</p>
 
@@ -124,7 +129,7 @@
 
 <p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009996712.png" alt="Alt text" /></p>
 
-<blockquote><p>如果电脑没有帮你自动安装，你需要手动安装：<strong>Step 1</strong>。电脑帮你自动安装了SR300 摄像头的驱动程序，你就可以跳过<strong>Step 1</strong>。</p></blockquote>
+<blockquote><p>如果电脑没有帮你自动安装，你需要将SR300模块与电脑断开，然后重插，电脑会帮你自动安装了SR300 摄像头的驱动程序。如果还是不行，重新启动试试看。</p></blockquote>
 
 <p><strong>Step 1 . </strong> 下载<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">SR300 深度摄像头管理程序</a>（intel_rs_dcm_sr300_3.3.27.5718.exe）</p>
 
