@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Intel RealSense SDK | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/intel-realsense-sdk/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-14T23:10:23+08:00</updated>
+  <updated>2016-12-15T05:30:58+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -15,16 +15,17 @@
   
   <entry>
     <title type="html"><![CDATA[Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/"/>
-    <updated>2016-12-14T23:09:06+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010</id>
+    <link href="http://aobojaing.github.io/blog/2016/12/15/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/"/>
+    <updated>2016-12-15T05:29:14+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/15/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010</id>
     <content type="html"><![CDATA[<hr />
 
 <ul>
-<li>我使用的Intel RealSense 硬件：SR300 摄像头</li>
+<li>我使用的Intel RealSense 硬件：<a href="http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">F200、SR300 和 R200 摄像头</a> 都可以</li>
+<li>Intel RealSense SDK：intel_rs_sdk_offline_package_10.0.26.0396（安装教程<a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">这里</a>）</li>
 <li>电脑系统：Windows 10 64位</li>
 <li>编程语言：C++</li>
-<li>开发工具软件：Visual Studio 2010</li>
+<li>开发工具软件：Visual Studio 2010 （安装教程<a href="http://blog.csdn.net/github_35160620/article/details/52365464">这里</a>）</li>
 </ul>
 
 
@@ -188,7 +189,7 @@ int wmain(int argc, WCHAR* argv[]) {
 
 <p>现在编译程序是不会通过的，有很多错误。下面开始搭建开发环境。</p>
 
-<h2>搭建VS2010使用C++编写Intel RealSense的程序的开发环境</h2>
+<h1>搭建VS2010使用C++编写Intel RealSense的程序的开发环境</h1>
 
 <p>现在开始搭建Intel RealSense在VS2010中的开发环境，这里有两种方法，我都介绍一遍，你可以选择任何一种方法。</p>
 
@@ -224,7 +225,7 @@ int wmain(int argc, WCHAR* argv[]) {
 
 <p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724929372.png" alt="Alt text" /></p>
 
-<p>所有步骤操作完成了，环境搭建好了，是不是很简单。OK，现在编译程序就成功了。</p>
+<p>所有步骤操作完成了，环境搭建好了，是不是很简单。OK，现在编译程序就成功了。（生成成功：（但是有一个警告，这个警告不用管。））</p>
 
 <blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
 
@@ -286,7 +287,7 @@ libpxcutilsmd.lib
 
 <p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481726928633.png" alt="Alt text" /></p>
 
-<p>OK，环境搭建完成，可以运行程序了。</p>
+<p>OK，环境搭建完成，可以运行程序了。（生成成功：（但是有一个警告，这个警告不用管。））</p>
 
 <hr />
 
@@ -302,7 +303,7 @@ libpxcutils.lib
 
 <p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727464696.png" alt="Alt text" /></p>
 
-<p>OK，环境搭建完成，可以运行程序了。</p>
+<p>OK，环境搭建完成，可以运行程序了。（生成成功：（但是有一个警告，这个警告不用管。））</p>
 
 <hr />
 
@@ -310,9 +311,23 @@ libpxcutils.lib
 
 <blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
 
+<p>（编译成功：（但是有一个警告，这个警告不用管。））</p>
+
+<pre><code>1&gt;  camera_viewer.cpp
+1&gt;d:\workspace\test_ws\intel_realsense_sdk_ws\hello_intel_realsense_sdk\hello_intel_realsense_sdk\camera_viewer.cpp(93): warning C4482: 使用了非标准扩展: 限定名中使用了枚举“PXCCapture::Device::MirrorMode”
+1&gt;d:\workspace\test_ws\intel_realsense_sdk_ws\hello_intel_realsense_sdk\hello_intel_realsense_sdk\camera_viewer.cpp(95): warning C4482: 使用了非标准扩展: 限定名中使用了枚举“PXCCapture::Device::MirrorMode”
+1&gt;生成成功。
+</code></pre>
+
 <p>默认输出两个图片，一个是彩色图片（1080p），一个是深度图片（640x480）。（彩色图片太大了，这里只截了一半的图）</p>
 
 <p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727693063.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong> 这一讲，我们以 <strong>VS2010开发平台</strong> 和 <strong>C++语言</strong> 为例，讲解了如何搭建Intel RealSense SDK 的开发环境。这个方法在VS2012、VS2013、VS2015上一样适用。</p>
+
+<p>下一节，我们详细讲解本篇博客里面使用的<code>camera_viewer.cpp</code>的代码。</p>
 ]]></content>
   </entry>
   
