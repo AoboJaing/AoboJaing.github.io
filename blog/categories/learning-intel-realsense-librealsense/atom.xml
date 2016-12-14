@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Learning Intel Realsense Librealsense | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/learning-intel-realsense-librealsense/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-14T19:04:55+08:00</updated>
+  <updated>2016-12-14T19:13:38+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -85,7 +85,7 @@
 
 <h2>R200</h2>
 
-<p>参考网站：<a href="https://software.intel.com/en-us/realsense/r200camera">Developing for the Intel® RealSense™ Camera (R200)</a></p>
+<p>参考网站：<a href="https://software.intel.com/en-us/articles/realsense-r200-camera">Developing for the Intel® RealSense™ Camera (R200)</a></p>
 
 <p>外部：</p>
 
