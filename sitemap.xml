@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/</loc>
+<lastmod>2016-12-15T07:01:51+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/15/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/</loc>
 <lastmod>2016-12-15T05:29:14+08:00</lastmod>
 </url>
@@ -965,5 +969,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/shu-xing-biao/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/df-cameraviewer/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cpp/</loc>
 </url>
 </urlset>
