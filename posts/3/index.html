@@ -11,11 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python2.7.10 或者 python 3.5.0 判断文件 1
-2
-3
-import os
-a = os.path.isfile(r&#39;D:\ &hellip;">
+使用的Python的版本：python2.7.10 或者 python 3.5.0 本博文对Python2和Python3都适用。 参考网站：Python split()方法 Python &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +68,87 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T17:06:32+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
+</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1240,73 +1317,6 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T20:13:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>学习这个知识点的原因</h2>
-
-<p>举一个实例：</p>
-
-<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
-
-<p><img src="/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
-</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
-
-<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
-
-<p>其实很简单，我们只需要这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
-
-<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1324,6 +1334,10 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/">Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
       </li>
     
@@ -1339,10 +1353,6 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
         <a href="/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">Learning Python 008 正则表达式-005 Compile模板的使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1353,7 +1363,8 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
-<a style="font-size: 129%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 139%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 115%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -1379,10 +1390,9 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
-<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
-<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
@@ -1404,7 +1414,7 @@ a = os.path.isfile(r&#39;D:\ &hellip;">
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (3)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (4)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>

@@ -10,9 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 计算列 1
-2
-3 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 distinct &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,124 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/">SQL 数据库 学习 019 查询-02 Distinct 的用法 --- 不允许重复</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-16T21:10:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>distinct</code> 的用法</h2>
+
+<p><code>distinct</code> 的意思是：不允许重复。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 14行记录 不是3行记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623018150.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="mi">10000</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">-- 也是14行记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623063142.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--distince deptno 会过滤掉重复的deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623127746.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--distince 也可以过滤掉重复的null。或者说如果有多个null，只输出一个</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623177137.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">distinct</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--把 comm 和 deptno 的组合进行过滤</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-16-SQL-Learning-019-Query-02-distinct-usage-not-allowed-to-repeat/1476623219322.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">distinct</span> <span class="n">comm</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--error 逻辑上有冲突</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行输出错误：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">消息</span> <span class="mi">156</span><span class="err">，级别</span> <span class="mi">15</span><span class="err">，状态</span> <span class="mi">1</span><span class="err">，第</span> <span class="mi">11</span> <span class="err">行</span>
+</span><span class='line'><span class="err">关键字</span> <span class="s1">&#39;distinct&#39;</span> <span class="err">附近有语法错误。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -900,176 +1016,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/14/EDA-Learning-001-QuartusII-90-software-download-install-crack/">EDA Learning 001 （Windows系统 软件安装） Quartus II 9.0正式版下载、安装、破解详细图解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-14T11:33:46+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:33 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>一共三步：下载、安装、破解。</p>
-
-<h2>一 . 下载</h2>
-
-<p><a href="ftp://ftp.altera.com/outgoing/release/">Quartus II 9.0正式版</a>。下载地址：<a href="ftp://ftp.altera.com/outgoing/release/90_quartus_windows.exe">ftp://ftp.altera.com/outgoing/release/90_quartus_windows.exe</a></p>
-
-<blockquote><p>Quartus II 是Altera公司的综合性PLD/FPGA开发软件，原理图、VHDL、VerilogHDL以及AHDL（Altera Hardware 支持Description Language）等多种设计输入形式，内嵌自有的综合器以及仿真器，可以完成从设计输入到硬件配置的完整PLD设计流程。</p></blockquote>
-
-<p><a href="http://download.csdn.net/detail/snzigod/3773166">Quartus_II_9.0_SP2破解器.exe、Quartus_II_9.0破解器.exe、Quartus_II_9.1破解器.exe</a></p>
-
-<p>当你下载<strong>破解器</strong>软件的时候，电脑会判断这个文件是病毒，电脑会自动删除这个文件，导致你无法下载这个文件。
-解决办法就是将杀毒软件和电脑自带的杀毒软件关闭，即可。</p>
-
-<p><strong>Windows 10</strong> 关闭自动杀毒：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283996339.png" alt="Alt text" /></p>
-
-<p>关闭下面这一项：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474284016890.png" alt="Alt text" /></p>
-
-<h2>二 . 安装</h2>
-
-<p>双击运行，先是解压：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278644162.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278728866.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278737223.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278765103.png" alt="Alt text" /></p>
-
-<p>安装到默认路径就可以：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278784253.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278793439.png" alt="Alt text" /></p>
-
-<p>安装：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278803589.png" alt="Alt text" /></p>
-
-<p>确定信息：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278816638.png" alt="Alt text" /></p>
-
-<p>正在安装：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474278841380.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474279490381.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474279506171.png" alt="Alt text" /></p>
-
-<p>完成：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474279510464.png" alt="Alt text" /></p>
-
-<p>让其自动关闭。</p>
-
-<h2>三 . 破解</h2>
-
-<p>双击启动：<strong>Quartus_II_9.0破解器.exe</strong> 。点击 <strong>应用补丁</strong></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474280706147.png" alt="Alt text" /></p>
-
-<p>点击 <strong>是</strong></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474280762103.png" alt="Alt text" /></p>
-
-<blockquote><p>如果直接把该破解器Copy到C:\altera\90\quartus\bin下，就不会出现这个对话框，而是直接开始破解！</p></blockquote>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474280847144.png" alt="Alt text" /></p>
-
-<p>破解后，生成一个 <code>license.DAT</code> 文件，保存它（license文件存放的路径名称不能包含汉字和空格，空格可以用下划线代替。）</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474280894953.png" alt="Alt text" /></p>
-
-<p>搞定： 点击 <strong>退出</strong> 即可。</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474280939390.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474281007873.png" alt="Alt text" /></p>
-
-<p>记事本打开它：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474281188304.png" alt="Alt text" /></p>
-
-<p>查看电脑的 <strong>IP</strong> 地址。在 <strong>DOS</strong> 窗口中执行  <code>ipconfig  /all</code>  命令：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474282104125.png" alt="Alt text" /></p>
-
-<p>把 <strong>license.dat</strong> 里的两个XXXXXXXXXXXX 用您的物理地址替换。保存文件。</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474282227305.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>破解完成。</h2>
-
-<h2>四 . 启动 软件</h2>
-
-<p>一共安装了两个 <strong>Quartus II</strong> 软件，一个32位的 一个是64位的。我们只能破解32位的，64位的那个就不要使用了。</p>
-
-<p>双击 运行 32位的这个 <strong>Quartus II</strong> 软件：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283601830.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474282695283.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474282962497.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474282992516.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283003725.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283024488.png" alt="Alt text" /></p>
-
-<h1>大功告成</h1>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283051006.png" alt="Alt text" /></p>
-
-<h1>Over</h1>
-
-<p>为了防止不合格的破解流行，影响客户的正常使用，我们在启动画面中加入了“Altera中国区代理――骏龙科技有限公司”的防伪字样，客户启动时可以看到这行汉字。</p>
-
-<p>重新启动软件，你只要看到下面的启动画面，那么久说明破解已经成功的。</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283525105.png" alt="Alt text" /></p>
-
-<p>只不过，每次启动的时候，都会出现这么这个窗口，没有关系，你只需要选择第3个选项：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283718224.png" alt="Alt text" /></p>
-
-<p>在点击 <strong>OK</strong>，就可以：</p>
-
-<p><img src="/images/2016-10-14-EDA-Learning-001-QuartusII-90-software-download-install-crack/1474283758095.png" alt="Alt text" /></p>
-
-<h1>Over</h1>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1087,6 +1033,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/">Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
       </li>
     
@@ -1102,10 +1052,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
         <a href="/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">Learning Python 008 正则表达式-005 Compile模板的使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1116,7 +1062,8 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
-<a style="font-size: 129%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 139%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 115%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -1142,10 +1089,9 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
-<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
-<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
@@ -1167,7 +1113,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (3)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (4)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>

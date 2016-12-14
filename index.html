@@ -9,8 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="不管你使用Intel RealSense的哪款摄像头，本文都适合你。 对于开发环境（就是你编写程序），你有两个选择： Intel RealSense SDK（有要求：Windows 10系统）
-librealsense（Intel RealSense跨平台API） &hellip;">
+  <meta name="description" content="我使用的Intel RealSense 硬件：SR300 摄像头
+电脑系统：Windows 10 64位
+编程语言：C++
+开发工具软件：Visual Studio 2010 准备工作 先新建一个项目：（一些简单的操作步骤，我忽略不记录） 在项目里面新建一个.cpp文件： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,484 @@ librealsense（Intel RealSense跨平台API） &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/">Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-14T23:09:06+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我使用的Intel RealSense 硬件：SR300 摄像头</li>
+<li>电脑系统：Windows 10 64位</li>
+<li>编程语言：C++</li>
+<li>开发工具软件：Visual Studio 2010</li>
+</ul>
+
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>先新建一个项目：（一些简单的操作步骤，我忽略不记录）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481715171782.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481722365940.png" alt="Alt text" /></p>
+
+<p>在项目里面新建一个<code>.cpp</code>文件：<code>camera_viewer.cpp</code>。并将下面的代码拷贝到里面。</p>
+
+<blockquote><p>这段代码是Intel RealSense SDK 中的一个示例程序。在这个路径里面可以找到它：<code>C:\Program Files (x86)\Intel\RSSDK\sample\DF_CameraViewer\src\camera_viewer.cpp</code></p></blockquote>
+
+<hr />
+
+<blockquote><p>现在我们先不管代码里面写的是什么，这一节我们重点介绍搭建开发环境。下一节，我们讲解这段代码。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*******************************************************************************</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">INTEL CORPORATION PROPRIETARY INFORMATION</span>
+</span><span class='line'><span class="cm">This software is supplied under the terms of a license agreement or nondisclosure</span>
+</span><span class='line'><span class="cm">agreement with Intel Corporation and may not be copied or disclosed except in</span>
+</span><span class='line'><span class="cm">accordance with the terms of that agreement</span>
+</span><span class='line'><span class="cm">Copyright(c) 2011-2014 Intel Corporation. All Rights Reserved.</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">*******************************************************************************/</span>
+</span><span class='line'><span class="cp">#include &lt;windows.h&gt;</span>
+</span><span class='line'><span class="cp">#include &quot;pxcsensemanager.h&quot;</span>
+</span><span class='line'><span class="cp">#include &quot;pxcmetadata.h&quot;</span>
+</span><span class='line'><span class="cp">#include &quot;util_cmdline.h&quot;</span>
+</span><span class='line'><span class="cp">#include &quot;util_render.h&quot;</span>
+</span><span class='line'><span class="cp">#include &lt;conio.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">wmain</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">WCHAR</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="cm">/* Creates an instance of the PXCSenseManager */</span>
+</span><span class='line'>    <span class="n">PXCSenseManager</span> <span class="o">*</span><span class="n">pp</span> <span class="o">=</span> <span class="n">PXCSenseManager</span><span class="o">::</span><span class="n">CreateInstance</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pp</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">wprintf_s</span><span class="p">(</span><span class="s">L&quot;Unable to create the SenseManager</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/* Collects command line arguments */</span>
+</span><span class='line'>    <span class="n">UtilCmdLine</span> <span class="n">cmdl</span><span class="p">(</span><span class="n">pp</span><span class="o">-&gt;</span><span class="n">QuerySession</span><span class="p">());</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cmdl</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="s">L&quot;-listio-nframes-sdname-csize-dsize-isize-lsize-rsize-file-record-noRender-mirror&quot;</span><span class="p">,</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">))</span> <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/* Sets file recording or playback */</span>
+</span><span class='line'>    <span class="n">PXCCaptureManager</span> <span class="o">*</span><span class="n">cm</span><span class="o">=</span><span class="n">pp</span><span class="o">-&gt;</span><span class="n">QueryCaptureManager</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">cm</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_recordedFile</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_bRecord</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_sdname</span><span class="p">)</span> <span class="n">cm</span><span class="o">-&gt;</span><span class="n">FilterByDeviceInfo</span><span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_sdname</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create stream renders</span>
+</span><span class='line'>    <span class="n">UtilRender</span> <span class="n">renderc</span><span class="p">(</span><span class="s">L&quot;Color&quot;</span><span class="p">),</span> <span class="n">renderd</span><span class="p">(</span><span class="s">L&quot;Depth&quot;</span><span class="p">),</span> <span class="n">renderi</span><span class="p">(</span><span class="s">L&quot;IR&quot;</span><span class="p">),</span> <span class="n">renderr</span><span class="p">(</span><span class="s">L&quot;Right&quot;</span><span class="p">),</span> <span class="n">renderl</span><span class="p">(</span><span class="s">L&quot;Left&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">pxcStatus</span> <span class="n">sts</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">do</span> <span class="p">{</span>
+</span><span class='line'>        <span class="cm">/* Apply command line arguments */</span>
+</span><span class='line'>        <span class="n">pxcBool</span> <span class="n">revert</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_IR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_RIGHT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_LEFT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">PXCVideoModule</span><span class="o">::</span><span class="n">DataDesc</span> <span class="n">desc</span><span class="o">=</span><span class="p">{};</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">cm</span><span class="o">-&gt;</span><span class="n">QueryCapture</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">cm</span><span class="o">-&gt;</span><span class="n">QueryCapture</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">QueryDeviceInfo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">desc</span><span class="p">.</span><span class="n">deviceInfo</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">desc</span><span class="p">.</span><span class="n">deviceInfo</span><span class="p">.</span><span class="n">streams</span> <span class="o">=</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span> <span class="o">|</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">;</span>
+</span><span class='line'>                <span class="n">revert</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStreams</span><span class="p">(</span><span class="o">&amp;</span><span class="n">desc</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* Initializes the pipeline */</span>
+</span><span class='line'>        <span class="n">sts</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">sts</span><span class="o">&lt;</span><span class="n">PXC_STATUS_NO_ERROR</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">revert</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="cm">/* Enable a single stream */</span>
+</span><span class='line'>                <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+</span><span class='line'>                <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">);</span>
+</span><span class='line'>                <span class="n">sts</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sts</span><span class="o">&lt;</span><span class="n">PXC_STATUS_NO_ERROR</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+</span><span class='line'>                    <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span><span class="p">);</span>
+</span><span class='line'>                    <span class="n">sts</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">sts</span><span class="o">&lt;</span><span class="n">PXC_STATUS_NO_ERROR</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">wprintf_s</span><span class="p">(</span><span class="s">L&quot;Failed to locate any video stream(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>                <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Release</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">sts</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* Reset all properties */</span>
+</span><span class='line'>        <span class="n">PXCCapture</span><span class="o">::</span><span class="n">Device</span> <span class="o">*</span><span class="n">device</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">QueryCaptureManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">QueryDevice</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">device</span><span class="o">-&gt;</span><span class="n">ResetProperties</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_ANY</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* Set mirror mode */</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_bMirror</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetMirrorMode</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">Device</span><span class="o">::</span><span class="n">MirrorMode</span><span class="o">::</span><span class="n">MIRROR_MODE_HORIZONTAL</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetMirrorMode</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">Device</span><span class="o">::</span><span class="n">MirrorMode</span><span class="o">::</span><span class="n">MIRROR_MODE_DISABLED</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* Stream Data */</span>
+</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">nframes</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">nframes</span><span class="o">&lt;</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_nframes</span><span class="p">;</span><span class="n">nframes</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="cm">/* Waits until new frame is available and locks it for application processing */</span>
+</span><span class='line'>            <span class="n">sts</span><span class="o">=</span><span class="n">pp</span><span class="o">-&gt;</span><span class="n">AcquireFrame</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">sts</span><span class="o">&lt;</span><span class="n">PXC_STATUS_NO_ERROR</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sts</span><span class="o">==</span><span class="n">PXC_STATUS_STREAM_CONFIG_CHANGED</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="n">wprintf_s</span><span class="p">(</span><span class="s">L&quot;Stream configuration was changed, re-initilizing</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>                    <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>                <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="cm">/* Render streams, unless -noRender is selected */</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_bNoRender</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">const</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">Sample</span> <span class="o">*</span><span class="n">sample</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">QuerySample</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">depth</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderd</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">depth</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">color</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderc</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">color</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">ir</span>    <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderi</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">ir</span><span class="p">))</span>    <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderr</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderl</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">))</span>  <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="cm">/* Releases lock so pipeline can process next frame */</span>
+</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">ReleaseFrame</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span> <span class="n">_kbhit</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span> <span class="c1">// Break loop</span>
+</span><span class='line'>                <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">_getch</span><span class="p">()</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">if</span><span class="p">(</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">27</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;q&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;Q&#39;</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span> <span class="c1">// ESC|q|Q for Exit</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">sts</span> <span class="o">==</span> <span class="n">PXC_STATUS_STREAM_CONFIG_CHANGED</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">wprintf_s</span><span class="p">(</span><span class="s">L&quot;Exiting</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Clean Up</span>
+</span><span class='line'>    <span class="n">pp</span><span class="o">-&gt;</span><span class="n">Release</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在编译程序是不会通过的，有很多错误。下面开始搭建开发环境。</p>
+
+<h2>搭建VS2010使用C++编写Intel RealSense的程序的开发环境</h2>
+
+<p>现在开始搭建Intel RealSense在VS2010中的开发环境，这里有两种方法，我都介绍一遍，你可以选择任何一种方法。</p>
+
+<h2>方法一</h2>
+
+<p>这个方法是最简单，最直接的。我们直接使用集成<strong>属性表</strong>。</p>
+
+<blockquote><p>参考文献：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkdevguide.chm -> Importing the SDK Property Sheets</p></blockquote>
+
+<p><strong>Intel RealSense SDK</strong>已经为我们配置好了属性表，并且这些属性表在VS2010~VS2015软件里都能使用。它的所在路径是：<code>C:\Program Files (x86)\Intel\RSSDK\props</code></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481722801194.png" alt="Alt text" /></p>
+
+<p><strong>视图(V)</strong> -> <strong>属性管理器(M)</strong></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724000917.png" alt="Alt text" /></p>
+
+<p><strong>项目名</strong> -> <strong>添加现有属性表(E)&hellip;</strong></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724042648.png" alt="Alt text" /></p>
+
+<p>随便选择哪一个都可以。</p>
+
+<ul>
+<li>VS2010-15.Integration.MD.props：动态编译</li>
+<li>VS2010-15.Integration.MT.props：静态编译</li>
+</ul>
+
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724159863.png" alt="Alt text" /></p>
+
+<p>一次添加，自动添加到<strong>Debug</strong>和<strong>Release</strong>里面。</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724929372.png" alt="Alt text" /></p>
+
+<p>所有步骤操作完成了，环境搭建好了，是不是很简单。OK，现在编译程序就成功了。</p>
+
+<blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 下次重新建新的工程，还需要重新搭建环境。</p></blockquote>
+
+<p>如果你觉得这个<strong>方法一</strong>太简单了，学不到什么东西。那么下面的<strong>方法二</strong>就是所有的环境都自己手动搭建，不使用Intel RealSense SDK提供的现成的属性表了。</p>
+
+<hr />
+
+<h2>方法二</h2>
+
+<blockquote><p>如果你操作了<strong>方法一</strong>，现在先把刚刚添加的属性表删除，让属性管理器变成原来的样子：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725209664.png" alt="Alt text" /></p></blockquote>
+
+<p>参考文献：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkdevguide.chm  -> Configuring Project Settings</p>
+
+<p>一共分三步：</p>
+
+<p><strong>Step 1 . </strong>  添加 <strong>包含目录</strong></p>
+
+<p>在 <strong>解决方案资源管理器</strong> 里，对着项目名右键 -> 属性</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725399945.png" alt="Alt text" /></p>
+
+<p>添加：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Program</span> <span class="n">Files</span> <span class="o">%</span><span class="mi">28</span><span class="n">x86</span><span class="o">%</span><span class="mi">29</span><span class="err">\</span><span class="n">Intel</span><span class="err">\</span><span class="n">RSSDK</span><span class="err">\</span><span class="n">sample</span><span class="err">\</span><span class="n">common</span><span class="err">\</span><span class="n">include</span>
+</span><span class='line'><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Program</span> <span class="n">Files</span> <span class="o">%</span><span class="mi">28</span><span class="n">x86</span><span class="o">%</span><span class="mi">29</span><span class="err">\</span><span class="n">Intel</span><span class="err">\</span><span class="n">RSSDK</span><span class="err">\</span><span class="n">include</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725633507.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 添加 <strong>库目录</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Program</span> <span class="n">Files</span> <span class="o">%</span><span class="mi">28</span><span class="n">x86</span><span class="o">%</span><span class="mi">29</span><span class="err">\</span><span class="n">Intel</span><span class="err">\</span><span class="n">RSSDK</span><span class="err">\</span><span class="n">sample</span><span class="err">\</span><span class="n">common</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">win32</span><span class="err">\</span><span class="n">v100</span>
+</span><span class='line'><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Program</span> <span class="n">Files</span> <span class="o">%</span><span class="mi">28</span><span class="n">x86</span><span class="o">%</span><span class="mi">29</span><span class="err">\</span><span class="n">Intel</span><span class="err">\</span><span class="n">RSSDK</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">Win32</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481726214296.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 添加 <strong>附加依赖项</strong></p>
+
+<p>先查看：查看当前项目使用的运行库是动态多线程调试（<code>/MDd</code>）还是静态多线程调试（<code>/MTd</code>）的。</p>
+
+<p>如果是<code>/MDd</code>（新建的项目默认都是<code>/MDd</code>）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725955088.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">libpxcutilsmd_d</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxcmd_d</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxcmd</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxcutilsmd</span><span class="p">.</span><span class="n">lib</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><strong>注意：</strong> 这里 文件名后有<code>_d</code>的是<strong>Debug</strong>使用的链接文件。<strong>Debug</strong>的链接文件一定要添加在<strong>Release</strong>链接文件前面。否则会出现<a href="http://blog.csdn.net/u012771236/article/details/29850169"><code>error LNK2038</code>错误</a>。</p></blockquote>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481726928633.png" alt="Alt text" /></p>
+
+<p>OK，环境搭建完成，可以运行程序了。</p>
+
+<hr />
+
+<p>如果是<code>/MTd</code>:</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727314579.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">libpxc_d</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxcutils_d</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxc</span><span class="p">.</span><span class="n">lib</span>
+</span><span class='line'><span class="n">libpxcutils</span><span class="p">.</span><span class="n">lib</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727464696.png" alt="Alt text" /></p>
+
+<p>OK，环境搭建完成，可以运行程序了。</p>
+
+<hr />
+
+<h2>运行 （测试环境是否搭建成功）</h2>
+
+<blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
+
+<p>默认输出两个图片，一个是彩色图片（1080p），一个是深度图片（640x480）。（彩色图片太大了，这里只截了一半的图）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727693063.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -914,94 +1394,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-06T13:37:20+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
-
-<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
-
-<h2>2. 下载Arduino IDE软件</h2>
-
-<p>然后，到<a href="https://www.arduino.cc/en/Main/Software">这个网址</a> （这个网站打开时，有点慢。）下载最新的Arduino IDE 软件。（记住安装路径，因为后面要用上。）
-<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
-
-<h2>3. 安装驱动</h2>
-
-<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口</p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" /></p>
-
-<p>驱动已经安装成功。</p>
-
-<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
-
-<h3>选择办卡：Arduino/Genuino Uno</h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
-
-<h3>然后，选择端口：</h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
-
-<h3>测试：随便导入一个程序：<code>Blink</code></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
-
-<h3>点击：<strong>验证</strong></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
-
-<h3>点击：<strong>上传</strong></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
-
-<h2>实验现象</h2>
-
-<p>现在看到的实验现象就是：板子上的A13的LED在闪烁。</p>
-
-<h1>搞定</h1>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
-
-<p>其他网站，没有用上：</p>
-
-<p><a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1015,6 +1407,10 @@ ls
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/">Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
@@ -1032,10 +1428,6 @@ ls
         <a href="/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">Learning Python 008 正则表达式-005 Compile模板的使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1046,7 +1438,8 @@ ls
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
-<a style="font-size: 129%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 139%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 115%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -1072,10 +1465,9 @@ ls
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
-<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
-<a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
@@ -1097,7 +1489,7 @@ ls
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (3)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (4)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>

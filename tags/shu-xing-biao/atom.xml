@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 属性表 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/shu-xing-biao/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-14T23:10:23+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Intel RealSense 003(Learning RealSense SDK 002) 给Visual Studio 2010搭建 Intel RealSense SDK开发环境]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/"/>
+    <updated>2016-12-14T23:09:06+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>我使用的Intel RealSense 硬件：SR300 摄像头</li>
+<li>电脑系统：Windows 10 64位</li>
+<li>编程语言：C++</li>
+<li>开发工具软件：Visual Studio 2010</li>
+</ul>
+
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>先新建一个项目：（一些简单的操作步骤，我忽略不记录）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481715171782.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481722365940.png" alt="Alt text" /></p>
+
+<p>在项目里面新建一个<code>.cpp</code>文件：<code>camera_viewer.cpp</code>。并将下面的代码拷贝到里面。</p>
+
+<blockquote><p>这段代码是Intel RealSense SDK 中的一个示例程序。在这个路径里面可以找到它：<code>C:\Program Files (x86)\Intel\RSSDK\sample\DF_CameraViewer\src\camera_viewer.cpp</code></p></blockquote>
+
+<hr />
+
+<blockquote><p>现在我们先不管代码里面写的是什么，这一节我们重点介绍搭建开发环境。下一节，我们讲解这段代码。</p></blockquote>
+
+<pre><code class="cpp">/*******************************************************************************
+
+INTEL CORPORATION PROPRIETARY INFORMATION
+This software is supplied under the terms of a license agreement or nondisclosure
+agreement with Intel Corporation and may not be copied or disclosed except in
+accordance with the terms of that agreement
+Copyright(c) 2011-2014 Intel Corporation. All Rights Reserved.
+
+*******************************************************************************/
+#include &lt;windows.h&gt;
+#include "pxcsensemanager.h"
+#include "pxcmetadata.h"
+#include "util_cmdline.h"
+#include "util_render.h"
+#include &lt;conio.h&gt;
+
+int wmain(int argc, WCHAR* argv[]) {
+    /* Creates an instance of the PXCSenseManager */
+    PXCSenseManager *pp = PXCSenseManager::CreateInstance();
+    if (!pp) {
+        wprintf_s(L"Unable to create the SenseManager\n");
+        return 3;
+    }
+
+    /* Collects command line arguments */
+    UtilCmdLine cmdl(pp-&gt;QuerySession());
+    if (!cmdl.Parse(L"-listio-nframes-sdname-csize-dsize-isize-lsize-rsize-file-record-noRender-mirror",argc,argv)) return 3;
+
+    /* Sets file recording or playback */
+    PXCCaptureManager *cm=pp-&gt;QueryCaptureManager();
+    cm-&gt;SetFileName(cmdl.m_recordedFile, cmdl.m_bRecord);
+    if (cmdl.m_sdname) cm-&gt;FilterByDeviceInfo(cmdl.m_sdname,0,0);
+
+    // Create stream renders
+    UtilRender renderc(L"Color"), renderd(L"Depth"), renderi(L"IR"), renderr(L"Right"), renderl(L"Left");
+    pxcStatus sts;
+    do {
+        /* Apply command line arguments */
+        pxcBool revert = false;
+        if (cmdl.m_csize.size()&gt;0) {
+            pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_COLOR, cmdl.m_csize.front().first.width, cmdl.m_csize.front().first.height, (pxcF32)cmdl.m_csize.front().second);
+        }
+        if (cmdl.m_dsize.size()&gt;0) {
+            pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_DEPTH, cmdl.m_dsize.front().first.width, cmdl.m_dsize.front().first.height, (pxcF32)cmdl.m_dsize.front().second);
+        }
+        if (cmdl.m_isize.size() &gt; 0) {
+            pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_IR, cmdl.m_isize.front().first.width, cmdl.m_isize.front().first.height, (pxcF32)cmdl.m_isize.front().second);
+        }
+        if (cmdl.m_rsize.size() &gt; 0) {
+            pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_RIGHT, cmdl.m_rsize.front().first.width, cmdl.m_rsize.front().first.height, (pxcF32)cmdl.m_rsize.front().second);
+        }
+        if (cmdl.m_lsize.size() &gt; 0) {
+            pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_LEFT, cmdl.m_lsize.front().first.width, cmdl.m_lsize.front().first.height, (pxcF32)cmdl.m_lsize.front().second);
+        }
+        if (cmdl.m_csize.size() == 0 &amp;&amp; cmdl.m_dsize.size() == 0 &amp;&amp; cmdl.m_isize.size() == 0 &amp;&amp; cmdl.m_rsize.size() == 0 &amp;&amp; cmdl.m_lsize.size() == 0) {
+            PXCVideoModule::DataDesc desc={};
+            if (cm-&gt;QueryCapture()) {
+                cm-&gt;QueryCapture()-&gt;QueryDeviceInfo(0, &amp;desc.deviceInfo);
+            } else {
+                desc.deviceInfo.streams = PXCCapture::STREAM_TYPE_COLOR | PXCCapture::STREAM_TYPE_DEPTH;
+                revert = true;
+            }
+            pp-&gt;EnableStreams(&amp;desc);
+        }
+
+        /* Initializes the pipeline */
+        sts = pp-&gt;Init();
+        if (sts&lt;PXC_STATUS_NO_ERROR) {
+            if (revert) {
+                /* Enable a single stream */
+                pp-&gt;Close();
+                pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_DEPTH);
+                sts = pp-&gt;Init();
+                if (sts&lt;PXC_STATUS_NO_ERROR) {
+                    pp-&gt;Close();
+                    pp-&gt;EnableStream(PXCCapture::STREAM_TYPE_COLOR);
+                    sts = pp-&gt;Init();
+                }
+            }
+            if (sts&lt;PXC_STATUS_NO_ERROR) {
+                wprintf_s(L"Failed to locate any video stream(s)\n");
+                pp-&gt;Release();
+                return sts;
+            }
+        }
+
+        /* Reset all properties */
+        PXCCapture::Device *device = pp-&gt;QueryCaptureManager()-&gt;QueryDevice();
+        device-&gt;ResetProperties(PXCCapture::STREAM_TYPE_ANY);
+
+        /* Set mirror mode */
+        if (cmdl.m_bMirror) {
+            device-&gt;SetMirrorMode(PXCCapture::Device::MirrorMode::MIRROR_MODE_HORIZONTAL);
+        } else {
+            device-&gt;SetMirrorMode(PXCCapture::Device::MirrorMode::MIRROR_MODE_DISABLED);
+        }
+
+        /* Stream Data */
+        for (int nframes=0;nframes&lt;cmdl.m_nframes;nframes++) {
+            /* Waits until new frame is available and locks it for application processing */
+            sts=pp-&gt;AcquireFrame(false);
+
+            if (sts&lt;PXC_STATUS_NO_ERROR) {
+                if (sts==PXC_STATUS_STREAM_CONFIG_CHANGED) {
+                    wprintf_s(L"Stream configuration was changed, re-initilizing\n");
+                    pp-&gt;Close();
+                }
+                break;
+            }
+
+            /* Render streams, unless -noRender is selected */
+            if (cmdl.m_bNoRender == false) {
+                const PXCCapture::Sample *sample = pp-&gt;QuerySample();
+                if (sample) {
+                    if (sample-&gt;depth &amp;&amp; !renderd.RenderFrame(sample-&gt;depth)) break;
+                    if (sample-&gt;color &amp;&amp; !renderc.RenderFrame(sample-&gt;color)) break;
+                    if (sample-&gt;ir    &amp;&amp; !renderi.RenderFrame(sample-&gt;ir))    break;
+                    if (sample-&gt;right &amp;&amp; !renderr.RenderFrame(sample-&gt;right)) break;
+                    if (sample-&gt;left  &amp;&amp; !renderl.RenderFrame(sample-&gt;left))  break;
+                }
+            }
+
+            /* Releases lock so pipeline can process next frame */
+            pp-&gt;ReleaseFrame();
+
+            if( _kbhit() ) { // Break loop
+                int c = _getch() &amp; 255;
+                if( c == 27 || c == 'q' || c == 'Q') break; // ESC|q|Q for Exit
+            }
+        }
+    } while (sts == PXC_STATUS_STREAM_CONFIG_CHANGED);
+
+    wprintf_s(L"Exiting\n");
+
+    // Clean Up
+    pp-&gt;Release();
+    return 0;
+}
+</code></pre>
+
+<p>现在编译程序是不会通过的，有很多错误。下面开始搭建开发环境。</p>
+
+<h2>搭建VS2010使用C++编写Intel RealSense的程序的开发环境</h2>
+
+<p>现在开始搭建Intel RealSense在VS2010中的开发环境，这里有两种方法，我都介绍一遍，你可以选择任何一种方法。</p>
+
+<h2>方法一</h2>
+
+<p>这个方法是最简单，最直接的。我们直接使用集成<strong>属性表</strong>。</p>
+
+<blockquote><p>参考文献：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkdevguide.chm -> Importing the SDK Property Sheets</p></blockquote>
+
+<p><strong>Intel RealSense SDK</strong>已经为我们配置好了属性表，并且这些属性表在VS2010~VS2015软件里都能使用。它的所在路径是：<code>C:\Program Files (x86)\Intel\RSSDK\props</code></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481722801194.png" alt="Alt text" /></p>
+
+<p><strong>视图(V)</strong> -> <strong>属性管理器(M)</strong></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724000917.png" alt="Alt text" /></p>
+
+<p><strong>项目名</strong> -> <strong>添加现有属性表(E)&hellip;</strong></p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724042648.png" alt="Alt text" /></p>
+
+<p>随便选择哪一个都可以。</p>
+
+<ul>
+<li>VS2010-15.Integration.MD.props：动态编译</li>
+<li>VS2010-15.Integration.MT.props：静态编译</li>
+</ul>
+
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724159863.png" alt="Alt text" /></p>
+
+<p>一次添加，自动添加到<strong>Debug</strong>和<strong>Release</strong>里面。</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481724929372.png" alt="Alt text" /></p>
+
+<p>所有步骤操作完成了，环境搭建好了，是不是很简单。OK，现在编译程序就成功了。</p>
+
+<blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 下次重新建新的工程，还需要重新搭建环境。</p></blockquote>
+
+<p>如果你觉得这个<strong>方法一</strong>太简单了，学不到什么东西。那么下面的<strong>方法二</strong>就是所有的环境都自己手动搭建，不使用Intel RealSense SDK提供的现成的属性表了。</p>
+
+<hr />
+
+<h2>方法二</h2>
+
+<blockquote><p>如果你操作了<strong>方法一</strong>，现在先把刚刚添加的属性表删除，让属性管理器变成原来的样子：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725209664.png" alt="Alt text" /></p></blockquote>
+
+<p>参考文献：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkdevguide.chm  -> Configuring Project Settings</p>
+
+<p>一共分三步：</p>
+
+<p><strong>Step 1 . </strong>  添加 <strong>包含目录</strong></p>
+
+<p>在 <strong>解决方案资源管理器</strong> 里，对着项目名右键 -> 属性</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725399945.png" alt="Alt text" /></p>
+
+<p>添加：</p>
+
+<pre><code>C:\Program Files %28x86%29\Intel\RSSDK\sample\common\include
+C:\Program Files %28x86%29\Intel\RSSDK\include
+</code></pre>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725633507.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 添加 <strong>库目录</strong></p>
+
+<pre><code>C:\Program Files %28x86%29\Intel\RSSDK\sample\common\lib\win32\v100
+C:\Program Files %28x86%29\Intel\RSSDK\lib\Win32
+</code></pre>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481726214296.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 添加 <strong>附加依赖项</strong></p>
+
+<p>先查看：查看当前项目使用的运行库是动态多线程调试（<code>/MDd</code>）还是静态多线程调试（<code>/MTd</code>）的。</p>
+
+<p>如果是<code>/MDd</code>（新建的项目默认都是<code>/MDd</code>）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481725955088.png" alt="Alt text" /></p>
+
+<pre><code>libpxcutilsmd_d.lib
+libpxcmd_d.lib
+libpxcmd.lib
+libpxcutilsmd.lib
+</code></pre>
+
+<blockquote><p><strong>注意：</strong> 这里 文件名后有<code>_d</code>的是<strong>Debug</strong>使用的链接文件。<strong>Debug</strong>的链接文件一定要添加在<strong>Release</strong>链接文件前面。否则会出现<a href="http://blog.csdn.net/u012771236/article/details/29850169"><code>error LNK2038</code>错误</a>。</p></blockquote>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481726928633.png" alt="Alt text" /></p>
+
+<p>OK，环境搭建完成，可以运行程序了。</p>
+
+<hr />
+
+<p>如果是<code>/MTd</code>:</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727314579.png" alt="Alt text" /></p>
+
+<pre><code>libpxc_d.lib
+libpxcutils_d.lib
+libpxc.lib
+libpxcutils.lib
+</code></pre>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727464696.png" alt="Alt text" /></p>
+
+<p>OK，环境搭建完成，可以运行程序了。</p>
+
+<hr />
+
+<h2>运行 （测试环境是否搭建成功）</h2>
+
+<blockquote><p>运行程序之前注意：要将Intel RealSense模块连接到电脑的USB3.0接口</p></blockquote>
+
+<p>默认输出两个图片，一个是彩色图片（1080p），一个是深度图片（640x480）。（彩色图片太大了，这里只截了一半的图）</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-SDK-Development-environment-build-in-Visual-Studio-2010/1481727693063.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>
