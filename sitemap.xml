@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select/</loc>
+<lastmod>2016-12-14T18:58:23+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/</loc>
 <lastmod>2016-12-14T18:47:00+08:00</lastmod>
 </url>
@@ -945,5 +949,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/r200/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/intel-realsense-sdk/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/librealsense/</loc>
 </url>
 </urlset>

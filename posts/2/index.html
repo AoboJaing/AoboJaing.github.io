@@ -9,8 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的pcduino板卡型号：pcduino 3B
-我使用的TF卡大小：32G 参考网站： Installing Ubuntu 14 on a pcDuino3B 下载需要的东西 下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器） 以我现在使用的板子（ &hellip;">
+  <meta name="description" content="开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
+Python 版本：python-3.5.0-amd64
+PyCharm软件版本：pycharm-professional-2016.1.4
+电脑系统：Windows 10 64位 如果你还没有搭建好开发环境 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,99 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T00:04:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>所有的设置都是在scrapy爬虫项目中的<code>settings.py</code> 文件中进行设置。</p>
+
+<p><strong>Step 1 . </strong> 设置爬虫不遵循 <code>robots.txt</code>协议</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Obey robots.txt rules
+</span><span class='line'>ROBOTSTXT_OBEY = False</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952600971.png" alt="Alt text" /></p>
+
+<blockquote><p>想要了解什么是<code>robots.txt</code>协议，请访问这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52586126">解析 robots.txt 文件</a>。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 设置取消<strong>Cookies</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Disable cookies (enabled by default)</span>
+</span><span class='line'><span class="n">COOKIES_ENABLED</span> <span class="o">=</span> <span class="bp">False</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952959564.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>Cookies</strong>：</p>
+
+<p> 简单的说，Cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机。当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookie 会帮你在网站上所打的文字或是一些选择，都记录下来。当下次你再光临同一个网站，Web服务器会先看看有没有它上次留下的Cookie资料，有的话，就会依据Cookie里的内容来判断使用者，送出特定的网页内容给你。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 设置用户代理值（<code>USER_AGENT</code>）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span>
+</span><span class='line'><span class="n">USER_AGENT</span> <span class="o">=</span> <span class="s">&#39;Mozilla/xxx (Windows xxx; Winxx; xxx) AppleWebKit/xxx (KHTML, like Gecko) Chrome/xxxx Safari/xxx&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953048379.png" alt="Alt text" /></p>
+
+<p>这个 用户代理可以在浏览器里面找到：</p>
+
+<p>随便浏览一个网页，按<strong>F12</strong> -> <strong>Network</strong> -> <strong>F5</strong>，随便点击一项，你都能看到有 <strong>User-agent</strong> 这一项，将这里面的内容拷贝就可以。</p>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953359818.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 设置IP</p>
+
+<p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1108,79 +1203,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T08:46:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>判断文件</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>判断文件夹</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1198,6 +1220,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a>
       </li>
     
@@ -1213,10 +1239,6 @@
         <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 002(Learning RealSense SDK 001) Windows安装 Intel RealSense SDK</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1227,7 +1249,7 @@
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
-<a style="font-size: 115%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 129%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -1253,9 +1275,9 @@
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
-<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
@@ -1277,8 +1299,8 @@
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (1)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (3)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>

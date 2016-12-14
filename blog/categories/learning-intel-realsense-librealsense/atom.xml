@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Learning Intel Realsense Librealsense | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/learning-intel-realsense-librealsense/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-14T18:54:43+08:00</updated>
+  <updated>2016-12-14T19:01:12+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Intel RealSense 001 开发环境的选择]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select/"/>
+    <updated>2016-12-14T18:58:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>不管你使用Intel RealSense的哪款摄像头，本文都适合你。</p></blockquote>
+
+<p>对于开发环境（就是你编写程序），你有两个选择：</p>
+
+<ul>
+<li><a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense SDK</a>（有要求：Windows 10系统）</li>
+<li><a href="https://github.com/IntelRealSense/librealsense">librealsense</a>（Intel RealSense跨平台API）</li>
+</ul>
+
+
+<p>我个人推荐使用<code>librealsense</code>这个跨平台库，它让Intel RealSense摄像头在Linux系统上使用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200]]></title>

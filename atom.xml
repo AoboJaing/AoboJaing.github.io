@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-14T18:54:43+08:00</updated>
+  <updated>2016-12-14T19:01:12+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Intel RealSense 001 开发环境的选择]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select/"/>
+    <updated>2016-12-14T18:58:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>不管你使用Intel RealSense的哪款摄像头，本文都适合你。</p></blockquote>
+
+<p>对于开发环境（就是你编写程序），你有两个选择：</p>
+
+<ul>
+<li><a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense SDK</a>（有要求：Windows 10系统）</li>
+<li><a href="https://github.com/IntelRealSense/librealsense">librealsense</a>（Intel RealSense跨平台API）</li>
+</ul>
+
+
+<p>我个人推荐使用<code>librealsense</code>这个跨平台库，它让Intel RealSense摄像头在Linux系统上使用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200]]></title>
@@ -1654,59 +1675,6 @@ ls
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 024 判断文件和文件夹是否存在]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist/"/>
-    <updated>2016-12-01T08:46:09+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/determine-whether-files-and-folders-exist</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>判断文件</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>判断文件夹</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>

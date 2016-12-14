@@ -9,7 +9,9 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="前言 之前，我是按照我写的这篇博客为Octopress站点侧边栏添加分类列表（Categories）。 出现的问题 基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。 解决思路 &hellip;">
+  <meta name="description" content="使用的电脑系统：Windows 10 64位
+使用的开发集成环境：PyCharm 2016.1.4
+使用的Python的版本：python 3.5.0 出现的错误 读取文件时，出现乱码或者UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +68,132 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T19:18:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>出现的错误</h2>
+
+<p>读取文件时，出现<strong>乱码</strong>或者<code>UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX in position XX: incomplete multibyte sequence</code> 错误</p>
+
+<hr />
+
+<h2>出现错误的原因</h2>
+
+<p>这两个错误可能会出现一个，两个错误的出现的原因是一样的：当我们使用了一个不正确的编码方式去读取一个不是用这个编码方式编码的文件时，轻者出现乱码，重者出现<code>UnicodeDecodeError</code>错误。</p>
+
+<hr />
+
+<h2>模拟错误发生现场</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">浣犲ソ锛孉</span><span class="n">oboSir</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir。&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;D:/WorkSpace/test_ws/demo/learning_python_15.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span class='line'><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t decode byte 0x82 in position 35: incomplete multibyte sequence</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>读取文件时，指定正确的编码方式：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在再运行，就正常了：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">你好，</span><span class="n">AoboSir</span><span class="err">。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2023,197 +2151,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/python-Scrapy-command/">Python --- Scrapy 命令</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T06:39:53+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:39 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>Scrapy 命令 分为两种：<strong>全局命令</strong> 和 <strong>项目命令</strong>。</p>
-
-<p>全局命令：在哪里都能使用。</p>
-
-<p>项目命令：必须在爬虫项目里面才能使用。</p>
-
-<h2>全局命令</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\Users\AOBO&gt;scrapy -h
-</span><span class='line'>Scrapy 1.2.1 - no active project
-</span><span class='line'>
-</span><span class='line'>Usage:
-</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
-</span><span class='line'>
-</span><span class='line'>Available commands:
-</span><span class='line'>  bench         Run quick benchmark test
-</span><span class='line'>  commands
-</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
-</span><span class='line'>  genspider     Generate new spider using pre-defined templates
-</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
-</span><span class='line'>  settings      Get settings values
-</span><span class='line'>  shell         Interactive scraping console
-</span><span class='line'>  startproject  Create new project
-</span><span class='line'>  version       Print Scrapy version
-</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
-</span><span class='line'>
-</span><span class='line'>  [ more ]      More commands available when run from project directory
-</span><span class='line'>
-</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>startproject</strong>：创建一个爬虫项目：<code>scrapy startproject demo</code>（<code>demo</code> 创建的爬虫项目的名字）</li>
-<li><strong>runspider</strong> 运用单独一个爬虫文件：<code>scrapy runspider abc.py</code></li>
-<li><strong>veiw</strong> 下载一个网页的源代码，并在默认的文本编辑器中打开这个源代码：<code>scrapy view http://www.aobossir.com/</code></li>
-<li><strong>shell</strong> 进入交互终端，用于爬虫的调试（如果你不调试，那么就不常用）：<code>scrapy shell http://www.baidu.com --nolog</code>（<code>--nolog</code> 不显示日志信息）</li>
-<li><strong>version</strong> 查看版本：（<code>scrapy version</code>）</li>
-<li><strong>bench</strong> 测试本地硬件性能（工作原理：）：<code>scrapy bench</code> （如果遇到问题：解决问题:  <code>import win32api ImportError: DLL load failed</code>，到<a href="http://www.aobosir.com/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">这里</a>查看解决办法。）</li>
-</ul>
-
-
-<hr />
-
-<h2>项目命令</h2>
-
-<p>（进入项目路径，才能看到项目命令）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy -h
-</span><span class='line'>Scrapy 1.2.1 - project: first
-</span><span class='line'>
-</span><span class='line'>Usage:
-</span><span class='line'>  scrapy &lt;command&gt; [options] [args]
-</span><span class='line'>
-</span><span class='line'>Available commands:
-</span><span class='line'>  bench         Run quick benchmark test
-</span><span class='line'>  check         Check spider contracts
-</span><span class='line'>  commands
-</span><span class='line'>  crawl         Run a spider
-</span><span class='line'>  edit          Edit spider
-</span><span class='line'>  fetch         Fetch a URL using the Scrapy downloader
-</span><span class='line'>  genspider     Generate new spider using pre-defined templates
-</span><span class='line'>  list          List available spiders
-</span><span class='line'>  parse         Parse URL (using its spider) and print the results
-</span><span class='line'>  runspider     Run a self-contained spider (without creating a project)
-</span><span class='line'>  settings      Get settings values
-</span><span class='line'>  shell         Interactive scraping console
-</span><span class='line'>  startproject  Create new project
-</span><span class='line'>  version       Print Scrapy version
-</span><span class='line'>  view          Open URL in browser, as seen by Scrapy
-</span><span class='line'>
-</span><span class='line'>Use "scrapy &lt;command&gt; -h" to see more info about a command
-</span><span class='line'>
-</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>genspider</strong> 创建一个爬虫文件，我们在爬虫项目里面才能创建爬虫文件（这个命令用的非常多）（<strong>startproject</strong>：创建一个爬虫项目）。创建爬虫文件是按照以下模板来创建的，使用<code>scrapy genspider -l</code> 命令查看有哪些模板。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy genspider -l
-</span><span class='line'>Available templates:
-</span><span class='line'>  basic
-</span><span class='line'>  crawl
-</span><span class='line'>  csvfeed
-</span><span class='line'>  xmlfeed
-</span><span class='line'>
-</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p><code>basic</code> 基础
-<code>crawl</code>自动爬虫
-<code>csvfeed</code>用来处理csv文件
-<code>xmlfeed</code>用来处理xml文件</p>
-
-<p>按照<code>basic</code>模板创建一个名为<code>f1</code>的爬虫文件：<code>scrapy genspider -t basic f1</code> ，创建了一个<code>f1.py</code>文件。</p></blockquote>
-
-<ul>
-<li><p><strong>check</strong> 测试爬虫文件、或者说：检测一个爬虫，如果结果是：OK，那么说明结果没有问题。：<code>scrapy check f1</code></p></li>
-<li><p><strong>crawl</strong> 运行一个爬虫文件。：<code>scrapy crawl f1</code> 或者 <code>scrapy crawl f1 --nolog</code></p></li>
-<li><p><strong>list</strong> 列出当前爬虫项目下所有的爬虫文件： <code>scrapy list</code></p></li>
-<li><p><strong>edit</strong> 使用编辑器打开爬虫文件 （Windows上似乎有问题，Linux上没有问题）：<code>scrapy edit f1</code></p></li>
-</ul>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -2231,6 +2168,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a>
       </li>
     
@@ -2246,10 +2187,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
         <a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense 002(Learning RealSense SDK 001) Windows安装 Intel RealSense SDK</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2260,7 +2197,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
-<a style="font-size: 115%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 129%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 115%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
@@ -2286,9 +2223,9 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/dong-tai-jie-gou-tu/">动态结构图</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
-<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 115%" href="/tags/shu-xue-mo-xing/">数学模型</a>
 <a style="font-size: 115%" href="/tags/wen-jian/">文件</a>
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
@@ -2310,8 +2247,8 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (1)</a></li>
-<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (3)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
