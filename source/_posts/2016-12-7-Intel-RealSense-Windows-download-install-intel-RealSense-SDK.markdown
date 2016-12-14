@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Intel RealSense 001 Windows安装 Intel RealSense SDK"
+title: "Intel RealSense 002(Learning RealSense SDK 001) Windows安装 Intel RealSense SDK"
 date: 2016-12-07 12:18:38 +0800
 comments: true
 sharing: true
-categories: [Intel RealSense]
+categories: [Learning Intel RealSense SDK]
 tags: [Intel RealSense, Windows, SDK, 安装软件,SR300]
 ---
 
