@@ -11,7 +11,8 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 学习Python的内存释放知识点的动机 之前我学过很多Python的程序，偶然的一次，我打开任务管理器， &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 range() 函数 Python2中：用来创建一个列表（list）。
+Python3中： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,176 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/30/python2-python3-range-function/">Learning Python 018 Python2 和 Python3 中 Range()函数的使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-30T13:37:04+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2><code>range()</code> 函数</h2>
+
+<ul>
+<li>Python2中：用来创建一个列表（list）。</li>
+<li>Python3中：用来创建一个可以生成list或者tuple的生成器。</li>
+</ul>
+
+
+<h2>Python2 <code>range()</code>函数 知识点</h2>
+
+<p>Python2 中的<code>range()</code> 函数可以生成一个list。（分配内存空间）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>Python2 中的<code>xrange()</code>函数不是生成一个list，而是生成一个生成器，不分配内存。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># xrange(10)</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Python3 <code>range()</code>函数 知识点</h2>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="c"># range(0, 10)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：（打印出来的不是一个列表，而是一个生成器）。</p>
+
+<p>Python3 选择这样做的原因：可以节约内存空间，详情请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-Memory-release-gc/">Python2和Python3的内存释放</a>。</p>
+
+<p>Python3中的<code>range()</code>函数的功能和Python2中的<code>xrange()</code>函数一样，所以在Python3中没有<code>xrange()</code>函数。</p>
+
+<hr />
+
+<p>要想生成<strong>list</strong>或者<strong>tuple</strong>，这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span><span class='line'><span class="c"># (4, 5, 6, 7, 8, 9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2><code>range()</code>函数的使用</h2>
+
+<p>下面这段代码在Python2 和 Python3中得到的运行结果都是一样的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mi">0</span>
+</span><span class='line'><span class="mi">1</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="mi">4</span>
+</span><span class='line'><span class="mi">5</span>
+</span><span class='line'><span class="mi">6</span>
+</span><span class='line'><span class="mi">7</span>
+</span><span class='line'><span class="mi">8</span>
+</span><span class='line'><span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果是一样的，但是运行的原理不同：</p>
+
+<ul>
+<li>Python2：在第一次执行 <code>range(10)</code>，就生成了一个<code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code>列表。</li>
+<li>Python3：在每次执行<code>range(10)</code>时，生成一个元素<code>i</code>。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1610,111 +1781,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/python-xpath/">Python --- Xpath 表达式 --- Ongoing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T18:00:15+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>什么是 <strong>XPath</strong>？</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
-
-<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
-
-<h2>xpath 表达式 语法讲解</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
-
-<p>例如，现在有这些信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt;
-</span><span class='line'>&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-</span><span class='line'>&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
-</span><span class='line'>&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
-</span><span class='line'>&lt;/head&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 表达式</th>
-<th style="text-align:right;">     意思</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">/ </td>
-<td style="text-align:right;">寻找指定标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">//</td>
-<td style="text-align:right;"> 寻找所有标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">@</td>
-<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
-</tr>
-</tbody>
-</table>
-
-
-<hr />
-
-<p><strong>例子：</strong></p>
-
-<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">/</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>表示：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">CSDN</span><span class="o">.</span><span class="n">NET</span> <span class="o">-</span> <span class="err">全球最大中文</span><span class="n">IT</span><span class="err">社区，为</span><span class="n">IT</span><span class="err">专业技术人员提供最全面的信息传播和服务平台</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1732,6 +1798,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/">C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/">Intel RealSense 004(Learning RealSense SDK 003) DF_CameraViewer示例讲解</a>
       </li>
     
@@ -1745,10 +1815,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/08/python-Regular-Expressions-Line-feed/">Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写</a>
       </li>
     
   </ul>
@@ -1809,6 +1875,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>

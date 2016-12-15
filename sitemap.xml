@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/</loc>
+<lastmod>2016-12-16T07:28:48+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/</loc>
 <lastmod>2016-12-15T07:01:51+08:00</lastmod>
 </url>
@@ -429,6 +433,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/learning-intel-realsense-librealsense/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/c-plus-plus/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -975,5 +982,26 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/cpp/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/c-plus-plus/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/string/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/wstring/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/char/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/wchar-t/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/char-star/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/wchar-t-star/</loc>
 </url>
 </urlset>
