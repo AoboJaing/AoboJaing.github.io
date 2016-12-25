@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: urllib | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/urllib/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T16:27:44+08:00</updated>
+  <updated>2016-12-25T16:35:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -20,10 +20,13 @@
     <id>http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support</id>
     <content type="html"><![CDATA[<h1>支持代理</h1>
 
-<p>使用的系统：<strong>Windows 10 64位</strong>
-<strong>Python</strong> 语言版本：<strong>Python 2.7.10 V</strong>
-使用的编程 <strong>Python</strong> 的集成开发环境：<strong>PyCharm 2016 04</strong>
-我使用的 <strong>urllib</strong> 的版本：<strong>urllib2</strong></p>
+<ul>
+<li>使用的系统：<strong>Windows 10 64位</strong></li>
+<li><strong>Python</strong> 语言版本：<strong>Python 2.7.10 V</strong></li>
+<li>使用的编程 <strong>Python</strong> 的集成开发环境：<strong>PyCharm 2016 04</strong></li>
+<li>我使用的 <strong>urllib</strong> 的版本：<strong>urllib2</strong></li>
+</ul>
+
 
 <p><strong>注意：</strong> 我没这里使用的是 <strong>Python2</strong> ，而不是<strong>Python3</strong></p>
 
