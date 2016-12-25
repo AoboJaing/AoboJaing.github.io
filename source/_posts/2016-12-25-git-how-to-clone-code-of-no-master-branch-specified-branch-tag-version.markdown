@@ -99,7 +99,7 @@ git checkout freenect-stack-0.2.2
 
 > 总结：其实tag和 branch是一样的操作。
 
-如果你感觉使用`git clone XXX` 下载源代码的速度太慢了，你可以参考这篇博客来配置你的git，让它提速。
+如果你感觉使用`git clone XXX` 下载源代码的速度太慢了，你可以参考[这篇博客](http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/)来配置你的git，让它提速。
 
 
 ----------
