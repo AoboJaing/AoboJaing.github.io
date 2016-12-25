@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="当你下载一个源代码的时候。出现下面错误： 1
+2
+3
+4
+5
+ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
+Cloning into 'turtlebot'... &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>代码在暴走，一切抛到脑后。Party开始，欢迎来到我的王国，跟着这flow，这个空间没有对错。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-25T15:27:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:27 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<p>当你下载一个源代码的时候。出现下面错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
+</span><span class='line'>Cloning into 'turtlebot'...
+</span><span class='line'>Permission denied (publickey).
+</span><span class='line'>fatal: The remote end hung up unexpectedly
+</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时需要添加SSH密钥。步骤如下：</p>
+
+<p>参考网址：<a href="https://help.github.com/articles/generating-an-ssh-key/">Generating an SSH key</a></p>
+
+<h2>步骤</h2>
+
+<p>先检查现有的SSH密钥</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>total 12
+</span><span class='line'>drwx------  2 ubuntu ubuntu 4096 Dec 24 07:40 .
+</span><span class='line'>drwxrwxr-x 32 ubuntu ubuntu 4096 Dec 24 07:29 ..
+</span><span class='line'>-rw-r--r--  1 ubuntu ubuntu  884 Dec 24 07:40 known_hosts</span></code></pre></td></tr></table></div></figure>
+
+
+<p>默认的，公钥的文件名可能是下面的几个：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>id_dsa.pub
+</span><span class='line'>id_ecdsa.pub
+</span><span class='line'>id_ed25519.pub
+</span><span class='line'>id_rsa.pub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你现在没有公有的或者私有的钥匙，或者你不希望使用现有的任何一个去连接GitHub，这个时候，你可以去生成一个新的SSH密钥（SSH key）</p>
+
+<p>如果你在上面的输出中看到了现有的公有和私有的密钥（比如： <code>id_rsa.pub</code> 和 <code>id_rsa</code>），这个时候，你可以直接连接GitHub，你可以将你的SSH密钥添加到ssh-agent。</p>
+
+<h2>生成一个新的SSH密钥（SSH key）</h2>
+
+<p>当你查看了你现有的密钥后没有SSH密钥，现在你可以来生成一个新的SSH密钥，用来身份验证。然后在将它添加到ssh-agent。</p>
+
+<p>添加你的GitHub使用的e-mail地址：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这是会创建一个新的SSH密钥，使用提供的电子邮件作为标签。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Generating public/private rsa key pair.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时提示你：“输入一个用来保存钥匙的文件”，默认保存在<code>/Users/you/.ssh/id_rsa</code>,我们直接按回车键。（它保存的位置跟你当前路径没有关系，默认都是保存在<code>~/.ssh/id_rsa</code>路径（即<code>/home/ubuntu/.ssh/id_rsa</code>）里面。）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): </span></code></pre></td></tr></table></div></figure>
+
+
+<p>接下来，它提示你输入密码短语(passphrase)，如果你直接按回车，就是没有密码。我们可以输入<code>123456</code>：（详细的信息：<a href="Working%20with%20SSH%20key%20passphrases">这里</a>）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Enter passphrase (empty for no passphrase): [Type a passphrase]
+</span><span class='line'>Enter same passphrase again: [Type passphrase again]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，密钥就生成了。</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649196486.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>如果你不想在每次都使用你的SSH密钥重新输入你的密码短语，现在，你需要将你的密钥添加到SSH 代理（SSH Agent）中，它会管理你的SSH密钥，并记住你的密码短语。</p>
+
+<hr />
+
+<p>添加你的密钥（SSH key）到ssh-agent</p>
+
+<p>在你添加一个新的SSH密钥到ssh-agent去管理你的密钥之前，我们查看一下当前新生成的密钥：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569573667.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在启动 ssh-agent（SSH代理），如果它还没有运行的话。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># start the ssh-agent in the background
+</span><span class='line'>$ eval "$(ssh-agent -s)"
+</span><span class='line'>Agent pid 2117</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569662050.png" alt="Alt text" /></p>
+
+<p>这个时候，将你的SSH密钥添加到 ssh-agent。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-add ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你你给你的SSH密钥设置了密码短语，你需要在输出提示<code>Enter passphrase for /home/ubuntu/.ssh/id_rsa:</code>时，输入密码短语（passphrase ）。</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570315247.png" alt="Alt text" /></p>
+
+<h2>将SSH密钥添加到你的GItHub账户上</h2>
+
+<p>参考网址：<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux">Adding a new SSH key to your GitHub account</a></p>
+
+<p>为了配置你的GitHub账户去使用你的新的SSH密钥，你需要将SSH密钥添加到你的GitHub账户上。</p>
+
+<p>第一步：复制共有密钥到剪切板上：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install xclip
+</span><span class='line'># 下载并安装 xclip. 如果你没有 `apt-get` 工具, 你可以使用其他的下载工具 (比如 `yum`)
+</span><span class='line'>
+</span><span class='line'>$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</span><span class='line'># 复制 id_rsa.pub 文件里面的内容到你的剪切板里</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>注意，如果<code>xclip</code>工具不工作， 你可以直接手动复制。</p>
+
+<p> <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570795686.png" alt="Alt text" /></p>
+
+<p>  <code>cat ~/.ssh/id_rsa.pub</code></p>
+
+<p>  <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570885700.png" alt="Alt text" /></p></blockquote>
+
+<p>再任何一个GitHUb页面右上角 你的用户图标 -> Settings ：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570974088.png" alt="Alt text" /></p>
+
+<p>在用户设置侧边栏中，点击<strong>SSH and GPG keys</strong></p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571005369.png" alt="Alt text" /></p>
+
+<p>点击 <strong>New SSH key</strong></p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571081262.png" alt="Alt text" /></p>
+
+<p>输入这个SSH密钥的标题 和 公有密钥，然后点击 <strong>Add SSH key</strong>：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649285303.png" alt="Alt text" /></p>
+
+<p>输入GitHub账户的密码：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571212784.png" alt="Alt text" /></p>
+
+<p>添加成功：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571232023.png" alt="Alt text" /></p>
+
+<h2>测试你的SSH连接</h2>
+
+<p>参考网站：<a href="https://help.github.com/articles/testing-your-ssh-connection/">Testing your SSH connection</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~$ ssh -T git@github.com
+</span><span class='line'>Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+</span><span class='line'>Hi AoboJaing! You've successfully authenticated, but GitHub does not provide shell access.
+</span><span class='line'>ubuntu@ubuntu:~$</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>成功了。</h2>
+
+<p>我们现在再来重新测试最上面的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:turtlebot/turtlebot.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482574855747.png" alt="Alt text" /></p>
+
+<blockquote><p> 如果你在之前创建密钥的时候，给密钥添加的密码短语的话，在你执行<code>git clone XXX</code>的时候可能会让你输入密码短语：</p>
+
+<p> <code>Enter passphrase for key '/home/ubuntu/.ssh/id_rsa':</code></p></blockquote>
+
+<p>你现在可能会发现，下载速度好像有点慢啊。如何给Git提速呢。请参考<a href="http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当你使用了git，在你的GitHub账号的SSH keys管理的页面里面，可以看到：（它变绿了。）</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482572823425.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>你现在可以执行下面的命令，查看当前你的git的配置。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git config --list
+</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果里面什么都没有，想我现在这个样子。你可以去完善你的git配置。请参考<a href="https://help.github.com/articles/set-up-git/#platform-linux">这个网页</a>。</p>
+
+<hr />
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-12-25T15:27:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:27 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git-github/'>git_github</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/" title="Previous Post: Git(GitHub) 004 配置代理 目的：clone提速">&laquo; Git(GitHub) 004 配置代理 目的：clone提速</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal" data-title="Git(GitHub) 005 添加SSH密钥 — 解决：Permission denied (publickey) fatal The remote end hung up unexpectedly 问题" data-url="http://aobojaing.github.io /blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">Git(GitHub) 004 配置代理 目的：clone提速</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/">Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/">C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/">Intel RealSense 004(Learning RealSense SDK 003) DF_CameraViewer示例讲解</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
+<a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 139%" href="/tags/git/">Git</a>
+<a style="font-size: 139%" href="/tags/ide/">IDE</a>
+<a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
+<a style="font-size: 115%" href="/tags/linux/">Linux</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 147%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
+<a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
+<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 172%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 115%" href="/tags/gbk/">gbk</a>
+<a style="font-size: 129%" href="/tags/git/">git</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
+<a style="font-size: 115%" href="/tags/os/">os</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 168%" href="/tags/python/">python</a>
+<a style="font-size: 115%" href="/tags/python2/">python2</a>
+<a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
+<a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
+<li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (7)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
+<li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (9)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

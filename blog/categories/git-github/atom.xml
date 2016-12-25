@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git_github | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/git-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T15:14:43+08:00</updated>
+  <updated>2016-12-25T15:27:32+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/"/>
+    <updated>2016-12-25T15:27:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>当你下载一个源代码的时候。出现下面错误：</p>
+
+<pre><code>ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
+Cloning into 'turtlebot'...
+Permission denied (publickey).
+fatal: The remote end hung up unexpectedly
+ubuntu@ubuntu:~/catkin_ws/src$ 
+</code></pre>
+
+<p>此时需要添加SSH密钥。步骤如下：</p>
+
+<p>参考网址：<a href="https://help.github.com/articles/generating-an-ssh-key/">Generating an SSH key</a></p>
+
+<h2>步骤</h2>
+
+<p>先检查现有的SSH密钥</p>
+
+<pre><code>ls -al ~/.ssh
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>total 12
+drwx------  2 ubuntu ubuntu 4096 Dec 24 07:40 .
+drwxrwxr-x 32 ubuntu ubuntu 4096 Dec 24 07:29 ..
+-rw-r--r--  1 ubuntu ubuntu  884 Dec 24 07:40 known_hosts
+</code></pre>
+
+<p>默认的，公钥的文件名可能是下面的几个：</p>
+
+<pre><code>id_dsa.pub
+id_ecdsa.pub
+id_ed25519.pub
+id_rsa.pub
+</code></pre>
+
+<p>如果你现在没有公有的或者私有的钥匙，或者你不希望使用现有的任何一个去连接GitHub，这个时候，你可以去生成一个新的SSH密钥（SSH key）</p>
+
+<p>如果你在上面的输出中看到了现有的公有和私有的密钥（比如： <code>id_rsa.pub</code> 和 <code>id_rsa</code>），这个时候，你可以直接连接GitHub，你可以将你的SSH密钥添加到ssh-agent。</p>
+
+<h2>生成一个新的SSH密钥（SSH key）</h2>
+
+<p>当你查看了你现有的密钥后没有SSH密钥，现在你可以来生成一个新的SSH密钥，用来身份验证。然后在将它添加到ssh-agent。</p>
+
+<p>添加你的GitHub使用的e-mail地址：</p>
+
+<pre><code>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+</code></pre>
+
+<p>这是会创建一个新的SSH密钥，使用提供的电子邮件作为标签。</p>
+
+<pre><code>Generating public/private rsa key pair.
+</code></pre>
+
+<p>此时提示你：“输入一个用来保存钥匙的文件”，默认保存在<code>/Users/you/.ssh/id_rsa</code>,我们直接按回车键。（它保存的位置跟你当前路径没有关系，默认都是保存在<code>~/.ssh/id_rsa</code>路径（即<code>/home/ubuntu/.ssh/id_rsa</code>）里面。）</p>
+
+<pre><code>Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): 
+</code></pre>
+
+<p>接下来，它提示你输入密码短语(passphrase)，如果你直接按回车，就是没有密码。我们可以输入<code>123456</code>：（详细的信息：<a href="Working%20with%20SSH%20key%20passphrases">这里</a>）</p>
+
+<pre><code>Enter passphrase (empty for no passphrase): [Type a passphrase]
+Enter same passphrase again: [Type passphrase again]
+</code></pre>
+
+<p>现在，密钥就生成了。</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649196486.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>如果你不想在每次都使用你的SSH密钥重新输入你的密码短语，现在，你需要将你的密钥添加到SSH 代理（SSH Agent）中，它会管理你的SSH密钥，并记住你的密码短语。</p>
+
+<hr />
+
+<p>添加你的密钥（SSH key）到ssh-agent</p>
+
+<p>在你添加一个新的SSH密钥到ssh-agent去管理你的密钥之前，我们查看一下当前新生成的密钥：</p>
+
+<pre><code>ls -al ~/.ssh
+</code></pre>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569573667.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在启动 ssh-agent（SSH代理），如果它还没有运行的话。</p>
+
+<pre><code># start the ssh-agent in the background
+$ eval "$(ssh-agent -s)"
+Agent pid 2117
+</code></pre>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569662050.png" alt="Alt text" /></p>
+
+<p>这个时候，将你的SSH密钥添加到 ssh-agent。</p>
+
+<pre><code>ssh-add ~/.ssh/id_rsa
+</code></pre>
+
+<p>如果你你给你的SSH密钥设置了密码短语，你需要在输出提示<code>Enter passphrase for /home/ubuntu/.ssh/id_rsa:</code>时，输入密码短语（passphrase ）。</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570315247.png" alt="Alt text" /></p>
+
+<h2>将SSH密钥添加到你的GItHub账户上</h2>
+
+<p>参考网址：<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux">Adding a new SSH key to your GitHub account</a></p>
+
+<p>为了配置你的GitHub账户去使用你的新的SSH密钥，你需要将SSH密钥添加到你的GitHub账户上。</p>
+
+<p>第一步：复制共有密钥到剪切板上：</p>
+
+<pre><code>$ sudo apt-get install xclip
+# 下载并安装 xclip. 如果你没有 `apt-get` 工具, 你可以使用其他的下载工具 (比如 `yum`)
+
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+# 复制 id_rsa.pub 文件里面的内容到你的剪切板里
+</code></pre>
+
+<blockquote><p>注意，如果<code>xclip</code>工具不工作， 你可以直接手动复制。</p>
+
+<p> <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570795686.png" alt="Alt text" /></p>
+
+<p>  <code>cat ~/.ssh/id_rsa.pub</code></p>
+
+<p>  <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570885700.png" alt="Alt text" /></p></blockquote>
+
+<p>再任何一个GitHUb页面右上角 你的用户图标 -> Settings ：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570974088.png" alt="Alt text" /></p>
+
+<p>在用户设置侧边栏中，点击<strong>SSH and GPG keys</strong></p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571005369.png" alt="Alt text" /></p>
+
+<p>点击 <strong>New SSH key</strong></p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571081262.png" alt="Alt text" /></p>
+
+<p>输入这个SSH密钥的标题 和 公有密钥，然后点击 <strong>Add SSH key</strong>：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649285303.png" alt="Alt text" /></p>
+
+<p>输入GitHub账户的密码：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571212784.png" alt="Alt text" /></p>
+
+<p>添加成功：</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571232023.png" alt="Alt text" /></p>
+
+<h2>测试你的SSH连接</h2>
+
+<p>参考网站：<a href="https://help.github.com/articles/testing-your-ssh-connection/">Testing your SSH connection</a></p>
+
+<pre><code>ubuntu@ubuntu:~$ ssh -T git@github.com
+Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+Hi AoboJaing! You've successfully authenticated, but GitHub does not provide shell access.
+ubuntu@ubuntu:~$
+</code></pre>
+
+<h2>成功了。</h2>
+
+<p>我们现在再来重新测试最上面的命令：</p>
+
+<pre><code>git clone git@github.com:turtlebot/turtlebot.git
+</code></pre>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482574855747.png" alt="Alt text" /></p>
+
+<blockquote><p> 如果你在之前创建密钥的时候，给密钥添加的密码短语的话，在你执行<code>git clone XXX</code>的时候可能会让你输入密码短语：</p>
+
+<p> <code>Enter passphrase for key '/home/ubuntu/.ssh/id_rsa':</code></p></blockquote>
+
+<p>你现在可能会发现，下载速度好像有点慢啊。如何给Git提速呢。请参考<a href="http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当你使用了git，在你的GitHub账号的SSH keys管理的页面里面，可以看到：（它变绿了。）</p>
+
+<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482572823425.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>你现在可以执行下面的命令，查看当前你的git的配置。</p>
+
+<pre><code>ubuntu@ubuntu:~/catkin_ws/src$ git config --list
+ubuntu@ubuntu:~/catkin_ws/src$ 
+</code></pre>
+
+<p>如果里面什么都没有，想我现在这个样子。你可以去完善你的git配置。请参考<a href="https://help.github.com/articles/set-up-git/#platform-linux">这个网页</a>。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 004 配置代理 目的：clone提速]]></title>
@@ -347,104 +550,6 @@ git push origin v1.0
 <p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388817420.png" alt="Alt text" /></p>
 
 <blockquote><p>两个方法互不干扰，你使用了其中任意一种方法推送了修改，那么另外一种方法里面也好显示推送完成，没有修改的文件了。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git(Github) 001 介绍和下载安装图文教程 for Windows]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/"/>
-    <updated>2016-11-29T04:29:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我的电脑：Windows 10 系统 64位</p>
-
-<hr />
-
-<h2>介绍</h2>
-
-<p>Git for Windows 软件就是 Git；GitHub For Windows 软件是GitHub公司做的一个超级低门槛的使用软件，非常好。</p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p>在Windows上</p>
-
-<p>下载：<a href="https://desktop.github.com/">https://desktop.github.com/</a></p>
-
-<p>安装时，不管是<strong>以普通用户的身份</strong>，还是<strong>以管理员的身份</strong>运行 <strong>GitHubSetup.exe</strong> 软件。都会出现下面的结果：</p>
-
-<p>（这是在线下载，国内防火墙的原因，导致下载速度巨慢，最后连资源都找不到了。）
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067064738.png" alt="Alt text" /></p>
-
-<p>是没有办法成功安装的。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067095197.png" alt="Alt text" /></p>
-
-<p>点击 <strong>详细信息(D)&hellip;</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067512031.png" alt="Alt text" /></p>
-
-<p>如果你看到的内容大致和我的一样的话，那么下面的解决方法很适合你。</p>
-
-<hr />
-
-<h2>Step 1 不使用Github 官方的这个在线下载软件，而是去我的百度云盘里下载离线版的Github For Windows软件</h2>
-
-<blockquote><p>Github For Windows软件：你可以使用GUI可视化界面来使用GitHub，而不需要使用一些繁琐的Git命令，只需点点鼠标即可。</p></blockquote>
-
-<p>我在我的百度云盘里面有离线版的Github For Windows 文件，你可以去那下载。但是版本不是最新的，是2015/09/08 时候的版本。</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1o8CSgI2">http://pan.baidu.com/s/1o8CSgI2</a> 密码：cbos</p>
-
-<p>下载后，解压，直接双击里面的 <strong>GitHub.application</strong> 文件，进行安装。</p>
-
-<p>安装后，自动出现下面的窗口。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068914780.png" alt="Alt text" /></p>
-
-<p>现在你输入你的Github 用户名和密码，并点击 <strong>Log in</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069085322.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Continue</strong> 按钮。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069097529.png" alt="Alt text" /></p>
-
-<p>&hellip;</p>
-
-<hr />
-
-<p>现在你就可以使用它了。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070434905.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>Step 2 下载安装 Git For Windows</h2>
-
-<blockquote><p>Git For Windows 软件：你可以在任何文件夹里面空白的位置，点击鼠标右键，里面会有两项：Git Bash  和 Git GUI 。其中 最常用的就是 <strong>Git Bash</strong> ，它就是 一个命令行终端，你需要使用繁琐的<strong>Git</strong>命令来将你的工程代码放到<strong>Github</strong>网站里面管理。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070635983.png" alt="Alt text" /></p></blockquote>
-
-<p>我们下载 Git For Windows 。现在路径：<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a></p>
-
-<p>下载完，直接双击安装，一路 <strong>下一步</strong>，所有选项全部默认即可。</p>
-
-<hr />
-
-<p><strong>启动：</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068623495.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<blockquote><p><strong>总结：</strong></p>
-
-<p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
-
-<p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
 ]]></content>
   </entry>
   
