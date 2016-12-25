@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git_github | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/git-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T16:06:12+08:00</updated>
+  <updated>2016-12-25T16:16:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 007 如何删除一个库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-how-to-delete-a-library/"/>
+    <updated>2016-12-25T16:15:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-how-to-delete-a-library</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>来到将要删除的库：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648554835.png" alt="Alt text" /></p>
+
+<p>点击右上角的 <strong>Settings</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648576420.png" alt="Alt text" /></p>
+
+<p>调到 <strong>Settings</strong>网页，拉倒最后，你会看到下面这个样子：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648609056.png" alt="Alt text" /></p>
+
+<p>点击 <strong>Delelte this repository</strong> 按钮。</p>
+
+<p>弹出下面的提示窗口：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475649572270.png" alt="Alt text" /></p>
+
+<p>意思是说：</p>
+
+<p>你是否真的真的真的要这样做？</p>
+
+<p>如果你不阅读下面这些东西的话，不好的事情可能会意外地发生！</p>
+
+<p>这个动作不能撤消。这将永久删除AoboJaing/ AoboJaing.github.io库，维基，问题和评论，并删除所有合作者协会。</p>
+
+<p>为了再次确认，请输入资源库的名称。</p>
+
+<p>所以我如果真的想要删除这个资源库的话，输入这个资源库的名称，再点击 <strong>I understand the consequences, delete this repoitory</strong>  按钮。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 006 如何新建一个库]]></title>
@@ -415,48 +456,6 @@ git tag
 <li><a href="http://www.jianshu.com/p/79cdb8d514ed">http://www.jianshu.com/p/79cdb8d514ed</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/GitHub-For-Windows-Adding-tag/"/>
-    <updated>2016-12-01T08:04:17+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/GitHub-For-Windows-Adding-tag</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">git 创建标签</a></li>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">git 操作标签</a></li>
-<li><a href="http://stackoverflow.com/questions/13862517/github-for-windows-adding-tags">Github for Windows - Adding tags</a></li>
-</ul>
-
-
-<hr />
-
-<p>要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 <strong>Git 命令行窗口</strong>，还是要使用命令行工具来完成这个工作。</p>
-
-<p><img src="/images/2016-12-1-GitHub-For-Windows-Adding-tag/1480548346142.png" alt="Alt text" /></p>
-
-<pre><code>git tag -a v1.0 -m "description information"
-git push origin v1.0
-</code></pre>
-
-<hr />
-
-<p>当你执行完<code>git tag -a v1.0 -m "description information"</code>，想要查看一下，你可以执行：</p>
-
-<pre><code>git show v1.0
-</code></pre>
-
-<p>如果你执行完<code>git tag -a v1.0 -m "description information"</code>，想要删除这个标签，可以执行：</p>
-
-<pre><code>git tag -d v1.0
-</code></pre>
-
-<hr />
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: git | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/git/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T16:06:12+08:00</updated>
+  <updated>2016-12-25T16:16:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 007 如何删除一个库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-how-to-delete-a-library/"/>
+    <updated>2016-12-25T16:15:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-how-to-delete-a-library</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>来到将要删除的库：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648554835.png" alt="Alt text" /></p>
+
+<p>点击右上角的 <strong>Settings</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648576420.png" alt="Alt text" /></p>
+
+<p>调到 <strong>Settings</strong>网页，拉倒最后，你会看到下面这个样子：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648609056.png" alt="Alt text" /></p>
+
+<p>点击 <strong>Delelte this repository</strong> 按钮。</p>
+
+<p>弹出下面的提示窗口：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475649572270.png" alt="Alt text" /></p>
+
+<p>意思是说：</p>
+
+<p>你是否真的真的真的要这样做？</p>
+
+<p>如果你不阅读下面这些东西的话，不好的事情可能会意外地发生！</p>
+
+<p>这个动作不能撤消。这将永久删除AoboJaing/ AoboJaing.github.io库，维基，问题和评论，并删除所有合作者协会。</p>
+
+<p>为了再次确认，请输入资源库的名称。</p>
+
+<p>所以我如果真的想要删除这个资源库的话，输入这个资源库的名称，再点击 <strong>I understand the consequences, delete this repoitory</strong>  按钮。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 006 如何新建一个库]]></title>

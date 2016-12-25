@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 怎样编写模糊查询语句 &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 函数的分类 单行函数 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,184 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/">SQL 数据库 学习 026 查询-09 聚合函数 --- 多行记录返回至一个值，通常用于统计分组的信息</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T11:05:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:05 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>函数的分类</h2>
+
+<p>单行函数</p>
+
+<ul>
+<li>每一行返回一个值</li>
+</ul>
+
+
+<hr />
+
+<p>多行函数</p>
+
+<ul>
+<li>多行返回一个值</li>
+<li>聚合函数是多行函数</li>
+</ul>
+
+
+<hr />
+
+<p>例子：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--最终返回的是14行</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672968757.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回时1行 max() 是多行函数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672998766.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>聚合函数的分类</h2>
+
+<ul>
+<li><code>max()</code> 求最大值</li>
+<li><code>min()</code> 求最小值</li>
+<li><code>avg()</code> 平均值</li>
+<li><code>count()</code> 求个数
+
+<ul>
+<li><code>count(*)</code> ：返回表中所有的记录的个数</li>
+<li><code>count(字段名)</code> : 返回字段值非空的记录的个数， 重复的记录也会被当做有效记录</li>
+<li><code>count(distinct 字段名)</code> ：返回字段不重复并且非空的记录的个数</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回emp表所有记录的个数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673037243.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是14，这说明deptno重复的记录也被当做有效的记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673083683.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="k">distinct</span> <span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是3， 统计deptno不重复的记录的个数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673123560.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--返回值是4。 这说明comm为null的记录不会被当做有效的记录</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673148684.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>注意的问题</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673188904.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最高工资&quot;</span><span class="p">,</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最低工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;员工人数&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673238975.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--error 单行函数和多行函数不能混用</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1105,80 +1283,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">SQL 数据库 学习 016 如何附加数据库</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T19:06:49+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<p><strong>scott</strong> 例子库可以在下面的链接中下载：
-（百度云）</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1sl9zbm1">http://pan.baidu.com/s/1sl9zbm1</a> 密码：<code>nyly</code></p>
-
-<p>这个例子库可以通过 <strong>附加</strong> 的方式添加到 <strong>SQL Server</strong> 软件里面。（这个例子很经典。<strong>SQL Server</strong>软件 和 <code>Orale</code> 软件 都可以使用到这个例子库。）</p>
-
-<h2>添加 <code>scott</code> 库 到<strong>SQL Server</strong> 软件</h2>
-
-<p><strong>Step 1 . </strong> 鼠标右键点击 <strong>数据库</strong> -> <strong>附加(A)&hellip;</strong></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610765494.png" alt="Alt text" /></p>
-
-<p><strong>Step 2 . </strong></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610825463.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610863975.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610918053.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610933947.png" alt="Alt text" /></p>
-
-<blockquote><p>如果你遇到下面的问题，请访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Solve-problem-Microsoft-SQL-Server-error-5120/">这个网站</a>解决问题。</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476610946090.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476612674466.png" alt="Alt text" /></p></blockquote>
-
-<p>成功添加：</p>
-
-<p><img src="/images/2016-10-16-SQL-Learning-016-how-to-attach-a-database/1476615669199.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1196,6 +1300,10 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-delete-a-library/">Git(GitHub) 007 如何删除一个库</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a>
       </li>
     
@@ -1209,10 +1317,6 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     
       <li class="post">
         <a href="/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/">Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/">C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换</a>
       </li>
     
   </ul>
@@ -1244,7 +1348,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
-<a style="font-size: 139%" href="/tags/git/">git</a>
+<a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -1275,7 +1379,7 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
-<li class='category'><a href='/blog/categories/git-github/'>git_github (8)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
