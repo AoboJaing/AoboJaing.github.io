@@ -133,6 +133,9 @@ tags: [pcduino, pcduino3B, Ubuntu NAND]
 
 总之，这一步（**Step 3 . **）的目的就是：让`update.sh`文件里面的`IMG`变量指向正确的镜像文件路径。
 
+> **注意：** 如果你使用的镜像文件是：**pcduino3_ubuntu_20140807.img**，它是有GUI界面的；如果你使用的镜像文件是**pcduino3nano_ubuntu_20140807.img**，它是没有GUI界面的，它只有命令行界面。
+
+
 **Step 4 . ** 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）
 
 ![Alt text](/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480943598183.png)
