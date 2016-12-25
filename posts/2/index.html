@@ -9,9 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="目前的Intel RealSense摄像头一共有三款：F200、SR300、R200。 SR300 和 F200 都属于：近距离摄像头（Front Facing）。
-R200 属于：远距离摄像头（Rear Facing）
-在Intel RealSense 官方示例程序中，总会在程序的前缀出现： &hellip;">
+  <meta name="description" content="不管你使用Intel RealSense的哪款摄像头，本文都适合你。 对于开发环境（就是你编写程序），你有两个选择： Intel RealSense SDK（有要求：Windows 10系统）
+librealsense（Intel RealSense跨平台API） &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,47 @@ R200 属于：远距离摄像头（Rear Facing）
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-14T18:58:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:58 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<blockquote><p>不管你使用Intel RealSense的哪款摄像头，本文都适合你。</p></blockquote>
+
+<p>对于开发环境（就是你编写程序），你有两个选择：</p>
+
+<ul>
+<li><a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense SDK</a>（有要求：Windows 10系统）</li>
+<li><a href="https://github.com/IntelRealSense/librealsense">librealsense</a>（Intel RealSense跨平台API）</li>
+</ul>
+
+
+<p>我个人推荐使用<code>librealsense</code>这个跨平台库，它让Intel RealSense摄像头在Linux系统上使用。并且同时可以在Linux系统里面的ROS机器人操作系统里面使用Intel RealSense。（<a href="http://wiki.ros.org/librealsense">这里</a>）</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -967,99 +1007,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-06T00:04:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:04 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>开发环境</h2>
-
-<ul>
-<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
-<li>Python 版本：python-3.5.0-amd64</li>
-<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
-<li>电脑系统：Windows 10 64位</li>
-</ul>
-
-
-<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
-
-<hr />
-
-<p>所有的设置都是在scrapy爬虫项目中的<code>settings.py</code> 文件中进行设置。</p>
-
-<p><strong>Step 1 . </strong> 设置爬虫不遵循 <code>robots.txt</code>协议</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Obey robots.txt rules
-</span><span class='line'>ROBOTSTXT_OBEY = False</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952600971.png" alt="Alt text" /></p>
-
-<blockquote><p>想要了解什么是<code>robots.txt</code>协议，请访问这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52586126">解析 robots.txt 文件</a>。</p></blockquote>
-
-<p><strong>Step 2 . </strong> 设置取消<strong>Cookies</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Disable cookies (enabled by default)</span>
-</span><span class='line'><span class="n">COOKIES_ENABLED</span> <span class="o">=</span> <span class="bp">False</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952959564.png" alt="Alt text" /></p>
-
-<blockquote><p><strong>Cookies</strong>：</p>
-
-<p> 简单的说，Cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机。当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookie 会帮你在网站上所打的文字或是一些选择，都记录下来。当下次你再光临同一个网站，Web服务器会先看看有没有它上次留下的Cookie资料，有的话，就会依据Cookie里的内容来判断使用者，送出特定的网页内容给你。</p></blockquote>
-
-<p><strong>Step 3 . </strong> 设置用户代理值（<code>USER_AGENT</code>）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span>
-</span><span class='line'><span class="n">USER_AGENT</span> <span class="o">=</span> <span class="s">&#39;Mozilla/xxx (Windows xxx; Winxx; xxx) AppleWebKit/xxx (KHTML, like Gecko) Chrome/xxxx Safari/xxx&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953048379.png" alt="Alt text" /></p>
-
-<p>这个 用户代理可以在浏览器里面找到：</p>
-
-<p>随便浏览一个网页，按<strong>F12</strong> -> <strong>Network</strong> -> <strong>F5</strong>，随便点击一项，你都能看到有 <strong>User-agent</strong> 这一项，将这里面的内容拷贝就可以。</p>
-
-<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953359818.png" alt="Alt text" /></p>
-
-<p><strong>Step 4 . </strong> 设置IP</p>
-
-<p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1077,6 +1024,10 @@ ls
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/">Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/25/python-Web-crawler-proxy-support/">Python 网络爬虫 011 (高级功能) 支持代理proxy — 让爬虫可以翻墙爬取网站</a>
       </li>
     
@@ -1090,10 +1041,6 @@ ls
     
       <li class="post">
         <a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">Git(GitHub) 004 配置代理 目的：clone提速</a>
       </li>
     
   </ul>
@@ -1112,11 +1059,11 @@ ls
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
-<a style="font-size: 147%" href="/tags/python3/">Python3</a>
+<a style="font-size: 154%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 115%" href="/tags/sr300/">SR300</a>
-<a style="font-size: 115%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 129%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
 <a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
@@ -1141,7 +1088,7 @@ ls
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
-<a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 139%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
@@ -1162,7 +1109,7 @@ ls
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
-<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (9)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (10)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

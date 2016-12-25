@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="[TOC] 开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
+Python 版本：python-3.5.0-amd64
+PyCharm软件版本：pycharm-professional-2016.1.4
+电脑系统：Windows 10 64位 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>代码在暴走，一切抛到脑后。Party开始，欢迎来到我的王国，跟着这flow，这个空间没有对错。</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-26T00:14:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<p>[TOC]</p>
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<ul>
+<li>本篇博客源代码GitHub里：<a href="https://github.com/AoboJaing/secondDemo/">这里</a>。</li>
+</ul>
+
+
+<p>这一篇博客的目的是爬取 <a href="http://www.169bb.com/">169美女图片网</a> 里面的所有的“<a href="http://www.169bb.com/xiyangmeinv/">西洋美女</a>”的高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480187579013.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>爬虫程序设计思路：</p>
+
+<p>1 . 先得到 <a href="http://www.169bb.com/xiyangmeinv/">http://www.169bb.com/xiyangmeinv/</a> 页面里面所有的照片后面对应的URL网页链接（<a href="http://www.169bb.com/xiyangmeinv/2016/1123/37380.html">如</a>）。</p>
+
+<p>2 . 接着在得到的URL链接网页里面得到里面所有高清图片的下载地址，进行下载。</p>
+
+<p>3 . 得到所有 “西洋美女” 网页的页数。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480187965472.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>观察网页 和 网页源代码</h2>
+
+<p>1 . 打开 169美女图片网：<a href="http://www.169bb.com/">http://www.169bb.com/</a></p>
+
+<p>2 . 我们的目的是爬取这个站点里面所有 “西洋美女” 的高清图片。所以点击进入“西洋美女” 标签里。（<a href="http://www.169bb.com/xiyangmeinv/%EF%BC%89">http://www.169bb.com/xiyangmeinv/%EF%BC%89</a></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188171424.png" alt="Alt text" /></p>
+
+<p>3 . 观察这个页面，在页面最下面，显示了，当前一共311页。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188308560.png" alt="Alt text" /></p>
+
+<p>4 . 我们再来观察每页的网址有什么共同点，我们发现：第2页的网站是：<a href="http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html">http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html</a></p>
+
+<p>这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：<a href="http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82">http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82</a></p>
+
+<p>5 . 现在，我们随便点击一个图片，进去看看这个美女的高清图片集。</p>
+
+<p>里面都是高清的图片，并且有很多，并且，不止一页。就我随机点击的这个美女的链接就有11页，并且一页里面有5张左右的高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188754820.png" alt="Alt text" /></p>
+
+<p>6 . 并且它的每页的网址也是有规律的。</p>
+
+<p>第2页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html</a>
+第3页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html</a>
+第1页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333.html</a>
+&hellip;</p>
+
+<p>但是有的美女的网址里只有一页，比如这个：<a href="http://www.169bb.com/xiyangmeinv/2016/0103/5974.html">http://www.169bb.com/xiyangmeinv/2016/0103/5974.html</a></p>
+
+<hr />
+
+<p>好了，现在这个目标网页，我们已经分析完了。现在就可以编程。</p>
+
+<hr />
+
+<h2>写程序</h2>
+
+<p>源代码GitHub里：<a href="https://github.com/AoboJaing/secondDemo/">这里</a>。</p>
+
+<p>接下来我们为大家讲解大型图片爬虫项目编写实战。</p>
+
+<p><strong>Step 1 . </strong></p>
+
+<p>创建一个Scrapy爬虫项目：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy startproject secondDemo</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190424967.png" alt="Alt text" /></p>
+
+<p>创建一个scrapy爬虫文件，我们就在这个文件里面写爬取目标网站里面图片的爬虫程序。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd secondDemo
+</span><span class='line'>scrapy genspider -t basic pic_169bb 169bb.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190488955.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>用 <strong>PyCharm</strong> 软件打开刚刚创建的 <code>secondDemo</code> 工程。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190609159.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 在 <code>items.py</code> 文件里面的<code>SeconddemoItem()</code>函数里面创建一个对象，这个对象在其他的文件里面会使用到。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480191956323.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 现在开始爬虫的编写。进入<code>pic_169bb.py</code>文件。</p>
+
+<p>爬虫（<code>pic_169bb.py</code>文件）会自动的先爬首页（<a href="http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5">http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5</a><code>parse()</code>回调函数。</p>
+
+<p>这个回调函数中，我们需要写些东西。</p>
+
+<p>先获取所有栏目的名字和地址。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480192407198.png" alt="Alt text" /></p>
+
+<p>查看源代码：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480192613372.png" alt="Alt text" /></p>
+
+<p>在<code>pic_169bb.py</code> 文件中的 <code>parse()</code>回调函数中添加下面的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">urldata</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body/div[@class=&#39;header&#39;]/div[@class=&#39;hd_nav&#39;]/div[@class=&#39;w1000&#39;]//a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">urldata</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480196844577.png" alt="Alt text" /></p>
+
+<p>现在运行一下，输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480196997090.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>继续进行下一次的爬取：</p>
+
+<p>先导入一个模块</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">scrapy.http</span> <span class="kn">import</span> <span class="n">Request</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>爬取子栏目的第一页，即西洋美女网址的第一页。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">xiyangurldata</span> <span class="o">=</span> <span class="n">urldata</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>  <span class="c"># 获取西洋美女首页网址</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">xiyangurldata</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">xiyangurldata</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480198132160.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">page_title_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@alt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">page_title_list</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">page_url_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">page_url_list</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200182166.png" alt="Alt text" /></p>
+
+<p>运行输出一下：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200281135.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200630246.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">page_num</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//span[@class=&#39;pageinfo&#39;]//strong/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># 得到西洋美女总页数</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">page_num</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">page_num</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">page_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">&#39;list_4_&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span> <span class="c"># 得到西洋美女每一个页面的网址</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">page_url</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201913887.png" alt="Alt text" /></p>
+
+<p>运行输出一下：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201965248.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201944373.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>继续下一次：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">page_num</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">page_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">&#39;list_4_&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span> <span class="c"># 得到西洋美女每一个页面的网址</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">page_url</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next2</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">next2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480202151141.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在获取每一个美女的网页网址：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">page_title_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@alt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="c"># print(page_title_list)</span>
+</span><span class='line'>    <span class="n">page_url_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="c"># print(page_url_list)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_url_list</span><span class="p">)):</span>
+</span><span class='line'>        <span class="n">gril_page_url</span> <span class="o">=</span> <span class="n">page_url_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">gril_page_url</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">gril_page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next3</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">next3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480203708834.png" alt="Alt text" /></p>
+
+<p>运行程序看看：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480203763527.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><code>next3()</code> 这个回调函数的功能就是得到一个美女网页里面的所有的页面的网址。</p>
+
+<p>有的美女的网页里面只有一个页面，有的美女的网页里面有多个页面：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656828793.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656883815.png" alt="Alt text" /></p>
+
+<p>可以统一解决。</p>
+
+<hr />
+
+<p>测试：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480204459567.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480204419920.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205200021.png" alt="Alt text" /></p>
+
+<p>输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205472599.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656683950.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205432817.png" alt="Alt text" /></p>
+
+<p>同样的回调函数</p>
+
+<p>输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205458465.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>所以，我们可以这样写程序：</p>
+
+<p>当得到的页码为-3，说明这个美女的网页是单页的；如果得到的页码数不等于-3，说明这个美女的网页是多也的。</p>
+
+<p>测试程序：</p>
+
+<p>对于多页面的美女网页网址</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480229614160.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480229673684.png" alt="Alt text" /></p>
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">secondDemo</span><span class="o">&gt;</span><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">pic_169bb</span> <span class="o">--</span><span class="n">nolog</span>
+</span><span class='line'><span class="mi">10</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mf">36463.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_5</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_10</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_9</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_6</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_8</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_7</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_3</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_4</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0717</span><span class="o">/</span><span class="mi">36463</span><span class="n">_2</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">secondDemo</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于单页面的美女网页：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>    <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;http://www.169bb.com/xiyangmeinv/2016/0103/2268.html&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demo</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>回调函输一样。</p>
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">secondDemo</span><span class="o">&gt;</span><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">pic_169bb</span> <span class="o">--</span><span class="n">nolog</span>
+</span><span class='line'><span class="o">-</span><span class="mi">3</span>
+</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="mi">169</span><span class="n">bb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiyangmeinv</span><span class="o">/</span><span class="mi">2016</span><span class="o">/</span><span class="mo">0103</span><span class="o">/</span><span class="mf">2268.</span><span class="n">html</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">secondDemo</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>成功。</p>
+
+<p>所以现在的爬虫代码应该是这样的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">scrapy</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scrapy.http</span> <span class="kn">import</span> <span class="n">Request</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Pic169bbSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;pic_169bb&quot;</span>
+</span><span class='line'>    <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;169bb.com&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://169bb.com/&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">title_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body/div[@class=&#39;header&#39;]/div[@class=&#39;hd_nav&#39;]/div[@class=&#39;w1000&#39;]//a/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="c"># print(title_list)</span>
+</span><span class='line'>        <span class="n">urldata</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body/div[@class=&#39;header&#39;]/div[@class=&#39;hd_nav&#39;]/div[@class=&#39;w1000&#39;]//a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="c">#print(urldata)</span>
+</span><span class='line'>        <span class="n">xiyang_title</span> <span class="o">=</span> <span class="n">title_list</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c"># 获取西洋美女标签的文本内容</span>
+</span><span class='line'>        <span class="n">xiyang_urldata</span> <span class="o">=</span> <span class="n">urldata</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>  <span class="c"># 获取西洋美女首页网址</span>
+</span><span class='line'>        <span class="c"># print(xiyang_title, xiyang_urldata)</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">xiyang_urldata</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># yield Request(url=&#39;http://www.169bb.com/xiyangmeinv/2016/0717/36463.html&#39;, callback=self.demo)</span>
+</span><span class='line'>        <span class="c"># yield Request(url=&#39;http://www.169bb.com/xiyangmeinv/2016/0103/2268.html&#39;, callback=self.demo)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">page_num_str</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//span[@class=&#39;pageinfo&#39;]//strong/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># 得到西洋美女总页数</span>
+</span><span class='line'>        <span class="c"># print(page_num_str)</span>
+</span><span class='line'>        <span class="c"># print(response.url)</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">page_num_str</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">page_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">&#39;list_4_&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span> <span class="c"># 得到西洋美女每一个页面的网址</span>
+</span><span class='line'>            <span class="c"># print(page_url)</span>
+</span><span class='line'>            <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next2</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">next2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">page_title_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@alt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="c"># print(page_title_list)</span>
+</span><span class='line'>        <span class="n">page_url_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;/html/body//div[@class=&#39;w1000 box03&#39;]/ul[@class=&#39;product01&#39;]//li/a/@href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="c"># print(page_url_list)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_url_list</span><span class="p">)):</span>
+</span><span class='line'>            <span class="n">gril_page_url</span> <span class="o">=</span> <span class="n">page_url_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c"># 得到西洋美女页面里面每一个美女的网页网址</span>
+</span><span class='line'>            <span class="k">print</span><span class="p">(</span><span class="n">gril_page_url</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">gril_page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next3</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">next3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">rela_pages_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;dede_pages&#39;]/ul//li/a/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">pages_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rela_pages_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+</span><span class='line'>        <span class="c"># print(pages_num)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">getPic</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">pages_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+</span><span class='line'>            <span class="c"># pages_num = 1</span>
+</span><span class='line'>            <span class="k">return</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pages_num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">girl_page_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.html&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span>
+</span><span class='line'>            <span class="c"># print(girl_page_url)</span>
+</span><span class='line'>            <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">girl_page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next4</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c"># def demo(self, response):</span>
+</span><span class='line'>    <span class="c"># #     rela_pages_list = response.xpath(&quot;//div[@class=&#39;dede_pages&#39;]/ul//li/a/text()&quot;).extract()</span>
+</span><span class='line'>    <span class="c"># #     pages_num = len(rela_pages_list)-3</span>
+</span><span class='line'>    <span class="c"># #     print(pages_num)</span>
+</span><span class='line'>    <span class="c"># #     pass</span>
+</span><span class='line'>    <span class="c">#     rela_pages_list = response.xpath(&quot;//div[@class=&#39;dede_pages&#39;]/ul//li/a/text()&quot;).extract()</span>
+</span><span class='line'>    <span class="c">#     pages_num = len(rela_pages_list) - 3</span>
+</span><span class='line'>    <span class="c">#     # print(pages_num)</span>
+</span><span class='line'>    <span class="c">#     self.getPic(response)</span>
+</span><span class='line'>    <span class="c">#     if pages_num == -3:</span>
+</span><span class='line'>    <span class="c">#         # pages_num = 1</span>
+</span><span class='line'>    <span class="c">#         return</span>
+</span><span class='line'>    <span class="c">#     for i in range(2, pages_num+1):</span>
+</span><span class='line'>    <span class="c">#         girl_page_url = response.url.replace(&#39;.html&#39;, &#39;_&#39;) + str(i) + &#39;.html&#39;</span>
+</span><span class='line'>    <span class="c">#         # print(girl_page_url)</span>
+</span><span class='line'>    <span class="c">#         yield Request(url=girl_page_url, callback=self.next4)</span>
+</span><span class='line'>    <span class="c">#     pass</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">next4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">getPic</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">getPic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在，我们需要在<code>getPic()</code> 函数中获取每一个美女网页的每一个页面里面的所有高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480231492634.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">getPic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># print(response.url)</span>
+</span><span class='line'>    <span class="n">item</span> <span class="o">=</span> <span class="n">SeconddemoItem</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;big-pic&#39;]/div[@class=&#39;big_img&#39;]//p/img/@src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">])</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试运行：</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480230996305.png" alt="Alt text" /></p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480237427282.png" alt="Alt text" /></p>
+
+<p>成功。</p>
+
+<hr />
+
+<h3>下载高清图片</h3>
+
+<p>OK，现在我们就已经得到了所有西洋美女的所有高清图片的下载地址，我们在<code>piplines.py</code> 文件中使用它们。</p>
+
+<p>删除了<code>next4()</code>回调函数。在<code>demo()</code>回调函数里面调用的都是<code>getPic()</code>回调函数。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">demo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'><span class="c">#     rela_pages_list = response.xpath(&quot;//div[@class=&#39;dede_pages&#39;]/ul//li/a/text()&quot;).extract()</span>
+</span><span class='line'><span class="c">#     pages_num = len(rela_pages_list)-3</span>
+</span><span class='line'><span class="c">#     print(pages_num)</span>
+</span><span class='line'><span class="c">#     pass</span>
+</span><span class='line'>    <span class="n">rela_pages_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;dede_pages&#39;]/ul//li/a/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">pages_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rela_pages_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+</span><span class='line'>    <span class="c"># print(pages_num)</span>
+</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">getPic</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">pages_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+</span><span class='line'>        <span class="c"># pages_num = 1</span>
+</span><span class='line'>        <span class="k">return</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pages_num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">girl_page_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.html&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span>
+</span><span class='line'>        <span class="c"># print(girl_page_url)</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">girl_page_url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getPic</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># error : yield 经过了一个中间函数，运行就有问题。我现在还不知道为什么</span>
+</span><span class='line'><span class="c"># def next4(self, response):</span>
+</span><span class='line'><span class="c">#     self.getPic(response)</span>
+</span><span class='line'><span class="c">#     pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>并将<code>getPic()</code>函数里面的item写到生成器里面：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">getPic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># print(response.url)</span>
+</span><span class='line'>    <span class="n">item</span> <span class="o">=</span> <span class="n">SeconddemoItem</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;big-pic&#39;]/div[@class=&#39;big_img&#39;]//p/img/@src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="c"># print(item[&#39;url&#39;])</span>
+</span><span class='line'>    <span class="c"># pass</span>
+</span><span class='line'>    <span class="k">yield</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试：</p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.getPic)</code></p>
+
+<p>成功。</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480230996305.png" alt="Alt text" /></p>
+
+<p>也算算成功，因为有重复的文件名，所以自动替换，所以这里需要做修改。</p>
+
+<p>我们可以使用美女图片网址里面的数字作为图片文件名的固定前缀来给图片命名，使用正则表达式获取网址的数字。</p>
+
+<hr />
+
+<p>在 <code>pipelines.py</code> 文件 中的 <code>process_item()</code> 函数中使用正则表达式得到图片下载网址的数字：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">re</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">urllib.request</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SeconddemoPipeline</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+</span><span class='line'>        <span class="c"># print(len(item[&#39;url&#39;]))</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">])):</span>
+</span><span class='line'>            <span class="n">this_url</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+</span><span class='line'>            <span class="nb">id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;http://724.169pp.net/169mm/(.*?).jpg&#39;</span><span class="p">,</span> <span class="n">this_url</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>            <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>            <span class="c"># file = &#39;D:/WorkSpace/python_ws/python-large-web-crawler/xiyangmeinv/&#39; + str(i) + &#39;.jpg&#39;</span>
+</span><span class='line'>            <span class="c"># print(&#39;Downloading :&#39; , file)</span>
+</span><span class='line'>            <span class="c"># urllib.request.urlretrieve(this_url, filename=file)</span>
+</span><span class='line'>            <span class="c"># print(&#39;Final Download :&#39; , file)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241683726.png" alt="Alt text" /></p>
+
+<p>要想使用 <code>pipelines.py</code> 文件 中的 <code>SeconddemoPipeline</code> 类，需要在 <code>settings.py</code> 文件里面设置 <code>ITEM_PIPELINES</code> 项：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">ITEM_PIPELINES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>   <span class="s">&#39;secondDemo.pipelines.SeconddemoPipeline&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242336499.png" alt="Alt text" /></p>
+
+<blockquote><p>这里，我有一件事情不懂，关于正则表达式的： 网址里面的<code>.</code> 也是正则表达式中的工具字符，也是数据中中的内容，那么正则表达式是如何分辨它在这里是功能字符还是内容字符？</p></blockquote>
+
+<p>在<code>pic_169bb.py</code> 文件的<code>demo()</code> 回调函数中，这样写才能获取到美女网页的第一页的图片地址：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="c"># error</span>
+</span><span class='line'>    <span class="c"># self.getPic(response)</span>
+</span><span class='line'>    <span class="c"># succes 为啥将下面的代码用self.getPic(response)的形式不能正常的获取到，而使用下面的代码却能获取到？</span>
+</span><span class='line'>    <span class="n">item</span> <span class="o">=</span> <span class="n">SeconddemoItem</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;big-pic&#39;]/div[@class=&#39;big_img&#39;]//p/img/@src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+</span><span class='line'>    <span class="c"># print(item[&#39;url&#39;])</span>
+</span><span class='line'>    <span class="c"># pass</span>
+</span><span class='line'>    <span class="k">yield</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241496168.png" alt="Alt text" /></p>
+
+<p>运行程序试试：</p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.getPic)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241922348.png" alt="Alt text" /></p>
+
+<p>成功。</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241935773.png" alt="Alt text" /></p>
+
+<p>都成功。</p>
+
+<hr />
+
+<p>先测试下载图片：</p>
+
+<p>将 <code>pipelines.py</code> 文件 中的 <code>SeconddemoPipeline</code> 类的<code>process_item()</code> 函数里面，添加代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># print(len(item[&#39;url&#39;]))</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">])):</span>
+</span><span class='line'>        <span class="n">this_url</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+</span><span class='line'>        <span class="nb">id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;http://724.169pp.net/169mm/(.*?).jpg&#39;</span><span class="p">,</span> <span class="n">this_url</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># print(id)</span>
+</span><span class='line'>        <span class="nb">file</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/python_ws/python-large-web-crawler/xiyangmeinv/&#39;</span> <span class="o">+</span> <span class="nb">id</span> <span class="o">+</span> <span class="s">&#39;.jpg&#39;</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Downloading :&#39;</span> <span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">this_url</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="nb">file</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Final Download :&#39;</span> <span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242553614.png" alt="Alt text" /></p>
+
+<p>运行程序，没有毛病：（除了下载速度有点慢）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242613763.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>下载 169美女图片网 的所有西洋美女的图片</h2>
+
+<p>在 <code>pic_169bb.py</code>文件里， 将<code>parse()</code>函数的最后一行改为：<code>yield Request(url=xiyang_urldata, callback=self.next)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242895996.png" alt="Alt text" /></p>
+
+<p>将 <code>demo()</code> 函数里面的所有代码复制一份到 <code>next3()</code>函数里：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242867282.png" alt="Alt text" /></p>
+
+<p>现在，运行程序：（最终的程序）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480243169351.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480243201173.png" alt="Alt text" /></p>
+
+<p>成功！</p>
+
+<hr />
+
+<h2>防反爬技术</h2>
+
+<p><strong>Step 4 . </strong> 不遵循 <code>robots.txt</code> 协议。</p>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>ROBOTSTXT_OBEY</code> 项设置为：<code>False</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480195250963.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>Step 6 . </strong> 模仿浏览器</p>
+
+<blockquote><p>请先查看这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52489709">http://blog.csdn.net/github_35160620/article/details/52489709</a> 里面是：<strong>六 . 设置 用户代理（user_agent）</strong>。</p></blockquote>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>USER_AGENT</code> 项设置为：浏览器的用户代理信息。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">USER_AGENT</span> <span class="o">=</span> <span class="s">&#39;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.22 Safari/537.36 SE 2.X MetaSr 1.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><strong>Step 7 . </strong>  禁止缓存</p>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>COOKIES_ENABLED</code> 项设置为：<code>False</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">COOKIES_ENABLED</span> <span class="o">=</span> <span class="bp">False</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>需要升级的地方:（2016-11-27 19:34:34）</p>
+
+<ol>
+<li>在易错的代码段加上异常检测程序</li>
+<li>在下载图片的代码加上：超时异常检测程序</li>
+<li>记录成功下载的、超时失败下载的、链接失败下载的 信息</li>
+<li>添加断点续下功能。</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-12-26T00:14:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:14 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/12/25/python-Web-crawler-proxy-support/" title="Previous Post: Python 网络爬虫 011 (高级功能)  支持代理proxy — 让爬虫可以翻墙爬取网站">&laquo; Python 网络爬虫 011 (高级功能)  支持代理proxy — 让爬虫可以翻墙爬取网站</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures" data-title="Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片" data-url="http://aobojaing.github.io /blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/">Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/python-Web-crawler-proxy-support/">Python 网络爬虫 011 (高级功能) 支持代理proxy — 让爬虫可以翻墙爬取网站</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-delete-a-library/">Git(GitHub) 007 如何删除一个库</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
+<a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 139%" href="/tags/git/">Git</a>
+<a style="font-size: 139%" href="/tags/ide/">IDE</a>
+<a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
+<a style="font-size: 115%" href="/tags/linux/">Linux</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 154%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
+<a style="font-size: 129%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
+<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 172%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 115%" href="/tags/gbk/">gbk</a>
+<a style="font-size: 147%" href="/tags/git/">git</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
+<a style="font-size: 115%" href="/tags/os/">os</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 168%" href="/tags/python/">python</a>
+<a style="font-size: 129%" href="/tags/python2/">python2</a>
+<a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
+<a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 139%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
+<li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
+<li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (10)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (5)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

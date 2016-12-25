@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 爬取图片 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/pa-qu-tu-pian/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-26T00:19:28+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/"/>
+    <updated>2016-12-26T00:14:57+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>[TOC]</p>
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<ul>
+<li>本篇博客源代码GitHub里：<a href="https://github.com/AoboJaing/secondDemo/">这里</a>。</li>
+</ul>
+
+
+<p>这一篇博客的目的是爬取 <a href="http://www.169bb.com/">169美女图片网</a> 里面的所有的“<a href="http://www.169bb.com/xiyangmeinv/">西洋美女</a>”的高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480187579013.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>爬虫程序设计思路：</p>
+
+<p>1 . 先得到 <a href="http://www.169bb.com/xiyangmeinv/">http://www.169bb.com/xiyangmeinv/</a> 页面里面所有的照片后面对应的URL网页链接（<a href="http://www.169bb.com/xiyangmeinv/2016/1123/37380.html">如</a>）。</p>
+
+<p>2 . 接着在得到的URL链接网页里面得到里面所有高清图片的下载地址，进行下载。</p>
+
+<p>3 . 得到所有 “西洋美女” 网页的页数。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480187965472.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>观察网页 和 网页源代码</h2>
+
+<p>1 . 打开 169美女图片网：<a href="http://www.169bb.com/">http://www.169bb.com/</a></p>
+
+<p>2 . 我们的目的是爬取这个站点里面所有 “西洋美女” 的高清图片。所以点击进入“西洋美女” 标签里。（<a href="http://www.169bb.com/xiyangmeinv/%EF%BC%89">http://www.169bb.com/xiyangmeinv/%EF%BC%89</a></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188171424.png" alt="Alt text" /></p>
+
+<p>3 . 观察这个页面，在页面最下面，显示了，当前一共311页。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188308560.png" alt="Alt text" /></p>
+
+<p>4 . 我们再来观察每页的网址有什么共同点，我们发现：第2页的网站是：<a href="http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html">http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html</a></p>
+
+<p>这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：<a href="http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82">http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82</a></p>
+
+<p>5 . 现在，我们随便点击一个图片，进去看看这个美女的高清图片集。</p>
+
+<p>里面都是高清的图片，并且有很多，并且，不止一页。就我随机点击的这个美女的链接就有11页，并且一页里面有5张左右的高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188754820.png" alt="Alt text" /></p>
+
+<p>6 . 并且它的每页的网址也是有规律的。</p>
+
+<p>第2页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html</a>
+第3页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html</a>
+第1页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333.html</a>
+&hellip;</p>
+
+<p>但是有的美女的网址里只有一页，比如这个：<a href="http://www.169bb.com/xiyangmeinv/2016/0103/5974.html">http://www.169bb.com/xiyangmeinv/2016/0103/5974.html</a></p>
+
+<hr />
+
+<p>好了，现在这个目标网页，我们已经分析完了。现在就可以编程。</p>
+
+<hr />
+
+<h2>写程序</h2>
+
+<p>源代码GitHub里：<a href="https://github.com/AoboJaing/secondDemo/">这里</a>。</p>
+
+<p>接下来我们为大家讲解大型图片爬虫项目编写实战。</p>
+
+<p><strong>Step 1 . </strong></p>
+
+<p>创建一个Scrapy爬虫项目：</p>
+
+<pre><code>scrapy startproject secondDemo
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190424967.png" alt="Alt text" /></p>
+
+<p>创建一个scrapy爬虫文件，我们就在这个文件里面写爬取目标网站里面图片的爬虫程序。</p>
+
+<pre><code>cd secondDemo
+scrapy genspider -t basic pic_169bb 169bb.com
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190488955.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>用 <strong>PyCharm</strong> 软件打开刚刚创建的 <code>secondDemo</code> 工程。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480190609159.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 在 <code>items.py</code> 文件里面的<code>SeconddemoItem()</code>函数里面创建一个对象，这个对象在其他的文件里面会使用到。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480191956323.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 现在开始爬虫的编写。进入<code>pic_169bb.py</code>文件。</p>
+
+<p>爬虫（<code>pic_169bb.py</code>文件）会自动的先爬首页（<a href="http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5">http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5</a><code>parse()</code>回调函数。</p>
+
+<p>这个回调函数中，我们需要写些东西。</p>
+
+<p>先获取所有栏目的名字和地址。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480192407198.png" alt="Alt text" /></p>
+
+<p>查看源代码：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480192613372.png" alt="Alt text" /></p>
+
+<p>在<code>pic_169bb.py</code> 文件中的 <code>parse()</code>回调函数中添加下面的代码：</p>
+
+<pre><code class="python">        urldata = response.xpath("/html/body/div[@class='header']/div[@class='hd_nav']/div[@class='w1000']//a/@href").extract()
+        print(urldata)
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480196844577.png" alt="Alt text" /></p>
+
+<p>现在运行一下，输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480196997090.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>继续进行下一次的爬取：</p>
+
+<p>先导入一个模块</p>
+
+<pre><code class="python">from scrapy.http import Request
+</code></pre>
+
+<hr />
+
+<p>爬取子栏目的第一页，即西洋美女网址的第一页。</p>
+
+<pre><code class="python">        xiyangurldata = urldata[4]  # 获取西洋美女首页网址
+        print(xiyangurldata)
+        yield Request(url=xiyangurldata, callback=self.next)
+
+    def next(self, response):
+        pass
+</code></pre>
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480198132160.png" alt="Alt text" /></p>
+
+<pre><code class="python">    def next(self, response):
+        page_title_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@alt").extract()
+        print(page_title_list)
+        page_url_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@href").extract()
+        print(page_url_list)
+        pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200182166.png" alt="Alt text" /></p>
+
+<p>运行输出一下：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200281135.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480200630246.png" alt="Alt text" /></p>
+
+<pre><code class="python">        page_num = response.xpath("//span[@class='pageinfo']//strong/text()").extract()[0] # 得到西洋美女总页数
+        print(page_num)
+        print(response.url)
+        for i in range(1, int(page_num)+1):
+            page_url = response.url + 'list_4_'+ str(i) + '.html' # 得到西洋美女每一个页面的网址
+            print(page_url)
+        pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201913887.png" alt="Alt text" /></p>
+
+<p>运行输出一下：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201965248.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480201944373.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>继续下一次：</p>
+
+<pre><code class="python">        for i in range(1, int(page_num)+1):
+            page_url = response.url + 'list_4_'+ str(i) + '.html' # 得到西洋美女每一个页面的网址
+            print(page_url)
+            yield Request(url=page_url, callback=self.next2)
+        pass
+
+    def next2(self, response):
+        pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480202151141.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在获取每一个美女的网页网址：</p>
+
+<pre><code class="python">    def next2(self, response):
+        page_title_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@alt").extract()
+        # print(page_title_list)
+        page_url_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@href").extract()
+        # print(page_url_list)
+
+        for i in range(0, len(page_url_list)):
+            gril_page_url = page_url_list[i]
+            print(gril_page_url)
+            yield Request(url=gril_page_url, callback=self.next3)
+        pass
+
+    def next3(self, response):
+        pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480203708834.png" alt="Alt text" /></p>
+
+<p>运行程序看看：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480203763527.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><code>next3()</code> 这个回调函数的功能就是得到一个美女网页里面的所有的页面的网址。</p>
+
+<p>有的美女的网页里面只有一个页面，有的美女的网页里面有多个页面：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656828793.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656883815.png" alt="Alt text" /></p>
+
+<p>可以统一解决。</p>
+
+<hr />
+
+<p>测试：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480204459567.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480204419920.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205200021.png" alt="Alt text" /></p>
+
+<p>输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205472599.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1482656683950.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205432817.png" alt="Alt text" /></p>
+
+<p>同样的回调函数</p>
+
+<p>输出：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480205458465.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>所以，我们可以这样写程序：</p>
+
+<p>当得到的页码为-3，说明这个美女的网页是单页的；如果得到的页码数不等于-3，说明这个美女的网页是多也的。</p>
+
+<p>测试程序：</p>
+
+<p>对于多页面的美女网页网址</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480229614160.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480229673684.png" alt="Alt text" /></p>
+
+<p>运行输出：</p>
+
+<pre><code>D:\WorkSpace\python_ws\python-large-web-crawler\secondDemo&gt;scrapy crawl pic_169bb --nolog
+10
+http://www.169bb.com/xiyangmeinv/2016/0717/36463.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_5.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_10.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_9.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_6.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_8.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_7.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_3.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_4.html
+http://www.169bb.com/xiyangmeinv/2016/0717/36463_2.html
+
+D:\WorkSpace\python_ws\python-large-web-crawler\secondDemo&gt;
+</code></pre>
+
+<p>对于单页面的美女网页：</p>
+
+<pre><code class="python">    def parse(self, response):
+        ...
+        yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.demo)
+</code></pre>
+
+<p>回调函输一样。</p>
+
+<p>运行输出：</p>
+
+<pre><code class="python">D:\WorkSpace\python_ws\python-large-web-crawler\secondDemo&gt;scrapy crawl pic_169bb --nolog
+-3
+http://www.169bb.com/xiyangmeinv/2016/0103/2268.html
+
+D:\WorkSpace\python_ws\python-large-web-crawler\secondDemo&gt;
+</code></pre>
+
+<p>成功。</p>
+
+<p>所以现在的爬虫代码应该是这样的：</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from scrapy.http import Request
+
+class Pic169bbSpider(scrapy.Spider):
+    name = "pic_169bb"
+    allowed_domains = ["169bb.com"]
+    start_urls = ['http://169bb.com/']
+
+    def parse(self, response):
+        title_list = response.xpath("/html/body/div[@class='header']/div[@class='hd_nav']/div[@class='w1000']//a/text()").extract()
+        # print(title_list)
+        urldata = response.xpath("/html/body/div[@class='header']/div[@class='hd_nav']/div[@class='w1000']//a/@href").extract()
+        #print(urldata)
+        xiyang_title = title_list[4] # 获取西洋美女标签的文本内容
+        xiyang_urldata = urldata[4]  # 获取西洋美女首页网址
+        # print(xiyang_title, xiyang_urldata)
+        yield Request(url=xiyang_urldata, callback=self.next)
+        # yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)
+        # yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.demo)
+
+    def next(self, response):
+        page_num_str = response.xpath("//span[@class='pageinfo']//strong/text()").extract()[0] # 得到西洋美女总页数
+        # print(page_num_str)
+        # print(response.url)
+        for i in range(1, int(page_num_str)+1):
+            page_url = response.url + 'list_4_'+ str(i) + '.html' # 得到西洋美女每一个页面的网址
+            # print(page_url)
+            yield Request(url=page_url, callback=self.next2)
+        pass
+
+    def next2(self, response):
+        page_title_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@alt").extract()
+        # print(page_title_list)
+        page_url_list = response.xpath("/html/body//div[@class='w1000 box03']/ul[@class='product01']//li/a/@href").extract()
+        # print(page_url_list)
+
+        for i in range(0, len(page_url_list)):
+            gril_page_url = page_url_list[i] # 得到西洋美女页面里面每一个美女的网页网址
+            print(gril_page_url)
+            yield Request(url=gril_page_url, callback=self.next3)
+        pass
+
+    def next3(self, response):
+        rela_pages_list = response.xpath("//div[@class='dede_pages']/ul//li/a/text()").extract()
+        pages_num = len(rela_pages_list) - 3
+        # print(pages_num)
+        self.getPic(response)
+        if pages_num == -3:
+            # pages_num = 1
+            return
+        for i in range(2, pages_num+1):
+            girl_page_url = response.url.replace('.html', '_') + str(i) + '.html'
+            # print(girl_page_url)
+            yield Request(url=girl_page_url, callback=self.next4)
+        pass
+
+    # def demo(self, response):
+    # #     rela_pages_list = response.xpath("//div[@class='dede_pages']/ul//li/a/text()").extract()
+    # #     pages_num = len(rela_pages_list)-3
+    # #     print(pages_num)
+    # #     pass
+    #     rela_pages_list = response.xpath("//div[@class='dede_pages']/ul//li/a/text()").extract()
+    #     pages_num = len(rela_pages_list) - 3
+    #     # print(pages_num)
+    #     self.getPic(response)
+    #     if pages_num == -3:
+    #         # pages_num = 1
+    #         return
+    #     for i in range(2, pages_num+1):
+    #         girl_page_url = response.url.replace('.html', '_') + str(i) + '.html'
+    #         # print(girl_page_url)
+    #         yield Request(url=girl_page_url, callback=self.next4)
+    #     pass
+
+    def next4(self, response):
+        self.getPic(response)
+        pass
+
+    def getPic(self, response):
+        print(response.url)
+        pass
+</code></pre>
+
+<hr />
+
+<p>现在，我们需要在<code>getPic()</code> 函数中获取每一个美女网页的每一个页面里面的所有高清图片。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480231492634.png" alt="Alt text" /></p>
+
+<pre><code class="python">    def getPic(self, response):
+        # print(response.url)
+        item = SeconddemoItem()
+        item['url'] = response.xpath("//div[@class='big-pic']/div[@class='big_img']//p/img/@src").extract()
+        print(item['url'])
+        pass
+</code></pre>
+
+<p>测试运行：</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480230996305.png" alt="Alt text" /></p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480237427282.png" alt="Alt text" /></p>
+
+<p>成功。</p>
+
+<hr />
+
+<h3>下载高清图片</h3>
+
+<p>OK，现在我们就已经得到了所有西洋美女的所有高清图片的下载地址，我们在<code>piplines.py</code> 文件中使用它们。</p>
+
+<p>删除了<code>next4()</code>回调函数。在<code>demo()</code>回调函数里面调用的都是<code>getPic()</code>回调函数。</p>
+
+<pre><code class="python">    def demo(self, response):
+    #     rela_pages_list = response.xpath("//div[@class='dede_pages']/ul//li/a/text()").extract()
+    #     pages_num = len(rela_pages_list)-3
+    #     print(pages_num)
+    #     pass
+        rela_pages_list = response.xpath("//div[@class='dede_pages']/ul//li/a/text()").extract()
+        pages_num = len(rela_pages_list) - 3
+        # print(pages_num)
+        self.getPic(response)
+        if pages_num == -3:
+            # pages_num = 1
+            return
+        for i in range(2, pages_num+1):
+            girl_page_url = response.url.replace('.html', '_') + str(i) + '.html'
+            # print(girl_page_url)
+            yield Request(url=girl_page_url, callback=self.getPic)
+        pass
+
+    # error : yield 经过了一个中间函数，运行就有问题。我现在还不知道为什么
+    # def next4(self, response):
+    #     self.getPic(response)
+    #     pass
+</code></pre>
+
+<p>并将<code>getPic()</code>函数里面的item写到生成器里面：</p>
+
+<pre><code class="python">    def getPic(self, response):
+        # print(response.url)
+        item = SeconddemoItem()
+        item['url'] = response.xpath("//div[@class='big-pic']/div[@class='big_img']//p/img/@src").extract()
+        # print(item['url'])
+        # pass
+        yield item
+</code></pre>
+
+<p>测试：</p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.getPic)</code></p>
+
+<p>成功。</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480230996305.png" alt="Alt text" /></p>
+
+<p>也算算成功，因为有重复的文件名，所以自动替换，所以这里需要做修改。</p>
+
+<p>我们可以使用美女图片网址里面的数字作为图片文件名的固定前缀来给图片命名，使用正则表达式获取网址的数字。</p>
+
+<hr />
+
+<p>在 <code>pipelines.py</code> 文件 中的 <code>process_item()</code> 函数中使用正则表达式得到图片下载网址的数字：</p>
+
+<pre><code class="python">import re
+import urllib.request
+
+class SeconddemoPipeline(object):
+    def process_item(self, item, spider):
+        # print(len(item['url']))
+        for i in range(0, len(item['url'])):
+            this_url = item['url'][i]
+            id = re.findall('http://724.169pp.net/169mm/(.*?).jpg', this_url)[0]
+            id = id.replace('/', '_')
+            print(id)
+            # file = 'D:/WorkSpace/python_ws/python-large-web-crawler/xiyangmeinv/' + str(i) + '.jpg'
+            # print('Downloading :' , file)
+            # urllib.request.urlretrieve(this_url, filename=file)
+            # print('Final Download :' , file)
+        return item
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241683726.png" alt="Alt text" /></p>
+
+<p>要想使用 <code>pipelines.py</code> 文件 中的 <code>SeconddemoPipeline</code> 类，需要在 <code>settings.py</code> 文件里面设置 <code>ITEM_PIPELINES</code> 项：</p>
+
+<pre><code class="python">ITEM_PIPELINES = {
+   'secondDemo.pipelines.SeconddemoPipeline': 300,
+}
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242336499.png" alt="Alt text" /></p>
+
+<blockquote><p>这里，我有一件事情不懂，关于正则表达式的： 网址里面的<code>.</code> 也是正则表达式中的工具字符，也是数据中中的内容，那么正则表达式是如何分辨它在这里是功能字符还是内容字符？</p></blockquote>
+
+<p>在<code>pic_169bb.py</code> 文件的<code>demo()</code> 回调函数中，这样写才能获取到美女网页的第一页的图片地址：</p>
+
+<pre><code class="python">        # error
+        # self.getPic(response)
+        # succes 为啥将下面的代码用self.getPic(response)的形式不能正常的获取到，而使用下面的代码却能获取到？
+        item = SeconddemoItem()
+        item['url'] = response.xpath("//div[@class='big-pic']/div[@class='big_img']//p/img/@src").extract()
+        # print(item['url'])
+        # pass
+        yield item
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241496168.png" alt="Alt text" /></p>
+
+<p>运行程序试试：</p>
+
+<p>测试单页的美女网页：</p>
+
+<p>将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0103/2268.html', callback=self.getPic)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241922348.png" alt="Alt text" /></p>
+
+<p>成功。</p>
+
+<p>测试多页的美女网页：</p>
+
+<p>先将<code>parse()</code>函数的最后一行改为：<code>yield Request(url='http://www.169bb.com/xiyangmeinv/2016/0717/36463.html', callback=self.demo)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480241935773.png" alt="Alt text" /></p>
+
+<p>都成功。</p>
+
+<hr />
+
+<p>先测试下载图片：</p>
+
+<p>将 <code>pipelines.py</code> 文件 中的 <code>SeconddemoPipeline</code> 类的<code>process_item()</code> 函数里面，添加代码：</p>
+
+<pre><code class="python">    def process_item(self, item, spider):
+        # print(len(item['url']))
+        for i in range(0, len(item['url'])):
+            this_url = item['url'][i]
+            id = re.findall('http://724.169pp.net/169mm/(.*?).jpg', this_url)[0]
+            id = id.replace('/', '_')
+            # print(id)
+            file = 'D:/WorkSpace/python_ws/python-large-web-crawler/xiyangmeinv/' + id + '.jpg'
+            print('Downloading :' , file)
+            urllib.request.urlretrieve(this_url, filename=file)
+            print('Final Download :' , file)
+        return item
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242553614.png" alt="Alt text" /></p>
+
+<p>运行程序，没有毛病：（除了下载速度有点慢）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242613763.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>下载 169美女图片网 的所有西洋美女的图片</h2>
+
+<p>在 <code>pic_169bb.py</code>文件里， 将<code>parse()</code>函数的最后一行改为：<code>yield Request(url=xiyang_urldata, callback=self.next)</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242895996.png" alt="Alt text" /></p>
+
+<p>将 <code>demo()</code> 函数里面的所有代码复制一份到 <code>next3()</code>函数里：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480242867282.png" alt="Alt text" /></p>
+
+<p>现在，运行程序：（最终的程序）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480243169351.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480243201173.png" alt="Alt text" /></p>
+
+<p>成功！</p>
+
+<hr />
+
+<h2>防反爬技术</h2>
+
+<p><strong>Step 4 . </strong> 不遵循 <code>robots.txt</code> 协议。</p>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>ROBOTSTXT_OBEY</code> 项设置为：<code>False</code></p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480195250963.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>Step 6 . </strong> 模仿浏览器</p>
+
+<blockquote><p>请先查看这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52489709">http://blog.csdn.net/github_35160620/article/details/52489709</a> 里面是：<strong>六 . 设置 用户代理（user_agent）</strong>。</p></blockquote>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>USER_AGENT</code> 项设置为：浏览器的用户代理信息。</p>
+
+<pre><code class="python">USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.22 Safari/537.36 SE 2.X MetaSr 1.0'
+</code></pre>
+
+<hr />
+
+<p><strong>Step 7 . </strong>  禁止缓存</p>
+
+<p>将 <code>settings.py</code> 文件里面的 <code>COOKIES_ENABLED</code> 项设置为：<code>False</code>。</p>
+
+<pre><code class="python">COOKIES_ENABLED = False
+</code></pre>
+
+<hr />
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>需要升级的地方:（2016-11-27 19:34:34）</p>
+
+<ol>
+<li>在易错的代码段加上异常检测程序</li>
+<li>在下载图片的代码加上：超时异常检测程序</li>
+<li>记录成功下载的、超时失败下载的、链接失败下载的 信息</li>
+<li>添加断点续下功能。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
