@@ -9,13 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="当你下载一个源代码的时候。出现下面错误： 1
-2
-3
-4
-5
-ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
-Cloning into 'turtlebot'... &hellip;">
+  <meta name="description" content="在GitHub网页，登录你的 GitHub 账号 之后。 点击右上角的图标 -> 然后选择 Your profile 接着点击： Repositories 现在，点击 New 现在，你就可以输入你要创建的资源库的名称了： 输入完成之后，点击 Create repository 按钮 OK，搞定 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +66,63 @@ Cloning into 'turtlebot'... &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-25T16:04:40+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:04 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>在<strong>GitHub</strong>网页，登录你的 <strong>GitHub 账号</strong> 之后。</p>
+
+<p>点击右上角的图标 -> 然后选择 <strong>Your profile</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475649961304.png" alt="Alt text" /></p>
+
+<p>接着点击： <strong>Repositories</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475650812663.png" alt="Alt text" /></p>
+
+<p>现在，点击 <strong>New</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651019664.png" alt="Alt text" /></p>
+
+<p>现在，你就可以输入你要创建的资源库的名称了：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651787525.png" alt="Alt text" /></p>
+
+<p>输入完成之后，点击 <strong>Create repository</strong> 按钮</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651897109.png" alt="Alt text" /></p>
+
+<h2>OK，搞定</h2>
+
+<p>现在你所看到的，说明这个库里面什么都没有。</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651954810.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2362,97 +2413,6 @@ Cloning into 'turtlebot'... &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">Learning Python 008 正则表达式-005 Compile模板的使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-08T07:05:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:05 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>compile()函数的用法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">re</span>
-</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;fdfgdrthxxi--gdfgexxlove--dsdfwesdxxyou--dfgdf&#39;</span>
-</span><span class='line'><span class="n">pattam_str</span> <span class="o">=</span> <span class="s">&#39;xx(.*?)--&#39;</span>
-</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython29</span><span class="o">.</span><span class="n">py</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">,</span> <span class="s">&#39;love&#39;</span><span class="p">,</span> <span class="s">&#39;you&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解释：</p>
-
-<ul>
-<li>其中<code>pattam_str</code> 就是<strong>正则表达式</strong>字符串。</li>
-<li><code>str</code> 就是目标字符串</li>
-<li><code>result</code> 就是得到的结果</li>
-</ul>
-
-
-<p>代码中的</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出的结果是一样的。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2468,6 +2428,10 @@ Cloning into 'turtlebot'... &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a>
       </li>
     
@@ -2481,10 +2445,6 @@ Cloning into 'turtlebot'... &hellip;">
     
       <li class="post">
         <a href="/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/">C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/">Intel RealSense 004(Learning RealSense SDK 003) DF_CameraViewer示例讲解</a>
       </li>
     
   </ul>
@@ -2516,7 +2476,7 @@ Cloning into 'turtlebot'... &hellip;">
 <a style="font-size: 172%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
-<a style="font-size: 129%" href="/tags/git/">git</a>
+<a style="font-size: 139%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
@@ -2547,7 +2507,7 @@ Cloning into 'turtlebot'... &hellip;">
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
-<li class='category'><a href='/blog/categories/git-github/'>git_github (7)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (8)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>

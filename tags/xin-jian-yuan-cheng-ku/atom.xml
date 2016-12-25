@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 新建远程库 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/xin-jian-yuan-cheng-ku/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-25T16:06:12+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 006 如何新建一个库]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-how-to-create-a-new-library/"/>
+    <updated>2016-12-25T16:04:40+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-how-to-create-a-new-library</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>在<strong>GitHub</strong>网页，登录你的 <strong>GitHub 账号</strong> 之后。</p>
+
+<p>点击右上角的图标 -> 然后选择 <strong>Your profile</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475649961304.png" alt="Alt text" /></p>
+
+<p>接着点击： <strong>Repositories</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475650812663.png" alt="Alt text" /></p>
+
+<p>现在，点击 <strong>New</strong></p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651019664.png" alt="Alt text" /></p>
+
+<p>现在，你就可以输入你要创建的资源库的名称了：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651787525.png" alt="Alt text" /></p>
+
+<p>输入完成之后，点击 <strong>Create repository</strong> 按钮</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651897109.png" alt="Alt text" /></p>
+
+<h2>OK，搞定</h2>
+
+<p>现在你所看到的，说明这个库里面什么都没有。</p>
+
+<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651954810.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>
