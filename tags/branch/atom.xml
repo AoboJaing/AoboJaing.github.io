@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: branch | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/branch/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T15:09:01+08:00</updated>
+  <updated>2016-12-25T15:14:43+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -93,7 +93,7 @@ git tag
 
 <blockquote><p>总结：其实tag和 branch是一样的操作。</p></blockquote>
 
-<p>如果你感觉使用<code>git clone XXX</code> 下载源代码的速度太慢了，你可以参考这篇博客来配置你的git，让它提速。</p>
+<p>如果你感觉使用<code>git clone XXX</code> 下载源代码的速度太慢了，你可以参考<a href="http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">这篇博客</a>来配置你的git，让它提速。</p>
 
 <hr />
 
