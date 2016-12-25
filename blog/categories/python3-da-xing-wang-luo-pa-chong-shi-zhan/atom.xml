@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python3 大型网络爬虫实战 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-26T00:37:42+08:00</updated>
+  <updated>2016-12-26T00:57:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,544 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/"/>
+    <updated>2016-12-26T00:56:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>[TOC]</p>
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<ul>
+<li>本文中的源代码在github这里：。</li>
+</ul>
+
+
+<p>本篇博文的重点内容：</p>
+
+<ul>
+<li>有一些数据，在源码上找不到的，这个时候需要使用 &mdash; 抓包。</li>
+<li>Python调用MySQL数据库</li>
+</ul>
+
+
+<hr />
+
+<p>本爬虫项目的目的是：某个关键字在淘宝上搜索到的所有商品，获取所有商品的： 商品名字、商品链接、商品价格、商品的评论。</p>
+
+<hr />
+
+<h2>开始实战</h2>
+
+<p>创建一个爬虫项目</p>
+
+<pre><code>scrapy startproject thirdDemo
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480949909390.png" alt="Alt text" /></p>
+
+<h2>设置防反爬机制（settings.py 文件）</h2>
+
+<p>请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">给 Scrapy 爬虫项目设置为防反爬</a>。</p>
+
+<h2>分析网站</h2>
+
+<ul>
+<li>分析网页界面</li>
+<li>分析网址结构</li>
+<li>分析网页源代码</li>
+</ul>
+
+
+<p>1 . 分析网页界面：</p>
+
+<p>我们在淘宝网的搜索栏里面搜索关键字，比如“小吃”。它一共会输出100页。</p>
+
+<blockquote><p>可见：100页的搜索结果是淘宝的上限。（最多100页）</p></blockquote>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480951614377.png" alt="Alt text" /></p>
+
+<p>2 . 分析网址结构：</p>
+
+<p>当我们点击页面进行浏览时，我们发现不同的页面的网址有规律，并且下面是我们找到的规律：</p>
+
+<ol>
+<li>红色部分是一模一样的。</li>
+<li>删除红色部分，将剩下的组成网址，一样可以正常的浏览原网页。</li>
+<li><code>q=</code> 后面是“小吃”的编码形式。</li>
+<li><code>s=</code> 后面的数值等于 <code>44*(当前页面-1)</code></li>
+</ol>
+
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480951515511.png" alt="Alt text" /></p>
+
+<h1>开始写爬虫程序（taobao.py 文件）</h1>
+
+<h2>创建一个爬虫文件（taobao.py 文件）</h2>
+
+<pre><code>cd thirdDemo
+scrapy genspider -t basic taobao taobao.com
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480949962287.png" alt="Alt text" /></p>
+
+<p>使用PyCharm软件开发，使用PyCharm软件打开 <strong>thirdDemo</strong>项目。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480950062203.png" alt="Alt text" /></p>
+
+<h2>添加需要使用的存储容器对象（items.py文件）</h2>
+
+<p>先到 <code>items.py</code> 文件里面的<code>ThirddemoItem()</code>函数里面创建存储用到容器（类的实例化对象）</p>
+
+<pre><code class="python">class ThirddemoItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    title = scrapy.Field()
+    link = scrapy.Field()
+    price = scrapy.Field()
+    comment = scrapy.Field()
+    pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480950185425.png" alt="Alt text" /></p>
+
+<h2>得到搜索关键字对应的所有搜索页面（taobao.py文件）</h2>
+
+<p>在回调函数<code>parse()</code>中，建立一个变量(<code>key</code>)来存储关键词（<code>零食</code>）。然后在使用一个<code>for</code>循环来爬取所有的网页。然后使用<code>scrapy.http</code>里面的<code>Request</code> 来在<code>parse()</code>函数返回（返回一个生成器（yield））一个网页源代码：</p>
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+import scrapy
+from scrapy.http import Request
+
+class TaobaoSpider(scrapy.Spider):
+    name = "taobao"
+    allowed_domains = ["taobao.com"]
+    start_urls = ['http://taobao.com/']
+
+    def parse(self, response):
+        key = '小吃'
+        for i in range(0, 2):
+            url = 'https://s.taobao.com/search?q=' + str(key) + '&amp;s=' + str(44*i)
+            print(url)
+            yield Request(url=url, callback=self.page)
+        pass
+
+    def page(self, response):
+        pass
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480952150312.png" alt="Alt text" /></p>
+
+<p>（注意：我们上面通过观察网页已经知道了，搜索得到的页面有100页，但是我们现在是测试阶段，不爬这么多页，上面的代码我们只爬了2页）</p>
+
+<hr />
+
+<blockquote><p>运行一下：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480952373465.png" alt="Alt text" /></p>
+
+<p>程序没有问题。</p></blockquote>
+
+<hr />
+
+<h2>得到所有商品的id</h2>
+
+<p>我们现在的目标是得到搜索页面中所有商品的链接。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480958203181.png" alt="Alt text" /></p>
+
+<p>现在，我们观察搜索页面的源代码，我们找这些商品链接的规律，能否通过什么商品<code>id</code>之类的信息，然后通过商品<code>id</code>来构造出商品的链接网址。</p>
+
+<p>幸运的是：确实可以这么做。</p>
+
+<p>我发现，不管是搜索的商品，不管是在淘宝里、天猫里、天猫超市里，商品的链接网址都可以用下面的格式去构造：</p>
+
+<pre><code>https://item.taobao.com/item.htm?id=商品的id
+</code></pre>
+
+<p>所以，现在我们要做的是：先提取商品的id：（使用正则表达式）</p>
+
+<p>对搜索结果的网页随便一个地方右键：<strong>查看网页源代码(V)</strong>：</p>
+
+<blockquote><p>（我发现：通过在浏览器中按<strong>F12</strong> 和 右键来 <strong>查看网页源代码</strong> 这两种查看源代码得到的源代码不一样，后者得到的源代码和爬虫爬取的源代码一致，而前者和爬虫爬取的不一致。）</p>
+
+<p> 所有我们不能使用<strong>Xpath</strong>表达式来用过标签获取商品id了。只能使用<strong>正则表达式</strong>了。</p>
+
+<p>我想可能的原因是：搜索页面可能是动态构造出来的，所以使用<strong>Xpath</strong>表达式是不能对这种网址的源码进行提取信息的。（我瞎想的，不知道是否正确。不过事实其实是：使用<strong>Xpath</strong>表达式是提取不了有效信息的。）</p></blockquote>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965022146.png" alt="Alt text" /></p>
+
+<p>然后随便点击进入一个商品的链接网页，在这个网页的网址里面就可以找到这个商品的id：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965129366.png" alt="Alt text" /></p>
+
+<p>然后在刚刚打开的源代码中，查找这个id:</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965212130.png" alt="Alt text" /></p>
+
+<p>我们通过观察发现，使用<code>"nid":"</code>就可以找到这个搜索结果页面里面所有商品的id：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965247629.png" alt="Alt text" /></p>
+
+<blockquote><p>这个页面里面一共是36个商品，没错。</p>
+
+<p><strong>Q：</strong> 你可能发现了，这个搜索网页里面搜索到结果是48个商品，我们得到的是36个，是不是少了？</p>
+
+<p><strong>A：</strong> 没有少，这就是淘宝的营销策略。一个搜索页面一共有48个商品，但是其中有10多个商品是重复的！其中甚至有个商品在这个搜索页面中重复出现了三次，不信，你可以仔细的找找。</p></blockquote>
+
+<p>所以，商品的id可以使用下面的<strong>正则表达式</strong>获取：</p>
+
+<pre><code>'"nid":"(.*?)"'
+</code></pre>
+
+<p>我们在<code>page()</code>方法中得到爬取到的网页源代码的 <code>body</code> 标签里面的所有信息：</p>
+
+<blockquote><p>先声明一点：</p>
+
+<p> 爬取到的网页源代码是：以网页源代码中指定的编码方式编码得到的bytes信息。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480954729660.png" alt="Alt text" /></p></blockquote>
+
+<p>我们需要得到对应的解码信息：</p>
+
+<p>参考网站：<a href="http://www.runoob.com/python3/python3-string-decode.html">Python3 bytes.decode()方法</a></p>
+
+<pre><code class="python">        body = response.body.decode('utf-8')
+</code></pre>
+
+<blockquote><p><code>response.body</code> 它默认是二进制格式，所以我们在使用它之前要给它解码：<code>decode('utf-8')</code>，为了避免出错，我给它传第二个参数：<code>ignore</code>。</p></blockquote>
+
+<p><code>page()</code>函数中的代码现在是下面这个样子的：</p>
+
+<pre><code class="python">    def page(self, response):
+        body = response.body.decode('utf-8','ignore')
+        pattam_id = '"nid":"(.*?)"'
+        all_id = re.compile(pattam_id).findall(body)
+        print(all_id)
+        pass
+</code></pre>
+
+<blockquote><p>运行试试看：</p>
+
+<p> <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965691671.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<h2>得到所有商品的链接网址</h2>
+
+<p>现在得到了所有商品的ip，现在通过这些ip，构造出所有商品的网址。得到了链接后，就可以去爬这个网页的源代码了：（下面的代码中，在<code>next()</code>方法中将商品的网页网址打印了出来）</p>
+
+<pre><code class="python">import re
+</code></pre>
+
+<pre><code class="python">    def page(self, response):
+        body = response.body.decode('utf-8','ignore')
+        pattam_id = '"nid":"(.*?)"'
+        all_id = re.compile(pattam_id).findall(body)
+        # print(all_id)
+        for i in range(0, len(all_id)):
+            this_id = all_id[i]
+            url = 'https://item.taobao.com/item.htm?id=' + str(this_id)
+            yield Request(url=url, callback=self.next)
+            pass
+        pass
+
+    def next(self, response):
+        print(response.url)
+        pass
+</code></pre>
+
+<blockquote><p>运行试试看：（自动的将网址调整到正确的网址上。比如<strong>天猫</strong>或者<strong>天猫超市</strong>之类的子域名）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480966453270.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<h1>获取商品的具体信息（taobao.py 文件）</h1>
+
+<h2>获取商品的名字</h2>
+
+<p>现在在<code>next()</code>回调函数中实例化一个开始时在<code>items.py</code>文件里面创建的项目的存储容器对象。然后，我们就可以直接使用它了。</p>
+
+<p>所以现在在 <code>taobao.py</code> 文件的上面添加这个文件：</p>
+
+<pre><code class="python">from thirdDemo.items import ThirddemoItem
+</code></pre>
+
+<p>现在我们要得到商品的标题。</p>
+
+<blockquote><p>我们尽量从源代码中的信息提取，如果源代码中没有的信息，我们在使用抓包的凡是提取。</p></blockquote>
+
+<p>标题是可以直接在源代码中提取的：（观察网页源代码，直接中<code>Xpath</code>表达式）</p>
+
+<p>天猫或者天猫超市的商品的标题可以使用下面的<strong>Xpath</strong>表达式提取：</p>
+
+<pre><code>title = response.xpath("//div[@class='tb-detail-hd']/h1/text()").extract()
+</code></pre>
+
+<p>淘宝的商品的标题可以使用下面的<strong>Xpath</strong>表达式提取：</p>
+
+<pre><code>title = response.xpath("//h3[@class='tb-main-title']/@data-title").extract()
+</code></pre>
+
+<p>所以，这里提取标题，我们需要一个判断语句，判断这个商品的网址链接是天猫的还是淘宝的。</p>
+
+<p>伪码如下：</p>
+
+<pre><code>if 不是淘宝的网址:
+    title = response.xpath("//div[@class='tb-detail-hd']/h1/text()").extract() # 天猫或者天猫超市
+else:
+    title = response.xpath("//h3[@class='tb-main-title']/@data-title").extract() # 淘宝
+</code></pre>
+
+<p>我们的判断标准就是商品网址的子域名。子域名大致一共有三种：<code>detail.tmall</code>（天猫）、<code>chaoshi.detail.tmall</code>（天猫超市）、<code>item.taobao</code>（淘宝）</p>
+
+<pre><code class="python">    def next(self, response):
+        # print(response.url)
+        url = response.url
+        pattam_url = 'https://(.*?).com'
+        subdomain = re.compile(pattam_url).findall(url)
+        # print(subdomain)
+        if subdomain[0] != 'item.taobao':
+            title = response.xpath("//div[@class='tb-detail-hd']/h1/text()").extract()
+            pass
+        else:
+            title = response.xpath("//h3[@class='tb-main-title']/@data-title").extract()
+            pass
+        self.num = self.num + 1;
+        print(title)
+        pass
+</code></pre>
+
+<blockquote><p>运行试试看：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480971492185.png" alt="Alt text" /></p>
+
+<p>有的时候，偶尔会得到几个 <code>[]</code>，这是因为，你爬的太快的，淘宝的服务器没有同意你爬取这个商品的网页。（所以提高防反爬机制，效果会好一些。）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480971883848.png" alt="Alt text" /></p></blockquote>
+
+<h2>获取商品的链接网址（taobao.py 文件）</h2>
+
+<p>（直接得到）</p>
+
+<pre><code class="python">        item['link'] = response.url
+</code></pre>
+
+<h2>获取商品的价格信息（原价）（taobao.py 文件）</h2>
+
+<blockquote><p>正常的价格可以在商品网页的源代码里面获取，但是淘宝价（促销价）在商品源代码里面没有，这时就需要通过抓包来获取。</p></blockquote>
+
+<p>淘宝：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973755825.png" alt="Alt text" /></p>
+
+<p>天猫：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973520884.png" alt="Alt text" /></p>
+
+<p>我们先获取正常的价格。这里也需要分淘宝和天猫，它们获取正常价格的<strong>Xpath</strong>表达式或者<strong>正则表达式</strong>不同。</p>
+
+<blockquote><p>注意：这里总结表达式，通过对商品页面右键 -> <strong>查看网页源代码</strong> 的方式查看源代码。</p></blockquote>
+
+<pre><code class="python">        if subdomain[0] != 'item.taobao':
+            pattam_price = '"defaultItemPrice":"(.*?)"'
+            price = re.compile(pattam_price).findall(response.body.decode('utf-8', 'ignore')) # 天猫
+            pass
+        else:
+            price = response.xpath("//em[@class = 'tb-rmb-num']/text()").extract() # 淘宝
+            pass
+        print(price)
+</code></pre>
+
+<h2>提取商品的累计评论数量：（使用抓包的方式）（taobao.py 文件）</h2>
+
+<p>淘宝：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973770234.png" alt="Alt text" /></p>
+
+<p>天猫：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973787179.png" alt="Alt text" /></p>
+
+<blockquote><p>可以使用 ： <strong>Fiddler4抓包软件</strong> 或者 浏览器按<strong>F12->Network->Name->Response</strong>查看抓包信息</p></blockquote>
+
+<p>这里，我通过浏览器进行抓包，找到了评论数所在的包：（一个一个的找）</p>
+
+<blockquote><p>淘宝：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990614603.png" alt="Alt text" /></p>
+
+<p>观察这个包的网址：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990661164.png" alt="Alt text" /></p>
+
+<p>这个网址，我们可以在浏览器中复制，再访问以下：（是可以正常访问的）</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990914346.png" alt="Alt text" /></p>
+
+<pre><code>https://rate.taobao.com/detailCommon.htm?auctionNumId=533237707421&amp;userNumId=1990097437&amp;ua=097UW5TcyMNYQwiAiwQRHhBfEF8QXtHcklnMWc%3D%7CUm5Ockt%2BQ3dDfkB8R35Eey0%3D%7CU2xMHDJ7G2AHYg8hAS8XKQcnCVU0Uj5ZJ11zJXM%3D%7CVGhXd1llXGlUYFRpV2tQaVFvWGVHekV8RHtBf0Z%2FQXRKdUx1T3VOYDY%3D%7CVWldfS0TMw8xBD8fIAAubQslcyU%3D%7CVmJCbEIU%7CV2lJGSQEORklGCMYOAI%2FADkZJREuEzMPMgc6GiYSLRAwDDEJNGI0%7CWGFcYUF8XGNDf0Z6WmRcZkZ8R2dZDw%3D%3D&amp;callback=json_tbc_rate_summary
+</code></pre>
+
+<p>我发现上面的这个网址可以缩减为：</p>
+
+<pre><code>https://rate.taobao.com/detailCommon.htm?auctionNumId=533237707421
+</code></pre>
+
+<pre><code>https://rate.taobao.com/detailCount.do?_ksTS=1480993623725_99&amp;callback=jsonp100&amp;itemId=533237707421
+</code></pre>
+
+<p>而这个<code>533237707421</code>就是商品的id。好了，找到这个网址的规律，现在可以> 手动构造这个评论数的网址了：</p>
+
+<p>天猫：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480993211429.png" alt="Alt text" /></p>
+
+<pre><code>https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=35338957824&amp;spuId=235704813&amp;sellerId=628189716&amp;_ksTS=1480992656788_203&amp;callback=jsonp204
+</code></pre>
+
+<p>可以缩减为：</p>
+
+<pre><code>https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=35338957824
+</code></pre></blockquote>
+
+<p>最后，我们发现：不管是淘宝还是天猫，都可以使用下面这个构造方式来得到含有正确评论数量的网址：</p>
+
+<pre><code>https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=商品id
+</code></pre>
+
+<blockquote><p>注意：使用<code>https://rate.taobao.com/detailCommon.htm?auctionNumId=商品id</code> 这种网址也可以，但是在对天猫商品得到评价数量和网页里面显示的不同。所以我们不使用这个构造方法。</p>
+
+<p> <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480994835425.png" alt="Alt text" /></p>
+
+<p>  <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480994874358.png" alt="Alt text" /></p></blockquote>
+
+<p>所以通过商品id就可以得到含有评论数量信息的包的网址。现在在<code>next()</code>方法中需要通过商品的URL获取商品的id。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480995644556.png" alt="Alt text" /></p>
+
+<p>我们从上面的图中看到：天猫和淘宝的网址不同，所以，从网址中获取商品id的正则表达式也就不同。下面的代码的功能就是从商品的url中提取商品id：</p>
+
+<pre><code class="python">        # 获取商品的id（用于构造商品评论数量的抓包网址）
+        if subdomain[0] != 'item.taobao':  # 如果不属于淘宝子域名，执行if语句里面的代码
+            pattam_id = 'id=(.*?)&amp;'
+            this_id = re.compile(pattam_id).findall(url)[0]
+            pass
+        else:
+            # 这种情况是不能使用正则表达式的，正则表达式不能获取字符串最末端的字符串
+            pattam_id = 'id=(.*?)$'
+            this_id = re.compile(pattam_id).findall(url)[0]
+            pass
+        print(this_id)
+</code></pre>
+
+<blockquote><p>注意：<code>$</code> : 在<strong>正则表达式</strong>里面的作用是：匹配字符串末尾。</p>
+
+<p>举例：当<code>url = 'https://item.taobao.com/item.htm?id=535023141744'</code> 时，这是一个淘宝网站里面的一个商品，现在我们想得到这个网址里面的商品id。</p>
+
+<p>如果你把正则表达式写成这个样子：<code>pattam_id = 'id=(.*?)'</code>，是匹配不到结果的（商品id）。</p>
+
+<p><strong>正则表达式是通过字符串上下文来匹配你需要的信息的，如果只有“上文”，没有“下文”时，对于使用正则表达式匹配字符串末端字符串，需要在正则表达式中使用<code>$</code>。</strong></p></blockquote>
+
+<hr />
+
+<blockquote><p>运行试试看，一切都在掌控之中。</p></blockquote>
+
+<h2>构造具有评论数量信息的包的网址，并获取商品的评论数量</h2>
+
+<p>得到目标抓包网址，获取它的源代码，然后提取评论数量：</p>
+
+<pre><code class="python">import urllib
+</code></pre>
+
+<pre><code class="python">        # 构造具有评论数量信息的包的网址
+        comment_url = 'https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=' + str(this_id)
+
+        # 这个获取网址源代码的代码永远也不会出现错误，因为这个URL的问题，就算URL是错误的，也可以获取到对应错误网址的源代码。
+        # 所以不需要使用 try 和 except urllib.URLError as e 来包装。
+        comment_data = urllib.request.urlopen(comment_url).read().decode('utf-8', 'ignore')
+        pattam_comment = '"rateTotal":(.*?),"'
+        comment = re.compile(pattam_comment).findall(comment_data)
+        # print(comment)
+        item['comment'] = comment
+</code></pre>
+
+<p>现在返回<code>item</code>对象：</p>
+
+<pre><code class="python">        yield item
+</code></pre>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999254433.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在，我们就可以在<code>pipline.py</code>文件里面来对我们得到的这些商品数据进行一些操作了，比如打印到终端或者保存到数据库中。</p>
+
+<p>但在这之前，我们需要设置一下<code>settings.py</code>文件，将下面的代码的注释去掉：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999396253.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>在<code>pipline.py</code>文件中对<code>taobao.py</code>爬虫文件返回的<code>item</code>对象进行处理（比如打印到终端，或者保存到数据库中）</p>
+
+<p>将得到的信息打印到终端中：</p>
+
+<pre><code class="python">class ThirddemoPipeline(object):
+    def process_item(self, item, spider):
+        title = item['title'][0]
+        link = item['link']
+        price = item['price'][0]
+        comment = item['comment'][0]
+        print('商品名字', title)
+        print('商品链接', link)
+        print('商品正常价格', price)
+        print('商品评论数量', comment)
+        print('------------------------------\n')
+        return item
+</code></pre>
+
+<blockquote><p>运行试试看：</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999663330.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<p>下面是将得到的信息保存到数据库中的操作：</p>
+
+<p>第一件事情就是 启动数据库，启动数据库的代码一般我们是将它写到默认的<code>__init__(self)</code>函数中，这个方法就是最开始做的事情。</p>
+
+<p>要想连接到数据库，首先要有数据库：使用MySQL数据库</p>
+
+<p>在python上要想使用MySqL数据库，需要先安装<code>pymysql</code>库这个模块。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480855800994.png" alt="Alt text" /></p>
+
+<p>有打开数据库的函数，就要有关闭数据库的方法。</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480855810885.png" alt="Alt text" /></p>
+
+<p>现在，我们在<code>process()</code>函数中处理数据，将数据插入到数据库里面。并且加一个异常处理，因为我不希望程序运行的时候会出现错误而终止，并且我也不想</p>
+
+<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480856115248.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片]]></title>
@@ -1234,80 +1772,6 @@ http://blog.csdn.net/googdev/article/details/53331364
 <hr />
 
 <p>我用英语跟小贩交谈，突然画面一下就全暗，我回台上，终于轮我上场。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python --- Xpath 表达式 --- Ongoing]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/11/26/python-xpath/"/>
-    <updated>2016-11-26T18:00:15+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/11/26/python-xpath</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>什么是 <strong>XPath</strong>？</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_intro.asp">http://www.w3school.com.cn/xpath/xpath_intro.asp</a></p>
-
-<p>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
-
-<h2>xpath 表达式 语法讲解</h2>
-
-<p>参考网站：<a href="http://www.w3school.com.cn/xpath/xpath_syntax.asp">http://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p>
-
-<p>例如，现在有这些信息：</p>
-
-<pre><code>&lt;head&gt;
-&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-&lt;title&gt;CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台&lt;/title&gt;
-&lt;link href="http://c.csdnimg.cn/www/css/csdn_common.css" rel="stylesheet" type="text/css"&gt;
-&lt;link href="css/content.css" rel="stylesheet" type="text/css"&gt;
-&lt;link href="http://c.csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON"&gt;
-&lt;/head&gt;
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 表达式</th>
-<th style="text-align:right;">     意思</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">/ </td>
-<td style="text-align:right;">寻找指定标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">//</td>
-<td style="text-align:right;"> 寻找所有标签</td>
-</tr>
-<tr>
-<td style="text-align:left;">@</td>
-<td style="text-align:right;"> 提取某个标签的属性的内容 </td>
-</tr>
-</tbody>
-</table>
-
-
-<hr />
-
-<p><strong>例子：</strong></p>
-
-<p>不管怎么样，记住一点：<strong>只有唯一的东西才能定位</strong>。</p>
-
-<pre><code class="python">/title.text()
-</code></pre>
-
-<p>表示：</p>
-
-<pre><code>CSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台
-</code></pre>
-
-<hr />
-
-<p>参考网站：<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html">http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/selectors.html</a></p>
-
-<hr />
 ]]></content>
   </entry>
   

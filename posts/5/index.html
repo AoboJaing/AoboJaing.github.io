@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 3.5.0 出现的错误 读取文件时，出现乱码或者UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX &hellip;">
+使用的Python的版本：python 3.5.0 学习这个知识点的原因 举一个实例： Octopress站点路径里面博文文件（.markdown后缀文件）必须要是以UTF- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T20:13:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>学习这个知识点的原因</h2>
+
+<p>举一个实例：</p>
+
+<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
+
+<p><img src="/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
+</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
+
+<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
+
+<p>其实很简单，我们只需要这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
+
+<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1901,256 +1968,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">解决问题： Pywin32 安装后出现 Import Win32api ImportError DLL Load Failed</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T07:04:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:04 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>执行 <code>scrapy bench</code> 命令时 出现错误。（之前安装了pywin32库）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\defer.py", line 1260, in _inlineCallbacks
-</span><span class='line'>    result = g.send(result)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 72, in crawl
-</span><span class='line'>    self.engine = self._create_engine()
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 97, in _create_engine
-</span><span class='line'>    return ExecutionEngine(self, lambda _: self.stop())
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\engine.py", line 68, in __init__
-</span><span class='line'>    self.downloader = downloader_cls(crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\downloader\__init__.py", line 88, in __init__
-</span><span class='line'>    self.middleware = DownloaderMiddlewareManager.from_crawler(crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 58, in from_crawler
-</span><span class='line'>    return cls.from_settings(crawler.settings, crawler)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 34, in from_settings
-</span><span class='line'>    mwcls = load_object(clspath)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\utils\misc.py", line 44, in load_object
-</span><span class='line'>    mod = import_module(module)
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\importlib\__init__.py", line 126, in import_module
-</span><span class='line'>    return _bootstrap._gcd_import(name[level:], package, level)
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 986, in _gcd_import
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 969, in _find_and_load
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 958, in _find_and_load_unlocked
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 673, in _load_unlocked
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap_external&gt;", line 662, in exec_module
-</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 222, in _call_with_frames_removed
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\downloadermiddlewares\retry.py", line 23, in &lt;module&gt;
-</span><span class='line'>    from scrapy.xlib.tx import ResponseFailed
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\xlib\tx\__init__.py", line 3, in &lt;module&gt;
-</span><span class='line'>    from twisted.web import client
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\web\client.py", line 42, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet.endpoints import TCP4ClientEndpoint, SSL4ClientEndpoint
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\endpoints.py", line 36, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet.stdio import StandardIO, PipeAddress
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\stdio.py", line 30, in &lt;module&gt;
-</span><span class='line'>    from twisted.internet import _win32stdio
-</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\_win32stdio.py", line 9, in &lt;module&gt;
-</span><span class='line'>    import win32api
-</span><span class='line'>ImportError: DLL load failed: 找不到指定的模块。</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解决办法：</h2>
-
-<p>参考网站：</p>
-
-<p><a href="http://blog.csdn.net/mtt_sky/article/details/50445938">http://blog.csdn.net/mtt_sky/article/details/50445938</a>
-<a href="http://blog.sina.com.cn/s/blog_5a81b7990101l225.html">http://blog.sina.com.cn/s/blog_5a81b7990101l225.html</a></p>
-
-<p><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Lib\site-packages\pywin32_system32</code></p>
-
-<p>里面的所有的文件复制到：<code>C:\Windows\System32</code></p>
-
-<p>现在，问题解决。无需重新打开DOS窗口，直接执行：<code>scrapy bench</code>。</p>
-
-<p>输出正常：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy bench
-</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Scrapy 1.2.1 started (bot: first)
-</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'first.spiders', 'CLOSESPIDER_TIMEOUT': 10, 'LOGSTATS_INTERVAL': 1, 'LOG_LEVEL': 'INFO', 'BOT_NAME': 'first', 'SPIDER_MODULES': ['first.spiders']}
-</span><span class='line'>2016-11-23 13:56:47 [scrapy] INFO: Enabled extensions:
-</span><span class='line'>['scrapy.extensions.corestats.CoreStats',
-</span><span class='line'> 'scrapy.extensions.telnet.TelnetConsole',
-</span><span class='line'> 'scrapy.extensions.closespider.CloseSpider',
-</span><span class='line'> 'scrapy.extensions.logstats.LogStats']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled downloader middlewares:
-</span><span class='line'>['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware',
-</span><span class='line'> 'scrapy.downloadermiddlewares.stats.DownloaderStats']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled spider middlewares:
-</span><span class='line'>['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.referer.RefererMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
-</span><span class='line'> 'scrapy.spidermiddlewares.depth.DepthMiddleware']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled item pipelines:
-</span><span class='line'>['first.pipelines.FirstPipeline']
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Spider opened
-</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:49 [scrapy] INFO: Crawled 69 pages (at 4140 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:50 [scrapy] INFO: Crawled 141 pages (at 4320 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:51 [scrapy] INFO: Crawled 205 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:52 [scrapy] INFO: Crawled 269 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:53 [scrapy] INFO: Crawled 325 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:54 [scrapy] INFO: Crawled 373 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:55 [scrapy] INFO: Crawled 429 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:56 [scrapy] INFO: Crawled 477 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:57 [scrapy] INFO: Crawled 533 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Crawled 581 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Closing spider (closespider_timeout)
-</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Dumping Scrapy stats:
-</span><span class='line'>{'downloader/request_bytes': 265444,
-</span><span class='line'> 'downloader/request_count': 597,
-</span><span class='line'> 'downloader/request_method_count/GET': 597,
-</span><span class='line'> 'downloader/response_bytes': 1833261,
-</span><span class='line'> 'downloader/response_count': 597,
-</span><span class='line'> 'downloader/response_status_count/200': 597,
-</span><span class='line'> 'finish_reason': 'closespider_timeout',
-</span><span class='line'> 'finish_time': datetime.datetime(2016, 11, 23, 5, 56, 59, 266168),
-</span><span class='line'> 'log_count/INFO': 17,
-</span><span class='line'> 'request_depth_max': 20,
-</span><span class='line'> 'response_received_count': 597,
-</span><span class='line'> 'scheduler/dequeued': 597,
-</span><span class='line'> 'scheduler/dequeued/memory': 597,
-</span><span class='line'> 'scheduler/enqueued': 11938,
-</span><span class='line'> 'scheduler/enqueued/memory': 11938,
-</span><span class='line'> 'start_time': datetime.datetime(2016, 11, 23, 5, 56, 48, 450531)}
-</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Spider closed (closespider_timeout)
-</span><span class='line'>
-</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -2168,6 +1985,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/">Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/">Python3 大型网络爬虫实战 003 — Scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片</a>
       </li>
     
@@ -2181,10 +2002,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a>
       </li>
     
   </ul>
@@ -2203,11 +2020,11 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
-<a style="font-size: 154%" href="/tags/python3/">Python3</a>
+<a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 115%" href="/tags/sr300/">SR300</a>
-<a style="font-size: 129%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 115%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
 <a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
@@ -2232,7 +2049,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
-<a style="font-size: 139%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
@@ -2253,7 +2070,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
-<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (10)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

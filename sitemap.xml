@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/</loc>
+<lastmod>2016-12-26T00:56:25+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/26/python3-large-web-crawler-169bb-com-HD-beautiful-pictures/</loc>
 <lastmod>2016-12-26T00:14:57+08:00</lastmod>
 </url>
@@ -1082,5 +1086,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/pa-qu-tu-pian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/mysql/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pa-qu-shang-ye-shu-ju/</loc>
 </url>
 </urlset>
