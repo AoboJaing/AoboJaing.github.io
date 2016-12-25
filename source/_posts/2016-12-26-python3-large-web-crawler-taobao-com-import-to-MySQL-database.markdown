@@ -23,7 +23,7 @@ tags: [MySQL, Python3, Scrapy, 爬虫,爬取商业数据]
 
 ---
 
-* 本文中的源代码在github这里：。
+* 本文中的源代码在github这里：https://github.com/AoboJaing/thirdDemo/
 
 本篇博文的重点内容：
 
