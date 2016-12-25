@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/26/Windows-install-cuteFTP-and-crack/</loc>
+<lastmod>2016-12-26T01:56:23+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/</loc>
 <lastmod>2016-12-26T01:46:45+08:00</lastmod>
 </url>
@@ -1108,5 +1112,8 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/ssh-agent/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cuteftp-9-dot-0/</loc>
 </url>
 </urlset>
