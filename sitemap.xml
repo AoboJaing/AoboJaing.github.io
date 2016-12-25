@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support/</loc>
+<lastmod>2016-12-25T16:27:20+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/25/git-how-to-delete-a-library/</loc>
 <lastmod>2016-12-25T16:15:20+08:00</lastmod>
 </url>
@@ -456,6 +460,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/c-plus-plus/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/wang-luo-pa-chong/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1062,5 +1069,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/shan-chu-yuan-cheng-ku/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/urllib/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/wang-luo-pa-chong/</loc>
 </url>
 </urlset>

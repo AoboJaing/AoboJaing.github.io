@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T16:19:38+08:00</updated>
+  <updated>2016-12-25T16:27:44+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,206 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python 网络爬虫 011 (高级功能) 支持代理proxy — 让爬虫可以翻墙爬取网站]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support/"/>
+    <updated>2016-12-25T16:27:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support</id>
+    <content type="html"><![CDATA[<h1>支持代理</h1>
+
+<p>使用的系统：<strong>Windows 10 64位</strong>
+<strong>Python</strong> 语言版本：<strong>Python 2.7.10 V</strong>
+使用的编程 <strong>Python</strong> 的集成开发环境：<strong>PyCharm 2016 04</strong>
+我使用的 <strong>urllib</strong> 的版本：<strong>urllib2</strong></p>
+
+<p><strong>注意：</strong> 我没这里使用的是 <strong>Python2</strong> ，而不是<strong>Python3</strong></p>
+
+<hr />
+
+<h2>一 . 前言</h2>
+
+<p>在国内一些网站已经被屏蔽，比如<strong>google</strong>、<strong>Facebook</strong>等等。如果我们想要访问这些被屏蔽的网站，需要翻墙，术语叫：代理。简单的说就是，我们访问这些网站都是通过国内的服务器来访问这些网站，但是在你与服务器之间有一道长城防火墙，它会判断你访问的这个网站是不是在屏蔽列表里的网站。假如你现在访问<strong>google</strong>网站，长城防火墙就会屏蔽这个网站，不让你访问它。
+那么代理又是什么呢？ 简单的说就是你不是直接访问的<strong>google</strong>网站，而是访问的国外的一个服务器。你在电脑上输入<strong>google</strong>的网站后，信息的运输是这样的： 国外服务器接受到你访问的网站，它帮你访问，然后将访问得到的结果返回给你。</p>
+
+<h2>二 .  测试</h2>
+
+<p>我们可以使用 <code>urllib2</code> 支持代理。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">proxy</span> <span class="o">=</span> <span class="o">...</span>
+</span><span class='line'><span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>
+</span><span class='line'><span class="n">proxy_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">urlparse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span><span class="p">:</span> <span class="n">proxy</span><span class="p">}</span>
+</span><span class='line'><span class="n">opener</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">(</span><span class="n">proxy_params</span><span class="p">))</span>
+</span><span class='line'><span class="n">response</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>三 . 代码</h2>
+
+<p>代码在<a href="https://github.com/AoboJaing/web-scraping-with-python-learning/blob/master/ch1/1-4-4-2-proxy.py">这里</a>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#-*- coding:utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">urllib2</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">chardet</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">urlparse</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="s">&#39;wswp&#39;</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">num_retries</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;Downloading: &#39;</span><span class="p">,</span> <span class="n">url</span>
+</span><span class='line'>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;User-agent&#39;</span> <span class="p">:</span> <span class="n">user_agent</span><span class="p">}</span>
+</span><span class='line'>    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">proxy</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">proxy_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">urlparse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span><span class="p">:</span> <span class="n">proxy</span><span class="p">}</span>
+</span><span class='line'>        <span class="n">opener</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">(</span><span class="n">proxy_params</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">html</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">charset</span> <span class="o">=</span> <span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">html</span><span class="p">)[</span><span class="s">&#39;encoding&#39;</span><span class="p">]</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">charset</span> <span class="o">==</span> <span class="s">&#39;GB2312&#39;</span> <span class="ow">or</span> <span class="n">charset</span> <span class="o">==</span> <span class="s">&#39;gb2312&#39;</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;GBK&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;GB18030&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;GB18030&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&#39;Download error&#39;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">reason</span>
+</span><span class='line'>        <span class="n">html</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">num_retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">num_retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&#39;code&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">500</span> <span class="o">&lt;=</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span> <span class="o">&lt;</span> <span class="mi">600</span><span class="p">:</span>
+</span><span class='line'>                    <span class="c"># recursively retry 5xx HTTP errors</span>
+</span><span class='line'>                    <span class="k">return</span> <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">proxy</span><span class="p">,</span> <span class="n">num_retries</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">html</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>四 . 运行</h2>
+
+<p>如何使用这个最新的 <code>download()</code> 函数。<code>download()</code> 函数里面的形参 <code>proxy</code> 究竟要传入什么？</p>
+
+<p>如果直接运行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">download</span><span class="p">(</span><span class="s">&#39;https://www.google.co.jp/&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Downloading</span><span class="p">:</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">co</span><span class="o">.</span><span class="n">jp</span><span class="o">/</span>
+</span><span class='line'><span class="n">Download</span> <span class="n">error</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">11002</span><span class="p">]</span> <span class="n">getaddrinfo</span> <span class="n">failed</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，我们启动<strong>proxy</strong>代理：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-python-Web-crawler-proxy-support/1478797401564.png" alt="Alt text" /></p>
+
+<p><strong>proxy</strong> 的本地端口为：<code>127.0.0.1:1080</code></p>
+
+<p>所以，我们给<code>download()</code> 函数的 <code>proxy</code> 参数的值设置为：<code>127.0.0.1:1080</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">download</span><span class="p">(</span><span class="s">&#39;https://www.google.co.jp/&#39;</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="s">&#39;127.0.0.1:1080&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>成功输出了<strong>google</strong>日本的网站源代码：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-python-Web-crawler-proxy-support/1478797631818.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>五 . 讲解代码中重点部分</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">if</span> <span class="n">proxy</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">proxy_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">urlparse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span><span class="p">:</span> <span class="n">proxy</span><span class="p">}</span>
+</span><span class='line'>    <span class="n">opener</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">(</span><span class="n">proxy_params</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果用户给<code>proxy</code>参数赋值了，那么就执行里面的代码。</p>
+
+<p>其中<code>urlparse.urlparse(url).scheme</code> 得到的是网页的协议类型，比如：<code>http</code>、<code>https</code>、<code>ftp</code>等等。</p>
+
+<p>所以<code>proxy_params = {urlparse.urlparse(url).scheme: proxy}</code>这句代码现在这个情况就等于：<code>proxy_params = {'https', '127.0.0.1:1080'}</code>。所以，<code>proxy_params</code>是一个字典，里面存放在代理的端口号。</p>
+
+<p>在<code>urllib2</code>包中有<code>ProxyHandler</code>类，通过此类可以设置代理访问网页。</p>
+
+<p>所以，上面完整的代码所执行的功能，和下面这一小段代码执行所得到的效果是一样的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#coding=utf8</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">urllib2</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">chardet</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">proxy</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">({</span><span class="s">&#39;https&#39;</span><span class="p">:</span> <span class="s">&#39;127.0.0.1:1080&#39;</span><span class="p">})</span>
+</span><span class='line'><span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
+</span><span class='line'><span class="n">html</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;https://www.google.co.jp/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="n">charset</span> <span class="o">=</span> <span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">html</span><span class="p">)[</span><span class="s">&#39;encoding&#39;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span> <span class="n">html</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;GB18030&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://outofmemory.cn/code-snippet/2625/python-urllib2-usage-ProxyHandler-through-Proxy-call-wangye">http://outofmemory.cn/code-snippet/2625/python-urllib2-usage-ProxyHandler-through-Proxy-call-wangye</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 007 如何删除一个库]]></title>
@@ -2833,95 +3033,6 @@ ls
 <p><strong>Step 4 . </strong> 设置IP</p>
 
 <p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/05/pcduino-programming-system-ubuntu-14/"/>
-    <updated>2016-12-05T22:19:23+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/05/pcduino-programming-system-ubuntu-14</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
-<li>我使用的TF卡大小：32G</li>
-</ul>
-
-
-<hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
-</ul>
-
-
-<hr />
-
-<h2>下载需要的东西</h2>
-
-<p>下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
-
-<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
-
-<ol>
-<li>一个是系统镜像文件。</li>
-<li>一个烧写工具。</li>
-</ol>
-
-
-<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
-
-<p><strong>Step 1 . </strong> 下载镜像文件</p>
-
-<p>镜像文件选择下面的 Ubuntu 14 下载：（注意，这个Ubuntu 14 只需要下载这个文件即可，因为它是一个 <strong>内核+系统</strong> 的镜像文件。）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480946917168.png" alt="Alt text" /></p>
-
-<p><strong>Step 2 . </strong> 下载烧写工具</p>
-
-<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947440669.png" alt="Alt text" /></p>
-
-<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
-
-<hr />
-
-<h2>给pcduino板子烧写Ubuntu 14系统</h2>
-
-<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
-
-<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
-
-<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件。</p>
-
-<p>点击<strong>镜像文件</strong>按钮，选择刚刚下载解压后的镜像文件。</p>
-
-<p>然后点击 <strong>烧录</strong> 按钮，进行烧录。（大于5分钟时间。）</p>
-
-<p><strong>Step 3 . </strong> 将TF卡插到pcduino板子上，只给板子供电即可。</p>
-
-<blockquote><p>注意：</p>
-
-<ul>
-<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
-<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
-<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
-</ul>
-</blockquote>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947234663.png" alt="Alt text" /></p>
-
-<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核和系统程序（pcduino板子全自动烧写），大约不到3分钟左右，中间这个LED不再闪烁（熄灭），说明：内核和系统烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
-
-<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
-
-<p>Ubuntu 14系统成功运行。</p>
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   

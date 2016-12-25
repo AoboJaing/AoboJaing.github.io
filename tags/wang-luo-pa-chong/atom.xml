@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 网络爬虫 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/wang-luo-pa-chong/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-25T16:27:44+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python 网络爬虫 011 (高级功能)  支持代理proxy — 让爬虫可以翻墙爬取网站]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support/"/>
+    <updated>2016-12-25T16:27:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/python-Web-crawler-proxy-support</id>
+    <content type="html"><![CDATA[<h1>支持代理</h1>
+
+<p>使用的系统：<strong>Windows 10 64位</strong>
+<strong>Python</strong> 语言版本：<strong>Python 2.7.10 V</strong>
+使用的编程 <strong>Python</strong> 的集成开发环境：<strong>PyCharm 2016 04</strong>
+我使用的 <strong>urllib</strong> 的版本：<strong>urllib2</strong></p>
+
+<p><strong>注意：</strong> 我没这里使用的是 <strong>Python2</strong> ，而不是<strong>Python3</strong></p>
+
+<hr />
+
+<h2>一 . 前言</h2>
+
+<p>在国内一些网站已经被屏蔽，比如<strong>google</strong>、<strong>Facebook</strong>等等。如果我们想要访问这些被屏蔽的网站，需要翻墙，术语叫：代理。简单的说就是，我们访问这些网站都是通过国内的服务器来访问这些网站，但是在你与服务器之间有一道长城防火墙，它会判断你访问的这个网站是不是在屏蔽列表里的网站。假如你现在访问<strong>google</strong>网站，长城防火墙就会屏蔽这个网站，不让你访问它。
+那么代理又是什么呢？ 简单的说就是你不是直接访问的<strong>google</strong>网站，而是访问的国外的一个服务器。你在电脑上输入<strong>google</strong>的网站后，信息的运输是这样的： 国外服务器接受到你访问的网站，它帮你访问，然后将访问得到的结果返回给你。</p>
+
+<h2>二 .  测试</h2>
+
+<p>我们可以使用 <code>urllib2</code> 支持代理。</p>
+
+<pre><code class="python">proxy = ...
+opener = urllib2.build_opener()
+proxy_params = {urlparse.urlparse(url).scheme: proxy}
+opener.add_handler(urllib2.ProxyHandler(proxy_params))
+response = opener.open(request)
+</code></pre>
+
+<h2>三 . 代码</h2>
+
+<p>代码在<a href="https://github.com/AoboJaing/web-scraping-with-python-learning/blob/master/ch1/1-4-4-2-proxy.py">这里</a>。</p>
+
+<pre><code class="python">#-*- coding:utf-8 -*-
+
+import urllib2
+import chardet
+import urlparse
+
+def download(url, user_agent='wswp', proxy=None, num_retries=2):
+    print 'Downloading: ', url
+    headers = {'User-agent' : user_agent}
+    request = urllib2.Request(url, headers=headers)
+
+    opener = urllib2.build_opener()
+    if proxy:
+        proxy_params = {urlparse.urlparse(url).scheme: proxy}
+        opener.add_handler(urllib2.ProxyHandler(proxy_params))
+    try:
+        html = opener.open(request).read()
+        charset = chardet.detect(html)['encoding']
+        if charset == 'GB2312' or charset == 'gb2312':
+            html = html.decode('GBK').encode('GB18030')
+        else:
+            html = html.decode(charset).encode('GB18030')
+    except urllib2.URLError as e:
+        print 'Download error', e.reason
+        html = None
+        if num_retries &gt; 0:
+            if num_retries &gt; 0:
+                if hasattr(e, 'code') and 500 &lt;= e.code &lt; 600:
+                    # recursively retry 5xx HTTP errors
+                    return download(url, user_agent, proxy, num_retries-1)
+    return html
+</code></pre>
+
+<h2>四 . 运行</h2>
+
+<p>如何使用这个最新的 <code>download()</code> 函数。<code>download()</code> 函数里面的形参 <code>proxy</code> 究竟要传入什么？</p>
+
+<p>如果直接运行：</p>
+
+<pre><code>&gt;&gt;&gt; download('https://www.google.co.jp/')
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>Downloading:  https://www.google.co.jp/
+Download error [Errno 11002] getaddrinfo failed
+</code></pre>
+
+<p>现在，我们启动<strong>proxy</strong>代理：</p>
+
+<p><img src="/images/2016-12-25-python-Web-crawler-proxy-support/1478797401564.png" alt="Alt text" /></p>
+
+<p><strong>proxy</strong> 的本地端口为：<code>127.0.0.1:1080</code></p>
+
+<p>所以，我们给<code>download()</code> 函数的 <code>proxy</code> 参数的值设置为：<code>127.0.0.1:1080</code></p>
+
+<pre><code class="python">&gt;&gt;&gt; download('https://www.google.co.jp/', proxy='127.0.0.1:1080')
+</code></pre>
+
+<p>成功输出了<strong>google</strong>日本的网站源代码：</p>
+
+<p><img src="/images/2016-12-25-python-Web-crawler-proxy-support/1478797631818.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>五 . 讲解代码中重点部分</h2>
+
+<pre><code class="python">    if proxy:
+        proxy_params = {urlparse.urlparse(url).scheme: proxy}
+        opener.add_handler(urllib2.ProxyHandler(proxy_params))
+</code></pre>
+
+<p>如果用户给<code>proxy</code>参数赋值了，那么就执行里面的代码。</p>
+
+<p>其中<code>urlparse.urlparse(url).scheme</code> 得到的是网页的协议类型，比如：<code>http</code>、<code>https</code>、<code>ftp</code>等等。</p>
+
+<p>所以<code>proxy_params = {urlparse.urlparse(url).scheme: proxy}</code>这句代码现在这个情况就等于：<code>proxy_params = {'https', '127.0.0.1:1080'}</code>。所以，<code>proxy_params</code>是一个字典，里面存放在代理的端口号。</p>
+
+<p>在<code>urllib2</code>包中有<code>ProxyHandler</code>类，通过此类可以设置代理访问网页。</p>
+
+<p>所以，上面完整的代码所执行的功能，和下面这一小段代码执行所得到的效果是一样的：</p>
+
+<pre><code class="python">#coding=utf8
+
+import urllib2
+import chardet
+
+proxy = urllib2.ProxyHandler({'https': '127.0.0.1:1080'})
+opener = urllib2.build_opener(proxy)
+html = opener.open('https://www.google.co.jp/').read()
+charset = chardet.detect(html)['encoding']
+
+print html.decode(charset).encode('GB18030')
+</code></pre>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://outofmemory.cn/code-snippet/2625/python-urllib2-usage-ProxyHandler-through-Proxy-call-wangye">http://outofmemory.cn/code-snippet/2625/python-urllib2-usage-ProxyHandler-through-Proxy-call-wangye</a></p>
+]]></content>
+  </entry>
+  
+</feed>
