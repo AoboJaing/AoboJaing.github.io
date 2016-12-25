@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git_github | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/git-github/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T14:45:33+08:00</updated>
+  <updated>2016-12-25T15:09:01+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 004 配置代理 目的：clone提速]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/"/>
+    <updated>2016-12-25T15:08:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>你如果没有翻墙，就算通过本篇博客对你的Git进行了配置，也是没有一点效果的。</p></blockquote>
+
+<p>在终端中执行：</p>
+
+<pre><code>$ git config --global http.proxy http://127.0.0.1:1080
+$ git config --global https.proxy https://127.0.0.1:1080
+</code></pre>
+
+<p>查看一下：</p>
+
+<pre><code>$ git config --list
+</code></pre>
+
+<p>对于我现在使用的Windows 系统而言，输出是下面这个样子的。</p>
+
+<pre><code>core.symlinks=false
+core.autocrlf=true
+core.fscache=true
+color.diff=auto
+color.status=auto
+color.branch=auto
+color.interactive=true
+help.format=html
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+diff.astextplain.textconv=astextplain
+rebase.autosquash=true
+credential.helper=manager
+filter.lfs.clean=git-lfs clean %f
+filter.lfs.smudge=git-lfs smudge %f
+filter.lfs.required=true
+user.name=AoboJaing
+user.email=744910955@qq.com
+https.proxy=https://127.0.0.1:1080
+http.proxy=http://127.0.0.1:1080
+</code></pre>
+
+<hr />
+
+<p>现在测试下载一个源代码试试看：（速度马上提上来）</p>
+
+<p><img src="/images/2016-12-25-git-config-agent-purpose-clone-download-speed-up/1482559985250.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<h2><strong>注意：</strong> 错误的做法：</h2>
+
+<pre><code>$ git config --global http.proxy 'socks5://127.0.0.1:1080'
+$ git config --global https.proxy 'socks5://127.0.0.1:1080'
+</code></pre>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE">https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE</a></li>
+<li><a href="https://gist.github.com/laispace/666dd7b27e9116faece6">https://gist.github.com/laispace/666dd7b27e9116faece6</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本]]></title>
@@ -374,47 +445,6 @@ git push origin v1.0
 <p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
 
 <p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决 GitHub for Windows 客户端软件中代码的中文显示乱码问题]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding/"/>
-    <updated>2016-10-10T07:47:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/slove-GitHub-For-Windows-chinese-garbled-coding</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><code>README.md</code> 文件里面是有中文的。在 <code>GitHub For Windows</code> 客户端软件里面显示中文是乱码的。</p>
-
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055346118.png" alt="Alt text" /></p>
-
-<p>解决办法：</p>
-
-<p><strong>Step 1 . </strong> 将 <code>README.md</code> 文件使用 <strong>Notepad++</strong> 软件打开。
-（如果你的电脑上没有 <strong>Notepad++</strong> 软件，你可以参考<a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/">这篇博客</a>来下载安装它。）</p>
-
-<p><strong>Step 2 . </strong> 选择： <strong>格式</strong> -> <strong>转为 Utf-8 无 BOM 编码格式</strong></p>
-
-<p><strong>Step 3 . </strong> 保存 <code>README.md</code> 文件</p>
-
-<p><strong>Step 4 . </strong> 将修改重新推送到 <strong>GitHub</strong> 远程。</p>
-
-<p>问题解决：</p>
-
-<p><img src="/images/2016-10-10-slove-GitHub-For-Windows-chinese-garbled-coding/1476055880353.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p><strong>GitHub For Windows </strong> 客户端软件是一个非常好的软件，它实现了：即使你不会 <code>git</code> 命令行工具的时候，一样可以使用 <strong>GitHub For Windows </strong> 客户端软件里面简单点的点击按钮就可以一样将代码推送到 <strong>GitHub</strong> 远程。</p></blockquote>
-
-<hr />
-
-<blockquote><p>下载、安装、配置 <strong>GitHub For Windows </strong> 客户端软件的图文教程可以参考这篇博客。</p></blockquote>
-
-<hr />
-
-<blockquote><p>因为 <strong>GitHub</strong> 在推送代码到远程的时候，会自动将所有文件的编码方式转换为 <code>UTF-8</code> ，所有在网页里面浏览你的 <strong>GitHub</strong> 仓库的时候，中文是不会出现乱码的。
-但是在本地，要想在 <strong>GitHub For Windows</strong> 客户端软件里面也能正常看到 中文，而不是乱码，就要自己手动的将含有中文的文件转换为：<code>UTF-8</code>编码方法。（如果是 <strong>Windows</strong> 系统就要转为：<code>Utf-8 无 BOM</code> 编码格式）</p></blockquote>
 ]]></content>
   </entry>
   

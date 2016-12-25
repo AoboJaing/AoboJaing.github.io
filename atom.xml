@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-25T14:45:33+08:00</updated>
+  <updated>2016-12-25T15:09:01+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 004 配置代理 目的：clone提速]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/"/>
+    <updated>2016-12-25T15:08:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up</id>
+    <content type="html"><![CDATA[<hr />
+
+<blockquote><p>你如果没有翻墙，就算通过本篇博客对你的Git进行了配置，也是没有一点效果的。</p></blockquote>
+
+<p>在终端中执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global http.proxy http://127.0.0.1:1080
+</span><span class='line'>$ git config --global https.proxy https://127.0.0.1:1080</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看一下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于我现在使用的Windows 系统而言，输出是下面这个样子的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>core.symlinks=false
+</span><span class='line'>core.autocrlf=true
+</span><span class='line'>core.fscache=true
+</span><span class='line'>color.diff=auto
+</span><span class='line'>color.status=auto
+</span><span class='line'>color.branch=auto
+</span><span class='line'>color.interactive=true
+</span><span class='line'>help.format=html
+</span><span class='line'>http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+</span><span class='line'>diff.astextplain.textconv=astextplain
+</span><span class='line'>rebase.autosquash=true
+</span><span class='line'>credential.helper=manager
+</span><span class='line'>filter.lfs.clean=git-lfs clean %f
+</span><span class='line'>filter.lfs.smudge=git-lfs smudge %f
+</span><span class='line'>filter.lfs.required=true
+</span><span class='line'>user.name=AoboJaing
+</span><span class='line'>user.email=744910955@qq.com
+</span><span class='line'>https.proxy=https://127.0.0.1:1080
+</span><span class='line'>http.proxy=http://127.0.0.1:1080</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在测试下载一个源代码试试看：（速度马上提上来）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-config-agent-purpose-clone-download-speed-up/1482559985250.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<h2><strong>注意：</strong> 错误的做法：</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global http.proxy 'socks5://127.0.0.1:1080'
+</span><span class='line'>$ git config --global https.proxy 'socks5://127.0.0.1:1080'</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE">https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE</a></li>
+<li><a href="https://gist.github.com/laispace/666dd7b27e9116faece6">https://gist.github.com/laispace/666dd7b27e9116faece6</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本]]></title>
@@ -2748,215 +2843,6 @@ ls
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C# 003 C#调用cmd.exe执行命令]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/"/>
-    <updated>2016-12-02T07:57:03+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我使用的电脑：Windows 10 64位</li>
-<li>使用的Visual Studio 软件： VS2010</li>
-</ul>
-
-
-<hr />
-
-<p>参考网站：<a href="http://www.cnblogs.com/njl041x/p/3881550.html">C#程序调用cmd.exe执行命令</a></p>
-
-<p>创建一个文件，名为：<code>RunCmd.cs</code>。将下面的代码拷贝到里面。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">AoboSir</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">RunCmd</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">public</span> <span class="nf">RunCmd</span><span class="p">()</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">CmdPath</span> <span class="p">=</span> <span class="s">@&quot;C:\Windows\System32\cmd.exe&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">/// &lt;summary&gt;</span>
-</span><span class='line'>        <span class="c1">/// 执行cmd命令</span>
-</span><span class='line'>        <span class="c1">/// 多命令请使用批处理命令连接符：</span>
-</span><span class='line'>        <span class="c1">/// &lt;![CDATA[</span>
-</span><span class='line'>        <span class="c1">/// &amp;:同时执行两个命令</span>
-</span><span class='line'>        <span class="c1">/// |:将上一个命令的输出,作为下一个命令的输入</span>
-</span><span class='line'>        <span class="c1">/// &amp;&amp;：当&amp;&amp;前的命令成功时,才执行&amp;&amp;后的命令</span>
-</span><span class='line'>        <span class="c1">/// ||：当||前的命令失败时,才执行||后的命令]]&gt;</span>
-</span><span class='line'>        <span class="c1">/// 其他请百度</span>
-</span><span class='line'>        <span class="c1">/// &lt;/summary&gt;</span>
-</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;cmd&quot;&gt;&lt;/param&gt;</span>
-</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;output&quot;&gt;&lt;/param&gt;</span>
-</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">run</span><span class="p">(</span><span class="kt">string</span> <span class="n">cmd</span><span class="p">,</span> <span class="k">out</span> <span class="kt">string</span> <span class="n">output</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">cmd</span> <span class="p">=</span> <span class="n">cmd</span><span class="p">.</span><span class="n">Trim</span><span class="p">().</span><span class="n">TrimEnd</span><span class="p">(</span><span class="sc">&#39;&amp;&#39;</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;&amp;exit&quot;</span><span class="p">;</span><span class="c1">//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态</span>
-</span><span class='line'>            <span class="k">using</span> <span class="p">(</span><span class="n">Process</span> <span class="n">p</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Process</span><span class="p">())</span>
-</span><span class='line'>            <span class="p">{</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">FileName</span> <span class="p">=</span> <span class="n">CmdPath</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">UseShellExecute</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>        <span class="c1">//是否使用操作系统shell启动</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardInput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//接受来自调用程序的输入信息</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardOutput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>  <span class="c1">//由调用程序获取输出信息</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardError</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//重定向标准错误输出</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">CreateNoWindow</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>          <span class="c1">//不显示程序窗口</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span><span class="c1">//启动程序</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//向cmd窗口写入命令</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">AutoFlush</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>                <span class="c1">//p.StandardInput.WriteLine(&quot;exit&quot;);</span>
-</span><span class='line'>                <span class="c1">//向标准输入写入要执行的命令。这里使用&amp;是批处理命令的符号，表示前面一个命令不管是否执行成功都执行后面(exit)命令，如果不执行exit命令，后面调用ReadToEnd()方法会假死</span>
-</span><span class='line'>                <span class="c1">//同类的符号还有&amp;&amp;和||前者表示必须前一个命令执行成功才会执行后面的命令，后者表示必须前一个命令执行失败才会执行后面的命令</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">//获取cmd窗口的输出信息</span>
-</span><span class='line'>                <span class="n">output</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="n">StandardOutput</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">WaitForExit</span><span class="p">();</span><span class="c1">//等待程序执行完退出进程</span>
-</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们可以这样使用这个<code>RunCmd</code> 类：</p>
-
-<p>在GUI界面里面添加一个按钮，然后在对应的<code>.cs</code> 文件的程序，就类似于下面这个样子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.ComponentModel</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Data</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Drawing</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Windows.Forms</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">AoboSir</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">learningcs003</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">Form1</span> <span class="p">:</span> <span class="n">Form</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">public</span> <span class="nf">Form1</span><span class="p">()</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">InitializeComponent</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">RunCmd</span> <span class="n">runcmd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RunCmd</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">private</span> <span class="k">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="kt">string</span> <span class="n">commond</span><span class="p">,</span> <span class="n">output</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">commond</span> <span class="p">=</span> <span class="s">@&quot;notepad.exe&quot;</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">runcmd</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">commond</span><span class="p">,</span> <span class="k">out</span> <span class="n">output</span><span class="p">);</span>
-</span><span class='line'>            <span class="c1">//MessageBox.Show(output);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行的功能是：启动 <strong>记事本</strong> 软件。</p>
-
-<hr />
 ]]></content>
   </entry>
   
