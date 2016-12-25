@@ -9,26 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="char 与 wchar_t 之间的转换 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-#include &lt;iostream&gt;
-#include &lt;iomanip&gt; int main(void)
-{ char c = &#39;a&# &hellip;">
+  <meta name="description" content="切换到指定 branch （分支） 举例 我们的目的是：得到 https://github.com/turtlebot/turtlebot_viz 网址里面的groovy分支的源代码： 第一步：git源代码到本地。（注意： 不是Download ZIP，它只是下载master分支的源代码， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +66,127 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/">Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-25T14:44:29+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>2:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<hr />
+
+<h1>切换到指定 branch （分支）</h1>
+
+<hr />
+
+<h2>举例</h2>
+
+<p>我们的目的是：得到 <a href="https://github.com/turtlebot/turtlebot_viz">https://github.com/turtlebot/turtlebot_viz</a> 网址里面的<strong>groovy</strong>分支的源代码：</p>
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557635906.png" alt="Alt text" /></p>
+
+<p>第一步：git源代码到本地。（<strong>注意：</strong> 不是<strong>Download ZIP</strong>，它只是下载master分支的源代码，不会下载所有分支的源代码）</p>
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557660023.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:turtlebot/turtlebot_viz.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557685824.png" alt="Alt text" /></p>
+
+<p>第二步：查看所有分支</p>
+
+<blockquote><p>1 . 绿色的表示本地当前分支</p>
+
+<p> 2 . 红色的表示远程的分支。</p>
+
+<p> 3 . <code>origin/HEAD -&gt; origin/hydro</code> 指：远程库的当前分支是<code>hydro</code></p>
+
+<p>  <img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482647272808.png" alt="Alt text" /></p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git branch -a</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557771056.png" alt="Alt text" /></p>
+
+<p>第三步：切换到指定分支，比如<strong>groovy</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout groovy</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h1>切换到指定 tag （版本）</h1>
+
+<h2>举例</h2>
+
+<p>我们的目的是：得到 <a href="https://github.com/ros-drivers/freenect_stack">https://github.com/ros-drivers/freenect_stack</a> 网址里面 <strong>freenect-stack-0.2.2</strong> 版本。</p>
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482647506482.png" alt="Alt text" /></p>
+
+<p>克隆</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:ros-drivers/freenect_stack.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580629054.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd freenect_stack
+</span><span class='line'>git tag</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580655226.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout freenect-stack-0.2.2</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580667832.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>总结：其实tag和 branch是一样的操作。</p></blockquote>
+
+<p>如果你感觉使用<code>git clone XXX</code> 下载源代码的速度太慢了，你可以参考这篇博客来配置你的git，让它提速。</p>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://gaohaoyang.github.io/2016/07/07/git-clone-not-master-branch/">https://gaohaoyang.github.io/2016/07/07/git-clone-not-master-branch/</a></li>
+<li><a href="http://www.jianshu.com/p/79cdb8d514ed">http://www.jianshu.com/p/79cdb8d514ed</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2218,61 +2320,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-06T13:54:54+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>在我的Windows电脑里面，Arduino IDE软件安装在<code>C:\Program Files (x86)\Arduino</code>路径里面。</p>
-
-<p>我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。</p>
-
-<h2>添加 I2Cdev 及其相关模块库到Arduino IDE软件里面</h2>
-
-<p><strong>Step 0 . </strong> 关闭 Arduino IDE 软件</p>
-
-<p><strong>Step 1 . </strong> 下载 i2cdev 及其相关的模块库</p>
-
-<p>到<a href="https://github.com/jrowberg/i2cdevlib">这个网址</a>里面下载所有i2cdev相关的模块库。</p>
-
-<p><strong>Step 2 . </strong> 下载后，解压，将<code>/Arduino/</code>路径里面的所有文件夹复制，并拷贝到：<code>C:\Program Files (x86)\Arduino\libraries</code>路径里面。</p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001787595.png" alt="Alt text" /></p>
-
-<p><strong>Step 3 . </strong> 启动Arduino IDE 软件。在 <strong>文件</strong> -> <strong>示例</strong> 里面就可以看到刚刚添加到Arduino IDE的模块库。（现在就可以正常使用了）</p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001851166.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p>注意：</p>
-
-<p>如果是Ubuntu系统，Arduino IDE 一般被安装在：<code>/opt/arduino/</code></p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2288,6 +2335,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/">Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/">C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换</a>
       </li>
     
@@ -2301,10 +2352,6 @@
     
       <li class="post">
         <a href="/blog/2016/12/14/Intel-RealSense-Development-environment-select/">Intel RealSense 001 开发环境的选择</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a>
       </li>
     
   </ul>
@@ -2344,6 +2391,7 @@
 <a style="font-size: 168%" href="/tags/python/">python</a>
 <a style="font-size: 115%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/tag/">tag</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
@@ -2351,7 +2399,6 @@
 <a style="font-size: 115%" href="/tags/wen-jian-jia/">文件夹</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
-<a style="font-size: 115%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 129%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
@@ -2367,7 +2414,7 @@
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
-<li class='category'><a href='/blog/categories/git-github/'>git_github (4)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (5)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>

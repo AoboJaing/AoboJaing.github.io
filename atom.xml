@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-21T11:36:28+08:00</updated>
+  <updated>2016-12-25T14:45:33+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git(GitHub) 003 如何 Clone 非 Master 分支的代码 — 切换到指定 Branch分支 或者 Tag版本]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/"/>
+    <updated>2016-12-25T14:44:29+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/25/git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version</id>
+    <content type="html"><![CDATA[<hr />
+
+<hr />
+
+<h1>切换到指定 branch （分支）</h1>
+
+<hr />
+
+<h2>举例</h2>
+
+<p>我们的目的是：得到 <a href="https://github.com/turtlebot/turtlebot_viz">https://github.com/turtlebot/turtlebot_viz</a> 网址里面的<strong>groovy</strong>分支的源代码：</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557635906.png" alt="Alt text" /></p>
+
+<p>第一步：git源代码到本地。（<strong>注意：</strong> 不是<strong>Download ZIP</strong>，它只是下载master分支的源代码，不会下载所有分支的源代码）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557660023.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:turtlebot/turtlebot_viz.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557685824.png" alt="Alt text" /></p>
+
+<p>第二步：查看所有分支</p>
+
+<blockquote><p>1 . 绿色的表示本地当前分支</p>
+
+<p> 2 . 红色的表示远程的分支。</p>
+
+<p> 3 . <code>origin/HEAD -&gt; origin/hydro</code> 指：远程库的当前分支是<code>hydro</code></p>
+
+<p>  <img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482647272808.png" alt="Alt text" /></p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git branch -a</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482557771056.png" alt="Alt text" /></p>
+
+<p>第三步：切换到指定分支，比如<strong>groovy</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout groovy</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h1>切换到指定 tag （版本）</h1>
+
+<h2>举例</h2>
+
+<p>我们的目的是：得到 <a href="https://github.com/ros-drivers/freenect_stack">https://github.com/ros-drivers/freenect_stack</a> 网址里面 <strong>freenect-stack-0.2.2</strong> 版本。</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482647506482.png" alt="Alt text" /></p>
+
+<p>克隆</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:ros-drivers/freenect_stack.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580629054.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd freenect_stack
+</span><span class='line'>git tag</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580655226.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout freenect-stack-0.2.2</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-25-git-how-to-clone-code-of-no-master-branch-specified-branch-tag-version/1482580667832.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>总结：其实tag和 branch是一样的操作。</p></blockquote>
+
+<p>如果你感觉使用<code>git clone XXX</code> 下载源代码的速度太慢了，你可以参考这篇博客来配置你的git，让它提速。</p>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://gaohaoyang.github.io/2016/07/07/git-clone-not-master-branch/">https://gaohaoyang.github.io/2016/07/07/git-clone-not-master-branch/</a></li>
+<li><a href="http://www.jianshu.com/p/79cdb8d514ed">http://www.jianshu.com/p/79cdb8d514ed</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换]]></title>
@@ -2856,186 +2957,6 @@ ls
 <p>运行的功能是：启动 <strong>记事本</strong> 软件。</p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 028 获取命令行参数]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/02/python-get-command-line-arguments/"/>
-    <updated>2016-12-02T02:07:35+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/02/python-get-command-line-arguments</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">optparse</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">(</span><span class="s">&#39;usage%prog &#39;</span> <span class="o">+</span>\
-</span><span class='line'>                                   <span class="s">&#39;-f &lt;zipfile&gt; -d &lt;dictionary&gt;&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;zname&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span>\
-</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;specify zip file&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-d&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dname&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span>\
-</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;specify dictionary file&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">zname</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">dname</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
-</span><span class='line'>        <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">zname</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">zname</span>
-</span><span class='line'>        <span class="n">dname</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">dname</span>
-</span><span class='line'>        <span class="n">dlist</span> <span class="o">=</span> <span class="n">dname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;zname is &#39;</span><span class="p">,</span> <span class="n">zname</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;dname is &#39;</span><span class="p">,</span> <span class="n">dname</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;dlist is &#39;</span><span class="p">,</span> <span class="n">dlist</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Python3 的运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span>  <span class="o">-</span><span class="n">d</span> <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;sir&#39;</span><span class="p">,</span> <span class="s">&#39;patty&#39;</span><span class="p">,</span> <span class="s">&#39;re&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Python2 的运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">C</span><span class="p">:</span>\<span class="n">Python27</span>\<span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span> <span class="o">-</span><span class="n">d</span> <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;zname is &#39;</span><span class="p">,</span> <span class="s">&#39;aobo&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;dname is &#39;</span><span class="p">,</span> <span class="s">&#39;sir,patty,re&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;dlist is &#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;sir&#39;</span><span class="p">,</span> <span class="s">&#39;patty&#39;</span><span class="p">,</span> <span class="s">&#39;re&#39;</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面这个几个命令运行的效果是一样的：（Python2 和 Python3 运行的效果都一样）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">h</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">help</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Usage</span><span class="p">:</span> <span class="n">usagelearningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">zipfile</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">dictionary</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Options</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>  <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">f</span> <span class="n">ZNAME</span>    <span class="n">specify</span> <span class="nb">zip</span> <span class="nb">file</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">d</span> <span class="n">DNAME</span>    <span class="n">specify</span> <span class="n">dictionary</span> <span class="nb">file</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>注意：如果传入的参数是<code>string</code>类型的，最好使用<code>""</code> 引上</h2>
-
-<p>为什么？ 因为字符串里面难免可能会有 <code></code> （空格），所以，最好使用<code>""</code>（双引号）引上。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="s">&quot;aobo fd g&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="s">&quot;ava,dssd,hg&quot;</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span> <span class="n">fd</span> <span class="n">g</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;ava&#39;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&#39;hg&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你用单引号或者不用引号，虽然说运行不会报错，但是运行的结果就不是你想要的。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="s">&#39;aobo fd g&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s">&#39;ava,dssd,hg&#39;</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="s">&#39;aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="s">&#39;ava,dssd,hg&#39;</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&quot;&#39;ava&quot;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&quot;hg&#39;&quot;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span> <span class="n">fd</span> <span class="n">g</span> <span class="o">-</span><span class="n">d</span> <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;ava&#39;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&#39;hg&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   
