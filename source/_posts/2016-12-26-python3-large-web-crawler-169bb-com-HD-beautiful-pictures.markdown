@@ -58,9 +58,14 @@ tags: [爬取图片, Python3, Scrapy, 爬虫]
 
 ![Alt text](/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188308560.png)
 
-4 . 我们再来观察每页的网址有什么共同点，我们发现：第2页的网站是：http://www.169bb.com/xiyangmeinv/list_4_2.html；第3页的网址是：http://www.169bb.com/xiyangmeinv/list_4_3.html；而第1页的网站是：http://www.169bb.com/xiyangmeinv/list_4_1.html
+4 . 我们再来观察每页的网址有什么共同点，我们发现：
 
-这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：http://www.169bb.com/xiyangmeinv/list_4_120.html。事实的确是这样的。好。
+* 第2页的网站是：http://www.169bb.com/xiyangmeinv/list_4_2.html
+* 第3页的网址是：http://www.169bb.com/xiyangmeinv/list_4_3.html
+* 第1页的网站是：http://www.169bb.com/xiyangmeinv/list_4_1.html
+
+这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：http://www.169bb.com/xiyangmeinv/list_4_120.html
+。事实的确是这样的。好。
 
 
 5 . 现在，我们随便点击一个图片，进去看看这个美女的高清图片集。
@@ -71,10 +76,10 @@ tags: [爬取图片, Python3, Scrapy, 爬虫]
 
 6 . 并且它的每页的网址也是有规律的。
 
-第2页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html
-第3页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html
-第1页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333.html
-...
+* 第2页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html
+* 第3页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html
+* 第1页是：http://www.169bb.com/xiyangmeinv/2016/1117/37333.html
+* ...
 
 但是有的美女的网址里只有一页，比如这个：http://www.169bb.com/xiyangmeinv/2016/0103/5974.html
 
@@ -127,7 +132,7 @@ scrapy genspider -t basic pic_169bb 169bb.com
 
 **Step 3 . ** 现在开始爬虫的编写。进入`pic_169bb.py`文件。
 
-爬虫（`pic_169bb.py`文件）会自动的先爬首页（http://169bb.com/），爬完首页之后，会自动的进入`parse()`回调函数。
+爬虫（`pic_169bb.py`文件）会自动的先爬首页（[169bb.com](http://169bb.com/)），爬完首页之后，会自动的进入`parse()`回调函数。
 
 这个回调函数中，我们需要写些东西。
 
