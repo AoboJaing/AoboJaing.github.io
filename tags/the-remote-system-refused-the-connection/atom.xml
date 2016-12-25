@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: The remote system refused the connection | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/the-remote-system-refused-the-connection/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2016-12-26T01:47:26+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Windows上使用SecureCRT软件连接Linux终端 — 解决问题；The remote system refused the connection]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/"/>
+    <updated>2016-12-26T01:46:45+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>正常的情况：</h2>
+
+<pre><code>ifconfig
+</code></pre>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552549436.png" alt="Alt text" /></p>
+
+<pre><code>whoami
+</code></pre>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552591430.png" alt="Alt text" /></p>
+
+<pre><code>ps -e | grep ssh
+</code></pre>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>secureCRT</strong>软件</p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552633225.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552666663.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552793582.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552803114.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>不正常的情况：The remote system refused the connection.</h2>
+
+<p>如果你遇到这个问题，说明你的Linux系统里面没有安装<code>openssh-server</code></p>
+
+<pre><code>sudo apt-get install openssh-server
+</code></pre>
+
+<pre><code>aobosir@ubuntu:~$ ps -e | grep ssh
+ 3834 ?        00:00:00 sshd
+</code></pre>
+
+<pre><code>ssh-agent restart
+</code></pre>
+
+<p>执行完这个语句，系统会自动注销（Logout）。</p>
+
+<pre><code>aobosir@ubuntu:~$ ps -e | grep ssh
+ 3834 ?        00:00:00 sshd
+ 4116 ?        00:00:00 ssh-agent
+aobosir@ubuntu:~$ 
+</code></pre>
+
+<p>刚刚还不正常的，现在有好使了。再次查看<strong>Linux</strong>当前进程：（下图是正常的情况，如果你看到这样的结果，说明Linux端已经没有问题了，SSH-Agent已经正常的运行了。）</p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
+]]></content>
+  </entry>
+  
+</feed>

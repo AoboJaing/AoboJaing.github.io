@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-26T01:12:34+08:00</updated>
+  <updated>2016-12-26T01:47:26+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection]]></title>
+    <link href="http://aobojaing.github.io/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/"/>
+    <updated>2016-12-26T01:46:45+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>正常的情况：</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ifconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552549436.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>whoami</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552591430.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>secureCRT</strong>软件</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552633225.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552666663.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552793582.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552803114.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>不正常的情况：The remote system refused the connection.</h2>
+
+<p>如果你遇到这个问题，说明你的Linux系统里面没有安装<code>openssh-server</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install openssh-server</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
+</span><span class='line'> 3834 ?        00:00:00 sshd</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-agent restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行完这个语句，系统会自动注销（Logout）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
+</span><span class='line'> 3834 ?        00:00:00 sshd
+</span><span class='line'> 4116 ?        00:00:00 ssh-agent
+</span><span class='line'>aobosir@ubuntu:~$ </span></code></pre></td></tr></table></div></figure>
+
+
+<p>刚刚还不正常的，现在有好使了。再次查看<strong>Linux</strong>当前进程：（下图是正常的情况，如果你看到这样的结果，说明Linux端已经没有问题了，SSH-Agent已经正常的运行了。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝]]></title>
@@ -4415,99 +4498,6 @@ ls
 <p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。</p>
 
 <p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/"/>
-    <updated>2016-12-06T13:46:35+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE</id>
-    <content type="html"><![CDATA[<ul>
-<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS 32位</strong></li>
-<li>需要安装的<strong>Arduino</strong>的版本：<strong>Arduino 1.6.11（最新版本） Linux 32位</strong></li>
-</ul>
-
-
-<h2>1. 下载 最新的 <strong>Arduino</strong> 开发软件</h2>
-
-<p><strong>Step 1 . </strong> 到<strong>Arduino</strong>官网下载 <strong>linux 32位</strong> 的 <strong>Arduino</strong> 开发软件：</p>
-
-<p>Web：<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a></p>
-
-<h2>2. 解压</h2>
-
-<p><strong>Step 2 . </strong> 解压<strong>arduino-1.6.11-linux32.tar.xz</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
-</span><span class='line'>tar -xvJf arduino-1.6.11-linux32.tar.xz</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642224393.png" alt="Alt text" /></p>
-
-<p><strong>Step 3 . </strong> 将解压后的文件（<code>arduino-1.6.11</code>）移动到 <code>/opt</code>  目录下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
-</span><span class='line'>sudo mv arduino-1.6.6 /opt</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Step 4 . </strong> 进入 <code>/opt/arduino-1.6.11</code> 文件夹，将<strong>Files</strong>窗口最大化。选中 <strong>arduino</strong> 文件，再在<strong>菜单栏</strong>中选择：<strong>Edits</strong> -> <strong>Preferences</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642888060.png" alt="Alt text" /></p>
-
-<p><strong>Step 5 . </strong> 这时弹出下面的窗口。选择：<strong>Behavior</strong> 选项卡，将<strong>Executable Text Files</strong>项里面，勾选：<strong>Ask each time</strong> 单选框。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642984839.png" alt="Alt text" /></p>
-
-<h2>3. 运行 <strong>Arduino</strong></h2>
-
-<p>现在你有两种方法运行 <strong>Arduino</strong> 软件：</p>
-
-<p><strong>方法一：</strong> 双击 <strong>arduino</strong> 文件： 弹出一个对话框，点击<strong>Run</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555757325.png" alt="Alt text" /></p>
-
-<p><strong>方法二：</strong>打开一个终端：路径切换到<strong>arduino</strong>文件所在路径（<code>/opt/arduino-1.6.11/</code>），运行它：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd /opt/arduino-1.6.11/
-</span><span class='line'>./arduino</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在，恭喜你，已经安装成功了：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555815898.png" alt="Alt text" /></p>
-
-<h2>4. 做一些配置，实现在终端的任何路径下，都可以运行 <strong>Arduino</strong> 软件</h2>
-
-<p>使用<code>ln</code> 命令(给文件创建软链接文件) Web：<a href="http://roclinux.cn/?p=752">http://roclinux.cn/?p=752</a></p>
-
-<p>我们希望在终端的任何路径下，输入 <code>arduino</code> 都可以启动 <strong>Arduino</strong> 软件：</p>
-
-<p><strong>Step 6 . </strong> 操作如下，打开一个终端，执行下面的命令。将 <code>/opt/arduino-1.6.6/arduino</code> 文件在 <code>/bin/</code> 路径下创建一个软链接文件。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/arduino-1.6.11/arduino /bin/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>搞定，这样就可以在终端中，不管当前路径是什么，都可以启动<strong>Arduino</strong>了。</p>
-
-<p>试试看。现在，在终端中直接执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5. 如何给 <strong>Arduino</strong> 板子，烧写程序</h2>
-
-<p>请见博客：Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 。</p>
 
 <h2>搞定</h2>
 ]]></content>
