@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Scrapy | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/scrapy/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-26T00:19:28+08:00</updated>
+  <updated>2016-12-26T00:37:42+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -71,9 +71,17 @@
 
 <p><img src="/images/2016-12-26-python3-large-web-crawler-169bb-com-HD-beautiful-pictures/1480188308560.png" alt="Alt text" /></p>
 
-<p>4 . 我们再来观察每页的网址有什么共同点，我们发现：第2页的网站是：<a href="http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html">http://www.169bb.com/xiyangmeinv/list_4_2.html%EF%BC%9B%E7%AC%AC3%E9%A1%B5%E7%9A%84%E7%BD%91%E5%9D%80%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_3.html%EF%BC%9B%E8%80%8C%E7%AC%AC1%E9%A1%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%98%AF%EF%BC%9Ahttp://www.169bb.com/xiyangmeinv/list_4_1.html</a></p>
+<p>4 . 我们再来观察每页的网址有什么共同点，我们发现：</p>
 
-<p>这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：<a href="http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82">http://www.169bb.com/xiyangmeinv/list_4_120.html%E3%80%82%E4%BA%8B%E5%AE%9E%E7%9A%84%E7%A1%AE%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E3%80%82%E5%A5%BD%E3%80%82</a></p>
+<ul>
+<li>第2页的网站是：<a href="http://www.169bb.com/xiyangmeinv/list_4_2.html">http://www.169bb.com/xiyangmeinv/list_4_2.html</a></li>
+<li>第3页的网址是：<a href="http://www.169bb.com/xiyangmeinv/list_4_3.html">http://www.169bb.com/xiyangmeinv/list_4_3.html</a></li>
+<li>第1页的网站是：<a href="http://www.169bb.com/xiyangmeinv/list_4_1.html">http://www.169bb.com/xiyangmeinv/list_4_1.html</a></li>
+</ul>
+
+
+<p>这样每页的网址是有规律的，按照这个规律，我们可以推测出“西洋美女” 的第120页的网址就应该是：<a href="http://www.169bb.com/xiyangmeinv/list_4_120.html">http://www.169bb.com/xiyangmeinv/list_4_120.html</a>
+。事实的确是这样的。好。</p>
 
 <p>5 . 现在，我们随便点击一个图片，进去看看这个美女的高清图片集。</p>
 
@@ -83,10 +91,13 @@
 
 <p>6 . 并且它的每页的网址也是有规律的。</p>
 
-<p>第2页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html</a>
-第3页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html</a>
-第1页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333.html</a>
-&hellip;</p>
+<ul>
+<li>第2页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_2.html</a></li>
+<li>第3页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333_3.html</a></li>
+<li>第1页是：<a href="http://www.169bb.com/xiyangmeinv/2016/1117/37333.html">http://www.169bb.com/xiyangmeinv/2016/1117/37333.html</a></li>
+<li>&hellip;</li>
+</ul>
+
 
 <p>但是有的美女的网址里只有一页，比如这个：<a href="http://www.169bb.com/xiyangmeinv/2016/0103/5974.html">http://www.169bb.com/xiyangmeinv/2016/0103/5974.html</a></p>
 
@@ -131,7 +142,7 @@ scrapy genspider -t basic pic_169bb 169bb.com
 
 <p><strong>Step 3 . </strong> 现在开始爬虫的编写。进入<code>pic_169bb.py</code>文件。</p>
 
-<p>爬虫（<code>pic_169bb.py</code>文件）会自动的先爬首页（<a href="http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5">http://169bb.com/%EF%BC%89%EF%BC%8C%E7%88%AC%E5%AE%8C%E9%A6%96%E9%A1%B5%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%BF%9B%E5%85%A5</a><code>parse()</code>回调函数。</p>
+<p>爬虫（<code>pic_169bb.py</code>文件）会自动的先爬首页（<a href="http://169bb.com/">169bb.com</a>），爬完首页之后，会自动的进入<code>parse()</code>回调函数。</p>
 
 <p>这个回调函数中，我们需要写些东西。</p>
 
