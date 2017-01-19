@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Ubuntu | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/ubuntu/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-26T02:22:22+08:00</updated>
+  <updated>2017-01-19T17:16:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/"/>
+    <updated>2017-01-19T17:15:24+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>当你的Ubuntu系统的真机或者虚拟机使用时间长了，安装下载的软件包多了。同时你的电脑的存储空间本身又不多。这样，时间一长，就会出现下面的这个问题：</p>
+
+<p><img src="/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484814879456.png" alt="Alt text" /></p>
+
+<p>系统提示你：现在系统的存储空间已经快要用没有了。</p>
+
+<blockquote><p>我现在这个情况，我这个Ubuntu系统是安装在一个虚拟机里面的，我只是给它分配了20G的硬盘空间。所以，我使用了大约2个月的时间，就出现了存储空间不足的问题。</p></blockquote>
+
+<p>下面就来解决这个问题。</p>
+
+<p>其实解决这个问题很简单。我们只需要清理一下系统就可以。</p>
+
+<p>参考网站：<a href="http://askubuntu.com/questions/298487/not-enough-free-disk-space-when-upgrading">http://askubuntu.com/questions/298487/not-enough-free-disk-space-when-upgrading</a></p>
+
+<p>你需要安装一个<strong>ubuntu-tweak</strong>软件，具体步骤如下：（如果你的Ubuntu里面有，就可以跳过这一步）</p>
+
+<pre><code>$ sudo add-apt-repository ppa:tualatrix/ppa
+$ sudo apt-get update
+$ sudo apt-get install ubuntu-tweak
+</code></pre>
+
+<p>现在启动ubuntu-tweak软件，进行清除缓存：</p>
+
+<pre><code>$ ubuntu-tweak
+</code></pre>
+
+<p><img src="/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484815204113.png" alt="Alt text" /></p>
+
+<p>然后切换到"Janitor"标签，选择你要清除的Apps、Personal、System的复选框，然后点击"Clean"按钮进行清除。</p>
+
+<p><img src="/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484815455240.png" alt="Alt text" /></p>
+
+<p>它这里面删除的是：比如， 我们下载的安装包，删除的就是这些安装包。</p>
+
+<p><img src="/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484816863268.png" alt="Alt text" /></p>
+
+<p>Over 2016-5-11 16:38:02</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序]]></title>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/</loc>
+<lastmod>2017-01-19T17:15:24+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2016/12/26/Windows-install-cuteFTP-and-crack/</loc>
 <lastmod>2016-12-26T01:56:23+08:00</lastmod>
 </url>
@@ -1115,5 +1119,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/cuteftp-9-dot-0/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/low-disk-space/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/not-enough-disk-space/</loc>
 </url>
 </urlset>

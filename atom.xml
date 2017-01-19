@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2016-12-26T02:22:22+08:00</updated>
+  <updated>2017-01-19T17:16:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/"/>
+    <updated>2017-01-19T17:15:24+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>当你的Ubuntu系统的真机或者虚拟机使用时间长了，安装下载的软件包多了。同时你的电脑的存储空间本身又不多。这样，时间一长，就会出现下面的这个问题：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484814879456.png" alt="Alt text" /></p>
+
+<p>系统提示你：现在系统的存储空间已经快要用没有了。</p>
+
+<blockquote><p>我现在这个情况，我这个Ubuntu系统是安装在一个虚拟机里面的，我只是给它分配了20G的硬盘空间。所以，我使用了大约2个月的时间，就出现了存储空间不足的问题。</p></blockquote>
+
+<p>下面就来解决这个问题。</p>
+
+<p>其实解决这个问题很简单。我们只需要清理一下系统就可以。</p>
+
+<p>参考网站：<a href="http://askubuntu.com/questions/298487/not-enough-free-disk-space-when-upgrading">http://askubuntu.com/questions/298487/not-enough-free-disk-space-when-upgrading</a></p>
+
+<p>你需要安装一个<strong>ubuntu-tweak</strong>软件，具体步骤如下：（如果你的Ubuntu里面有，就可以跳过这一步）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:tualatrix/ppa
+</span><span class='line'>$ sudo apt-get update
+</span><span class='line'>$ sudo apt-get install ubuntu-tweak</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在启动ubuntu-tweak软件，进行清除缓存：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ubuntu-tweak</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484815204113.png" alt="Alt text" /></p>
+
+<p>然后切换到"Janitor"标签，选择你要清除的Apps、Personal、System的复选框，然后点击"Clean"按钮进行清除。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484815455240.png" alt="Alt text" /></p>
+
+<p>它这里面删除的是：比如， 我们下载的安装包，删除的就是这些安装包。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-1-19-Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/1484816863268.png" alt="Alt text" /></p>
+
+<p>Over 2016-5-11 16:38:02</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Windows 安装 cuteFTP 9.0 并破解]]></title>
@@ -4401,41 +4452,6 @@
 <hr />
 
 <p>学习文档：<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/documentation">英特尔® 实感™ SDK 文档</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino 004 Windows上给Arduino IDE添加模块库]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-add-module-libraries/"/>
-    <updated>2016-12-06T13:54:54+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-add-module-libraries</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>在我的Windows电脑里面，Arduino IDE软件安装在<code>C:\Program Files (x86)\Arduino</code>路径里面。</p>
-
-<p>我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。</p>
-
-<h2>添加 I2Cdev 及其相关模块库到Arduino IDE软件里面</h2>
-
-<p><strong>Step 0 . </strong> 关闭 Arduino IDE 软件</p>
-
-<p><strong>Step 1 . </strong> 下载 i2cdev 及其相关的模块库</p>
-
-<p>到<a href="https://github.com/jrowberg/i2cdevlib">这个网址</a>里面下载所有i2cdev相关的模块库。</p>
-
-<p><strong>Step 2 . </strong> 下载后，解压，将<code>/Arduino/</code>路径里面的所有文件夹复制，并拷贝到：<code>C:\Program Files (x86)\Arduino\libraries</code>路径里面。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001787595.png" alt="Alt text" /></p>
-
-<p><strong>Step 3 . </strong> 启动Arduino IDE 软件。在 <strong>文件</strong> -> <strong>示例</strong> 里面就可以看到刚刚添加到Arduino IDE的模块库。（现在就可以正常使用了）</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001851166.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p>注意：</p>
-
-<p>如果是Ubuntu系统，Arduino IDE 一般被安装在：<code>/opt/arduino/</code></p></blockquote>
 ]]></content>
   </entry>
   
