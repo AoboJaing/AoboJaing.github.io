@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ssh-agent | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/ssh-agent/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-01-19T17:16:51+08:00</updated>
+  <updated>2017-01-20T17:22:51+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -62,10 +62,15 @@
  3834 ?        00:00:00 sshd
 </code></pre>
 
+<p>执行完下面的命令，系统会自动注销（Logout）。</p>
+
 <pre><code>ssh-agent restart
+# 已经没有这个命令了。替代的方法就是:重启系统或者注销系统。
 </code></pre>
 
-<p>执行完这个语句，系统会自动注销（Logout）。</p>
+<hr />
+
+<p>现在查看一下，现在就可以进入了正常使用的状态。</p>
 
 <pre><code>aobosir@ubuntu:~$ ps -e | grep ssh
  3834 ?        00:00:00 sshd
@@ -73,9 +78,22 @@
 aobosir@ubuntu:~$ 
 </code></pre>
 
-<p>刚刚还不正常的，现在有好使了。再次查看<strong>Linux</strong>当前进程：（下图是正常的情况，如果你看到这样的结果，说明Linux端已经没有问题了，SSH-Agent已经正常的运行了。）</p>
+<hr />
+
+<p>现在，我们在Windows系统这段使用<strong>SecureCRT</strong>软件连接这个Linux系统，就可以添加成功了。</p>
+
+<p>连接成功之后，我们现在在<strong>SecureCRT</strong>软件连接的Linux系统终端中再次下面命令来查看当前运行着的<strong>ssh</strong>进程有哪些。（现在，我们已经可以在Windows端的<strong>SecureCRT</strong>软件里面控制Linux端了。）</p>
+
+<pre><code>ps -e | grep ssh
+</code></pre>
+
+<p>查看<strong>Linux</strong>这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））</p>
 
 <p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
 
 <p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
 ]]></content>
