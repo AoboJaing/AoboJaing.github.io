@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: C++ | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-01-23T00:45:48+08:00</updated>
+  <updated>2017-02-01T00:39:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/01/solve-cpp-error-constructor-pointers/"/>
+    <updated>2017-02-01T00:38:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/01/solve-cpp-error-constructor-pointers</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我先把结论列出来：</p>
+
+<p>当成员变量和形参是指针，最好不要使用<code>:成员变量(形参)</code>这样的形式。因为你可以不是进行：<code>成员变量 = 形参</code>这个方向的赋值，你可能是执行：<code>形参 = 成员变量</code>这个方向的赋值。因为前提，它们都是指针嘛。</p>
+
+<hr />
+
+<h2>今天我遇到了这样的一个错误：</h2>
+
+<p>下面的程序，编译是正常通过的，但是运行却不行。（我只是将相关的代码贴了出来）</p>
+
+<pre><code class="cpp">class PclView{
+public:
+    PclView(pcl::visualization::PCLVisualizer * &amp;p);
+    void showCloudsLeft(const pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_source,
+                        const pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_target);
+private:
+    pcl::visualization::PCLVisualizer *p;
+};
+</code></pre>
+
+<pre><code class="cpp">PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p):p(p){
+    vp_1 = 1;
+    vp_2 = 2;
+    // Create a PCLVisualizer object
+    p = new pcl::visualization::PCLVisualizer ("Pairwise Incremental Registration example");
+    p-&gt;createViewPort (0.0, 0, 0.5, 1.0, vp_1);
+    p-&gt;createViewPort (0.5, 0, 1.0, 1.0, vp_2);
+    p-&gt;removePointCloud ("vp1_target");
+}
+
+void PclView::showCloudsLeft(const pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_source,
+                             const pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_target)
+{
+  p-&gt;removePointCloud ("vp1_target");
+  p-&gt;removePointCloud ("vp1_source");
+
+  pcl::visualization::PointCloudColorHandlerCustom&lt;pcl::PointXYZ&gt; tgt_h (cloud_target, 0, 255, 0);
+  pcl::visualization::PointCloudColorHandlerCustom&lt;pcl::PointXYZ&gt; src_h (cloud_source, 255, 0, 0);
+  p-&gt;addPointCloud (cloud_target, tgt_h, "vp1_target", vp_1);
+  p-&gt;addPointCloud (cloud_source, src_h, "vp1_source", vp_1);
+
+//  PCL_INFO ("Press Space to begin the registration.\n");
+  p-&gt; spinOnce();
+}
+</code></pre>
+
+<p>当我们在<code>main.cpp</code>文件中定义了一个上面的类的实例化对象后，然后调用这个类的<code>showCloudsLeft()</code>方法。编译程序没有问题， 但是运行程序就会出现错误。</p>
+
+<pre><code class="cpp">int main(void){
+    pcl::visualization::PCLVisualizer *p;
+    PclView viewer(p);
+    pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_source;
+    pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_target;
+    viewer.showCloudsLeft(cloud_source, cloud_target);
+    return 0;
+}
+</code></pre>
+
+<p>上面的程序运行的时候程序会死在<code>showCloudsLeft()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码。原因是：<code>p</code>指针为空。</p>
+
+<hr />
+
+<h2>正确的写法：</h2>
+
+<p>问题出现在<code>PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p)</code>这个构造函数里面。</p>
+
+<p>正确的写法有两种：</p>
+
+<pre><code class="cpp">PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p){
+    this-&gt;p = p;
+    vp_1 = 1;
+    vp_2 = 2;
+    // Create a PCLVisualizer object
+    this-&gt;p = new pcl::visualization::PCLVisualizer ("Pairwise Incremental Registration example");
+    this-&gt;p-&gt;createViewPort (0.0, 0, 0.5, 1.0, vp_1);
+    this-&gt;p-&gt;createViewPort (0.5, 0, 1.0, 1.0, vp_2);
+    this-&gt;p-&gt;removePointCloud ("vp1_target");
+}
+</code></pre>
+
+<p>或者：</p>
+
+<pre><code class="cpp">PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p):p(p){
+    vp_1 = 1;
+    vp_2 = 2;
+    // Create a PCLVisualizer object
+    this-&gt;p = new pcl::visualization::PCLVisualizer ("Pairwise Incremental Registration example");
+    this-&gt;p-&gt;createViewPort (0.0, 0, 0.5, 1.0, vp_1);
+    this-&gt;p-&gt;createViewPort (0.5, 0, 1.0, 1.0, vp_2);
+    this-&gt;p-&gt;removePointCloud ("vp1_target");
+}
+</code></pre>
+
+<hr />
+
+<p>现在问题就解决了。</p>
+
+<hr />
+
+<p>但是虽然现在的问题是解决了，但是程序还是有潜在问题的。（现在的程序，还没有达到我们想要的目的。）我们最开始设计这个构造函数，是想将外部通过形参传入的这个指针能够与这个实例化对象里面<code>pcl::visualization::PCLVisualizer * p</code>指针能够指向同一个东西，然后它们两个都可以去改变这个东西。</p>
+
+<p>但是现在我们并没有做到这一点。我们可以使用下面的代码验证：</p>
+
+<pre><code class="cpp">int main(void){
+    pcl::visualization::PCLVisualizer *p;
+    PclView viewer(p);
+    pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_source;
+    pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr &amp;cloud_target;
+    viewer.showCloudsLeft(cloud_source, cloud_target);
+    p-&gt;removePointCloud ("vp1_target");
+    return 0;
+}
+</code></pre>
+
+<p>编译程序不会出现什么问题，但是现在运行，程序就会在<code>main()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码出现问题。</p>
+
+<hr />
+
+<p>所以，正真正确的解决办法是：</p>
+
+<pre><code class="cpp">PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p){
+    vp_1 = 1;
+    vp_2 = 2;
+    // Create a PCLVisualizer object
+    this-&gt;p = new pcl::visualization::PCLVisualizer ("Pairwise Incremental Registration example");
+    this-&gt;p-&gt;createViewPort (0.0, 0, 0.5, 1.0, vp_1);
+    this-&gt;p-&gt;createViewPort (0.5, 0, 1.0, 1.0, vp_2);
+    this-&gt;p-&gt;removePointCloud ("vp1_target");
+    p = this-&gt;p;
+}
+</code></pre>
+
+<p>现在就变成了完美的程序，不会出现问题，也没有潜在的问题。</p>
+
+<hr />
+
+<h2>出现上面的问题的原因</h2>
+
+<p>原因很简单，完美的设计思想是：希望两个指针都指向同一个存储空间，但是，实际上两个指针没有指向一个存储空间，一个指针指向了存储空间，而一个是空指针，所以就出现了错误。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ string 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换]]></title>

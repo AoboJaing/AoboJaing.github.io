@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项 - AoboSir 博客</title>
+  <meta name="author" content="Aobo Jaing">
+
+  
+  <meta name="description" content="我先把结论列出来： 当成员变量和形参是指针，最好不要使用:成员变量(形参)这样的形式。因为你可以不是进行：成员变量 = 形参这个方向的赋值，你可能是执行：形参 = 成员变量这个方向的赋值。因为前提，它们都是指针嘛。 今天我遇到了这样的一个错误： 下面的程序，编译是正常通过的，但是运行却不行。（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://aobojaing.github.io/blog/2017/02/01/solve-cpp-error-constructor-pointers/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/git@github.com:AoboJaing/atom.xml" rel="alternate" title="AoboSir 博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AoboSir 博客</a></h1>
+  
+    <h2>仍然自由自我 永远高唱我歌</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/git@github.com:AoboJaing/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="aobojaing.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.csdn.net/github_35160620">CSDN</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-01T00:38:20+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>12:38 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><hr />
+
+<p>我先把结论列出来：</p>
+
+<p>当成员变量和形参是指针，最好不要使用<code>:成员变量(形参)</code>这样的形式。因为你可以不是进行：<code>成员变量 = 形参</code>这个方向的赋值，你可能是执行：<code>形参 = 成员变量</code>这个方向的赋值。因为前提，它们都是指针嘛。</p>
+
+<hr />
+
+<h2>今天我遇到了这样的一个错误：</h2>
+
+<p>下面的程序，编译是正常通过的，但是运行却不行。（我只是将相关的代码贴了出来）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">class</span> <span class="nc">PclView</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">void</span> <span class="nf">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
+</span><span class='line'>                        <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'><span class="k">private</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">PclView</span><span class="o">::</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
+</span><span class='line'>                             <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_source&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">tgt_h</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">src_h</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="n">tgt_h</span><span class="p">,</span> <span class="s">&quot;vp1_target&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">src_h</span><span class="p">,</span> <span class="s">&quot;vp1_source&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//  PCL_INFO (&quot;Press Space to begin the registration.\n&quot;);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span> <span class="n">spinOnce</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当我们在<code>main.cpp</code>文件中定义了一个上面的类的实例化对象后，然后调用这个类的<code>showCloudsLeft()</code>方法。编译程序没有问题， 但是运行程序就会出现错误。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的程序运行的时候程序会死在<code>showCloudsLeft()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码。原因是：<code>p</code>指针为空。</p>
+
+<hr />
+
+<h2>正确的写法：</h2>
+
+<p>问题出现在<code>PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p)</code>这个构造函数里面。</p>
+
+<p>正确的写法有两种：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在问题就解决了。</p>
+
+<hr />
+
+<p>但是虽然现在的问题是解决了，但是程序还是有潜在问题的。（现在的程序，还没有达到我们想要的目的。）我们最开始设计这个构造函数，是想将外部通过形参传入的这个指针能够与这个实例化对象里面<code>pcl::visualization::PCLVisualizer * p</code>指针能够指向同一个东西，然后它们两个都可以去改变这个东西。</p>
+
+<p>但是现在我们并没有做到这一点。我们可以使用下面的代码验证：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编译程序不会出现什么问题，但是现在运行，程序就会在<code>main()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码出现问题。</p>
+
+<hr />
+
+<p>所以，正真正确的解决办法是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在就变成了完美的程序，不会出现问题，也没有潜在的问题。</p>
+
+<hr />
+
+<h2>出现上面的问题的原因</h2>
+
+<p>原因很简单，完美的设计思想是：希望两个指针都指向同一个存储空间，但是，实际上两个指针没有指向一个存储空间，一个指针指向了存储空间，而一个是空指针，所以就出现了错误。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aobo Jaing</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-02-01T00:38:20+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>12:38 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-plus-plus-error/'>c++ error</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/" title="Previous Post: Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题">&laquo; Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/blog/2017/02/01/solve-cpp-error-constructor-pointers" data-title="C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项" data-url="http://aobojaing.github.io /blog/2017/02/01/solve-cpp-error-constructor-pointers/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"aobosir"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/02/01/solve-cpp-error-constructor-pointers/">C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/">Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/26/Windows-install-cuteFTP-and-crack/">Windows 安装 cuteFTP 9.0 并破解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/">Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
+<a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
+<a style="font-size: 129%" href="/tags/c-number/">C#</a>
+<a style="font-size: 115%" href="/tags/c-plus-plus/">C++</a>
+<a style="font-size: 139%" href="/tags/git/">Git</a>
+<a style="font-size: 139%" href="/tags/ide/">IDE</a>
+<a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
+<a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
+<a style="font-size: 129%" href="/tags/linux/">Linux</a>
+<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
+<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 159%" href="/tags/python3/">Python3</a>
+<a style="font-size: 210%" href="/tags/sql/">SQL</a>
+<a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
+<a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
+<a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
+<a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
+<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
+<a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
+<a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
+<a style="font-size: 179%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
+<a style="font-size: 115%" href="/tags/gbk/">gbk</a>
+<a style="font-size: 147%" href="/tags/git/">git</a>
+<a style="font-size: 115%" href="/tags/open/">open</a>
+<a style="font-size: 115%" href="/tags/os/">os</a>
+<a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
+<a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
+<a style="font-size: 129%" href="/tags/pip/">pip</a>
+<a style="font-size: 168%" href="/tags/python/">python</a>
+<a style="font-size: 129%" href="/tags/python2/">python2</a>
+<a style="font-size: 168%" href="/tags/python3/">python3</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
+<a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
+<a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
+<a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+
+  </ul>
+</section><section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
+<li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
+<li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
+<li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
+<li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
+<li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
+<li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
+<li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
+<li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
+<li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (6)</a></li>
+
+  </ul>
+</section><section>
+  <h1>访客统计</h1>
+  <br/>
+  <a href="http://s11.flagcounter.com/more/Km5"><img src="http://s11.flagcounter.com/count2/Km5/bg_ABCDFF/txt_000000/border_B29CB5/columns_2/maxflags_10/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Aobo Jaing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
