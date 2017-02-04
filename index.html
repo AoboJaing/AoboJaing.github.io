@@ -9,7 +9,18 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我先把结论列出来： 当成员变量和形参是指针，最好不要使用:成员变量(形参)这样的形式。因为你可以不是进行：成员变量 = 形参这个方向的赋值，你可能是执行：形参 = 成员变量这个方向的赋值。因为前提，它们都是指针嘛。 今天我遇到了这样的一个错误： 下面的程序，编译是正常通过的，但是运行却不行。（ &hellip;">
+  <meta name="description" content="在Linux下，我们这样使用： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+#include &lt;iostream&gt;
+#include &lt;unistd.h&gt; int main(void){ while(1){ std::cout &lt;&lt; &quot;Hello &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +77,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-05T01:32:23+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:32 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>在Linux下，我们这样使用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们使用<code>#include &lt;unistd.h&gt;</code>头文件里面的<code>sleep()</code>函数，给这个函数传入的形参是以秒为单位的正整数。</p>
+
+<hr />
+
+<p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2556,265 +2629,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T15:27:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:27 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>当你下载一个源代码的时候。出现下面错误：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
-</span><span class='line'>Cloning into 'turtlebot'...
-</span><span class='line'>Permission denied (publickey).
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时需要添加SSH密钥。步骤如下：</p>
-
-<p>参考网址：<a href="https://help.github.com/articles/generating-an-ssh-key/">Generating an SSH key</a></p>
-
-<h2>步骤</h2>
-
-<p>先检查现有的SSH密钥</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>total 12
-</span><span class='line'>drwx------  2 ubuntu ubuntu 4096 Dec 24 07:40 .
-</span><span class='line'>drwxrwxr-x 32 ubuntu ubuntu 4096 Dec 24 07:29 ..
-</span><span class='line'>-rw-r--r--  1 ubuntu ubuntu  884 Dec 24 07:40 known_hosts</span></code></pre></td></tr></table></div></figure>
-
-
-<p>默认的，公钥的文件名可能是下面的几个：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>id_dsa.pub
-</span><span class='line'>id_ecdsa.pub
-</span><span class='line'>id_ed25519.pub
-</span><span class='line'>id_rsa.pub</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你现在没有公有的或者私有的钥匙，或者你不希望使用现有的任何一个去连接GitHub，这个时候，你可以去生成一个新的SSH密钥（SSH key）</p>
-
-<p>如果你在上面的输出中看到了现有的公有和私有的密钥（比如： <code>id_rsa.pub</code> 和 <code>id_rsa</code>），这个时候，你可以直接连接GitHub，你可以将你的SSH密钥添加到ssh-agent。</p>
-
-<h2>生成一个新的SSH密钥（SSH key）</h2>
-
-<p>当你查看了你现有的密钥后没有SSH密钥，现在你可以来生成一个新的SSH密钥，用来身份验证。然后在将它添加到ssh-agent。</p>
-
-<p>添加你的GitHub使用的e-mail地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这是会创建一个新的SSH密钥，使用提供的电子邮件作为标签。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Generating public/private rsa key pair.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时提示你：“输入一个用来保存钥匙的文件”，默认保存在<code>/Users/you/.ssh/id_rsa</code>,我们直接按回车键。（它保存的位置跟你当前路径没有关系，默认都是保存在<code>~/.ssh/id_rsa</code>路径（即<code>/home/ubuntu/.ssh/id_rsa</code>）里面。）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): </span></code></pre></td></tr></table></div></figure>
-
-
-<p>接下来，它提示你输入密码短语(passphrase)，如果你直接按回车，就是没有密码。我们可以输入<code>123456</code>：（详细的信息：<a href="Working%20with%20SSH%20key%20passphrases">这里</a>）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Enter passphrase (empty for no passphrase): [Type a passphrase]
-</span><span class='line'>Enter same passphrase again: [Type passphrase again]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在，密钥就生成了。</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649196486.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>如果你不想在每次都使用你的SSH密钥重新输入你的密码短语，现在，你需要将你的密钥添加到SSH 代理（SSH Agent）中，它会管理你的SSH密钥，并记住你的密码短语。</p>
-
-<hr />
-
-<p>添加你的密钥（SSH key）到ssh-agent</p>
-
-<p>在你添加一个新的SSH密钥到ssh-agent去管理你的密钥之前，我们查看一下当前新生成的密钥：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569573667.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在启动 ssh-agent（SSH代理），如果它还没有运行的话。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># start the ssh-agent in the background
-</span><span class='line'>$ eval "$(ssh-agent -s)"
-</span><span class='line'>Agent pid 2117</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569662050.png" alt="Alt text" /></p>
-
-<p>这个时候，将你的SSH密钥添加到 ssh-agent。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-add ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你你给你的SSH密钥设置了密码短语，你需要在输出提示<code>Enter passphrase for /home/ubuntu/.ssh/id_rsa:</code>时，输入密码短语（passphrase ）。</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570315247.png" alt="Alt text" /></p>
-
-<h2>将SSH密钥添加到你的GItHub账户上</h2>
-
-<p>参考网址：<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux">Adding a new SSH key to your GitHub account</a></p>
-
-<p>为了配置你的GitHub账户去使用你的新的SSH密钥，你需要将SSH密钥添加到你的GitHub账户上。</p>
-
-<p>第一步：复制共有密钥到剪切板上：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install xclip
-</span><span class='line'># 下载并安装 xclip. 如果你没有 `apt-get` 工具, 你可以使用其他的下载工具 (比如 `yum`)
-</span><span class='line'>
-</span><span class='line'>$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
-</span><span class='line'># 复制 id_rsa.pub 文件里面的内容到你的剪切板里</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意，如果<code>xclip</code>工具不工作， 你可以直接手动复制。</p>
-
-<p> <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570795686.png" alt="Alt text" /></p>
-
-<p>  <code>cat ~/.ssh/id_rsa.pub</code></p>
-
-<p>  <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570885700.png" alt="Alt text" /></p></blockquote>
-
-<p>再任何一个GitHUb页面右上角 你的用户图标 -> Settings ：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570974088.png" alt="Alt text" /></p>
-
-<p>在用户设置侧边栏中，点击<strong>SSH and GPG keys</strong></p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571005369.png" alt="Alt text" /></p>
-
-<p>点击 <strong>New SSH key</strong></p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571081262.png" alt="Alt text" /></p>
-
-<p>输入这个SSH密钥的标题 和 公有密钥，然后点击 <strong>Add SSH key</strong>：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649285303.png" alt="Alt text" /></p>
-
-<p>输入GitHub账户的密码：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571212784.png" alt="Alt text" /></p>
-
-<p>添加成功：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571232023.png" alt="Alt text" /></p>
-
-<h2>测试你的SSH连接</h2>
-
-<p>参考网站：<a href="https://help.github.com/articles/testing-your-ssh-connection/">Testing your SSH connection</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~$ ssh -T git@github.com
-</span><span class='line'>Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
-</span><span class='line'>Hi AoboJaing! You've successfully authenticated, but GitHub does not provide shell access.
-</span><span class='line'>ubuntu@ubuntu:~$</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>成功了。</h2>
-
-<p>我们现在再来重新测试最上面的命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:turtlebot/turtlebot.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482574855747.png" alt="Alt text" /></p>
-
-<blockquote><p> 如果你在之前创建密钥的时候，给密钥添加的密码短语的话，在你执行<code>git clone XXX</code>的时候可能会让你输入密码短语：</p>
-
-<p> <code>Enter passphrase for key '/home/ubuntu/.ssh/id_rsa':</code></p></blockquote>
-
-<p>你现在可能会发现，下载速度好像有点慢啊。如何给Git提速呢。请参考<a href="http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">这篇博客</a>。</p>
-
-<hr />
-
-<p>当你使用了git，在你的GitHub账号的SSH keys管理的页面里面，可以看到：（它变绿了。）</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482572823425.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>你现在可以执行下面的命令，查看当前你的git的配置。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git config --list
-</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果里面什么都没有，想我现在这个样子。你可以去完善你的git配置。请参考<a href="https://help.github.com/articles/set-up-git/#platform-linux">这个网页</a>。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2828,6 +2642,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/02/01/solve-cpp-error-constructor-pointers/">C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项</a>
@@ -2845,10 +2663,6 @@
         <a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/">Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -2857,7 +2671,7 @@
     <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
-<a style="font-size: 115%" href="/tags/c-plus-plus/">C++</a>
+<a style="font-size: 129%" href="/tags/c-plus-plus/">C++</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
@@ -2907,7 +2721,7 @@
     <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
-<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (2)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>

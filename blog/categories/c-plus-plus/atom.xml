@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C++ | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-01T00:39:49+08:00</updated>
+  <updated>2017-02-05T01:33:39+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 的延时函数]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/cpp-sleep/"/>
+    <updated>2017-02-05T01:32:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/cpp-sleep</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>在Linux下，我们这样使用：</p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;unistd.h&gt;
+
+int main(void){
+    while(1){
+        std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+        sleep(1);
+    }
+    return 0;
+}
+</code></pre>
+
+<p>我们使用<code>#include &lt;unistd.h&gt;</code>头文件里面的<code>sleep()</code>函数，给这个函数传入的形参是以秒为单位的正整数。</p>
+
+<hr />
+
+<p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换]]></title>

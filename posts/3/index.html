@@ -9,10 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的Intel RealSense 硬件：SR300 摄像头
-电脑系统：Windows 10 64位
-电脑必须要有USB3.0接口 参考网站： Downloading and Installing the Intel® RealSense SDK
-Getting Started with &hellip;">
+  <meta name="description" content="开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
+Python 版本：python-3.5.0-amd64
+PyCharm软件版本：pycharm-professional-2016.1.4
+电脑系统：Windows 10 64位 如果你还没有搭建好开发环境 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,103 @@ Getting Started with &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/">Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-08T06:38:45+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:38 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>当使用Scrapy写爬虫项目的时候，当我们爬取某些中文网站，然后在DOS终端中打印爬取的网页源代码的时候，会出现各式各样的编码错误，今天，我又遇到一种编码错误，下面我将这个错误和对应的解决办法记录下来。</p>
+
+<p>爬取的目标网址：<a href="http://blog.csdn.net/github_35160620/article/details/53353672">http://blog.csdn.net/github_35160620/article/details/53353672</a></p>
+
+<p>出现错误的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">body_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行：来到对应的爬虫项目路径下，执行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">scrapy</span> <span class="n">crawl</span> <span class="err">爬虫名字</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在出现的调试信息中你可以看到一个编码错误：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
+</span><span class='line'><span class="ne">UnicodeEncodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t encode character &#39;</span>\<span class="n">xa9</span><span class="s">&#39; in position 6732: illegal multibyte sequence</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>通过查看，这个<a href="http://www.codetable.net/hex/a9"><code>u'xa9'</code> Unicode编码所表示的字符是：<code>©</code></a>。</p>
+
+<p><img src="/images/2016-12-8-python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/1481149755580.png" alt="Alt text" /></p>
+
+<p>可以解决这个错误的方法：</p>
+
+<p>将上面的代码修改为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">body_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">u&#39;</span><span class="se">\xa9</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">u&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在运行这个程序<code>scrapy crawl 爬虫名字 --nolog</code>，上面的编码错误就没有。成功的输出了爬取的网页的源代码。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1035,56 +1132,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-04T23:18:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:18 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>将单个文件 <code>file</code> 复制到指定目录<code>dir</code>里面：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp file dir</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>当你使用<code>cp</code>命令的时候，如果出现下面的错误：</p>
-
-<pre><code>cp: omitting directory ‘file’
-</code></pre>
-
-<p>说明：<code>file</code> 不是单个文件，是一个目录，你如果要复制目录，需要给<code>cp</code>命令加一个参数 <code>-r</code> 。</p></blockquote>
-
-<p>将目录 <code>dir1</code> 复制到 指定目录 <code>dir2</code> 里面：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp -r dir1 dir2</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1102,6 +1149,10 @@ ls
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/01/solve-cpp-error-constructor-pointers/">C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项</a>
       </li>
     
@@ -1117,10 +1168,6 @@ ls
         <a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/">Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1129,7 +1176,7 @@ ls
     <a style="font-size: 139%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
-<a style="font-size: 115%" href="/tags/c-plus-plus/">C++</a>
+<a style="font-size: 129%" href="/tags/c-plus-plus/">C++</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
@@ -1179,7 +1226,7 @@ ls
     <li class='category'><a href='/blog/categories/arduino/'>arduino (4)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
-<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (1)</a></li>
+<li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (2)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>

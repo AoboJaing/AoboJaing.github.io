@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-01T00:39:49+08:00</updated>
+  <updated>2017-02-05T01:33:39+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 的延时函数]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/cpp-sleep/"/>
+    <updated>2017-02-05T01:32:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/cpp-sleep</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>在Linux下，我们这样使用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们使用<code>#include &lt;unistd.h&gt;</code>头文件里面的<code>sleep()</code>函数，给这个函数传入的形参是以秒为单位的正整数。</p>
+
+<hr />
+
+<p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项]]></title>
@@ -4499,83 +4541,6 @@
 <p>运行输出的结果是一样的。</p>
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python3 解决编码问题： UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa9' in Position Xxx: Illegal Multibyte Sequence --- 当执行爬虫将爬取信息打印到终端时出现的编码错误]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/"/>
-    <updated>2016-12-08T06:38:45+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/08/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>开发环境</h2>
-
-<ul>
-<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
-<li>Python 版本：python-3.5.0-amd64</li>
-<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
-<li>电脑系统：Windows 10 64位</li>
-</ul>
-
-
-<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
-
-<hr />
-
-<p>当使用Scrapy写爬虫项目的时候，当我们爬取某些中文网站，然后在DOS终端中打印爬取的网页源代码的时候，会出现各式各样的编码错误，今天，我又遇到一种编码错误，下面我将这个错误和对应的解决办法记录下来。</p>
-
-<p>爬取的目标网址：<a href="http://blog.csdn.net/github_35160620/article/details/53353672">http://blog.csdn.net/github_35160620/article/details/53353672</a></p>
-
-<p>出现错误的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">body_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行：来到对应的爬虫项目路径下，执行：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">scrapy</span> <span class="n">crawl</span> <span class="err">爬虫名字</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在出现的调试信息中你可以看到一个编码错误：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
-</span><span class='line'><span class="ne">UnicodeEncodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t encode character &#39;</span>\<span class="n">xa9</span><span class="s">&#39; in position 6732: illegal multibyte sequence</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过查看，这个<a href="http://www.codetable.net/hex/a9"><code>u'xa9'</code> Unicode编码所表示的字符是：<code>©</code></a>。</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-8-python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa9/1481149755580.png" alt="Alt text" /></p>
-
-<p>可以解决这个错误的方法：</p>
-
-<p>将上面的代码修改为：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">body_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">u&#39;</span><span class="se">\xa9</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">u&#39;&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">body_data</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在运行这个程序<code>scrapy crawl 爬虫名字 --nolog</code>，上面的编码错误就没有。成功的输出了爬取的网页的源代码。</p>
 ]]></content>
   </entry>
   
