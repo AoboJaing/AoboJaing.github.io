@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: AREF | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/aref/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-05T16:38:44+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 005 ADC]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF/"/>
+    <updated>2017-02-05T16:38:21+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
+
+<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
+
+<hr />
+
+<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
+
+<h2>设置参考电压</h2>
+
+<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
+
+<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>设置参考电压是需要注意</h2>
+
+<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

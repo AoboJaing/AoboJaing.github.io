@@ -9,8 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="下载 首先到 https://github.com/robbyedwards/octopress-tag-pages 和 https://github.com/robbyedwards/octopress-tag-cloud clone这两个项目的代码。 ```
-$ git clone &hellip;">
+  <meta name="description" content="我的电脑系统：Windows 10 64位
+SQL Server 软件版本： SQL Server 2014 Express 之前，我们介绍了如何使用图形化操作建表和主外键约束。这一节我们来介绍如何使用命令来建表和主外键约束。 使用命令 建表 Step 0 . 先把之前在这篇博客里面建的表删除， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,158 @@ $ git clone &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/12/SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/">SQL 数据库 学习 009 通过SQL命令 建表 和 主外键约束</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T11:15:01+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:15 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<p>之前，我们介绍了<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">如何使用图形化操作建表和主外键约束</a>。这一节我们来介绍如何使用<strong>命令</strong>来<strong>建表和主外键约束</strong>。</p>
+
+<hr />
+
+<h2>使用命令 建表</h2>
+
+<p><strong>Step 0 . </strong> 先把之前在<a href="http://www.aobosir.com/blog/2016/10/11/SQL-Learning-008-build-tables-and-primary-foreign-key-constraints-with-GUI/">这篇博客</a>里面建的表删除，我们先使用命令重新建。（如果你没有看这篇博客，就不需要做这一步的操作了。）</p>
+
+<p><strong>Step 1 . </strong> 先选中（要建表的）库，然后点击 <strong>新建查询</strong>，输入下面的命令：（先建部门（<code>dept</code>）表，再建员工（<code>emp</code>）表）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">dept</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">dept_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">dept_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">dept_address</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 2 . </strong> 现在点击 对号 图标（分析），看看有没有语法错误。然后点击 <strong>执行(X)</strong> 按钮，来生成表。现在在做出的 <strong>表</strong> 里面右键 ，选择 <strong>刷新</strong> 。现在你就看到了，创建了一个新的表 <code>dept</code> 。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239675315.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476239692934.png" alt="Alt text" /></p>
+
+<p>解释：<code>--</code>后面跟注释信息。<strong>SQL</strong> 定义变量和 <strong>C++</strong> 定义变量是反着的。</p>
+
+<p><strong>Step 3 . </strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">emp</span>
+</span><span class='line'><span class="p">(</span> <span class="c1">--不能写成{} ，C++才写成}</span>
+</span><span class='line'>  <span class="n">emp_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">pk_emp_id_haha</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">emp_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">emp_sex</span> <span class="k">nchar</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">dept_id</span> <span class="nb">int</span> <span class="k">constraint</span> <span class="n">fk_dept_id_heihei</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">references</span> <span class="n">dept</span><span class="p">(</span><span class="n">dept_id</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解释：
+1. 对于<strong>约束</strong>（<code>constraint</code>），要写一个名字（<code>pk_emp_id_haha</code> 和 <code>fk_dept_id_heihei</code> 都是自定义的名字），如果你不写名字，系统会自动给它分配一个名字。
+2. <code>primary key</code> 是主键； <code>foreign key</code> 是外键。
+3. <code>create table</code> 最后一个字段的后面建议不要写 <code>,</code> （逗号）。</p>
+
+<p>选中这些命令。点击 <code>执行</code> 按钮。并刷新 <strong>表</strong>，<code>emp</code> 表就会出现。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240682691.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240702251.png" alt="Alt text" /></p>
+
+<p><code>PK</code> 指的是 <strong>主键</strong> ；<code>FK</code> 指的是 <code>外键</code>。</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240725526.png" alt="Alt text" /></p>
+
+<p>下面的是我们刚刚定义的 <code>emp</code> 表的主键和外键的名字：</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240863958.png" alt="Alt text" /></p>
+
+<p>下面的是我们没有给取名字的 <code>dept</code> 表的主键的默认名字：</p>
+
+<p><img src="/images/2016-10-12-SQL-Learning-009-build-table-and-primary-key-foreign-key-constraints-through-command/1476240944813.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p>使用命令 <code>create table</code> 来建表。</p>
+
+<p><strong>Q：</strong> 什么是约束？
+<strong>A：</strong> <strong>主键约束</strong> 和 <strong>外键约束</strong> 的作用：</p>
+
+<ul>
+<li>定义
+
+<ul>
+<li>对一个表中的属性操作的限制叫做约束。</li>
+</ul>
+</li>
+<li>分类
+
+<ul>
+<li>主键约束
+
+<ul>
+<li>不允许重复元素 避免了数据的冗余。</li>
+</ul>
+</li>
+<li>外键约束
+
+<ul>
+<li>通过外键约束从语法上保证了本事物所关联的其他事物一定是存在的。（就是说：事物与事物之前的关系是通过外键来体现的）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>你要是感觉命令很难，就多敲，敲一敲就好了。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -934,6 +1086,10 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">Arduino 000 — Arduino UNO R3 板子引脚定义</a>
       </li>
     
@@ -949,16 +1105,12 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
         <a href="/blog/2017/01/19/Ubuntu-not-enough-free-disk-space-when-upgrading-low-disk-space/">Ubuntu 解决更新软件包的时候出现的 “Low Disk Space” 存储空间不足问题</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/26/Windows-install-cuteFTP-and-crack/">Windows 安装 cuteFTP 9.0 并破解</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 147%" href="/tags/arduino/">Arduino</a>
+    <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 129%" href="/tags/c-plus-plus/">C++</a>
@@ -1008,7 +1160,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/arduino/'>arduino (5)</a></li>
+    <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (2)</a></li>

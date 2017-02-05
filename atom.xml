@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T16:00:17+08:00</updated>
+  <updated>2017-02-05T16:38:44+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 005 ADC]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF/"/>
+    <updated>2017-02-05T16:38:21+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
+
+<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
+
+<hr />
+
+<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
+
+<h2>设置参考电压</h2>
+
+<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
+
+<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>设置参考电压是需要注意</h2>
+
+<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 000 — Arduino UNO R3 板子引脚定义]]></title>
@@ -4404,85 +4439,6 @@
 <h2><a href="https://software.intel.com/en-us/articles/intel-realsense-data-ranges">Intel RealSense 测量范围</a></h2>
 
 <p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481708072967.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed/"/>
-    <updated>2016-12-08T07:24:18+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/08/python-Regular-Expressions-Line-feed</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>开发环境</h2>
-
-<ul>
-<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
-<li>Python 版本：python-3.5.0-amd64</li>
-<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
-<li>电脑系统：Windows 10 64位</li>
-</ul>
-
-
-<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
-
-<hr />
-
-<p>当我在使用正则表达式去提取网页源代码中的有效数据的时候。发现：我要提取的有效数据所需要使用的正则表达式中有换行。那么这个时候，正则表达式要怎么写？</p>
-
-<p>目标网站：<a href="http://blog.csdn.net/github_35160620/article/details/53512977">http://blog.csdn.net/github_35160620/article/details/53512977</a></p>
-
-<p>要提取的有效信息：访问的数量</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152435523.png" alt="Alt text" /></p>
-
-<p>查看网页源代码：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-8-python-Regular-Expressions-Line-feed/1481152530825.png" alt="Alt text" /></p>
-
-<p>所以，如果我们想提取出访问数量，需要使用的正则表达式中会存在换行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>'''&lt;dt class="item"&gt;(.^?)&lt;/dt&gt;
-</span><span class='line'>            &lt;dd class="item_name"&gt;访问'''</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是这样是不能匹配到结果。而正确的正则表达式是下面这样的：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>'&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>使用转义字符 <code>\r\n</code> 来表示换行。</p></blockquote>
-
-<p>代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>def next(self, response):
-</span><span class='line'>    pattam_visits = '&lt;dt class="item"&gt;(.*?)&lt;/dt&gt;\r\n            &lt;dd class="item_name"&gt;访问'
-</span><span class='line'>    # print('response.body type is ', type(response.body))
-</span><span class='line'>    # print('response.body.decode type is ', type(response.body.decode('utf-8', 'ignore')))
-</span><span class='line'>
-</span><span class='line'>    body_data = response.body.decode('utf-8', 'ignore') # .replace(u'\xa9', u'')
-</span><span class='line'>    visits = re.compile(pattam_visits).findall(body_data)[0]
-</span><span class='line'>    print('当前访问量为：', visits)
-</span><span class='line'>    print('-------------------')
-</span><span class='line'>    pass</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p><code>compile()</code> 函数的使用方法<a href="http://www.aobosir.com/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">在这里</a>可以了解。</p></blockquote>
-
-<hr />
 ]]></content>
   </entry>
   

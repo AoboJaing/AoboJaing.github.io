@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Arduino | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/arduino/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T16:00:17+08:00</updated>
+  <updated>2017-02-05T16:38:44+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 005 ADC]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF/"/>
+    <updated>2017-02-05T16:38:21+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
+
+<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
+
+<hr />
+
+<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
+
+<h2>设置参考电压</h2>
+
+<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
+
+<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>设置参考电压是需要注意</h2>
+
+<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 000 — Arduino UNO R3 板子引脚定义]]></title>
@@ -230,74 +265,6 @@ sudo mv arduino-1.6.6 /opt
 <p>请见博客：Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 。</p>
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/"/>
-    <updated>2016-12-06T13:37:20+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive</id>
-    <content type="html"><![CDATA[<hr />
-
-<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
-
-<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
-
-<h2>2. 下载Arduino IDE软件</h2>
-
-<p>然后，到<a href="https://www.arduino.cc/en/Main/Software">这个网址</a> （这个网站打开时，有点慢。）下载最新的Arduino IDE 软件。（记住安装路径，因为后面要用上。）
-<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
-
-<h2>3. 安装驱动</h2>
-
-<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口</p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" /></p>
-
-<p>驱动已经安装成功。</p>
-
-<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
-
-<h3>选择办卡：Arduino/Genuino Uno</h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
-
-<h3>然后，选择端口：</h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
-
-<h3>测试：随便导入一个程序：<code>Blink</code></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
-
-<h3>点击：<strong>验证</strong></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
-
-<h3>点击：<strong>上传</strong></h3>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
-
-<h2>实验现象</h2>
-
-<p>现在看到的实验现象就是：板子上的A13的LED在闪烁。</p>
-
-<h1>搞定</h1>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
-
-<p>其他网站，没有用上：</p>
-
-<p><a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
 ]]></content>
   </entry>
   
