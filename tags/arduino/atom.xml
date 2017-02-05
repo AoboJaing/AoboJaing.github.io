@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Arduino | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/arduino/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T01:33:39+08:00</updated>
+  <updated>2017-02-05T16:00:17+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 000 — Arduino UNO R3 板子引脚定义]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition/"/>
+    <updated>2017-02-05T15:59:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="/images/2017-2-5-Arduino-UNO-R3-pin-definition/1486280649241.png" alt="Alt text" /></p>
+
+<p>Arduino UNO R3 板子的官方介绍：<a href="https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn">https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 004 Windows上给Arduino IDE添加模块库]]></title>

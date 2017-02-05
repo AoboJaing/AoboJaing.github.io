@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T01:33:39+08:00</updated>
+  <updated>2017-02-05T16:00:17+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino 000 — Arduino UNO R3 板子引脚定义]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition/"/>
+    <updated>2017-02-05T15:59:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-UNO-R3-pin-definition/1486280649241.png" alt="Alt text" /></p>
+
+<p>Arduino UNO R3 板子的官方介绍：<a href="https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn">https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ 的延时函数]]></title>
@@ -4468,77 +4481,6 @@
 
 
 <blockquote><p><code>compile()</code> 函数的使用方法<a href="http://www.aobosir.com/blog/2016/12/08/python-compile-Regular-Expressions-pattam/">在这里</a>可以了解。</p></blockquote>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 008 正则表达式-005 Compile模板的使用]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/08/python-compile-Regular-Expressions-pattam/"/>
-    <updated>2016-12-08T07:05:09+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/08/python-compile-Regular-Expressions-pattam</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>compile()函数的用法</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">re</span>
-</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;fdfgdrthxxi--gdfgexxlove--dsdfwesdxxyou--dfgdf&#39;</span>
-</span><span class='line'><span class="n">pattam_str</span> <span class="o">=</span> <span class="s">&#39;xx(.*?)--&#39;</span>
-</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython29</span><span class="o">.</span><span class="n">py</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">,</span> <span class="s">&#39;love&#39;</span><span class="p">,</span> <span class="s">&#39;you&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解释：</p>
-
-<ul>
-<li>其中<code>pattam_str</code> 就是<strong>正则表达式</strong>字符串。</li>
-<li><code>str</code> 就是目标字符串</li>
-<li><code>result</code> 就是得到的结果</li>
-</ul>
-
-
-<p>代码中的</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>等价于：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattam_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出的结果是一样的。</p>
 
 <hr />
 ]]></content>
