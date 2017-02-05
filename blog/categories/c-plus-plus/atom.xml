@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C++ | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T16:38:44+08:00</updated>
+  <updated>2017-02-05T19:01:40+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -20,6 +20,8 @@
     <id>http://aobojaing.github.io/blog/2017/02/05/cpp-sleep</id>
     <content type="html"><![CDATA[<hr />
 
+<h2>方法一</h2>
+
 <p>在Linux下，我们这样使用：</p>
 
 <pre><code class="cpp">#include &lt;iostream&gt;
@@ -28,7 +30,7 @@
 int main(void){
     while(1){
         std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
-        sleep(1);
+        sleep(1); //单位是秒
     }
     return 0;
 }
@@ -40,7 +42,86 @@ int main(void){
 
 <p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
 
+<p>或者形参传入以微秒为单位（<code>1000,000</code>微秒 = <code>1</code>秒）的数据：</p>
+
+<p><code>usleep()</code>函数的详细介绍：<a href="http://pubs.opengroup.org/onlinepubs/007908799/xsh/usleep.html">这里</a>。</p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;unistd.h&gt;
+
+int main(void){
+    while(1){
+        std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+        usleep(1000000); //单位是微秒 1000000us = 1s
+    }
+    return 0;
+}
+</code></pre>
+
 <hr />
+
+<h2>方法三</h2>
+
+<p>C++11里面，你可以这样使用：</p>
+
+<p>我使用的是Qt5，在Qt5里面使用<code>C++11</code>，你需要在项目的<code>.pro</code>文件里面添加下面的这句代码：</p>
+
+<pre><code>CONFIG += c++11
+</code></pre>
+
+<blockquote><p>如果你不在<code>.pro</code>文件中添加上面的这句代码，你就使用不了下面代码里面的<code>std::this_thread</code>。</p></blockquote>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+#include &lt;thread&gt;
+
+int main(void){
+    while(1){
+        std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //单位是毫秒
+    }
+    return 0;
+}
+</code></pre>
+
+<hr />
+
+<h2>方法四</h2>
+
+<p>如果你使用了<code>Boost</code>库，那么你可以使用下面的代码实现延时的功能：</p>
+
+<blockquote><p>Linux系统安装<strong>Boost</strong>库很简单，只需要执行：
+<code>
+sudo apt-get install libboost-dev
+</code></p></blockquote>
+
+<p>我使用的是QT项目，所以我们需要在<code>.pro</code>文件中，添加<code>boost</code>库的头文件路径和链接文件的路径：</p>
+
+<pre><code>HEADERS += /usr/include/
+
+LIBS += -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_thread
+</code></pre>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;boost/thread/thread.hpp&gt;
+
+int main(void){
+    while(1){
+        std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+        boost::this_thread::sleep( boost::posix_time::milliseconds(1000) ); //单位是毫秒
+    }
+    return 0;
+}
+</code></pre>
+
+<p>或者：</p>
+
+<pre><code class="cpp">boost::this_thread::sleep( boost::posix_time::seconds(1) ); //单位是秒
+</code></pre>
+
+<hr />
+
+<p>参考网站：<a href="http://stackoverflow.com/questions/4184468/sleep-for-milliseconds">Sleep for milliseconds</a></p>
 ]]></content>
   </entry>
   
