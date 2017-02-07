@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-05T19:01:40+08:00</updated>
+  <updated>2017-02-07T00:13:45+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 编写类文件的时候，需要注意的问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/07/cpp-cmake-aux_source_directory/"/>
+    <updated>2017-02-07T00:13:15+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/07/cpp-cmake-aux_source_directory</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>一段时间不编写程序了，基本上都忘记了。今天我来介绍一下：当我们编写类文件的时候，需要注意的问题：</p>
+
+<hr />
+
+<p>比如，我现在写了<code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件。</p>
+
+<p>我在<code>pairAlign.hpp</code>文件里面</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">class</span> <span class="nc">PairAlign</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">PairAlign</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你会发现：这个文件的名字和里面的类的名字不同。一个是<code>pairAlign</code>的文件名，一个是<code>PairAlign</code>类。这是没有关系的。这个随便。</p>
+
+<hr />
+
+<p>但是，我在使用<code>make</code>命令编译程序的时候，上面没有错误的程序竟然编译不了。</p>
+
+<p>后来，我们知道了问题。其实是我们的<code>CMakeLists.txt</code>文件里面的问题。因为 <code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件是放在<code>pairAlgin</code>文件夹里面的。而我却没有将这个文件夹添加的被编译的<code>SRC_LIST</code>变量里面。</p>
+
+<p>我们需要在<code>CMakeLists.txt</code>文件里面的<code>aux_source_directory(. SRC_LIST)</code>下面添加下面这个代码，就可以解决问题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="nb">aux_source_directory</span><span class="p">(</span><span class="s">./pairAlign/</span> <span class="s">SRC_LIST</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在我们在重新执行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="err">cmake</span> <span class="err">..</span>
+</span><span class='line'><span class="err">make</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以编译成功了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 005 ADC]]></title>
@@ -4488,82 +4544,6 @@ sudo apt-get install libboost-dev
 
 
 <p>我个人推荐使用<code>librealsense</code>这个跨平台库，它让Intel RealSense摄像头在Linux系统上使用。并且同时可以在Linux系统里面的ROS机器人操作系统里面使用Intel RealSense。（<a href="http://wiki.ros.org/librealsense">这里</a>）</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/"/>
-    <updated>2016-12-14T18:47:00+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200</id>
-    <content type="html"><![CDATA[<hr />
-
-<hr />
-
-<p>目前的Intel RealSense摄像头一共有三款：<strong>F200</strong>、<strong>SR300</strong>、<strong>R200</strong>。</p>
-
-<ul>
-<li>SR300 和 F200 都属于：近距离摄像头（Front Facing）。</li>
-<li>R200 属于：远距离摄像头（Rear Facing）</li>
-<li>在Intel RealSense 官方示例程序中，总会在程序的前缀出现：<code>FF_</code>、<code>RF_</code>或者<code>DF_</code>，它们分别表示：<strong>适用于近距离摄像头</strong>（Front Facing）、<strong>适用于远距离摄像头</strong>（Rear Facing） 和 <strong>两者都适用</strong>（Dual Facing）。</li>
-</ul>
-
-
-<hr />
-
-<h2>SR300</h2>
-
-<p>官网介绍：<a href="https://software.intel.com/en-us/articles/introducing-the-intel-realsense-camera-sr300">Introducing the Intel® RealSense™ Camera SR300</a></p>
-
-<p>外部：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614405367.png" alt="Alt text" /></p>
-
-<p>内部：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614321225.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614483853.png" alt="Alt text" /></p>
-
-<p>SR300 只有：</p>
-
-<ul>
-<li>测量范围：0.2m ~ 1.2m （要求：室内，并且）</li>
-<li>深度摄像头（640x480 60fps）</li>
-<li>彩色摄像头（1080p 30fps 或者 720p 60fps 可调）</li>
-<li>红外线摄像头（640x480 200fps ）</li>
-<li>无<strong>左</strong>（left）、<strong>右</strong>（right）摄像头</li>
-</ul>
-
-
-<hr />
-
-<h2>R200</h2>
-
-<p>参考网站：<a href="https://software.intel.com/en-us/articles/realsense-r200-camera">Developing for the Intel® RealSense™ Camera (R200)</a></p>
-
-<p>外部：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707509944.png" alt="Alt text" /></p>
-
-<p>内部：</p>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707878472.png" alt="Alt text" /></p>
-
-<p>R200 有：</p>
-
-<ul>
-<li>测量范围：</li>
-</ul>
-
-
-<hr />
-
-<h2><a href="https://software.intel.com/en-us/articles/intel-realsense-data-ranges">Intel RealSense 测量范围</a></h2>
-
-<p><img src="http://aobojaing.github.io/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481708072967.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

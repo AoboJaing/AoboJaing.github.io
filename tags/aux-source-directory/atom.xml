@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: aux_source_directory() | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/aux-source-directory/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-07T00:13:45+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 编写类文件的时候，需要注意的问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/07/cpp-cmake-aux_source_directory/"/>
+    <updated>2017-02-07T00:13:15+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/07/cpp-cmake-aux_source_directory</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>一段时间不编写程序了，基本上都忘记了。今天我来介绍一下：当我们编写类文件的时候，需要注意的问题：</p>
+
+<hr />
+
+<p>比如，我现在写了<code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件。</p>
+
+<p>我在<code>pairAlign.hpp</code>文件里面</p>
+
+<pre><code class="cpp">class PairAlign{
+public:
+    PairAlign();
+};
+</code></pre>
+
+<p>你会发现：这个文件的名字和里面的类的名字不同。一个是<code>pairAlign</code>的文件名，一个是<code>PairAlign</code>类。这是没有关系的。这个随便。</p>
+
+<hr />
+
+<p>但是，我在使用<code>make</code>命令编译程序的时候，上面没有错误的程序竟然编译不了。</p>
+
+<p>后来，我们知道了问题。其实是我们的<code>CMakeLists.txt</code>文件里面的问题。因为 <code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件是放在<code>pairAlgin</code>文件夹里面的。而我却没有将这个文件夹添加的被编译的<code>SRC_LIST</code>变量里面。</p>
+
+<p>我们需要在<code>CMakeLists.txt</code>文件里面的<code>aux_source_directory(. SRC_LIST)</code>下面添加下面这个代码，就可以解决问题：</p>
+
+<pre><code class="cmake">aux_source_directory(./pairAlign/ SRC_LIST)
+</code></pre>
+
+<hr />
+
+<p>现在我们在重新执行：</p>
+
+<pre><code>cmake ..
+make
+</code></pre>
+
+<p>就可以编译成功了。</p>
+]]></content>
+  </entry>
+  
+</feed>
