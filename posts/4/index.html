@@ -9,10 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
-Python 版本：python-3.5.0-amd64
-PyCharm软件版本：pycharm-professional-2016.1.4
-电脑系统：Windows 10 64位 如果你还没有搭建好开发环境 &hellip;">
+  <meta name="description" content="我的Ubuntu系统：Ubuntu 14.04.10 TLS 32位
+需要安装的Arduino的版本：Arduino 1.6.11（最新版本） Linux 32位 1. 下载 最新的 Arduino 开发软件 Step 1 . 到Arduino官网下载 linux 32位 的 Arduino &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,207 @@ PyCharm软件版本：pycharm-professional-2016.1.4
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:46:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:46 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS 32位</strong></li>
+<li>需要安装的<strong>Arduino</strong>的版本：<strong>Arduino 1.6.11（最新版本） Linux 32位</strong></li>
+</ul>
+
+
+<h2>1. 下载 最新的 <strong>Arduino</strong> 开发软件</h2>
+
+<p><strong>Step 1 . </strong> 到<strong>Arduino</strong>官网下载 <strong>linux 32位</strong> 的 <strong>Arduino</strong> 开发软件：</p>
+
+<p>Web：<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a></p>
+
+<h2>2. 解压</h2>
+
+<p><strong>Step 2 . </strong> 解压<strong>arduino-1.6.11-linux32.tar.xz</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
+</span><span class='line'>tar -xvJf arduino-1.6.11-linux32.tar.xz</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642224393.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 将解压后的文件（<code>arduino-1.6.11</code>）移动到 <code>/opt</code>  目录下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
+</span><span class='line'>sudo mv arduino-1.6.6 /opt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 4 . </strong> 进入 <code>/opt/arduino-1.6.11</code> 文件夹，将<strong>Files</strong>窗口最大化。选中 <strong>arduino</strong> 文件，再在<strong>菜单栏</strong>中选择：<strong>Edits</strong> -> <strong>Preferences</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642888060.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 这时弹出下面的窗口。选择：<strong>Behavior</strong> 选项卡，将<strong>Executable Text Files</strong>项里面，勾选：<strong>Ask each time</strong> 单选框。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642984839.png" alt="Alt text" /></p>
+
+<h2>3. 运行 <strong>Arduino</strong></h2>
+
+<p>现在你有两种方法运行 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>方法一：</strong> 双击 <strong>arduino</strong> 文件： 弹出一个对话框，点击<strong>Run</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555757325.png" alt="Alt text" /></p>
+
+<p><strong>方法二：</strong>打开一个终端：路径切换到<strong>arduino</strong>文件所在路径（<code>/opt/arduino-1.6.11/</code>），运行它：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /opt/arduino-1.6.11/
+</span><span class='line'>./arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，恭喜你，已经安装成功了：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555815898.png" alt="Alt text" /></p>
+
+<h2>4. 做一些配置，实现在终端的任何路径下，都可以运行 <strong>Arduino</strong> 软件</h2>
+
+<p>使用<code>ln</code> 命令(给文件创建软链接文件) Web：<a href="http://roclinux.cn/?p=752">http://roclinux.cn/?p=752</a></p>
+
+<p>我们希望在终端的任何路径下，输入 <code>arduino</code> 都可以启动 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>Step 6 . </strong> 操作如下，打开一个终端，执行下面的命令。将 <code>/opt/arduino-1.6.6/arduino</code> 文件在 <code>/bin/</code> 路径下创建一个软链接文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/arduino-1.6.11/arduino /bin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>搞定，这样就可以在终端中，不管当前路径是什么，都可以启动<strong>Arduino</strong>了。</p>
+
+<p>试试看。现在，在终端中直接执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. 如何给 <strong>Arduino</strong> 板子，烧写程序</h2>
+
+<p>请见博客：Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 。</p>
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:37:20+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
+
+<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
+
+<h2>2. 下载Arduino IDE软件</h2>
+
+<p>然后，到<a href="https://www.arduino.cc/en/Main/Software">这个网址</a> （这个网站打开时，有点慢。）下载最新的Arduino IDE 软件。（记住安装路径，因为后面要用上。）
+<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
+
+<h2>3. 安装驱动</h2>
+
+<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" /></p>
+
+<p>驱动已经安装成功。</p>
+
+<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
+
+<h3>选择办卡：Arduino/Genuino Uno</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
+
+<h3>然后，选择端口：</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
+
+<h3>测试：随便导入一个程序：<code>Blink</code></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>验证</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>上传</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
+
+<h2>实验现象</h2>
+
+<p>现在看到的实验现象就是：板子上的A13的LED在闪烁。</p>
+
+<h1>搞定</h1>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
+
+<p>其他网站，没有用上：</p>
+
+<p><a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1071,140 +1270,6 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/">Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T17:37:34+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>出现这个错误，是因为<code>xxxx.py</code> 文件里面有中文字符。</p>
-
-<p>解决办法：在文件第一行，加上下面的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T17:06:32+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
-
-<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
-
-<h2>语法：</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>str 分隔符</li>
-<li>num 分割次数</li>
-</ul>
-
-
-<h2>实例：</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
-</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1222,6 +1287,14 @@ PyCharm软件版本：pycharm-professional-2016.1.4
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/08/pcl-console-time-TicToc/">PCL 记录时间长度 — TicToc 类</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/">PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/07/cpp-string-fusion-and-int-to-string/">C++ 字符串融合 和 String 与 Int 之间最简单的转换方法</a>
       </li>
     
@@ -1231,14 +1304,6 @@ PyCharm软件版本：pycharm-professional-2016.1.4
     
       <li class="post">
         <a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">Arduino 000 — Arduino UNO R3 板子引脚定义</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a>
       </li>
     
   </ul>
@@ -1308,6 +1373,7 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

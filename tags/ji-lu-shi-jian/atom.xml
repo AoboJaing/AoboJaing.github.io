@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 记录时间 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/ji-lu-shi-jian/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-08T00:24:08+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PCL 记录时间长度 — TicToc 类]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc/"/>
+    <updated>2017-02-08T00:23:41+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>对于PCL在<strong>Windows</strong>和<strong>Linux</strong>上的环境的搭建请参考我写的这几篇博客。</p>
+
+<hr />
+
+<pre><code class="cpp">#include &lt;pcl/console/time.h&gt;
+</code></pre>
+
+<pre><code>pcl::console::TicToc tt;
+tt.tic ();
+
+//需要记录执行多长时间的代码
+
+std::cout &lt;&lt; "[done, " &lt;&lt; tt.toc () &lt;&lt; " ms ]" &lt;&lt; std::endl;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

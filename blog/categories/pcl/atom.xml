@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Pcl | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/blog/categories/pcl/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-08T00:24:08+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PCL 记录时间长度 — TicToc 类]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc/"/>
+    <updated>2017-02-08T00:23:41+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>对于PCL在<strong>Windows</strong>和<strong>Linux</strong>上的环境的搭建请参考我写的这几篇博客。</p>
+
+<hr />
+
+<pre><code class="cpp">#include &lt;pcl/console/time.h&gt;
+</code></pre>
+
+<pre><code>pcl::console::TicToc tt;
+tt.tic ();
+
+//需要记录执行多长时间的代码
+
+std::cout &lt;&lt; "[done, " &lt;&lt; tt.toc () &lt;&lt; " ms ]" &lt;&lt; std::endl;
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/"/>
+    <updated>2017-02-08T00:19:57+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>如何使用 pcl 库里面的可视化模块的键盘事件</h2>
+
+<pre><code>#include &lt;pcl/visualization/pcl_visualizer.h&gt;
+
+bool iteration_flag = false;
+
+void keyboardEventOccurred(const pcl::visualization::KeyboardEvent&amp; event, void* nothing){
+    if(event.getKeySym() == "space" &amp;&amp; event.keyDown()){
+        iteration_flag = true;
+    }
+}
+
+int main(){
+    pcl::visualization::PCLVisualizer *p;
+    p = new pcl::visualization::PCLVisualizer("PCL Windows");
+    p-&gt;registerKeyboardCallback(&amp;keyboardEventOccurred, (void*)NULL);
+
+    while(iteration_flag != true){
+        p-&gt;spinOnce();
+    }
+    return 0;
+}
+</code></pre>
+
+<hr />
+
+<h2>需要注意的事项：</h2>
+
+<p>第一个：就是，你定义的这个<code>p</code>指针，必须要给它赋值实例化对象：<code>p = new pcl::visualization::PCLVisualizer("PCL Windows");</code>，否则程序编译不会出现错误，但是运行的时候会出现内存异常的运行错误。</p>
+
+<hr />
+
+<p>第二个：就是这个自定义的键盘事件函数了：<code>keyboardEventOccurred()</code>函数。想要让这个函数可以使用，我们不需要再程序中循环的调用<code>p-&gt;spinOnce()</code>方法，程序才能响应我们的这个键盘事件函数。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,13 +9,15 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="字符串融合 1
+  <meta name="description" content="对于PCL在Windows和Linux上的环境的搭建请参考我写的这几篇博客。 1
+#include &lt;pcl/console/time.h&gt; 1
 2
 3
 4
 5
-#include &lt;string&gt; std::string str = std::string(&quot;../pairAlginClass/capture0001&quot;) + std::string(&quot;.pcd&quot;);
-或者 &hellip;">
+6
+pcl::console::TicToc tt;
+tt.tic (); //需要记录执行多长时间的代码 std:: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +74,145 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/08/pcl-console-time-TicToc/">PCL 记录时间长度 — TicToc 类</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-08T00:23:41+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:23 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>对于PCL在<strong>Windows</strong>和<strong>Linux</strong>上的环境的搭建请参考我写的这几篇博客。</p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;pcl/console/time.h&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">pcl</span><span class="o">::</span><span class="n">console</span><span class="o">::</span><span class="n">TicToc</span> <span class="n">tt</span><span class="p">;</span>
+</span><span class='line'><span class="n">tt</span><span class="p">.</span><span class="n">tic</span> <span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//需要记录执行多长时间的代码</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[done, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tt</span><span class="p">.</span><span class="n">toc</span> <span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; ms ]&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/">PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-08T00:19:57+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:19 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>如何使用 pcl 库里面的可视化模块的键盘事件</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;pcl/visualization/pcl_visualizer.h&gt;
+</span><span class='line'>
+</span><span class='line'>bool iteration_flag = false;
+</span><span class='line'>
+</span><span class='line'>void keyboardEventOccurred(const pcl::visualization::KeyboardEvent& event, void* nothing){
+</span><span class='line'>  if(event.getKeySym() == "space" && event.keyDown()){
+</span><span class='line'>      iteration_flag = true;
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main(){
+</span><span class='line'>  pcl::visualization::PCLVisualizer *p;
+</span><span class='line'>  p = new pcl::visualization::PCLVisualizer("PCL Windows");
+</span><span class='line'>  p-&gt;registerKeyboardCallback(&keyboardEventOccurred, (void*)NULL);
+</span><span class='line'>  
+</span><span class='line'>  while(iteration_flag != true){
+</span><span class='line'>      p-&gt;spinOnce();
+</span><span class='line'>  }
+</span><span class='line'>  return 0;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>需要注意的事项：</h2>
+
+<p>第一个：就是，你定义的这个<code>p</code>指针，必须要给它赋值实例化对象：<code>p = new pcl::visualization::PCLVisualizer("PCL Windows");</code>，否则程序编译不会出现错误，但是运行的时候会出现内存异常的运行错误。</p>
+
+<hr />
+
+<p>第二个：就是这个自定义的键盘事件函数了：<code>keyboardEventOccurred()</code>函数。想要让这个函数可以使用，我们不需要再程序中循环的调用<code>p-&gt;spinOnce()</code>方法，程序才能响应我们的这个键盘事件函数。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -885,832 +1026,6 @@ sudo apt-get install libboost-dev
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-26T01:46:45+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>正常的情况：</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ifconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552549436.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>whoami</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552591430.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>secureCRT</strong>软件</p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552633225.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552666663.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552793582.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552803114.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>不正常的情况：The remote system refused the connection.</h2>
-
-<p>如果你遇到这个问题，说明你的Linux系统里面没有安装<code>openssh-server</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install openssh-server</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
-</span><span class='line'> 3834 ?        00:00:00 sshd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行完下面的命令，系统会自动注销（Logout）。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-agent restart
-</span><span class='line'># 已经没有这个命令了。替代的方法就是:重启系统或者注销系统。</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在查看一下，现在就可以进入了正常使用的状态。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
-</span><span class='line'> 3834 ?        00:00:00 sshd
-</span><span class='line'> 4116 ?        00:00:00 ssh-agent
-</span><span class='line'>aobosir@ubuntu:~$ </span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在，我们在Windows系统这段使用<strong>SecureCRT</strong>软件连接这个Linux系统，就可以添加成功了。</p>
-
-<p>连接成功之后，我们现在在<strong>SecureCRT</strong>软件连接的Linux系统终端中再次下面命令来查看当前运行着的<strong>ssh</strong>进程有哪些。（现在，我们已经可以在Windows端的<strong>SecureCRT</strong>软件里面控制Linux端了。）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查看<strong>Linux</strong>这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））</p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/26/python3-large-web-crawler-taobao-com-import-to-MySQL-database/">Python3 大型网络爬虫实战 004 — Scrapy 大型静态商城网站爬虫项目编写及数据写入数据库实战 — 实战：爬取淘宝</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-26T00:56:25+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:56 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>[TOC]</p>
-
-<h2>开发环境</h2>
-
-<ul>
-<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
-<li>Python 版本：python-3.5.0-amd64</li>
-<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
-<li>电脑系统：Windows 10 64位</li>
-</ul>
-
-
-<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
-
-<hr />
-
-<ul>
-<li>本文中的源代码在github这里：<a href="https://github.com/AoboJaing/thirdDemo/">https://github.com/AoboJaing/thirdDemo/</a></li>
-</ul>
-
-
-<p>本篇博文的重点内容：</p>
-
-<ul>
-<li>有一些数据，在源码上找不到的，这个时候需要使用 &mdash; 抓包。</li>
-<li>Python调用MySQL数据库</li>
-</ul>
-
-
-<hr />
-
-<p>本爬虫项目的目的是：某个关键字在淘宝上搜索到的所有商品，获取所有商品的： 商品名字、商品链接、商品价格、商品的评论。</p>
-
-<hr />
-
-<h2>开始实战</h2>
-
-<p>创建一个爬虫项目</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy startproject thirdDemo</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480949909390.png" alt="Alt text" /></p>
-
-<h2>设置防反爬机制（settings.py 文件）</h2>
-
-<p>请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">给 Scrapy 爬虫项目设置为防反爬</a>。</p>
-
-<h2>分析网站</h2>
-
-<ul>
-<li>分析网页界面</li>
-<li>分析网址结构</li>
-<li>分析网页源代码</li>
-</ul>
-
-
-<p>1 . 分析网页界面：</p>
-
-<p>我们在淘宝网的搜索栏里面搜索关键字，比如“小吃”。它一共会输出100页。</p>
-
-<blockquote><p>可见：100页的搜索结果是淘宝的上限。（最多100页）</p></blockquote>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480951614377.png" alt="Alt text" /></p>
-
-<p>2 . 分析网址结构：</p>
-
-<p>当我们点击页面进行浏览时，我们发现不同的页面的网址有规律，并且下面是我们找到的规律：</p>
-
-<ol>
-<li>红色部分是一模一样的。</li>
-<li>删除红色部分，将剩下的组成网址，一样可以正常的浏览原网页。</li>
-<li><code>q=</code> 后面是“小吃”的编码形式。</li>
-<li><code>s=</code> 后面的数值等于 <code>44*(当前页面-1)</code></li>
-</ol>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480951515511.png" alt="Alt text" /></p>
-
-<h1>开始写爬虫程序（taobao.py 文件）</h1>
-
-<h2>创建一个爬虫文件（taobao.py 文件）</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd thirdDemo
-</span><span class='line'>scrapy genspider -t basic taobao taobao.com</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480949962287.png" alt="Alt text" /></p>
-
-<p>使用PyCharm软件开发，使用PyCharm软件打开 <strong>thirdDemo</strong>项目。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480950062203.png" alt="Alt text" /></p>
-
-<h2>添加需要使用的存储容器对象（items.py文件）</h2>
-
-<p>先到 <code>items.py</code> 文件里面的<code>ThirddemoItem()</code>函数里面创建存储用到容器（类的实例化对象）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">ThirddemoItem</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
-</span><span class='line'>    <span class="c"># define the fields for your item here like:</span>
-</span><span class='line'>    <span class="c"># name = scrapy.Field()</span>
-</span><span class='line'>    <span class="n">title</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">link</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">price</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">comment</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480950185425.png" alt="Alt text" /></p>
-
-<h2>得到搜索关键字对应的所有搜索页面（taobao.py文件）</h2>
-
-<p>在回调函数<code>parse()</code>中，建立一个变量(<code>key</code>)来存储关键词（<code>零食</code>）。然后在使用一个<code>for</code>循环来爬取所有的网页。然后使用<code>scrapy.http</code>里面的<code>Request</code> 来在<code>parse()</code>函数返回（返回一个生成器（yield））一个网页源代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">scrapy</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">scrapy.http</span> <span class="kn">import</span> <span class="n">Request</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">TaobaoSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;taobao&quot;</span>
-</span><span class='line'>    <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;taobao.com&quot;</span><span class="p">]</span>
-</span><span class='line'>    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://taobao.com/&#39;</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">key</span> <span class="o">=</span> <span class="s">&#39;小吃&#39;</span>
-</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-</span><span class='line'>            <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;https://s.taobao.com/search?q=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&amp;s=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">44</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'>            <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span><span class='line'>            <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480952150312.png" alt="Alt text" /></p>
-
-<p>（注意：我们上面通过观察网页已经知道了，搜索得到的页面有100页，但是我们现在是测试阶段，不爬这么多页，上面的代码我们只爬了2页）</p>
-
-<hr />
-
-<blockquote><p>运行一下：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480952373465.png" alt="Alt text" /></p>
-
-<p>程序没有问题。</p></blockquote>
-
-<hr />
-
-<h2>得到所有商品的id</h2>
-
-<p>我们现在的目标是得到搜索页面中所有商品的链接。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480958203181.png" alt="Alt text" /></p>
-
-<p>现在，我们观察搜索页面的源代码，我们找这些商品链接的规律，能否通过什么商品<code>id</code>之类的信息，然后通过商品<code>id</code>来构造出商品的链接网址。</p>
-
-<p>幸运的是：确实可以这么做。</p>
-
-<p>我发现，不管是搜索的商品，不管是在淘宝里、天猫里、天猫超市里，商品的链接网址都可以用下面的格式去构造：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">item</span><span class="o">.</span><span class="n">taobao</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">item</span><span class="o">.</span><span class="n">htm</span><span class="err">?</span><span class="nb">id</span><span class="o">=</span><span class="err">商品的</span><span class="nb">id</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，现在我们要做的是：先提取商品的id：（使用正则表达式）</p>
-
-<p>对搜索结果的网页随便一个地方右键：<strong>查看网页源代码(V)</strong>：</p>
-
-<blockquote><p>（我发现：通过在浏览器中按<strong>F12</strong> 和 右键来 <strong>查看网页源代码</strong> 这两种查看源代码得到的源代码不一样，后者得到的源代码和爬虫爬取的源代码一致，而前者和爬虫爬取的不一致。）</p>
-
-<p> 所有我们不能使用<strong>Xpath</strong>表达式来用过标签获取商品id了。只能使用<strong>正则表达式</strong>了。</p>
-
-<p>我想可能的原因是：搜索页面可能是动态构造出来的，所以使用<strong>Xpath</strong>表达式是不能对这种网址的源码进行提取信息的。（我瞎想的，不知道是否正确。不过事实其实是：使用<strong>Xpath</strong>表达式是提取不了有效信息的。）</p></blockquote>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965022146.png" alt="Alt text" /></p>
-
-<p>然后随便点击进入一个商品的链接网页，在这个网页的网址里面就可以找到这个商品的id：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965129366.png" alt="Alt text" /></p>
-
-<p>然后在刚刚打开的源代码中，查找这个id:</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965212130.png" alt="Alt text" /></p>
-
-<p>我们通过观察发现，使用<code>"nid":"</code>就可以找到这个搜索结果页面里面所有商品的id：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965247629.png" alt="Alt text" /></p>
-
-<blockquote><p>这个页面里面一共是36个商品，没错。</p>
-
-<p><strong>Q：</strong> 你可能发现了，这个搜索网页里面搜索到结果是48个商品，我们得到的是36个，是不是少了？</p>
-
-<p><strong>A：</strong> 没有少，这就是淘宝的营销策略。一个搜索页面一共有48个商品，但是其中有10多个商品是重复的！其中甚至有个商品在这个搜索页面中重复出现了三次，不信，你可以仔细的找找。</p></blockquote>
-
-<p>所以，商品的id可以使用下面的<strong>正则表达式</strong>获取：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="s">&#39;&quot;nid&quot;:&quot;(.*?)&quot;&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们在<code>page()</code>方法中得到爬取到的网页源代码的 <code>body</code> 标签里面的所有信息：</p>
-
-<blockquote><p>先声明一点：</p>
-
-<p> 爬取到的网页源代码是：以网页源代码中指定的编码方式编码得到的bytes信息。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480954729660.png" alt="Alt text" /></p></blockquote>
-
-<p>我们需要得到对应的解码信息：</p>
-
-<p>参考网站：<a href="http://www.runoob.com/python3/python3-string-decode.html">Python3 bytes.decode()方法</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p><code>response.body</code> 它默认是二进制格式，所以我们在使用它之前要给它解码：<code>decode('utf-8')</code>，为了避免出错，我给它传第二个参数：<code>ignore</code>。</p></blockquote>
-
-<p><code>page()</code>函数中的代码现在是下面这个样子的：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span><span class="s">&#39;ignore&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">pattam_id</span> <span class="o">=</span> <span class="s">&#39;&quot;nid&quot;:&quot;(.*?)&quot;&#39;</span>
-</span><span class='line'>    <span class="n">all_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_id</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">all_id</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>运行试试看：</p>
-
-<p> <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480965691671.png" alt="Alt text" /></p></blockquote>
-
-<hr />
-
-<h2>得到所有商品的链接网址</h2>
-
-<p>现在得到了所有商品的ip，现在通过这些ip，构造出所有商品的网址。得到了链接后，就可以去爬这个网页的源代码了：（下面的代码中，在<code>next()</code>方法中将商品的网页网址打印了出来）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">re</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span><span class="s">&#39;ignore&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">pattam_id</span> <span class="o">=</span> <span class="s">&#39;&quot;nid&quot;:&quot;(.*?)&quot;&#39;</span>
-</span><span class='line'>    <span class="n">all_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_id</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
-</span><span class='line'>    <span class="c"># print(all_id)</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_id</span><span class="p">)):</span>
-</span><span class='line'>        <span class="n">this_id</span> <span class="o">=</span> <span class="n">all_id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span class='line'>        <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;https://item.taobao.com/item.htm?id=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_id</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">yield</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>运行试试看：（自动的将网址调整到正确的网址上。比如<strong>天猫</strong>或者<strong>天猫超市</strong>之类的子域名）</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480966453270.png" alt="Alt text" /></p></blockquote>
-
-<hr />
-
-<h1>获取商品的具体信息（taobao.py 文件）</h1>
-
-<h2>获取商品的名字</h2>
-
-<p>现在在<code>next()</code>回调函数中实例化一个开始时在<code>items.py</code>文件里面创建的项目的存储容器对象。然后，我们就可以直接使用它了。</p>
-
-<p>所以现在在 <code>taobao.py</code> 文件的上面添加这个文件：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">thirdDemo.items</span> <span class="kn">import</span> <span class="n">ThirddemoItem</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在我们要得到商品的标题。</p>
-
-<blockquote><p>我们尽量从源代码中的信息提取，如果源代码中没有的信息，我们在使用抓包的凡是提取。</p></blockquote>
-
-<p>标题是可以直接在源代码中提取的：（观察网页源代码，直接中<code>Xpath</code>表达式）</p>
-
-<p>天猫或者天猫超市的商品的标题可以使用下面的<strong>Xpath</strong>表达式提取：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;tb-detail-hd&#39;]/h1/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>淘宝的商品的标题可以使用下面的<strong>Xpath</strong>表达式提取：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//h3[@class=&#39;tb-main-title&#39;]/@data-title&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，这里提取标题，我们需要一个判断语句，判断这个商品的网址链接是天猫的还是淘宝的。</p>
-
-<p>伪码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">if</span> <span class="err">不是淘宝的网址</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;tb-detail-hd&#39;]/h1/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span> <span class="c"># 天猫或者天猫超市</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//h3[@class=&#39;tb-main-title&#39;]/@data-title&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span> <span class="c"># 淘宝</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们的判断标准就是商品网址的子域名。子域名大致一共有三种：<code>detail.tmall</code>（天猫）、<code>chaoshi.detail.tmall</code>（天猫超市）、<code>item.taobao</code>（淘宝）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span class='line'>    <span class="c"># print(response.url)</span>
-</span><span class='line'>    <span class="n">url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span>
-</span><span class='line'>    <span class="n">pattam_url</span> <span class="o">=</span> <span class="s">&#39;https://(.*?).com&#39;</span>
-</span><span class='line'>    <span class="n">subdomain</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_url</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span><span class='line'>    <span class="c"># print(subdomain)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">subdomain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;item.taobao&#39;</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//div[@class=&#39;tb-detail-hd&#39;]/h1/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">title</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//h3[@class=&#39;tb-main-title&#39;]/@data-title&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>运行试试看：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480971492185.png" alt="Alt text" /></p>
-
-<p>有的时候，偶尔会得到几个 <code>[]</code>，这是因为，你爬的太快的，淘宝的服务器没有同意你爬取这个商品的网页。（所以提高防反爬机制，效果会好一些。）</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480971883848.png" alt="Alt text" /></p></blockquote>
-
-<h2>获取商品的链接网址（taobao.py 文件）</h2>
-
-<p>（直接得到）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">item</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>获取商品的价格信息（原价）（taobao.py 文件）</h2>
-
-<blockquote><p>正常的价格可以在商品网页的源代码里面获取，但是淘宝价（促销价）在商品源代码里面没有，这时就需要通过抓包来获取。</p></blockquote>
-
-<p>淘宝：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973755825.png" alt="Alt text" /></p>
-
-<p>天猫：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973520884.png" alt="Alt text" /></p>
-
-<p>我们先获取正常的价格。这里也需要分淘宝和天猫，它们获取正常价格的<strong>Xpath</strong>表达式或者<strong>正则表达式</strong>不同。</p>
-
-<blockquote><p>注意：这里总结表达式，通过对商品页面右键 -> <strong>查看网页源代码</strong> 的方式查看源代码。</p></blockquote>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="k">if</span> <span class="n">subdomain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;item.taobao&#39;</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">pattam_price</span> <span class="o">=</span> <span class="s">&#39;&quot;defaultItemPrice&quot;:&quot;(.*?)&quot;&#39;</span>
-</span><span class='line'>        <span class="n">price</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_price</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">))</span> <span class="c"># 天猫</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">price</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&quot;//em[@class = &#39;tb-rmb-num&#39;]/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span> <span class="c"># 淘宝</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>提取商品的累计评论数量：（使用抓包的方式）（taobao.py 文件）</h2>
-
-<p>淘宝：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973770234.png" alt="Alt text" /></p>
-
-<p>天猫：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480973787179.png" alt="Alt text" /></p>
-
-<blockquote><p>可以使用 ： <strong>Fiddler4抓包软件</strong> 或者 浏览器按<strong>F12->Network->Name->Response</strong>查看抓包信息</p></blockquote>
-
-<p>这里，我通过浏览器进行抓包，找到了评论数所在的包：（一个一个的找）</p>
-
-<blockquote><p>淘宝：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990614603.png" alt="Alt text" /></p>
-
-<p>观察这个包的网址：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990661164.png" alt="Alt text" /></p>
-
-<p>这个网址，我们可以在浏览器中复制，再访问以下：（是可以正常访问的）</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480990914346.png" alt="Alt text" /></p>
-
-<pre><code>https://rate.taobao.com/detailCommon.htm?auctionNumId=533237707421&amp;userNumId=1990097437&amp;ua=097UW5TcyMNYQwiAiwQRHhBfEF8QXtHcklnMWc%3D%7CUm5Ockt%2BQ3dDfkB8R35Eey0%3D%7CU2xMHDJ7G2AHYg8hAS8XKQcnCVU0Uj5ZJ11zJXM%3D%7CVGhXd1llXGlUYFRpV2tQaVFvWGVHekV8RHtBf0Z%2FQXRKdUx1T3VOYDY%3D%7CVWldfS0TMw8xBD8fIAAubQslcyU%3D%7CVmJCbEIU%7CV2lJGSQEORklGCMYOAI%2FADkZJREuEzMPMgc6GiYSLRAwDDEJNGI0%7CWGFcYUF8XGNDf0Z6WmRcZkZ8R2dZDw%3D%3D&amp;callback=json_tbc_rate_summary
-</code></pre>
-
-<p>我发现上面的这个网址可以缩减为：</p>
-
-<pre><code>https://rate.taobao.com/detailCommon.htm?auctionNumId=533237707421
-</code></pre>
-
-<pre><code>https://rate.taobao.com/detailCount.do?_ksTS=1480993623725_99&amp;callback=jsonp100&amp;itemId=533237707421
-</code></pre>
-
-<p>而这个<code>533237707421</code>就是商品的id。好了，找到这个网址的规律，现在可以> 手动构造这个评论数的网址了：</p>
-
-<p>天猫：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480993211429.png" alt="Alt text" /></p>
-
-<pre><code>https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=35338957824&amp;spuId=235704813&amp;sellerId=628189716&amp;_ksTS=1480992656788_203&amp;callback=jsonp204
-</code></pre>
-
-<p>可以缩减为：</p>
-
-<pre><code>https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=35338957824
-</code></pre></blockquote>
-
-<p>最后，我们发现：不管是淘宝还是天猫，都可以使用下面这个构造方式来得到含有正确评论数量的网址：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dsr</span><span class="o">-</span><span class="n">rate</span><span class="o">.</span><span class="n">tmall</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">list_dsr_info</span><span class="o">.</span><span class="n">htm</span><span class="err">?</span><span class="n">itemId</span><span class="o">=</span><span class="err">商品</span><span class="nb">id</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意：使用<code>https://rate.taobao.com/detailCommon.htm?auctionNumId=商品id</code> 这种网址也可以，但是在对天猫商品得到评价数量和网页里面显示的不同。所以我们不使用这个构造方法。</p>
-
-<p> <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480994835425.png" alt="Alt text" /></p>
-
-<p>  <img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480994874358.png" alt="Alt text" /></p></blockquote>
-
-<p>所以通过商品id就可以得到含有评论数量信息的包的网址。现在在<code>next()</code>方法中需要通过商品的URL获取商品的id。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480995644556.png" alt="Alt text" /></p>
-
-<p>我们从上面的图中看到：天猫和淘宝的网址不同，所以，从网址中获取商品id的正则表达式也就不同。下面的代码的功能就是从商品的url中提取商品id：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="c"># 获取商品的id（用于构造商品评论数量的抓包网址）</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">subdomain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;item.taobao&#39;</span><span class="p">:</span>  <span class="c"># 如果不属于淘宝子域名，执行if语句里面的代码</span>
-</span><span class='line'>        <span class="n">pattam_id</span> <span class="o">=</span> <span class="s">&#39;id=(.*?)&amp;&#39;</span>
-</span><span class='line'>        <span class="n">this_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_id</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>        <span class="c"># 这种情况是不能使用正则表达式的，正则表达式不能获取字符串最末端的字符串</span>
-</span><span class='line'>        <span class="n">pattam_id</span> <span class="o">=</span> <span class="s">&#39;id=(.*?)$&#39;</span>
-</span><span class='line'>        <span class="n">this_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_id</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">this_id</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意：<code>$</code> : 在<strong>正则表达式</strong>里面的作用是：匹配字符串末尾。</p>
-
-<p>举例：当<code>url = 'https://item.taobao.com/item.htm?id=535023141744'</code> 时，这是一个淘宝网站里面的一个商品，现在我们想得到这个网址里面的商品id。</p>
-
-<p>如果你把正则表达式写成这个样子：<code>pattam_id = 'id=(.*?)'</code>，是匹配不到结果的（商品id）。</p>
-
-<p><strong>正则表达式是通过字符串上下文来匹配你需要的信息的，如果只有“上文”，没有“下文”时，对于使用正则表达式匹配字符串末端字符串，需要在正则表达式中使用<code>$</code>。</strong></p></blockquote>
-
-<hr />
-
-<blockquote><p>运行试试看，一切都在掌控之中。</p></blockquote>
-
-<h2>构造具有评论数量信息的包的网址，并获取商品的评论数量</h2>
-
-<p>得到目标抓包网址，获取它的源代码，然后提取评论数量：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">urllib</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="c"># 构造具有评论数量信息的包的网址</span>
-</span><span class='line'>    <span class="n">comment_url</span> <span class="o">=</span> <span class="s">&#39;https://dsr-rate.tmall.com/list_dsr_info.htm?itemId=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_id</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c"># 这个获取网址源代码的代码永远也不会出现错误，因为这个URL的问题，就算URL是错误的，也可以获取到对应错误网址的源代码。</span>
-</span><span class='line'>    <span class="c"># 所以不需要使用 try 和 except urllib.URLError as e 来包装。</span>
-</span><span class='line'>    <span class="n">comment_data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">comment_url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">pattam_comment</span> <span class="o">=</span> <span class="s">&#39;&quot;rateTotal&quot;:(.*?),&quot;&#39;</span>
-</span><span class='line'>    <span class="n">comment</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattam_comment</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">comment_data</span><span class="p">)</span>
-</span><span class='line'>    <span class="c"># print(comment)</span>
-</span><span class='line'>    <span class="n">item</span><span class="p">[</span><span class="s">&#39;comment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在返回<code>item</code>对象：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>   <span class="k">yield</span> <span class="n">item</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999254433.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在，我们就可以在<code>pipline.py</code>文件里面来对我们得到的这些商品数据进行一些操作了，比如打印到终端或者保存到数据库中。</p>
-
-<p>但在这之前，我们需要设置一下<code>settings.py</code>文件，将下面的代码的注释去掉：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999396253.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>在<code>pipline.py</code>文件中对<code>taobao.py</code>爬虫文件返回的<code>item</code>对象进行处理（比如打印到终端，或者保存到数据库中）</p>
-
-<p>将得到的信息打印到终端中：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">ThirddemoPipeline</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">title</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="n">link</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">]</span>
-</span><span class='line'>        <span class="n">price</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;price&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="n">comment</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;comment&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;商品名字&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;商品链接&#39;</span><span class="p">,</span> <span class="n">link</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;商品正常价格&#39;</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;商品评论数量&#39;</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;------------------------------</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">item</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>运行试试看：</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480999663330.png" alt="Alt text" /></p></blockquote>
-
-<hr />
-
-<p>下面是将得到的信息保存到数据库中的操作：</p>
-
-<p>第一件事情就是 启动数据库，启动数据库的代码一般我们是将它写到默认的<code>__init__(self)</code>函数中，这个方法就是最开始做的事情。</p>
-
-<p>要想连接到数据库，首先要有数据库：使用MySQL数据库</p>
-
-<p>在python上要想使用MySqL数据库，需要先安装<code>pymysql</code>库这个模块。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480855800994.png" alt="Alt text" /></p>
-
-<p>有打开数据库的函数，就要有关闭数据库的方法。</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480855810885.png" alt="Alt text" /></p>
-
-<p>现在，我们在<code>process()</code>函数中处理数据，将数据插入到数据库里面。并且加一个异常处理，因为我不希望程序运行的时候会出现错误而终止，并且我也不想</p>
-
-<p><img src="/images/2016-12-26-python3-large-web-crawler-taobao-com-import-to-MySQL-database/1480856115248.png" alt="Alt text" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1726,6 +1041,14 @@ sudo apt-get install libboost-dev
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/08/pcl-console-time-TicToc/">PCL 记录时间长度 — TicToc 类</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/">PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/07/cpp-string-fusion-and-int-to-string/">C++ 字符串融合 和 String 与 Int 之间最简单的转换方法</a>
       </li>
     
@@ -1735,14 +1058,6 @@ sudo apt-get install libboost-dev
     
       <li class="post">
         <a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">Arduino 000 — Arduino UNO R3 板子引脚定义</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a>
       </li>
     
   </ul>
@@ -1812,6 +1127,7 @@ sudo apt-get install libboost-dev
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
+<li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

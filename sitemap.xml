@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc/</loc>
+<lastmod>2017-02-08T00:23:41+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/</loc>
+<lastmod>2017-02-08T00:19:57+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string/</loc>
 <lastmod>2017-02-07T16:40:16+08:00</lastmod>
 </url>
@@ -513,6 +521,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/c-plus-plus-error/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/pcl/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1191,5 +1202,23 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/zi-fu-chuan-rong-he/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pclvisualizer/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pcljian-pan-shi-jian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/spinonce/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/registerkeyboardcallback/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/tictoc/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/ji-lu-shi-jian/</loc>
 </url>
 </urlset>
