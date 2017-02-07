@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 字符串融合 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/zi-fu-chuan-rong-he/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-07T16:40:38+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 字符串融合 和 string 与 int 之间最简单的转换方法]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string/"/>
+    <updated>2017-02-07T16:40:16+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>字符串融合</h2>
+
+<pre><code class="cpp">#include &lt;string&gt;
+
+std::string str = std::string("../pairAlginClass/capture0001") + std::string(".pcd");
+或者
+std::string str(std::string("../pairAlginClass/capture0001") + std::string(".pcd"));
+</code></pre>
+
+<hr />
+
+<h2>string 与 int 之间最简单的转换方法</h2>
+
+<p>下面的代码，我们需要使用<strong>C++11</strong>，<strong>C++11</strong>里面有<code>std::to_string()</code>方法。</p>
+
+<pre><code class="cpp">#include &lt;string&gt;
+
+int i = 123;
+std::string str = std::to_string(i);
+</code></pre>
+
+<h2>给项目添加<strong>C++11</strong>：</h2>
+
+<p>如果是<code>CMakeLists.txt</code>文件的项目。就在<code>CMakeLists.txt</code>文件中添加：</p>
+
+<pre><code class="cmake">cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_STANDARD 11)
+</code></pre>
+
+<p>如果是<code>Qt</code>项目的，就在<code>.pro</code>文件里面添加：</p>
+
+<pre><code>CONFIG += c++11
+</code></pre>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c">在C ++中将int转换为字符串的最简单的方法</a></li>
+<li><a href="http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake">如何激活C ++ 11在CMake？</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

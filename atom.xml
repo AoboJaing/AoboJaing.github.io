@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-07T00:13:45+08:00</updated>
+  <updated>2017-02-07T16:40:38+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 字符串融合 和 String 与 Int 之间最简单的转换方法]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string/"/>
+    <updated>2017-02-07T16:40:16+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>字符串融合</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;string&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;../pairAlginClass/capture0001&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;.pcd&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err">或者</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;../pairAlginClass/capture0001&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;.pcd&quot;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>string 与 int 之间最简单的转换方法</h2>
+
+<p>下面的代码，我们需要使用<strong>C++11</strong>，<strong>C++11</strong>里面有<code>std::to_string()</code>方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;string&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>给项目添加<strong>C++11</strong>：</h2>
+
+<p>如果是<code>CMakeLists.txt</code>文件的项目。就在<code>CMakeLists.txt</code>文件中添加：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+</span><span class='line'><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是<code>Qt</code>项目的，就在<code>.pro</code>文件里面添加：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="err">CONFIG</span> <span class="err">+=</span> <span class="err">c++11</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c">在C ++中将int转换为字符串的最简单的方法</a></li>
+<li><a href="http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake">如何激活C ++ 11在CMake？</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C++ 编写类文件的时候，需要注意的问题]]></title>
@@ -4523,27 +4592,6 @@ sudo apt-get install libboost-dev
 <p><strong>总结：</strong> 这一讲，我们以 <strong>VS2010开发平台</strong> 和 <strong>C++语言</strong> 为例，讲解了如何搭建Intel RealSense SDK 的开发环境。这个方法在VS2012、VS2013、VS2015上一样适用。</p>
 
 <p>下一节，我们详细讲解本篇博客里面使用的<code>camera_viewer.cpp</code>的代码。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intel RealSense 001 开发环境的选择]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select/"/>
-    <updated>2016-12-14T18:58:23+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/14/Intel-RealSense-Development-environment-select</id>
-    <content type="html"><![CDATA[<hr />
-
-<blockquote><p>不管你使用Intel RealSense的哪款摄像头，本文都适合你。</p></blockquote>
-
-<p>对于开发环境（就是你编写程序），你有两个选择：</p>
-
-<ul>
-<li><a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">Intel RealSense SDK</a>（有要求：Windows 10系统）</li>
-<li><a href="https://github.com/IntelRealSense/librealsense">librealsense</a>（Intel RealSense跨平台API）</li>
-</ul>
-
-
-<p>我个人推荐使用<code>librealsense</code>这个跨平台库，它让Intel RealSense摄像头在Linux系统上使用。并且同时可以在Linux系统里面的ROS机器人操作系统里面使用Intel RealSense。（<a href="http://wiki.ros.org/librealsense">这里</a>）</p>
 ]]></content>
   </entry>
   
