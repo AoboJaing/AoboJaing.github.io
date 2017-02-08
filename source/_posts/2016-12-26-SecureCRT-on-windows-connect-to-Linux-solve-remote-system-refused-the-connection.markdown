@@ -63,11 +63,17 @@ aobosir@ubuntu:~$ ps -e | grep ssh
 ```
 
 
+执行完下面的命令，系统会自动注销（Logout）。
+
 ```
 ssh-agent restart
+# 已经没有这个命令了。替代的方法就是:重启系统或者注销系统。
 ```
 
-执行完这个语句，系统会自动注销（Logout）。
+----------
+
+现在查看一下，现在就可以进入了正常使用的状态。
+
 
 ```
 aobosir@ubuntu:~$ ps -e | grep ssh
@@ -76,9 +82,25 @@ aobosir@ubuntu:~$ ps -e | grep ssh
 aobosir@ubuntu:~$ 
 ```
 
+----------
 
-刚刚还不正常的，现在有好使了。再次查看**Linux**当前进程：（下图是正常的情况，如果你看到这样的结果，说明Linux端已经没有问题了，SSH-Agent已经正常的运行了。）
+现在，我们在Windows系统这段使用**SecureCRT**软件连接这个Linux系统，就可以添加成功了。
+
+连接成功之后，我们现在在**SecureCRT**软件连接的Linux系统终端中再次下面命令来查看当前运行着的**ssh**进程有哪些。（现在，我们已经可以在Windows端的**SecureCRT**软件里面控制Linux端了。）
+
+```
+ps -e | grep ssh
+```
+
+查看**Linux**这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））
 
 ![Alt text](/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png)
+
+
+## 搞定
+
+----------
+
+
 
 参考网站：http://blog.csdn.net/lifengxun20121019/article/details/13627757
