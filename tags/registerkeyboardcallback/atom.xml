@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: registerKeyboardCallback() | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/registerkeyboardcallback/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-08T13:17:23+08:00</updated>
+  <updated>2017-02-08T14:17:20+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项]]></title>
     <link href="http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/"/>
-    <updated>2017-02-08T00:19:57+08:00</updated>
+    <updated>2017-02-08T14:16:42+08:00</updated>
     <id>http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback</id>
     <content type="html"><![CDATA[<hr />
 
@@ -52,7 +52,38 @@ int main(){
 
 <hr />
 
-<p>第二个：就是这个自定义的键盘事件函数了：<code>keyboardEventOccurred()</code>函数。想要让这个函数可以使用，我们必须要在程序中循环的调用<code>p-&gt;spinOnce()</code>方法，程序才能响应我们的这个键盘事件函数。</p>
+<p>第二个：就是这个自定义的键盘事件函数了：<code>keyboardEventOccurred()</code>函数。想要让这个函数可以使用，我们不需要再程序中循环的调用<code>p-&gt;spinOnce()</code>方法，程序才能响应我们的这个键盘事件函数。</p>
+
+<hr />
+
+<p>第三个：一个也非常重要：其实上面的代码中，这段程序是不安全的：</p>
+
+<pre><code class="cpp">    while(iteration_flag != true){
+        p-&gt;spinOnce();
+    }
+</code></pre>
+
+<p>因为如何程序在这个地方一直的执行，如果你可视化的是一个点比较多的点云，那么一段时间后（大约不到5秒钟），你的电脑就会卡得要死！！！！</p>
+
+<p>安全的程序应该是下面这个样子的：（参考网站：<a href="http://pointclouds.org/documentation/tutorials/pcl_visualizer.php#pcl-visualizer">这里</a>）</p>
+
+<p>我们添加延时函数，不让它一直执行<code>spinOnce()</code>方法。</p>
+
+<pre><code class="cpp">#include &lt;boost/thread/thread.hpp&gt;
+</code></pre>
+
+<pre><code class="cpp">  while (iteration_flag != true)
+  {
+    p-&gt;spinOnce (100);
+    boost::this_thread::sleep (boost::posix_time::microseconds (100000));
+  }
+</code></pre>
+
+<p>其中<a href="http://docs.pointclouds.org/trunk/classpcl_1_1visualization_1_1_p_c_l_visualizer.html#a896556f91ba6b45b12a9543a2b397193"><code>spinOnce()</code>函数</a>里面的<code>100</code>指的是：<strong>How long (in ms) should the visualization loop be allowed to run.</strong></p>
+
+<p><img src="/images/2017-2-8-pcl-visualization-PCLVisualizer-register-keyboard-callback/1486533744923.png" alt="Alt text" /></p>
+
+<p>其中的<code>boost::this_thread::sleep (boost::posix_time::microseconds (100000));</code>是延时100000微秒，也就是0.1秒。</p>
 ]]></content>
   </entry>
   
