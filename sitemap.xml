@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/</loc>
+<lastmod>2017-02-11T07:51:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/</loc>
 <lastmod>2017-02-08T14:16:42+08:00</lastmod>
 </url>
@@ -524,6 +528,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/pcl/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/openni/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1223,5 +1230,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/sleep/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/no-such-file-or-directory/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/openni/</loc>
 </url>
 </urlset>

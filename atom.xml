@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-08T14:17:20+08:00</updated>
+  <updated>2017-02-11T07:52:23+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,399 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解决OpenNI问题：XnOS.h：No Such File or Directory]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/"/>
+    <updated>2017-02-11T07:51:03+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：<a href="https://forum.openframeworks.cc/t/ofxopenni-xnopenni-h-no-such-file-or-directory/14286">ofxOpenNI：XnOpenNI.h：没有这样的文件或目录</a></p>
+
+<hr />
+
+<h2>遇到的问题</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>XnOS.h: No such file or directory</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2017-2-11-solve-openni-XnOS-No-such-file-or-directory/1486745884346.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>查找<code>openni</code>相关的软件包。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ apt-cache search openni
+</span><span class='line'>libopenni-dev - headers for OpenNI 'Natural Interaction' frameworks
+</span><span class='line'>libopenni-java - Java framework for sensor-based 'Natural Interaction'
+</span><span class='line'>libopenni-sensor-pointclouds-dev - headers for Kinect sensor modules for the OpenNI framework
+</span><span class='line'>libopenni-sensor-pointclouds0 - Microsoft Kinect sensor modules for the OpenNI framework
+</span><span class='line'>libopenni-sensor-primesense-dev - headers for working with PrimeSense sensor OpenNI modules
+</span><span class='line'>libopenni-sensor-primesense0 - PrimeSense sensor modules for the OpenNI framework
+</span><span class='line'>libopenni0 - framework for sensor-based 'Natural Interaction'
+</span><span class='line'>libopenni2-0 - framework for sensor-based 'Natural Interaction'
+</span><span class='line'>libopenni2-dev - headers for OpenNI 'Natural Interaction' frameworks
+</span><span class='line'>openni-doc - developer documentation for OpenNI frameworks
+</span><span class='line'>openni-utils - debug and test utilities OpenNI framework
+</span><span class='line'>openni2-doc - developer documentation for OpenNI frameworks
+</span><span class='line'>openni2-utils - debug and test utilities OpenNI2 framework
+</span><span class='line'>primesense-nite-nonfree - OpenNI module providing gesture and skeleton tracking
+</span><span class='line'>ros-kinetic-depth-image-proc - Contains nodelets for processing depth images such as those produced by OpenNI camera.
+</span><span class='line'>ros-kinetic-ecto-openni - Ecto bindings for the openni sensor.
+</span><span class='line'>ros-kinetic-freenect-camera - A libfreenect-based ROS driver for the Microsoft Kinect.
+</span><span class='line'>ros-kinetic-freenect-launch - Launch files for freenect_camera to produce rectified, registered or disparity images.
+</span><span class='line'>ros-kinetic-openni-camera - A ROS driver for OpenNI depth (+ RGB) cameras.
+</span><span class='line'>ros-kinetic-openni-launch - Launch files to open an OpenNI device and load all nodelets to convert raw depth/RGB/IR streams to depth images, disparity images, and (registered) point clouds.
+</span><span class='line'>ros-kinetic-openni2-camera - Drivers for the Asus Xtion and Primesense Devices.
+</span><span class='line'>ros-kinetic-openni2-launch - Launch files to start the openni2_camera drivers using rgbd_launch.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装 <code>libopenni-dev</code> ：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ sudo apt-get install libopenni-dev 
+</span><span class='line'>[sudo] password for aobo: 
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree       
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>libopenni-dev is already the newest version (1.5.4.0-14).
+</span><span class='line'>libopenni-dev set to manually installed.
+</span><span class='line'>The following packages were automatically installed and are no longer required:
+</span><span class='line'>  linux-headers-4.4.0-36 linux-headers-4.4.0-36-generic linux-headers-4.4.0-57
+</span><span class='line'>  linux-headers-4.4.0-57-generic linux-image-4.4.0-36-generic
+</span><span class='line'>  linux-image-4.4.0-57-generic linux-image-extra-4.4.0-36-generic
+</span><span class='line'>  linux-image-extra-4.4.0-57-generic
+</span><span class='line'>Use 'sudo apt autoremove' to remove them.
+</span><span class='line'>0 upgraded, 0 newly installed, 0 to remove and 140 not upgraded.
+</span><span class='line'>aobo@aobo-tp:~$ </span></code></pre></td></tr></table></div></figure>
+
+
+<p>检测安装路径：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ dpkg -L libopenni-dev
+</span><span class='line'>/.
+</span><span class='line'>/usr
+</span><span class='line'>/usr/share
+</span><span class='line'>/usr/share/doc
+</span><span class='line'>/usr/share/doc/libopenni-dev
+</span><span class='line'>/usr/share/doc/libopenni-dev/copyright
+</span><span class='line'>/usr/include
+</span><span class='line'>/usr/include/ni
+</span><span class='line'>/usr/include/ni/XnEnumerationErrors.h
+</span><span class='line'>/usr/include/ni/Linux-Powerpc
+</span><span class='line'>/usr/include/ni/Linux-Powerpc/XnPlatformLinux-Powerpc.h
+</span><span class='line'>/usr/include/ni/XnProfiling.h
+</span><span class='line'>/usr/include/ni/XnCppWrapper.h
+</span><span class='line'>/usr/include/ni/XnStack.h
+</span><span class='line'>/usr/include/ni/XnModuleInterface.h
+</span><span class='line'>/usr/include/ni/XnDump.h
+</span><span class='line'>/usr/include/ni/XnGeneralBuffer.h
+</span><span class='line'>/usr/include/ni/XnInternalDefs.h
+</span><span class='line'>/usr/include/ni/XnOpenNI.h
+</span><span class='line'>/usr/include/ni/XnStringsHashT.h
+</span><span class='line'>/usr/include/ni/XnOS.h
+</span><span class='line'>/usr/include/ni/XnMacros.h
+</span><span class='line'>/usr/include/ni/XnModuleCppInterface.h
+</span><span class='line'>/usr/include/ni/XnBaseNode.h
+</span><span class='line'>/usr/include/ni/XnDataTypes.h
+</span><span class='line'>/usr/include/ni/XnFPSCalculator.h
+</span><span class='line'>/usr/include/ni/XnCodecIDs.h
+</span><span class='line'>/usr/include/ni/XnPropNames.h
+</span><span class='line'>/usr/include/ni/XnUtils.h
+</span><span class='line'>/usr/include/ni/XnOSStrings.h
+</span><span class='line'>/usr/include/ni/XnUSB.h
+</span><span class='line'>/usr/include/ni/XnCyclicQueueT.h
+</span><span class='line'>/usr/include/ni/XnLicensing.h
+</span><span class='line'>/usr/include/ni/XnQueue.h
+</span><span class='line'>/usr/include/ni/XnArray.h
+</span><span class='line'>/usr/include/ni/XnStackT.h
+</span><span class='line'>/usr/include/ni/XnModuleCppRegistratration.h
+</span><span class='line'>/usr/include/ni/XnCallback.h
+</span><span class='line'>/usr/include/ni/XnDerivedCast.h
+</span><span class='line'>/usr/include/ni/XnDumpWriters.h
+</span><span class='line'>/usr/include/ni/XnHash.h
+</span><span class='line'>/usr/include/ni/XnOSMemory.h
+</span><span class='line'>/usr/include/ni/XnModuleCFunctions.h
+</span><span class='line'>/usr/include/ni/XnStatusCodes.h
+</span><span class='line'>/usr/include/ni/XnPrdNodeInfoList.h
+</span><span class='line'>/usr/include/ni/Linux-Mips
+</span><span class='line'>/usr/include/ni/Linux-Mips/XnPlatformLinux-Mips.h
+</span><span class='line'>/usr/include/ni/XnStringsHash.h
+</span><span class='line'>/usr/include/ni/XnLog.h
+</span><span class='line'>/usr/include/ni/XnBitSet.h
+</span><span class='line'>/usr/include/ni/XnTypes.h
+</span><span class='line'>/usr/include/ni/XnThreadSafeQueue.h
+</span><span class='line'>/usr/include/ni/XnStatusRegister.h
+</span><span class='line'>/usr/include/ni/XnVersion.h
+</span><span class='line'>/usr/include/ni/XnAlgorithms.h
+</span><span class='line'>/usr/include/ni/XnPlatform.h
+</span><span class='line'>/usr/include/ni/XnEventT.h
+</span><span class='line'>/usr/include/ni/Linux-AArch64
+</span><span class='line'>/usr/include/ni/Linux-AArch64/XnPlatformLinux-AArch64.h
+</span><span class='line'>/usr/include/ni/Linux-x86
+</span><span class='line'>/usr/include/ni/Linux-x86/XnOSLinux-x86.h
+</span><span class='line'>/usr/include/ni/Linux-x86/XnPlatformLinux-x86.h
+</span><span class='line'>/usr/include/ni/XnPrdNode.h
+</span><span class='line'>/usr/include/ni/MacOSX
+</span><span class='line'>/usr/include/ni/MacOSX/XnPlatformMacOSX.h
+</span><span class='line'>/usr/include/ni/XnEvent.h
+</span><span class='line'>/usr/include/ni/IXnNodeAllocator.h
+</span><span class='line'>/usr/include/ni/XnListT.h
+</span><span class='line'>/usr/include/ni/XnContext.h
+</span><span class='line'>/usr/include/ni/XnPrdNodeInfo.h
+</span><span class='line'>/usr/include/ni/XnOSCpp.h
+</span><span class='line'>/usr/include/ni/XnCyclicStackT.h
+</span><span class='line'>/usr/include/ni/XnQueueT.h
+</span><span class='line'>/usr/include/ni/XnList.h
+</span><span class='line'>/usr/include/ni/XnStatus.h
+</span><span class='line'>/usr/include/ni/XnNodeAllocator.h
+</span><span class='line'>/usr/include/ni/XnLogTypes.h
+</span><span class='line'>/usr/include/ni/Linux-Arm
+</span><span class='line'>/usr/include/ni/Linux-Arm/XnPlatformLinux-Arm.h
+</span><span class='line'>/usr/include/ni/XnQueries.h
+</span><span class='line'>/usr/include/ni/XnLogWriterBase.h
+</span><span class='line'>/usr/include/ni/XnNode.h
+</span><span class='line'>/usr/include/ni/XnScheduler.h
+</span><span class='line'>/usr/include/ni/XnUSBDevice.h
+</span><span class='line'>/usr/include/ni/XnHashT.h
+</span><span class='line'>/usr/lib
+</span><span class='line'>/usr/lib/pkgconfig
+</span><span class='line'>/usr/lib/pkgconfig/libopenni.pc
+</span><span class='line'>/usr/share/doc/libopenni-dev/changelog.Debian.gz
+</span><span class='line'>/usr/lib/libnimCodecs.so
+</span><span class='line'>/usr/lib/libSample-NiSampleModule.so
+</span><span class='line'>/usr/lib/libnimRecorder.so
+</span><span class='line'>/usr/lib/libnimMockNodes.so
+</span><span class='line'>/usr/lib/libOpenNI.so
+</span><span class='line'>/usr/lib/libOpenNI.jni.so
+</span><span class='line'>aobo@aobo-tp:~$ 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看一下<code>include</code>路径里面的<code>openni</code>文件：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ cd /usr/include/ni/
+</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ ls
+</span><span class='line'>IXnNodeAllocator.h  XnCodecIDs.h           XnFPSCalculator.h  XnModuleCFunctions.h          XnPrdNode.h          XnStatus.h
+</span><span class='line'>Linux-AArch64       XnContext.h            XnGeneralBuffer.h  XnModuleCppInterface.h        XnPrdNodeInfo.h      XnStatusRegister.h
+</span><span class='line'>Linux-Arm           XnCppWrapper.h         XnHash.h           XnModuleCppRegistratration.h  XnPrdNodeInfoList.h  XnStringsHash.h
+</span><span class='line'>Linux-Mips          XnCyclicQueueT.h       XnHashT.h          XnModuleInterface.h           XnProfiling.h        XnStringsHashT.h
+</span><span class='line'>Linux-Powerpc       XnCyclicStackT.h       XnInternalDefs.h   XnNodeAllocator.h             XnPropNames.h        XnThreadSafeQueue.h
+</span><span class='line'>Linux-x86           XnDataTypes.h          XnLicensing.h      XnNode.h                      XnQueries.h          XnTypes.h
+</span><span class='line'>MacOSX              XnDerivedCast.h        XnList.h           XnOpenNI.h                    XnQueue.h            XnUSBDevice.h
+</span><span class='line'>XnAlgorithms.h      XnDump.h               XnListT.h          XnOSCpp.h                     XnQueueT.h           XnUSB.h
+</span><span class='line'>XnArray.h           XnDumpWriters.h        XnLog.h            XnOS.h                        XnScheduler.h        XnUtils.h
+</span><span class='line'>XnBaseNode.h        XnEnumerationErrors.h  XnLogTypes.h       XnOSMemory.h                  XnStack.h            XnVersion.h
+</span><span class='line'>XnBitSet.h          XnEvent.h              XnLogWriterBase.h  XnOSStrings.h                 XnStackT.h
+</span><span class='line'>XnCallback.h        XnEventT.h             XnMacros.h         XnPlatform.h                  XnStatusCodes.h
+</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们现在查看一下<code>openni</code>安装的头文件和链接文件：</p>
+
+<p>下面这两个命令是检测不到<code>openni</code>的头文件路径的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:/usr/include/ni$ pkg-config --cflags openni
+</span><span class='line'>Package openni was not found in the pkg-config search path.
+</span><span class='line'>Perhaps you should add the directory containing `openni.pc'
+</span><span class='line'>to the PKG_CONFIG_PATH environment variable
+</span><span class='line'>No package 'openni' found
+</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ pkg-config --cflags ni
+</span><span class='line'>Package ni was not found in the pkg-config search path.
+</span><span class='line'>Perhaps you should add the directory containing `ni.pc'
+</span><span class='line'>to the PKG_CONFIG_PATH environment variable
+</span><span class='line'>No package 'ni' found
+</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ </span></code></pre></td></tr></table></div></figure>
+
+
+<p>正确的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ pkg-config --cflags libopenni
+</span><span class='line'>-I/usr/include/ni
+</span><span class='line'>aobo@aobo-tp:~$ pkg-config --libs libopenni
+</span><span class='line'>-lOpenNI
+</span><span class='line'>aobo@aobo-tp:~$ </span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>我当前的项目是在QT中的，解决办法就是：</p>
+
+<p>在 <code>.pro</code> 文件里面，添加<code>openni</code>的头文件路径和链接文件路径。</p>
+
+<pre><code></code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项]]></title>
@@ -3238,533 +3631,6 @@ sudo apt-get install libboost-dev
 <li><a href="http://www.jianshu.com/p/79cdb8d514ed">http://www.jianshu.com/p/79cdb8d514ed</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C++ String 、char 、char *、wstring、wchar_t * 、wchar_t 之间的转换]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer/"/>
-    <updated>2016-12-16T07:28:48+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/16/cpp-convert-string-wstring-char-wchar_t-pointer</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2><code>char</code> 与 <code>wchar_t</code> 之间的转换</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;iomanip&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//char -&gt; wchar_t</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">(</span><span class="kt">wchar_t</span><span class="p">)</span><span class="n">c</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">wc</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//wchar_t -&gt; char</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="n">c_</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">wc</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">a</span>
-</span><span class='line'><span class="n">U</span><span class="o">+</span><span class="mo">0061</span>
-</span><span class='line'><span class="n">a</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>Unicode编码表：<a href="http://blog.csdn.net/fedawn/article/details/7307993">A-Z,a-z,0-9的unicode编码表</a></p></blockquote>
-
-<h2><code>string</code> 与 <code>wstring</code> 之间的转换</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;iomanip&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//string -&gt; wstring</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">wstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">wstr</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">str</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span><span class='line'>  <span class="c1">// std::cout &lt;&lt; wstr.c_str() &lt;&lt; std::endl; //error 这样是打印不出来的</span>
-</span><span class='line'>  <span class="c1">//std::cout &lt;&lt; wstr.c_str() &lt;&lt; std::endl; //error 编译不报错，但是它打印的是wstr第一个字符的地址</span>
-</span><span class='line'>  <span class="c1">//打印 success</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">wstr</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">wstr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//wstring -&gt; string</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str_</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">str_</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">wstr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">wstr</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2><code>char *</code> 与 <code>string</code> 之间的转换</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//string -&gt; char *</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span> <span class="n">cstr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cstr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//char * -&gt; string</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str_</span> <span class="o">=</span> <span class="n">cstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2><code>char *</code> 与 <code>wchar_t *</code> 之间的转换</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;iomanip&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span> <span class="n">cstr</span> <span class="o">=</span> <span class="s">&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cstr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// char * -&gt; wchar_t *</span>
-</span><span class='line'>  <span class="c1">//wchar_t * wcstr = (wchar_t *)cstr; //error</span>
-</span><span class='line'>  <span class="c1">//success</span>
-</span><span class='line'>  <span class="kt">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">cstr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">size_t</span> <span class="n">converted</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span><span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">wcstr</span><span class="o">=</span><span class="p">(</span><span class="kt">wchar_t</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">len</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">wchar_t</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">mbstowcs_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">converted</span><span class="p">,</span> <span class="n">wcstr</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">cstr</span><span class="p">,</span> <span class="n">_TRUNCATE</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;\0&#39;</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;------------------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//-------------------------------------------------</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">wcstr_</span> <span class="o">=</span> <span class="s">L&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">temp_</span> <span class="o">=</span> <span class="n">wcstr_</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">temp_</span><span class="p">[</span><span class="n">i_</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;\0&#39;</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">temp_</span><span class="p">[</span><span class="n">i_</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">i_</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//wchar_t * -&gt; char *</span>
-</span><span class='line'>  <span class="kt">size_t</span> <span class="n">len_</span> <span class="o">=</span> <span class="n">wcslen</span><span class="p">(</span><span class="n">wcstr_</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">size_t</span> <span class="n">converted_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span> <span class="n">cstr_</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">cstr_</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">len</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
-</span><span class='line'>  <span class="n">wcstombs_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">converted_</span><span class="p">,</span> <span class="n">cstr_</span><span class="p">,</span> <span class="n">len_</span><span class="p">,</span> <span class="n">wcstr_</span><span class="p">,</span> <span class="n">_TRUNCATE</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cstr_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="o">------------------</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意：</p>
-
-<ul>
-<li><code>cstr</code>、<code>wcstr</code>、<code>cstr_</code> 是地址变量，使用 <code>std::cout &lt;&lt; cstr_ &lt;&lt; std::endl;</code>代码打印的值是地址，并不是字符串的值。</li>
-<li><code>wchar_t *</code> 与 <code>char *</code> 之间的转换，使用<code>wchar_t * wcstr = (wchar_t *)cstr;</code>是错误的。（异想天开）</li>
-</ul>
-</blockquote>
-
-<h2><code>wchar_t *</code> 与 <code>wstring</code> 之间的转换</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;iomanip&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">wstr</span> <span class="o">=</span> <span class="s">L&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">wstr</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">wstr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>  <span class="c1">//wstring -&gt; wchar_t *</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">wcstr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">wchar_t</span> <span class="o">*</span><span class="p">)</span><span class="n">wstr</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;\0&#39;</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>  <span class="c1">//wchar_t * -&gt; wstring</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">wstr_</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">wstr_</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">wstr_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2><code>wchar_t *</code> 与 <code>string</code> 之间的转换</h2>
-
-<p>知道了上面的几种转换，我们就可以通过组合它们，来实现，比如：<code>wchar_t *</code> 与 <code>string</code> 之间的转换。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;iomanip&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">wstr</span> <span class="o">=</span> <span class="s">L&quot;HelloWorld&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">wcstr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">wchar_t</span> <span class="o">*</span><span class="p">)</span><span class="n">wstr</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;\0&#39;</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//wchar_t * -&gt; string (wchar_t * -&gt; wstring -&gt; string)</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">wstr_</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">str</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">wstr_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">wstr_</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//string -&gt; wchar_t * (string -&gt; wstring -&gt; wchar_t *)</span>
-</span><span class='line'>  <span class="n">wstr_</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">str</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">wcstr_</span> <span class="o">=</span> <span class="p">(</span><span class="kt">wchar_t</span> <span class="o">*</span><span class="p">)</span><span class="n">wstr_</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
-</span><span class='line'>  <span class="c1">//打印</span>
-</span><span class='line'>  <span class="kt">wchar_t</span> <span class="o">*</span> <span class="n">temp_</span> <span class="o">=</span> <span class="n">wcstr</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">i_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unicode is &quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">temp_</span><span class="p">[</span><span class="n">i_</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;\0&#39;</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;U+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">temp_</span><span class="p">[</span><span class="n">i_</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">i_</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">//打印 end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="n">HelloWorld</span>
-</span><span class='line'><span class="n">Unicode</span> <span class="n">is</span> <span class="n">U</span><span class="o">+</span><span class="mo">004</span><span class="mi">8</span> <span class="n">U</span><span class="o">+</span><span class="mo">0065</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0057</span> <span class="n">U</span><span class="o">+</span><span class="mf">006f</span> <span class="n">U</span><span class="o">+</span><span class="mo">0072</span> <span class="n">U</span><span class="o">+</span><span class="mo">006</span><span class="n">c</span> <span class="n">U</span><span class="o">+</span><span class="mo">0064</span>
-</span><span class='line'><span class="err">请按任意键继续</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
 ]]></content>
   </entry>
   
