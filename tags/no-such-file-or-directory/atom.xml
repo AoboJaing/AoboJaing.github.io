@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: No such file or directory | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/no-such-file-or-directory/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-11T07:52:23+08:00</updated>
+  <updated>2017-02-11T08:01:39+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解决问题：QGLWidget：No such file or directory]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/"/>
+    <updated>2017-02-11T08:01:11+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：<a href="%E6%97%A0%E6%B3%95%E6%89%BE%E5%88%B0QT%20OpenGL%20QGLWidget">无法找到QT OpenGL QGLWidget</a></p>
+
+<hr />
+
+<p>现在出现了这个问题：</p>
+
+<pre><code>QGLWidget: No such file or directory
+</code></pre>
+
+<p><img src="/images/2017-2-11-solve-Qt-QGLWidget-No-such-file-or-directory/1486743476422.png" alt="Alt text" /></p>
+
+<h2>解决办法</h2>
+
+<p>在<code>.pro</code>文件里面，添加：</p>
+
+<pre><code>QT += opengl
+</code></pre>
+
+<p>参考网站：<a href="http://doc.qt.io/qt-5/qtopengl-index.html#details">Qt OpenGL</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决OpenNI问题：XnOS.h：No such file or directory]]></title>

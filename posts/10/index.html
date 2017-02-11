@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 1
-select &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 top &mdash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,71 @@ select &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/">SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-17T00:55:57+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:55 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>top</code> &mdash;  输出最前面的若干个记录</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">5</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，前5个元组</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636796825.png" alt="Alt text" /></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">15</span> <span class="n">percent</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">--输出从emp表的上面数，15%的元组。（输出的是3个，不是2个）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -871,67 +935,6 @@ select &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/16/SQL-Learning-013-primary-key-specific-definition-and-attention/">SQL 数据库 学习 013 主键的具体定义 设计主键要注意的问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-16T16:50:11+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:50 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<h2>主键的具体定义</h2>
-
-<p>能够唯一标识一个事物的一个字段或者多个字段的组合，被称为主键</p>
-
-<hr />
-
-<h2>设计主键要注意的问题</h2>
-
-<ul>
-<li>含有主键的表叫做主键表</li>
-<li>主键通常都是整数，不建议使用字符串为主键。（如果主键是用于集群式服务（指跨数据库服务，比如：跨行转账），才可以考虑用字符串当主键。）</li>
-<li>主键的值通常都不允许 修改，除非本记录被删除</li>
-<li>主键不要定义成<code>id</code>，而要定义成<code>表名id</code> 或者 <code>表名_id</code></li>
-<li>要用代理主键，不要用业务主键
-
-<ul>
-<li>任何一张表，强烈建议不要使用业务含义的字段充当主键，我们通常都是在表中单独添加一个整型的编号充当主键字段。</li>
-</ul>
-</li>
-</ul>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -949,6 +952,10 @@ select &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/">解决OpenNI问题：XnOS.h：No Such File or Directory</a>
       </li>
     
@@ -962,10 +969,6 @@ select &hellip;">
     
       <li class="post">
         <a href="/blog/2017/02/07/cpp-string-fusion-and-int-to-string/">C++ 字符串融合 和 String 与 Int 之间最简单的转换方法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/07/cpp-cmake-aux_source_directory/">C++ 编写类文件的时候，需要注意的问题</a>
       </li>
     
   </ul>
@@ -1039,6 +1042,7 @@ select &hellip;">
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
+<li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 连接查询 定义： &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 identity &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,216 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-032-identity-usage-how-to-set-the-primary-key-auto-growth/">SQL 数据库 学习 032 Identity的用法 --- 如何设置主键自动增长（用户不需要为identity修饰的主键赋值）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T05:28:22+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2><code>identity</code> 的用法 &mdash; 如何设置主键自动增长（用户不需要为identity修饰的主键赋值）</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student3</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">student_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">identity</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">student_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student3</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student3</span> <span class="p">(</span><span class="n">student_name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student3</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;李四&#39;</span><span class="p">);</span>  <span class="c1">-- ok</span>
+</span><span class='line'><span class="k">delete</span> <span class="k">from</span> <span class="n">student3</span> <span class="k">where</span> <span class="n">student_name</span> <span class="o">=</span> <span class="s1">&#39;李四&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student3</span> <span class="p">(</span><span class="n">student_name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;王五&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>如何重新设置<code>identity</code> 字段的值</h2>
+
+<p>表中删除数据又插入数据会导致主键不连续递增 怎么办？</p>
+
+<p>不重要。主键是否连续增长不是非常重要。</p>
+
+<p>如果对表中数据进行了删除操作，如何让 <code>identity</code> 字段重新从某个值开始自增？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">emp</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">empid</span> <span class="nb">int</span> <span class="k">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">ename</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;aaaa&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;bbbb&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;cccc&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;dddd&#39;</span><span class="p">);</span> <span class="c1">-- 10行</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'><span class="k">delete</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">wmpid</span><span class="o">=</span><span class="mi">4</span> <span class="c1">-- 删除empid为4的记录</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;eeee&#39;</span><span class="p">)</span> <span class="c1">-- 因为执行10行时empid为4，所以执行本句时，empid为5</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'><span class="k">delete</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">empid</span><span class="o">=</span><span class="mi">5</span>
+</span><span class='line'><span class="n">dbcc</span> <span class="n">checkident</span><span class="p">(</span><span class="s1">&#39;emp&#39;</span><span class="p">,</span> <span class="n">reseed</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">-- 17行 把emp表中identity字段的初始值重新设置为3</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">emp</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;eeee&#39;</span><span class="p">)</span> <span class="c1">-- 此时插入记录时。empid为4，因为17行代码把empid设置成了3</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">dbcc</span> <span class="n">checkident</span><span class="p">(</span><span class="s1">&#39;emp&#39;</span><span class="p">,</span> <span class="n">reseed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>种子的值也可以是零，这样设置的话，用户插入值时，种子的初始值将从1开始。</p>
+
+<hr />
+
+<p><strong>总结：</strong></p>
+
+<p><code>identity</code> 表示该字段的值会自动更新，不需要我们维护，通常情况下我们不可以直接给 <code>identity</code> 修饰的字符赋值，否则编译时会报错。</p>
+
+<p>语法格式为：</p>
+
+<ul>
+<li><code>identity [(m, n)]</code></li>
+<li><code>m</code> 表示的是初始值，<code>n</code> 表示的是每次自动增加的值</li>
+<li>要么同时指定 <code>m</code> 和 <code>n</code> 的值，要么 <code>m</code> 和 <code>n</code> 都不指定，不能只写其中一个值。如：<code>identity(3,2)</code>、<code>identity</code>  都是正确的，但是 <code>identity(3)</code>、<code>identity(2)</code>、<code>identity</code> 都是错误的。</li>
+<li>如果 <code>m</code> 和 <code>n</code> 都未指定，则取默认值<code>(1, 1)</code></li>
+</ul>
+
+
+<p>数据类型是整型的列才能被定义成标识列：</p>
+
+<ul>
+<li><code>int</code>、<code>bigint</code>、<code>smallint</code> 列都可以被定义成 <code>identity</code></li>
+<li>不含有小数位的 <code>decimal</code> 和 <code>numeric</code> 也可以被标记为 <code>identity</code>。如：<code>decimal</code>、<code>decimal(6, 0)</code> 字段都可以被标记为 <code>identity</code>，但是 <code>decimal(6, 2)</code> 字段就不能被标记为  <code>identity</code></li>
+</ul>
+
+
+<p>标识列通常与 <code>primary key</code> 约束一起用作表的唯一行标识符：</p>
+
+<ul>
+<li>非主键也是可以被定义为 <code>identity</code>的，但不推荐。</li>
+</ul>
+
+
+<hr />
+
+<h2>如何向 <code>identity</code> 字段插入数据</h2>
+
+<p>通常<code>identity</code>标记的字段我们是不需要插入数据的，即我们不需要维护 <code>identity</code> 字段的值，它会自动更新，如果我们需要向<code>identity</code>修饰的字段插入值，则必须满足如下两点：</p>
+
+<ol>
+<li>先得执行 <code>set identity_insert [database.[owner.]] {table} {on | off}</code></li>
+<li>插入数据时必须得指定 <code>identity</code> 修饰的字段的名字</li>
+</ol>
+
+
+<hr />
+
+<h2>如何向 <code>identity</code> 字段插入数据示例</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">database</span> <span class="n">Test</span>
+</span><span class='line'><span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">dept</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">deptid</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">identity</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">deptname</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="k">set</span> <span class="n">identity_insert</span> <span class="n">test</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">dept</span> <span class="k">on</span>
+</span><span class='line'>  <span class="c1">--执行本语句的目的是：希望可以向identity修饰的字段插入值</span>
+</span><span class='line'>  <span class="c1">--不可以改为set identity_insert dept on</span>
+</span><span class='line'>  <span class="c1">--不可以改为set identity_insert dbo.test.dept on</span>
+</span><span class='line'>  <span class="c1">--不可以改为set identity_insert dbo.test.dept.on</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">dept</span> <span class="p">(</span><span class="n">deptid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;zhangsan&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">--不能改为：insert into dept values (1, &#39;zhangsan&#39;) -- 13</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>默认情况下，使用<code>identity</code>关键字修饰的主键是自动增长的，如果想手动设置主键的值，需要先将目标表打开：<code>set identity_insert test.dbo.dept on</code>，然后再使用<code>insert into dept (deptid, deptname) values (1, 'zhangsan')</code> 命令来手动设置主键的值。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2297,71 +2507,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-022-Query-05-top-usage/">SQL 数据库 学习 022 查询-05 Top 的用法 --- 最前面的若干个记录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T00:55:57+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:55 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>top</code> &mdash;  输出最前面的若干个记录</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">5</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出从emp表的上面数，前5个元组</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636796825.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">top</span> <span class="mi">15</span> <span class="n">percent</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出从emp表的上面数，15%的元组。（输出的是3个，不是2个）</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-022-Query-05-top-usage/1476636830654.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/10">&larr; Older</a>
@@ -2379,6 +2524,10 @@ select deptno, avg(sal)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/">解决OpenNI问题：XnOS.h：No Such File or Directory</a>
       </li>
     
@@ -2392,10 +2541,6 @@ select deptno, avg(sal)
     
       <li class="post">
         <a href="/blog/2017/02/07/cpp-string-fusion-and-int-to-string/">C++ 字符串融合 和 String 与 Int 之间最简单的转换方法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/07/cpp-cmake-aux_source_directory/">C++ 编写类文件的时候，需要注意的问题</a>
       </li>
     
   </ul>
@@ -2469,6 +2614,7 @@ select deptno, avg(sal)
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
+<li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
