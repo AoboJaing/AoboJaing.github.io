@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/11/Windows-Compile-vtk-source/</loc>
+<lastmod>2017-02-11T08:25:21+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/11/Windows-install-OpenNI2/</loc>
 <lastmod>2017-02-11T08:20:56+08:00</lastmod>
 </url>
@@ -1284,5 +1288,14 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/di-san-fang-ku-an-zhuang/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/vtk/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/vs2010/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/di-san-fang-ku-bian-yi/</loc>
 </url>
 </urlset>

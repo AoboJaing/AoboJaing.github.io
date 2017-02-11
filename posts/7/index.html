@@ -9,7 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="下载 PyCharm 软件（professional版 专业版） 官网下载：https://www.jetbrains.com/pycharm/download/#section=windows 安装 傻瓜式安装，无需多言。 破解 破解就是注册的意思。这个软件是付费试用的，如果你不输入注册码， &hellip;">
+  <meta name="description" content="我的电脑：Windows 10 64位
+PyCharm 软件的版本：PyCharm 2016.1.4
+Git For Windows版本：Git-2.10.0-64-bit
+GitHub For Windows软件版：GitHub For Windows 3.0.5.2 参考网站：How to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,156 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/">在 JetBrains PyCharm 软件上使用 Git(Github)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-29T11:44:46+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:44 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑：Windows 10 64位</li>
+<li>PyCharm 软件的版本：PyCharm 2016.1.4</li>
+<li>Git For Windows版本：Git-2.10.0-64-bit</li>
+<li>GitHub For Windows软件版：GitHub For Windows 3.0.5.2</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：<a href="https://www.youtube.com/watch?v=bsN7ogDz02g">How to Use PyCharm with Github</a></p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480361358084.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>在 JetBrains PyCharm 软件上使用 Git(Github)，开发项目时，推送代码修改到远程库会变得更加便捷。</p>
+
+<hr />
+
+<h2>准备工作</h2>
+
+<p>你的电脑里面需要有的软件：</p>
+
+<ul>
+<li>Git For Windows</li>
+<li>GitHub For Windows</li>
+<li>JetBrains PyCharm</li>
+</ul>
+
+
+<p>你可以到这里查看如何下载和安装这些软件的图文教程：</p>
+
+<ul>
+<li><a href="http://www.aobosir.com/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git For Windows 和 GitHub For Windows 这两个软件的下载和安装的教程</a></li>
+<li><a href="http://www.aobosir.com/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件的下载、安装、破解教程</a></li>
+</ul>
+
+
+<hr />
+
+<h2>在 JetBrains PyCharm 软件上使用 Git(Github)</h2>
+
+<p>对于已有项目文件夹，</p>
+
+<p><strong>Step 1 . </strong> 在文件夹里面打开命令行，执行 <code>git init</code> 命令，将这个项目文件夹做成本地库。</p>
+
+<p><strong>Step 2 . </strong> 使用<strong>GitHub For Windows</strong> 软件克隆本地库，忽略一些文件，并上传到GitHub远程。</p>
+
+<p>具体详细的步骤如下：</p>
+
+<p>克隆本地库：</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384008856.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384665342.png" alt="Alt text" /></p>
+
+<p>添加<code>ignorefile</code> 文件</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480384713963.png" alt="Alt text" /></p>
+
+<p>点击 <strong>+ Add a default .gitignore file.</strong> 按钮</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386549071.png" alt="Alt text" /></p>
+
+<p>我们这个项目使用的开发软件是 <strong>JetBrains PyCharm</strong> 软件，所以我们需要写一个符合 <strong>JetBrains PyCharm</strong> 软件 的 <code>.gitignore</code> 文件。</p>
+
+<p>其实我们不需要自己写 <code>.gitignore</code> 文件，GitHub 官方已经为我们写好很多的  <code>.gitignore</code> 文件。</p>
+
+<p>点击 <strong>example</strong>：</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480386671756.png" alt="Alt text" /></p>
+
+<p>弹出一个网页，将里面的<code>gitignore/Global/JetBrains.gitignore</code> 的内容复制粘贴：</p>
+
+<p>（我们再在里面添加一行：<code>.idea/*</code>）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387492001.png" alt="Alt text" /></p>
+
+<p>现在，直接点击 <code>OK</code> 就可以了。</p>
+
+<p>现在，你可以发现，只有3个改变的文件了：（这是因为一些文件被忽略，不需要上传到远程。）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387512124.png" alt="Alt text" /></p>
+
+<p>输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。</p>
+
+<p>最后点击 <strong>Publish</strong> 按钮，推送到远程库。</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387792020.png" alt="Alt text" /></p>
+
+<p>第一次推送，需要填写下面的信息。注意：<code>Name</code> 默认不变；<code>Description</code> 里面输入好描述信息（中英文都可以）。</p>
+
+<p>同时选中好要推送到的GitHub账号。</p>
+
+<p>填好之后点击 <strong>Pubish xxx</strong> 按钮。（可能会失败，白天可能是因为GitHub官网服务器的原因，晚上会好一点。解决办法就是：多试几次。）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480387921240.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 使用 <strong>PyCharm</strong> 软件打开看看那个python项目。</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388438196.png" alt="Alt text" /></p>
+
+<p>你会看到：</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388544163.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 当你对项目进行增减代码后，你想要将修改推送到远程库时。</p>
+
+<p>方法1 ： 就点击上图中红圈里面的图标。然后进行推送。</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388727382.png" alt="Alt text" /></p>
+
+<p>方法2 ： 你也可以使用 <strong>GitHub For Windows</strong> 软件进行推送。</p>
+
+<p>（推送方法：输入 <strong>Summary</strong> 和 <strong>Description</strong> ，点击 <strong>Commit to master</strong> 按钮将修改提交到指定分支上（当前指定分支是：<code>master</code>）。最后点击 <strong>Sync</strong> 按钮，推送到远程库。）</p>
+
+<p><img src="/images/2016-11-29-JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/1480388817420.png" alt="Alt text" /></p>
+
+<blockquote><p>两个方法互不干扰，你使用了其中任意一种方法推送了修改，那么另外一种方法里面也好显示推送完成，没有修改的文件了。</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2475,77 +2628,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/download-install-Miarosoft-Visual-Studio-2015-software-tutorial/">下载和安装 Visual Studio 2015 软件 的详细步骤图文教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T03:53:41+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:53 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>我的电脑系统：Windows 10 64位</p>
-
-<h2>下载：</h2>
-
-<p>下载网站：<a href="https://www.visualstudio.com/zh-hans/downloads/">https://www.visualstudio.com/zh-hans/downloads/</a></p>
-
-<p>选择 <strong>ISO</strong>（离线安装包），选择 <strong>简体中文</strong>，点击下载。</p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480096481409.png" alt="Alt text" /></p>
-
-<p>下载一个7.1G的安装包，请耐心等待。（用迅雷下载，速度很快）</p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480096585421.png" alt="Alt text" /></p>
-
-<h2>安装</h2>
-
-<p>双击 <strong>vs2015.3.com_chs.iso</strong> ，进行安装</p>
-
-<p>全程傻瓜式安装。</p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097828432.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097804088.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480097963562.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480099125653.png" alt="Alt text" /></p>
-
-<blockquote><p>如果遇到问题：
-下载Microsoft.net framework 4.6.2
-<a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=53344">https://www.microsoft.com/zh-CN/download/details.aspx?id=53344</a></p></blockquote>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480102421690.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-
-<p>手动重新启动电脑后，打开<strong>Visual Microsoft 2015</strong> 软件：（需要几分钟）</p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103243428.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-11-26-download-install-Miarosoft-Visual-Studio-2015-software-tutorial/1480103384488.png" alt="Alt text" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -2563,6 +2645,10 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/11/Windows-install-OpenNI2/">Windows 安装OpenNI2</a>
       </li>
     
@@ -2576,10 +2662,6 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
     
       <li class="post">
         <a href="/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/">解决OpenNI问题：XnOS.h：No Such File or Directory</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/">PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项</a>
       </li>
     
   </ul>
@@ -2609,7 +2691,7 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 181%" href="/tags/windows/">Windows</a>
+<a style="font-size: 184%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
@@ -2624,9 +2706,9 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
+<a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
-<a style="font-size: 115%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
@@ -2642,7 +2724,7 @@ Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应�
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
-<li class='category'><a href='/blog/categories/cmake-gui/'>cmake-gui (1)</a></li>
+<li class='category'><a href='/blog/categories/cmake-gui/'>cmake-gui (2)</a></li>
 <li class='category'><a href='/blog/categories/eda/'>eda (1)</a></li>
 <li class='category'><a href='/blog/categories/git-github/'>git_github (9)</a></li>
 <li class='category'><a href='/blog/categories/learning-intel-realsense-librealsense/'>learning intel realsense librealsense (2)</a></li>
