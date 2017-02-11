@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Openni | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/openni/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-11T08:12:09+08:00</updated>
+  <updated>2017-02-11T08:22:12+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Windows 安装OpenNI2]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/11/Windows-install-OpenNI2/"/>
+    <updated>2017-02-11T08:20:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/11/Windows-install-OpenNI2</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>下载</h2>
+
+<p>到这个网站下载：<a href="https://structure.io/openni">https://structure.io/openni</a></p>
+
+<p>我们下载 x86的，就是32位的。</p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673648122.png" alt="Alt text" /></p>
+
+<p>下载完成后，解压：</p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673700821.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>双击这个 <code>.msi</code> 文件，开始安装OpenNI2：</p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673740660.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673618477.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673750699.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673806305.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Windows-install-OpenNI2/1486673820166.png" alt="Alt text" /></p>
+
+<h2></h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决OpenNI问题：XnOS.h：No Such File or Directory]]></title>
