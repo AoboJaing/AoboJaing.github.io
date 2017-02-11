@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: CMake-GUI | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/cmake-gui/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-11T08:12:09+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Windows 上 使用CMake-GUI 软件生成 zlib 和 png 库的编译文件，然后使用VS2010编译]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/11/Compile-zlib-and-png-using-CMake-GUI-and-VS2010/"/>
+    <updated>2017-02-11T08:08:16+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/11/Compile-zlib-and-png-using-CMake-GUI-and-VS2010</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>当我在编译Windows 上编译 PCL源代码的时候，它zlib库和png库的依赖，但是现在我的电脑里面并没有两个库。所以，我们现在就来手动的下载这两个库的源代码，然后亲自编译它们。</p>
+
+<hr />
+
+<p>参考网站：<a href="http://www.voidcn.com/blog/glunoy/article/p-6019106.html">http://www.voidcn.com/blog/glunoy/article/p-6019106.html</a></p>
+
+<p>我现在知道了。png库是依赖于zlib库的。（所以我们需要先编译zlib库）</p>
+
+<p>现在我们电脑里面已经有zlib库了（我也不知道这个库是正有还是假有。不过当我们下面使用CMake-GUI软件生成png库的时候，CMake-GUI软件自动的天添加了zlib库的include文件的路径。所以，现在，我们就姑且认为当前的电脑立里面已经存在zlib库了。（但是我们继续后面的步骤发现，其实电脑里面并没有zlib库。）），但是没有png库，我们现在需要下载源码并编译：</p>
+
+<p>到这里png库官网下载：<a href="http://libpng.sourceforge.net/index.html">http://libpng.sourceforge.net/index.html</a></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486733756039.png" alt="Alt text" /></p>
+
+<p>下载 <code>libpng16</code>库：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486733871091.png" alt="Alt text" /></p>
+
+<p>下载，人下载最多的那个：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486733985739.png" alt="Alt text" /></p>
+
+<p>接着是：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734040450.png" alt="Alt text" /></p>
+
+<p>下载后解压。</p>
+
+<p>然后使用CMake-GUI软件生成编译文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734198117.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734205651.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734211664.png" alt="Alt text" /></p>
+
+<p>出现一个错误：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734240388.png" alt="Alt text" /></p>
+
+<p>错误的原因就是没有找到<code>ZLIB</code>库的链接文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734281258.png" alt="Alt text" /></p>
+
+<p>手动添加，这个两个（Debug 和 Release）都填写同一个文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734344171.png" alt="Alt text" /></p>
+
+<p>现在再点击 <strong>Configure</strong> 按钮。</p>
+
+<p>没有错误了。但是现在有红色的条目：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734380225.png" alt="Alt text" /></p>
+
+<p>现在再点击一次 <code>Configure</code> 按钮。红色条目消失：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734519705.png" alt="Alt text" /></p>
+
+<p>现在点击 <strong>Generate</strong> 按钮生成编译文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734548317.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在开始使用VS2010软件编译：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734582464.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734726006.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486734698502.png" alt="Alt text" /></p>
+
+<p>看来现在不行啊，我需要先下载并编译<code>zlib</code>库，然后在下载并编译<code>png</code>库。这才是正确的步骤。</p>
+
+<hr />
+
+<p>我们现在下载并编译zlib库：</p>
+
+<p>下载zlib库源代码：</p>
+
+<p>下载：<a href="https://sourceforge.net/projects/libpng/files/">https://sourceforge.net/projects/libpng/files/</a></p>
+
+<p>依次的步骤是：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735206889.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735242472.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735278358.png" alt="Alt text" /></p>
+
+<p>下载完成后，我使用7-zip软件对其进行了两次解压。</p>
+
+<p>然后使用CMake-GUI软件给它生产编译文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735448018.png" alt="Alt text" /></p>
+
+<p>点击 <strong>Configure</strong>按钮进行配置：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735463109.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735469279.png" alt="Alt text" /></p>
+
+<p>没有出现错误，出现了红色的条目：</p>
+
+<p>我们现在来仔细的看看<strong>INSTALL</strong>条目：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735527480.png" alt="Alt text" /></p>
+
+<p>默认的添加的路径都是<code>C:\Program Files (x86)</code>。我们不能使用这个安装路径，原因是当我们一会在使用VS2010软件编译生成的编译文件的时候，会出现错误的，错误的原因是：没有权限。所以，我需要将这部分INSTALL条目的路径都修改为我们有权限的路径。</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735689013.png" alt="Alt text" /></p>
+
+<p>然后在点击 <strong>COnfigure</strong> 按钮。红色条目消失。</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735739401.png" alt="Alt text" /></p>
+
+<p>然后在点击 <strong>Generate</strong> 按钮。</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735744957.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在使用VS2010软甲打开刚刚生成的<code>.sln</code>文件：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735790730.png" alt="Alt text" /></p>
+
+<p>生成：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735812669.png" alt="Alt text" /></p>
+
+<p>很快，不到1秒钟就编译完成了：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735840702.png" alt="Alt text" /></p>
+
+<p>然后对 <strong>INSTALL</strong>项目进行<strong>生成</strong></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735888551.png" alt="Alt text" /></p>
+
+<p>也是秒速编译完成：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735908123.png" alt="Alt text" /></p>
+
+<p>生成成功：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486735924463.png" alt="Alt text" /></p>
+
+<p>现在，我们将这个生成的文件夹，剪切到<code>C:\third_packages</code>路径里面。（我自己的一个习惯，我喜欢将第三方库放在这个路径下。）</p>
+
+<p>我们还需要将zlib库的png路径添加到系统的环境变量里面。</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736460782.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736449182.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在我们可以将下面这两个文件夹给删除了。（一个是zlib的源代码。一个是zlib的编译文件）（当然，我们删除这两个文件夹之前，需要先关闭VS2010软件，因为刚刚VS2010软件一直在使用其中一个文件。CMake-GUI软件可以不用关闭，它不影响。）</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736039738.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>接下来，我们来编译 png库：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736190279.png" alt="Alt text" /></p>
+
+<p>修改zlib库（png库依赖于这个库）条目为正确的路径：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736285036.png" alt="Alt text" /></p>
+
+<p>现在点击 <strong>Configure</strong> 按钮。</p>
+
+<p>红色的条目都消失了。现在有用一个点：我们需要注意这个安装路径：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736543109.png" alt="Alt text" /></p>
+
+<p>和zlib库是一样，我们需要给这个安装路径修改为一个我们可以控制的权限的路径。</p>
+
+<p>修改为：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736593446.png" alt="Alt text" /></p>
+
+<p>现在点击 <strong>Configure</strong> 按钮，然后在点击 <strong>Generate</strong> 按钮：搞定</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736628850.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在使用VS2010软件对生成的编译文件进行编译：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736678641.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736696702.png" alt="Alt text" /></p>
+
+<p>编译成功，一共没有用了3秒钟：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736728357.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>然后是编译 <strong>INSTALL</strong>项目：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736754817.png" alt="Alt text" /></p>
+
+<p>秒速编译完成：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736783846.png" alt="Alt text" /></p>
+
+<p>一样，我们将得到的文件夹剪切到 <code>C:\third_packages</code>这个路径里面。</p>
+
+<p>然后将<code>png</code>路径添加到环境变量里面：</p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736889900.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Compile-zlib-and-png-using-CMake-GUI-and-VS2010/1486736877915.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>最后一步就是清理战场：删除下面两个文件夹：（清理前，需要先关闭VS2010软件）</p>
+
+<hr />
+
+<p>好的，这样，zlib 和 png 这两个库就编译完成了。</p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
+  
+</feed>

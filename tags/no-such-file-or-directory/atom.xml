@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: No such file or directory | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/no-such-file-or-directory/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-11T08:01:39+08:00</updated>
+  <updated>2017-02-11T08:12:09+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -262,7 +262,10 @@ aobo@aobo-tp:~$
 
 <p>在 <code>.pro</code> 文件里面，添加<code>openni</code>的头文件路径和链接文件路径。</p>
 
-<pre><code></code></pre>
+<pre><code>INCLUDEPATH += /usr/include/ni
+
+LIBS += -L/usr/lib -lOpenNI
+</code></pre>
 ]]></content>
   </entry>
   

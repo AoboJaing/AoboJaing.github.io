@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/11/Compile-zlib-and-png-using-CMake-GUI-and-VS2010/</loc>
+<lastmod>2017-02-11T08:08:16+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/</loc>
 <lastmod>2017-02-11T08:01:11+08:00</lastmod>
 </url>
@@ -538,6 +542,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/qt/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/cmake-gui/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1252,5 +1259,23 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/gl/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/pcl/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cmake-gui/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/zlib/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/png/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/vs2010/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/bian-yi-di-san-fang-ku/</loc>
 </url>
 </urlset>
