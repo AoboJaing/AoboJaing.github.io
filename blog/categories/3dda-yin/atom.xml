@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 3d打印 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/3dda-yin/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-18T22:20:36+08:00</updated>
+  <updated>2017-02-19T01:02:37+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,367 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[现在热床寄到了，现在我将热床安装到3D打印机上]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/3D-printer-hot-bed/"/>
+    <updated>2017-02-19T01:01:37+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/3D-printer-hot-bed</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>安装热床不像你想象的那么简单，是一个比较复杂的事情：</p>
+
+<ul>
+<li>首先你需要重新修改程序，重新烧写程序</li>
+<li>然后是安装热床</li>
+<li>然后调整热床的平衡度</li>
+<li>然后调整出料不爱出的问题</li>
+</ul>
+
+
+<hr />
+
+<p>为了安全起见，我先从卖家要：有没有换热床的教程和程序源代码。</p>
+
+<hr />
+
+<p>刚刚询问了卖家，卖家的态度是爱理不理。</p>
+
+<p>反正我现在是知道了我想知道的事情：无需重新烧写程序。直接安装热床即可。</p>
+
+<hr />
+
+<p>好的，现在我先不安装热床，我先来解决这个出料出一点就不出的问题。</p>
+
+<hr />
+
+<h2>校正</h2>
+
+<p>电脑成功连接到3D打印机后。执行</p>
+
+<p>第一件事情：回到最高位置：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485161222653.png" alt="Alt text" /></p>
+
+<p>然后，在底盘上放一张纸：</p>
+
+<p>接着，到最接近最低位置的位置：</p>
+
+<pre><code>g1 z1
+</code></pre>
+
+<p>现在，你移动下面的纸。几乎被压住了，但是现在你不要调整任何东西。移动纸，纸是可以移动的，是最好的。我现在的状态就是，我移动纸的时候，稍微有那么一点点的阻力。</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485161546753.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>下面开始校正：</p>
+
+<p>我们使用三点法：</p>
+
+<p>先到A点：</p>
+
+<pre><code>g1 x0 y-60 z0
+</code></pre>
+
+<p>纸已经不能移动了，好想是被戳坏了。</p>
+
+<p>现在调整底板下面A点附近的螺丝，目的是让这种纸，多少可以移动。</p>
+
+<p>然后，我们再执行一次上面的命令：</p>
+
+<pre><code>g1 x0 y-60 z0
+</code></pre>
+
+<hr />
+
+<p>接着是B点：</p>
+
+<pre><code>g1 z1
+g1 x50 y30 z1
+g1 z0
+</code></pre>
+
+<p>一样，调整附近的螺丝。我这次还还将下面的纸给移动坏了。</p>
+
+<hr />
+
+<p>接着是最后一个点C点：</p>
+
+<pre><code>g1 z1
+g1 x-50 y30 z1
+g1 z0
+</code></pre>
+
+<hr />
+
+<p>好的，现在我们就校正好了。</p>
+
+<p>将出料嘴移动到零点：</p>
+
+<pre><code>g1 z1
+g1 x0 y0 z1
+g1 z0
+</code></pre>
+
+<p>到了零点后，移动一下下面的纸，看看效果好不好，如果好，我们就把纸去掉。如果不好，我们在重新调整3个点。</p>
+
+<hr />
+
+<p>好的，我调整了一次，就校正成功了。现在我们就来打印一个东西。</p>
+
+<hr />
+
+<p>这个3D打印机出料感觉好像是太少了似的，每一次都是打印不成功。我就怀疑是出料的问题。</p>
+
+<p>遇事我找到了一个很有嫌疑的问题：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485164421735.png" alt="Alt text" /></p>
+
+<p>然后要记得保存：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485164492501.png" alt="Alt text" /></p>
+
+<p>现在设置完了这个出料的直径后，出料的量其实是有明显的增多，现在的出料量应该是正常的量。</p>
+
+<hr />
+
+<p>现在，我已经测试打印了。已经打印完成，效果超级的好。</p>
+
+<p><img src="./1485166756931.png" alt="Alt text | 240x0" /> <img src="/images/2017-2-19-3D-printer-hot-bed/1485166773479.png" alt="Alt text | 240x0" /></p>
+
+<p><img src="./1485166785899.png" alt="Alt text | 240x0" /> <img src="./1485166799917.png" alt="Alt text | 240x0" /></p>
+
+<p>只是美中不足就是这个开始答应的时候，（1）我发现底板它不怎么爱粘料。（2）并且有一个边，在打印的时候，它打印出来是料是悬空的。</p>
+
+<hr />
+
+<p>好的，现在我们就来解决上面的两个问题：</p>
+
+<p>这两个问题都很好解决，其实</p>
+
+<p>对于第一个问题，我们只需要将底板替换成热床就可以。然后我们在校正一次热床。然后在测试一次打印。或许第二个问题就可以不攻自破。如果第二个问题还是存在，那我们再说。</p>
+
+<hr />
+
+<p>2017-1-23 19:16:51</p>
+
+<p>好的，现在的工作是：替换热床。</p>
+
+<p>现在的样子：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485170806513.png" alt="Alt text" /></p>
+
+<p>单独的热床：（下面这图是热床的背面）</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485171018651.png" alt="Alt text" /></p>
+
+<p>热床的正面和之前的钢板是一模一样的，没有什么区别：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485171128911.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>同时我们还需要一个新的电源：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485171149883.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485172619594.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485173229191.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485173252404.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485173349464.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485173210981.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>稳压器连接电源线：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485173533381.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>稳压器连接与电路板的电源线连接：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485176997391.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>控制板连接热床和温度传感器：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485180014916.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>然后我们现在直接安装。安装完成后。我们在电脑端直接点击 <strong>连接</strong> 按钮，你就可以看到热床已经成功的识别了：（无需进行任何3D打印机的源代码的重新烧录）</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485180289761.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485180268148.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485180280872.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>好的，现在热床安装完了了。现在开始校正热床这个底盘平衡。</p>
+
+<p>技巧：校正底盘平衡的工具，就是一张A4纸。</p>
+
+<p>先将出料头降到3~5mm的安全距离下，然后一点一点的将三个底盘上的螺丝往下转。</p>
+
+<pre><code>g1 z3
+</code></pre>
+
+<p>然后一点一点的往下拧螺丝，知道可以降到<code>z1</code>这个高度。</p>
+
+<pre><code>g1 z2
+</code></pre>
+
+<pre><code>g1 z1
+</code></pre>
+
+<p>然后我们现在使用3点校正法。</p>
+
+<pre><code>g1 z0
+</code></pre>
+
+<p>然后试着移动一下A4纸。理想的情况下是移动不了的。</p>
+
+<p>先到A点：</p>
+
+<pre><code>g1 z1
+g1 x0 y-60 z1
+g1 z0
+</code></pre>
+
+<p>进行调整。</p>
+
+<hr />
+
+<p>接着是B点：</p>
+
+<pre><code>g1 z1
+g1 x50 y30 z1
+g1 z0
+</code></pre>
+
+<p>进行调整。</p>
+
+<hr />
+
+<p>接着是最后一个点C点：</p>
+
+<pre><code>g1 z1
+g1 x-50 y30 z1
+g1 z0
+</code></pre>
+
+<p>进行调整。</p>
+
+<hr />
+
+<p>好的，现在我们就校正好了。</p>
+
+<p>将出料嘴移动到零点：</p>
+
+<pre><code>g1 z1
+g1 x0 y0 z1
+g1 z0
+</code></pre>
+
+<p>到了零点后，移动一下下面的纸，看看效果好不好，如果好，我们就把纸去掉。如果不好，我们在重新调整3个点。</p>
+
+<hr />
+
+<p>现在进行打印测试：</p>
+
+<p>导入模型后，进行配置：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181657497.png" alt="Alt text" /></p>
+
+<p>热床（bed）设置为60度：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181688586.png" alt="Alt text" /></p>
+
+<p>然后记得要保存：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181702918.png" alt="Alt text" /></p>
+
+<p>然后点击 <strong>开始切片Slic3r</strong> 按钮</p>
+
+<hr />
+
+<p>然后我们点击 <strong>开始任务</strong> 按钮。然后你可以看到挤出头和热床在升温：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181816308.png" alt="Alt text" /></p>
+
+<p>你可以看到，显示热床升温，挤出头不升温：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181859693.png" alt="Alt text" /></p>
+
+<p>等到热床升到指定温度后，出料器（就是挤出头往下降到3~5mm的地方，很接近热床的位置），挤出头开始升温：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485181959716.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>好的，准备就绪后的温度：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485182107398.png" alt="Alt text" /></p>
+
+<p>开始自动打印。</p>
+
+<p>打印这个立方体大约需要13分钟：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485182137432.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485182148716.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>坐等结果。</p>
+
+<p>打印完了。</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485182661586.png" alt="Alt text" /></p>
+
+<p>注意：当完成后，不要记得去去模型。要等到热床和挤出头都冷却了，这个时候，我们在去取模型。</p>
+
+<p>要是我们急于去取模型的话，模型这个时候还是热的，你用手取模型，模型会被你按变形的。并且，我们要等到挤出头和热床的温度降到常温，我们再在<strong>Repetier</strong>软件 点击 <strong>断开</strong> 按钮。其实我们就是为了能够看到这个挤出头和热床的实时温度。</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485182870015.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<p>现在，已经降到了室温，起的时候很难起，我怕使太大的力气把热床底盘按得不在平衡了，但是不使太大的力气，又取不下来。</p>
+
+<p>没有办法，我就只能使劲的掰，才能掰下来。所以，下次，我每次打印前需要校正。</p>
+
+<p>我将其掰下来后，你可以看到下面的图片，底部好像是被压得变形了。可能的原因就是，我猜测就是热床的温度太高了。我现在将其设置为60度。</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485183957977.png" alt="Alt text" /></p>
+
+<p>不管总体来说比没有使用热床要好得多：（下图是之前打印的模型）</p>
+
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485166773479.png" alt="Alt text" /></p>
+
+<p>我要不把它设置为40度！试试看。 2017年1月23日23:12:28</p>
+
+<p>也有可能是热床底盘的问题，它上面的三个螺丝可能应该在往下拧那么一点点的距离，可能就会好得多！</p>
+
+<p>好的，今天的3D打印的事情就到这里了，明天，我就开始学习STL文件的模型建模。（SolidWorks软件）</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[第一次 测试3D打印机 — 出现问题：打不出来]]></title>
