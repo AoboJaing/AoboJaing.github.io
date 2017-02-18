@@ -9,8 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content=" Arduino UNO R3 板子的官方介绍：https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn
-">
+  <meta name="description" content="我使用的Arduino板子是：Arduino UNO R3 （这里 关于这个板子的引脚介绍。） 参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压 好的，现在我们知道使用analogRead()函数来获取模拟输入口的电压。 设置参考电压 Arduino板子上有一个引脚：AREF &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-05T16:38:21+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:38 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
+
+<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
+
+<hr />
+
+<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
+
+<h2>设置参考电压</h2>
+
+<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
+
+<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>设置参考电压是需要注意</h2>
+
+<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2659,67 +2713,6 @@ sudo apt-get install libboost-dev
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-how-to-delete-a-library/">Git(GitHub) 007 如何删除一个库</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T16:15:20+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>来到将要删除的库：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648554835.png" alt="Alt text" /></p>
-
-<p>点击右上角的 <strong>Settings</strong></p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648576420.png" alt="Alt text" /></p>
-
-<p>调到 <strong>Settings</strong>网页，拉倒最后，你会看到下面这个样子：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648609056.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Delelte this repository</strong> 按钮。</p>
-
-<p>弹出下面的提示窗口：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475649572270.png" alt="Alt text" /></p>
-
-<p>意思是说：</p>
-
-<p>你是否真的真的真的要这样做？</p>
-
-<p>如果你不阅读下面这些东西的话，不好的事情可能会意外地发生！</p>
-
-<p>这个动作不能撤消。这将永久删除AoboJaing/ AoboJaing.github.io库，维基，问题和评论，并删除所有合作者协会。</p>
-
-<p>为了再次确认，请输入资源库的名称。</p>
-
-<p>所以我如果真的想要删除这个资源库的话，输入这个资源库的名称，再点击 <strong>I understand the consequences, delete this repoitory</strong>  按钮。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -2737,6 +2730,10 @@ sudo apt-get install libboost-dev
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/18/3D-printer-experience-and-precautions-when-printing-large-models/">3D 打印大型模型时的经验和注意事项</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a>
       </li>
     
@@ -2750,10 +2747,6 @@ sudo apt-get install libboost-dev
     
       <li class="post">
         <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/">解决OpenNI问题：XnOS.h：No Such File or Directory</a>
       </li>
     
   </ul>
@@ -2811,7 +2804,8 @@ sudo apt-get install libboost-dev
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (1)</a></li>
+<li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>

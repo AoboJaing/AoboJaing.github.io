@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="无论是学什么技术，你第一件事情就要搞清楚：为什么要学它；学它可以解决那些问题。 为什么要学习 自动控制原理 如果你做个平衡车或者四轴飞机或者倒立摆，你肯定会使用PID控制函数，它很神奇吧，没错，它就是最简单的自动控制原理其中的一个原理。 如果你停留在PID的程度，你会觉得控制就是调参数； &hellip;">
+  <meta name="description" content="一 . 自动控制系统的组成 自动控制装置：自动控制装置的组成当中涉及到了这样一些东西： 需要有（1）被控对象，那么这些被控对象需要有谁来控制呢？一定要有控制器，这些控制器，我们也把它叫做（2）自动控制装置。所以一个系统要叫做自动控制系统，它一定要包含 自动控制器 和 被控对象。 常见的被控对象 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,194 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/25/Auto-Control-001-Principle-of-automatic-control-general-concept/">Auto Control 001 自动控制原理 自动控制的一般概念</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-25T20:28:35+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><img src="/images/2016-10-25-Auto-Control-001-Principle-of-automatic-control-general-concept/1474364477678.png" alt="Alt text" /></p>
+
+<h2>一 . 自动控制系统的组成</h2>
+
+<p><strong>自动控制装置</strong>：自动控制装置的组成当中涉及到了这样一些东西：</p>
+
+<p>需要有（1）<strong>被控对象</strong>，那么这些被控对象需要有谁来控制呢？一定要有控制器，这些控制器，我们也把它叫做（2）<strong>自动控制装置</strong>。所以一个系统要叫做自动控制系统，它一定要包含 <strong>自动控制器</strong> 和 <strong>被控对象</strong>。</p>
+
+<p><strong>常见的被控对象</strong> 有：电机、锅炉 等。</p>
+
+<hr />
+
+<blockquote><p>而常见的自动控制系统的基本方式有三种</p></blockquote>
+
+<h2>二 . 自动控制系统的基本控制方式 &mdash; 三种</h2>
+
+<p>1 . 最简单的：<strong>开环控制</strong>，所谓的开环控制，就是只有输入很输出的一个顺向作用。可能在理想的状态下，输入加入以后，输出会出现一个期望的结果。可是在实际工作当中，一定会有扰动的存在，因此，开环控制在有了扰动以后，它没有办法对扰动产生抑制。所以这种控制方式虽然结构简单，但是控制的精度是比较低的。</p>
+
+<p>2 . 为了提高控制精度，我们考虑在开环控制的基础上增加了检查装置，这样的控制系统称为：<strong>闭环控制</strong>。把我们输出端的实际输出量引回到输入端，这样的话，在系统中，即有输入对输出的一个顺向引向，也有输出对输入的一个反作用，而且由于 检测装置 的引入，当系统的前向通道当中出现了扰动，利用闭环自身的作用，我们就可以有效的抑制这种扰动。因此，闭环控制方式也是我们控制当中最常用的控制方式。这种闭环控制虽然结构比开环复杂了，但是它能有效的抑制扰动，因此它是我们最常见的控制了。</p>
+
+<p>3 . <strong>复合控制</strong>。还有一种情况，闭环控制是：当输出偏离期望值的时候才介入的。可是如果现在我们可以提前就可以预知系统当中出现了误差，而不是当误差出现了以后，我们借助于闭环来补偿这种误差，那么这个时候，对于提前就可以预知的误差，我们可以考虑使用前馈控制，来进行补偿。那么如果在一个系统当中，即有前馈又有反馈，那么这个时候，我们管这种控制叫做 <strong>复合控制</strong>。</p>
+
+<p>这些就是我们自动控制系统中常见的控制方式。</p>
+
+<h2>三 . 自动控制系统的分类</h2>
+
+<p>我们常见的自动控制系统，可以区分为几种类型。</p>
+
+<ul>
+<li><p>比如说，按照上面的<strong>控制方式</strong>分，可以分为：</p>
+
+<ul>
+<li>开环</li>
+<li>闭环</li>
+<li>复合</li>
+</ul>
+</li>
+<li><p>如果按照<strong>元件</strong>来分：</p>
+
+<ul>
+<li>机械</li>
+<li>电气</li>
+<li>机电</li>
+<li>液压</li>
+<li>气动</li>
+<li>生物系统等</li>
+</ul>
+</li>
+<li><p>如果按照<strong>系统的功能</strong>来 分，就是说：如果我们的</p>
+
+<ul>
+<li>被控量是温度，就是温控</li>
+<li>是压力，就是压控&hellip;</li>
+</ul>
+</li>
+<li><p>此外，按照<strong>系统的性能，描述它的数学模型的特点</strong>不一样，我们又可以把系统分为：（在我们经典控制理论分析当中，针对的对象大部分都是：线性的、连续的、定常的系统。当然，我们在后面也会介绍线性的离散，还会讨论一下非线性的系统。）</p>
+
+<ul>
+<li>线性</li>
+<li>非线性</li>
+<li>连续</li>
+<li>离散</li>
+<li>定常</li>
+<li>时变</li>
+</ul>
+</li>
+<li><p>当然还有，如果我们按照<strong>参考量的变化规律</strong>来分：</p>
+
+<ul>
+<li>有恒值控制，这是我们最常见的，比如说我们的控制对象时电机，那么我们希望电机的转速维持在什么样的值上面，那么这种控制叫做： 恒值控制。</li>
+<li>此外还有一种控制叫做：随动控制，所谓随动控制要求输出必须快速并且准确的跟踪输入，也就是说，输入要是变了，我要求输出要以很快的速度来跟随输入的变化，这叫随动控制。</li>
+<li>再有一类，再我们熟客机床，我们现在   希望被控对象能够安装提前设计好的一段程序来运行，这种控制叫做：程序控制。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>这就是自动控制系统的分类。除了分类，我们还对自动控制做了几个要求：</p></blockquote>
+
+<h2>四 . 自动控制系统的基本要求 &mdash; 三个方面</h2>
+
+<p><strong>三个方面：稳、快、准。</strong></p>
+
+<p>其中 <strong>稳</strong> 包括两个 <strong>恒量</strong>，其中包括：</p>
+
+<ul>
+<li>它是否稳定。（稳不稳定是正常工作的前提条件。）</li>
+<li>除此之外，在运动控制当中，它的震荡剧不剧烈，它的运动相对平稳性好不好。（我们希望一个好的系统，它的震荡越小越好，震荡的次数越少越好，超调量越小越好。）</li>
+</ul>
+
+
+<p><strong>稳</strong> 主要是靠稳定器，平稳器。</p>
+
+<hr />
+
+<p><strong>快</strong> 其实是说 ： 从 <strong>一种运动过程</strong> 转移到<strong>另一种运动过程</strong>，它的<strong>持续时间</strong>我们希望是越短越好。<strong>快</strong> 主要是靠一些时间指标来衡量，比如上升时间、调节时间、分时时间等等。</p>
+
+<hr />
+
+<p><strong>准</strong> 就是 <strong>稳态误差</strong>， 我们希望越小越好。指理想情况下，当过度过程结束后，被控量<strong>达到的稳定值</strong>与<strong>期望值</strong>之间的<strong>差值</strong>，指的就是<strong>稳态误差</strong>。</p>
+
+<hr />
+
+<blockquote><p>上面这些就是自动控制原理的一些基本概念。</p></blockquote>
+
+<hr />
+
+<h2>五 . 自动控制系统框图讲解</h2>
+
+<p><strong>例子：</strong> 我们来分析一下这个图。</p>
+
+<p><img src="/images/2016-10-25-Auto-Control-001-Principle-of-automatic-control-general-concept/1477396799474.png" alt="Alt text" /></p>
+
+<p><strong>分析：</strong>这是一个反馈控制系统的一般结构图，在这个结构图里面，我们来分析一下。</p>
+
+<p>在被控对象当中，经常会有扰动量的存在。</p>
+
+<p><strong>Q：</strong> 如果现在系统即有参考输入，又有扰动，那么这样的系统不就变成了多输入单输出的系统了吗？</p>
+
+<p><strong>A：</strong> 不是。要注意，我们分析的对象是线性的，所谓线性是什么，它一定要满足叠加性，也就是说，在两个不用的作用量输入（<strong>控制量和扰动量</strong>），它等于每个输入单独作用下输出的叠加。也就是说：如果是<strong>线性系统</strong>，<strong>系统的实际输出</strong> 等于 <strong>参考作用对应的输出</strong>叠加上 <strong>扰动作用对应的输出</strong>。</p>
+
+<p><strong>Q：</strong> 而<strong>被控对象</strong>怎么才能够按照我们希望的控制规律运行呢？</p>
+
+<p><strong>A：</strong> 我们要加控制器，也就是<strong>自动控制装置</strong>，这些自动控制转置包括一些功率变换转置（<strong>变换放大</strong>）、一些校正转置（<strong>串联校正</strong>）。</p>
+
+<p>在这个基础上系统往往不是单闭环的，在闭环的基础上还有可能附加内环。在这里我们还有一个比较重要的概念要注意：就是反馈（<strong>测量元件</strong>）。可以说 ：整个<strong>经典控制理论</strong>都是围绕着<strong>反馈</strong>展开的。</p>
+
+<p>我们提到的反馈，通常就是<strong>负反馈</strong>，只有<strong>负反馈</strong>才能自动减少偏差，而<strong>正反馈</strong>能使偏差增大。那么系统当中有没有正反馈呢？有的，这个正反馈可能是出现在局部反馈的位置（<strong>反馈校正</strong>），如果现在我们想改善局部的性能，我们可以在整个系统上附加一个内环。（就如上图所示）</p>
+
+<p>这就是我们常见系统基本结构。</p>
+
+<hr />
+
+<p>那么在这个结构当中出现的<strong>实物装置</strong>有哪些呢？</p>
+
+<p><strong>测量元件：</strong> 我们先来看反馈装置中的测量元件。测量元件有这么几个功能：</p>
+
+<ol>
+<li>测量元件是检测<strong>被控量</strong>，而且要把被控量送回到输入端。由于我们常见的是电气控制系统，所以测量元件大部分是<strong>传感器</strong>，比如温度传感器、湿度传感器、速度传感器等等。这种传感器除了检测被控量之外，还要把一些非电的物理量，比如说温度等，转换为电量，送回到输入端。</li>
+<li>在系统当中有<strong>比较元件</strong>时，这个比较元件的功能主要是：得到<strong>被控量</strong>和<strong>控制量</strong>之间形成<strong>偏差信号</strong>。也就是说：对<strong>控制量</strong>和<strong>反馈量</strong>做比较，形成一个<strong>偏差信号</strong>。</li>
+</ol>
+
+
+<p><strong>变换放大转置：</strong> 除此之外，在这个系统中还有一些变换放大转置。为什么要加这样的转置呢？由于偏差信号通常是比较微弱的，那么怎么样要这个比较微弱的信号，能够驱动后端的装置正常的工作。答案就是：我们通常对这个偏差信号，要么是 功率放大，要么就是 电压放大。目的就是：为了让微弱的偏差信号有足够大的幅值和功率，能够驱动后端的装置来运行。</p>
+
+<p><strong>执行机构：</strong> 那么 在系统当中，还会有执行机构。所谓的执行机构，我们是指：直接作用在被控对象上面，驱动被控对象工作的装置。那么执行机构在我们常见的运动控制系统当中就是一些：功率变换装置这样的一些东西。当然，这些执行机构在一些过程控制里面也可能是一些障碍力调节器等等这样的元件。</p>
+
+<p><strong>校正元件：</strong> 系统中还会有校正元件的存在。所谓的校正元件是指：为了保证系统能够正常工作，我们增加了提高系统控制能力的这些元件，我们会在后面的教学中（频域校正）详细的讨论：校正元件我们该如何的选择；校正元件在系统当中的作用有哪些。</p>
+
+<hr />
+
+<hr />
+
+<blockquote><p>这 就是所有的自动控制系统的基本概念。</p></blockquote>
+
+<h2>完</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2375,184 +2563,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/">SQL 数据库 学习 026 查询-09 聚合函数 --- 多行记录返回至一个值，通常用于统计分组的信息</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T11:05:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:05 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>函数的分类</h2>
-
-<p>单行函数</p>
-
-<ul>
-<li>每一行返回一个值</li>
-</ul>
-
-
-<hr />
-
-<p>多行函数</p>
-
-<ul>
-<li>多行返回一个值</li>
-<li>聚合函数是多行函数</li>
-</ul>
-
-
-<hr />
-
-<p>例子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--最终返回的是14行</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672968757.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回时1行 max() 是多行函数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672998766.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>聚合函数的分类</h2>
-
-<ul>
-<li><code>max()</code> 求最大值</li>
-<li><code>min()</code> 求最小值</li>
-<li><code>avg()</code> 平均值</li>
-<li><code>count()</code> 求个数
-
-<ul>
-<li><code>count(*)</code> ：返回表中所有的记录的个数</li>
-<li><code>count(字段名)</code> : 返回字段值非空的记录的个数， 重复的记录也会被当做有效记录</li>
-<li><code>count(distinct 字段名)</code> ：返回字段不重复并且非空的记录的个数</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回emp表所有记录的个数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673037243.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是14，这说明deptno重复的记录也被当做有效的记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673083683.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="k">distinct</span> <span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是3， 统计deptno不重复的记录的个数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673123560.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是4。 这说明comm为null的记录不会被当做有效的记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673148684.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>注意的问题</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673188904.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最高工资&quot;</span><span class="p">,</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最低工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;员工人数&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673238975.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--error 单行函数和多行函数不能混用</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/10">&larr; Older</a>
@@ -2570,6 +2580,10 @@ select deptno, avg(sal)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/18/3D-printer-experience-and-precautions-when-printing-large-models/">3D 打印大型模型时的经验和注意事项</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a>
       </li>
     
@@ -2583,10 +2597,6 @@ select deptno, avg(sal)
     
       <li class="post">
         <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/">解决OpenNI问题：XnOS.h：No Such File or Directory</a>
       </li>
     
   </ul>
@@ -2644,7 +2654,8 @@ select deptno, avg(sal)
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (1)</a></li>
+<li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
