@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 3D打印 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/3dda-yin/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T01:02:37+08:00</updated>
+  <updated>2017-02-19T01:09:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/"/>
+    <updated>2017-02-19T01:06:23+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>下载 Meshmixer 软件</h2>
+
+<p>官方下载网址：<a href="http://www.meshmixer.com/download.html">http://www.meshmixer.com/download.html</a></p>
+
+<hr />
+
+<h2>安装</h2>
+
+<p>一路傻瓜式安装：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940089455.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940105637.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940111527.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940168401.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>启动</h2>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940217894.png" alt="Alt text" /></p>
+
+<p>点击  <strong>Accept</strong>：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940229391.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940266461.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486940291481.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>使用</h2>
+
+<p>如何使用这个软件，请参考网站：<a href="http://3dkoukou.com/showns.asp?nID=2611">3D打印模型加支撑软件Meshmixer简单使用教程</a></p>
+
+<p>最理想的参数：</p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486942843471.png" alt="Alt text" /></p>
+
+<p>得到的效果：</p>
+
+<blockquote><p>注意：当你的模型比较大，或者曲面比较复杂的时候，它处理生成支撑的时间会比较长，所以请你耐心等待。</p></blockquote>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486942522539.png" alt="Alt text" /></p>
+
+<p>最终修复后的模型：（使用 <strong>Windows 10</strong> 自带的软件：<strong>3D Builder</strong> 打开<code>stl</code>模型文件）</p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486942309375.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-3D-printer-auto-add-support-using-Meshmixer-software/1486942368172.png" alt="Alt text" /></p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[现在热床寄到了，现在我将热床安装到3D打印机上]]></title>

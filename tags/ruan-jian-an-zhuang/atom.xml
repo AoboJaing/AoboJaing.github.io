@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 软件安装 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/ruan-jian-an-zhuang/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T01:02:37+08:00</updated>
+  <updated>2017-02-19T01:09:47+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 2011 软件下载、安装和破解 图文教程]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial/"/>
+    <updated>2017-02-19T01:09:34+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>下载</h2>
+
+<p>下载网站：
+<a href="http://www.mfcad.com/solidworks/xiazai/18672.html">http://www.mfcad.com/solidworks/xiazai/18672.html</a></p>
+
+<p>下载两个文件：</p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485673406500.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>安装教程参考：<a href="http://www.mfcad.com/solidworks/anzhuang/18673.html">http://www.mfcad.com/solidworks/anzhuang/18673.html</a></p>
+
+<blockquote><p>有可以有用的网站：<a href="http://www.cr173.com/soft/21633.html">http://www.cr173.com/soft/21633.html</a></p></blockquote>
+
+<hr />
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884501366.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884513219.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884517992.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884546919.png" alt="Alt text" /></p>
+
+<p>把网断了：</p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884575289.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884593341.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884896255.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885016566.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885215977.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885272645.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885282456.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885175012.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885331226.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885337667.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境]]></title>
@@ -295,46 +353,6 @@ sudo mv arduino-1.6.6 /opt
 <p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
 
 <p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows系统 下载并安装 Notepad++ 图文教程]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++/"/>
-    <updated>2016-10-10T10:44:52+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/10/10/Windows-install-Notepad++</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>下载</h2>
-
-<p>（<strong>Notepad</strong> 文本编辑器软件是免费的，并且非常的好。属于电脑必备软件。）</p>
-
-<p>到这个网站下载：<a href="https://notepad-plus-plus.org/download/v7.html">https://notepad-plus-plus.org/download/v7.html</a></p>
-
-<p>点击相应的 <strong>安装包</strong> 进行下载：
-（我电脑是64位的，所以下载64位的。<strong>Installer</strong> 是安装包； <strong>压缩包</strong> 是绿色版的，下载解压后直接就能使用，无需安装。）</p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993346774.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993288957.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993358700.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993364763.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993371316.png" alt="Alt text" /></p>
-
-<p>什么都不选，直接<strong>下一步</strong>。</p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993422195.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-10-Windows-install-Notepad++/1475993429978.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   
