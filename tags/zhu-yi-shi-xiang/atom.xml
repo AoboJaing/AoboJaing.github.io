@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 注意事项 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/zhu-yi-shi-xiang/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-18T22:11:21+08:00</updated>
+  <updated>2017-02-18T22:20:36+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[第一次 测试3D打印机 — 出现问题：打不出来]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out/"/>
+    <updated>2017-02-18T22:12:49+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>可能的原因：</p>
+
+<ul>
+<li>料 出的少</li>
+<li>没有热板，地板最好是热的，这样比较容易上料（打第一层的时候。）</li>
+<li>温度没有掌握好</li>
+<li>设置没有配置好</li>
+<li>打第一层的时候，低板与出料头的距离太大。</li>
+</ul>
+
+
+<hr />
+
+<p>2017-1-19 05:33:24</p>
+
+<p>不管了，我这几天，3D打印方面，主要做的方面是：</p>
+
+<ul>
+<li>总结经验</li>
+<li>学习建模型 &mdash; （3D 打印的六足机器人模型 和 URDF中六足机器人的虚拟模型。）</li>
+</ul>
+
+
+<hr />
+
+<p>这个前几层打不上料的问题，现在视乎已经解决了。</p>
+
+<p>解决方法就是，将底板与出料口的距离竟可以的缩短，最好做到0距离。</p>
+
+<hr />
+
+<p>但是现在还有一个问题：开始的时候挺好的，但打一会，就不再出料。这是怎么回事？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[3D 打印大型模型时的经验和注意事项]]></title>
