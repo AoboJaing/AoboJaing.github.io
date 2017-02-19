@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SolidWorks | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/solidworks/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T16:28:40+08:00</updated>
+  <updated>2017-02-19T16:38:08+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,15 +14,54 @@
 
   
   <entry>
+    <title type="html"><![CDATA[SolidWorks 如何使用 边界切除 工具]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/"/>
+    <updated>2017-02-19T16:37:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>先画好一些草图，并准备一个实体。</p>
+
+<p>实体，我已经画好了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357916858.png" alt="Alt text" /></p>
+
+<p>基准面我也画好了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357999645.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358141137.png" alt="Alt text" /></p>
+
+<p>接下来，我们就来使用  <strong>边界切除</strong> 工具，将这个实体中间掏空：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358161740.png" alt="Alt text" /></p>
+
+<p>然后在 <strong>方向1</strong> 里面，按照顺序添加已经绘制好的草图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358184913.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358658059.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358750812.png" alt="Alt text" /></p>
+
+<p>最后 <strong>确定</strong> 即可。</p>
+
+<p>完成后，我们看看横切面图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358868183.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题]]></title>
     <link href="http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/"/>
-    <updated>2017-02-19T16:28:11+08:00</updated>
+    <updated>2017-02-19T16:35:46+08:00</updated>
     <id>http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file</id>
     <content type="html"><![CDATA[<hr />
 
 <p>昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：<code>无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll</code></p>
 
-<p><img src="./1487392359179.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487392359179.png" alt="Alt text" /></p>
 
 <hr />
 
@@ -32,27 +71,27 @@
 
 <p>参考</p>
 
-<p><img src="./1487393791415.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393791415.png" alt="Alt text" /></p>
 
-<p><img src="./1487393815563.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393815563.png" alt="Alt text" /></p>
 
 <p>直接点击 <strong>忽略</strong> ：</p>
 
-<p><img src="./1487393914660.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393914660.png" alt="Alt text" /></p>
 
 <p>等待大约5分钟：</p>
 
-<p><img src="./1487394450625.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394450625.png" alt="Alt text" /></p>
 
-<p><img src="./1487394522702.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394522702.png" alt="Alt text" /></p>
 
-<p><img src="./1487394544788.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394544788.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>现在启动 SolidWorks 软件：</p>
 
-<p><img src="./1487394625073.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394625073.png" alt="Alt text" /></p>
 
 <p>所以，你需要重新破解：</p>
 
@@ -62,7 +101,7 @@
 
 <p>问题仍然存在：</p>
 
-<p><img src="./1487394891003.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394891003.png" alt="Alt text" /></p>
 
 <p>操了！</p>
 
@@ -70,17 +109,17 @@
 
 <p>我知道怎么回事了。在<strong>注册表编辑器</strong> 里面添加Installer的路径错了。</p>
 
-<p><img src="./1487397304857.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397304857.png" alt="Alt text" /></p>
 
-<p><img src="./1487397342762.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397342762.png" alt="Alt text" /></p>
 
-<p><img src="./1487397374349.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397374349.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。</p>
 
-<p><img src="./1487405570583.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405570583.png" alt="Alt text" /></p>
 
 <p>我现在没有办法了，现在的办法是：安装更新的SolidWorks 软件（2016）</p>
 
@@ -96,13 +135,28 @@
 
 <p>解决办法就是：我们只需要将这些“<strong>失效</strong>”的步骤给 <strong>解除压缩</strong>即可。</p>
 
-<p><img src="./1487405886362.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405886362.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>问题解决：</p>
 
-<p><img src="./1487405910127.png" alt="Alt text" /></p>
+<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405910127.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如何在曲面上获取与基准线相交的分割线]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/"/>
+    <updated>2017-02-19T16:33:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356248650.png" alt="Alt text" /></p>
+
+<p>分割类型选择： <strong>交叉点</strong>，然后选择一个基准面 再选择一个 面。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356275589.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   
@@ -149,82 +203,6 @@
 <p>选好一个面后，就可以按 <strong>确定</strong> 图标（绿色的对号）。</p>
 
 <p>这样，我们就生成了一个放样基准面。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 如何在曲面添加文字]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/"/>
-    <updated>2017-02-19T16:08:17+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>参考网站：</p>
-
-<p><a href="http://www.xmj1688.com/solidworks2012qm/1581.html">http://www.xmj1688.com/solidworks2012qm/1581.html</a></p>
-
-<hr />
-
-<p>新建一个基准面：（如何创建基准面：这里）</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305868464.png" alt="Alt text" /></p>
-
-<p>然后选中这个基准面，在进行下面的操作：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305437670.png" alt="Alt text" /></p>
-
-<p>此时生成了一个草图：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305985643.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>点击 插入文字 的图标：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306013079.png" alt="Alt text" /></p>
-
-<p>输入要插入的文字，然后调整尺寸和位置：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306102092.png" alt="Alt text" /></p>
-
-<p>草图绘制完成后，点击完成：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306136366.png" alt="Alt text" /></p>
-
-<p>这个时候会出现下面的 <strong>包覆</strong> 工具提示：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306174421.png" alt="Alt text" /></p>
-
-<blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 如何复制 基准面]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/"/>
-    <updated>2017-02-19T16:05:30+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>先点击将要复制的基准面：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247435981.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247441983.png" alt="Alt text" /></p>
-
-<p>现在按住 <strong>Ctrl</strong> ，然后将鼠标移动到基准面的一个点上，然后按住鼠标左键推动。</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247459958.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247600485.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   

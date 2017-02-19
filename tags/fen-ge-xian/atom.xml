@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 分割线 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/fen-ge-xian/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:38:08+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如何在曲面上获取与基准线相交的分割线]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/"/>
+    <updated>2017-02-19T16:33:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356248650.png" alt="Alt text" /></p>
+
+<p>分割类型选择： <strong>交叉点</strong>，然后选择一个基准面 再选择一个 面。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356275589.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>

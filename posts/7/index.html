@@ -9,9 +9,9 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="参考网站： git 创建标签
-git 操作标签
-Github for Windows - Adding tags 要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 Git 命令行窗口， &hellip;">
+  <meta name="description" content="使用的电脑系统：Windows 10 64位
+使用的开发集成环境：PyCharm 2016.1.4
+使用的Python的版本：python2.7.10 或者 python 3.5.0 本博文对Python2和Python3都适用。 参考网站：Python split()方法 Python &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,160 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T17:06:32+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
+</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T08:46:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>判断文件</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>判断文件夹</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1163,199 +1317,6 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T20:13:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>学习这个知识点的原因</h2>
-
-<p>举一个实例：</p>
-
-<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
-
-<p><img src="/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
-</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
-
-<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
-
-<p>其实很简单，我们只需要这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
-
-<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T19:18:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:18 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>出现的错误</h2>
-
-<p>读取文件时，出现<strong>乱码</strong>或者<code>UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX in position XX: incomplete multibyte sequence</code> 错误</p>
-
-<hr />
-
-<h2>出现错误的原因</h2>
-
-<p>这两个错误可能会出现一个，两个错误的出现的原因是一样的：当我们使用了一个不正确的编码方式去读取一个不是用这个编码方式编码的文件时，轻者出现乱码，重者出现<code>UnicodeDecodeError</code>错误。</p>
-
-<hr />
-
-<h2>模拟错误发生现场</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">浣犲ソ锛孉</span><span class="n">oboSir</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir。&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;D:/WorkSpace/test_ws/demo/learning_python_15.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t decode byte 0x82 in position 35: incomplete multibyte sequence</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>读取文件时，指定正确的编码方式：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在再运行，就正常了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">你好，</span><span class="n">AoboSir</span><span class="err">。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1373,7 +1334,15 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/">SolidWorks 如何使用 边界切除 工具</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/">解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/">SolidWorks 如何在曲面上获取与基准线相交的分割线</a>
       </li>
     
       <li class="post">
@@ -1382,14 +1351,6 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
     
       <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/">Solidworks 如何添加放样基准面</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/">Solidworks 如何在曲面添加文字</a>
       </li>
     
   </ul>
@@ -1415,7 +1376,7 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 159%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 168%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
@@ -1467,7 +1428,7 @@ Github for Windows - Adding tags 要想给代码库贴标签，Github For Window
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (7)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

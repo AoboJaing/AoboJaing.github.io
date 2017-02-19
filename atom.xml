@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T16:28:40+08:00</updated>
+  <updated>2017-02-19T16:38:08+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,15 +14,54 @@
 
   
   <entry>
+    <title type="html"><![CDATA[SolidWorks 如何使用 边界切除 工具]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/"/>
+    <updated>2017-02-19T16:37:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>先画好一些草图，并准备一个实体。</p>
+
+<p>实体，我已经画好了：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357916858.png" alt="Alt text" /></p>
+
+<p>基准面我也画好了：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357999645.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358141137.png" alt="Alt text" /></p>
+
+<p>接下来，我们就来使用  <strong>边界切除</strong> 工具，将这个实体中间掏空：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358161740.png" alt="Alt text" /></p>
+
+<p>然后在 <strong>方向1</strong> 里面，按照顺序添加已经绘制好的草图：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358184913.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358658059.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358750812.png" alt="Alt text" /></p>
+
+<p>最后 <strong>确定</strong> 即可。</p>
+
+<p>完成后，我们看看横切面图：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358868183.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题]]></title>
     <link href="http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/"/>
-    <updated>2017-02-19T16:28:11+08:00</updated>
+    <updated>2017-02-19T16:35:46+08:00</updated>
     <id>http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file</id>
     <content type="html"><![CDATA[<hr />
 
 <p>昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：<code>无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll</code></p>
 
-<p><img src="./1487392359179.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487392359179.png" alt="Alt text" /></p>
 
 <hr />
 
@@ -32,27 +71,27 @@
 
 <p>参考</p>
 
-<p><img src="./1487393791415.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393791415.png" alt="Alt text" /></p>
 
-<p><img src="./1487393815563.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393815563.png" alt="Alt text" /></p>
 
 <p>直接点击 <strong>忽略</strong> ：</p>
 
-<p><img src="./1487393914660.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393914660.png" alt="Alt text" /></p>
 
 <p>等待大约5分钟：</p>
 
-<p><img src="./1487394450625.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394450625.png" alt="Alt text" /></p>
 
-<p><img src="./1487394522702.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394522702.png" alt="Alt text" /></p>
 
-<p><img src="./1487394544788.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394544788.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>现在启动 SolidWorks 软件：</p>
 
-<p><img src="./1487394625073.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394625073.png" alt="Alt text" /></p>
 
 <p>所以，你需要重新破解：</p>
 
@@ -62,7 +101,7 @@
 
 <p>问题仍然存在：</p>
 
-<p><img src="./1487394891003.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394891003.png" alt="Alt text" /></p>
 
 <p>操了！</p>
 
@@ -70,17 +109,17 @@
 
 <p>我知道怎么回事了。在<strong>注册表编辑器</strong> 里面添加Installer的路径错了。</p>
 
-<p><img src="./1487397304857.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397304857.png" alt="Alt text" /></p>
 
-<p><img src="./1487397342762.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397342762.png" alt="Alt text" /></p>
 
-<p><img src="./1487397374349.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397374349.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。</p>
 
-<p><img src="./1487405570583.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405570583.png" alt="Alt text" /></p>
 
 <p>我现在没有办法了，现在的办法是：安装更新的SolidWorks 软件（2016）</p>
 
@@ -96,13 +135,28 @@
 
 <p>解决办法就是：我们只需要将这些“<strong>失效</strong>”的步骤给 <strong>解除压缩</strong>即可。</p>
 
-<p><img src="./1487405886362.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405886362.png" alt="Alt text" /></p>
 
 <hr />
 
 <p>问题解决：</p>
 
-<p><img src="./1487405910127.png" alt="Alt text" /></p>
+<p><img src="http://aobojaing.github.io/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405910127.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如何在曲面上获取与基准线相交的分割线]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/"/>
+    <updated>2017-02-19T16:33:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356248650.png" alt="Alt text" /></p>
+
+<p>分割类型选择： <strong>交叉点</strong>，然后选择一个基准面 再选择一个 面。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356275589.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   
@@ -2180,110 +2234,6 @@
 <p><img src="http://aobojaing.github.io/images/2017-2-8-pcl-visualization-PCLVisualizer-register-keyboard-callback/1486533744923.png" alt="Alt text" /></p>
 
 <p>其中的<code>boost::this_thread::sleep (boost::posix_time::microseconds (100000));</code>是延时100000微秒，也就是0.1秒。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PCL 记录时间长度 — TicToc 类]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc/"/>
-    <updated>2017-02-08T00:23:41+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/08/pcl-console-time-TicToc</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>对于PCL在<strong>Windows</strong>和<strong>Linux</strong>上的环境的搭建请参考我写的这几篇博客。</p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;pcl/console/time.h&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">pcl</span><span class="o">::</span><span class="n">console</span><span class="o">::</span><span class="n">TicToc</span> <span class="n">tt</span><span class="p">;</span>
-</span><span class='line'><span class="n">tt</span><span class="p">.</span><span class="n">tic</span> <span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//需要记录执行多长时间的代码</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[done, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tt</span><span class="p">.</span><span class="n">toc</span> <span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; ms ]&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C++ 字符串融合 和 String 与 Int 之间最简单的转换方法]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string/"/>
-    <updated>2017-02-07T16:40:16+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/07/cpp-string-fusion-and-int-to-string</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>字符串融合</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;../pairAlginClass/capture0001&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;.pcd&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="err">或者</span>
-</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;../pairAlginClass/capture0001&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;.pcd&quot;</span><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>string 与 int 之间最简单的转换方法</h2>
-
-<p>下面的代码，我们需要使用<strong>C++11</strong>，<strong>C++11</strong>里面有<code>std::to_string()</code>方法。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;string&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
-</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>给项目添加<strong>C++11</strong>：</h2>
-
-<p>如果是<code>CMakeLists.txt</code>文件的项目。就在<code>CMakeLists.txt</code>文件中添加：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
-</span><span class='line'><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果是<code>Qt</code>项目的，就在<code>.pro</code>文件里面添加：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="err">CONFIG</span> <span class="err">+=</span> <span class="err">c++11</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="http://stackoverflow.com/questions/5590381/easiest-way-to-convert-int-to-string-in-c">在C ++中将int转换为字符串的最简单的方法</a></li>
-<li><a href="http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake">如何激活C ++ 11在CMake？</a></li>
-</ul>
-
 ]]></content>
   </entry>
   

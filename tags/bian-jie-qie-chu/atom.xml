@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 边界切除 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/bian-jie-qie-chu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:38:08+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如何使用 边界切除 工具]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/"/>
+    <updated>2017-02-19T16:37:56+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>先画好一些草图，并准备一个实体。</p>
+
+<p>实体，我已经画好了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357916858.png" alt="Alt text" /></p>
+
+<p>基准面我也画好了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357999645.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358141137.png" alt="Alt text" /></p>
+
+<p>接下来，我们就来使用  <strong>边界切除</strong> 工具，将这个实体中间掏空：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358161740.png" alt="Alt text" /></p>
+
+<p>然后在 <strong>方向1</strong> 里面，按照顺序添加已经绘制好的草图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358184913.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358658059.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358750812.png" alt="Alt text" /></p>
+
+<p>最后 <strong>确定</strong> 即可。</p>
+
+<p>完成后，我们看看横切面图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358868183.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>
