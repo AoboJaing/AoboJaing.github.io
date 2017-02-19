@@ -5,7 +5,7 @@ date: 2017-02-18 22:12:49 +0800
 comments: true
 sharing: true
 categories: [3D打印]
-tags: [3D打印, 注意事项, 经验, 第一次]
+tags: [3D打印, 注意事项, 经验]
 ---
 
 
