@@ -9,22 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="使用的电脑系统：Windows 10 64位
-使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python2.7.10 或者 python 3.5.0 本博文对Python2和Python3都适用。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14 &hellip;">
+  <meta name="description" content="我使用的pcduino板卡型号：pcduino 3B
+我使用的TF卡大小：32G 参考网站： [Video] Run built-in Arduino IDE on pcDuino3 下载需要的东西 下载 内核镜像文件、系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +67,533 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/05/pcduino-programming-sysytem-Ubuntu-NAND-image/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T21:50:42+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:50 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
+<li>我使用的TF卡大小：32G</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://learn.linksprite.com/pcduino/quick-start/pcduino3/video-run-built-in-arduino-ide-on-pcduino3/">[Video] Run built-in Arduino IDE on pcDuino3</a></li>
+</ul>
+
+
+<h2>下载需要的东西</h2>
+
+<p>下载 内核镜像文件、系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
+
+<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
+
+<ol>
+<li>一个内核文件镜像文件。</li>
+<li>一个是系统镜像文件。</li>
+<li>一个烧写工具。</li>
+</ol>
+
+
+<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载Kernel(内核)镜像文件</p>
+
+<p>下面的4个都是同一个内核文件，随便点击一个下载即可。（这里面说的：<strong>PhoenixCard</strong> 就是烧写工具）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480777105671.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：如果你给pcduino板子连接的是<strong>LVDS Screen</strong>显示屏，那么你需要下载的是上面图片中的<strong>LVDS Screen</strong>的<strong>Kernel</strong>内核文件。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480938335315.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 2 . </strong> 下载烧写工具</p>
+
+<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480744828441.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 下载镜像文件</p>
+
+<p>镜像文件随便选择一个 Ubuntu NAND 下载即可：（注意，要对应上面下载的内核文件。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480938647531.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>给pcduino板子烧写内核</h2>
+
+<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480939221029.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480745667635.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480745770272.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 给TF卡烧写Kernel(内核)镜像</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480939466523.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 将TF卡从电脑上拔下来，将TF卡插到pcduino板子上，给pcduino板子上电。</p>
+
+<blockquote><p>注意：</p>
+
+<ul>
+<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
+<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
+<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
+</ul>
+</blockquote>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480781160131.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480779553594.png" alt="Alt text" /></p>
+
+<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核程序（pcduino板子全自动烧写），大约不到23秒钟左右，中间这个LED不在闪烁，说明：内核文件烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
+
+<hr />
+
+<h2>给pcduino板子烧写Ubuntu NAND系统</h2>
+
+<p><strong>Step 1 . </strong> 再将TF卡通过读卡器连接到电脑，然后使用上面同样的方法（用<strong>SD Formatter</strong>软件）对TF卡进行格式化操作。</p>
+
+<p><strong>Step 2 . </strong> 选择要烧写的镜像文件</p>
+
+<p>将解压后的系统镜像文件（<code>pcduino3_ubuntu_20140807.img</code> 和 <code>update.sh</code>）直接拷贝到TF卡上。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480782215024.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 检查 <code>update.sh</code> 文件</p>
+
+<p>如果你下载的这个：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480940230049.png" alt="Alt text" /></p>
+
+<p>我们现在使用记事本软件打开<code>update.sh</code> 启动文件，检查里面指定的镜像文件名是否正确，可以看到，我现在这个情况，是不正确的：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480780631220.png" alt="Alt text" /></p>
+
+<p>如果我们TF卡根目录里面的镜像文件名为：<code>pcduino3nano_ubuntu_20140807.img</code>。所以我们需要手动修改<code>update.sh</code> 文件：</p>
+
+<p>将其修改为下面这样，并保存文件。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480780787224.png" alt="Alt text" /></p>
+
+<p>总之，这一步（<strong>Step 3 . </strong>）的目的就是：让<code>update.sh</code>文件里面的<code>IMG</code>变量指向正确的镜像文件路径。</p>
+
+<blockquote><p><strong>注意：</strong> 如果你使用的镜像文件是：<strong>pcduino3_ubuntu_20140807.img</strong>，它是有GUI界面的；如果你使用的镜像文件是<strong>pcduino3nano_ubuntu_20140807.img</strong>，它是没有GUI界面的，它只有命令行界面。</p></blockquote>
+
+<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480943598183.png" alt="Alt text" /></p>
+
+<p>这时观察pcduino连接的显示屏，当出现下面的信息时：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480945409839.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 现在将烧写好的系统的TF卡插到pcduino板子上。然后pcduino自动将TF卡里面的系统镜像安装到pcduino芯片里。（等待大约8分钟）</p>
+
+<p>当你看看到下面的信息的时候，说明系统已经安装完成了。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480944718209.png" alt="Alt text" /></p>
+
+<p><strong>Step 6 . </strong> 这个时候，关闭电源，你可以将SD卡去下来（TF卡已经没有用了，你可以把它扔了，呵呵）。</p>
+
+<p>现在，给板子重新上电，板子自动运行系统。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480945185981.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
+<li><a href="http://www.itdadao.com/articles/c15a578261p0.html">Pcduino烧写系统Pcduino 3 Nano 烧写系统小记</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/05/pcduino-3B-Board-Introduction/">Learning Pcduino 000 Pcduino板卡介绍 — Pcduino 3B</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T19:17:30+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>什么是pcduino</h2>
+
+<p>pcduino = mini PC + Arduino</p>
+
+<p>简单的说，就是一个板子，它所具有的功能 等价于：一个装有系统的微型笔记本电脑再连接一个Arduino UNO 的板子。</p>
+
+<h2>pcduino 3B</h2>
+
+<p><img src="/images/2016-12-5-pcduino-3B-Board-Introduction/1480743252811.png" alt="Alt text" /></p>
+
+<p>购买网站：<a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10306272528.14.xr2Mrd&amp;id=42881071231">pcDuino3B A20开发板</a></p>
+
+<p>pcduino3 与 pcduino3B 的唯一区别就是：pcduino3B有一个大型集成的RJ45网络端口。（其他和pcduino3一模一样）</p>
+
+<p><img src="/images/2016-12-5-pcduino-3B-Board-Introduction/1480784084302.png" alt="Alt text" /></p>
+
+<p>pcduino 3B 的官方介绍网站： <a href="http://www.linksprite.com/linksprite-pcduino3/">LinkSprite pcDuino3</a> （pcduino3 包括：pcduino3 和 pcduino3B）</p>
+
+<p>pcduino 官网的教程资料网站：<a href="http://www.linksprite.com/quick-start/">LinkSprite pcDuino Quick Start</a></p>
+
+<p>pcduino 中文教程网站：<a href="http://www.pcduino.com/wiki/index.php?title=%E4%B8%AD%E6%96%87%E4%B9%A6">维基 pcduino 中文书</a></p>
+
+<p>pcduino 教学的pdf:</p>
+
+<ul>
+<li><a href="https://s3.amazonaws.com/pcduino/book/pcDuinov3%E5%8F%8Anano%E6%95%99%E7%A8%8B%EF%BC%88%E4%BC%98%E5%A3%A4%E6%95%99%E8%82%B2%EF%BC%89.pdf">pcDuinov3及nano教程（优壤教育）</a></li>
+<li><a href="https://s3.amazonaws.com/pcduino/book/CPK_pcDuino3.pdf">18 Projects with CuteDigi Project Kit for pcDuino3</a></li>
+<li><a href="http://cnlearn.linksprite.com/wp-content/uploads/2014/03/%E3%80%8A-%E7%88%B1%E4%B8%8A-pcDuino-%E3%80%8B.pdf">爱上-pcDuino</a></li>
+</ul>
+
+
+<p>pcduino sparkfun网站的tutorials：<a href="https://learn.sparkfun.com/tutorials/programming-the-pcduino">Programming the pcDuino</a></p>
+
+<p><a href="http://learn.linksprite.com/?s=pcduino3b">Search Results for &ldquo;pcduino3b&rdquo;</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/04/Linux-commands-cp-copy/">Learning Linux 命令 001 Cp 复制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-04T23:18:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>将单个文件 <code>file</code> 复制到指定目录<code>dir</code>里面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp file dir</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>当你使用<code>cp</code>命令的时候，如果出现下面的错误：</p>
+
+<pre><code>cp: omitting directory ‘file’
+</code></pre>
+
+<p>说明：<code>file</code> 不是单个文件，是一个目录，你如果要复制目录，需要给<code>cp</code>命令加一个参数 <code>-r</code> 。</p></blockquote>
+
+<p>将目录 <code>dir1</code> 复制到 指定目录 <code>dir2</code> 里面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp -r dir1 dir2</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/02/cs-003-cmd-exe-execute-command-line-command/">C# 003 C#调用cmd.exe执行命令</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-02T07:57:03+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>7:57 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我使用的电脑：Windows 10 64位</li>
+<li>使用的Visual Studio 软件： VS2010</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：<a href="http://www.cnblogs.com/njl041x/p/3881550.html">C#程序调用cmd.exe执行命令</a></p>
+
+<p>创建一个文件，名为：<code>RunCmd.cs</code>。将下面的代码拷贝到里面。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">AoboSir</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">RunCmd</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="nf">RunCmd</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">CmdPath</span> <span class="p">=</span> <span class="s">@&quot;C:\Windows\System32\cmd.exe&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">/// &lt;summary&gt;</span>
+</span><span class='line'>        <span class="c1">/// 执行cmd命令</span>
+</span><span class='line'>        <span class="c1">/// 多命令请使用批处理命令连接符：</span>
+</span><span class='line'>        <span class="c1">/// &lt;![CDATA[</span>
+</span><span class='line'>        <span class="c1">/// &amp;:同时执行两个命令</span>
+</span><span class='line'>        <span class="c1">/// |:将上一个命令的输出,作为下一个命令的输入</span>
+</span><span class='line'>        <span class="c1">/// &amp;&amp;：当&amp;&amp;前的命令成功时,才执行&amp;&amp;后的命令</span>
+</span><span class='line'>        <span class="c1">/// ||：当||前的命令失败时,才执行||后的命令]]&gt;</span>
+</span><span class='line'>        <span class="c1">/// 其他请百度</span>
+</span><span class='line'>        <span class="c1">/// &lt;/summary&gt;</span>
+</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;cmd&quot;&gt;&lt;/param&gt;</span>
+</span><span class='line'>        <span class="c1">/// &lt;param name=&quot;output&quot;&gt;&lt;/param&gt;</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">run</span><span class="p">(</span><span class="kt">string</span> <span class="n">cmd</span><span class="p">,</span> <span class="k">out</span> <span class="kt">string</span> <span class="n">output</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">cmd</span> <span class="p">=</span> <span class="n">cmd</span><span class="p">.</span><span class="n">Trim</span><span class="p">().</span><span class="n">TrimEnd</span><span class="p">(</span><span class="sc">&#39;&amp;&#39;</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;&amp;exit&quot;</span><span class="p">;</span><span class="c1">//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态</span>
+</span><span class='line'>            <span class="k">using</span> <span class="p">(</span><span class="n">Process</span> <span class="n">p</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Process</span><span class="p">())</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">FileName</span> <span class="p">=</span> <span class="n">CmdPath</span><span class="p">;</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">UseShellExecute</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>        <span class="c1">//是否使用操作系统shell启动</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardInput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//接受来自调用程序的输入信息</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardOutput</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>  <span class="c1">//由调用程序获取输出信息</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">RedirectStandardError</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//重定向标准错误输出</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StartInfo</span><span class="p">.</span><span class="n">CreateNoWindow</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>          <span class="c1">//不显示程序窗口</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span><span class="c1">//启动程序</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">//向cmd窗口写入命令</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">StandardInput</span><span class="p">.</span><span class="n">AutoFlush</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>                <span class="c1">//p.StandardInput.WriteLine(&quot;exit&quot;);</span>
+</span><span class='line'>                <span class="c1">//向标准输入写入要执行的命令。这里使用&amp;是批处理命令的符号，表示前面一个命令不管是否执行成功都执行后面(exit)命令，如果不执行exit命令，后面调用ReadToEnd()方法会假死</span>
+</span><span class='line'>                <span class="c1">//同类的符号还有&amp;&amp;和||前者表示必须前一个命令执行成功才会执行后面的命令，后者表示必须前一个命令执行失败才会执行后面的命令</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">//获取cmd窗口的输出信息</span>
+</span><span class='line'>                <span class="n">output</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="n">StandardOutput</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">WaitForExit</span><span class="p">();</span><span class="c1">//等待程序执行完退出进程</span>
+</span><span class='line'>                <span class="n">p</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们可以这样使用这个<code>RunCmd</code> 类：</p>
+
+<p>在GUI界面里面添加一个按钮，然后在对应的<code>.cs</code> 文件的程序，就类似于下面这个样子：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.ComponentModel</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Data</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Drawing</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Windows.Forms</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">AoboSir</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">learningcs003</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">Form1</span> <span class="p">:</span> <span class="n">Form</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="nf">Form1</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">InitializeComponent</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">RunCmd</span> <span class="n">runcmd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RunCmd</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">private</span> <span class="k">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">string</span> <span class="n">commond</span><span class="p">,</span> <span class="n">output</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">commond</span> <span class="p">=</span> <span class="s">@&quot;notepad.exe&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">runcmd</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">commond</span><span class="p">,</span> <span class="k">out</span> <span class="n">output</span><span class="p">);</span>
+</span><span class='line'>            <span class="c1">//MessageBox.Show(output);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的功能是：启动 <strong>记事本</strong> 软件。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -627,458 +1140,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/class-programming-object/">Learning Python 023 类编程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T07:03:26+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h1>怎么使用python编写一个 <strong>类</strong></h1>
-
-<p>参考网站：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p01_change_string_representation_of_instances.html">Python3-cookbook 类与对象</a></p>
-
-<p>随便编写一个Python类，类里面至少有下面三个函数：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Pair</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;Pair({0.x!r}, {0.y!r})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;({0.x!s}, {0.y!s})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>__init__()</code> 函数就是类的构造函数。</li>
-<li><code>__repr__()</code>  和 <code>__str__()</code> 函数 都是用来输出字符串用的。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span>
-</span><span class='line'><span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __repr__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __str__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-DOS-system-windows-Command-Line-os/">Learning Python 022 调用DOS命令 --- 实例：调用Windows里面的copy命令</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T05:47:12+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:47 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
-
-<hr />
-
-<h2>实例：调用Windows里面的<code>copy</code>命令</h2>
-
-<p>比如现在，我想把这个路径<code>F:\原文件夹</code>里面的所有文件复制到这个路径<code>F:\目标文件夹</code>里面。可以在<strong>DOS</strong>命令行窗口里面执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>copy "F:\原文件夹\*" "F:\目标文件夹\"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，我们要使用Python调用DOS命令行工具的步骤就两步：</p>
-
-<ol>
-<li>构造命令字符串。</li>
-<li>使用<code>os.system()</code>函数执行命令字符串。</li>
-</ol>
-
-
-<hr />
-
-<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来进行文件的复制。代码如下：</p>
-
-<p>适合在Python3中执行的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">org_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\原文件夹&#39;</span>
-</span><span class='line'><span class="n">res_folder</span> <span class="o">=</span> <span class="s">r&#39;F:\目标文件夹&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 构造命令字符串</span>
-</span><span class='line'><span class="n">copy_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">org_folder</span> <span class="o">+</span> <span class="s">r&#39;\*&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">res_folder</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
-</span><span class='line'><span class="c"># copy_command = copy_command.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span> <span class="c"># 如果你使用的是Python2，需要将这一行的注释去掉。</span>
-</span><span class='line'><span class="c"># print(copy_command)</span>
-</span><span class='line'><span class="c"># 使用os.system()函数执行命令字符串</span>
-</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_command</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的代码如果在python2中执行，不将第10行的注释去掉的话，会因为字符串编码和解码的不正确问题，导致系统找不到指定的路径。：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\鍘熸枃浠跺す\*&quot;</span> <span class="s">&quot;F:\鐩爣鏂囦欢澶筡&quot;</span>
-</span><span class='line'><span class="err">系统找不到指定的路径。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>经验：我发现了两件事：</h2>
-
-<p><strong>第一件事 .</strong> 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Succesfull</span>
-</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹\*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\&quot;</span>
-</span><span class='line'><span class="c"># Succesfull</span>
-</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:\原文件夹</span><span class="se">\\</span><span class="s">*&quot;</span> <span class="s">&quot;F:\目标文件夹</span><span class="se">\\</span><span class="s">&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># error</span>
-</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F:/原文件夹/*&quot;</span> <span class="s">&quot;F:/目标文件夹/&quot;</span>
-</span><span class='line'><span class="c"># error</span>
-</span><span class='line'><span class="n">copy</span> <span class="s">&quot;F://原文件夹//*&quot;</span> <span class="s">&quot;F://目标文件夹//&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>总结：</p>
-
-<ol>
-<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
-<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
-<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
-</ol>
-
-
-<hr />
-
-<p><strong>第二件事 .</strong> 同时，我发现：</p>
-
-<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
-
-<p>但是我发现了python的一个bug：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># error</span>
-</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\&#39;</span>
-</span><span class='line'><span class="c"># 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
-</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="c"># 输出：D:\WorkSpace\test_ws\\</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes,但是不是我们要的结果</span>
-</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">&#39;</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</span><span class='line'><span class="c"># 输出：D:\WorkSpace   est_ws\</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-create-file-create-folder-open/">Learning Python 021 创建文件夹、创建文件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T04:45:53+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:45 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
-
-<h2>Python 创建文件夹</h2>
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="http://www.qttc.net/201209207.html">Python创建目录文件夹</a></li>
-<li><a href="http://www.cnblogs.com/zhoujie/archive/2013/04/10/python7.html">python学习笔记（七）——文件和目录操作</a></li>
-</ul>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
-</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/test_ws/&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意：如果想要创建的文件夹是已经存在的，那么执行上面的程序会出现下面的错误：<code>FileExistsError: [WinError 183] 当文件已存在时，无法创建该文件。</code></p></blockquote>
-
-<p>所以这段代码容易出现错误：如果文件夹已存在或者文件夹名中有不允许使用的字符时，<code>os.mkdir()</code>函数都会执行失败。所以，这段代码需要进行异常处理：</p>
-
-<p>参考网站：<a href="http://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">try</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
-</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样，在运行程序的时候就不会再出现错误了。但是当你给定的文件名中有非法字符时，创建文件夹是不会成功的，但是程序不会报错。</p>
-
-<h2>Python 创建文件</h2>
-
-<p>参考网站：<a href="https://blog.linuxeye.com/365.html">Python文件处理 open()</a></p>
-
-<p>比如你想在<code>F:\</code>根目录里面创建一个名为 <code>data.txt</code> 文件，你可以这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">file_path</span> <span class="o">=</span> <span class="s">r&#39;F:\data.txt&#39;</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第二个参数 <code>'w'</code> 也可以写成：<code>'wt'</code>。它们等价。</p>
-
-<p>或者</p>
-
-<p>如果你想创建以指定编码的文件，请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-pass/">Learning Python 020 Pass 的用法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T04:12:13+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>pass 的用法</h2>
-
-<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
-
-<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
-
-<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
-
-<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
-
-<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>换成Python，这样写：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1096,23 +1157,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/">Solidworks 如何添加放样基准面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/">Solidworks 如何在曲面添加文字</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-sketching/">Solidworks 草图绘制</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/download-install-crack-graphic-tutorial/">Solidworks 2011 软件下载、安装和破解 图文教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-hot-bed/">现在热床寄到了，现在我将热床安装到3D打印机上</a>
       </li>
     
   </ul>
@@ -1120,7 +1181,7 @@
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 139%" href="/tags/3dda-yin/">3D打印</a>
+    <a style="font-size: 147%" href="/tags/3dda-yin/">3D打印</a>
 <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
@@ -1132,17 +1193,15 @@
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
-<a style="font-size: 115%" href="/tags/openni/">OpenNI</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 129%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 154%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
-<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 184%" href="/tags/windows/">Windows</a>
@@ -1157,12 +1216,14 @@
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
-<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 154%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
@@ -1170,7 +1231,7 @@
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (4)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (5)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
@@ -1183,13 +1244,14 @@
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/meshmixer/'>meshmixer (1)</a></li>
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (3)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (6)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

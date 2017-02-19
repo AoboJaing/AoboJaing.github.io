@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="当你的Ubuntu系统的真机或者虚拟机使用时间长了，安装下载的软件包多了。同时你的电脑的存储空间本身又不多。这样，时间一长，就会出现下面的这个问题： 系统提示你：现在系统的存储空间已经快要用没有了。 我现在这个情况，我这个Ubuntu系统是安装在一个虚拟机里面的，我只是给它分配了20G的硬盘空间 &hellip;">
+  <meta name="description" content="我使用的Arduino板子是：Arduino UNO R3 （这里 关于这个板子的引脚介绍。） 参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压 好的，现在我们知道使用analogRead()函数来获取模拟输入口的电压。 设置参考电压 Arduino板子上有一个引脚：AREF &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,537 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-05T16:38:21+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:38 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
+
+<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
+
+<hr />
+
+<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
+
+<h2>设置参考电压</h2>
+
+<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
+
+<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
+
+<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>设置参考电压是需要注意</h2>
+
+<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">Arduino 000 — Arduino UNO R3 板子引脚定义</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-05T15:59:01+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>3:59 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><img src="/images/2017-2-5-Arduino-UNO-R3-pin-definition/1486280649241.png" alt="Alt text" /></p>
+
+<p>Arduino UNO R3 板子的官方介绍：<a href="https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn">https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/05/cpp-sleep/">C++ 的延时函数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-05T01:32:23+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:32 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>方法一</h2>
+
+<p>在Linux下，我们这样使用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//单位是秒</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们使用<code>#include &lt;unistd.h&gt;</code>头文件里面的<code>sleep()</code>函数，给这个函数传入的形参是以秒为单位的正整数。</p>
+
+<hr />
+
+<p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
+
+<p>或者形参传入以微秒为单位（<code>1000,000</code>微秒 = <code>1</code>秒）的数据：</p>
+
+<p><code>usleep()</code>函数的详细介绍：<a href="http://pubs.opengroup.org/onlinepubs/007908799/xsh/usleep.html">这里</a>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">usleep</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span> <span class="c1">//单位是微秒 1000000us = 1s</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>方法三</h2>
+
+<p>C++11里面，你可以这样使用：</p>
+
+<p>我使用的是Qt5，在Qt5里面使用<code>C++11</code>，你需要在项目的<code>.pro</code>文件里面添加下面的这句代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">c</span><span class="o">++</span><span class="mi">11</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>如果你不在<code>.pro</code>文件中添加上面的这句代码，你就使用不了下面代码里面的<code>std::this_thread</code>。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;chrono&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;thread&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span> <span class="c1">//单位是毫秒</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>方法四</h2>
+
+<p>如果你使用了<code>Boost</code>库，那么你可以使用下面的代码实现延时的功能：</p>
+
+<blockquote><p>Linux系统安装<strong>Boost</strong>库很简单，只需要执行：
+<code>
+sudo apt-get install libboost-dev
+</code></p></blockquote>
+
+<p>我使用的是QT项目，所以我们需要在<code>.pro</code>文件中，添加<code>boost</code>库的头文件路径和链接文件的路径：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">HEADERS</span> <span class="o">+=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">include</span><span class="o">/</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">LIBS</span> <span class="o">+=</span> <span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="o">-</span><span class="n">lboost_system</span> <span class="o">-</span><span class="n">lboost_thread</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;boost/thread/thread.hpp&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">boost</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="p">);</span> <span class="c1">//单位是毫秒</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">boost</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span> <span class="c1">//单位是秒</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>参考网站：<a href="http://stackoverflow.com/questions/4184468/sleep-for-milliseconds">Sleep for milliseconds</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/01/solve-cpp-error-constructor-pointers/">C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-01T00:38:20+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>12:38 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>我先把结论列出来：</p>
+
+<p>当成员变量和形参是指针，最好不要使用<code>:成员变量(形参)</code>这样的形式。因为你可以不是进行：<code>成员变量 = 形参</code>这个方向的赋值，你可能是执行：<code>形参 = 成员变量</code>这个方向的赋值。因为前提，它们都是指针嘛。</p>
+
+<hr />
+
+<h2>今天我遇到了这样的一个错误：</h2>
+
+<p>下面的程序，编译是正常通过的，但是运行却不行。（我只是将相关的代码贴了出来）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">class</span> <span class="nc">PclView</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">void</span> <span class="nf">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
+</span><span class='line'>                        <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'><span class="k">private</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">PclView</span><span class="o">::</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
+</span><span class='line'>                             <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_source&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">tgt_h</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">src_h</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="n">tgt_h</span><span class="p">,</span> <span class="s">&quot;vp1_target&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">src_h</span><span class="p">,</span> <span class="s">&quot;vp1_source&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//  PCL_INFO (&quot;Press Space to begin the registration.\n&quot;);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span> <span class="n">spinOnce</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当我们在<code>main.cpp</code>文件中定义了一个上面的类的实例化对象后，然后调用这个类的<code>showCloudsLeft()</code>方法。编译程序没有问题， 但是运行程序就会出现错误。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的程序运行的时候程序会死在<code>showCloudsLeft()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码。原因是：<code>p</code>指针为空。</p>
+
+<hr />
+
+<h2>正确的写法：</h2>
+
+<p>问题出现在<code>PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p)</code>这个构造函数里面。</p>
+
+<p>正确的写法有两种：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在问题就解决了。</p>
+
+<hr />
+
+<p>但是虽然现在的问题是解决了，但是程序还是有潜在问题的。（现在的程序，还没有达到我们想要的目的。）我们最开始设计这个构造函数，是想将外部通过形参传入的这个指针能够与这个实例化对象里面<code>pcl::visualization::PCLVisualizer * p</code>指针能够指向同一个东西，然后它们两个都可以去改变这个东西。</p>
+
+<p>但是现在我们并没有做到这一点。我们可以使用下面的代码验证：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编译程序不会出现什么问题，但是现在运行，程序就会在<code>main()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码出现问题。</p>
+
+<hr />
+
+<p>所以，正真正确的解决办法是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在就变成了完美的程序，不会出现问题，也没有潜在的问题。</p>
+
+<hr />
+
+<h2>出现上面的问题的原因</h2>
+
+<p>原因很简单，完美的设计思想是：希望两个指针都指向同一个存储空间，但是，实际上两个指针没有指向一个存储空间，一个指针指向了存储空间，而一个是空指针，所以就出现了错误。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2182,498 +2713,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-how-to-delete-a-library/">Git(GitHub) 007 如何删除一个库</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T16:15:20+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>来到将要删除的库：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648554835.png" alt="Alt text" /></p>
-
-<p>点击右上角的 <strong>Settings</strong></p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648576420.png" alt="Alt text" /></p>
-
-<p>调到 <strong>Settings</strong>网页，拉倒最后，你会看到下面这个样子：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475648609056.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Delelte this repository</strong> 按钮。</p>
-
-<p>弹出下面的提示窗口：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-delete-a-library/1475649572270.png" alt="Alt text" /></p>
-
-<p>意思是说：</p>
-
-<p>你是否真的真的真的要这样做？</p>
-
-<p>如果你不阅读下面这些东西的话，不好的事情可能会意外地发生！</p>
-
-<p>这个动作不能撤消。这将永久删除AoboJaing/ AoboJaing.github.io库，维基，问题和评论，并删除所有合作者协会。</p>
-
-<p>为了再次确认，请输入资源库的名称。</p>
-
-<p>所以我如果真的想要删除这个资源库的话，输入这个资源库的名称，再点击 <strong>I understand the consequences, delete this repoitory</strong>  按钮。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-how-to-create-a-new-library/">Git(GitHub) 006 如何新建一个库</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T16:04:40+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:04 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>在<strong>GitHub</strong>网页，登录你的 <strong>GitHub 账号</strong> 之后。</p>
-
-<p>点击右上角的图标 -> 然后选择 <strong>Your profile</strong></p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475649961304.png" alt="Alt text" /></p>
-
-<p>接着点击： <strong>Repositories</strong></p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475650812663.png" alt="Alt text" /></p>
-
-<p>现在，点击 <strong>New</strong></p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651019664.png" alt="Alt text" /></p>
-
-<p>现在，你就可以输入你要创建的资源库的名称了：</p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651787525.png" alt="Alt text" /></p>
-
-<p>输入完成之后，点击 <strong>Create repository</strong> 按钮</p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651897109.png" alt="Alt text" /></p>
-
-<h2>OK，搞定</h2>
-
-<p>现在你所看到的，说明这个库里面什么都没有。</p>
-
-<p><img src="/images/2016-12-25-git-how-to-create-a-new-library/1475651954810.png" alt="Alt text" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/">Git(GitHub) 005 添加SSH密钥 — 解决：Permission Denied (Publickey) Fatal the Remote End Hung Up Unexpectedly 问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T15:27:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:27 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>当你下载一个源代码的时候。出现下面错误：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git clone git@github.com:turtlebot/turtlebot.git
-</span><span class='line'>Cloning into 'turtlebot'...
-</span><span class='line'>Permission denied (publickey).
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时需要添加SSH密钥。步骤如下：</p>
-
-<p>参考网址：<a href="https://help.github.com/articles/generating-an-ssh-key/">Generating an SSH key</a></p>
-
-<h2>步骤</h2>
-
-<p>先检查现有的SSH密钥</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>total 12
-</span><span class='line'>drwx------  2 ubuntu ubuntu 4096 Dec 24 07:40 .
-</span><span class='line'>drwxrwxr-x 32 ubuntu ubuntu 4096 Dec 24 07:29 ..
-</span><span class='line'>-rw-r--r--  1 ubuntu ubuntu  884 Dec 24 07:40 known_hosts</span></code></pre></td></tr></table></div></figure>
-
-
-<p>默认的，公钥的文件名可能是下面的几个：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>id_dsa.pub
-</span><span class='line'>id_ecdsa.pub
-</span><span class='line'>id_ed25519.pub
-</span><span class='line'>id_rsa.pub</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你现在没有公有的或者私有的钥匙，或者你不希望使用现有的任何一个去连接GitHub，这个时候，你可以去生成一个新的SSH密钥（SSH key）</p>
-
-<p>如果你在上面的输出中看到了现有的公有和私有的密钥（比如： <code>id_rsa.pub</code> 和 <code>id_rsa</code>），这个时候，你可以直接连接GitHub，你可以将你的SSH密钥添加到ssh-agent。</p>
-
-<h2>生成一个新的SSH密钥（SSH key）</h2>
-
-<p>当你查看了你现有的密钥后没有SSH密钥，现在你可以来生成一个新的SSH密钥，用来身份验证。然后在将它添加到ssh-agent。</p>
-
-<p>添加你的GitHub使用的e-mail地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这是会创建一个新的SSH密钥，使用提供的电子邮件作为标签。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Generating public/private rsa key pair.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时提示你：“输入一个用来保存钥匙的文件”，默认保存在<code>/Users/you/.ssh/id_rsa</code>,我们直接按回车键。（它保存的位置跟你当前路径没有关系，默认都是保存在<code>~/.ssh/id_rsa</code>路径（即<code>/home/ubuntu/.ssh/id_rsa</code>）里面。）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): </span></code></pre></td></tr></table></div></figure>
-
-
-<p>接下来，它提示你输入密码短语(passphrase)，如果你直接按回车，就是没有密码。我们可以输入<code>123456</code>：（详细的信息：<a href="Working%20with%20SSH%20key%20passphrases">这里</a>）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Enter passphrase (empty for no passphrase): [Type a passphrase]
-</span><span class='line'>Enter same passphrase again: [Type passphrase again]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在，密钥就生成了。</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649196486.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>如果你不想在每次都使用你的SSH密钥重新输入你的密码短语，现在，你需要将你的密钥添加到SSH 代理（SSH Agent）中，它会管理你的SSH密钥，并记住你的密码短语。</p>
-
-<hr />
-
-<p>添加你的密钥（SSH key）到ssh-agent</p>
-
-<p>在你添加一个新的SSH密钥到ssh-agent去管理你的密钥之前，我们查看一下当前新生成的密钥：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -al ~/.ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569573667.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在启动 ssh-agent（SSH代理），如果它还没有运行的话。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># start the ssh-agent in the background
-</span><span class='line'>$ eval "$(ssh-agent -s)"
-</span><span class='line'>Agent pid 2117</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482569662050.png" alt="Alt text" /></p>
-
-<p>这个时候，将你的SSH密钥添加到 ssh-agent。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-add ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你你给你的SSH密钥设置了密码短语，你需要在输出提示<code>Enter passphrase for /home/ubuntu/.ssh/id_rsa:</code>时，输入密码短语（passphrase ）。</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570315247.png" alt="Alt text" /></p>
-
-<h2>将SSH密钥添加到你的GItHub账户上</h2>
-
-<p>参考网址：<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux">Adding a new SSH key to your GitHub account</a></p>
-
-<p>为了配置你的GitHub账户去使用你的新的SSH密钥，你需要将SSH密钥添加到你的GitHub账户上。</p>
-
-<p>第一步：复制共有密钥到剪切板上：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install xclip
-</span><span class='line'># 下载并安装 xclip. 如果你没有 `apt-get` 工具, 你可以使用其他的下载工具 (比如 `yum`)
-</span><span class='line'>
-</span><span class='line'>$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
-</span><span class='line'># 复制 id_rsa.pub 文件里面的内容到你的剪切板里</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注意，如果<code>xclip</code>工具不工作， 你可以直接手动复制。</p>
-
-<p> <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570795686.png" alt="Alt text" /></p>
-
-<p>  <code>cat ~/.ssh/id_rsa.pub</code></p>
-
-<p>  <img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570885700.png" alt="Alt text" /></p></blockquote>
-
-<p>再任何一个GitHUb页面右上角 你的用户图标 -> Settings ：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482570974088.png" alt="Alt text" /></p>
-
-<p>在用户设置侧边栏中，点击<strong>SSH and GPG keys</strong></p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571005369.png" alt="Alt text" /></p>
-
-<p>点击 <strong>New SSH key</strong></p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571081262.png" alt="Alt text" /></p>
-
-<p>输入这个SSH密钥的标题 和 公有密钥，然后点击 <strong>Add SSH key</strong>：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482649285303.png" alt="Alt text" /></p>
-
-<p>输入GitHub账户的密码：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571212784.png" alt="Alt text" /></p>
-
-<p>添加成功：</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482571232023.png" alt="Alt text" /></p>
-
-<h2>测试你的SSH连接</h2>
-
-<p>参考网站：<a href="https://help.github.com/articles/testing-your-ssh-connection/">Testing your SSH connection</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~$ ssh -T git@github.com
-</span><span class='line'>Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
-</span><span class='line'>Hi AoboJaing! You've successfully authenticated, but GitHub does not provide shell access.
-</span><span class='line'>ubuntu@ubuntu:~$</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>成功了。</h2>
-
-<p>我们现在再来重新测试最上面的命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:turtlebot/turtlebot.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482574855747.png" alt="Alt text" /></p>
-
-<blockquote><p> 如果你在之前创建密钥的时候，给密钥添加的密码短语的话，在你执行<code>git clone XXX</code>的时候可能会让你输入密码短语：</p>
-
-<p> <code>Enter passphrase for key '/home/ubuntu/.ssh/id_rsa':</code></p></blockquote>
-
-<p>你现在可能会发现，下载速度好像有点慢啊。如何给Git提速呢。请参考<a href="http://www.aobosir.com/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">这篇博客</a>。</p>
-
-<hr />
-
-<p>当你使用了git，在你的GitHub账号的SSH keys管理的页面里面，可以看到：（它变绿了。）</p>
-
-<p><img src="/images/2016-12-25-git-add-ssh-key-solution-permission-denied-publickey-fatal/1482572823425.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>你现在可以执行下面的命令，查看当前你的git的配置。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ git config --list
-</span><span class='line'>ubuntu@ubuntu:~/catkin_ws/src$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果里面什么都没有，想我现在这个样子。你可以去完善你的git配置。请参考<a href="https://help.github.com/articles/set-up-git/#platform-linux">这个网页</a>。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-config-agent-purpose-clone-download-speed-up/">Git(GitHub) 004 配置代理 目的：clone提速</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-25T15:08:25+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:08 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<blockquote><p>你如果没有翻墙，就算通过本篇博客对你的Git进行了配置，也是没有一点效果的。</p></blockquote>
-
-<p>在终端中执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global http.proxy http://127.0.0.1:1080
-</span><span class='line'>$ git config --global https.proxy https://127.0.0.1:1080</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查看一下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --list</span></code></pre></td></tr></table></div></figure>
-
-
-<p>对于我现在使用的Windows 系统而言，输出是下面这个样子的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>core.symlinks=false
-</span><span class='line'>core.autocrlf=true
-</span><span class='line'>core.fscache=true
-</span><span class='line'>color.diff=auto
-</span><span class='line'>color.status=auto
-</span><span class='line'>color.branch=auto
-</span><span class='line'>color.interactive=true
-</span><span class='line'>help.format=html
-</span><span class='line'>http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
-</span><span class='line'>diff.astextplain.textconv=astextplain
-</span><span class='line'>rebase.autosquash=true
-</span><span class='line'>credential.helper=manager
-</span><span class='line'>filter.lfs.clean=git-lfs clean %f
-</span><span class='line'>filter.lfs.smudge=git-lfs smudge %f
-</span><span class='line'>filter.lfs.required=true
-</span><span class='line'>user.name=AoboJaing
-</span><span class='line'>user.email=744910955@qq.com
-</span><span class='line'>https.proxy=https://127.0.0.1:1080
-</span><span class='line'>http.proxy=http://127.0.0.1:1080</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在测试下载一个源代码试试看：（速度马上提上来）</p>
-
-<p><img src="/images/2016-12-25-git-config-agent-purpose-clone-download-speed-up/1482559985250.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-
-<hr />
-
-<h2><strong>注意：</strong> 错误的做法：</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git config --global http.proxy 'socks5://127.0.0.1:1080'
-</span><span class='line'>$ git config --global https.proxy 'socks5://127.0.0.1:1080'</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE">https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE</a></li>
-<li><a href="https://gist.github.com/laispace/666dd7b27e9116faece6">https://gist.github.com/laispace/666dd7b27e9116faece6</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -2691,23 +2730,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/">Solidworks 如何添加放样基准面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/">Solidworks 如何在曲面添加文字</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-sketching/">Solidworks 草图绘制</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/download-install-crack-graphic-tutorial/">Solidworks 2011 软件下载、安装和破解 图文教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-hot-bed/">现在热床寄到了，现在我将热床安装到3D打印机上</a>
       </li>
     
   </ul>
@@ -2715,7 +2754,7 @@
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 139%" href="/tags/3dda-yin/">3D打印</a>
+    <a style="font-size: 147%" href="/tags/3dda-yin/">3D打印</a>
 <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
@@ -2727,17 +2766,15 @@
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
-<a style="font-size: 115%" href="/tags/openni/">OpenNI</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 129%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 154%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
-<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 184%" href="/tags/windows/">Windows</a>
@@ -2752,12 +2789,14 @@
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
-<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 154%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
@@ -2765,7 +2804,7 @@
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (4)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (5)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
@@ -2778,13 +2817,14 @@
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/meshmixer/'>meshmixer (1)</a></li>
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (3)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (6)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

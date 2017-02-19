@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Solidworks | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/solidworks/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T16:06:59+08:00</updated>
+  <updated>2017-02-19T16:15:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何画穿透点]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points/"/>
+    <updated>2017-02-19T16:12:41+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>穿透点是指：两个草图之间，其中一个草图中的点穿透另一个草图里面的一条线。</p>
+
+<p>首先，你先绘制好两个草图。</p>
+
+<p>然后到其中一个需要选中<strong>点</strong>的草图里面，进行<strong>编辑草图</strong>。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425230483.png" alt="Alt text" /></p>
+
+<p>先选中这个<strong>点</strong>，然后按住 <strong>Ctrl</strong>键，再选中另一个草图里面的一条线。这个时候，你会看到下面的截图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425470489.png" alt="Alt text" /></p>
+
+<p>这样，就创建了一个穿透点。</p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何添加放样基准面]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/"/>
+    <updated>2017-02-19T16:11:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>对着放样曲面 右键，选择：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424065921.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424349928.png" alt="Alt text" /></p>
+
+<p>选好一个面后，就可以按 <strong>确定</strong> 图标（绿色的对号）。</p>
+
+<p>这样，我们就生成了一个放样基准面。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何在曲面添加文字]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/"/>
+    <updated>2017-02-19T16:08:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://www.xmj1688.com/solidworks2012qm/1581.html">http://www.xmj1688.com/solidworks2012qm/1581.html</a></p>
+
+<hr />
+
+<p>新建一个基准面：（如何创建基准面：这里）</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305868464.png" alt="Alt text" /></p>
+
+<p>然后选中这个基准面，在进行下面的操作：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305437670.png" alt="Alt text" /></p>
+
+<p>此时生成了一个草图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305985643.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>点击 插入文字 的图标：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306013079.png" alt="Alt text" /></p>
+
+<p>输入要插入的文字，然后调整尺寸和位置：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306102092.png" alt="Alt text" /></p>
+
+<p>草图绘制完成后，点击完成：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306136366.png" alt="Alt text" /></p>
+
+<p>这个时候会出现下面的 <strong>包覆</strong> 工具提示：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306174421.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Solidworks 如何复制 基准面]]></title>
@@ -316,64 +411,6 @@
 <hr />
 
 <p><img src="/images/2017-2-19-SolidWorks-sketching/1486028600613.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 2011 软件下载、安装和破解 图文教程]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial/"/>
-    <updated>2017-02-19T01:09:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>下载</h2>
-
-<p>下载网站：
-<a href="http://www.mfcad.com/solidworks/xiazai/18672.html">http://www.mfcad.com/solidworks/xiazai/18672.html</a></p>
-
-<p>下载两个文件：</p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485673406500.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>安装教程参考：<a href="http://www.mfcad.com/solidworks/anzhuang/18673.html">http://www.mfcad.com/solidworks/anzhuang/18673.html</a></p>
-
-<blockquote><p>有可以有用的网站：<a href="http://www.cr173.com/soft/21633.html">http://www.cr173.com/soft/21633.html</a></p></blockquote>
-
-<hr />
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884501366.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884513219.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884517992.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884546919.png" alt="Alt text" /></p>
-
-<p>把网断了：</p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884575289.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884593341.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485884896255.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885016566.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885215977.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885272645.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885282456.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885175012.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885331226.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-download-install-crack-graphic-tutorial/1485885337667.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

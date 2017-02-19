@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 穿透 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/chuan-tou/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:15:49+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何画穿透点]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points/"/>
+    <updated>2017-02-19T16:12:41+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>穿透点是指：两个草图之间，其中一个草图中的点穿透另一个草图里面的一条线。</p>
+
+<p>首先，你先绘制好两个草图。</p>
+
+<p>然后到其中一个需要选中<strong>点</strong>的草图里面，进行<strong>编辑草图</strong>。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425230483.png" alt="Alt text" /></p>
+
+<p>先选中这个<strong>点</strong>，然后按住 <strong>Ctrl</strong>键，再选中另一个草图里面的一条线。这个时候，你会看到下面的截图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425470489.png" alt="Alt text" /></p>
+
+<p>这样，就创建了一个穿透点。</p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
+  
+</feed>

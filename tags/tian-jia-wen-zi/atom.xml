@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 添加文字 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/tian-jia-wen-zi/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:15:49+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何在曲面添加文字]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/"/>
+    <updated>2017-02-19T16:08:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://www.xmj1688.com/solidworks2012qm/1581.html">http://www.xmj1688.com/solidworks2012qm/1581.html</a></p>
+
+<hr />
+
+<p>新建一个基准面：（如何创建基准面：这里）</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305868464.png" alt="Alt text" /></p>
+
+<p>然后选中这个基准面，在进行下面的操作：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305437670.png" alt="Alt text" /></p>
+
+<p>此时生成了一个草图：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305985643.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>点击 插入文字 的图标：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306013079.png" alt="Alt text" /></p>
+
+<p>输入要插入的文字，然后调整尺寸和位置：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306102092.png" alt="Alt text" /></p>
+
+<p>草图绘制完成后，点击完成：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306136366.png" alt="Alt text" /></p>
+
+<p>这个时候会出现下面的 <strong>包覆</strong> 工具提示：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306174421.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>

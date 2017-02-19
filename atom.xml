@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T16:06:59+08:00</updated>
+  <updated>2017-02-19T16:15:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/"/>
+    <updated>2017-02-19T16:15:24+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/3D-printer-add-support-note-must-be-strong</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>使用的软件：Windows 10 里面自带的 <strong>3D Builder</strong></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-3D-printer-add-support-note-must-be-strong/1487425926937.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>我刚刚打印下面模型的支撑：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-3D-printer-add-support-note-must-be-strong/1487055653986.png" alt="Alt text" /></p>
+
+<p>打印的时候，打到红色浪线的位置，黑色箭头的地方起来的。（支撑的地基不稳。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-3D-printer-add-support-note-must-be-strong/1487055739751.png" alt="Alt text" /></p>
+
+<p>修改后的：（ 我在地基的地方，添加了很多的扁扁的椭圆。）</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-3D-printer-add-support-note-must-be-strong/1487055586094.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何画穿透点]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points/"/>
+    <updated>2017-02-19T16:12:41+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>穿透点是指：两个草图之间，其中一个草图中的点穿透另一个草图里面的一条线。</p>
+
+<p>首先，你先绘制好两个草图。</p>
+
+<p>然后到其中一个需要选中<strong>点</strong>的草图里面，进行<strong>编辑草图</strong>。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425230483.png" alt="Alt text" /></p>
+
+<p>先选中这个<strong>点</strong>，然后按住 <strong>Ctrl</strong>键，再选中另一个草图里面的一条线。这个时候，你会看到下面的截图：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-draw-through-points/1487425470489.png" alt="Alt text" /></p>
+
+<p>这样，就创建了一个穿透点。</p>
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何添加放样基准面]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/"/>
+    <updated>2017-02-19T16:11:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>对着放样曲面 右键，选择：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424065921.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424349928.png" alt="Alt text" /></p>
+
+<p>选好一个面后，就可以按 <strong>确定</strong> 图标（绿色的对号）。</p>
+
+<p>这样，我们就生成了一个放样基准面。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何在曲面添加文字]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/"/>
+    <updated>2017-02-19T16:08:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：</p>
+
+<p><a href="http://www.xmj1688.com/solidworks2012qm/1581.html">http://www.xmj1688.com/solidworks2012qm/1581.html</a></p>
+
+<hr />
+
+<p>新建一个基准面：（如何创建基准面：这里）</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305868464.png" alt="Alt text" /></p>
+
+<p>然后选中这个基准面，在进行下面的操作：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305437670.png" alt="Alt text" /></p>
+
+<p>此时生成了一个草图：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305985643.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>点击 插入文字 的图标：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306013079.png" alt="Alt text" /></p>
+
+<p>输入要插入的文字，然后调整尺寸和位置：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306102092.png" alt="Alt text" /></p>
+
+<p>草图绘制完成后，点击完成：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306136366.png" alt="Alt text" /></p>
+
+<p>这个时候会出现下面的 <strong>包覆</strong> 工具提示：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306174421.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Solidworks 如何复制 基准面]]></title>
@@ -2125,457 +2247,6 @@
 
 
 <p>就可以编译成功了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino 005 ADC]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF/"/>
-    <updated>2017-02-05T16:38:21+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-ADC-AREF</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
-
-<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
-
-<hr />
-
-<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
-
-<h2>设置参考电压</h2>
-
-<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
-
-<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>设置参考电压是需要注意</h2>
-
-<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
-
-<hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arduino 000 — Arduino UNO R3 板子引脚定义]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition/"/>
-    <updated>2017-02-05T15:59:01+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/05/Arduino-UNO-R3-pin-definition</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-5-Arduino-UNO-R3-pin-definition/1486280649241.png" alt="Alt text" /></p>
-
-<p>Arduino UNO R3 板子的官方介绍：<a href="https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn">https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C++ 的延时函数]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/05/cpp-sleep/"/>
-    <updated>2017-02-05T01:32:23+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/05/cpp-sleep</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>方法一</h2>
-
-<p>在Linux下，我们这样使用：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//单位是秒</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们使用<code>#include &lt;unistd.h&gt;</code>头文件里面的<code>sleep()</code>函数，给这个函数传入的形参是以秒为单位的正整数。</p>
-
-<hr />
-
-<p>上面的程序执行的效果应该是：以一秒为单位打印<code>Hello World!</code>这个字符串。</p>
-
-<p>或者形参传入以微秒为单位（<code>1000,000</code>微秒 = <code>1</code>秒）的数据：</p>
-
-<p><code>usleep()</code>函数的详细介绍：<a href="http://pubs.opengroup.org/onlinepubs/007908799/xsh/usleep.html">这里</a>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">usleep</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span> <span class="c1">//单位是微秒 1000000us = 1s</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>方法三</h2>
-
-<p>C++11里面，你可以这样使用：</p>
-
-<p>我使用的是Qt5，在Qt5里面使用<code>C++11</code>，你需要在项目的<code>.pro</code>文件里面添加下面的这句代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">c</span><span class="o">++</span><span class="mi">11</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>如果你不在<code>.pro</code>文件中添加上面的这句代码，你就使用不了下面代码里面的<code>std::this_thread</code>。</p></blockquote>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;chrono&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;thread&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span> <span class="c1">//单位是毫秒</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>方法四</h2>
-
-<p>如果你使用了<code>Boost</code>库，那么你可以使用下面的代码实现延时的功能：</p>
-
-<blockquote><p>Linux系统安装<strong>Boost</strong>库很简单，只需要执行：
-<code>
-sudo apt-get install libboost-dev
-</code></p></blockquote>
-
-<p>我使用的是QT项目，所以我们需要在<code>.pro</code>文件中，添加<code>boost</code>库的头文件路径和链接文件的路径：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">HEADERS</span> <span class="o">+=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">include</span><span class="o">/</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">LIBS</span> <span class="o">+=</span> <span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="o">-</span><span class="n">lboost_system</span> <span class="o">-</span><span class="n">lboost_thread</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;boost/thread/thread.hpp&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">boost</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="p">);</span> <span class="c1">//单位是毫秒</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">boost</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span> <span class="c1">//单位是秒</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>参考网站：<a href="http://stackoverflow.com/questions/4184468/sleep-for-milliseconds">Sleep for milliseconds</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C++ 构造函数使用`:成员变量(形参)`的形式给类里面成员变量赋值，如果成员变量和形参是指针，那么需要注意的事项]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/01/solve-cpp-error-constructor-pointers/"/>
-    <updated>2017-02-01T00:38:20+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/01/solve-cpp-error-constructor-pointers</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>我先把结论列出来：</p>
-
-<p>当成员变量和形参是指针，最好不要使用<code>:成员变量(形参)</code>这样的形式。因为你可以不是进行：<code>成员变量 = 形参</code>这个方向的赋值，你可能是执行：<code>形参 = 成员变量</code>这个方向的赋值。因为前提，它们都是指针嘛。</p>
-
-<hr />
-
-<h2>今天我遇到了这样的一个错误：</h2>
-
-<p>下面的程序，编译是正常通过的，但是运行却不行。（我只是将相关的代码贴了出来）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">class</span> <span class="nc">PclView</span><span class="p">{</span>
-</span><span class='line'><span class="k">public</span><span class="o">:</span>
-</span><span class='line'>    <span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
-</span><span class='line'>                        <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">);</span>
-</span><span class='line'><span class="k">private</span><span class="o">:</span>
-</span><span class='line'>    <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
-</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
-</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="n">PclView</span><span class="o">::</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">,</span>
-</span><span class='line'>                             <span class="k">const</span> <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_source&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">tgt_h</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PointCloudColorHandlerCustom</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;</span> <span class="n">src_h</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_target</span><span class="p">,</span> <span class="n">tgt_h</span><span class="p">,</span> <span class="s">&quot;vp1_target&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">addPointCloud</span> <span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">src_h</span><span class="p">,</span> <span class="s">&quot;vp1_source&quot;</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//  PCL_INFO (&quot;Press Space to begin the registration.\n&quot;);</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span> <span class="n">spinOnce</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>当我们在<code>main.cpp</code>文件中定义了一个上面的类的实例化对象后，然后调用这个类的<code>showCloudsLeft()</code>方法。编译程序没有问题， 但是运行程序就会出现错误。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的程序运行的时候程序会死在<code>showCloudsLeft()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码。原因是：<code>p</code>指针为空。</p>
-
-<hr />
-
-<h2>正确的写法：</h2>
-
-<p>问题出现在<code>PclView::PclView(pcl::visualization::PCLVisualizer * &amp;p)</code>这个构造函数里面。</p>
-
-<p>正确的写法有两种：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span><span class="o">:</span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
-</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在问题就解决了。</p>
-
-<hr />
-
-<p>但是虽然现在的问题是解决了，但是程序还是有潜在问题的。（现在的程序，还没有达到我们想要的目的。）我们最开始设计这个构造函数，是想将外部通过形参传入的这个指针能够与这个实例化对象里面<code>pcl::visualization::PCLVisualizer * p</code>指针能够指向同一个东西，然后它们两个都可以去改变这个东西。</p>
-
-<p>但是现在我们并没有做到这一点。我们可以使用下面的代码验证：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">PclView</span> <span class="n">viewer</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_source</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">pcl</span><span class="o">::</span><span class="n">PointCloud</span><span class="o">&lt;</span><span class="n">pcl</span><span class="o">::</span><span class="n">PointXYZ</span><span class="o">&gt;::</span><span class="n">Ptr</span> <span class="o">&amp;</span><span class="n">cloud_target</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">viewer</span><span class="p">.</span><span class="n">showCloudsLeft</span><span class="p">(</span><span class="n">cloud_source</span><span class="p">,</span> <span class="n">cloud_target</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>编译程序不会出现什么问题，但是现在运行，程序就会在<code>main()</code>函数里面的<code>p-&gt;removePointCloud ("vp1_target");</code>这段代码出现问题。</p>
-
-<hr />
-
-<p>所以，正真正确的解决办法是：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PclView</span><span class="o">::</span><span class="n">PclView</span><span class="p">(</span><span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="o">*</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
-</span><span class='line'>    <span class="n">vp_1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">vp_2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'>    <span class="c1">// Create a PCLVisualizer object</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">pcl</span><span class="o">::</span><span class="n">visualization</span><span class="o">::</span><span class="n">PCLVisualizer</span> <span class="p">(</span><span class="s">&quot;Pairwise Incremental Registration example&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_1</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">createViewPort</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">vp_2</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">removePointCloud</span> <span class="p">(</span><span class="s">&quot;vp1_target&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">p</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在就变成了完美的程序，不会出现问题，也没有潜在的问题。</p>
-
-<hr />
-
-<h2>出现上面的问题的原因</h2>
-
-<p>原因很简单，完美的设计思想是：希望两个指针都指向同一个存储空间，但是，实际上两个指针没有指向一个存储空间，一个指针指向了存储空间，而一个是空指针，所以就出现了错误。</p>
 ]]></content>
   </entry>
   

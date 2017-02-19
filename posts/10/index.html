@@ -9,8 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 scott 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问这篇博文来在你的服务器里面附加scott库。 identity &hellip;">
+  <meta name="description" content="一 . 自动控制系统的组成 自动控制装置：自动控制装置的组成当中涉及到了这样一些东西： 需要有（1）被控对象，那么这些被控对象需要有谁来控制呢？一定要有控制器，这些控制器，我们也把它叫做（2）自动控制装置。所以一个系统要叫做自动控制系统，它一定要包含 自动控制器 和 被控对象。 常见的被控对象 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,687 @@ SQL Server 软件版本： SQL Server 2014 Express 本篇博客里面使用了 s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/25/Auto-Control-001-Principle-of-automatic-control-general-concept/">Auto Control 001 自动控制原理 自动控制的一般概念</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-25T20:28:35+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p><img src="/images/2016-10-25-Auto-Control-001-Principle-of-automatic-control-general-concept/1474364477678.png" alt="Alt text" /></p>
+
+<h2>一 . 自动控制系统的组成</h2>
+
+<p><strong>自动控制装置</strong>：自动控制装置的组成当中涉及到了这样一些东西：</p>
+
+<p>需要有（1）<strong>被控对象</strong>，那么这些被控对象需要有谁来控制呢？一定要有控制器，这些控制器，我们也把它叫做（2）<strong>自动控制装置</strong>。所以一个系统要叫做自动控制系统，它一定要包含 <strong>自动控制器</strong> 和 <strong>被控对象</strong>。</p>
+
+<p><strong>常见的被控对象</strong> 有：电机、锅炉 等。</p>
+
+<hr />
+
+<blockquote><p>而常见的自动控制系统的基本方式有三种</p></blockquote>
+
+<h2>二 . 自动控制系统的基本控制方式 &mdash; 三种</h2>
+
+<p>1 . 最简单的：<strong>开环控制</strong>，所谓的开环控制，就是只有输入很输出的一个顺向作用。可能在理想的状态下，输入加入以后，输出会出现一个期望的结果。可是在实际工作当中，一定会有扰动的存在，因此，开环控制在有了扰动以后，它没有办法对扰动产生抑制。所以这种控制方式虽然结构简单，但是控制的精度是比较低的。</p>
+
+<p>2 . 为了提高控制精度，我们考虑在开环控制的基础上增加了检查装置，这样的控制系统称为：<strong>闭环控制</strong>。把我们输出端的实际输出量引回到输入端，这样的话，在系统中，即有输入对输出的一个顺向引向，也有输出对输入的一个反作用，而且由于 检测装置 的引入，当系统的前向通道当中出现了扰动，利用闭环自身的作用，我们就可以有效的抑制这种扰动。因此，闭环控制方式也是我们控制当中最常用的控制方式。这种闭环控制虽然结构比开环复杂了，但是它能有效的抑制扰动，因此它是我们最常见的控制了。</p>
+
+<p>3 . <strong>复合控制</strong>。还有一种情况，闭环控制是：当输出偏离期望值的时候才介入的。可是如果现在我们可以提前就可以预知系统当中出现了误差，而不是当误差出现了以后，我们借助于闭环来补偿这种误差，那么这个时候，对于提前就可以预知的误差，我们可以考虑使用前馈控制，来进行补偿。那么如果在一个系统当中，即有前馈又有反馈，那么这个时候，我们管这种控制叫做 <strong>复合控制</strong>。</p>
+
+<p>这些就是我们自动控制系统中常见的控制方式。</p>
+
+<h2>三 . 自动控制系统的分类</h2>
+
+<p>我们常见的自动控制系统，可以区分为几种类型。</p>
+
+<ul>
+<li><p>比如说，按照上面的<strong>控制方式</strong>分，可以分为：</p>
+
+<ul>
+<li>开环</li>
+<li>闭环</li>
+<li>复合</li>
+</ul>
+</li>
+<li><p>如果按照<strong>元件</strong>来分：</p>
+
+<ul>
+<li>机械</li>
+<li>电气</li>
+<li>机电</li>
+<li>液压</li>
+<li>气动</li>
+<li>生物系统等</li>
+</ul>
+</li>
+<li><p>如果按照<strong>系统的功能</strong>来 分，就是说：如果我们的</p>
+
+<ul>
+<li>被控量是温度，就是温控</li>
+<li>是压力，就是压控&hellip;</li>
+</ul>
+</li>
+<li><p>此外，按照<strong>系统的性能，描述它的数学模型的特点</strong>不一样，我们又可以把系统分为：（在我们经典控制理论分析当中，针对的对象大部分都是：线性的、连续的、定常的系统。当然，我们在后面也会介绍线性的离散，还会讨论一下非线性的系统。）</p>
+
+<ul>
+<li>线性</li>
+<li>非线性</li>
+<li>连续</li>
+<li>离散</li>
+<li>定常</li>
+<li>时变</li>
+</ul>
+</li>
+<li><p>当然还有，如果我们按照<strong>参考量的变化规律</strong>来分：</p>
+
+<ul>
+<li>有恒值控制，这是我们最常见的，比如说我们的控制对象时电机，那么我们希望电机的转速维持在什么样的值上面，那么这种控制叫做： 恒值控制。</li>
+<li>此外还有一种控制叫做：随动控制，所谓随动控制要求输出必须快速并且准确的跟踪输入，也就是说，输入要是变了，我要求输出要以很快的速度来跟随输入的变化，这叫随动控制。</li>
+<li>再有一类，再我们熟客机床，我们现在   希望被控对象能够安装提前设计好的一段程序来运行，这种控制叫做：程序控制。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>这就是自动控制系统的分类。除了分类，我们还对自动控制做了几个要求：</p></blockquote>
+
+<h2>四 . 自动控制系统的基本要求 &mdash; 三个方面</h2>
+
+<p><strong>三个方面：稳、快、准。</strong></p>
+
+<p>其中 <strong>稳</strong> 包括两个 <strong>恒量</strong>，其中包括：</p>
+
+<ul>
+<li>它是否稳定。（稳不稳定是正常工作的前提条件。）</li>
+<li>除此之外，在运动控制当中，它的震荡剧不剧烈，它的运动相对平稳性好不好。（我们希望一个好的系统，它的震荡越小越好，震荡的次数越少越好，超调量越小越好。）</li>
+</ul>
+
+
+<p><strong>稳</strong> 主要是靠稳定器，平稳器。</p>
+
+<hr />
+
+<p><strong>快</strong> 其实是说 ： 从 <strong>一种运动过程</strong> 转移到<strong>另一种运动过程</strong>，它的<strong>持续时间</strong>我们希望是越短越好。<strong>快</strong> 主要是靠一些时间指标来衡量，比如上升时间、调节时间、分时时间等等。</p>
+
+<hr />
+
+<p><strong>准</strong> 就是 <strong>稳态误差</strong>， 我们希望越小越好。指理想情况下，当过度过程结束后，被控量<strong>达到的稳定值</strong>与<strong>期望值</strong>之间的<strong>差值</strong>，指的就是<strong>稳态误差</strong>。</p>
+
+<hr />
+
+<blockquote><p>上面这些就是自动控制原理的一些基本概念。</p></blockquote>
+
+<hr />
+
+<h2>五 . 自动控制系统框图讲解</h2>
+
+<p><strong>例子：</strong> 我们来分析一下这个图。</p>
+
+<p><img src="/images/2016-10-25-Auto-Control-001-Principle-of-automatic-control-general-concept/1477396799474.png" alt="Alt text" /></p>
+
+<p><strong>分析：</strong>这是一个反馈控制系统的一般结构图，在这个结构图里面，我们来分析一下。</p>
+
+<p>在被控对象当中，经常会有扰动量的存在。</p>
+
+<p><strong>Q：</strong> 如果现在系统即有参考输入，又有扰动，那么这样的系统不就变成了多输入单输出的系统了吗？</p>
+
+<p><strong>A：</strong> 不是。要注意，我们分析的对象是线性的，所谓线性是什么，它一定要满足叠加性，也就是说，在两个不用的作用量输入（<strong>控制量和扰动量</strong>），它等于每个输入单独作用下输出的叠加。也就是说：如果是<strong>线性系统</strong>，<strong>系统的实际输出</strong> 等于 <strong>参考作用对应的输出</strong>叠加上 <strong>扰动作用对应的输出</strong>。</p>
+
+<p><strong>Q：</strong> 而<strong>被控对象</strong>怎么才能够按照我们希望的控制规律运行呢？</p>
+
+<p><strong>A：</strong> 我们要加控制器，也就是<strong>自动控制装置</strong>，这些自动控制转置包括一些功率变换转置（<strong>变换放大</strong>）、一些校正转置（<strong>串联校正</strong>）。</p>
+
+<p>在这个基础上系统往往不是单闭环的，在闭环的基础上还有可能附加内环。在这里我们还有一个比较重要的概念要注意：就是反馈（<strong>测量元件</strong>）。可以说 ：整个<strong>经典控制理论</strong>都是围绕着<strong>反馈</strong>展开的。</p>
+
+<p>我们提到的反馈，通常就是<strong>负反馈</strong>，只有<strong>负反馈</strong>才能自动减少偏差，而<strong>正反馈</strong>能使偏差增大。那么系统当中有没有正反馈呢？有的，这个正反馈可能是出现在局部反馈的位置（<strong>反馈校正</strong>），如果现在我们想改善局部的性能，我们可以在整个系统上附加一个内环。（就如上图所示）</p>
+
+<p>这就是我们常见系统基本结构。</p>
+
+<hr />
+
+<p>那么在这个结构当中出现的<strong>实物装置</strong>有哪些呢？</p>
+
+<p><strong>测量元件：</strong> 我们先来看反馈装置中的测量元件。测量元件有这么几个功能：</p>
+
+<ol>
+<li>测量元件是检测<strong>被控量</strong>，而且要把被控量送回到输入端。由于我们常见的是电气控制系统，所以测量元件大部分是<strong>传感器</strong>，比如温度传感器、湿度传感器、速度传感器等等。这种传感器除了检测被控量之外，还要把一些非电的物理量，比如说温度等，转换为电量，送回到输入端。</li>
+<li>在系统当中有<strong>比较元件</strong>时，这个比较元件的功能主要是：得到<strong>被控量</strong>和<strong>控制量</strong>之间形成<strong>偏差信号</strong>。也就是说：对<strong>控制量</strong>和<strong>反馈量</strong>做比较，形成一个<strong>偏差信号</strong>。</li>
+</ol>
+
+
+<p><strong>变换放大转置：</strong> 除此之外，在这个系统中还有一些变换放大转置。为什么要加这样的转置呢？由于偏差信号通常是比较微弱的，那么怎么样要这个比较微弱的信号，能够驱动后端的装置正常的工作。答案就是：我们通常对这个偏差信号，要么是 功率放大，要么就是 电压放大。目的就是：为了让微弱的偏差信号有足够大的幅值和功率，能够驱动后端的装置来运行。</p>
+
+<p><strong>执行机构：</strong> 那么 在系统当中，还会有执行机构。所谓的执行机构，我们是指：直接作用在被控对象上面，驱动被控对象工作的装置。那么执行机构在我们常见的运动控制系统当中就是一些：功率变换装置这样的一些东西。当然，这些执行机构在一些过程控制里面也可能是一些障碍力调节器等等这样的元件。</p>
+
+<p><strong>校正元件：</strong> 系统中还会有校正元件的存在。所谓的校正元件是指：为了保证系统能够正常工作，我们增加了提高系统控制能力的这些元件，我们会在后面的教学中（频域校正）详细的讨论：校正元件我们该如何的选择；校正元件在系统当中的作用有哪些。</p>
+
+<hr />
+
+<hr />
+
+<blockquote><p>这 就是所有的自动控制系统的基本概念。</p></blockquote>
+
+<h2>完</h2>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/25/Auto-Control-000-Principle-of-automatic-control-Why-Learn/">Auto Control 000 自动控制原理 为什么要学</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-25T19:16:06+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<blockquote><p>无论是学什么技术，你第一件事情就要搞清楚：为什么要学它；学它可以解决那些问题。</p></blockquote>
+
+<h2>为什么要学习 自动控制原理</h2>
+
+<p>如果你做个平衡车或者四轴飞机或者倒立摆，你肯定会使用<strong>PID</strong>控制函数，它很神奇吧，没错，它就是最简单的自动控制原理其中的一个原理。</p>
+
+<p>如果你停留在PID的程度，你会觉得控制就是调参数；学了极点配置之后，你起码对稳定性有了理解；学了lqr之后，你对怎么处理扰动、怎么track referance有了理解；学了mpc之后，你就会怎么处理约束；学了robust和adaptive时候，你懂得uncertainty怎么处理；而现在的control研究已经进展到与传统control完全不同的程度。比如：机器人这种十几个自由度的非线性系统如何稳定，如何让它稳定地走路。</p>
+
+<blockquote><p>我现在所知道的就是这些，&mdash; 2016年10月25日 &mdash; 不断完善中&hellip;。</p></blockquote>
+
+<p>我们接下来都是学习经典自动控制原理。而我学它的目的是：做机器人、替代人力机器。</p>
+
+<p><img src="http://nviki1.qiniudn.com/wp-content/uploads/2015/06/095350a5fc9fd60.gif" alt="Alt Image" /></p>
+
+<p><img src="/images/2016-10-25-Auto-Control-000-Principle-of-automatic-control-Why-Learn/1477392429765.png" alt="Alt text" /></p>
+
+<p>既然决心要学，那定会认真的学。</p>
+
+<hr />
+
+<p>图片来源于：<a href="http://www.acznw.com/archives/13854.html">http://www.acznw.com/archives/13854.html</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-034-Transactions/">SQL 数据库 学习 034 事务</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T13:20:24+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要事务</h2>
+
+<p>事务主要用来保证数据的合理性和并发处理的能力！</p>
+
+<p>通俗的说：</p>
+
+<ul>
+<li>事务可以保证避免数据处于一种不合理的中间状态</li>
+<li>利用事务可以实现多个用户对共享资源的同时访问</li>
+</ul>
+
+
+<p>例子：</p>
+
+<p>银行中的转账操作，账户A把一定数量的款项转到账户B上，这个操作包括两个步骤，一个是从账户A上把存款减去一定数量，二是在账户B上把存款加上相同的数量。这两个步骤显然要么都完成，要么都取消，否则银行就会受损失。显然，这个转账操作中的两个步骤就构成一个事务。</p>
+
+<p>假设A和B用户都希望查询修改M表数据，A用户不应该刚把M表的数据改成5，查询时显示的数据却是8（因为B用户修改M表的数据成8了）。事务必须得保证多个用户对共享资源同时访问时，数据库给用户的反应是合理的。</p>
+
+<p>事务就是专门解决这个问题的。</p>
+
+<hr />
+
+<h2>什么是事务</h2>
+
+<p>一系列操作要么全部执行成功，要么全部执行失败，这就是事务。</p>
+
+<hr />
+
+<h2>如何创建事务</h2>
+
+<p><strong>T-SQL</strong> 使用下列语句管理事务：</p>
+
+<ul>
+<li>开启事务：<code>begin transaction</code></li>
+<li>提交事务：<code>commit transaction</code></li>
+<li>回滚（撤销）事务：<code>rollback transaction</code></li>
+</ul>
+
+
+<p>一旦事务提交或回滚，则事务结束。</p>
+
+<p>判断某条语句执行是否出错：</p>
+
+<ul>
+<li>使用全局变量 <code>@@error</code></li>
+<li><code>@@error</code> 只能判断当前一条<strong>T-SQL</strong>语句执行是否有错，为了判断事务中所有<strong>T-SQL</strong>语句是否有错，我们需要对错误进行累计。如：<code>set @errorSum=@errorSum+@@error</code></li>
+</ul>
+
+
+<hr />
+
+<h2>初学者必须要掌握的三个问题：</h2>
+
+<p>一 . 事务时用来研究什么的：</p>
+
+<ul>
+<li>避免数据处于不合理的中间状态。（比如：转账）</li>
+<li>怎样避免多用户同时访问时，呈现给用户的数据是合理的。</li>
+</ul>
+
+
+<p>二 . 事务和线程的关系：</p>
+
+<p>事务也是通过锁来解决很多问题的。（线程同步就是通过锁来解决的 <code>sychronized</code>）</p>
+
+<p>三 . 事务和第三方插件的关系：</p>
+
+<ul>
+<li>直接使用事务库技术难度很大，很多人是借助第三方插件来实现。（因为我们一般人不需要细细的研究数据库中事务的语法细节。）</li>
+<li>第三方插件要想完成预期的功能，一般必须得借助数据库中的事务机制。</li>
+</ul>
+
+
+<hr />
+
+<h2>事务 &mdash; 总结 和 实例</h2>
+
+<p>总结事务的四大特性：事务必须具备以下四个属性，简称<strong>ACID</strong>属性。</p>
+
+<ul>
+<li>原子性：事务是一个完整的操作。事务的各步操作是不可分的（原子的）；要么都执行，要么都不执行。</li>
+<li>一致性：当事务完成时，数据必须处于一致状态，要么处于开始状态要么处于结束状态，不允许出现中间状态！</li>
+<li>隔离性：指当前的事务与其他未完成的事务是隔离的。在不同的隔离级别下，事务的读取操作，可以得到的结果是不同的。</li>
+<li>持久性：事务完成后，它对数据库的修改被永久保持，事务日志能够保持事务的永久性。</li>
+</ul>
+
+
+<p><strong>一个例子：</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--创建Test库</span>
+</span><span class='line'><span class="k">create</span> <span class="k">database</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--进入Test库</span>
+</span><span class='line'><span class="n">use</span> <span class="n">Test</span>
+</span><span class='line'><span class="c1">--创建一个bank表</span>
+</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">bank</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">customerEname</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">currrentMoney</span> <span class="n">money</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="c1">--插入数据</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">bank</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1">--给bank表中的currentMoney属性添加一个约束</span>
+</span><span class='line'><span class="k">alter</span> <span class="k">table</span> <span class="n">bank</span> <span class="k">add</span> <span class="k">constraint</span> <span class="n">check_currentMoney</span> <span class="k">check</span><span class="p">(</span><span class="n">currentMoney</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在我要将张三的1000打给李四。（这样做会失败，因为上面已经给<code>check_currentMoney</code>属性添加了一个约束：<code>currentMoney&gt;=1</code>）。</p>
+
+<p>普通的查询指令进行转账：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span> <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用事务实现进行转账：（不重要，掌握就可以，语法怪异，实用性不强。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">begin</span> <span class="n">transaction</span>
+</span><span class='line'><span class="k">declare</span> <span class="o">@</span><span class="n">errorSum</span> <span class="nb">int</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">-</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;张三&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="k">update</span> <span class="n">bank</span> <span class="n">bank</span> <span class="k">set</span> <span class="n">currentMoney</span><span class="o">=</span><span class="n">currentMoney</span><span class="o">+</span><span class="mi">1000</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">customerEname</span><span class="o">=</span><span class="s1">&#39;李四&#39;</span>
+</span><span class='line'><span class="k">set</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">=</span> <span class="o">@</span><span class="n">errorSum</span> <span class="o">+</span> <span class="o">@@</span><span class="n">error</span>
+</span><span class='line'><span class="n">if</span> <span class="p">(</span><span class="o">@</span><span class="n">errorSum</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账失败&#39;</span>
+</span><span class='line'>      <span class="k">rollback</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>      <span class="n">print</span> <span class="s1">&#39;转账成功&#39;</span>
+</span><span class='line'>      <span class="k">commit</span> <span class="n">transaction</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/24/SQL-Learning-033-View/">SQL 数据库 学习 033 视图</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-24T09:13:55+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:13 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
+
+<hr />
+
+<h2>为什么需要视图</h2>
+
+<p>以一个例子为例：</p>
+
+<p><strong>求出平均工资最高的部门的编号和部门的平均工资。</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--使用我们目前所知道的方法去编写查询代码。</span>
+</span><span class='line'><span class="k">select</span> <span class="o">*</span>
+</span><span class='line'>  <span class="k">from</span> <span class="p">(</span>
+</span><span class='line'>      <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>          <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>          <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>  <span class="p">)</span> <span class="ss">&quot;T&quot;</span>
+</span><span class='line'>  <span class="k">where</span> <span class="ss">&quot;T&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class='line'>      <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="ss">&quot;E&quot;</span><span class="p">.</span><span class="ss">&quot;avg_sal&quot;</span><span class="p">)</span> <span class="k">from</span> <span class="p">(</span>
+</span><span class='line'>          <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>              <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>              <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span><span class='line'>      <span class="p">)</span> <span class="ss">&quot;E&quot;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的查询代码中，有下面的一段代码，这段代码是创建一个临时表。我们可以将这个临时表创建为一个视图：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建了一个视图：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
+</span><span class='line'><span class="k">as</span>
+</span><span class='line'>  <span class="k">select</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;avg_sal&quot;</span>
+</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
+</span><span class='line'>      <span class="k">group</span> <span class="k">by</span> <span class="n">deptno</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出这个视图中的数据信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面的代码的输出同上面<strong>使用目前所知道的方法去编写查询代码</strong>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span>
+</span><span class='line'>  <span class="k">where</span> <span class="n">avg_sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">avg_sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp_1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>总结：</strong> 视图的优点是可以简化查询代码。（简化查询）。即避免了代码的冗余；避免了属性大量重复的<strong>sql</strong>语法。</p>
+
+<hr />
+
+<h2>什么是视图</h2>
+
+<ul>
+<li>视图从代码上看视图是一个<code>select</code>语句。</li>
+<li>视图从逻辑上被当做一个虚拟表看待。</li>
+</ul>
+
+
+<hr />
+
+<h2>如何创建视图</h2>
+
+<p>视图的格式</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="err">视图的名字</span>
+</span><span class='line'>  <span class="k">as</span>
+</span><span class='line'>      <span class="c1">--select的前面不能添加begin</span>
+</span><span class='line'>      <span class="k">select</span>
+</span><span class='line'>      <span class="c1">--select的后面不能添加end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>视图的优点</h2>
+
+<ol>
+<li>视图的优点是可以简化查询代码。</li>
+<li>增加数据的保密性</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--屏蔽了入职日期和员工工资 这两个属性。</span>
+</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_emp2</span>
+</span><span class='line'><span class="k">as</span>
+</span><span class='line'>  <span class="k">select</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">mgr</span><span class="p">,</span> <span class="n">comm</span><span class="p">,</span> <span class="n">deptno</span>
+</span><span class='line'>      <span class="k">from</span> <span class="n">emp</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>视图的缺点</h2>
+
+<ol>
+<li>增加了数据库维护的成本。
+
+<ul>
+<li>原表里面的属性被改了，那么视图就会报错。</li>
+</ul>
+</li>
+<li>视图只是简化了查询的代码，但是并不能加快查询的速度，这也是视图使用不足的地方。</li>
+</ol>
+
+
+<hr />
+
+<h2>使用视图要注意的三个问题</h2>
+
+<p>1 . 创建视图的<code>select</code>语句必须得为所有的计算列指定别名</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--error</span>
+</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
+</span><span class='line'><span class="k">as</span>
+</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--ok</span>
+</span><span class='line'><span class="k">create</span> <span class="k">view</span> <span class="n">v</span><span class="err">$</span><span class="n">_a</span>
+</span><span class='line'><span class="k">as</span>
+</span><span class='line'>  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">as</span> <span class="ss">&quot;avg_sal&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 . 视图不是物理表，而是虚拟表</p>
+
+<p>3 . 不建议通过视图更新视图所依赖的原始表的数据和结果。（因为很麻烦，有许多语法的限制。）</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1883,630 +2563,6 @@ select deptno, avg(sal)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/">SQL 数据库 学习 026 查询-09 聚合函数 --- 多行记录返回至一个值，通常用于统计分组的信息</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T11:05:58+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:05 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>函数的分类</h2>
-
-<p>单行函数</p>
-
-<ul>
-<li>每一行返回一个值</li>
-</ul>
-
-
-<hr />
-
-<p>多行函数</p>
-
-<ul>
-<li>多行返回一个值</li>
-<li>聚合函数是多行函数</li>
-</ul>
-
-
-<hr />
-
-<p>例子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--最终返回的是14行</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672968757.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回时1行 max() 是多行函数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476672998766.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>聚合函数的分类</h2>
-
-<ul>
-<li><code>max()</code> 求最大值</li>
-<li><code>min()</code> 求最小值</li>
-<li><code>avg()</code> 平均值</li>
-<li><code>count()</code> 求个数
-
-<ul>
-<li><code>count(*)</code> ：返回表中所有的记录的个数</li>
-<li><code>count(字段名)</code> : 返回字段值非空的记录的个数， 重复的记录也会被当做有效记录</li>
-<li><code>count(distinct 字段名)</code> ：返回字段不重复并且非空的记录的个数</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回emp表所有记录的个数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673037243.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是14，这说明deptno重复的记录也被当做有效的记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673083683.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="k">distinct</span> <span class="n">deptno</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是3， 统计deptno不重复的记录的个数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673123560.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--返回值是4。 这说明comm为null的记录不会被当做有效的记录</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673148684.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>注意的问题</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673188904.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最高工资&quot;</span><span class="p">,</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="ss">&quot;最低工资&quot;</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="ss">&quot;员工人数&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673238975.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">),</span> <span class="k">lower</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--error 单行函数和多行函数不能混用</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-026-Query-09-aggregate-function-fuzzy-query/1476673278431.png" alt="Alt text" /></p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-025-Query-08-Fuzzy-Query/">SQL 数据库 学习 025 查询-08 模糊查询 --- 怎样编写模糊查询语句</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T06:59:39+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:59 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2>怎样编写模糊查询语句</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A%&#39;</span>
-</span><span class='line'>  <span class="c1">--ename只要含有字母A就输出</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;A%&#39;</span>
-</span><span class='line'>  <span class="c1">--ename只要首字母是A的就输出</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;%A&#39;</span>
-</span><span class='line'>  <span class="c1">--ename只要尾字母是A的就输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658355448.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658371703.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658389550.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_A%&#39;</span>
-</span><span class='line'>  <span class="c1">--ename只要第二个字母是A的就输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658413951.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_[A-F]%&#39;</span>
-</span><span class='line'>  <span class="c1">--把ename中第二个字符是A或者B或者C或者D或者E或者F的记录输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658456248.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">ename</span> <span class="k">like</span> <span class="s1">&#39;_[^A-F]%&#39;</span>
-</span><span class='line'>  <span class="c1">--把ename中第二个字符不是A也不是B也不是C也不是D也不是E也不是F的记录输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658507717.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>创建一个 <code>student</code> 表。（预备操作）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>  <span class="n">name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">age</span> <span class="nb">int</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="mi">68</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="mi">66</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;a_b&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;c%d&#39;</span><span class="p">,</span> <span class="mi">44</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;abc_fe&#39;</span><span class="p">,</span> <span class="mi">56</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;haobin&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;HapBin&#39;</span><span class="p">,</span> <span class="mi">88</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;c%&#39;</span><span class="p">,</span> <span class="mi">66</span><span class="p">);</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;long&#39;&#39;s&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658533004.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;%\%%&#39;</span> <span class="k">escape</span> <span class="s1">&#39;\&#39;</span>
-</span><span class='line'>  <span class="c1">--把name中包含有%的输出</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;%\_%&#39;</span> <span class="k">escape</span> <span class="s1">&#39;\&#39;</span>
-</span><span class='line'>  <span class="c1">--把name中包含有_的输出</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658590460.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-10-17-SQL-Learning-025-Query-08-Fuzzy-Query/1476658616954.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong> <strong>通配符：</strong></p>
-
-<p><strong>格式：</strong> <code>select 字段的集合 from 表名 where 某个字段的名字 like 匹配的条件</code></p>
-
-<blockquote><p>匹配的条件通常含有通配符</p></blockquote>
-
-<ul>
-<li><code>%</code>
-
-<ul>
-<li>表示任意0个或多个字符</li>
-</ul>
-</li>
-<li><code>_</code> （这个是下划线，不是减号）
-
-<ul>
-<li>表示任意单个字符</li>
-</ul>
-</li>
-<li><code>[a-f]</code>
-
-<ul>
-<li><code>a</code> 到 <code>f</code> 中的任意单个字符。只能是<code>a</code>、<code>b</code>、<code>c</code>、<code>d</code>、<code>e</code>、<code>f</code> 中的任意一个字符</li>
-</ul>
-</li>
-<li><code>[a, f]</code>
-
-<ul>
-<li><code>a</code> 或者 <code>f</code></li>
-</ul>
-</li>
-<li><code>[^a-c]</code>
-
-<ul>
-<li>不是<code>a</code>、也不是<code>b</code>，也不是<code>c</code>的任意单个字符</li>
-</ul>
-</li>
-</ul>
-
-
-<hr />
-
-<p><strong>注意：</strong></p>
-
-<ul>
-<li>匹配的内容必须使用单引号括起来。不能省略，也不能改用双引号。</li>
-<li><code>escape '\'</code> 里面 <code>escape</code> 后面 <code>''</code> 里面的<code>\</code> 字符就自定义的：通配符。它可以替换成其他的字符（比如：<code>a</code>、<code>b</code>、<code>m</code> 等等）。</li>
-</ul>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-024-Query-07-order-by-usage-sort/">SQL 数据库 学习 024 查询-07 Order by 的用法 --- 以某个字段排序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T03:13:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>order by</code> &mdash; 以某个字段排序</h2>
-
-<p><strong>例子：</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--默认是按照升序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644715874.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno排序，然后再按照sal排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644847648.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--asc是升序的意思，默认可以不写 desc是降序</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span> <span class="k">desc</span><span class="p">,</span> <span class="n">sal</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--先按照deptno降序排序，如果deptno相同，再按照sal升序排序</span>
-</span><span class='line'>  <span class="c1">--记住sal是升序不是降序</span>
-</span><span class='line'>  <span class="c1">--order by a desc, b, c, d   desc只对a产生影响，不会对后面的b, c, d 产生影响</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644919129.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">order</span> <span class="k">by</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span> <span class="k">desc</span>
-</span><span class='line'>  <span class="c1">--问题：desc是否会对deptno产生影响？</span>
-</span><span class='line'>  <span class="c1">--答案：不会</span>
-</span><span class='line'>  <span class="c1">--先按deptno升序，如果deptno相同，再按sal降序排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-10-17-SQL-Learning-024-Query-07-order-by-usage-sort/1476644983662.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<ul>
-<li><code>order by a, b                --a和b都是升序</code></li>
-<li><code>order by a, b desc           --a升序 b降序</code></li>
-<li><code>order by a desc, b           --a降序 b升序</code></li>
-<li><code>order by a desc, b desc  --a和b都是降序</code></li>
-</ul>
-
-
-<p>文字描述：</p>
-
-<ul>
-<li>如果不制定排序的标准，则默认是升序。升序用<code>asc</code>表示，默认可以不写</li>
-<li>为一个字段制定的排序标准并不会对另一个字段产生影响</li>
-<li>强烈建议为每一个字段都指定排序的标准</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/17/SQL-Learning-023-Query-06-null-usage/">SQL 数据库 学习 023 查询-06 Null 的用法 --- 没有值 空值</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-10-17T01:48:03+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:48 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
-<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本篇博客里面使用了 <code>scott</code> 库，如何你现在还没有添加这个库到你的服务器里面，请在查看本篇博客前，访问<a href="http://www.aobosir.com/blog/2016/10/16/SQL-Learning-016-how-to-attach-a-database/">这篇博文</a>来在你的服务器里面附加<code>scott</code>库。</p></blockquote>
-
-<hr />
-
-<h2><code>null</code> &mdash; 没有值、空值</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null不能参与&lt;&gt; != = 运算</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">&lt;&gt;</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emo</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">!=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">--输出为空 error</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--null 可以参与is 、 not is </span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出奖金为空的员工的信息</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">comm</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--输出奖金不为空的员工的信息</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--任何类型的数据都允许为null</span>
-</span><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">t1</span> <span class="p">(</span><span class="n">name</span> <span class="n">nvachar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">cnt</span> <span class="nb">int</span><span class="p">,</span> <span class="n">riqi</span> <span class="n">datetime</span><span class="p">)</span>
-</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">t1</span> <span class="k">values</span> <span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-</span><span class='line'><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t1</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--输出每一个员工的姓名、年薪（包含了奖金）、comm假设是一年的奖金</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="n">comm</span> <span class="ss">&quot;年薪&quot;</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--这段指令证明了：null不能参与任何数学运算，结果永远是null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">--正确的写法</span>
-</span><span class='line'><span class="k">select</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="k">isnull</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">from</span> <span class="n">emp</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--isnull(comm, 0) 如果comm是null，就返回为0，否则返回comm的值。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>总结：</strong></p>
-
-<ul>
-<li><code>0</code> 和 <code>null</code> 是不一样的，<code>null</code> 表示空值，没有值，<code>0</code>表示一个确定的值</li>
-<li><code>null</code> 不能参与如下运算：<code>&lt;&gt;</code>、<code>!=</code>、<code>=</code></li>
-<li><code>null</code> 可以参与如下运算：<code>is</code>、<code>not is</code></li>
-<li>任何类型的数据都允许为<code>null</code></li>
-<li>null不能参与任何数学运算，结果永远是null</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -2524,23 +2580,23 @@ select deptno, avg(sal)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/">Solidworks 如何添加放样基准面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/">Solidworks 如何在曲面添加文字</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-sketching/">Solidworks 草图绘制</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/download-install-crack-graphic-tutorial/">Solidworks 2011 软件下载、安装和破解 图文教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-hot-bed/">现在热床寄到了，现在我将热床安装到3D打印机上</a>
       </li>
     
   </ul>
@@ -2548,7 +2604,7 @@ select deptno, avg(sal)
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 139%" href="/tags/3dda-yin/">3D打印</a>
+    <a style="font-size: 147%" href="/tags/3dda-yin/">3D打印</a>
 <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
@@ -2560,17 +2616,15 @@ select deptno, avg(sal)
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
-<a style="font-size: 115%" href="/tags/openni/">OpenNI</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 129%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 154%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
-<a style="font-size: 115%" href="/tags/unicodeencodeerror/">UnicodeEncodeError</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 184%" href="/tags/windows/">Windows</a>
@@ -2585,12 +2639,14 @@ select deptno, avg(sal)
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
-<a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
+<a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 154%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
@@ -2598,7 +2654,7 @@ select deptno, avg(sal)
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (4)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (5)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
@@ -2611,13 +2667,14 @@ select deptno, avg(sal)
 <li class='category'><a href='/blog/categories/learning-intel-realsense-sdk/'>learning intel realsense sdk (5)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
+<li class='category'><a href='/blog/categories/meshmixer/'>meshmixer (1)</a></li>
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (3)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (6)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

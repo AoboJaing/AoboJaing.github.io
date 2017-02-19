@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/</loc>
+<lastmod>2017-02-19T16:15:24+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-draw-through-points/</loc>
+<lastmod>2017-02-19T16:12:41+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/</loc>
+<lastmod>2017-02-19T16:11:17+08:00</lastmod>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/</loc>
+<lastmod>2017-02-19T16:08:17+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/</loc>
 <lastmod>2017-02-19T16:05:30+08:00</lastmod>
 </url>
@@ -587,6 +603,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/solidworks/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/meshmixer/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1358,5 +1377,17 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/ji-zhun-mian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/tian-jia-wen-zi/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/fang-yang/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/chuan-tou/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/tian-jia-zhi-cheng/</loc>
 </url>
 </urlset>

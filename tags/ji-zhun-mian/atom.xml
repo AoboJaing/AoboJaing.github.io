@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 基准面 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/ji-zhun-mian/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-19T16:06:59+08:00</updated>
+  <updated>2017-02-19T16:15:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 如何添加放样基准面]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/"/>
+    <updated>2017-02-19T16:11:17+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>对着放样曲面 右键，选择：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424065921.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424349928.png" alt="Alt text" /></p>
+
+<p>选好一个面后，就可以按 <strong>确定</strong> 图标（绿色的对号）。</p>
+
+<p>这样，我们就生成了一个放样基准面。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Solidworks 如何复制 基准面]]></title>
