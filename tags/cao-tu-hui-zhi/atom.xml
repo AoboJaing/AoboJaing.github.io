@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 草图绘制 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/cao-tu-hui-zhi/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:06:59+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Solidworks 草图绘制]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-sketching/"/>
+    <updated>2017-02-19T16:03:44+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-sketching</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>如何新建一个文件</h2>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485927554653.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>鼠标点击 <strong>前视基准面</strong>，然后鼠标不要动，会在鼠标右上角出现一条图标：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485928241107.png" alt="Alt text" /></p>
+
+<p>第一个是：<strong>绘制草图</strong></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485928516663.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>第二个是：<strong>正视于</strong></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485928543023.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>当你点击<strong>绘制草图</strong> 这个图标。视图中会自动的将<strong>前视基准面</strong> 正对着你。（当然这是你第一个这样操作的时候，会这样。如果视图中已经有模型存在了，那么它就不会这样做了。）</p>
+
+<p>同时还会在左侧的列表里面增加了一个<img src="/images/2017-2-19-SolidWorks-sketching/1485928807493.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485928772388.png" alt="Alt text" /></p>
+
+<p>所以，对于第一次点击 <strong>草图绘制</strong>，它是做了两步操作：选择一个基准面，然后<strong>正视于</strong>你。</p>
+
+<hr />
+
+<p>你在视图右下角可以看到：<strong>正在编辑：草图1</strong></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485929231348.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在就是正在编辑草图的状态，我们可以开始画草图了。</p>
+
+<hr />
+
+<p>画草图的第一个原则：就是<strong>草图必须跟原点发生关系</strong>。（如果一个物体在空间中跟原点没有关系，这个物体的位置在空间中就定义不了。它是浮动的，它跟原点没有任何关系。）所以，需要跟原点产生关系。</p>
+
+<p>关系一般就是：几何约束 或者 尺寸约束。（根据你自己的模型的特点来定。）</p>
+
+<hr />
+
+<p>选择<strong>直线</strong>命令：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1485931152305.png" alt="Alt text" /></p>
+
+<p>然后鼠标移动到原点上面，当鼠标移动到原点上面的时候，会出现下面这个图标：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486022516663.png" alt="Alt text" /></p>
+
+<p>出现上面的图标，说明，原点与当前鼠标点的几何关系是重合。这个时候鼠标点下去。然后就可以松开。（一个点画完之后，就可以马上松开。）</p>
+
+<p>松开之后，我们在画一条竖直的 直线。注意鼠标的反馈信息。你会看到现在出现一个图标，当你看到现在这个图标，说明当前的直线是竖直的。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486022844406.png" alt="Alt text" /></p>
+
+<p>在点击一下鼠标左键，一条直线就画好了。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486022892530.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>接下来，我们绘制一段圆弧：先将鼠标放置在一点，此时会出现下面的图标：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486022995558.png" alt="Alt text" /></p>
+
+<p>然后将鼠标移上去。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023020758.png" alt="Alt text" /></p>
+
+<p>然后在想右移，圆弧就出来了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023059691.png" alt="Alt text" /></p>
+
+<p>快捷键：直线变成圆弧，圆弧变成直线： <strong>A</strong></p>
+
+<hr />
+
+<p>此时，你会看到一个十字交叉的线，这个线叫做：推理线。</p>
+
+<p>如果我们绘制的线（虚线）在下面这个位置，那么它的几何关系就是：进过圆弧的中心。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023372171.png" alt="Alt text" /></p>
+
+<p>如果是下面这个情况，鼠标的反馈信息是：相切。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023360816.png" alt="Alt text" /></p>
+
+<p>鼠标点下去，会这条直线。</p>
+
+<p>然后在将鼠标移动到下面这个位置：（出现两个几何关系：一个水平，一个竖直）</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023457105.png" alt="Alt text" /></p>
+
+<p>画下去，最后闭合：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023607424.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>接下来，我们的目标是画槽：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023684882.png" alt="Alt text" /></p>
+
+<p>命令在这里：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486023792344.png" alt="Alt text" /></p>
+
+<p>当我们选择这个命令后，我们会看到，左侧出现的<strong>槽口</strong>窗口，我们选择的就是第一个命令。你可以看到这个图标里面有<code>1</code>、<code>2</code>、<code>3</code>。它们代表的意思顾名思义：就是鼠标第一下点的是这个圆弧的中心，第2下点的是第二个圆弧的中心，第3下点鼠标是圆弧的半径，就是宽度。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486024090462.png" alt="Alt text" /></p>
+
+<p>然后，我们将 <strong>添加尺寸</strong> 复选框选中。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486024798934.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>如何做到：让一个绘制出的直线平行与已知直线。</p>
+
+<p>第一步靠近要平行的直线，然后停一停，推理线就出来了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486024567374.png" alt="Alt text" /></p>
+
+<p>第二步：移动到推理线上。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486024615305.png" alt="Alt text" /></p>
+
+<p>这样，一个槽就画好了。它就自动的添加了两个尺寸。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486024847643.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>扩展：如果两个分来的直线，然后我们让他它们两个的几何关系是平行的，我们如何手动添加呢？</p>
+
+<p>我们先选中一条直线，然后按住<strong>Ctrl</strong>键选中另一条。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486025169184.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486025226649.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在轮廓已经画好了。现在我们就来标注尺寸。大多数的尺寸，我们都可以使用 <strong>智能尺寸</strong> 命令来标注。</p>
+
+<p>快捷键：<strong>S</strong>，弹出一个工具栏，第二个图标就是<strong>智能尺寸</strong></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486025375647.png" alt="Alt text" /></p>
+
+<p>点一下需要标注的直线。然后鼠标放到合适的位置，然后在点击一下鼠标。然后输入尺寸，即可，很简单。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486025553704.png" alt="Alt text" /></p>
+
+<p>圆弧半径的标注也是一样的简单，点一下圆弧就可以了。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486025541470.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>两条直线之间的距离如何标注：</p>
+
+<p>点一下一个直线，然后在点击另一个直线，然后将尺寸放置在合适的位置，点一下鼠标，然后就可以标注尺寸了。</p>
+
+<hr />
+
+<p>在标注尺寸的时候，你有没有发现一个现象：当我们没有标注尺寸之前，草图的线是蓝色的（就是：欠定义状态），但是当我们标注了尺寸之后，线就变成了黑色。黑色代表的是：完全定义。</p>
+
+<p>如果当你标注的尺寸出现了逻辑上的错误，那么直线就会以红色显示。</p>
+
+<hr />
+
+<p>现在就完全定义了。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026142063.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>圆与圆之间 最近距离的智能尺寸如何添加：</p>
+
+<p>点击其中一个圆的比较靠近的边，然后按住<strong>Shift</strong>，然后在点击另一个圆比较靠近的边。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026391771.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>同样的道理，可以添加最远的智能尺寸 和 一个圆最远和一个圆最近的智能尺寸：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026441757.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026492761.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>当我们编辑完草图后，我们点击右上角的 <strong>完成编辑</strong> 按钮：（注意不要点击那个叉，如果你点击了那个叉，那么你绘制的草图就没有了，消失了。）</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026703297.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在自动跳到了实体菜单里面：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026797681.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486026932475.png" alt="Alt text" /></p>
+
+<p>当你点击了 <strong>拉伸凸台/基体</strong> 你会看到，现在草图变成了灰色的。因为拉伸是基于草图的，你需要选择一个草图，拉伸的是草图。</p>
+
+<p>我们现在草图已经画好了，只需要选择一个草图就可以了。只需要鼠标左键点一个草图的一个边，然后点击<strong>确定</strong>：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486027138904.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>那么做一个零件模型的整个流程就做完了。</p>
+
+<hr />
+
+<p>接下来，介绍如何画：草图的圆角。</p>
+
+<p>先随便绘制一组线：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486027981617.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>然后快捷键 <strong>S</strong>，选择里面的 <strong>圆角</strong> 命令：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028007306.png" alt="Alt text" /></p>
+
+<p>鼠标放在 一个点上，就会出现圆角：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028167894.png" alt="Alt text" /></p>
+
+<p>鼠标点中即可。然后我们给每一个点添加圆角：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028234848.png" alt="Alt text" /></p>
+
+<p>你可以在左侧设置圆角参数：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028251098.png" alt="Alt text" /></p>
+
+<p>设置完成后，我们点击 确定图标，即可：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028282061.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>你看可以看到，如果我们想要给断的两端的线添加一个圆角，我们要怎么做呢。</p>
+
+<p>很简单，选中一端的线，然后在将鼠标放到另一端，圆角就出现了：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028507916.png" alt="Alt text" /></p>
+
+<p>确定即可：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028534798.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-sketching/1486028600613.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>
