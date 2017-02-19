@@ -9,8 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的pcduino板卡型号：pcduino 3B
-我使用的TF卡大小：32G 参考网站： [Video] Run built-in Arduino IDE on pcDuino3 下载需要的东西 下载 内核镜像文件、系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷， &hellip;">
+  <meta name="description" content="使用的虚拟机软件：VMware 11
+我的Ubuntu系统：Ubuntu 14.04.10 TLS
+Arduino 软件的版本：Arduino 1.6.11
+Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的Ubuntu 系统的界面。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,518 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:51:56+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>使用的虚拟机软件：<strong>VMware 11</strong></li>
+<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong></li>
+<li><strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong></li>
+<li><strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></li>
+</ul>
+
+
+<p><strong>Step 0 . </strong> 来到 <strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面。</p>
+
+<p><strong>Step 1 . </strong> 将 <strong>Arduino</strong> 板子通过USB线插到电脑上。</p>
+
+<p><strong>Step 2 . </strong> 在终端中执行下面的命令，来启动 <strong>Arduino</strong> 软件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
+
+<blockquote><p>你可以看到：<strong>Arduino</strong> 软件右下角有当前被选中的端口号和被选中的<strong>Arduino</strong>板卡的信息。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660193423.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 6 . </strong> 给端口添加权限。</p>
+
+<blockquote><p>如果，这时你给 <strong>Arduino</strong> 开发板下载程序，发现下载出错。原因就是没有给端口添加权限。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" /></p>
+
+<p>输出的 <strong>error</strong> 提示：</p>
+
+<pre><code>avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
+</code></pre></blockquote>
+
+<p>在终端中执行下面的命令，来给当前选中的端口添加权限。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chmod a+rw /dev/ttyACM0</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>端口号都在<code>/dev/</code> 目录里面。执行下面的命令可以查看：
+<code>
+cd /dev/
+ls
+</code>
+输出 如下图所示：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。</p>
+
+<p>解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
+
+<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
+
+<blockquote><p>其实，可以不用点击 <strong>编译</strong> 按钮，直接点击 <strong>上传</strong> 按钮就可以。因为点击完 <strong>上传</strong> 按钮后，它会再编译一遍，在将程序烧写到板子上。</p></blockquote>
+
+<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-install-Arduino-IDE/">Arduino 002 — 在Ubuntu（Linux） 中搭建Arduino开发环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:46:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:46 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS 32位</strong></li>
+<li>需要安装的<strong>Arduino</strong>的版本：<strong>Arduino 1.6.11（最新版本） Linux 32位</strong></li>
+</ul>
+
+
+<h2>1. 下载 最新的 <strong>Arduino</strong> 开发软件</h2>
+
+<p><strong>Step 1 . </strong> 到<strong>Arduino</strong>官网下载 <strong>linux 32位</strong> 的 <strong>Arduino</strong> 开发软件：</p>
+
+<p>Web：<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a></p>
+
+<h2>2. 解压</h2>
+
+<p><strong>Step 2 . </strong> 解压<strong>arduino-1.6.11-linux32.tar.xz</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
+</span><span class='line'>tar -xvJf arduino-1.6.11-linux32.tar.xz</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642224393.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 将解压后的文件（<code>arduino-1.6.11</code>）移动到 <code>/opt</code>  目录下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Downloads
+</span><span class='line'>sudo mv arduino-1.6.6 /opt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 4 . </strong> 进入 <code>/opt/arduino-1.6.11</code> 文件夹，将<strong>Files</strong>窗口最大化。选中 <strong>arduino</strong> 文件，再在<strong>菜单栏</strong>中选择：<strong>Edits</strong> -> <strong>Preferences</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642888060.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 这时弹出下面的窗口。选择：<strong>Behavior</strong> 选项卡，将<strong>Executable Text Files</strong>项里面，勾选：<strong>Ask each time</strong> 单选框。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472642984839.png" alt="Alt text" /></p>
+
+<h2>3. 运行 <strong>Arduino</strong></h2>
+
+<p>现在你有两种方法运行 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>方法一：</strong> 双击 <strong>arduino</strong> 文件： 弹出一个对话框，点击<strong>Run</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555757325.png" alt="Alt text" /></p>
+
+<p><strong>方法二：</strong>打开一个终端：路径切换到<strong>arduino</strong>文件所在路径（<code>/opt/arduino-1.6.11/</code>），运行它：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /opt/arduino-1.6.11/
+</span><span class='line'>./arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，恭喜你，已经安装成功了：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-install-Arduino-IDE/1472555815898.png" alt="Alt text" /></p>
+
+<h2>4. 做一些配置，实现在终端的任何路径下，都可以运行 <strong>Arduino</strong> 软件</h2>
+
+<p>使用<code>ln</code> 命令(给文件创建软链接文件) Web：<a href="http://roclinux.cn/?p=752">http://roclinux.cn/?p=752</a></p>
+
+<p>我们希望在终端的任何路径下，输入 <code>arduino</code> 都可以启动 <strong>Arduino</strong> 软件：</p>
+
+<p><strong>Step 6 . </strong> 操作如下，打开一个终端，执行下面的命令。将 <code>/opt/arduino-1.6.6/arduino</code> 文件在 <code>/bin/</code> 路径下创建一个软链接文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/arduino-1.6.11/arduino /bin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>搞定，这样就可以在终端中，不管当前路径是什么，都可以启动<strong>Arduino</strong>了。</p>
+
+<p>试试看。现在，在终端中直接执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. 如何给 <strong>Arduino</strong> 板子，烧写程序</h2>
+
+<p>请见博客：Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序 。</p>
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Windows-10-install-Arduino-IDE-and-drive/">Arduino 001 Windows 10 安装Arduino IDE软件 和 驱动</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:37:20+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<blockquote><p>在Win10 上安装最新的Arduino IDE （1.6.9安装包）很简单，并且不行要手动安装Arduino板子的驱动，整个安装过程都当前的简单，我以前在我的Win7系统上安装Arduino1.1.0时，需要手动安装板卡驱动，步骤相当繁琐。</p></blockquote>
+
+<h2>1. 先连接<strong>Arduino</strong>与电脑。</h2>
+
+<h2>2. 下载Arduino IDE软件</h2>
+
+<p>然后，到<a href="https://www.arduino.cc/en/Main/Software">这个网址</a> （这个网站打开时，有点慢。）下载最新的Arduino IDE 软件。（记住安装路径，因为后面要用上。）
+<img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421628198.png" alt="Alt text" /></p>
+
+<h2>3. 安装驱动</h2>
+
+<p>打开<strong>控制面板</strong> -> 设备管理器 -> 端口</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421740222.png" alt="Alt text" /></p>
+
+<p>驱动已经安装成功。</p>
+
+<h2>4. 测试Arduino IDE软件是否可以使用：</h2>
+
+<h3>选择办卡：Arduino/Genuino Uno</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421799260.png" alt="Alt text" /></p>
+
+<h3>然后，选择端口：</h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421867289.png" alt="Alt text" /></p>
+
+<h3>测试：随便导入一个程序：<code>Blink</code></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421937550.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>验证</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469421954757.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422001208.png" alt="Alt text" /></p>
+
+<h3>点击：<strong>上传</strong></h3>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422032515.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-10-install-Arduino-IDE-and-drive/1469422051312.png" alt="Alt text" /></p>
+
+<h2>实验现象</h2>
+
+<p>现在看到的实验现象就是：板子上的A13的LED在闪烁。</p>
+
+<h1>搞定</h1>
+
+<hr />
+
+<p>参考网站：</p>
+
+<p><a href="https://www.arduino.cc/en/Guide/Windows?setlang=cn">https://www.arduino.cc/en/Guide/Windows?setlang=cn</a></p>
+
+<p>其他网站，没有用上：</p>
+
+<p><a href="http://www.arduino.cn/thread-1008-1-1.html">http://www.arduino.cn/thread-1008-1-1.html</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/python3-large-web-crawler-scrapy-project-Anti-reptile-settings/">Python3 大型网络爬虫实战 — 给 Scrapy 爬虫项目设置为防反爬</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T00:04:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<p>所有的设置都是在scrapy爬虫项目中的<code>settings.py</code> 文件中进行设置。</p>
+
+<p><strong>Step 1 . </strong> 设置爬虫不遵循 <code>robots.txt</code>协议</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Obey robots.txt rules
+</span><span class='line'>ROBOTSTXT_OBEY = False</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952600971.png" alt="Alt text" /></p>
+
+<blockquote><p>想要了解什么是<code>robots.txt</code>协议，请访问这篇博客：<a href="http://blog.csdn.net/github_35160620/article/details/52586126">解析 robots.txt 文件</a>。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 设置取消<strong>Cookies</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Disable cookies (enabled by default)</span>
+</span><span class='line'><span class="n">COOKIES_ENABLED</span> <span class="o">=</span> <span class="bp">False</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480952959564.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>Cookies</strong>：</p>
+
+<p> 简单的说，Cookie就是服务器暂存放在你计算机上的一笔资料，好让服务器用来辨认你的计算机。当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookie 会帮你在网站上所打的文字或是一些选择，都记录下来。当下次你再光临同一个网站，Web服务器会先看看有没有它上次留下的Cookie资料，有的话，就会依据Cookie里的内容来判断使用者，送出特定的网页内容给你。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 设置用户代理值（<code>USER_AGENT</code>）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span>
+</span><span class='line'><span class="n">USER_AGENT</span> <span class="o">=</span> <span class="s">&#39;Mozilla/xxx (Windows xxx; Winxx; xxx) AppleWebKit/xxx (KHTML, like Gecko) Chrome/xxxx Safari/xxx&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953048379.png" alt="Alt text" /></p>
+
+<p>这个 用户代理可以在浏览器里面找到：</p>
+
+<p>随便浏览一个网页，按<strong>F12</strong> -> <strong>Network</strong> -> <strong>F5</strong>，随便点击一项，你都能看到有 <strong>User-agent</strong> 这一项，将这里面的内容拷贝就可以。</p>
+
+<p><img src="/images/2016-12-6-python3-large-web-crawler-scrapy-project-Anti-reptile-settings/1480953359818.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 设置IP</p>
+
+<p>对于这一步，如果你没有做什么违法的事情，可以不用设置。仅仅上面的三个步骤，就可以将那些具有反爬虫机制的网站可以正常爬取了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T22:19:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
+<li>我使用的TF卡大小：32G</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
+</ul>
+
+
+<hr />
+
+<h2>下载需要的东西</h2>
+
+<p>下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
+
+<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
+
+<ol>
+<li>一个是系统镜像文件。</li>
+<li>一个烧写工具。</li>
+</ol>
+
+
+<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载镜像文件</p>
+
+<p>镜像文件选择下面的 Ubuntu 14 下载：（注意，这个Ubuntu 14 只需要下载这个文件即可，因为它是一个 <strong>内核+系统</strong> 的镜像文件。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480946917168.png" alt="Alt text" /></p>
+
+<p><strong>Step 2 . </strong> 下载烧写工具</p>
+
+<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947440669.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
+
+<hr />
+
+<h2>给pcduino板子烧写Ubuntu 14系统</h2>
+
+<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
+
+<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件。</p>
+
+<p>点击<strong>镜像文件</strong>按钮，选择刚刚下载解压后的镜像文件。</p>
+
+<p>然后点击 <strong>烧录</strong> 按钮，进行烧录。（大于5分钟时间。）</p>
+
+<p><strong>Step 3 . </strong> 将TF卡插到pcduino板子上，只给板子供电即可。</p>
+
+<blockquote><p>注意：</p>
+
+<ul>
+<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
+<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
+<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
+</ul>
+</blockquote>
+
+<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947234663.png" alt="Alt text" /></p>
+
+<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核和系统程序（pcduino板子全自动烧写），大约不到3分钟左右，中间这个LED不再闪烁（熄灭），说明：内核和系统烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
+
+<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
+
+<p>Ubuntu 14系统成功运行。</p>
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -795,351 +1309,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-join/">Learning Python 026 字符串连接</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T19:03:50+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\笔记\text.md&#39;</span>
-</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">mylist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
-</span><span class='line'><span class="n">res_path</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mylist</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span><span class='line'><span class="c"># res_path = res_path.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;) # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">res_path</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">test_ws</span>\<span class="err">笔记</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/">Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T17:37:34+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>出现这个错误，是因为<code>xxxx.py</code> 文件里面有中文字符。</p>
-
-<p>解决办法：在文件第一行，加上下面的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T17:06:32+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
-
-<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
-
-<h2>语法：</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>str 分隔符</li>
-<li>num 分割次数</li>
-</ul>
-
-
-<h2>实例：</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
-</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T08:46:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>判断文件</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>判断文件夹</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/GitHub-For-Windows-Adding-tag/">Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T08:04:17+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:04 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">git 创建标签</a></li>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">git 操作标签</a></li>
-<li><a href="http://stackoverflow.com/questions/13862517/github-for-windows-adding-tags">Github for Windows - Adding tags</a></li>
-</ul>
-
-
-<hr />
-
-<p>要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 <strong>Git 命令行窗口</strong>，还是要使用命令行工具来完成这个工作。</p>
-
-<p><img src="/images/2016-12-1-GitHub-For-Windows-Adding-tag/1480548346142.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -a v1.0 -m "description information"
-</span><span class='line'>git push origin v1.0</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>当你执行完<code>git tag -a v1.0 -m "description information"</code>，想要查看一下，你可以执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git show v1.0</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你执行完<code>git tag -a v1.0 -m "description information"</code>，想要删除这个标签，可以执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -d v1.0</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -1157,23 +1326,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2017/02/18/3D-printer-experience-and-precautions-when-printing-large-models/">3D 打印大型模型时的经验和注意事项</a>
+        <a href="/blog/2017/02/19/download-install-crack-graphic-tutorial/">Solidworks 2011 软件下载、安装和破解 图文教程</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a>
+        <a href="/blog/2017/02/19/aobojaing/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Windows-install-OpenNI2/">Windows 安装OpenNI2</a>
+        <a href="/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Compile-zlib-and-png-using-CMake-GUI-and-VS2010/">Windows 上 使用CMake-GUI 软件生成 Zlib 和 Png 库的编译文件，然后使用VS2010编译</a>
+        <a href="/blog/2017/02/19/3D-printer-hot-bed/">现在热床寄到了，现在我将热床安装到3D打印机上</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
+        <a href="/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out/">第一次 测试3D打印机 — 出现问题：打不出来</a>
       </li>
     
   </ul>
@@ -1181,22 +1350,24 @@
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
+    <a style="font-size: 147%" href="/tags/3dda-yin/">3D打印</a>
+<a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 147%" href="/tags/c-plus-plus/">C++</a>
+<a style="font-size: 115%" href="/tags/cmake-gui/">CMake-GUI</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 115%" href="/tags/openni/">OpenNI</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
-<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
@@ -1204,7 +1375,6 @@
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 184%" href="/tags/windows/">Windows</a>
-<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
@@ -1216,22 +1386,21 @@
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
-<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
-<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
-<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 154%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (1)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (5)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
@@ -1250,13 +1419,14 @@
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
 <li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
-<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (6)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (7)</a></li>
 
   </ul>
 </section><section>

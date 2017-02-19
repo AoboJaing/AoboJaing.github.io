@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 3.5.0 怎么使用python编写一个 类 参考网站：Python3-cookbook 类与对象 随便编写一个Python类，类里面至少有下面三个函数： &hellip;">
+使用的Python的版本：python2.7.10 或者 python 3.5.0 本博文对Python2和Python3都适用。 参考网站：Python 字符串操作（string替换、删除、截取 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,351 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-join/">Learning Python 026 字符串连接</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T19:03:50+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\笔记\text.md&#39;</span>
+</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mylist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+</span><span class='line'><span class="n">res_path</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mylist</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span><span class='line'><span class="c"># res_path = res_path.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;) # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">res_path</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">test_ws</span>\<span class="err">笔记</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/">Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T17:37:34+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>出现这个错误，是因为<code>xxxx.py</code> 文件里面有中文字符。</p>
+
+<p>解决办法：在文件第一行，加上下面的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T17:06:32+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>5:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
+
+<hr />
+
+<p>参考网站：<a href="http://www.runoob.com/python/att-string-split.html">Python split()方法</a></p>
+
+<p>Python split()通过指定分隔符对字符串进行切片，返回一个列表。</p>
+
+<h2>语法：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">zifuchuang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>str 分隔符</li>
+<li>num 分割次数</li>
+</ul>
+
+
+<h2>实例：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub)&#39;</span>
+</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace&#39;</span><span class="p">,</span> <span class="s">&#39;test_ws&#39;</span><span class="p">,</span> <span class="s">&#39;Git(GitHub)&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;D:&#39;</span><span class="p">,</span> <span class="s">&#39;WorkSpace</span><span class="se">\\</span><span class="s">test_ws</span><span class="se">\\</span><span class="s">Git(GitHub)&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T08:46:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>判断文件</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>判断文件夹</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/GitHub-For-Windows-Adding-tag/">Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T08:04:17+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">git 创建标签</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">git 操作标签</a></li>
+<li><a href="http://stackoverflow.com/questions/13862517/github-for-windows-adding-tags">Github for Windows - Adding tags</a></li>
+</ul>
+
+
+<hr />
+
+<p>要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 <strong>Git 命令行窗口</strong>，还是要使用命令行工具来完成这个工作。</p>
+
+<p><img src="/images/2016-12-1-GitHub-For-Windows-Adding-tag/1480548346142.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -a v1.0 -m "description information"
+</span><span class='line'>git push origin v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>当你执行完<code>git tag -a v1.0 -m "description information"</code>，想要查看一下，你可以执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git show v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你执行完<code>git tag -a v1.0 -m "description information"</code>，想要删除这个标签，可以执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -d v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -735,657 +1080,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/30/python2-python3-range-function/">Learning Python 018 Python2 和 Python3 中 Range()函数的使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-30T13:37:04+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2><code>range()</code> 函数</h2>
-
-<ul>
-<li>Python2中：用来创建一个列表（list）。</li>
-<li>Python3中：用来创建一个可以生成list或者tuple的生成器。</li>
-</ul>
-
-
-<h2>Python2 <code>range()</code>函数 知识点</h2>
-
-<p>Python2 中的<code>range()</code> 函数可以生成一个list。（分配内存空间）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>Python2 中的<code>xrange()</code>函数不是生成一个list，而是生成一个生成器，不分配内存。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'><span class="c"># xrange(10)</span>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
-</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>Python3 <code>range()</code>函数 知识点</h2>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'><span class="c"># range(0, 10)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：（打印出来的不是一个列表，而是一个生成器）。</p>
-
-<p>Python3 选择这样做的原因：可以节约内存空间，详情请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-Memory-release-gc/">Python2和Python3的内存释放</a>。</p>
-
-<p>Python3中的<code>range()</code>函数的功能和Python2中的<code>xrange()</code>函数一样，所以在Python3中没有<code>xrange()</code>函数。</p>
-
-<hr />
-
-<p>要想生成<strong>list</strong>或者<strong>tuple</strong>，这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># [4, 5, 6, 7, 8, 9]</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-</span><span class='line'><span class="c"># (4, 5, 6, 7, 8, 9)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2><code>range()</code>函数的使用</h2>
-
-<p>下面这段代码在Python2 和 Python3中得到的运行结果都是一样的。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="mi">0</span>
-</span><span class='line'><span class="mi">1</span>
-</span><span class='line'><span class="mi">2</span>
-</span><span class='line'><span class="mi">3</span>
-</span><span class='line'><span class="mi">4</span>
-</span><span class='line'><span class="mi">5</span>
-</span><span class='line'><span class="mi">6</span>
-</span><span class='line'><span class="mi">7</span>
-</span><span class='line'><span class="mi">8</span>
-</span><span class='line'><span class="mi">9</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行结果是一样的，但是运行的原理不同：</p>
-
-<ul>
-<li>Python2：在第一次执行 <code>range(10)</code>，就生成了一个<code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code>列表。</li>
-<li>Python3：在每次执行<code>range(10)</code>时，生成一个元素<code>i</code>。</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/30/python2-python3-Memory-release-gc/">Learning Python 017 — Python2 和 Python3 的内存释放</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-30T13:34:56+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:34 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>学习Python的内存释放知识点的动机</h2>
-
-<p>之前我学过很多Python的程序，偶然的一次，我打开任务管理器，看到我写的程序，运行时占用了大量的内存，所以，我希望学会如何释放内存，来优化我的程序，也不给电脑照成太大的负担，所以，我想学会：Python的内存释放这个知识点。</p>
-
-<hr />
-
-<p>参考网站： <a href="http://qinqianshan.com/python-memory-the-gc-module-released/">gc模块–Python内存释放</a></p>
-
-<p>下面写几个实验程序，里面都是使用<code>range()</code> 函数来分配内存空间的。<code>range()</code>函数的详细介绍，请见这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-range-function/">range()函数在python2 和 python3中的使用介绍</a>。</p>
-
-<h2>Python2 内存释放</h2>
-
-<p>未优化前的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424648330.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>优化内存的代码：</p>
-
-<p>使用手动释放内存的方法来优化内存。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">del</span> <span class="n">a</span>
-</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以看出，占用的内存空间明显减小了。</p>
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424705571.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>既优化了内存，也优化了CPU 的代码</p>
-
-<p>使用睡眠来优化CPU运行。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">del</span> <span class="n">a</span>
-</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424877933.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>Python3 内存释放</h2>
-
-<p>未优化前的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使用Python3库运行未优化的代码，所需要的消耗的内存空间和使用Python2运行优化内存的代码消耗的内存空间 差不多。</p>
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480433041923.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>优化内存的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">del</span> <span class="n">a</span>
-</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以看出，所暂用的内存空间没有任何增减。</p>
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480432975323.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>既优化了内存，也优化了CPU 的代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
-</span><span class='line'><span class="k">del</span> <span class="n">a</span>
-</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480432888777.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>总结</h2>
-
-<p>Python3 真的是比 Python2 更加的完善了，从这一点上也可以看出来，Python语言是第4代语言里面非常杰出的语言。随着它的不断发展，它会运行速度慢和内存消耗大的缺点会慢慢的消失（因为：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/chapters/p15_c_extensions.html">许多Python内置库是用C语言写的</a>）。我看好Python。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">Learning Python 016 写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T20:13:51+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>学习这个知识点的原因</h2>
-
-<p>举一个实例：</p>
-
-<p><strong>Octopress</strong>站点路径里面博文文件（<code>.markdown</code>后缀文件）必须要是以UTF-8无BOM编码方式编码的文件，否则执行<code>rake generate</code>命令会出现下面这个错误：</p>
-
-<p><img src="/images/2016-11-29-python-open-save-file-specify-encoding-utf-8/1480419391696.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error reading file F:/octopress/source/_posts/xxxx.markdown: invalid byte sequence in UTF-8
-</span><span class='line'>  Liquid Exception: invalid byte sequence in UTF-8 in _posts/xxxx.markdown/#excerpt</span></code></pre></td></tr></table></div></figure>
-
-
-<p>所以，为了解决不要出现这个问题，我们需要将文件指定你希望的编码方式保存。</p>
-
-<h2>将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</h2>
-
-<p>其实很简单，我们只需要这样做：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样<code>file</code>文件就是以<strong>Utf-8无BOM编码方式</strong>编码的文件。</p>
-
-<blockquote><p>我们也看到了，其实不是将<code>file</code>保存为以<strong>Utf-8无BOM编码方式</strong>编码的文件，而是创建这个一个以<strong>Utf-8无BOM编码方式</strong>编码的文件 <code>file</code>。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T19:18:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:18 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>出现的错误</h2>
-
-<p>读取文件时，出现<strong>乱码</strong>或者<code>UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX in position XX: incomplete multibyte sequence</code> 错误</p>
-
-<hr />
-
-<h2>出现错误的原因</h2>
-
-<p>这两个错误可能会出现一个，两个错误的出现的原因是一样的：当我们使用了一个不正确的编码方式去读取一个不是用这个编码方式编码的文件时，轻者出现乱码，重者出现<code>UnicodeDecodeError</code>错误。</p>
-
-<hr />
-
-<h2>模拟错误发生现场</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">浣犲ソ锛孉</span><span class="n">oboSir</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir。&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;D:/WorkSpace/test_ws/demo/learning_python_15.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t decode byte 0x82 in position 35: incomplete multibyte sequence</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>读取文件时，指定正确的编码方式：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在再运行，就正常了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">你好，</span><span class="n">AoboSir</span><span class="err">。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T13:49:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>前言</h2>
-
-<p>之前，我是按照我写的<a href="http://www.aobosir.com/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">这篇博客</a>为<strong>Octopress</strong>站点侧边栏添加分类列表（Categories）。</p>
-
-<hr />
-
-<h2>出现的问题</h2>
-
-<p>基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。</p>
-
-<hr />
-
-<h2>解决思路</h2>
-
-<p>中文取拼音。</p>
-
-<hr />
-
-<h2>解决方法</h2>
-
-<p>参考网站：<a href="http://jiankg.github.io/2014/10/16/jie-jue-octopressfen-lei-mu-lu-zhi-chi-zhong-wen-de-wen-ti/">解决Octopress分类目录支持中文的问题</a></p>
-
-<p><code>/plugins/category_sidebar.rb</code> (若没有，自行创建)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;stringex&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
-</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
-</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/blog/categories/</span><span class="si">#{</span><span class="n">category</span><span class="o">.</span><span class="n">to_url</span><span class="o">.</span><span class="n">downcase</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">html</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_sidebar&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>搞定</h2>
-
-<p>现在你可以重新执行<code>rake generate</code>和<code>rake preview</code>、 <code>rake deploy</code>，分类列表中有中文字符的分类，就可以正常打开了，而实际的链接就是对应的拼音。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1403,23 +1097,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2017/02/18/3D-printer-experience-and-precautions-when-printing-large-models/">3D 打印大型模型时的经验和注意事项</a>
+        <a href="/blog/2017/02/19/download-install-crack-graphic-tutorial/">Solidworks 2011 软件下载、安装和破解 图文教程</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a>
+        <a href="/blog/2017/02/19/aobojaing/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Windows-install-OpenNI2/">Windows 安装OpenNI2</a>
+        <a href="/blog/2017/02/19/3D-printer-auto-add-support-using-Meshmixer-software/">3D 打印的模型 告别手动添加支撑的方式 — 使用 Meshmixer 软件</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/Compile-zlib-and-png-using-CMake-GUI-and-VS2010/">Windows 上 使用CMake-GUI 软件生成 Zlib 和 Png 库的编译文件，然后使用VS2010编译</a>
+        <a href="/blog/2017/02/19/3D-printer-hot-bed/">现在热床寄到了，现在我将热床安装到3D打印机上</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a>
+        <a href="/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out/">第一次 测试3D打印机 — 出现问题：打不出来</a>
       </li>
     
   </ul>
@@ -1427,22 +1121,24 @@
 <section>
   <h1>Tags</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
+    <a style="font-size: 147%" href="/tags/3dda-yin/">3D打印</a>
+<a style="font-size: 154%" href="/tags/arduino/">Arduino</a>
 <a style="font-size: 129%" href="/tags/auto-control/">Auto Control</a>
 <a style="font-size: 129%" href="/tags/c-number/">C#</a>
 <a style="font-size: 147%" href="/tags/c-plus-plus/">C++</a>
+<a style="font-size: 115%" href="/tags/cmake-gui/">CMake-GUI</a>
 <a style="font-size: 139%" href="/tags/git/">Git</a>
 <a style="font-size: 139%" href="/tags/ide/">IDE</a>
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 115%" href="/tags/openni/">OpenNI</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 164%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
-<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
@@ -1450,7 +1146,6 @@
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 184%" href="/tags/windows/">Windows</a>
-<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
@@ -1462,22 +1157,21 @@
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
-<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
-<a style="font-size: 115%" href="/tags/mo-hu-cha-xun/">模糊查询</a>
+<a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/bian-ma-wen-ti/">编码问题</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
-<a style="font-size: 147%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
+<a style="font-size: 154%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (1)</a></li>
+    <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (5)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
@@ -1496,13 +1190,14 @@
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (1)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
 <li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
-<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (6)</a></li>
+<li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (7)</a></li>
 
   </ul>
 </section><section>
