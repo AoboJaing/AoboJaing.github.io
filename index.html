@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content=" 使用的软件：Windows 10 里面自带的 3D Builder 我刚刚打印下面模型的支撑： 打印的时候，打到红色浪线的位置，黑色箭头的地方起来的。（支撑的地基不稳。） 修改后的：（ 我在地基的地方，添加了很多的扁扁的椭圆。） ">
+  <meta name="description" content="昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll 解决办法 参考网站：http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,119 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/">解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-19T16:28:11+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：<code>无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll</code></p>
+
+<p><img src="./1487392359179.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>参考网站：<a href="http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html">http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html</a></p>
+
+<p>参考</p>
+
+<p><img src="./1487393791415.png" alt="Alt text" /></p>
+
+<p><img src="./1487393815563.png" alt="Alt text" /></p>
+
+<p>直接点击 <strong>忽略</strong> ：</p>
+
+<p><img src="./1487393914660.png" alt="Alt text" /></p>
+
+<p>等待大约5分钟：</p>
+
+<p><img src="./1487394450625.png" alt="Alt text" /></p>
+
+<p><img src="./1487394522702.png" alt="Alt text" /></p>
+
+<p><img src="./1487394544788.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在启动 SolidWorks 软件：</p>
+
+<p><img src="./1487394625073.png" alt="Alt text" /></p>
+
+<p>所以，你需要重新破解：</p>
+
+<p>参考网站：</p>
+
+<p>现在我们想点击 <strong>我想以后激活我的SolidWorks产品</strong>，来看看上面出现的问题是否解决了。</p>
+
+<p>问题仍然存在：</p>
+
+<p><img src="./1487394891003.png" alt="Alt text" /></p>
+
+<p>操了！</p>
+
+<hr />
+
+<p>我知道怎么回事了。在<strong>注册表编辑器</strong> 里面添加Installer的路径错了。</p>
+
+<p><img src="./1487397304857.png" alt="Alt text" /></p>
+
+<p><img src="./1487397342762.png" alt="Alt text" /></p>
+
+<p><img src="./1487397374349.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。</p>
+
+<p><img src="./1487405570583.png" alt="Alt text" /></p>
+
+<p>我现在没有办法了，现在的办法是：安装更新的SolidWorks 软件（2016）</p>
+
+<p>请参考这篇笔记：<strong>Windows 10 安装 SolidWorks 2016 Sp5.0</strong></p>
+
+<hr />
+
+<p>2017-2-18 16:12:01</p>
+
+<p>其实可以不用安装 SolidWorks 2016软件，我知道为什么打开的模型会是上面这个样子的了：</p>
+
+<p>那些 “<strong>失效</strong>” 的步骤其实是 被 <strong>压缩</strong> 了。</p>
+
+<p>解决办法就是：我们只需要将这些“<strong>失效</strong>”的步骤给 <strong>解除压缩</strong>即可。</p>
+
+<p><img src="./1487405886362.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>问题解决：</p>
+
+<p><img src="./1487405910127.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1189,68 +1302,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out/">第一次 测试3D打印机 — 出现问题：打不出来</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-18T22:12:49+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:12 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>可能的原因：</p>
-
-<ul>
-<li>料 出的少</li>
-<li>没有热板，地板最好是热的，这样比较容易上料（打第一层的时候。）</li>
-<li>温度没有掌握好</li>
-<li>设置没有配置好</li>
-<li>打第一层的时候，低板与出料头的距离太大。</li>
-</ul>
-
-
-<hr />
-
-<p>2017-1-19 05:33:24</p>
-
-<p>不管了，我这几天，3D打印方面，主要做的方面是：</p>
-
-<ul>
-<li>总结经验</li>
-<li>学习建模型 &mdash; （3D 打印的六足机器人模型 和 URDF中六足机器人的虚拟模型。）</li>
-</ul>
-
-
-<hr />
-
-<p>这个前几层打不上料的问题，现在视乎已经解决了。</p>
-
-<p>解决方法就是，将底板与出料口的距离竟可以的缩短，最好做到0距离。</p>
-
-<hr />
-
-<p>但是现在还有一个问题：开始的时候挺好的，但打一会，就不再出料。这是怎么回事？</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1266,6 +1317,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/">解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
       </li>
     
@@ -1279,10 +1334,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/">Solidworks 如何在曲面添加文字</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a>
       </li>
     
   </ul>
@@ -1308,7 +1359,7 @@
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 154%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 159%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 115%" href="/tags/unicode/">Unicode</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
@@ -1360,7 +1411,7 @@
 <li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (6)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (7)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>

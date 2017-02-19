@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: GdtAnalysisSupport.dll | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/gdtanalysissupport-dot-dll/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-02-19T16:28:40+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/"/>
+    <updated>2017-02-19T16:28:11+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：<code>无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll</code></p>
+
+<p><img src="./1487392359179.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>参考网站：<a href="http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html">http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html</a></p>
+
+<p>参考</p>
+
+<p><img src="./1487393791415.png" alt="Alt text" /></p>
+
+<p><img src="./1487393815563.png" alt="Alt text" /></p>
+
+<p>直接点击 <strong>忽略</strong> ：</p>
+
+<p><img src="./1487393914660.png" alt="Alt text" /></p>
+
+<p>等待大约5分钟：</p>
+
+<p><img src="./1487394450625.png" alt="Alt text" /></p>
+
+<p><img src="./1487394522702.png" alt="Alt text" /></p>
+
+<p><img src="./1487394544788.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在启动 SolidWorks 软件：</p>
+
+<p><img src="./1487394625073.png" alt="Alt text" /></p>
+
+<p>所以，你需要重新破解：</p>
+
+<p>参考网站：</p>
+
+<p>现在我们想点击 <strong>我想以后激活我的SolidWorks产品</strong>，来看看上面出现的问题是否解决了。</p>
+
+<p>问题仍然存在：</p>
+
+<p><img src="./1487394891003.png" alt="Alt text" /></p>
+
+<p>操了！</p>
+
+<hr />
+
+<p>我知道怎么回事了。在<strong>注册表编辑器</strong> 里面添加Installer的路径错了。</p>
+
+<p><img src="./1487397304857.png" alt="Alt text" /></p>
+
+<p><img src="./1487397342762.png" alt="Alt text" /></p>
+
+<p><img src="./1487397374349.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。</p>
+
+<p><img src="./1487405570583.png" alt="Alt text" /></p>
+
+<p>我现在没有办法了，现在的办法是：安装更新的SolidWorks 软件（2016）</p>
+
+<p>请参考这篇笔记：<strong>Windows 10 安装 SolidWorks 2016 Sp5.0</strong></p>
+
+<hr />
+
+<p>2017-2-18 16:12:01</p>
+
+<p>其实可以不用安装 SolidWorks 2016软件，我知道为什么打开的模型会是上面这个样子的了：</p>
+
+<p>那些 “<strong>失效</strong>” 的步骤其实是 被 <strong>压缩</strong> 了。</p>
+
+<p>解决办法就是：我们只需要将这些“<strong>失效</strong>”的步骤给 <strong>解除压缩</strong>即可。</p>
+
+<p><img src="./1487405886362.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>问题解决：</p>
+
+<p><img src="./1487405910127.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
+  
+</feed>
