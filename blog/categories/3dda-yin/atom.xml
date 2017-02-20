@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 3d打印 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/3dda-yin/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-20T19:30:49+08:00</updated>
+  <updated>2017-02-20T22:38:24+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -232,9 +232,9 @@ g1 z0
 
 <p>现在，我已经测试打印了。已经打印完成，效果超级的好。</p>
 
-<p><img src="./1485166756931.png" alt="Alt text | 240x0" /> <img src="/images/2017-2-19-3D-printer-hot-bed/1485166773479.png" alt="Alt text | 240x0" /></p>
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485166756931.png" alt="Alt text | 240x0" /> <img src="/images/2017-2-19-3D-printer-hot-bed/1485166773479.png" alt="Alt text | 240x0" /></p>
 
-<p><img src="./1485166785899.png" alt="Alt text | 240x0" /> <img src="./1485166799917.png" alt="Alt text | 240x0" /></p>
+<p><img src="/images/2017-2-19-3D-printer-hot-bed/1485166785899.png" alt="Alt text | 240x0" /> <img src="/images/2017-2-19-3D-printer-hot-bed/1485166799917.png" alt="Alt text | 240x0" /></p>
 
 <p>只是美中不足就是这个开始答应的时候，（1）我发现底板它不怎么爱粘料。（2）并且有一个边，在打印的时候，它打印出来是料是悬空的。</p>
 
@@ -615,11 +615,11 @@ g1 z0
 
 <p>经过了接近两个小时的打印，得到了最终的结果：</p>
 
-<p><img src="./1485390402045.png" alt="Alt text | 480x0" /></p>
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390402045.png" alt="Alt text | 480x0" /></p>
 
-<p><img src="./1485390431885.png" alt="Alt text | 480x0" /></p>
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390431885.png" alt="Alt text | 480x0" /></p>
 
-<p><img src="./1485390455275.png" alt="Alt text | 480x0" /></p>
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390455275.png" alt="Alt text | 480x0" /></p>
 
 <p>从得到的结果，我们可以看到，从窄到宽的两个部分都不怎么好。</p>
 
