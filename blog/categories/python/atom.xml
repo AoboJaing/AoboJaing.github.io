@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T00:02:15+08:00</updated>
+  <updated>2017-02-21T00:25:04+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/"/>
+    <updated>2017-02-21T00:17:30+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>开发环境</h2>
+
+<ul>
+<li>Python第三方库：lxml、Twisted、pywin32、scrapy</li>
+<li>Python 版本：python-3.5.0-amd64</li>
+<li>PyCharm软件版本：pycharm-professional-2016.1.4</li>
+<li>电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<p>如果你还没有搭建好开发环境，请到<a href="http://www.aobosir.com/blog/2016/11/26/python3-large-web-crawler-001-Build-development-environment/">这篇博客</a>。</p>
+
+<hr />
+
+<h2></h2>
+
+<p>例子程序在这里：</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 008 正则表达式-006 正则表达式中如果有换行，代码要怎么写]]></title>
@@ -283,35 +310,6 @@ print(res_path)
 <p>运行输出：</p>
 
 <pre><code>D:\WorkSpace\test_ws\笔记
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Python 027 解决错误：SyntaxError: Non-UTF-8 Code Starting With '\xc8' in File xxxx.py]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file/"/>
-    <updated>2016-12-01T17:37:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/01/SyntaxError-Non-UTF-8-code-starting-with-in-file</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>出现这个错误，是因为<code>xxxx.py</code> 文件里面有中文字符。</p>
-
-<p>解决办法：在文件第一行，加上下面的代码：</p>
-
-<pre><code class="python"># -!- coding: utf-8 -!-
 </code></pre>
 ]]></content>
   </entry>

@@ -9,10 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="[TOC] 开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
-Python 版本：python-3.5.0-amd64
-PyCharm软件版本：pycharm-professional-2016.1.4
-电脑系统：Windows 10 64位 &hellip;">
+  <meta name="description" content="正常的情况： 1
+ifconfig 1
+whoami 1
+ps -e | grep ssh secureCRT软件 不正常的情况：The remote system refused the connection. 如果你遇到这个问题，说明你的Linux系统里面没有安装openssh-server &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,127 @@ PyCharm软件版本：pycharm-professional-2016.1.4
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-26T01:46:45+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>正常的情况：</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ifconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552549436.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>whoami</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552591430.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><strong>secureCRT</strong>软件</p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552633225.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552666663.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552793582.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552803114.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>不正常的情况：The remote system refused the connection.</h2>
+
+<p>如果你遇到这个问题，说明你的Linux系统里面没有安装<code>openssh-server</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install openssh-server</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
+</span><span class='line'> 3834 ?        00:00:00 sshd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行完下面的命令，系统会自动注销（Logout）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-agent restart
+</span><span class='line'># 已经没有这个命令了。替代的方法就是:重启系统或者注销系统。</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在查看一下，现在就可以进入了正常使用的状态。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
+</span><span class='line'> 3834 ?        00:00:00 sshd
+</span><span class='line'> 4116 ?        00:00:00 ssh-agent
+</span><span class='line'>aobosir@ubuntu:~$ </span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在，我们在Windows系统这段使用<strong>SecureCRT</strong>软件连接这个Linux系统，就可以添加成功了。</p>
+
+<p>连接成功之后，我们现在在<strong>SecureCRT</strong>软件连接的Linux系统终端中再次下面命令来查看当前运行着的<strong>ssh</strong>进程有哪些。（现在，我们已经可以在Windows端的<strong>SecureCRT</strong>软件里面控制Linux端了。）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看<strong>Linux</strong>这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））</p>
+
+<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3108,519 +3229,6 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/15/Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/">Intel RealSense 004(Learning RealSense SDK 003) DF_CameraViewer示例讲解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-15T07:01:51+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:01 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我使用的Intel RealSense 硬件：<a href="http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">F200、SR300 和 R200 摄像头</a> 都可以</li>
-<li>Intel RealSense SDK：intel_rs_sdk_offline_package_10.0.26.0396（安装教程<a href="http://www.aobosir.com/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/">这里</a>）</li>
-<li>电脑系统：Windows 10 64位</li>
-<li>编程语言：C++</li>
-<li>开发工具软件：Visual Studio 2010 （安装教程<a href="http://blog.csdn.net/github_35160620/article/details/52365464">这里</a>）</li>
-<li>参考程序所在路径：C:\Program Files (x86)\Intel\RSSDK\sample\DF_CameraViewer\src\camera_viewer.cpp</li>
-<li>示例程序官方文档使用说明：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkmanual-essential.chm -> Sample: DF_CameraViewer [C++]</li>
-</ul>
-
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481755013420.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2><code>DF_</code> 指的是什么</h2>
-
-<p>（在我写的：介绍<a href="http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">F200、SR300 和 R200 摄像头</a> 的博文里面已经有讲过了。）这里直接截个图。</p>
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481751810567.png" alt="Alt text" /></p>
-
-<hr />
-
-<blockquote><p><strong>注意：</strong>Intel RealSense 模块使用时间长了发热会很严重。不要开启太长的时间，并且注意使用散热片散热</p></blockquote>
-
-<h2>在命令行中的使用方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>DF_CameraViewer [-load &lt;module name&gt;] [-sdname &lt;device name&gt;] 
-</span><span class='line'>[-csize &lt;resolution&gt;] [-dsize &lt;resolution&gt;] [-file &lt;Output Filename&gt;] [-listio] [-record] [-help]</span></code></pre></td></tr></table></div></figure>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> Col1      </th>
-<th style="text-align:right;">     Col2 </th>
-<th style="text-align:center;">   Col3   </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> -load </td>
-<td style="text-align:right;">   明确加载指定模块（如果你的电脑上连接了两个Intel RealSense模块，使用这个参数就可以明确指定你要使用哪一个模块） </td>
-<td style="text-align:center;">  field3  </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -csize </td>
-<td style="text-align:right;"> 指定彩色流分辨率和帧速率。 例如，使用640x480指定分辨率，或使用640x480x30指定分辨率和帧速率。 </td>
-<td style="text-align:center;"> <code>DF_CameraViewer -csize 640x480x30</code> 或者 <code>DF_CameraViewer -csize 640x480</code></td>
-</tr>
-<tr>
-<td style="text-align:left;"> -dsize </td>
-<td style="text-align:right;"> 指定深度流分辨率和帧速率。 例如，使用640x480指定分辨率，或使用640x480x30指定分辨率和帧速率。 </td>
-<td style="text-align:center;"> <code>DF_CameraViewer -dsize 640x480x30</code> 或者 <code>DF_CameraViewer -dsize 640x480</code> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -sdname </td>
-<td style="text-align:right;"> 指定一个输入设备名称 </td>
-<td style="text-align:center;"> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -nframes </td>
-<td style="text-align:right;">  指定要显示的最大帧数。就是刷新多少次显示的图片。比如设置为200，那么帧数刷新200次，程序自动结束。 </td>
-<td style="text-align:center;"> <code>DF_CameraViewer –nframes 200</code> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -listio </td>
-<td style="text-align:right;"> 列出I/O 设备列表 </td>
-<td style="text-align:center;"> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -record </td>
-<td style="text-align:right;"> 启用文件记录。 如果使用这个参数，就必须要还要使用-file参数指定记录文件名 </td>
-<td style="text-align:center;"> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -file </td>
-<td style="text-align:right;"> 录像或者播放指定文件名。 如果未指定-record，则程序将播放指定的文件。 否则，示例将摄像机数据记录到指定的文件。 （注意:指定的路径一定要有可写的权限。）</td>
-<td style="text-align:center;"> </td>
-</tr>
-<tr>
-<td style="text-align:left;"> -help </td>
-<td style="text-align:right;"> 输出帮助信息 </td>
-<td style="text-align:center;"> </td>
-</tr>
-</tbody>
-</table>
-
-
-<hr />
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;DF_CameraViewer -help
-</span><span class='line'>Usage: [options]
-</span><span class='line'>-csize 640x480x30             Set the source device color resolution and frame rate
-</span><span class='line'>-dsize 320x240x60             Set the source device depth resolution and frame rate
-</span><span class='line'>-isize 640x480x30             Set the source device IR resolution and frame rate
-</span><span class='line'>-file FILENAME                Specify playback (or recording) file
-</span><span class='line'>-record                       Use together with -file to enable recording
-</span><span class='line'>-nframes 350                  Record specific number of frames then exit
-</span><span class='line'>-sdname Integrated            Specify the source device by its partial name
-</span><span class='line'>-listio                       List all I/O devices
-</span><span class='line'>-noRender                     Disable rendering of all streams
-</span><span class='line'>-mirror                       Enable MIRROR_MODE_HORIZONTAL
-</span><span class='line'>-help                         This help</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>在命令行中运行程序</h2>
-
-<p>下面简单的使用几个命令，来通过实战了解各个参数的作用。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;DF_CameraViewer.exe</span></code></pre></td></tr></table></div></figure>
-
-
-<p>默认输出两个图片，一个是彩色图片（1080p），一个是深度图片（640x480）。（彩色图片太大了，这里只截了一半的图）</p>
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481665036586.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;DF_CameraViewer.exe -csize 640x480 -dsize 640x480 -isize 640x480
-</span><span class='line'>（注意：640x480, 使用的是字母 x ）</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出三个图片：彩色图片、深度图片、红外线图片</p>
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481662595704.png" alt="Alt text" /></p>
-
-<hr />
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;DF_CameraViewer.exe -csize 640x480 -dsize 640x480 -isize 640x480 -mirror</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输出的是镜面图像。</p>
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481664965270.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>讲解程序</h2>
-
-<p><strong>DF_CameraViewer</strong>示例是一个简单的<strong>C ++控制台应用程序</strong>。从这个示例程序，我们<strong>可以学到：如何从 Intel RealSense模块 以数据流的形式获取彩色图像和深度图像（或者其他图像）</strong>。</p>
-
-<p><strong>1 . </strong> 创建了一个<code>PXCSenseManager</code>（RealSense管理器）类的实例化对象：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">PXCSenseManager</span> <span class="o">*</span><span class="n">pp</span> <span class="o">=</span> <span class="n">PXCSenseManager</span><span class="o">::</span><span class="n">CreateInstance</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>注：</p>
-
-<ul>
-<li>Intel的RealSense SDK 的C++的：接口全部携带“<code>PXC</code>”前缀、 顶层枚举器全部携带“<code>pxc</code>”前缀、实用程序类全部携带“<code>Util</code>”前缀。</li>
-<li>Intel RealSense SDK C#使用类似的前缀方案，但在末尾加一个“<code>M</code>”（代表“管理”的意思）：接口携带“<code>PXCM</code>”前缀、 顶层枚举器携带“<code>pxcm</code>”前缀、实用程序类携带“<code>UtilM</code>”前缀。</li>
-<li>如果你在网上搜索资料时看到："PXC[M]&ldquo;, "pxc[m]&rdquo; 和 &ldquo;Util[M]"，这表示这个资料是C++ 和 C#都可以使用的资料。里面使用"PXC[M]&rdquo;, &ldquo;pxc[m]&rdquo; 和 &ldquo;Util[M]&rdquo; 标注的接口和函数，如果替换成 “<code>PXC</code>”、“<code>pxc</code>” 和 “<code>Util</code>”，那么就是C++程序；反之，如果替换成“<code>PXCM</code>”、“<code>pxcm</code>” 和 “<code>UtilM</code>”，那么就是C#程序。</li>
-<li>“<code>PXC</code>” 是全称是：？2016-12-13 07:01:17 <a href="https://software.intel.com/en-us/forums/realsense/topic/601434">https://software.intel.com/en-us/forums/realsense/topic/601434</a> 这个我还不太清楚，应该是：Perceptual eXperience Coding</li>
-</ul>
-
-
-<hr />
-
-<p><strong>2 . </strong> 程序接下来，检查是否<code>pp</code>这个对象是否创建成功：（这个就是一个检测类的实例化对象是否创建成功的代码。电脑不插Intel RealSense模块， 这段代码也可以正常执行。）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pp</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">wprintf_s</span><span class="p">(</span><span class="s">L&quot;Unable to create the SenseManager</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>获取命令行参数：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">UtilCmdLine</span> <span class="nf">cmdl</span><span class="p">(</span><span class="n">pp</span><span class="o">-&gt;</span><span class="n">QuerySession</span><span class="p">());</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cmdl</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="s">L&quot;-listio-nframes-sdname-csize-dsize-isize-lsize-rsize-file-record-noRender-mirror&quot;</span><span class="p">,</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">)){</span>
-</span><span class='line'>  <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中<code>QuerySession()</code>方法返回的是一个<code>Session</code>类的实例化对象。</p>
-
-<p><code>UtilCmdLine</code> 这个类里面的<code>Parse()</code>方法会自动将<code>-listio-nframes-sdname-csize-dsize-isize-lsize-rsize-file-record-noRender-mirror</code>这一长串的字符串还有命令行参入的参数转换为一些数值，然后分配给<code>UtilCmdLine</code>类里面的一些变量：（<code>util_cmdline.h</code>文件所在路径：  <code>C:\Program Files (x86)\Intel\RSSDK\sample\common\include</code>）</p>
-
-<p><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481595578366.png" alt="Alt text" /></p>
-
-<blockquote><p>注意：这个<code>QuerySession()</code>方法返回的<code>Session</code>实例化对象（<code>pp-&gt;QuerySession()</code>）是存储在<code>PXCSenseManager</code>类（就是<code>pp</code>这个实例化对象）里面的，所以，你不可以手动释放它（<code>pp-&gt;QuerySession()</code>）。</p></blockquote>
-
-<hr />
-
-<p><strong>3 . </strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/* Sets file recording or playback */</span>
-</span><span class='line'><span class="n">PXCCaptureManager</span> <span class="o">*</span><span class="n">cm</span><span class="o">=</span><span class="n">pp</span><span class="o">-&gt;</span><span class="n">QueryCaptureManager</span><span class="p">();</span>
-</span><span class='line'><span class="n">cm</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_recordedFile</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_bRecord</span><span class="p">);</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_sdname</span><span class="p">)</span> <span class="n">cm</span><span class="o">-&gt;</span><span class="n">FilterByDeviceInfo</span><span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_sdname</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>定义了一个<code>PXCCaptureManager</code>（捕获管理器）对象。</li>
-<li>来到<code>cmdl.m_recordedFile</code>这个路径（如果你没有在命令行中指定<code>-file</code>参数，那么这段代码执行没有什么效果。第二个参数<code>cmdl.m_bRecord</code>，判断是播放还是录制。）</li>
-<li>如果在命令行中指定了<code>-sdname</code>参数，那么就在这里设定使用指定的Intel RealSense设备。</li>
-</ul>
-
-
-<hr />
-
-<p><strong>4 . </strong></p>
-
-<p>创建了几个<code>UtilRender</code>类的实例对象。它们分别是：彩色图像显示流、深度图像显示流、红外激光显示流、右摄像头显示流、左摄像头显示流。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// Create stream renders</span>
-</span><span class='line'><span class="n">UtilRender</span> <span class="nf">renderc</span><span class="p">(</span><span class="s">L&quot;Color&quot;</span><span class="p">),</span> <span class="n">renderd</span><span class="p">(</span><span class="s">L&quot;Depth&quot;</span><span class="p">),</span> <span class="n">renderi</span><span class="p">(</span><span class="s">L&quot;IR&quot;</span><span class="p">),</span> <span class="n">renderr</span><span class="p">(</span><span class="s">L&quot;Right&quot;</span><span class="p">),</span> <span class="n">renderl</span><span class="p">(</span><span class="s">L&quot;Left&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="n">pxcStatus</span> <span class="n">sts</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>注：C++的字符串前面的<code>L</code>的作用： <code>L"我的字符串"</code>    表示将ANSI字符串转换成unicode的字符串</p></blockquote>
-
-<hr />
-
-<p><strong>5 . </strong></p>
-
-<p>接下来，根据命令行传入的参数进行相应的设置：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">do</span> <span class="p">{</span>
-</span><span class='line'>    <span class="cm">/* Apply command line arguments */</span>
-</span><span class='line'>    <span class="n">pxcBool</span> <span class="n">revert</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_IR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_RIGHT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_LEFT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">PXCVideoModule</span><span class="o">::</span><span class="n">DataDesc</span> <span class="n">desc</span><span class="o">=</span><span class="p">{};</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cm</span><span class="o">-&gt;</span><span class="n">QueryCapture</span><span class="p">())</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">cm</span><span class="o">-&gt;</span><span class="n">QueryCapture</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">QueryDeviceInfo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">desc</span><span class="p">.</span><span class="n">deviceInfo</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">desc</span><span class="p">.</span><span class="n">deviceInfo</span><span class="p">.</span><span class="n">streams</span> <span class="o">=</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span> <span class="o">|</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">revert</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStreams</span><span class="p">(</span><span class="o">&amp;</span><span class="n">desc</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使能某个显示流显示窗口的方法是：<code>pp-&gt;EnableStream()</code></p>
-
-<p>如果你给上面的程序的每一个<code>if</code>判断语句内部添加上注释（像下面这样），然后再在命令行中使用命令运行程序。你就知道了，这些程序是怎么执行的了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">do</span> <span class="p">{</span>
-</span><span class='line'>    <span class="cm">/* Apply command line arguments */</span>
-</span><span class='line'>    <span class="n">pxcBool</span> <span class="n">revert</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_csize.size() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_COLOR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_csize.front().first.width=%d, cmdl.m_csize.front().first.height=%d, cmdl.m_csize.front().second=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_csize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_dsize.size() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_DEPTH</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_dsize.front().first.width=%d, cmdl.m_dsize.front().first.height=%d, cmdl.m_dsize.front().second=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_dsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_isize.size() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_IR</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_isize.front().first.width=%d, cmdl.m_isize.front().first.height=%d, cmdl.m_isize.front().second=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_isize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_rsize.size() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_RIGHT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_rsize.front().first.width=%d, cmdl.m_rsize.front().first.height=%d, cmdl.m_rsize.front().second=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_rsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_lsize.size() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">pp</span><span class="o">-&gt;</span><span class="n">EnableStream</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">STREAM_TYPE_LEFT</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="p">(</span><span class="n">pxcF32</span><span class="p">)</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;cmdl.m_lsize.front().first.width=%d, cmdl.m_lsize.front().first.height=%d, cmdl.m_lsize.front().second=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">cmdl</span><span class="p">.</span><span class="n">m_lsize</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>如果有时程序秒退的话，你可以在<code>return</code>之前加上：<code>system("pause");</code>这样一段代码，让程序先暂停到这。</p></blockquote>
-
-<hr />
-
-<p><strong>6 . </strong></p>
-
-<p>下面的代码是对命令行传入的 <code>-mirror</code> 参数进行处理：是否对图像进行镜像配置。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>    <span class="cm">/* Set mirror mode */</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_bMirror</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetMirrorMode</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">Device</span><span class="o">::</span><span class="n">MirrorMode</span><span class="o">::</span><span class="n">MIRROR_MODE_HORIZONTAL</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetMirrorMode</span><span class="p">(</span><span class="n">PXCCapture</span><span class="o">::</span><span class="n">Device</span><span class="o">::</span><span class="n">MirrorMode</span><span class="o">::</span><span class="n">MIRROR_MODE_DISABLED</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>7 . </strong> 下面显示图片：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">cmdl</span><span class="p">.</span><span class="n">m_bNoRender</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">const</span> <span class="n">PXCCapture</span><span class="o">::</span><span class="n">Sample</span> <span class="o">*</span><span class="n">sample</span> <span class="o">=</span> <span class="n">pp</span><span class="o">-&gt;</span><span class="n">QuerySample</span><span class="p">();</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">depth</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderd</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">depth</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">color</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderc</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">color</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">ir</span>    <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderi</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">ir</span><span class="p">))</span>    <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderr</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">renderl</span><span class="p">.</span><span class="n">RenderFrame</span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">))</span>  <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参考文献：C:\Program Files (x86)\Intel\RSSDK\doc\CHM\sdkmanual-essential.chm -> QuerySample</p>
-
-<ul>
-<li><code>QuerySample()</code>函数可以返回所有可能存在的图片样本。</li>
-<li>如果不给<code>QuerySample()</code>函数不传入任何形参，那么它将返回一个<code>Sample</code>结构体，这个结构体里面包含了所有的可能存在的图片样本。<strong>[</strong>可能存在的图片样本：depth（深度图像）、color（彩色图像）、ir（红外线图像）、right（右图像）、left（左图像）。<strong>]</strong> （下图就是<code>Sample</code>结构体其中一部分）
-
-<ul>
-<li><img src="/images/2016-12-14-Intel-RealSense-SDK-DF_CameraViewer-cpp-code-sample-explain/1481666053928.png" alt="Alt text" /></li>
-</ul>
-</li>
-<li>如果给<code>QuerySample()</code>函数传入一个指定的参数，那么它将只返回对应参数的图片样本。</li>
-<li>如果你给<code>QuerySample()</code>函数传入一个参数，是你当前使用的Intel RealSense模块没有的设备，那么<code>QuerySample()</code>函数会返回<code>NULL/null</code>。<strong>（</strong>比如说：我们当前使用的Intel RealSense模块是SR300，它没有right Camera 和 left Camera设备，所以如果你给<code>QuerySample()</code>函数传入<code>sample-&gt;right</code> 或者 <code>sample-&gt;left</code>参数，那么<code>QuerySample()</code>函数将返回<code>NULL/null</code>。R200版的Intel RealSense模块是具备right Camera 和 left Camera设备的，所以如果你当前使用的是R200，那么给<code>QuerySample()</code>函数传入<code>sample-&gt;right</code> 或者 <code>sample-&gt;left</code>参数，<code>QuerySample()</code>函数会返回<code>sample-&gt;right</code> 或者 <code>sample-&gt;left</code>对应的图片样本。<strong>）</strong></li>
-</ul>
-
-
-<p>上面的代码中，类似<code>if (sample-&gt;depth &amp;&amp; !renderd.RenderFrame(sample-&gt;depth)) break;</code>这样的代码一共有5句。它们分别处理：depth（深度图像）、color（彩色图像）、ir（红外线图像）、right（右图像）、left（左图像）。</p>
-
-<hr />
-
-<p>下面以深度图像为例，讲解：</p>
-
-<ul>
-<li>第一个判断条件：有没有得到深度图片<code>sample-&gt;depth</code>。如果没有直接<code>break</code>，第二个判断条件不会执行。</li>
-<li>第二个判断条件：<code>RenderFrame()</code>函数是<code>UtilRender</code>类中的一个方法，它用来显示传入的形参图片，并返回一个<code>bool</code>类型数据，如果成功显示，返回<code>true</code>，否则返回<code>false</code>。</li>
-</ul>
-
-
-<p>那么对于深度图像<code>sample-&gt;depth</code>，伪码就应该是下面这样的。所以不执行<code>break;</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">if</span><span class="p">(</span><span class="nb">true</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">true</span><span class="p">)</span>  <span class="k">break</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>对于右图像<code>sample-&gt;right</code>，它的伪码是下面这样的（当前使用的是SR300）。所以也不执行<code>break;</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">if</span><span class="p">(</span><span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">false</span><span class="p">)</span>    <span class="k">break</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>程序会正常的执行，图片会正常的显示。那么什么时候图片会不正常显示呢：当执行到<code>break;</code>，图片就不显示了。执行到<code>break</code>说明判断语句是<code>if(true &amp;&amp; !false)</code>这样的状态。说明图片我们会得到了，但是在显示的时候失败了。</p></blockquote>
-
-<hr />
-
-<h2>讲解完毕</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -3638,6 +3246,10 @@ PyCharm软件版本：pycharm-professional-2016.1.4
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/">Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/">SolidWorks 如何使用 边界切除 工具</a>
       </li>
     
@@ -3651,10 +3263,6 @@ PyCharm软件版本：pycharm-professional-2016.1.4
     
       <li class="post">
         <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
       </li>
     
   </ul>
@@ -3675,7 +3283,7 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
-<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -3697,10 +3305,10 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
-<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
@@ -3729,14 +3337,14 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
-<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
 <li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (7)</a></li>

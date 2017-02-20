@@ -9,15 +9,27 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="对于PCL在Windows和Linux上的环境的搭建请参考我写的这几篇博客。 1
-#include &lt;pcl/console/time.h&gt; 1
+  <meta name="description" content="如何使用 pcl 库里面的可视化模块的键盘事件 1
 2
 3
 4
 5
 6
-pcl::console::TicToc tt;
-tt.tic (); //需要记录执行多长时间的代码 std:: &hellip;">
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+#include &lt;pcl/visualization/pcl_visualizer.h&gt; bool iteration_flag &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +86,135 @@ tt.tic (); //需要记录执行多长时间的代码 std:: &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/08/pcl-visualization-PCLVisualizer-register-keyboard-callback/">PCL 使用 pcl::visualization::PCLVisualizer 类里面的键盘事件方法 如何使用及需要注意的事项</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-08T14:16:42+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>2:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>如何使用 pcl 库里面的可视化模块的键盘事件</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;pcl/visualization/pcl_visualizer.h&gt;
+</span><span class='line'>
+</span><span class='line'>bool iteration_flag = false;
+</span><span class='line'>
+</span><span class='line'>void keyboardEventOccurred(const pcl::visualization::KeyboardEvent& event, void* nothing){
+</span><span class='line'>  if(event.getKeySym() == "space" && event.keyDown()){
+</span><span class='line'>      iteration_flag = true;
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main(){
+</span><span class='line'>  pcl::visualization::PCLVisualizer *p;
+</span><span class='line'>  p = new pcl::visualization::PCLVisualizer("PCL Windows");
+</span><span class='line'>  p-&gt;registerKeyboardCallback(&keyboardEventOccurred, (void*)NULL);
+</span><span class='line'>  
+</span><span class='line'>  while(iteration_flag != true){
+</span><span class='line'>      p-&gt;spinOnce();
+</span><span class='line'>  }
+</span><span class='line'>  return 0;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>需要注意的事项：</h2>
+
+<p>第一个：就是，你定义的这个<code>p</code>指针，必须要给它赋值实例化对象：<code>p = new pcl::visualization::PCLVisualizer("PCL Windows");</code>，否则程序编译不会出现错误，但是运行的时候会出现内存异常的运行错误。</p>
+
+<hr />
+
+<p>第二个：就是这个自定义的键盘事件函数了：<code>keyboardEventOccurred()</code>函数。想要让这个函数可以使用，我们不需要再程序中循环的调用<code>p-&gt;spinOnce()</code>方法，程序才能响应我们的这个键盘事件函数。</p>
+
+<hr />
+
+<p>第三个：一个也非常重要：其实上面的代码中，这段程序是不安全的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">iteration_flag</span> <span class="o">!=</span> <span class="nb">true</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">spinOnce</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因为如何程序在这个地方一直的执行，如果你可视化的是一个点比较多的点云，那么一段时间后（大约不到5秒钟），你的电脑就会卡得要死！！！！</p>
+
+<p>安全的程序应该是下面这个样子的：（参考网站：<a href="http://pointclouds.org/documentation/tutorials/pcl_visualizer.php#pcl-visualizer">这里</a>）</p>
+
+<p>我们添加延时函数，不让它一直执行<code>spinOnce()</code>方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;boost/thread/thread.hpp&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="n">iteration_flag</span> <span class="o">!=</span> <span class="nb">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">spinOnce</span> <span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">boost</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">microseconds</span> <span class="p">(</span><span class="mi">100000</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<a href="http://docs.pointclouds.org/trunk/classpcl_1_1visualization_1_1_p_c_l_visualizer.html#a896556f91ba6b45b12a9543a2b397193"><code>spinOnce()</code>函数</a>里面的<code>100</code>指的是：<strong>How long (in ms) should the visualization loop be allowed to run.</strong></p>
+
+<p><img src="/images/2017-2-8-pcl-visualization-PCLVisualizer-register-keyboard-callback/1486533744923.png" alt="Alt text" /></p>
+
+<p>其中的<code>boost::this_thread::sleep (boost::posix_time::microseconds (100000));</code>是延时100000微秒，也就是0.1秒。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -942,127 +1083,6 @@ sudo apt-get install libboost-dev
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/26/SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/">Windows上使用SecureCRT软件连接Linux终端 — 解决问题；the Remote System Refused the Connection</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-26T01:46:45+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>正常的情况：</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ifconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552549436.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>whoami</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552591430.png" alt="Alt text" /></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><strong>secureCRT</strong>软件</p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552633225.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552666663.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552793582.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552803114.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>不正常的情况：The remote system refused the connection.</h2>
-
-<p>如果你遇到这个问题，说明你的Linux系统里面没有安装<code>openssh-server</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install openssh-server</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
-</span><span class='line'> 3834 ?        00:00:00 sshd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行完下面的命令，系统会自动注销（Logout）。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh-agent restart
-</span><span class='line'># 已经没有这个命令了。替代的方法就是:重启系统或者注销系统。</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在查看一下，现在就可以进入了正常使用的状态。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobosir@ubuntu:~$ ps -e | grep ssh
-</span><span class='line'> 3834 ?        00:00:00 sshd
-</span><span class='line'> 4116 ?        00:00:00 ssh-agent
-</span><span class='line'>aobosir@ubuntu:~$ </span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在，我们在Windows系统这段使用<strong>SecureCRT</strong>软件连接这个Linux系统，就可以添加成功了。</p>
-
-<p>连接成功之后，我们现在在<strong>SecureCRT</strong>软件连接的Linux系统终端中再次下面命令来查看当前运行着的<strong>ssh</strong>进程有哪些。（现在，我们已经可以在Windows端的<strong>SecureCRT</strong>软件里面控制Linux端了。）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps -e | grep ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查看<strong>Linux</strong>这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））</p>
-
-<p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1080,6 +1100,10 @@ sudo apt-get install libboost-dev
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/">Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/">SolidWorks 如何使用 边界切除 工具</a>
       </li>
     
@@ -1093,10 +1117,6 @@ sudo apt-get install libboost-dev
     
       <li class="post">
         <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
       </li>
     
   </ul>
@@ -1117,7 +1137,7 @@ sudo apt-get install libboost-dev
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
-<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -1139,10 +1159,10 @@ sudo apt-get install libboost-dev
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
-<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
@@ -1171,14 +1191,14 @@ sudo apt-get install libboost-dev
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
-<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
 <li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (7)</a></li>

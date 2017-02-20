@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 3.5.0 学习这个知识点的原因 举一个实例： Octopress站点路径里面博文文件（.markdown后缀文件）必须要是以UTF- &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 学习Python的内存释放知识点的动机 之前我学过很多Python的程序，偶然的一次，我打开任务管理器， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,198 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/30/python2-python3-Memory-release-gc/">Learning Python 017 — Python2 和 Python3 的内存释放</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-30T13:34:56+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>学习Python的内存释放知识点的动机</h2>
+
+<p>之前我学过很多Python的程序，偶然的一次，我打开任务管理器，看到我写的程序，运行时占用了大量的内存，所以，我希望学会如何释放内存，来优化我的程序，也不给电脑照成太大的负担，所以，我想学会：Python的内存释放这个知识点。</p>
+
+<hr />
+
+<p>参考网站： <a href="http://qinqianshan.com/python-memory-the-gc-module-released/">gc模块–Python内存释放</a></p>
+
+<p>下面写几个实验程序，里面都是使用<code>range()</code> 函数来分配内存空间的。<code>range()</code>函数的详细介绍，请见这篇博客：<a href="http://www.aobosir.com/blog/2016/11/30/python2-python3-range-function/">range()函数在python2 和 python3中的使用介绍</a>。</p>
+
+<h2>Python2 内存释放</h2>
+
+<p>未优化前的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424648330.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>优化内存的代码：</p>
+
+<p>使用手动释放内存的方法来优化内存。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看出，占用的内存空间明显减小了。</p>
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424705571.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>既优化了内存，也优化了CPU 的代码</p>
+
+<p>使用睡眠来优化CPU运行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480424877933.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>Python3 内存释放</h2>
+
+<p>未优化前的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用Python3库运行未优化的代码，所需要的消耗的内存空间和使用Python2运行优化内存的代码消耗的内存空间 差不多。</p>
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480433041923.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>优化内存的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看出，所暂用的内存空间没有任何增减。</p>
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480432975323.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>既优化了内存，也优化了CPU 的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">gc</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="k">del</span> <span class="n">a</span>
+</span><span class='line'><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2016-11-30-python2-python3-Memory-release-gc/1480432888777.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>总结</h2>
+
+<p>Python3 真的是比 Python2 更加的完善了，从这一点上也可以看出来，Python语言是第4代语言里面非常杰出的语言。随着它的不断发展，它会运行速度慢和内存消耗大的缺点会慢慢的消失（因为：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/chapters/p15_c_extensions.html">许多Python内置库是用C语言写的</a>）。我看好Python。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1523,451 +1715,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/26/python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/">Python3 解决编码问题： `UnicodeEncodeError: 'Gbk' Codec Can't Encode Character '\xa0' in Position 10: Illegal Multibyte Sequence` --- 当执行爬虫将爬取信息打印到终端时出现的编码错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-26T17:37:35+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>Python 版本：python-3.5.0-amd64</li>
-</ul>
-
-
-<hr />
-
-<p>目标网站：<a href="http://blog.csdn.net/">http://blog.csdn.net/</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
-</span><span class='line'>    <span class="c"># print(item[&#39;title&#39;])</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])):</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;第&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;篇文章：&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;detail&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;---------&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">item</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>出现的错误</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-<span class='line-number'>156</span>
-<span class='line-number'>157</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">firstdemo</span><span class="o">&gt;</span><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">csdn</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">58</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Scrapy</span> <span class="mf">1.2</span><span class="o">.</span><span class="mi">1</span> <span class="n">started</span> <span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">firstdemo</span><span class="p">)</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">58</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Overridden</span> <span class="n">settings</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;SPIDER_MODULES&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;firstdemo.spiders&#39;</span><span class="p">],</span> <span class="s">&#39;BOT_NAME&#39;</span><span class="p">:</span> <span class="s">&#39;firstdemo&#39;</span><span class="p">,</span> <span class="s">&#39;NEWSPIDER_MODULE&#39;</span><span class="p">:</span> <span class="s">&#39;firstdemo.spiders&#39;</span><span class="p">}</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">58</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Enabled</span> <span class="n">extensions</span><span class="p">:</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;scrapy.extensions.logstats.LogStats&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.extensions.corestats.CoreStats&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.extensions.telnet.TelnetConsole&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Enabled</span> <span class="n">downloader</span> <span class="n">middlewares</span><span class="p">:</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.useragent.UserAgentMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.retry.RetryMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.redirect.RedirectMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.cookies.CookiesMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.downloadermiddlewares.stats.DownloaderStats&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Enabled</span> <span class="n">spider</span> <span class="n">middlewares</span><span class="p">:</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;scrapy.spidermiddlewares.httperror.HttpErrorMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.spidermiddlewares.offsite.OffsiteMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.spidermiddlewares.referer.RefererMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.spidermiddlewares.urllength.UrlLengthMiddleware&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scrapy.spidermiddlewares.depth.DepthMiddleware&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Enabled</span> <span class="n">item</span> <span class="n">pipelines</span><span class="p">:</span>
-</span><span class='line'><span class="p">[</span><span class="s">&#39;firstdemo.pipelines.FirstdemoPipeline&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Spider</span> <span class="n">opened</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Crawled</span> <span class="mi">0</span> <span class="n">pages</span> <span class="p">(</span><span class="n">at</span> <span class="mi">0</span> <span class="n">pages</span><span class="o">/</span><span class="nb">min</span><span class="p">),</span> <span class="n">scraped</span> <span class="mi">0</span> <span class="n">items</span> <span class="p">(</span><span class="n">at</span> <span class="mi">0</span> <span class="n">items</span><span class="o">/</span><span class="nb">min</span><span class="p">)</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">DEBUG</span><span class="p">:</span> <span class="n">Telnet</span> <span class="n">console</span> <span class="n">listening</span> <span class="n">on</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6023</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">DEBUG</span><span class="p">:</span> <span class="n">Crawled</span> <span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/&gt;</span> <span class="p">(</span><span class="n">referer</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
-</span><span class='line'><span class="err">第</span><span class="mi">1</span><span class="err">篇文章：</span>
-</span><span class='line'><span class="n">JSTL</span> <span class="err">标签大全详解</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">59</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">ERROR</span><span class="p">:</span> <span class="n">Error</span> <span class="n">processing</span> <span class="p">{</span><span class="s">&#39;detail&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;1、什么是JSTL？</span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> &#39;</span>
-</span><span class='line'>            <span class="s">&#39;JSTL是apache对EL表达式的扩展（也就是说JSTL依赖EL），JSTL是标签语言！JSTL标签使用以来非常方便，它与JSP动作标签一样，只不过它不是JSP内...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;你是否为调试第三方SDK时debug签名和release签名发生冲突而烦恼？你是否在debug时第三方功能测试通过，而release时无法使用？你是否在为对接微信、支付宝、地图因签名导致的问题而烦恼？...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  接上篇，今天要说的，和上篇的类似，只是方向是有相反的两面，我们先看下效果  实际上这样就导致了我们的代码是...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;一个类在被加载到内存之前要经过加载、验证、准备等过程。经过这些过程之后，虚拟机才会从方法区将代表类的运行时数据结构转换为内存中的Class。</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;我们这节内容的重点在于一个类是如何被加载的，所以我们从类...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;今天遇到一个问题是关于仿射变换的，但是由于没有将仿射变换的具体原理型明白，看别人的代码看的很费解，最后终于在师兄的帮助下将原理弄明白了，我觉得最重要的是理解 仿射变换可以看成是几种简单变换的复合实现，</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;开发环境准备首先你要搭建好React Native for Android开发环境， 没有搭建好的可以参考：React &#39;</span>
-</span><span class='line'>            <span class="s">&#39;Native for Android Windows环境搭建  用Android...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;TCP三次握手四次挥手详解&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;秋招收官最后一战。</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;腾讯一面（电话）：</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;自我介绍</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;项目，平时怎么学习？</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;设计模式 </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;（1）知道哪些设计模式？设计模式在Android、Java中是怎么应用的，每个都说一下？ </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;（2）InputStre...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;实现一个简单的呈现/解散动画效果，当呈现时，呈现的主要内容和背景要明显区分，背景呈现一个半透明遮罩效果，透过背景可以看到下层 &#39;</span>
-</span><span class='line'>            <span class="s">&#39;View Controller 的内容&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;概述前面的3篇博文分别对lazyAndroid的框架简介、元素抓取和核心API进行了说明，本文将基于框架给出的测试模板工程，详细阐述下使用该框架进行安卓UI自动化测试的步骤。&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;有时候我们想动态的根据一个资源名获得到对应的资源id，就可以使用getResources().getIdentifier()方法来获取该id。然后再使用该id进行相关的操作。</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;1、Demo示例</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  下...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;这篇应该是RecycleView的第四篇了，RecycleView真是新生代的宠儿能做这么多的事情。转载请注明作者AndroidMsky及原文链接  </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;http://blog.csdn.net/and...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;提供：ZStack云计算 &#39;</span>
-</span><span class='line'>            <span class="s">&#39;前言版本控制，这是现代软件开发的核心需求之一。有了它，软件项目可以安全的跟踪代码变更并执行回溯、完整性检查、协同开发等多种操作。在各种版本控制软件中，git是近年来最流行的软...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;相信有部分同学已经有耳闻了，前几天炒的很火一个消息，就是 Google 要推出一种全新的操作系统，取名 &#39;</span>
-</span><span class='line'>            <span class="s">&#39;Andromeda，这款新型的操作系统融合了 Android 和 Chrome OS，据称已经有...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;Android7.0 Vold 进程工作机制分析之整体流程</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;一、Vold简介</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;Vold是Volume Daemon的缩写,负责管理和控制Android平台外部存储设备，包括SD插拨、挂载、卸载...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;尊重原创，转载请标明出处</span><span class="se">\xa0\xa0\xa0\xa0</span><span class="s">http://blog.csdn.net/abcdef314159</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;Matrix是一个3*3的矩阵，通过矩阵执行对图像的平移，旋转，缩放，斜切等操作。先看一段代码   ...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;Service后台服务、前台服务、IntentService、跨进程服务、无障碍服务、系统服务</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  本篇文章包括以下内容：</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  前言</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  Service的简介</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  后台服务 </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  不可交互...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;借着今天“感恩节”，CSDN在此感谢每一位无私分享的博客作者。 </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  他们笔耕不辍，在这里分享技术经验、自己走过的坑……  </span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  社区习惯了他们的存在，首页也需要他们的分享，他们无形中帮助了许多的开发...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;Android图表库MPAndroidChart(十一)——多层级的堆叠条形图</span><span class="se">\n</span><span class="s">&#39;</span>
-</span><span class='line'>            <span class="s">&#39;  事实上这个也是条形图的一种扩展，我们看下效果就知道了  是吧，他一般满足的需求就是同类数据比较了，不过目前我还真没看...&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="s">&#39;相信大家应该都在使用 Android Studio 来开发 Android 了，如果你还没有的话，那么建议尽快迁移到 &#39;</span>
-</span><span class='line'>            <span class="s">&#39;Android Studio 上来，而且 Google 前段时间刚刚宣布，已经彻底...&#39;</span><span class="p">],</span>
-</span><span class='line'> <span class="s">&#39;link&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;http://blog.csdn.net/qq_25827845/article/details/53311722&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/yanzhenjie1003/article/details/53334071&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/qq_26787115/article/details/53333270&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/sahadev_/article/details/53334911&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/q123456789098/article/details/53330484&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/u011965040/article/details/53331859&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/u010913001/article/details/53331863&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/kesarchen/article/details/53332157&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/kmyhy/article/details/53322669&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/kaka1121/article/details/53325265&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/ouyang_peng/article/details/53328000&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/androidmsky/article/details/53306657&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/zstack_org/article/details/53331077&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/googdev/article/details/53331364&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/qq_31530015/article/details/53324819&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/abcdef314159/article/details/52813313&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/qq_30379689/article/details/53318861&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/blogdevteam/article/details/53322501&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/qq_26787115/article/details/53323046&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">&#39;http://blog.csdn.net/googdev/article/details/53288564&#39;</span><span class="p">],</span>
-</span><span class='line'> <span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;JSTL 标签大全详解&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android调试大法 自定义IDE默认签名文件&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android图表库MPAndroidChart(十二)——来点不一样的，正负堆叠条形图&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;一步步手动实现热修复(二)-类的加载机制简要介绍&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;仿射变换详解 warpAffine&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;React Native嵌入Android原生应用中&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;TCP三次握手四次挥手详解&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;腾讯Android面经&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;轻松实现部分背景半透明的呈现效果&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;APP自动化框架LazyAndroid使用手册（4）--测试模板工程详解&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android使用getIdentifier()方法根据资源名来获取资源id&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android基于RecyclerView实现高亮搜索列表&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;使用Git Hooks实现开发部署任务自动化&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Andromeda OS 来了，Android 再见？&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android7.0 Vold 进程工作机制分析之整体流程&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android Matrix源码详解&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android四大组件——Service后台服务、前台服务、IntentService、跨进程服务、无障碍服务、系统服务&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;聚焦CSDN 2016博客之星，年终盛典！&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android图表库MPAndroidChart(十一)——多层级的堆叠条形图&#39;</span><span class="p">,</span>
-</span><span class='line'>           <span class="s">&#39;Android 高效调试神器 JRebel&#39;</span><span class="p">]}</span>
-</span><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;c:\users</span><span class="se">\a</span><span class="s">obo</span><span class="se">\a</span><span class="s">ppdata\local\programs\python\python35\lib\site-packages</span><span class="se">\t</span><span class="s">wisted\internet\defer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">649</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_runCallbacks</span>
-</span><span class='line'>    <span class="n">current</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;D:\WorkSpace\python_ws\python-large-web-crawler</span><span class="se">\f</span><span class="s">irstdemo</span><span class="se">\f</span><span class="s">irstdemo\pipelines.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">15</span><span class="p">,</span> <span class="ow">in</span> <span class="n">process_item</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;detail&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-</span><span class='line'><span class="ne">UnicodeEncodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t encode character &#39;</span>\<span class="n">xa0</span><span class="s">&#39; in position 10: illegal multibyte sequence</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mo">00</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Closing</span> <span class="n">spider</span> <span class="p">(</span><span class="n">finished</span><span class="p">)</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mo">00</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Dumping</span> <span class="n">Scrapy</span> <span class="n">stats</span><span class="p">:</span>
-</span><span class='line'><span class="p">{</span><span class="s">&#39;downloader/request_bytes&#39;</span><span class="p">:</span> <span class="mi">211</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;downloader/request_count&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;downloader/request_method_count/GET&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;downloader/response_bytes&#39;</span><span class="p">:</span> <span class="mi">13294</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;downloader/response_count&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;downloader/response_status_count/200&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;finish_reason&#39;</span><span class="p">:</span> <span class="s">&#39;finished&#39;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;finish_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">268302</span><span class="p">),</span>
-</span><span class='line'> <span class="s">&#39;log_count/DEBUG&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;log_count/ERROR&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;log_count/INFO&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;response_received_count&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scheduler/dequeued&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scheduler/dequeued/memory&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scheduler/enqueued&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;scheduler/enqueued/memory&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">190533</span><span class="p">)}</span>
-</span><span class='line'><span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mo">00</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mo">00</span> <span class="p">[</span><span class="n">scrapy</span><span class="p">]</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Spider</span> <span class="n">closed</span> <span class="p">(</span><span class="n">finished</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">python</span><span class="o">-</span><span class="n">large</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">crawler</span>\<span class="n">firstdemo</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>解析 为什么会出现这个问题？</h2>
-
-<p><strong>解析：</strong></p>
-
-<p>当我们获取这个网页的源代码的时候，是将这个网页用<strong>utf-8</strong>的解码方式将其转换成对应的<strong>Unicode</strong>字符，当我们使用<code>print()</code>函数将其打印到Windows系统的DOS窗口上的时候（DOS窗口的编码方式是<strong>GBK</strong>），自动将<strong>Unicode</strong>字符通过<strong>GBK</strong>编码转换为<strong>GBK</strong>编码方式的<code>str</code>。</p>
-
-<p>整个过程是： [用python爬取] <strong>UTF-8</strong>(<code>str</code>) -> [缓存中存放] <strong>Unicode</strong>(<code>byte</code>) -> [DOS中显示] <strong>GBK</strong>(<code>str</code>)</p>
-
-<hr />
-
-<p><strong>出现这个问题（错误的<code>\xa0</code>）的原因：</strong></p>
-
-<p>网页源代码中的<code>&amp;nbsp;</code> 的<code>utf-8</code> 编码是：<code>\xc2 \xa0</code>，通过后，转换为<strong>Unicode</strong>字符为：<code>\xa0</code>，当显示到<strong>DOS</strong>窗口上的时候，转换为<strong>GBK</strong>编码的字符串，但是<code>\xa0</code>这个<strong>Unicode</strong>字符没有对应的 <strong>GBK</strong> 编码的字符串，所以出现错误。</p>
-
-<p><img src="/images/2016-11-26-python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/1480148818436.png" alt="Alt text" /></p>
-
-<p><a href="http://www.codetable.net/hex/a0">http://www.codetable.net/hex/a0</a></p>
-
-<p><img src="/images/2016-11-26-python3-UnicodeEncodeError-gbk-codec-can't-encode-character-xa0/1480147139074.png" alt="Alt text" /></p>
-
-<p><strong>Unicode</strong>字符：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">第</span><span class="mi">7</span><span class="err">篇文章：</span>
-</span><span class='line'><span class="n">JSTL</span> <span class="err">标签大全详解</span>
-</span><span class='line'><span class="n">b</span><span class="s">&#39;1</span><span class="se">\\</span><span class="s">u3001</span><span class="se">\\</span><span class="s">u4ec0</span><span class="se">\\</span><span class="s">u4e48</span><span class="se">\\</span><span class="s">u662fJSTL</span><span class="se">\\</span><span class="s">uff1f</span><span class="se">\\</span><span class="s">xa0 </span><span class="se">\\</span><span class="s">xa0 </span><span class="se">\\</span><span class="s">xa0 </span><span class="se">\\</span><span class="s">xa0 JSTL</span><span class="se">\\</span><span class="s">u662fapache</span><span class="se">\\</span><span class="s">u5bf9EL</span><span class="se">\\</span><span class="s">u8868</span><span class="se">\\</span><span class="s">u8fbe</span><span class="se">\\</span><span class="s">u5f0f</span><span class="se">\\</span><span class="s">u7684</span>
-</span><span class='line'>\\<span class="n">u6269</span>\\<span class="n">u5c55</span>\\<span class="n">uff08</span>\\<span class="n">u4e5f</span>\\<span class="n">u5c31</span>\\<span class="n">u662f</span>\\<span class="n">u8bf4JSTL</span>\\<span class="n">u4f9d</span>\\<span class="n">u8d56EL</span>\\<span class="n">uff09</span>\\<span class="n">uff0cJSTL</span>\\<span class="n">u662f</span>\\<span class="n">u6807</span>\\<span class="n">u7b7e</span>\\<span class="n">u8bed</span>\\<span class="n">u8a</span>
-</span><span class='line'><span class="mo">00</span>\\<span class="n">uff01JSTL</span>\\<span class="n">u6807</span>\\<span class="n">u7b7e</span>\\<span class="n">u4f7f</span>\\<span class="n">u7528</span>\\<span class="n">u4ee5</span>\\<span class="n">u6765</span>\\<span class="n">u975e</span>\\<span class="n">u5e38</span>\\<span class="n">u65b9</span>\\<span class="n">u4fbf</span>\\<span class="n">uff0c</span>\\<span class="n">u5b83</span>\\<span class="n">u4e0eJSP</span>\\<span class="n">u52a8</span>\\<span class="n">u4f5</span>
-</span><span class='line'><span class="n">c</span>\\<span class="n">u6807</span>\\<span class="n">u7b7e</span>\\<span class="n">u4e00</span>\\<span class="n">u6837</span>\\<span class="n">uff0c</span>\\<span class="n">u53ea</span>\\<span class="n">u4e0d</span>\\<span class="n">u8fc7</span>\\<span class="n">u5b83</span>\\<span class="n">u4e0d</span>\\<span class="n">u662fJSP</span>\\<span class="n">u5185</span><span class="o">...</span><span class="s">&#39;</span>
-</span><span class='line'><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">blog</span><span class="o">.</span><span class="n">csdn</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">qq_25827845</span><span class="o">/</span><span class="n">article</span><span class="o">/</span><span class="n">details</span><span class="o">/</span><span class="mi">53311722</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过<strong>GBK</strong>编码后得到的错误的<code>log</code>信息。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="s">&#39;1、什么是JSTL？</span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> </span><span class="se">\xa0</span><span class="s"> &#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解决办法</h2>
-
-<p><a href="http://stackoverflow.com/questions/10993612/python-removing-xa0-from-string">http://stackoverflow.com/questions/10993612/python-removing-xa0-from-string</a></p>
-
-<p>用 ‘<code></code>’ 来替换 ‘<code>\xa0</code>’ （<code>&amp;nbsp;</code>）：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;detail&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">u&#39;</span><span class="se">\xa0</span><span class="s"> &#39;</span><span class="p">,</span> <span class="s">u&#39; &#39;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>参考网站：</p>
-
-<p><a href="https://www.zhihu.com/question/20899988">https://www.zhihu.com/question/20899988</a></p>
-
-<p><a href="http://blog.csdn.net/jim7424994/article/details/22675759">http://blog.csdn.net/jim7424994/article/details/22675759</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1985,6 +1732,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/">Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/">SolidWorks 如何使用 边界切除 工具</a>
       </li>
     
@@ -1998,10 +1749,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-draw-through-points/">Solidworks 如何画穿透点</a>
       </li>
     
   </ul>
@@ -2022,7 +1769,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
 <a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
-<a style="font-size: 164%" href="/tags/python/">Python</a>
+<a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -2044,10 +1791,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
-<a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
@@ -2076,14 +1823,14 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
-<li class='category'><a href='/blog/categories/python/'>python (18)</a></li>
+<li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
-<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (2)</a></li>
+<li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
 <li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (7)</a></li>
