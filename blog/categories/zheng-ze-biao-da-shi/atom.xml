@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 正则表达式 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/zheng-ze-biao-da-shi/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T00:25:04+08:00</updated>
+  <updated>2017-02-21T01:19:40+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写]]></title>
     <link href="http://aobojaing.github.io/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/"/>
-    <updated>2017-02-21T00:17:30+08:00</updated>
+    <updated>2017-02-21T01:19:10+08:00</updated>
     <id>http://aobojaing.github.io/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind</id>
     <content type="html"><![CDATA[<hr />
 
@@ -36,7 +36,53 @@
 
 <h2></h2>
 
-<p>例子程序在这里：</p>
+<p>例子程序在这里：<a href="https://github.com/AoboJaing/learning_python/blob/master/learning_python08_06.py">learning_python_08_06.py</a></p>
+
+<p>参考网站：<a href="http://www.cnblogs.com/dyfblog/p/5880728.html">python正则表达式详解</a></p>
+
+<p><img src="/images/2017-2-21-python-regular-expression-match-string-no-string-in-behind/1487610263474.png" alt="Alt text" /></p>
+
+<p>当我们的匹配字符串的末尾处没有字符串的时候，我们使用<code>\Z</code>来表示结束处。</p>
+
+<blockquote><p>同样的道理：当我们的匹配字符串的开头处没有字符串的时候，我们使用<code>\A</code>来表示开头处。</p></blockquote>
+
+<pre><code class="python"># -!- coding:utf-8 -!-
+
+import re
+
+# Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写 --- 2017年2月20日 星期一
+# 博文的链接地址：http://www.aobosir.com/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/
+
+# 这个程序的功能：获取'.\data\2017-2-19-3D-printer-hot-bed.markdown'文件里面所有的图片链接的地址。
+
+# 这个demo 程序使用了两次正则表达式的方式，成功的将所有的图片链接地址都获取了出来。（其中有："![Alt text](/images/2017-2-21-python-regular-expression-match-string-no-string-in-behind/1485166773479.png)"这种形式的，还是"![Alt text | 240x0](./1485166756931.png)"这种形式的。）
+
+file = open(r'.\data\2017-2-19-3D-printer-hot-bed.markdown', 'rt', encoding='utf-8')
+data = file.read()
+print(data)
+
+image_local_path_step1 = re.findall('!\[Alt text(.*?)\)', data, re.S)
+for i in range(len(image_local_path_step1)):
+    print(image_local_path_step1[i])
+    pass
+
+for i in range(len(image_local_path_step1)):
+    image_local_path_step1_this = image_local_path_step1[i]
+    image_local_path_step2 = re.findall(']\((.*?)\Z', image_local_path_step1_this, re.S)
+    print(image_local_path_step2[0])
+    pass
+
+
+file.close()
+</code></pre>
+
+<p>这个demo程序中，使用了两层正则表达式。</p>
+
+<p>第一层的匹配字符串是：<code>!\[Alt text(.*?)\)</code>。它可以得到<code>](./1485164492501.png</code>这样或者<code>| 240x0](./1485166756931.png</code>这样的结果。</p>
+
+<p>解决我们将得到的结果再进行一次正则表示匹配。这次使用的匹配字符串是：<code>]\((.*?)\Z</code>。通过这次匹配，得到的结果就都是图片的地址了。（想这样：<code>./1485181859693.png</code>）</p>
+
+<blockquote><p>注意：在匹配字符串中的<code>(</code>和<code>)</code>需要使用转义字符<code>\</code>修饰。</p></blockquote>
 ]]></content>
   </entry>
   

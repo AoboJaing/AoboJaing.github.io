@@ -84,7 +84,7 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 
 
 
-<time class='entry-date' datetime='2017-02-21T00:17:30+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>12:17 am</span></time>
+<time class='entry-date' datetime='2017-02-21T01:19:10+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>1:19 am</span></time>
         
       </p>
     
@@ -109,7 +109,82 @@ PyCharm软件版本：pycharm-professional-2016.1.4
 
 <h2></h2>
 
-<p>例子程序在这里：</p>
+<p>例子程序在这里：<a href="https://github.com/AoboJaing/learning_python/blob/master/learning_python08_06.py">learning_python_08_06.py</a></p>
+
+<p>参考网站：<a href="http://www.cnblogs.com/dyfblog/p/5880728.html">python正则表达式详解</a></p>
+
+<p><img src="/images/2017-2-21-python-regular-expression-match-string-no-string-in-behind/1487610263474.png" alt="Alt text" /></p>
+
+<p>当我们的匹配字符串的末尾处没有字符串的时候，我们使用<code>\Z</code>来表示结束处。</p>
+
+<blockquote><p>同样的道理：当我们的匹配字符串的开头处没有字符串的时候，我们使用<code>\A</code>来表示开头处。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding:utf-8 -!-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">re</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写 --- 2017年2月20日 星期一</span>
+</span><span class='line'><span class="c"># 博文的链接地址：http://www.aobosir.com/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 这个程序的功能：获取&#39;.\data\2017-2-19-3D-printer-hot-bed.markdown&#39;文件里面所有的图片链接的地址。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 这个demo 程序使用了两次正则表达式的方式，成功的将所有的图片链接地址都获取了出来。（其中有：&quot;![Alt text](/images/2017-2-21-python-regular-expression-match-string-no-string-in-behind/1485166773479.png)&quot;这种形式的，还是&quot;![Alt text | 240x0](./1485166756931.png)&quot;这种形式的。）</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">r&#39;.\data\2017-2-19-3D-printer-hot-bed.markdown&#39;</span><span class="p">,</span> <span class="s">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">image_local_path_step1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text(.*?)\)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image_local_path_step1</span><span class="p">)):</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">image_local_path_step1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image_local_path_step1</span><span class="p">)):</span>
+</span><span class='line'>    <span class="n">image_local_path_step1_this</span> <span class="o">=</span> <span class="n">image_local_path_step1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">image_local_path_step2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;]\((.*?)\Z&#39;</span><span class="p">,</span> <span class="n">image_local_path_step1_this</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">image_local_path_step2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个demo程序中，使用了两层正则表达式。</p>
+
+<p>第一层的匹配字符串是：<code>!\[Alt text(.*?)\)</code>。它可以得到<code>](./1485164492501.png</code>这样或者<code>| 240x0](./1485166756931.png</code>这样的结果。</p>
+
+<p>解决我们将得到的结果再进行一次正则表示匹配。这次使用的匹配字符串是：<code>]\((.*?)\Z</code>。通过这次匹配，得到的结果就都是图片的地址了。（想这样：<code>./1485181859693.png</code>）</p>
+
+<blockquote><p>注意：在匹配字符串中的<code>(</code>和<code>)</code>需要使用转义字符<code>\</code>修饰。</p></blockquote>
 </div>
   
   
