@@ -140,7 +140,7 @@ os.system(copy_img_command)
 
 1 . 在**DOS** 里面，执行下面的命令，有的是对的，有的是错的：
 
-```dos
+```
 # Succesfull
 copy "D:\WorkSpace\test_ws\Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png" "D:\WorkSpace\test_ws\2016-11-27-demo\"
 # Succesfull
