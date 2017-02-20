@@ -9,9 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="GUI-Evernote-Auto-converted-to-Octopress-local-site-blog-and-CSDN-blog [TOC] 开发环境： Python 版本： Python3.5.0
-PyCharm 版本：PyCharm 2016.1.4
-Windows 10 64位 &hellip;">
+  <meta name="description" content="当前使用的ROS 版本：Groovy 1
+2
+ubuntu@ubuntu:~/catkin_ws$ catin_make
+-bash: catin_make: command not found 问题出现的原因 参考网站：http://answers.ros.org/question/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,76 @@ Windows 10 64位 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/21/solve-bash-catin_make-command-not-found/">解决 -bash: Catin_make: Command Not Found 问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-21T04:08:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>4:08 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>当前使用的ROS 版本：Groovy</li>
+</ul>
+
+
+<hr />
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws$ catin_make
+</span><span class='line'>-bash: catin_make: command not found</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>问题出现的原因</h2>
+
+<p>参考网站：<a href="http://answers.ros.org/question/212492/catkin_make-command-not-found/">http://answers.ros.org/question/212492/catkin_make-command-not-found/</a></p>
+
+<p>先来查看当前ROS的环境变量：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/2017-2-21-solve-bash-catin_make-command-not-found/1482563988992.png" alt="Alt text" /></p>
+
+<p>我们发现里面已经有<code>source /opt/ros/indigo/setup.bash</code>这行代码了。（如果没有一定要添加上。）</p>
+
+<p>为什么还是出现问题呢。</p>
+
+<hr />
+
+<p>后来我才发现，出现错误的原因：</p>
+
+<p>是因为我输错<code>catin_make</code></p>
+
+<p>正确的命令是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>catkin_make</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1580,53 +1651,6 @@ Windows 10 64位 &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-19T16:05:30+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:05 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>先点击将要复制的基准面：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247435981.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247441983.png" alt="Alt text" /></p>
-
-<p>现在按住 <strong>Ctrl</strong> ，然后将鼠标移动到基准面的一个点上，然后按住鼠标左键推动。</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247459958.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247600485.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1642,6 +1666,10 @@ Windows 10 64位 &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/solve-bash-catin_make-command-not-found/">解决 -bash: Catin_make: Command Not Found 问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/21/python-Evernote-Auto-converted-to-Octopress-local-site-blog/">马克飞象笔记自动转换为Octopress本地站点博客 — Python</a>
       </li>
     
@@ -1655,10 +1683,6 @@ Windows 10 64位 &hellip;">
     
       <li class="post">
         <a href="/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/">解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/">SolidWorks 如何在曲面上获取与基准线相交的分割线</a>
       </li>
     
   </ul>
@@ -1737,6 +1761,7 @@ Windows 10 64位 &hellip;">
 <li class='category'><a href='/blog/categories/python-shi-zhan/'>python 实战 (1)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/ros/'>ros (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>

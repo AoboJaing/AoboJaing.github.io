@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T02:23:41+08:00</updated>
+  <updated>2017-02-21T04:08:30+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解决 -bash: Catin_make: Command Not Found 问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/21/solve-bash-catin_make-command-not-found/"/>
+    <updated>2017-02-21T04:08:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/21/solve-bash-catin_make-command-not-found</id>
+    <content type="html"><![CDATA[<hr />
+
+<ul>
+<li>当前使用的ROS 版本：Groovy</li>
+</ul>
+
+
+<hr />
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ubuntu:~/catkin_ws$ catin_make
+</span><span class='line'>-bash: catin_make: command not found</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>问题出现的原因</h2>
+
+<p>参考网站：<a href="http://answers.ros.org/question/212492/catkin_make-command-not-found/">http://answers.ros.org/question/212492/catkin_make-command-not-found/</a></p>
+
+<p>先来查看当前ROS的环境变量：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-solve-bash-catin_make-command-not-found/1482563988992.png" alt="Alt text" /></p>
+
+<p>我们发现里面已经有<code>source /opt/ros/indigo/setup.bash</code>这行代码了。（如果没有一定要添加上。）</p>
+
+<p>为什么还是出现问题呢。</p>
+
+<hr />
+
+<p>后来我才发现，出现错误的原因：</p>
+
+<p>是因为我输错<code>catin_make</code></p>
+
+<p>正确的命令是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>catkin_make</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[马克飞象笔记自动转换为Octopress本地站点博客 — Python]]></title>
@@ -2757,37 +2807,6 @@
 <p>好的，这样，zlib 和 png 这两个库就编译完成了。</p>
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决问题：QGLWidget：No Such File or Directory]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/"/>
-    <updated>2017-02-11T08:01:11+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>参考网站：<a href="%E6%97%A0%E6%B3%95%E6%89%BE%E5%88%B0QT%20OpenGL%20QGLWidget">无法找到QT OpenGL QGLWidget</a></p>
-
-<hr />
-
-<p>现在出现了这个问题：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>QGLWidget: No such file or directory</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-solve-Qt-QGLWidget-No-such-file-or-directory/1486743476422.png" alt="Alt text" /></p>
-
-<h2>解决办法</h2>
-
-<p>在<code>.pro</code>文件里面，添加：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>QT += opengl</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参考网站：<a href="http://doc.qt.io/qt-5/qtopengl-index.html#details">Qt OpenGL</a></p>
 ]]></content>
   </entry>
   

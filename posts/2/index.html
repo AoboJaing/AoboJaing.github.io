@@ -9,7 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="如何新建一个文件 鼠标点击 前视基准面，然后鼠标不要动，会在鼠标右上角出现一条图标： 第一个是：绘制草图 第二个是：正视于 当你点击绘制草图 这个图标。视图中会自动的将前视基准面 正对着你。（当然这是你第一个这样操作的时候，会这样。如果视图中已经有模型存在了，那么它就不会这样做了。） &hellip;">
+  <meta name="description" content=" 先点击将要复制的基准面： 现在按住 Ctrl ，然后将鼠标移动到基准面的一个点上，然后按住鼠标左键推动。 搞定
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/">Solidworks 如何复制 基准面</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-19T16:05:30+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:05 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>先点击将要复制的基准面：</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247435981.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247441983.png" alt="Alt text" /></p>
+
+<p>现在按住 <strong>Ctrl</strong> ，然后将鼠标移动到基准面的一个点上，然后按住鼠标左键推动。</p>
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247459958.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247600485.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1636,57 +1684,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/11/solve-Qt-QGLWidget-No-such-file-or-directory/">解决问题：QGLWidget：No Such File or Directory</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-11T08:01:11+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>8:01 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>参考网站：<a href="%E6%97%A0%E6%B3%95%E6%89%BE%E5%88%B0QT%20OpenGL%20QGLWidget">无法找到QT OpenGL QGLWidget</a></p>
-
-<hr />
-
-<p>现在出现了这个问题：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>QGLWidget: No such file or directory</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="/images/2017-2-11-solve-Qt-QGLWidget-No-such-file-or-directory/1486743476422.png" alt="Alt text" /></p>
-
-<h2>解决办法</h2>
-
-<p>在<code>.pro</code>文件里面，添加：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>QT += opengl</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参考网站：<a href="http://doc.qt.io/qt-5/qtopengl-index.html#details">Qt OpenGL</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1704,6 +1701,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/solve-bash-catin_make-command-not-found/">解决 -bash: Catin_make: Command Not Found 问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/21/python-Evernote-Auto-converted-to-Octopress-local-site-blog/">马克飞象笔记自动转换为Octopress本地站点博客 — Python</a>
       </li>
     
@@ -1717,10 +1718,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/">解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/">SolidWorks 如何在曲面上获取与基准线相交的分割线</a>
       </li>
     
   </ul>
@@ -1799,6 +1796,7 @@
 <li class='category'><a href='/blog/categories/python-shi-zhan/'>python 实战 (1)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/ros/'>ros (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
