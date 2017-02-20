@@ -149,9 +149,9 @@ g1 z0
 
 现在，我已经测试打印了。已经打印完成，效果超级的好。
 
-![Alt text | 240x0](./1485166756931.png) ![Alt text | 240x0](/images/2017-2-19-3D-printer-hot-bed/1485166773479.png)
+![Alt text | 240x0](/images/2017-2-19-3D-printer-hot-bed/1485166756931.png) ![Alt text | 240x0](/images/2017-2-19-3D-printer-hot-bed/1485166773479.png)
 
-![Alt text | 240x0](./1485166785899.png) ![Alt text | 240x0](./1485166799917.png)
+![Alt text | 240x0](/images/2017-2-19-3D-printer-hot-bed/1485166785899.png) ![Alt text | 240x0](/images/2017-2-19-3D-printer-hot-bed/1485166799917.png)
 
 
 

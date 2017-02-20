@@ -121,11 +121,11 @@ tags: [3D打印, 大型模型, 注意事项, 经验]
 >  
 > 经过了接近两个小时的打印，得到了最终的结果：
 >  
-> ![Alt text | 480x0](./1485390402045.png)
+> ![Alt text | 480x0](/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390402045.png)
 >  
-> ![Alt text | 480x0](./1485390431885.png)
+> ![Alt text | 480x0](/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390431885.png)
 >  
-> ![Alt text | 480x0](./1485390455275.png)
+> ![Alt text | 480x0](/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390455275.png)
 >  
 > 从得到的结果，我们可以看到，从窄到宽的两个部分都不怎么好。
 >  
