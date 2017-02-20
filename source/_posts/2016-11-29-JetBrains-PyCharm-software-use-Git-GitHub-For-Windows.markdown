@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在 JetBrains PyCharm 软件上使用 Git(Github)"
+title: "在 JetBrains PyCharm 软件上使用 Git(Github) --- 如何使用GitHub For Windows软件的GUI界面给一个代码库添加一个`.gitignore`文件 --- 创建一个GitHub远程代码库的完整步骤"
 date: 2016-11-29 11:44:46 +0800
 comments: true
 sharing: true
