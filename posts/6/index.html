@@ -9,8 +9,10 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我的Ubuntu系统：Ubuntu 14.04.10 TLS 32位
-需要安装的Arduino的版本：Arduino 1.6.11（最新版本） Linux 32位 1. 下载 最新的 Arduino 开发软件 Step 1 . 到Arduino官网下载 linux 32位 的 Arduino &hellip;">
+  <meta name="description" content="使用的虚拟机软件：VMware 11
+我的Ubuntu系统：Ubuntu 14.04.10 TLS
+Arduino 软件的版本：Arduino 1.6.11
+Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的Ubuntu 系统的界面。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,115 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Ubuntu-Linux-board-upload-program/">Arduino 003 Ubuntu（Linux） 系统下，如何给板子烧写程序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:51:56+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>使用的虚拟机软件：<strong>VMware 11</strong></li>
+<li>我的<strong>Ubuntu</strong>系统：<strong>Ubuntu 14.04.10 TLS</strong></li>
+<li><strong>Arduino</strong> 软件的版本：<strong>Arduino 1.6.11</strong></li>
+<li><strong>Arduino</strong> 板子的型号：<strong>Arduino UNO R3</strong></li>
+</ul>
+
+
+<p><strong>Step 0 . </strong> 来到 <strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面。</p>
+
+<p><strong>Step 1 . </strong> 将 <strong>Arduino</strong> 板子通过USB线插到电脑上。</p>
+
+<p><strong>Step 2 . </strong> 在终端中执行下面的命令，来启动 <strong>Arduino</strong> 软件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arduino</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Step 3 . </strong> 随便打开一个程序。我们以 <strong>Blink</strong> 程序为例，打开它：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472659956768.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 选择 <strong>板卡型号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660070620.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 选择当前 <strong>端口号</strong></p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660146798.png" alt="Alt text" /></p>
+
+<blockquote><p>你可以看到：<strong>Arduino</strong> 软件右下角有当前被选中的端口号和被选中的<strong>Arduino</strong>板卡的信息。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660193423.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 6 . </strong> 给端口添加权限。</p>
+
+<blockquote><p>如果，这时你给 <strong>Arduino</strong> 开发板下载程序，发现下载出错。原因就是没有给端口添加权限。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660225037.png" alt="Alt text" /></p>
+
+<p>输出的 <strong>error</strong> 提示：</p>
+
+<pre><code>avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
+</code></pre></blockquote>
+
+<p>在终端中执行下面的命令，来给当前选中的端口添加权限。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chmod a+rw /dev/ttyACM0</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>端口号都在<code>/dev/</code> 目录里面。执行下面的命令可以查看：
+<code>
+cd /dev/
+ls
+</code>
+输出 如下图所示：</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660593893.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<blockquote><p><strong>注意：</strong> 如果你将<strong>Arduino</strong> 板子插到电脑上了，但是在<strong>/dev/</strong> 目录里面没有在到类似 <code>ttyACM0</code> 这样的端口号。</p>
+
+<p>解决办法，将<strong>Arduino</strong>板子从电脑的USB口拔出，将当前屏幕界面切换到<strong>VMware</strong> 虚拟机里的<strong>Ubuntu </strong>系统的界面，这时，再将<strong>Arduino</strong> 板子插到电脑上。你就可以在<code>/dev/</code>路径里面找到类似 <code>ttyACM0</code> 这样的端口号了。</p></blockquote>
+
+<p><strong>Step 6 . </strong> 点击 <strong>编译</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660394610.png" alt="Alt text" /></p>
+
+<p><strong>Step 7 . </strong> 点击 <strong>上传</strong> 按钮</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660434092.png" alt="Alt text" /></p>
+
+<blockquote><p>其实，可以不用点击 <strong>编译</strong> 按钮，直接点击 <strong>上传</strong> 按钮就可以。因为点击完 <strong>上传</strong> 按钮后，它会再编译一遍，在将程序烧写到板子上。</p></blockquote>
+
+<p>现在提示 <strong>Done uploading</strong>，表示程序已经成功烧写到板子里面。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Ubuntu-Linux-board-upload-program/1472660284963.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1198,78 +1309,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/python-string-join/">Learning Python 026 字符串连接</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T19:03:50+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<p>参考网站：<a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\笔记\text.md&#39;</span>
-</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">mylist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
-</span><span class='line'><span class="n">res_path</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mylist</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</span><span class='line'><span class="c"># res_path = res_path.decode(&#39;utf-8&#39;).encode(&#39;GB18030&#39;) # 如果是适用python2在windows系统上运行，需要将这样注释去掉，否则你会得到中文乱码</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">res_path</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">test_ws</span>\<span class="err">笔记</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1287,6 +1326,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/21/python-Evernote-Auto-converted-to-Octopress-local-site-blog/">马克飞象笔记自动转换为Octopress本地站点博客 — Python</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/">Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写</a>
       </li>
     
@@ -1300,10 +1343,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/">SolidWorks 如何在曲面上获取与基准线相交的分割线</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/19/3D-printer-add-support-note-must-be-strong/">3D打印大件模型时，添加支撑的注意事项：支撑的地基一定要结实</a>
       </li>
     
   </ul>
@@ -1322,7 +1361,7 @@
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 129%" href="/tags/linux/">Linux</a>
-<a style="font-size: 147%" href="/tags/octopress/">Octopress</a>
+<a style="font-size: 154%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
@@ -1379,6 +1418,7 @@
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
+<li class='category'><a href='/blog/categories/python-shi-zhan/'>python 实战 (1)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (9)</a></li>

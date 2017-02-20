@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T01:19:40+08:00</updated>
+  <updated>2017-02-21T02:23:41+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,966 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[马克飞象笔记自动转换为Octopress本地站点博客 — Python]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/21/python-Evernote-Auto-converted-to-Octopress-local-site-blog/"/>
+    <updated>2017-02-21T02:16:37+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/21/python-Evernote-Auto-converted-to-Octopress-local-site-blog</id>
+    <content type="html"><![CDATA[<h2>GUI-Evernote-Auto-converted-to-Octopress-local-site-blog-and-CSDN-blog</h2>
+
+<p>[TOC]</p>
+
+<hr />
+
+<p><strong>开发环境：</strong></p>
+
+<ul>
+<li>Python 版本： Python3.5.0</li>
+<li>PyCharm 版本：PyCharm 2016.1.4</li>
+<li>Windows 10 64位 系统</li>
+</ul>
+
+
+<hr />
+
+<h2>程序设计流程</h2>
+
+<ul>
+<li>用一个变量存放 <strong>Octopress</strong> 博客的文件名。比如：<code>folder_name = '2016-11-27-demo'</code></li>
+<li>在与<strong>马克飞象笔记文件夹</strong>（<code>evernote_folder_name</code>）同一路径（<code>root_directory</code>）下，创建一个文件夹，取名为<code>folder_name</code>变量</li>
+<li>将<strong>马克飞象笔记文件夹</strong>（<code>evernote_folder_name</code>）里面的所有图片全部复制到刚刚新创建的<code>folder_name</code> 文件夹（路径）里面。</li>
+<li>将<strong>马克飞象笔记文件夹</strong>（<code>evernote_folder_name</code>）里面的笔记文件（<code>.md</code>文件），复制一份放到<code>root_directory</code>路径下，并将其名字重命名为：<code>folder_name</code>变量，并将其后缀修改为：<code>.markdown</code></li>
+<li>读取<code>folder_name</code>.markdown 文件，将里面的图片链接替换为<strong>Octopress</strong>本地链接的形式</li>
+<li>删除笔记里面的 第一个标题（<code># xxx</code>） 和 笔记本（<code>@(xxx)</code>）（方法：以后记马克飞象笔记，第1行是标题，第3行是 归宿笔记本。所以，我们只需要简单的将前3行删除就可。）</li>
+<li>添加<strong>Octopress</strong>博客前缀</li>
+<li>将最终得到的Octopress博文文件（.markdown后缀文件）保存为UTF-8无BOM编码文件</li>
+<li>之前创建文件夹<code>folder</code>，现在加一个条件：如果文件夹已经存在，则不用创建</li>
+<li>自动检测这个博客是：仅仅一个文件（<code>.md</code>），还是一个文件夹（就是检测这个博文里面有没有图片）</li>
+<li>给定马克飞象笔记文件（<code>.md</code>文件）路径，自动获取<code>root_directory</code>路径</li>
+<li>自动检测这个博客是：仅仅一个文件（<code>.md</code>），还是一个文件夹 和 给定马克飞象笔记文件（<code>.md</code>文件）路径，自动获取<code>root_directory</code>路径 和 <code>evernote_folder_name</code>名字 的代码如下：</li>
+<li>如果马克飞象笔记只是一个文件，我们就不进行创建文件夹、复制图片和文件内图片链接的修改的操作</li>
+<li>将整个<code>evernoteToOctopressBlog.py</code>封装成一个类:<code>EvernoteToOctopressBlog</code></li>
+<li>将<code>evernoteToOctopressBlog.py</code>文件写成一个工具（命令行工具），可以向里面传入命令行参数</li>
+<li>基本完成了</li>
+</ul>
+
+
+<p>这样，程序的功能就都完成了。</p>
+
+<h2>Python 创建文件夹</h2>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.qttc.net/201209207.html">Python创建目录文件夹</a></li>
+<li><a href="http://www.cnblogs.com/zhoujie/archive/2013/04/10/python7.html">python学习笔记（七）——文件和目录操作</a></li>
+</ul>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
+</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/test_ws/&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>注意：如果想要创建的文件夹是已经存在的，那么执行上面的程序会出现下面的错误：<code>FileExistsError: [WinError 183] 当文件已存在时，无法创建该文件。</code></p></blockquote>
+
+<p>所以这段代码容易出现错误：如果文件夹已存在或者文件夹名中有不允许使用的字符时，<code>os.mkdir()</code>函数都会执行失败。所以，这段代码需要进行异常处理：</p>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样，在运行程序的时候就不会再出现错误了。但是当你给定的文件名中有非法字符时，创建文件夹是不会成功的，但是程序不会报错。</p>
+
+<hr />
+
+<h2>Python 复制图片</h2>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.zhukun.net/archives/6326">python中文件的复制</a></li>
+<li><a href="http://www.jb51.net/article/17921.htm">dos 文件复制 copy命令</a></li>
+</ul>
+
+
+<p>将<strong>马克飞象笔记文件夹</strong>里面的所有图片全部复制到刚刚新创建的<code>folder_name</code> 文件夹（路径）里面。</p>
+
+<blockquote><p>python自带的第三方库：<strong>shutil</strong> 可以实现文件的复制操作，但是它只能一次复制一个文件。所以我们不使用这个<strong>shutil</strong>模块来做复制文件的操作。</p></blockquote>
+
+<p>我们使用python调用Windows系统DOS命令行里面的<strong>copy</strong>工具来继续文件的复制。</p>
+
+<p>下面的代码可以将<strong>马克飞象笔记文件夹</strong>里面的所有图片复制到<code>folder_name</code>文件夹里面：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
+</span><span class='line'><span class="n">evernote_folder_name</span> <span class="o">=</span> <span class="s">&#39;Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六&#39;</span>
+</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;File error: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">copy_img_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">evernote_folder_name</span> <span class="o">+</span> <span class="s">r&#39;\*.png&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
+</span><span class='line'><span class="c"># print(copy_img_command)</span>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_img_command</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其实，代码中的 <code>os.system(copy_img_command)</code> 这段代码就是等价于：在 <strong>DOS</strong> 窗口执行：<code>copy "D:\WorkSpace\test_ws\\Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png" "D:\WorkSpace\test_ws\\2016-11-27-demo\"</code>  这个指令。</p>
+
+<hr />
+
+<h2>经验：我发现了两件事：</h2>
+
+<p>1 . 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws\Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png&quot;</span> <span class="s">&quot;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\201</span><span class="s">6-11-27-demo</span><span class="se">\&quot;</span>
+</span><span class='line'><span class="c"># Succesfull</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png&quot;</span> <span class="s">&quot;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">2016-11-27-demo</span><span class="se">\&quot;</span>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;D:/WorkSpace/test_ws/Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六/*.png&quot;</span> <span class="s">&quot;D:/WorkSpace/test_ws/2016-11-27-demo/&quot;</span>
+</span><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="n">copy</span> <span class="s">&quot;D://WorkSpace//test_ws//Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六//*.png&quot;</span> <span class="s">&quot;D://WorkSpace//test_ws//2016-11-27-demo//&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>总结：</p>
+
+<ol>
+<li><code>\</code>是一个特殊字符，它不能再字符串中正常的显示，如果必须显示，就这样写：<code>\\</code></li>
+<li><strong>DOS</strong> 命令里面指定文件路径时，只能使用<code>\</code>，不能使用<code>/</code> 和 <code>//</code> ，使用这两个都是错的，都会导致 <strong>DOS</strong>找不到指定的文件路径</li>
+<li>在<strong>DOS</strong> 命令里面，指定文件路径的 <code>\</code> ，你写成 <code>\\</code> 或者 <code>\\\</code> 或者 <code>\\\\\\</code> &hellip; 对是可以正常执行的，不会出现错误。</li>
+</ol>
+
+
+<hr />
+
+<p>2 . 同时，我发现：</p>
+
+<p>python 的字符串前面加上<code>r</code>，说明这个字符串是<code>raw string</code>，即无需转义的字符串，意思就是这个字符串里面有什么就是什么。</p>
+
+<p>但是我发现了python的一个bug：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># error</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\&#39;</span>
+</span><span class='line'><span class="c"># 经验：就算是在字符串前面加上了 r ，字符串最后一个字符也不能是 /</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace\test_ws\\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># succes</span>
+</span><span class='line'><span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span><span class='line'><span class="c"># 输出：D:\WorkSpace   est_ws\</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Python 复制文件，并对副本文件重命名</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">copy_file_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">evernote_folder_name</span> <span class="o">+</span> <span class="s">r&#39;</span><span class="se">\\</span><span class="s">&#39;</span> <span class="o">+</span> <span class="n">evernote_folder_name</span> <span class="o">+</span> <span class="s">&#39;.md&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="s">&#39;.markdown&quot;&#39;</span>
+</span><span class='line'><span class="c"># print(copy_file_command)</span>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_file_command</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>打开马克笔记的拷贝文件（.markdown后缀）</h2>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://blog.linuxeye.com/365.html">Python文件处理 open()</a></li>
+<li><a href="https://my.oschina.net/kenblog/blog/599737">Python3 读取文件出错： &lsquo;gbk&rsquo; codec can&rsquo;t decode byte 0x8</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">evernote_file_path</span> <span class="o">=</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="s">&#39;.markdown&#39;</span>
+</span><span class='line'><span class="n">evernote_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">evernote_file_path</span><span class="p">,</span> <span class="s">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">evernote_data</span> <span class="o">=</span> <span class="n">evernote_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class='line'><span class="n">evernote_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">evernote_data</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>替换图片的链接</h2>
+
+<p>使用正则表达式先提取出原来的图片链接。再将这个链接修改为<strong>Octopress</strong>本地形式的链接。最后进行替换。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">image_local_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text\]\((.*?)\)&#39;</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'><span class="c"># print(image_local_path)</span>
+</span><span class='line'><span class="n">image_relative_path</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image_local_path</span><span class="p">)):</span>
+</span><span class='line'>    <span class="n">image_relative_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;/images/&#39;</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
+</span><span class='line'>    <span class="c"># print(image_relative_path[i])</span>
+</span><span class='line'>    <span class="n">evernote_data</span> <span class="o">=</span> <span class="n">evernote_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">image_relative_path</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">evernote_data</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>删除笔记里面的 第一个标题（<code># xxx</code>） 和 笔记本（<code>@(xxx)</code>）</h2>
+
+<p>我是这样设计的，我们今后写马克笔记定一个规则：</p>
+
+<p>以后记马克飞象笔记，第1行是标题，第3行是 归宿笔记本。所以，我们只需要简单的将前3行删除就可。</p>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2158268.html">Python 字符串操作（string替换、删除、截取、复制、连接、比较、查找、包含、大小写转换、分割等）</a></li>
+<li><a href="http://stackoverflow.com/questions/13227970/how-to-effectively-remove-a-line-in-the-middle-of-a-large-file">How to effectively remove a line in the middle of a large file?</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">evernote_data_list</span> <span class="o">=</span> <span class="n">evernote_data</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+</span><span class='line'><span class="n">octopress_file_path</span> <span class="o">=</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="s">&#39;.markdown&#39;</span>  <span class="c"># r&#39;F:\octopress\source\_posts\\&#39; + folder_name + &#39;.markdown&#39;</span>
+</span><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">evernote_data_list</span><span class="p">)):</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">evernote_data_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">octopress_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">octopress_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span class='line'><span class="n">octopress_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480294281304.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>添加<strong>Octopress</strong>博客前缀</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">addOctopressBlogPrefix</span><span class="p">(</span><span class="n">octopress_file</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;---&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;layout: post&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;title: &quot;&#39;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;date: &#39;</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="s">&#39; +0800&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;comments: true&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;sharing: true&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;categories: [&#39;</span> <span class="o">+</span> <span class="n">categories</span> <span class="o">+</span> <span class="s">&#39;]&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;tags: [&#39;</span> <span class="o">+</span> <span class="n">tags</span> <span class="o">+</span> <span class="s">&#39;]&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">octopress_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;---&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">octopress_file</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用这个<code>addOctopressBlogPrefix()</code>函数：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480293276868.png" alt="Alt text" /></p>
+
+<p>这个系统时间是这样得到的：（<a href="http://www.runoob.com/python/python-date-time.html">参考网站</a>）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'><span class="c"># 格式化成2016-03-20 11:45:39形式</span>
+</span><span class='line'><span class="n">time_data</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span>
+</span><span class='line'><span class="c"># print(time_data)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>将最终得到的Octopress博文文件（.markdown后缀文件）保存为UTF-8无BOM编码文件</h2>
+
+<p>如果现在将这个文件和图片转移到Octopress站点路径里面，然后执行<code>rake generate</code>命令会出现下面这个错误：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480365808617.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Error</span> <span class="n">reading</span> <span class="nb">file</span> <span class="n">F</span><span class="p">:</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="n">xxxx</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">byte</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</span><span class='line'>  <span class="n">Liquid</span> <span class="ne">Exception</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">byte</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="ow">in</span> <span class="n">_posts</span><span class="o">/</span><span class="n">xxxx</span><span class="o">.</span><span class="n">markdown</span><span class="o">/</span><span class="c">#excerpt</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个错误时说：这个文件<code>xxxx.markdown</code>它的编码不是标准的UTF-8无BOM编码方式编辑的文件。</p>
+
+<p>所以，为了解决这个问题，我们需要将输出的<strong>Octopress</strong>博文文件（<code>.markdown</code>后缀文件）在保存的时候将其转换为以Utf-8无BOM编码方式编码的文件。</p>
+
+<p>其实很简单，我们只需要将下面这行代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样<code>octopress_file</code>文件就是以Utf-8无BOM编码方式编码的文件。</p>
+
+<blockquote><p>我们也看到了，其实不是将<code>octopress_file</code>保存为以Utf-8无BOM编码方式编码的文件，而是创建这个一个以Utf-8无BOM编码方式编码的文件 <code>octopress_file</code>。</p></blockquote>
+
+<p>虽然已经成功的将最终得到的Octopress博文文件（.markdown后缀文件）保存为UTF-8无BOM编码文件。但是在执行 <code>print(octopress_file.read())</code> 这句代码的时候，出现了<code>UnicodeDecodeError</code> 错误，如下。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480367555470.png" alt="Alt text" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">octopress_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span class='line'><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t decode byte 0x8b in position 75: illegal multibyte sequence</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>哦，这个问题也非常容易解决，可以说现在不在是一个难问题了。</p>
+
+<p>解决办法：将<code>print(octopress_file.read())</code>这行代码的上一行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">octopress_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">octopress_file_path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解释：因为 <code>octopress_file</code> 已经是UTF-8无BOM编码的文件了，所以读取它的时候，也要将编码方式设为：<code>UTF-8</code> 才行。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480369389414.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<p>最后贴上当前最新的完整代码(v1.0)：<a href="https://github.com/AoboJaing/Evernote_Automatic_format_conversion/tree/v1.0">https://github.com/AoboJaing/Evernote_Automatic_format_conversion/tree/v1.0</a></p>
+
+<p>运行结果：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480294160448.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1480294179617.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>之前创建文件夹<code>folder</code>，现在加一个条件：如果文件夹已经存在，则不用创建</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># 在root_directory路径里面创建一个名为 folder_name 的文件夹。（如果文件夹已经存在，则不用创建）</span>
+</span><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Create a folder:&#39;</span> <span class="o">+</span> <span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;The folder &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span> <span class="o">+</span> <span class="s">&#39;&quot; was already exist. Not need to create again.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;File error: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>自动检测这个博客是：仅仅一个文件（<code>.md</code>），还是一个文件夹（就是检测这个博文里面有没有图片）</h2>
+
+<p>参考博客：<a href="http://www.aobosir.com/blog/2016/12/01/python-string-split/">Learning Python 025 字符串分割</a></p>
+
+<p>Demo 程序：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四.md&#39;</span>
+</span><span class='line'><span class="n">path2</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四.md&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">l1</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c"># l1 = path2.split(&#39;\\&#39;)</span>
+</span><span class='line'><span class="c"># print(l1)</span>
+</span><span class='line'><span class="c"># print(l1[-1])</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</span><span class='line'><span class="n">l2</span> <span class="o">=</span> <span class="n">l1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c"># print(l2)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">l2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">same</span> <span class="o">=</span> <span class="n">l1</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">l2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">same</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Git</span><span class="p">(</span><span class="n">GitHub</span><span class="p">)</span> <span class="mo">002</span> <span class="err">如何在</span><span class="n">GitHub</span> <span class="n">For</span> <span class="n">Windows</span> <span class="err">软件上为代码库创建一个版本标签</span> <span class="err">—</span> <span class="n">Ongoing</span> <span class="err">—</span> <span class="mi">2016</span><span class="err">年</span><span class="mi">12</span><span class="err">月</span><span class="mi">1</span><span class="err">日</span> <span class="err">星期四</span>
+</span><span class='line'><span class="n">Git</span><span class="p">(</span><span class="n">GitHub</span><span class="p">)</span> <span class="mo">002</span> <span class="err">如何在</span><span class="n">GitHub</span> <span class="n">For</span> <span class="n">Windows</span> <span class="err">软件上为代码库创建一个版本标签</span> <span class="err">—</span> <span class="n">Ongoing</span> <span class="err">—</span> <span class="mi">2016</span><span class="err">年</span><span class="mi">12</span><span class="err">月</span><span class="mi">1</span><span class="err">日</span> <span class="err">星期四</span>
+</span><span class='line'><span class="bp">True</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>给定马克飞象笔记文件（<code>.md</code>文件）路径，自动获取<code>root_directory</code>路径</h2>
+
+<p>Demo 程序：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -!- coding: utf-8 -!-</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四.md&#39;</span>
+</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">evernote_is_folder</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">a</span><span class="o">=-</span><span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mylist</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mylist</span><span class="p">[:</span><span class="n">a</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>自动检测这个博客是：仅仅一个文件（<code>.md</code>），还是一个文件夹 和 给定马克飞象笔记文件（<code>.md</code>文件）路径，自动获取<code>root_directory</code>路径 和 <code>evernote_folder_name</code>名字 的代码如下：</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># 自动检测这个博客是：仅仅一个文件（`.md`），还是一个文件夹</span>
+</span><span class='line'><span class="c"># 给定马克飞象笔记文件（`.md`文件）路径，自动获取`root_directory`路径 和 `evernote_folder_name`名字</span>
+</span><span class='line'><span class="n">evernote_file_path</span> <span class="o">=</span> <span class="s">r&#39;D:\WorkSpace\test_ws\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四\Git(GitHub) 002 如何在GitHub For Windows 软件上为代码库创建一个版本标签 — Ongoing — 2016年12月1日 星期四.md&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'><span class="n">l1</span> <span class="o">=</span> <span class="n">evernote_file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+</span><span class='line'><span class="c"># print(l1[-2])</span>
+</span><span class='line'><span class="n">l2</span> <span class="o">=</span> <span class="n">l1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c"># print(l2[0])</span>
+</span><span class='line'><span class="n">evernote_is_folder</span> <span class="o">=</span> <span class="n">l1</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">l2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span><span class='line'><span class="n">str_temp</span><span class="o">=</span><span class="s">&#39;文件&#39;</span>
+</span><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">a</span><span class="o">=-</span><span class="mi">2</span>
+</span><span class='line'>    <span class="n">str_temp</span><span class="o">=</span><span class="s">&#39;文件夹&#39;</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="s">&#39;当前处理的这个马克飞象笔记是一个&#39;</span> <span class="o">+</span> <span class="n">str_temp</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 马克飞象笔记的文件名</span>
+</span><span class='line'><span class="n">evernote_folder_name</span> <span class="o">=</span> <span class="n">l2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="c"># 马克飞象笔记文件夹所在路径</span>
+</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l1</span><span class="p">[:</span><span class="n">a</span><span class="p">])</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">evernote_folder_name</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">root_directory</span><span class="p">)</span>
+</span><span class='line'><span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>如果马克飞象笔记只是一个文件，我们就不进行创建文件夹、复制图片和文件内图片链接的修改的操作</h2>
+
+<p>很简单，我们只需要在创建文件夹和复制图片的操作的代码执行前加一个条件。满足条件就执行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span> <span class="c"># 执行以下代码的前提是：马克飞象笔记是一个文件夹</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># 在root_directory路径里面创建一个名为 folder_name 的文件夹。（如果文件夹已经存在，则不用创建）</span>
+</span><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span> <span class="c"># 执行以下代码的前提是：马克飞象笔记是一个文件夹</span>
+</span><span class='line'>    <span class="n">folder_name_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">folder_name_exists</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Create a folder:&#39;</span> <span class="o">+</span> <span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">pass</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">print</span><span class="p">(</span><span class="s">&#39;The folder &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span> <span class="o">+</span> <span class="s">&#39;&quot; was already exist. Not need to create again.&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;File error: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 将马克飞象笔记文件夹里面的所有图片全部复制到刚刚新创建的folder_name 文件夹（路径）里面</span>
+</span><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span> <span class="c"># 执行以下代码的前提是：马克飞象笔记是一个文件夹</span>
+</span><span class='line'>    <span class="n">copy_img_command</span> <span class="o">=</span> <span class="s">&#39;copy &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">evernote_folder_name</span> <span class="o">+</span> <span class="s">r&#39;\*.png&quot; &quot;&#39;</span> <span class="o">+</span> <span class="n">root_directory</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="s">r&#39;\&quot;&#39;</span>
+</span><span class='line'>    <span class="c"># print(copy_img_command)</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">copy_img_command</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># 将里面的图片链接替换为**Octopress**本地链接的形式</span>
+</span><span class='line'><span class="k">if</span> <span class="n">evernote_is_folder</span><span class="p">:</span> <span class="c"># 执行以下代码的前提是：马克飞象笔记是一个文件夹</span>
+</span><span class='line'>    <span class="n">image_local_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text\]\((.*?)\)&#39;</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'>    <span class="c"># print(image_local_path)</span>
+</span><span class='line'>    <span class="n">image_relative_path</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image_local_path</span><span class="p">)):</span>
+</span><span class='line'>        <span class="n">image_relative_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;/images/&#39;</span> <span class="o">+</span> <span class="n">folder_name</span> <span class="o">+</span> <span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
+</span><span class='line'>        <span class="c"># print(image_relative_path[i])</span>
+</span><span class='line'>        <span class="n">evernote_data</span> <span class="o">=</span> <span class="n">evernote_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">image_relative_path</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="c"># print(evernote_data)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>当前完整的代码在这里：<a href="https://github.com/AoboJaing/Evernote_Automatic_format_conversion/tree/v1.1">https://github.com/AoboJaing/Evernote_Automatic_format_conversion/tree/v1.1</a></p>
+
+<hr />
+
+<h2>将整个<code>evernoteToOctopressBlog.py</code>封装成一个类:<code>EvernoteToOctopressBlog</code></h2>
+
+<p>参考网站：<a href="http://www.aobosir.com/blog/2016/12/01/class-programming-object/">Learning Python 023 类编程</a></p>
+
+<p>当前完整的代码在这里（v2.0）：<a href="https://github.com/AoboJaing/Evernote_Automatic_format_conversion/blob/v2.0/script/evernoteToOctopressBlog.py">https://github.com/AoboJaing/Evernote_Automatic_format_conversion/blob/v2.0/script/evernoteToOctopressBlog.py</a></p>
+
+<hr />
+
+<h2>将<code>evernoteToOctopressBlog.py</code>文件写成一个工具（命令行工具），可以向里面传入命令行参数</h2>
+
+<p>参考网站：<a href="http://www.aobosir.com/blog/2016/12/02/python-get-command-line-arguments/">Learning Python 028 获取命令行参数</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">optparse</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span><span class='line'>    <span class="c"># 输入信息：folder_name、 evernote_file_path、octopress_title、octopress_categories、octopress_tags</span>
+</span><span class='line'>    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">(</span><span class="s">&#39;usage%prog &#39;</span> <span class="o">+</span>\
+</span><span class='line'>            <span class="s">&#39;-f &lt;folder_name&gt; -p &lt;evernote_file_path&gt; -T &lt;octopress_title&gt; -c &lt;octopress_categories&gt; -t &lt;octopress_tags&gt;&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;folder_name&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span>\
+</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;be converted Octopress blog file and images file name&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-p&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;evernote_file_path&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span> \
+</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;evernote file path&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-T&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;octopress_title&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span> \
+</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;be converted Octopress blog</span><span class="se">\&#39;</span><span class="s">s title&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-c&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;octopress_categories&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span> \
+</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;be converted Octopress blog</span><span class="se">\&#39;</span><span class="s">s categories&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-t&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;octopress_tags&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span> \
+</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;be converted Octopress blog</span><span class="se">\&#39;</span><span class="s">s tags&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">folder_name</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">evernote_file_path</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> \
+</span><span class='line'>            <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">octopress_title</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">octopress_categories</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> \
+</span><span class='line'>            <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">octopress_tags</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
+</span><span class='line'>        <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">folder_name</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">folder_name</span>
+</span><span class='line'>        <span class="n">evernote_file_path</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">evernote_file_path</span>
+</span><span class='line'>        <span class="n">octopress_title</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">octopress_title</span>
+</span><span class='line'>        <span class="n">octopress_categories</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">octopress_categories</span>
+</span><span class='line'>        <span class="n">octopress_tags</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">octopress_tags</span>
+</span><span class='line'>        <span class="c"># print(folder_name)</span>
+</span><span class='line'>        <span class="c"># print(evernote_file_path)</span>
+</span><span class='line'>        <span class="c"># print(octopress_title)</span>
+</span><span class='line'>        <span class="c"># print(octopress_categories)</span>
+</span><span class='line'>        <span class="c"># print(octopress_tags)</span>
+</span><span class='line'>        <span class="n">eTo</span> <span class="o">=</span> <span class="n">EvernoteToOctopressBlog</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="n">evernote_file_path</span><span class="p">,</span> <span class="n">octopress_title</span><span class="p">,</span> <span class="n">octopress_categories</span><span class="p">,</span> <span class="n">octopress_tags</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">eTo</span><span class="o">.</span><span class="n">autoProcess</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">Evernote_Automatic_format_conversion</span><span class="o">&gt;</span><span class="n">python</span> <span class="n">script</span>\<span class="n">evernoteToOctopressBlog</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</span><span class='line'><span class="n">Usage</span><span class="p">:</span> <span class="n">usageevernoteToOctopressBlog</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">folder_name</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">evernote_file_path</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">T</span> <span class="o">&lt;</span><span class="n">octopress_title</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">octopress_categories</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">t</span> <span class="o">&lt;</span><span class="n">octopress_tags</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Options</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">f</span> <span class="n">FOLDER_NAME</span>        <span class="n">be</span> <span class="n">converted</span> <span class="n">Octopress</span> <span class="n">blog</span> <span class="nb">file</span> <span class="ow">and</span> <span class="n">images</span> <span class="nb">file</span> <span class="n">name</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">p</span> <span class="n">EVERNOTE_FILE_PATH</span>
+</span><span class='line'>                        <span class="n">evernote</span> <span class="nb">file</span> <span class="n">path</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">T</span> <span class="n">OCTOPRESS_TITLE</span>    <span class="n">be</span> <span class="n">converted</span> <span class="n">Octopress</span> <span class="n">blog</span><span class="s">&#39;s title</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">c</span> <span class="n">OCTOPRESS_CATEGORIES</span>
+</span><span class='line'>                        <span class="n">be</span> <span class="n">converted</span> <span class="n">Octopress</span> <span class="n">blog</span><span class="s">&#39;s categories</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">t</span> <span class="n">OCTOPRESS_TAGS</span>     <span class="n">be</span> <span class="n">converted</span> <span class="n">Octopress</span> <span class="n">blog</span><span class="s">&#39;s tags</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">Evernote_Automatic_format_conversion</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行：(成功)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">Evernote_Automatic_format_conversion</span><span class="o">&gt;</span><span class="n">python</span> <span class="n">script</span>\<span class="n">evernoteToOctopressBlog</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="s">&quot;2016-12-1-python-get-command-line-arguments&quot;</span> <span class="o">-</span><span class="n">p</span> <span class="s">&quot;D:\WorkSpace</span><span class="se">\t</span><span class="s">est_ws\Learning Python 028 获取命令行参数 — Over — 2016年12月1日 星期 四.md&quot;</span> <span class="o">-</span><span class="n">T</span> <span class="s">&quot;Learning Python 028 获取命令行参数&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;python&quot;</span> <span class="o">-</span><span class="n">t</span> <span class="s">&quot;python3, python2, 命令行, 参数, args&quot;</span>
+</span><span class='line'><span class="err">当前处理的这个马克飞象笔记是一个文件</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">D</span><span class="p">:</span>\<span class="n">WorkSpace</span>\<span class="n">python_ws</span>\<span class="n">Evernote_Automatic_format_conversion</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在最新的代码在这里：<a href="https://github.com/AoboJaing/Evernote_Automatic_format_conversion/blob/v3.0/script/evernoteToOctopressBlog.py">https://github.com/AoboJaing/Evernote_Automatic_format_conversion/blob/v3.0/script/evernoteToOctopressBlog.py</a></p>
+
+<hr />
+
+<h2>基本完成了</h2>
+
+<p>可以收工了！</p>
+
+<p>&mdash; 2016-12-2 03:24:59</p>
+
+<hr />
+
+<h1>需要升级的地方</h1>
+
+<ol>
+<li>检查<code>folder_name</code> 字符串是否有非法字符和字符串的长度是否超过最大允许长度</li>
+</ol>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>Python 文件夹及文件操作（特全，特别详细）
+<a href="http://www.cnblogs.com/feeland/p/4463682.html">http://www.cnblogs.com/feeland/p/4463682.html</a></p>
+
+<hr />
+
+<h1>2017年2月20日 星期一 发现一个bug：当我将图片链接写成：<img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1487601876744.png" alt="Alt text" /> 的时候，程序不会识别到这是一个图片链接</h1>
+
+<p>2017-2-20 22:45:07 我想将这个bug记录下来。</p>
+
+<p>现在，修改这个bug。修改思路：</p>
+
+<p>我们需要修改这段代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">replaceImgLink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># 将里面的图片链接替换为**Octopress**本地链接的形式</span>
+</span><span class='line'>    <span class="n">image_local_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text\]\((.*?)\)&#39;</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-python-Evernote-Auto-converted-to-Octopress-local-site-blog/1487603129502.png" alt="Alt text" /></p>
+
+<p>我们在这里，将这里使用一次正则表达式，改为使用两次正则表达式。：</p>
+
+<p>大概的伪码的样子是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">image_local_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text\]\((.*?)\)&#39;</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第一步里面我们的正则表达式的匹配模板（<code>!\[Alt text(.*?)</code>）是一个前面有字符串，而后面没有字符串的一个字符串。那么这个时候，如果你想要程序正常的运行，你需要在这个匹配模板里面<code>(.*?)</code>后面添加上：<code>\Z</code>，用来表示后面没有字符串。（对着正则表达式的这个知识点，你可以参考<a href="http://www.aobosir.com/blog/2017/02/21/python-regular-expression-match-string-no-string-in-behind/">这篇博客</a>，这里对正则表达式的这个知识点有详细的介绍。）</p>
+
+<p>修改为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>    <span class="n">image_local_path</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;!\[Alt text(.*?)\)&#39;</span><span class="p">,</span> <span class="n">evernote_data</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image_local_path</span><span class="p">)):</span>
+</span><span class='line'>        <span class="n">image_local_path_this</span> <span class="o">=</span> <span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span class='line'>        <span class="n">image_local_path_step2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;]\((.*?)\Z&#39;</span><span class="p">,</span> <span class="n">image_local_path_this</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">image_local_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_local_path_step2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>现在修改后的代码：<a href="https://github.com/AoboJaing/Evernote_Automatic_format_conversion">依然在GitHub里面</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Python 008 正则表达式-007 匹配的字符串模板中如果只有前面有字符串，而后面没有字符串时，这个匹配模板要怎么写]]></title>
@@ -1828,405 +2788,6 @@
 
 
 <p>参考网站：<a href="http://doc.qt.io/qt-5/qtopengl-index.html#details">Qt OpenGL</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决OpenNI问题：XnOS.h：No Such File or Directory]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory/"/>
-    <updated>2017-02-11T07:51:03+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/11/solve-openni-XnOS-No-such-file-or-directory</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>参考网站：<a href="https://forum.openframeworks.cc/t/ofxopenni-xnopenni-h-no-such-file-or-directory/14286">ofxOpenNI：XnOpenNI.h：没有这样的文件或目录</a></p>
-
-<hr />
-
-<h2>遇到的问题</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>XnOS.h: No such file or directory</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-solve-openni-XnOS-No-such-file-or-directory/1486745884346.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>查找<code>openni</code>相关的软件包。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ apt-cache search openni
-</span><span class='line'>libopenni-dev - headers for OpenNI 'Natural Interaction' frameworks
-</span><span class='line'>libopenni-java - Java framework for sensor-based 'Natural Interaction'
-</span><span class='line'>libopenni-sensor-pointclouds-dev - headers for Kinect sensor modules for the OpenNI framework
-</span><span class='line'>libopenni-sensor-pointclouds0 - Microsoft Kinect sensor modules for the OpenNI framework
-</span><span class='line'>libopenni-sensor-primesense-dev - headers for working with PrimeSense sensor OpenNI modules
-</span><span class='line'>libopenni-sensor-primesense0 - PrimeSense sensor modules for the OpenNI framework
-</span><span class='line'>libopenni0 - framework for sensor-based 'Natural Interaction'
-</span><span class='line'>libopenni2-0 - framework for sensor-based 'Natural Interaction'
-</span><span class='line'>libopenni2-dev - headers for OpenNI 'Natural Interaction' frameworks
-</span><span class='line'>openni-doc - developer documentation for OpenNI frameworks
-</span><span class='line'>openni-utils - debug and test utilities OpenNI framework
-</span><span class='line'>openni2-doc - developer documentation for OpenNI frameworks
-</span><span class='line'>openni2-utils - debug and test utilities OpenNI2 framework
-</span><span class='line'>primesense-nite-nonfree - OpenNI module providing gesture and skeleton tracking
-</span><span class='line'>ros-kinetic-depth-image-proc - Contains nodelets for processing depth images such as those produced by OpenNI camera.
-</span><span class='line'>ros-kinetic-ecto-openni - Ecto bindings for the openni sensor.
-</span><span class='line'>ros-kinetic-freenect-camera - A libfreenect-based ROS driver for the Microsoft Kinect.
-</span><span class='line'>ros-kinetic-freenect-launch - Launch files for freenect_camera to produce rectified, registered or disparity images.
-</span><span class='line'>ros-kinetic-openni-camera - A ROS driver for OpenNI depth (+ RGB) cameras.
-</span><span class='line'>ros-kinetic-openni-launch - Launch files to open an OpenNI device and load all nodelets to convert raw depth/RGB/IR streams to depth images, disparity images, and (registered) point clouds.
-</span><span class='line'>ros-kinetic-openni2-camera - Drivers for the Asus Xtion and Primesense Devices.
-</span><span class='line'>ros-kinetic-openni2-launch - Launch files to start the openni2_camera drivers using rgbd_launch.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装 <code>libopenni-dev</code> ：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ sudo apt-get install libopenni-dev 
-</span><span class='line'>[sudo] password for aobo: 
-</span><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>libopenni-dev is already the newest version (1.5.4.0-14).
-</span><span class='line'>libopenni-dev set to manually installed.
-</span><span class='line'>The following packages were automatically installed and are no longer required:
-</span><span class='line'>  linux-headers-4.4.0-36 linux-headers-4.4.0-36-generic linux-headers-4.4.0-57
-</span><span class='line'>  linux-headers-4.4.0-57-generic linux-image-4.4.0-36-generic
-</span><span class='line'>  linux-image-4.4.0-57-generic linux-image-extra-4.4.0-36-generic
-</span><span class='line'>  linux-image-extra-4.4.0-57-generic
-</span><span class='line'>Use 'sudo apt autoremove' to remove them.
-</span><span class='line'>0 upgraded, 0 newly installed, 0 to remove and 140 not upgraded.
-</span><span class='line'>aobo@aobo-tp:~$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>检测安装路径：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ dpkg -L libopenni-dev
-</span><span class='line'>/.
-</span><span class='line'>/usr
-</span><span class='line'>/usr/share
-</span><span class='line'>/usr/share/doc
-</span><span class='line'>/usr/share/doc/libopenni-dev
-</span><span class='line'>/usr/share/doc/libopenni-dev/copyright
-</span><span class='line'>/usr/include
-</span><span class='line'>/usr/include/ni
-</span><span class='line'>/usr/include/ni/XnEnumerationErrors.h
-</span><span class='line'>/usr/include/ni/Linux-Powerpc
-</span><span class='line'>/usr/include/ni/Linux-Powerpc/XnPlatformLinux-Powerpc.h
-</span><span class='line'>/usr/include/ni/XnProfiling.h
-</span><span class='line'>/usr/include/ni/XnCppWrapper.h
-</span><span class='line'>/usr/include/ni/XnStack.h
-</span><span class='line'>/usr/include/ni/XnModuleInterface.h
-</span><span class='line'>/usr/include/ni/XnDump.h
-</span><span class='line'>/usr/include/ni/XnGeneralBuffer.h
-</span><span class='line'>/usr/include/ni/XnInternalDefs.h
-</span><span class='line'>/usr/include/ni/XnOpenNI.h
-</span><span class='line'>/usr/include/ni/XnStringsHashT.h
-</span><span class='line'>/usr/include/ni/XnOS.h
-</span><span class='line'>/usr/include/ni/XnMacros.h
-</span><span class='line'>/usr/include/ni/XnModuleCppInterface.h
-</span><span class='line'>/usr/include/ni/XnBaseNode.h
-</span><span class='line'>/usr/include/ni/XnDataTypes.h
-</span><span class='line'>/usr/include/ni/XnFPSCalculator.h
-</span><span class='line'>/usr/include/ni/XnCodecIDs.h
-</span><span class='line'>/usr/include/ni/XnPropNames.h
-</span><span class='line'>/usr/include/ni/XnUtils.h
-</span><span class='line'>/usr/include/ni/XnOSStrings.h
-</span><span class='line'>/usr/include/ni/XnUSB.h
-</span><span class='line'>/usr/include/ni/XnCyclicQueueT.h
-</span><span class='line'>/usr/include/ni/XnLicensing.h
-</span><span class='line'>/usr/include/ni/XnQueue.h
-</span><span class='line'>/usr/include/ni/XnArray.h
-</span><span class='line'>/usr/include/ni/XnStackT.h
-</span><span class='line'>/usr/include/ni/XnModuleCppRegistratration.h
-</span><span class='line'>/usr/include/ni/XnCallback.h
-</span><span class='line'>/usr/include/ni/XnDerivedCast.h
-</span><span class='line'>/usr/include/ni/XnDumpWriters.h
-</span><span class='line'>/usr/include/ni/XnHash.h
-</span><span class='line'>/usr/include/ni/XnOSMemory.h
-</span><span class='line'>/usr/include/ni/XnModuleCFunctions.h
-</span><span class='line'>/usr/include/ni/XnStatusCodes.h
-</span><span class='line'>/usr/include/ni/XnPrdNodeInfoList.h
-</span><span class='line'>/usr/include/ni/Linux-Mips
-</span><span class='line'>/usr/include/ni/Linux-Mips/XnPlatformLinux-Mips.h
-</span><span class='line'>/usr/include/ni/XnStringsHash.h
-</span><span class='line'>/usr/include/ni/XnLog.h
-</span><span class='line'>/usr/include/ni/XnBitSet.h
-</span><span class='line'>/usr/include/ni/XnTypes.h
-</span><span class='line'>/usr/include/ni/XnThreadSafeQueue.h
-</span><span class='line'>/usr/include/ni/XnStatusRegister.h
-</span><span class='line'>/usr/include/ni/XnVersion.h
-</span><span class='line'>/usr/include/ni/XnAlgorithms.h
-</span><span class='line'>/usr/include/ni/XnPlatform.h
-</span><span class='line'>/usr/include/ni/XnEventT.h
-</span><span class='line'>/usr/include/ni/Linux-AArch64
-</span><span class='line'>/usr/include/ni/Linux-AArch64/XnPlatformLinux-AArch64.h
-</span><span class='line'>/usr/include/ni/Linux-x86
-</span><span class='line'>/usr/include/ni/Linux-x86/XnOSLinux-x86.h
-</span><span class='line'>/usr/include/ni/Linux-x86/XnPlatformLinux-x86.h
-</span><span class='line'>/usr/include/ni/XnPrdNode.h
-</span><span class='line'>/usr/include/ni/MacOSX
-</span><span class='line'>/usr/include/ni/MacOSX/XnPlatformMacOSX.h
-</span><span class='line'>/usr/include/ni/XnEvent.h
-</span><span class='line'>/usr/include/ni/IXnNodeAllocator.h
-</span><span class='line'>/usr/include/ni/XnListT.h
-</span><span class='line'>/usr/include/ni/XnContext.h
-</span><span class='line'>/usr/include/ni/XnPrdNodeInfo.h
-</span><span class='line'>/usr/include/ni/XnOSCpp.h
-</span><span class='line'>/usr/include/ni/XnCyclicStackT.h
-</span><span class='line'>/usr/include/ni/XnQueueT.h
-</span><span class='line'>/usr/include/ni/XnList.h
-</span><span class='line'>/usr/include/ni/XnStatus.h
-</span><span class='line'>/usr/include/ni/XnNodeAllocator.h
-</span><span class='line'>/usr/include/ni/XnLogTypes.h
-</span><span class='line'>/usr/include/ni/Linux-Arm
-</span><span class='line'>/usr/include/ni/Linux-Arm/XnPlatformLinux-Arm.h
-</span><span class='line'>/usr/include/ni/XnQueries.h
-</span><span class='line'>/usr/include/ni/XnLogWriterBase.h
-</span><span class='line'>/usr/include/ni/XnNode.h
-</span><span class='line'>/usr/include/ni/XnScheduler.h
-</span><span class='line'>/usr/include/ni/XnUSBDevice.h
-</span><span class='line'>/usr/include/ni/XnHashT.h
-</span><span class='line'>/usr/lib
-</span><span class='line'>/usr/lib/pkgconfig
-</span><span class='line'>/usr/lib/pkgconfig/libopenni.pc
-</span><span class='line'>/usr/share/doc/libopenni-dev/changelog.Debian.gz
-</span><span class='line'>/usr/lib/libnimCodecs.so
-</span><span class='line'>/usr/lib/libSample-NiSampleModule.so
-</span><span class='line'>/usr/lib/libnimRecorder.so
-</span><span class='line'>/usr/lib/libnimMockNodes.so
-</span><span class='line'>/usr/lib/libOpenNI.so
-</span><span class='line'>/usr/lib/libOpenNI.jni.so
-</span><span class='line'>aobo@aobo-tp:~$ 
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>看一下<code>include</code>路径里面的<code>openni</code>文件：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ cd /usr/include/ni/
-</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ ls
-</span><span class='line'>IXnNodeAllocator.h  XnCodecIDs.h           XnFPSCalculator.h  XnModuleCFunctions.h          XnPrdNode.h          XnStatus.h
-</span><span class='line'>Linux-AArch64       XnContext.h            XnGeneralBuffer.h  XnModuleCppInterface.h        XnPrdNodeInfo.h      XnStatusRegister.h
-</span><span class='line'>Linux-Arm           XnCppWrapper.h         XnHash.h           XnModuleCppRegistratration.h  XnPrdNodeInfoList.h  XnStringsHash.h
-</span><span class='line'>Linux-Mips          XnCyclicQueueT.h       XnHashT.h          XnModuleInterface.h           XnProfiling.h        XnStringsHashT.h
-</span><span class='line'>Linux-Powerpc       XnCyclicStackT.h       XnInternalDefs.h   XnNodeAllocator.h             XnPropNames.h        XnThreadSafeQueue.h
-</span><span class='line'>Linux-x86           XnDataTypes.h          XnLicensing.h      XnNode.h                      XnQueries.h          XnTypes.h
-</span><span class='line'>MacOSX              XnDerivedCast.h        XnList.h           XnOpenNI.h                    XnQueue.h            XnUSBDevice.h
-</span><span class='line'>XnAlgorithms.h      XnDump.h               XnListT.h          XnOSCpp.h                     XnQueueT.h           XnUSB.h
-</span><span class='line'>XnArray.h           XnDumpWriters.h        XnLog.h            XnOS.h                        XnScheduler.h        XnUtils.h
-</span><span class='line'>XnBaseNode.h        XnEnumerationErrors.h  XnLogTypes.h       XnOSMemory.h                  XnStack.h            XnVersion.h
-</span><span class='line'>XnBitSet.h          XnEvent.h              XnLogWriterBase.h  XnOSStrings.h                 XnStackT.h
-</span><span class='line'>XnCallback.h        XnEventT.h             XnMacros.h         XnPlatform.h                  XnStatusCodes.h
-</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ 
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们现在查看一下<code>openni</code>安装的头文件和链接文件：</p>
-
-<p>下面这两个命令是检测不到<code>openni</code>的头文件路径的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:/usr/include/ni$ pkg-config --cflags openni
-</span><span class='line'>Package openni was not found in the pkg-config search path.
-</span><span class='line'>Perhaps you should add the directory containing `openni.pc'
-</span><span class='line'>to the PKG_CONFIG_PATH environment variable
-</span><span class='line'>No package 'openni' found
-</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ pkg-config --cflags ni
-</span><span class='line'>Package ni was not found in the pkg-config search path.
-</span><span class='line'>Perhaps you should add the directory containing `ni.pc'
-</span><span class='line'>to the PKG_CONFIG_PATH environment variable
-</span><span class='line'>No package 'ni' found
-</span><span class='line'>aobo@aobo-tp:/usr/include/ni$ </span></code></pre></td></tr></table></div></figure>
-
-
-<p>正确的命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>aobo@aobo-tp:~$ pkg-config --cflags libopenni
-</span><span class='line'>-I/usr/include/ni
-</span><span class='line'>aobo@aobo-tp:~$ pkg-config --libs libopenni
-</span><span class='line'>-lOpenNI
-</span><span class='line'>aobo@aobo-tp:~$ </span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>我当前的项目是在QT中的，解决办法就是：</p>
-
-<p>在 <code>.pro</code> 文件里面，添加<code>openni</code>的头文件路径和链接文件路径。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>INCLUDEPATH += /usr/include/ni
-</span><span class='line'>
-</span><span class='line'>LIBS += -L/usr/lib -lOpenNI</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

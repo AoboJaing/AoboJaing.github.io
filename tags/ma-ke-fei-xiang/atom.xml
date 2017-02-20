@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 马克飞象 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/ma-ke-fei-xiang/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T02:17:38+08:00</updated>
+  <updated>2017-02-21T02:23:41+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -143,7 +143,7 @@ os.system(copy_img_command)
 
 <p>1 . 在<strong>DOS</strong> 里面，执行下面的命令，有的是对的，有的是错的：</p>
 
-<pre><code class="dos"># Succesfull
+<pre><code># Succesfull
 copy "D:\WorkSpace\test_ws\Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png" "D:\WorkSpace\test_ws\2016-11-27-demo\"
 # Succesfull
 copy "D:\WorkSpace\test_ws\\Python3 大型网络爬虫实战 003 — scrapy 大型静态图片网站爬虫项目实战 — 实战：爬取 169美女图片网 高清图片 — Over — 2016年11月26日 星期六\*.png" "D:\WorkSpace\test_ws\\2016-11-27-demo\"
