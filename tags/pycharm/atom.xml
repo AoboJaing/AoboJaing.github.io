@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: PyCharm | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/pycharm/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-20T22:38:24+08:00</updated>
+  <updated>2017-02-21T00:02:15+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[在 JetBrains PyCharm 软件上使用 Git(Github)]]></title>
+    <title type="html"><![CDATA[在 JetBrains PyCharm 软件上使用 Git(Github) --- 如何使用GitHub For Windows软件的GUI界面给一个代码库添加一个`.gitignore`文件 --- 创建一个GitHub远程代码库的完整步骤]]></title>
     <link href="http://aobojaing.github.io/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows/"/>
     <updated>2016-11-29T11:44:46+08:00</updated>
     <id>http://aobojaing.github.io/blog/2016/11/29/JetBrains-PyCharm-software-use-Git-GitHub-For-Windows</id>
