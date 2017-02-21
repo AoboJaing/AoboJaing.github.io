@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "解决 -bash:  catin_make:  command not found 问题"
-date: 2017-02-21 04:08:00 +0800
+title: "解决 -bash  catin_make  command not found 问题"
+date: 2017-02-21 12:26:17 +0800
 comments: true
 sharing: true
 categories: [ROS]

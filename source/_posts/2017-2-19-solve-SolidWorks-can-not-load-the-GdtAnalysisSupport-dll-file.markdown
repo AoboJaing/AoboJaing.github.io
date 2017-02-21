@@ -77,6 +77,19 @@ tags: [SolidWorks, GdtAnalysisSupport.dll]
 
 ----------
 
+----------
+
+现在，`GdtAnalysisSupport.dll`文件的这个问题已经被解决了。现在SolidWorks软件是未被激活的状态，我们需要将其激活，激活的方法很简单，只需要到[这个](http://www.mfcad.com/solidworks/xiazai/18672.html)下载破解文件：
+
+![Alt text](/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487628031823.png)
+
+然后将这个下载后的压缩包解压，然后将里面的`setup`文件夹整个复制到你安装SolidWorks软件的路径下， 我当前安装的路径是：`C:\Program Files\SolidWorks Corp\SolidWorks`。这个路径里面原本就是有一个`setup`文件夹。我们在复制的时候，电脑会提示我们，我们直接选择**替换**即可。现在无需重启电脑，直接启动SolidWorks软件，现在软件就不会在提示你**激活软件**了。
+
+----------
+
+
+
+## 出现一个问题
 
 现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。
 
