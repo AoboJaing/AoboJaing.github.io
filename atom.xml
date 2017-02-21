@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T12:27:14+08:00</updated>
+  <updated>2017-02-21T15:38:42+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在3D打印的时候，不要给电脑拔出其他的USB设备]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/21/3D-printer-Best-to-run-offline/"/>
+    <updated>2017-02-21T15:38:25+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/21/3D-printer-Best-to-run-offline</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>今天遇到的事情</h2>
+
+<p>今天，我将需要打印的文件考到了3D打印机的SD卡里面，3D打印机还通过USB线连接着电脑的USB口。我这个时候将一个读卡器插到了电脑上，这个时候一件悲哀的事情发生了：已经打印了一半的3D打印机不打印了（停机了）。</p>
+
+<p>我现在终于知道了为什么之前会有莫名其妙的打印停止。</p>
+
+<h2>解决办法和经验</h2>
+
+<p>我得到的经验：在3D打印的时候，不要将3D打印机的USB线与电脑连接。让3D打印机离线脱机运行。这样就不会受到电脑端的影响。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决 -bash Catin_make Command Not Found 问题]]></title>
@@ -2685,45 +2704,6 @@
 <hr />
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows 安装OpenNI2]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/11/Windows-install-OpenNI2/"/>
-    <updated>2017-02-11T08:20:56+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/11/Windows-install-OpenNI2</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>下载</h2>
-
-<p>到这个网站下载：<a href="https://structure.io/openni">https://structure.io/openni</a></p>
-
-<p>我们下载 x86的，就是32位的。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673648122.png" alt="Alt text" /></p>
-
-<p>下载完成后，解压：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673700821.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>双击这个 <code>.msi</code> 文件，开始安装OpenNI2：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673740660.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673618477.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673750699.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673806305.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-install-OpenNI2/1486673820166.png" alt="Alt text" /></p>
-
-<h2></h2>
 ]]></content>
   </entry>
   
