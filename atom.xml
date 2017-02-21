@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-21T15:38:42+08:00</updated>
+  <updated>2017-02-21T17:26:40+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,167 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如何制作装配体]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/21/SolidWorks-How-to-make-Assemblies/"/>
+    <updated>2017-02-21T17:25:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/21/SolidWorks-How-to-make-Assemblies</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>自底向上的装配体设计</h2>
+
+<p>我们以一个例子来学习如何制作装配体。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/%E8%A3%85%E9%85%8D%E7%9A%84%E6%A6%82%E5%BF%B5.zip" alt="Alt text" /></p>
+
+<p>这里有包含一个机器人的所有零件的压缩包，这里面都是单独的零件。</p>
+
+<p>接下来，我们要做的事情就是将这些单独的零件制作成一个装配体。</p>
+
+<hr />
+
+<p>启动SolidWorks软件，然后先新建一个装配体：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487658790557.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487658814883.png" alt="Alt text" /></p>
+
+<p>点击 <strong>浏览</strong>：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487658863593.png" alt="Alt text" /></p>
+
+<p>我们先选择其中的<code>RectBase.SLDPRT</code>零件。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487659234073.png" alt="Alt text" /></p>
+
+<p>直接点击 <strong>确定</strong>：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487659308431.png" alt="Alt text" /></p>
+
+<p>这个时候，鼠标是和零件绑定在一起的，你鼠标移动到哪个位置，零件就到哪个位置。当你鼠标一点击，那么零件就会固定在这个位置上了。这是不行的。（这个时候是关键了）如果你鼠标随便的一点击，零件固定在一个位置，你不知道它被放在了什么位置。你根本就不知道。</p>
+
+<p>正确的做法：</p>
+
+<p>装配体里面有一个默认的原点，就是<code>(0, 0)</code>点，同时零件本身也有一个零点。我们现在需要做的事情是：将这个零件的原点与这个装配体的原点重合。如何重合，很简单：可视化窗口里面不需要点击鼠标，将鼠标移动到设计树这边，我只需要点击 上面对号（就是 <strong>确定</strong>的意思）。软件会自动帮我们将第一个零件固定。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487660511203.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>这样，我们就成功的在装配体中插入了第一个零件。（插入第一个零件的要点就是：必须要将零件的原点与装配件的原点重合。）</p>
+
+<hr />
+
+<p>接着，我们插入第二个零件。还是一样：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487664083112.png" alt="Alt text" /></p>
+
+<p>点击 <strong>浏览</strong>：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487664127950.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487664146709.png" alt="Alt text" /></p>
+
+<p>对于第二个和第三个零件，我们就可以随便点了。我们只需要在这个可视化界面里面随便点一下。</p>
+
+<p>和插入第二个零件一样的方法，将第三个零件插入到装配件里面。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487664299248.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>好的，零件都放进来了，现在我们就要开始装配了。</p>
+
+<h2>随便说一下，在装配体中，鼠标的作用</h2>
+
+<p>当鼠标选中了一个零件，按住鼠标左键，就是移动这个零件。鼠标的滚轮还是缩放的功能。鼠标中间按住不松口，就是整个视角上的旋转（看不同方式上的视图）。鼠标右键还是一样是选择菜单。如果是使用鼠标右键选中这个零件后，然后鼠标右键按住不动，那么就是真正的对单个零件的旋转。</p>
+
+<p>这就是装配体中，对鼠标的基本操作。现在熟悉了鼠标，现在我们就来开始做装配。</p>
+
+<hr />
+
+<p>一个零件在空间中有六个自由度，其中三个是平移，三个是旋转。我们要做的事情就是限制这些自由度，自由度限定死了，那么它就在空间中完全固定下来了，就不会随便乱动了。</p>
+
+<p>如果你留一个自由度在那，那么它就是一个会旋转的装配体。所以，简单的说：做装配体就是限制零件在空间中的自由度。（所以做装配体是很简单的。）</p>
+
+<hr />
+
+<p>现在，我们就来限制这些零件的自由度。</p>
+
+<p>限制零件的自由度，其实就是做<strong>配合</strong>。</p>
+
+<p>我们现在就做第一个导入的零件和第三个导入的零件进行<strong>配合</strong>。</p>
+
+<p>先点击 <strong>配合</strong> 工具 ：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487664893082.png" alt="Alt text" /></p>
+
+<p>分部选择两个零件的需要重合的面。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487666994345.png" alt="Alt text" /></p>
+
+<p>配合好了，就可以点击<strong>确定</strong>了。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667075053.png" alt="Alt text" /></p>
+
+<p>配合一般都是进行连续配合。所以，你配合了一次，是不会退出配合命令的，我们还会继续进行接下来的几次配合。</p>
+
+<p>接下来就是使用同样的方法，进行配合了。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667253911.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667371108.png" alt="Alt text" /></p>
+
+<p>这样，我们就将第一个零件和第二个零件完全的配合了，它们现在已经被完全的定义了。现在点击 <strong>确定</strong> 图标来退出<strong>配合</strong>操作。</p>
+
+<hr />
+
+<p>现在使用同样的道理，现在来装配第二个零部件。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667808835.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667837627.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487667899899.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在，三个零件都装配好了。现在我们就可以点击 <strong>确定</strong> 按钮来退出<strong>配合</strong>操作。</p>
+
+<hr />
+
+<p>在装配体里面，千万不要选择镜像。镜像会出现一个什么样的效果：镜像会产生一个新的零部件。这跟我们在零部件的状态下生成镜像是一样的。</p>
+
+<p>那么我现在要做装配件的另外一面，我要怎么做：就是复制这个零件。</p>
+
+<h2>如何复制零件</h2>
+
+<p>按住 <strong>Ctrl </strong>键，然后鼠标左键不要松开，推动这跟零件，这样就复制出来了。复制完之后，松开 <strong>Ctrl</strong> 键完成复制。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668280693.png" alt="Alt text" /></p>
+
+<p>然后，我们在使用上面同样的操作，再对复制出来的零部件进行同样操作，将其装配到装配体上。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668500372.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668586382.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668698857.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668724875.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668773121.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668802776.png" alt="Alt text" /></p>
+
+<p><img src="http://aobojaing.github.io/images/2017-2-21-SolidWorks-How-to-make-Assemblies/1487668840052.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在3D打印的时候，不要给电脑拔出其他的USB设备]]></title>
@@ -2579,131 +2740,6 @@
 <h2>解决问题：当打印从小面积到大面积的模型部分的时候出现的打印效果很差问题</h2>
 
 <p>解决办法就是：我现在习惯，不管我打印什么样的模型，我都习惯将模型倾斜45度角进行打印。这样可以有效的解决上面说的这个问题。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Windows上手动编译VTK源代码]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/11/Windows-Compile-vtk-source/"/>
-    <updated>2017-02-11T08:25:21+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/11/Windows-Compile-vtk-source</id>
-    <content type="html"><![CDATA[<hr />
-
-<h1>下载 VTK （7.1.0 版本）</h1>
-
-<p>下载网站：<a href="http://www.vtk.org/download/">http://www.vtk.org/download/</a></p>
-
-<p>下载下面这个：大约40多M</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486664521880.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>使用CMake-GUI软件生成编译文件</h2>
-
-<p>解压VTK。然后使用CMake-GUI软件，生成编译文件：</p>
-
-<p>第一次点击 <strong>Configure</strong> 按钮，选择的编译器是：<strong>Visual Studio 10 2010</strong>（就是VS2010 软件 32位的），大约要执行3分多钟。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486667440556.png" alt="Alt text" /></p>
-
-<p>出现了红色的条目。然后，在点击<strong>Configure</strong> 按钮一次。</p>
-
-<p>不在有红色条目。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486667504849.png" alt="Alt text" /></p>
-
-<p>点击<strong>Generate</strong> 按钮。</p>
-
-<p>搞定：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486667544319.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>开始编译VTK：</h2>
-
-<p>我们使用VS2010软件编译。使用VS2010软件打开下面的文件：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486667661222.png" alt="Alt text" /></p>
-
-<p>点击生成：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486667698053.png" alt="Alt text" /></p>
-
-<blockquote><p>VTK库是一个比较底层的库，它没有什么依赖库，所以编译VTK库是一件比较容易的事情。</p></blockquote>
-
-<p>执行了30多分钟，现在，全部编译成功：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486669531270.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>然后我们在生成 <strong>INSTALL</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486670425630.png" alt="Alt text" /></p>
-
-<p>有一个执行失败：失败的原因是：需要管理员权限。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486670387856.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>解决办法：（参考网站：<a href="http://public.kitware.com/pipermail/vtkusers/2010-August/061898.html">这里</a>）</p>
-
-<p>所以，我们现在关闭这个VS2010软件。打开CMake-GUI，重新生成编译文件：</p>
-
-<p>我们将 <strong>CMAKE_INSTALL_PREFIX</strong> 条目设置为一个我们有权限新建文件的路径：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671350467.png" alt="Alt text" /></p>
-
-<p>再次点击 <strong>Configure</strong> 按钮。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671408818.png" alt="Alt text" /></p>
-
-<p>最后在点击 <strong>Generates</strong> 按钮。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671440035.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在点击：<strong>VTK.sln</strong> 文件</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671467333.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>对着<strong>ALL_BUILD</strong> 右键，点击 <strong>生成</strong></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671511547.png" alt="Alt text" /></p>
-
-<p>这次执行，也就5分钟左右。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671854513.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在，我们生成 <strong>INSTALL</strong> ：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671928418.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486671904455.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>然后，我们再将这个文件夹剪切到<code>C:\Program Files (x86)</code> 路径里面：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486672083636.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486672171677.png" alt="Alt text" /></p>
-
-<p>我们需要将<code>\bin\</code> 路径（<code>C:\Program Files (x86)\VTK\bin</code>）添加到环境变量里面。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-11-Windows-Compile-vtk-source/1486672352228.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   
