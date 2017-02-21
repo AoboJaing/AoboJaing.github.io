@@ -11,7 +11,11 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 3.5.0 怎么使用python编写一个 类 参考网站：Python3-cookbook 类与对象 随便编写一个Python类，类里面至少有下面三个函数： &hellip;">
+使用的Python的版本：python2.7.10 或者 python 3.5.0 判断文件 1
+2
+3
+import os
+a = os.path.isfile(r&#39;D:\ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +72,145 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/determine-whether-files-and-folders-exist/">Learning Python 024 判断文件和文件夹是否存在</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T08:46:09+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>判断文件</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者下面的代码。（这两种方式是对于判断一个文件是否存在是等价的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws\ao.txt&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>判断文件夹</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;D:\WorkSpace\test_ws&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/GitHub-For-Windows-Adding-tag/">Git(GitHub) 002 如何在GitHub for Windows 软件上为代码库创建一个版本标签</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T08:04:17+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>8:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">git 创建标签</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">git 操作标签</a></li>
+<li><a href="http://stackoverflow.com/questions/13862517/github-for-windows-adding-tags">Github for Windows - Adding tags</a></li>
+</ul>
+
+
+<hr />
+
+<p>要想给代码库贴标签，Github For Windows 软件上没没有这个按钮。你需要在Github For Windows 软件上打开 <strong>Git 命令行窗口</strong>，还是要使用命令行工具来完成这个工作。</p>
+
+<p><img src="/images/2016-12-1-GitHub-For-Windows-Adding-tag/1480548346142.png" alt="Alt text" /></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -a v1.0 -m "description information"
+</span><span class='line'>git push origin v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>当你执行完<code>git tag -a v1.0 -m "description information"</code>，想要查看一下，你可以执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git show v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你执行完<code>git tag -a v1.0 -m "description information"</code>，想要删除这个标签，可以执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git tag -d v1.0</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1164,228 +1307,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/Python-read-file-Garbled-UnicodeDecodeError-gbk-codec-cant-decode-error/">Learning Python 015 解决问题：读取文件时，出现乱码或者“UnicodeDecodeError 'Gbk' Codec Can't Decode Byte 0xXX in Position XX: Incomplete Multibyte Sequence” 错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T19:18:27+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:18 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h2>出现的错误</h2>
-
-<p>读取文件时，出现<strong>乱码</strong>或者<code>UnicodeDecodeError: 'gbk' codec can't decode byte 0xXX in position XX: incomplete multibyte sequence</code> 错误</p>
-
-<hr />
-
-<h2>出现错误的原因</h2>
-
-<p>这两个错误可能会出现一个，两个错误的出现的原因是一样的：当我们使用了一个不正确的编码方式去读取一个不是用这个编码方式编码的文件时，轻者出现乱码，重者出现<code>UnicodeDecodeError</code>错误。</p>
-
-<hr />
-
-<h2>模拟错误发生现场</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">浣犲ソ锛孉</span><span class="n">oboSir</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;你好，AoboSir。&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-</span><span class='line'>  <span class="n">File</span> <span class="s">&quot;D:/WorkSpace/test_ws/demo/learning_python_15.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span class='line'><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s">&#39;gbk&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s">&#39;t decode byte 0x82 in position 35: incomplete multibyte sequence</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>读取文件时，指定正确的编码方式：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;newfile.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在再运行，就正常了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">你好，</span><span class="n">AoboSir</span><span class="err">。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/octopress-build-static-blog-site-categories-cn-url-404-not-found/">Octopress 搭建静态博客站点 — 让中文的分类列表（Categories）的超链接正常使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T13:49:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>前言</h2>
-
-<p>之前，我是按照我写的<a href="http://www.aobosir.com/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">这篇博客</a>为<strong>Octopress</strong>站点侧边栏添加分类列表（Categories）。</p>
-
-<hr />
-
-<h2>出现的问题</h2>
-
-<p>基于Octopress的博客系统自带了一个很好用分类目录插件。但遗憾的是它不支持中文链接URL，所以导致了：如果你分类列表有中文，那么点击的时候会链接到404页面。</p>
-
-<hr />
-
-<h2>解决思路</h2>
-
-<p>中文取拼音。</p>
-
-<hr />
-
-<h2>解决方法</h2>
-
-<p>参考网站：<a href="http://jiankg.github.io/2014/10/16/jie-jue-octopressfen-lei-mu-lu-zhi-chi-zhong-wen-de-wen-ti/">解决Octopress分类目录支持中文的问题</a></p>
-
-<p><code>/plugins/category_sidebar.rb</code> (若没有，自行创建)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;stringex&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">module</span> <span class="nn">Jekyll</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">CategoryListTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>      <span class="n">categories</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span>
-</span><span class='line'>      <span class="n">categories</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">posts_in_category</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">registers</span><span class="o">[</span><span class="ss">:site</span><span class="o">].</span><span class="n">categories</span><span class="o">[</span><span class="n">category</span><span class="o">].</span><span class="n">size</span>
-</span><span class='line'>        <span class="n">html</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&lt;li class=&#39;category&#39;&gt;&lt;a href=&#39;/blog/categories/</span><span class="si">#{</span><span class="n">category</span><span class="o">.</span><span class="n">to_url</span><span class="o">.</span><span class="n">downcase</span><span class="si">}</span><span class="s2">/&#39;&gt;</span><span class="si">#{</span><span class="n">category</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">posts_in_category</span><span class="si">}</span><span class="s2">)&lt;/a&gt;&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">html</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;category_sidebar&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">CategoryListTag</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>搞定</h2>
-
-<p>现在你可以重新执行<code>rake generate</code>和<code>rake preview</code>、 <code>rake deploy</code>，分类列表中有中文字符的分类，就可以正常打开了，而实际的链接就是对应的拼音。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1403,6 +1324,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/">SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/21/SolidWorks-2012-download-install-cracked/">Windows 10 下载、安装、破解 SolidWorks 2012 Sp5.0 软件 图文教程</a>
       </li>
     
@@ -1412,14 +1341,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/21/3D-printer-Best-to-run-offline/">在3D打印的时候，不要给电脑拔出其他的USB设备</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/solve-bash-catin_make-command-not-found/">解决 -bash Catin_make Command Not Found 问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/ROS-sw_urdf_exporter-download-install-and-add-plug-in-solidworks/">ROS Learning-033 （提高篇-011 URDF）如何使用SolidWorks软件导出URDF机器人模型文件 — 00 给SolidWorks软件安装 Sw_urdf_exporter插件</a>
       </li>
     
   </ul>
@@ -1445,7 +1366,7 @@
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 175%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 181%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
@@ -1466,11 +1387,11 @@
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
-<a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 129%" href="/tags/zhuang-pei-ti/">装配体</a>
 <a style="font-size: 159%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
@@ -1499,7 +1420,7 @@
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/ros/'>ros (2)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (11)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (13)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/sw-urdf-exporter/'>sw_urdf_exporter (1)</a></li>

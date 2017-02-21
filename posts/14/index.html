@@ -10,7 +10,9 @@
 
   
   <meta name="description" content="我的电脑系统：Windows 10 64位
-SQL Server 软件版本： SQL Server 2014 Express 之前，我们介绍了如何使用图形化操作建表和主外键约束。这一节我们来介绍如何使用命令来建表和主外键约束。 使用命令 建表 Step 0 . 先把之前在这篇博客里面建的表删除， &hellip;">
+SQL Server 软件版本： SQL Server 2014 Express 表和约束的区别 数据库是通过表来解决事物的存储问题的。
+数据库是用过约束来解决事物取值的有效性和合法性的问题。
+建表的过程就是指定事物属性及其事物属性各种约束的过程。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,381 @@ SQL Server 软件版本： SQL Server 2014 Express 之前，我们介绍了如�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/13/SQL-Learning-010-differences-tables-contraints-check-default-unique-not-null/">SQL 数据库 学习 010 表和约束的区别、check约束、default约束、unique约束、not Null约束</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-13T12:40:11+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我的电脑系统：<strong>Windows  10</strong> 64位</li>
+<li><strong>SQL Server</strong> 软件版本： <strong>SQL Server 2014 Express</strong></li>
+</ul>
+
+
+<hr />
+
+<h2>表和约束的区别</h2>
+
+<ul>
+<li>数据库是通过表来解决事物的存储问题的。</li>
+<li>数据库是用过约束来解决事物取值的有效性和合法性的问题。</li>
+<li>建表的过程就是指定事物属性及其事物属性各种约束的过程。</li>
+</ul>
+
+
+<hr />
+
+<h2>check 约束</h2>
+
+<p>意义：保证事物属性的取值在合法的范围之内。</p>
+
+<p>我们先创建一个表：（建表之前，先确保选中了指定的库）</p>
+
+<p><img src="/images/2016-10-13-SQL-Learning-010-differences-tables-contraints-check-default-unique-not-null/1476251551513.png" alt="Alt text" /></p>
+
+<p>点击 <strong>新建查询</strong> 按钮。输入下面的指令来新建一个带有<code>check</code> 约束的学生表：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">stu_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">stu_sal</span> <span class="nb">int</span> <span class="k">check</span> <span class="p">(</span><span class="n">stu_sal</span><span class="o">&gt;=</span><span class="mi">1000</span> <span class="k">and</span> <span class="n">stu_sal</span><span class="o">&lt;=</span><span class="mi">8000</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在，选中，然后点击执行。</p>
+
+<p>现在刷新右侧栏<code>test</code>库的 <strong>表</strong> ，就可以看到刚刚建的学生表：</p>
+
+<p><img src="/images/2016-10-13-SQL-Learning-010-differences-tables-contraints-check-default-unique-not-null/1476251700453.png" alt="Alt text" /></p>
+
+<p>接下来是，向这个表里面插数据：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>这就是所谓的第4代语言。全都是命令，你不需要知道它里面是如何实现的。这就是第4代编程语言。</p></blockquote>
+
+<p>现在<code>student(2)</code> 的工资已经超出了约束。如果你现在选中这两行命令。点击 <strong>执行</strong>，就会出现错误。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">消息</span> <span class="mi">547</span><span class="err">，级别</span> <span class="mi">16</span><span class="err">，状态</span> <span class="mi">0</span><span class="err">，第</span> <span class="mi">8</span> <span class="err">行</span>
+</span><span class='line'><span class="k">INSERT</span> <span class="err">语句与</span> <span class="k">CHECK</span> <span class="err">约束</span><span class="ss">&quot;CK__student__stu_sal__1A14E395&quot;</span><span class="err">冲突。该冲突发生于数据库</span><span class="ss">&quot;test&quot;</span><span class="err">，表</span><span class="ss">&quot;dbo.student&quot;</span><span class="p">,</span> <span class="k">column</span> <span class="s1">&#39;stu_sal&#39;</span><span class="err">。</span>
+</span><span class='line'><span class="err">语句已终止。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这就是 <code>check</code> 约束。</p>
+
+<hr />
+
+<h2>default约束</h2>
+
+<p>意义：保证事物的属性一定会有一个值。</p>
+
+<p>我们还是写 学生表。我们先把上面新建的学生表先删除掉。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">stu_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">stu_sal</span> <span class="nb">int</span> <span class="k">check</span> <span class="p">(</span><span class="n">stu_sal</span><span class="o">&gt;=</span><span class="mi">1000</span> <span class="k">and</span> <span class="n">stu_sal</span><span class="o">&lt;=</span><span class="mi">8000</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">stu_sex</span> <span class="k">nchar</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">default</span> <span class="p">(</span><span class="s1">&#39;男&#39;</span><span class="p">)</span> <span class="c1">--()可以省略。在数据库中字符串是必须用&#39;&#39;括起来的</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里简单的解释一下：<code>''</code> 和 <code>""</code> 在数据库里面有什么区别？</p>
+
+<p><strong>A：</strong> <code>''</code> 就是表示一个字符串；<code>""</code> 就是表示一个数据的名字。（比如：为某一个事物去一个名字，用<code>""</code>。表的名字、约束的名字、列的名字、计算列的名字、临时表的名字。总之，只要是为一个事物取一个名字，就是：<code>""</code>。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span><span class="p">(</span><span class="n">stu_id</span><span class="p">,</span> <span class="n">stu_sal</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>选中这两行，点击 <strong>执行</strong> 按钮。</p>
+
+<p><img src="/images/2016-10-13-SQL-Learning-010-differences-tables-contraints-check-default-unique-not-null/1476254095140.png" alt="Alt text" /></p>
+
+<blockquote><p><code>insert into student values (3, 2000)</code> 这样的命令是会报错的。因为表里面有3列值，你只输入了2列的数据。所以如果你想要让 <code>stu_sex</code> 使用默认值，必须要要这样写：<code>insert into student(stu_id, stu_sal) values (1, 1000)</code>，指定你赋值的两列。</p></blockquote>
+
+<hr />
+
+<h2>unique（唯一）约束</h2>
+
+<p>意义：它保证了事物的属性的取值不允许重复，但是允许为空。</p>
+
+<p>它都唯一了，那它和主键还有什么区别啊？</p>
+
+<p><code>unique（唯一）约束</code> 和 <code>允许为空</code> 是可以组合使用的。而 <code>主键</code> 和 <code>允许为空</code> 是不能组合使用的。</p>
+
+<p>（<strong>不允许为空</strong>（<code>not null</code>）都可以和<code>unique（唯一）约束</code>、 <code>主键</code>  组合使用。）</p>
+
+<p> 表里的项，如果不设置为 <code>not null</code> ，默认是：<strong>允许为空</strong> 的。</p>
+
+<p>创建表：学生表2</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">create</span> <span class="k">table</span> <span class="n">student2</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="n">stu_id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">stu_sal</span> <span class="nb">int</span> <span class="k">check</span> <span class="p">(</span><span class="n">stu_sal</span><span class="o">&gt;=</span><span class="mi">1000</span> <span class="k">and</span> <span class="n">stu_sal</span><span class="o">&lt;=</span><span class="mi">8000</span><span class="p">),</span>
+</span><span class='line'>  <span class="n">stu_sex</span> <span class="k">nchar</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">default</span> <span class="p">(</span><span class="s1">&#39;男&#39;</span><span class="p">),</span> <span class="c1">--()可以省略。在数据库中字符串是必须用&#39;&#39;括起来的</span>
+</span><span class='line'>  <span class="n">stu_name</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">unique</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们执行下面的指令就会出错。因为 <code>stu_name</code> 项是有唯一约束的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student2</span> <span class="n">vaules</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">,</span> <span class="s1">&#39;张三&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student2</span> <span class="n">vaules</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">,</span> <span class="s1">&#39;张三&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们执行下面的命令不会出错：（因为：<code>unique（唯一）约束</code> 和 <code>允许为空</code> 是可以组合使用的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student2</span> <span class="k">values</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果我们执行下面的指令，就会出错：（因为，主键是不允许为空的。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student2</span> <span class="k">values</span> <span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">,</span> <span class="s1">&#39;王麻子&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果现在再插入一个为空的元组，就会出错：（错误时：重复）</p>
+
+<p>（唯一约束不允许重复，但唯一约束允许为空，但是只允许其中有一列为空。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">student2</span> <span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><strong>Q：</strong> <code>unique（唯一）约束</code> 是否 允许多列为 <code>空</code>?</p>
+
+<p><strong>A：</strong>
+在 <strong>SQL Server</strong> 软件只允许一个 <code>unique</code> 列为空；
+<code>Oracle</code> 允许多个 <code>unique</code> 列为空。</p>
+
+<hr />
+
+<h2>如何合理的利用主键和唯一约束建表</h2>
+
+<p>一个比较重要的问题：
+<strong>Q：</strong> 唯一约束 和 主键 有什么区别？如何辨别？如何合理的利用主键和唯一约束建表？</p>
+
+<p><strong>A：</strong></p>
+
+<p>我们上网的时候，经常要登录，有些网站使用用户名，有的还可以使用邮箱登录。邮箱或者用户名，是唯一的。但不能使用它来当主键，我们不能使用业务信息当主键，因为用户名和邮箱是可以修改的。主键永远不可以修改。因为主键不但是本表的主键，而可能是其他表的外键，如果主键改变了，那么其他表的外键也要修改。所以，这个唯一键和主键的第一个区别。</p>
+
+<p>第二区别，主键一遍最好使用数字，不要使用字符串。使用数字为主键，查新速度非常快，相比使用字符串。所以不能使用有实际意义的字符串当主键。再说一次：不要使用业务逻辑（虽然它也是不允许重复的，比如用户名和邮箱）当主键，要使用没有实际意义的编号当主键。（如果数据量太大，可能主键里面还需要加一下字母。）</p>
+
+<p>主键最好不直接录入，我们最好使用 <code>identity</code> 关键字，让其自动增长，自动生成主键。（不使用业务逻辑当主键，使用代理主键（就是编号）当主键）</p>
+
+<hr />
+
+<h2>什么是<code>not null</code> 约束 以及 其 <code>not null</code> 约束与 <code>default</code> 约束的异同</h2>
+
+<p>我认为 <code>not null</code>  就是一个约束。它要求用户必须得为该属性赋一个值，否则语法出错！</p>
+
+<p>如果一个字段不写<code>null</code> ，也不写 <code>not null</code> ，则默认是  <code>null</code> ，即默认允许为空，用户可以不给该字段赋值。</p>
+
+<p>如果用户没有为该字段赋值，则该字段的值默认是 <code>null</code>。</p>
+
+<p>要注意 <code>nul</code> 和 <code>default</code> 的区别。</p>
+
+<ul>
+<li>相同点：都允许用户不赋值</li>
+<li>不同点：<code>null</code> 修饰的字段如果用户不赋值则默认是<code>null</code>；<code>default</code> 修饰的字段如果用户不赋值则默认是<code>default</code> 指定的那个值。</li>
+</ul>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/12/octopress-build-static-blog-site-add-categories-list-for-site-sidebar/">Octopress 搭建静态博客站点 --- 为站点侧边栏添加分类列表（Categories）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-12T16:15:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>一共三步，很简单。跟着走就可以。</p>
+
+<hr />
+
+<p><strong>Step 1 . </strong>  增加 <code>category_list</code> 插件</p>
+
+<p>在 <code>octopress\plugins\</code> 文件夹里面，新建一个文件，取名为：<code>category_list_tag.rb</code>。并将下面的代码粘贴到里面。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
+</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
+</span><span class='line'>    def render(context)
+</span><span class='line'>      html = ""
+</span><span class='line'>      categories = context.registers[:site].categories.keys
+</span><span class='line'>      categories.sort.each do |category|
+</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
+</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
+</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+</span><span class='line'>      end
+</span><span class='line'>      html
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个插件会向<code>liquid</code>注册一个名为<code>category_list</code>的<code>tag</code>，该<code>tag</code>就是以<code>li</code>的形式将站点所有的<code>category</code>组织起来。如果要将<code>category</code>加入到侧边导航栏，需要增加一个<code>aside</code>。</p>
+
+<hr />
+
+<p><strong>Step 2 . </strong> 增加 <code>aside</code></p>
+
+<p>在 <code>octopress\source\_includes\asides\</code> 文件夹里面，新建一个文件，取名为：<code>category_list.html</code> 。并粘贴下面的代码：</p>
+
+<p><strong>注意：</strong> 去掉 <code>%</code> 前面的 <code>\</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Categories<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;categories&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      {\% category_list \%}
+</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><strong>Step 3 . </strong> 在 <code>_config.yml</code> 文件里面 ，修改 <code>default_asides</code> 项</p>
+
+<p>打开 <code>octopress\_config.yml</code> 文件，修改里面的 <code>default_asides</code> 项，将 <code>asides/category_list.html</code> 添加进去。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [asides/category_list.html, ......]
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>搞定</h2>
+
+<p>现在，我们执行 <code>rake generate</code> 命令来生成最新的博客站点。然后执行 <code>rake preview</code> 命令在本地预览博客站点。 看看修改后的效果。</p>
+
+<p><img src="/images/2016-10-12-octopress-build-static-blog-site-add-categories-list-for-site-sidebar/1476259852727.png" alt="Alt text" /></p>
+
+<hr />
+
+<hr />
+
+<p>参考网站：</p>
+
+<p>为octopress添加分类(category)列表
+<a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">http://codemacro.com/2012/07/18/add-category-list-to-octopress/</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1086,6 +1463,14 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/">SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/21/SolidWorks-2012-download-install-cracked/">Windows 10 下载、安装、破解 SolidWorks 2012 Sp5.0 软件 图文教程</a>
       </li>
     
@@ -1095,14 +1480,6 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
     
       <li class="post">
         <a href="/blog/2017/02/21/3D-printer-Best-to-run-offline/">在3D打印的时候，不要给电脑拔出其他的USB设备</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/solve-bash-catin_make-command-not-found/">解决 -bash Catin_make Command Not Found 问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/ROS-sw_urdf_exporter-download-install-and-add-plug-in-solidworks/">ROS Learning-033 （提高篇-011 URDF）如何使用SolidWorks软件导出URDF机器人模型文件 — 00 给SolidWorks软件安装 Sw_urdf_exporter插件</a>
       </li>
     
   </ul>
@@ -1128,7 +1505,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
-<a style="font-size: 175%" href="/tags/solidworks/">SolidWorks</a>
+<a style="font-size: 181%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
@@ -1149,11 +1526,11 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
-<a style="font-size: 115%" href="/tags/zhu-yi-shi-xiang/">注意事项</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
 <a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
+<a style="font-size: 129%" href="/tags/zhuang-pei-ti/">装配体</a>
 <a style="font-size: 159%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
 
   </ul>
@@ -1182,7 +1559,7 @@ $ git clone https://github.com/robbyedwards/octopress-tag-cloud.git
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
 <li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
 <li class='category'><a href='/blog/categories/ros/'>ros (2)</a></li>
-<li class='category'><a href='/blog/categories/solidworks/'>solidworks (11)</a></li>
+<li class='category'><a href='/blog/categories/solidworks/'>solidworks (13)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/sw-urdf-exporter/'>sw_urdf_exporter (1)</a></li>

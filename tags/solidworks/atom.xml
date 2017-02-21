@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SolidWorks | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/solidworks/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-22T01:11:05+08:00</updated>
+  <updated>2017-02-22T03:55:30+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/"/>
+    <updated>2017-02-22T03:55:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>但你在制作 装配体的时候，发现有个零部件零件需要修改，这个时候，我们可以这样做：</p>
+
+<p>对着这个零部件点击鼠标左键，选择里面的 <strong>打开零件</strong> 图标工具。</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706640968.png" alt="Alt text" /></p>
+
+<p>这个时候，就进入了这个零部件文件里面。我们现在就可以对其进行编辑了。</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706706951.png" alt="Alt text" /></p>
+
+<p>当你修改完成后，记得要保存（按 <strong>Ctrl + S</strong>）。然后在点击下面截图里面的 <strong>叉号</strong> 回到装配体文件里面：</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706784279.png" alt="Alt text" /></p>
+
+<h1>搞定</h1>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/"/>
+    <updated>2017-02-22T03:47:59+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>如果你在装配体里面插入一个装配体的话，如果被插入的装配体原本是有可动关节的，但是被插入后，可动的关节不能运动了。</p>
+
+<p>要想让它还能动， 其他很简单，我们只需要这样做：</p>
+
+<p>对着我们需要恢复可动的关节的转配体：</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706079338.png" alt="Alt text" /></p>
+
+<p>然后将 <strong>求解为</strong> 选为 <strong>柔性(F)</strong>。（被插入到装配体中的装配体默认这一项是为 <strong>刚性&reg;</strong>的。）</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706131122.png" alt="Alt text" /></p>
+
+<p>现在转配体里面的包含的装配体的可动关节就可以动了。（如果可动的关节太多，你会明显的感觉到SolidWorks软件运行有点卡。）</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SolidWorks 如何制作装配体]]></title>
@@ -350,126 +400,6 @@
 <p>完成后，我们看看横切面图：</p>
 
 <p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358868183.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决 SolidWorks 无法装入 GdtAnalysisSupport.dll文件 的问题]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/"/>
-    <updated>2017-02-19T16:35:46+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>昨天做好的零件文件，今天睡醒了，再次打开， 就出现了这个问题：<code>无法装入 SolidWorks.dll文件：GdtAnalysisSupport.dll</code></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487392359179.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>解决办法</h2>
-
-<p>参考网站：<a href="http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html">http://jingyan.baidu.com/article/72ee561a530355e16138dfd4.html</a></p>
-
-<p>参考</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393791415.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393815563.png" alt="Alt text" /></p>
-
-<p>直接点击 <strong>忽略</strong> ：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487393914660.png" alt="Alt text" /></p>
-
-<p>等待大约5分钟：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394450625.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394522702.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394544788.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>现在启动 SolidWorks 软件：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394625073.png" alt="Alt text" /></p>
-
-<p>所以，你需要重新破解：</p>
-
-<p>参考网站：</p>
-
-<p>现在我们想点击 <strong>我想以后激活我的SolidWorks产品</strong>，来看看上面出现的问题是否解决了。</p>
-
-<p>问题仍然存在：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487394891003.png" alt="Alt text" /></p>
-
-<p>操了！</p>
-
-<hr />
-
-<p>我知道怎么回事了。在<strong>注册表编辑器</strong> 里面添加Installer的路径错了。</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397304857.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397342762.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487397374349.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<p>现在，<code>GdtAnalysisSupport.dll</code>文件的这个问题已经被解决了。现在SolidWorks软件是未被激活的状态，我们需要将其激活，激活的方法很简单，只需要到<a href="http://www.mfcad.com/solidworks/xiazai/18672.html">这个</a>下载破解文件：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487628031823.png" alt="Alt text" /></p>
-
-<p>然后将这个下载后的压缩包解压，然后将里面的<code>setup</code>文件夹整个复制到你安装SolidWorks软件的路径下， 我当前安装的路径是：<code>C:\Program Files\SolidWorks Corp\SolidWorks</code>。这个路径里面原本就是有一个<code>setup</code>文件夹。我们在复制的时候，电脑会提示我们，我们直接选择<strong>替换</strong>即可。现在无需重启电脑，直接启动SolidWorks软件，现在软件就不会在提示你<strong>激活软件</strong>了。</p>
-
-<hr />
-
-<h2>出现一个问题</h2>
-
-<p>现在，这个问题是不在出现了，但是，我之前做好的模型，还是有一部分步骤都失效了。这是怎么回事。</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405570583.png" alt="Alt text" /></p>
-
-<p>我现在没有办法了，现在的办法是：安装更新的SolidWorks 软件（2016）</p>
-
-<p>请参考这篇笔记：<strong>Windows 10 安装 SolidWorks 2016 Sp5.0</strong></p>
-
-<hr />
-
-<p>2017-2-18 16:12:01</p>
-
-<p>其实可以不用安装 SolidWorks 2016软件，我知道为什么打开的模型会是上面这个样子的了：</p>
-
-<p>那些 “<strong>失效</strong>” 的步骤其实是 被 <strong>压缩</strong> 了。</p>
-
-<p>解决办法就是：我们只需要将这些“<strong>失效</strong>”的步骤给 <strong>解除压缩</strong>即可。</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405886362.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>问题解决：</p>
-
-<p><img src="/images/2017-2-19-solve-SolidWorks-can-not-load-the-GdtAnalysisSupport-dll-file/1487405910127.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SolidWorks 如何在曲面上获取与基准线相交的分割线]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/"/>
-    <updated>2017-02-19T16:33:25+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline</id>
-    <content type="html"><![CDATA[<hr />
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356248650.png" alt="Alt text" /></p>
-
-<p>分割类型选择： <strong>交叉点</strong>，然后选择一个基准面 再选择一个 面。</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356275589.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

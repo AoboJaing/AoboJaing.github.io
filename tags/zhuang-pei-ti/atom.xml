@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 装配体 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/zhuang-pei-ti/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-22T01:11:05+08:00</updated>
+  <updated>2017-02-22T03:55:30+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/"/>
+    <updated>2017-02-22T03:55:20+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>但你在制作 装配体的时候，发现有个零部件零件需要修改，这个时候，我们可以这样做：</p>
+
+<p>对着这个零部件点击鼠标左键，选择里面的 <strong>打开零件</strong> 图标工具。</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706640968.png" alt="Alt text" /></p>
+
+<p>这个时候，就进入了这个零部件文件里面。我们现在就可以对其进行编辑了。</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706706951.png" alt="Alt text" /></p>
+
+<p>当你修改完成后，记得要保存（按 <strong>Ctrl + S</strong>）。然后在点击下面截图里面的 <strong>叉号</strong> 回到装配体文件里面：</p>
+
+<p><img src="/images/2017-2-22-SolidWorks-how-to-modify-a-spare-parts-in-Assembly/1487706784279.png" alt="Alt text" /></p>
+
+<h1>搞定</h1>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/"/>
+    <updated>2017-02-22T03:47:59+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>如果你在装配体里面插入一个装配体的话，如果被插入的装配体原本是有可动关节的，但是被插入后，可动的关节不能运动了。</p>
+
+<p>要想让它还能动， 其他很简单，我们只需要这样做：</p>
+
+<p>对着我们需要恢复可动的关节的转配体：</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706079338.png" alt="Alt text" /></p>
+
+<p>然后将 <strong>求解为</strong> 选为 <strong>柔性(F)</strong>。（被插入到装配体中的装配体默认这一项是为 <strong>刚性&reg;</strong>的。）</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706131122.png" alt="Alt text" /></p>
+
+<p>现在转配体里面的包含的装配体的可动关节就可以动了。（如果可动的关节太多，你会明显的感觉到SolidWorks软件运行有点卡。）</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SolidWorks 如何制作装配体]]></title>
