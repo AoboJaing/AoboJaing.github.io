@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/</loc>
+<lastmod>2017-02-28T14:29:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/</loc>
 <lastmod>2017-02-22T03:55:20+08:00</lastmod>
 </url>
@@ -663,6 +667,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/sw-urdf-exporter/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/opencv/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>
@@ -1491,5 +1498,20 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/ling-bu-jian/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/exited-with-code-0xc0000135/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/exited-with-code-1073741515/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/qt5/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/opencv/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/huan-jing-bian-liang/</loc>
 </url>
 </urlset>

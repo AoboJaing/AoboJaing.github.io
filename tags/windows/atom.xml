@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Windows | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/windows/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-22T03:55:30+08:00</updated>
+  <updated>2017-02-28T14:30:02+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解决问题：Qt5 OpenCV “uring startup program exited with code 0xc0000135”  “ exited with code -1073741515”]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/"/>
+    <updated>2017-02-28T14:29:00+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515</id>
+    <content type="html"><![CDATA[<hr />
+
+<h2>前言</h2>
+
+<p>之前已经搭建好的Qt5 和 OpenCV的环境（并且我之前写过博文，在<a href="http://blog.csdn.net/github_35160620/article/details/52364252">这里</a>），今天我运行了一下之前可以运行的程序， 竟然出现了问题：</p>
+
+<p>代码：</p>
+
+<pre><code class="cpp">#include &lt;QCoreApplication&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+
+    cv::Mat image = cv::imread("..\\helloWorld\\image.jpg");
+    cv::namedWindow("Image");
+    cv::imshow("Image", image);
+
+    cv::waitKey(0);
+    return a.exec();
+}
+</code></pre>
+
+<p>配置：</p>
+
+<pre><code class="cpp">QT += core
+QT -= gui
+
+CONFIG += c++11
+
+TARGET = helloWorld
+CONFIG += console
+CONFIG -= app_bundle
+
+TEMPLATE = app
+
+SOURCES += main.cpp
+
+INCLUDEPATH+=C:\third_packages\opencv\opencv2410-qt5\include\opencv \
+             C:\third_packages\opencv\opencv2410-qt5\include\opencv2 \
+             C:\third_packages\opencv\opencv2410-qt5\include
+
+LIBS+=  C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_calib3d2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_contrib2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_core2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_features2d2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_flann2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_gpu2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_highgui2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_imgproc2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_legacy2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_ml2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_nonfree2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_objdetect2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_ocl2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_photo2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_stitching2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_ts2410.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_video2410.dll.a \
+        C:\third_packages\opencv\opencv2410-qt5\lib\libopencv_videostab2410.dll.a \
+</code></pre>
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>调试的时候出现了下面的错误：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257248592.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257255314.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257261932.png" alt="Alt text" /></p>
+
+<p>运行程序的时候，什么的没有。但是在<strong>应用程序输出栏里面有这面截图是如数</strong></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257401005.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257952750.png" alt="Alt text" /></p>
+
+<p>我简单的用语言叙述一下出现的这个问题：</p>
+
+<p>当我点击运行的时候，程序会弹出黑色的终端窗口，在<strong>应用程序窗口</strong>里面，程序会显示自动退出，然后代码是：<strong>-1073741515</strong>。</p>
+
+<p>我想研究一下，究竟是什么地方出现看错误，所以，我点击 <strong>调试</strong> 按钮，然后就出现了上面三个错误提示窗口。</p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>在我没有上网上找解决办法之前，我猜测是因为我后来在电脑上安装了什么软件或者又搭建了什么环境，然后可能是影响到了Qt 和 OpenCV 的开发环境了，可能是被神不知鬼不觉的给改了什么地方。</p>
+
+<p>网上说：是因为环境变量没有添加的原因，但是我之前都添加过环境变量了。我想可能是因为其他的软件把我添加的环境变量个删除了或者挤下去了。所以现在我来查看一下当前的环境变量：</p>
+
+<p>通过查看，环境变量都在：</p>
+
+<hr />
+
+<p>我使用下面的程序测试Qt5软件。程序是可以正常运行的。正常的输出的 <code>Hello World!</code>。</p>
+
+<pre><code class="cpp">#include &lt;QCoreApplication&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+
+#include &lt;iostream&gt;
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+
+//    cv::Mat image = cv::imread("..\\helloWorld\\image.jpg");
+//    cv::namedWindow("Image");
+//    cv::imshow("Image", image);
+
+//    cv::waitKey(0);
+    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+    return a.exec();
+}
+</code></pre>
+
+<hr />
+
+<p>我刚刚再次查看了一下系统的环境变量，还真的发现：OpenCV-Qt的编译生成的<code>bin</code>的路径不在了。（也不知道是我之前根本就没有添加，我也忘记了）</p>
+
+<p>将我之前编译的OpenCV-Qt的<code>bin</code>路径添加到当前的系统的环境变量里面：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488262534186.png" alt="Alt text" /></p>
+
+<p>然后现在，关掉Qt软件（必须要关闭，然后重新启动）。然后重新启动Qt5软件。</p>
+
+<p>现在再次运行程序，问题解决：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488262593875.png" alt="Alt text" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Windows上手动编译VTK源代码]]></title>
@@ -285,136 +430,6 @@ aobosir@ubuntu:~$
 <hr />
 
 <p>参考网站：<a href="http://blog.csdn.net/lifengxun20121019/article/details/13627757">http://blog.csdn.net/lifengxun20121019/article/details/13627757</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intel RealSense 002(Learning RealSense SDK 001) Windows安装 Intel RealSense SDK]]></title>
-    <link href="http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK/"/>
-    <updated>2016-12-07T12:18:38+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2016/12/07/Intel-RealSense-Windows-download-install-intel-RealSense-SDK</id>
-    <content type="html"><![CDATA[<hr />
-
-<ul>
-<li>我使用的Intel RealSense 硬件：<a href="http://www.aobosir.com/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">SR300 摄像头</a></li>
-<li>电脑系统：Windows 10 64位</li>
-<li>电脑必须要有USB3.0接口</li>
-</ul>
-
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="https://www.youtube.com/watch?v=dFVUiwyWyFo&amp;list=PLg-UKERBljNwbHO7R9t0mnIA52xd65LUT&amp;index=6">Downloading and Installing the Intel® RealSense SDK</a></li>
-<li><a href="https://software.intel.com/blogs/2015/09/13/detailed-instructions-for-getting-started-with-intel-realsense-app-development?utm_source=ISTV&amp;utm_medium=Video&amp;utm_campaign=ISTV_2016&amp;utm_content=Video">Getting Started with Intel® RealSense™ App Development: Step-by-Step Install Instructions</a></li>
-</ul>
-
-
-<h2><a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">下载</a> 并安装</h2>
-
-<p><strong>Step 0 . </strong> 先将SR300摄像头通过USB3.0接口插到电脑上。</p>
-
-<blockquote><p>注意：</p>
-
-<ol>
-<li>必须要将SR300摄像头连接到USB3.0接口上。（这是一个非常重要的步骤）</li>
-<li>不要通过USB延长线连接。</li>
-</ol>
-</blockquote>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009695299.png" alt="Alt text" /></p>
-
-<p>等待大约5分钟，驱动就自动安装完成了。</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481009996712.png" alt="Alt text" /></p>
-
-<blockquote><p>如果电脑没有帮你自动安装，你需要将SR300模块与电脑断开，然后重插，电脑会帮你自动安装了SR300 摄像头的驱动程序。如果还是不行，重新启动试试看。</p></blockquote>
-
-<p><strong>Step 1 . </strong> 下载<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">SR300 深度摄像头管理程序</a>（intel_rs_dcm_sr300_3.3.27.5718.exe）</p>
-
-<blockquote><p><strong>DCM</strong> 是全称：Depth Camera Manager</p></blockquote>
-
-<p>安装：按照提示，一步一步的进行操作即可。</p>
-
-<blockquote><p>如果你需要这个问题：</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481008202698.png" alt="Alt text" /></p>
-
-<p>说明：SR300 摄像头没有与电脑连接，请先将SR300 摄像头于电脑通过USB3.0接口连接。</p></blockquote>
-
-<p><strong>Step 2 . </strong> 下载 <a href="https://software.intel.com/zh-cn/intel-realsense-sdk/download">英特尔® 实感™ 软件开发套件（必备）</a>（Intel® RealSense™ SDK for Windows*）</p>
-
-<blockquote><p>下载这里，你需要先注册一个inteld的用户，才能下载它。</p></blockquote>
-
-<p>安装：intel_rs_sdk_offline_package_10.0.26.0396.exe</p>
-
-<p>一步一步的安装，即可。</p>
-
-<blockquote><p>如果你在安装的时候遇到这个问题：</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481021331695.png" alt="Alt text" /></p>
-
-<p><strong>The Installer failed to detect OpenCL™ 1.2 support on your system. Certain SDK samples/modules may not be functional. Please upgrade your graphics driver for full SDK functionalities.</strong></p>
-
-<p>点击<strong>Next</strong> 按钮忽略即可。</p>
-
-<h2>出现这个问题的原因：</h2>
-
-<p>你先下载 <a href="http://www.ozone3d.net/gpu_caps_viewer/">GPU Caps Viewer</a> 软件来查看<strong>我当前的电脑安装的OpenCL的版本</strong>和<strong>我的电脑有没有GPU</strong>。</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048947084.png" alt="Alt text" /></p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481048958442.png" alt="Alt text" /> <img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049035444.png" alt="Alt text" /></p>
-
-<p>通过GPU Caps Viewer软件得到的结果，我知道了：</p>
-
-<ul>
-<li>我的电脑里面是有GPU的：(NVIDIA CUDA公司的)<a href="http://www.geforce.com/hardware/notebook-gpus/geforce-705m/specifications">GeForce GT 705</a>。</li>
-<li>这个显卡（GPU）支持的OpenCL版本是1.1</li>
-</ul>
-
-
-<p>现在你应该大概知道了：安装的 Intel RealSense SDK 提示的安装问题的原因了吧：</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481049133289.png" alt="Alt text" /></p>
-
-<p>它说：您当前电脑的显卡太喽了，Intel RealSense SDK需要的是OpenCL1.2，而你的电脑里面没有，你电脑里面的显卡所支持的OpenCL版本是OpenCL1.1。</p>
-
-<h2>解决办法</h2>
-
-<p>没有办法，唯一可以解决下面这个问题的办法就是：提升（换一个好的）图形驱动硬件。（即：支持OpenCL1.2以上的显卡）。我们直接直接忽略这个问题也可以。对后面基本没有什么影响。</p></blockquote>
-
-<hr />
-
-<blockquote><p><strong>总结：</strong> 对于你的电脑，你想检测是否有GPU（显卡）（不管是<strong>NVIDIA CUDA 公司</strong>的还是 <strong>Intel公司</strong>的 都可以）。然后查看GPU（显卡）支持的OpenCL版本，必须要大于等于OpenCL1.2，否则 Intel RealSense SDK 安装不能成功。</p></blockquote>
-
-<hr />
-
-<p>注意安装的时候要连着网，因为在安装的时候会从网上下载一下安装包。</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481072982805.png" alt="Alt text" /></p>
-
-<p>如果你想要拥有 <strong>China</strong> 的语音识别和合成包，可以将下面的选项勾选。</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481073189997.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
-
-<h2>测试</h2>
-
-<p>启动 <strong>Intel RealSense SDK Sample Browser</strong></p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083199264.png" alt="Alt text" /></p>
-
-<p>里面有很多的示例可以运行：（每个程序都运行一下，试试看。）</p>
-
-<p><img src="/images/2016-12-7-Intel-RealSense-Windows-download-install-intel-RealSense-SDK/1481083256629.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>学习文档：<a href="https://software.intel.com/zh-cn/intel-realsense-sdk/documentation">英特尔® 实感™ SDK 文档</a></p>
 ]]></content>
   </entry>
   

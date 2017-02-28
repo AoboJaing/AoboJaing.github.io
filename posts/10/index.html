@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="Scrapy 命令 分为两种：全局命令 和 项目命令。 全局命令：在哪里都能使用。 项目命令：必须在爬虫项目里面才能使用。 全局命令 1
+  <meta name="description" content="执行 scrapy bench 命令时 出现错误。（之前安装了pywin32库） 1
 2
 3
 4
@@ -30,7 +30,23 @@
 19
 20
 21
-C:\Users\AOBO&gt;scrapy -h &hellip;">
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +103,256 @@ C:\Users\AOBO&gt;scrapy -h &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/26/solve-pywin32-import-win32api-ImportError-DLL-load-failed/">解决问题： Pywin32 安装后出现 Import Win32api ImportError DLL Load Failed</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-26T07:04:25+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>7:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>执行 <code>scrapy bench</code> 命令时 出现错误。（之前安装了pywin32库）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\defer.py", line 1260, in _inlineCallbacks
+</span><span class='line'>    result = g.send(result)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 72, in crawl
+</span><span class='line'>    self.engine = self._create_engine()
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\crawler.py", line 97, in _create_engine
+</span><span class='line'>    return ExecutionEngine(self, lambda _: self.stop())
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\engine.py", line 68, in __init__
+</span><span class='line'>    self.downloader = downloader_cls(crawler)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\core\downloader\__init__.py", line 88, in __init__
+</span><span class='line'>    self.middleware = DownloaderMiddlewareManager.from_crawler(crawler)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 58, in from_crawler
+</span><span class='line'>    return cls.from_settings(crawler.settings, crawler)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\middleware.py", line 34, in from_settings
+</span><span class='line'>    mwcls = load_object(clspath)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\utils\misc.py", line 44, in load_object
+</span><span class='line'>    mod = import_module(module)
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\importlib\__init__.py", line 126, in import_module
+</span><span class='line'>    return _bootstrap._gcd_import(name[level:], package, level)
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 986, in _gcd_import
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 969, in _find_and_load
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 958, in _find_and_load_unlocked
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 673, in _load_unlocked
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap_external&gt;", line 662, in exec_module
+</span><span class='line'>  File "&lt;frozen importlib._bootstrap&gt;", line 222, in _call_with_frames_removed
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\downloadermiddlewares\retry.py", line 23, in &lt;module&gt;
+</span><span class='line'>    from scrapy.xlib.tx import ResponseFailed
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\scrapy\xlib\tx\__init__.py", line 3, in &lt;module&gt;
+</span><span class='line'>    from twisted.web import client
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\web\client.py", line 42, in &lt;module&gt;
+</span><span class='line'>    from twisted.internet.endpoints import TCP4ClientEndpoint, SSL4ClientEndpoint
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\endpoints.py", line 36, in &lt;module&gt;
+</span><span class='line'>    from twisted.internet.stdio import StandardIO, PipeAddress
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\stdio.py", line 30, in &lt;module&gt;
+</span><span class='line'>    from twisted.internet import _win32stdio
+</span><span class='line'>  File "c:\users\aobo\appdata\local\programs\python\python35\lib\site-packages\twisted\internet\_win32stdio.py", line 9, in &lt;module&gt;
+</span><span class='line'>    import win32api
+</span><span class='line'>ImportError: DLL load failed: 找不到指定的模块。</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>解决办法：</h2>
+
+<p>参考网站：</p>
+
+<p><a href="http://blog.csdn.net/mtt_sky/article/details/50445938">http://blog.csdn.net/mtt_sky/article/details/50445938</a>
+<a href="http://blog.sina.com.cn/s/blog_5a81b7990101l225.html">http://blog.sina.com.cn/s/blog_5a81b7990101l225.html</a></p>
+
+<p><code>C:\Users\AOBO\AppData\Local\Programs\Python\Python35\Lib\site-packages\pywin32_system32</code></p>
+
+<p>里面的所有的文件复制到：<code>C:\Windows\System32</code></p>
+
+<p>现在，问题解决。无需重新打开DOS窗口，直接执行：<code>scrapy bench</code>。</p>
+
+<p>输出正常：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D:\BaiduYunDownload\first&gt;scrapy bench
+</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Scrapy 1.2.1 started (bot: first)
+</span><span class='line'>2016-11-23 13:56:45 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'first.spiders', 'CLOSESPIDER_TIMEOUT': 10, 'LOGSTATS_INTERVAL': 1, 'LOG_LEVEL': 'INFO', 'BOT_NAME': 'first', 'SPIDER_MODULES': ['first.spiders']}
+</span><span class='line'>2016-11-23 13:56:47 [scrapy] INFO: Enabled extensions:
+</span><span class='line'>['scrapy.extensions.corestats.CoreStats',
+</span><span class='line'> 'scrapy.extensions.telnet.TelnetConsole',
+</span><span class='line'> 'scrapy.extensions.closespider.CloseSpider',
+</span><span class='line'> 'scrapy.extensions.logstats.LogStats']
+</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled downloader middlewares:
+</span><span class='line'>['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware',
+</span><span class='line'> 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled spider middlewares:
+</span><span class='line'>['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+</span><span class='line'> 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+</span><span class='line'> 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+</span><span class='line'> 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+</span><span class='line'> 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Enabled item pipelines:
+</span><span class='line'>['first.pipelines.FirstPipeline']
+</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Spider opened
+</span><span class='line'>2016-11-23 13:56:48 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:49 [scrapy] INFO: Crawled 69 pages (at 4140 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:50 [scrapy] INFO: Crawled 141 pages (at 4320 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:51 [scrapy] INFO: Crawled 205 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:52 [scrapy] INFO: Crawled 269 pages (at 3840 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:53 [scrapy] INFO: Crawled 325 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:54 [scrapy] INFO: Crawled 373 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:55 [scrapy] INFO: Crawled 429 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:56 [scrapy] INFO: Crawled 477 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:57 [scrapy] INFO: Crawled 533 pages (at 3360 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Crawled 581 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2016-11-23 13:56:58 [scrapy] INFO: Closing spider (closespider_timeout)
+</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Dumping Scrapy stats:
+</span><span class='line'>{'downloader/request_bytes': 265444,
+</span><span class='line'> 'downloader/request_count': 597,
+</span><span class='line'> 'downloader/request_method_count/GET': 597,
+</span><span class='line'> 'downloader/response_bytes': 1833261,
+</span><span class='line'> 'downloader/response_count': 597,
+</span><span class='line'> 'downloader/response_status_count/200': 597,
+</span><span class='line'> 'finish_reason': 'closespider_timeout',
+</span><span class='line'> 'finish_time': datetime.datetime(2016, 11, 23, 5, 56, 59, 266168),
+</span><span class='line'> 'log_count/INFO': 17,
+</span><span class='line'> 'request_depth_max': 20,
+</span><span class='line'> 'response_received_count': 597,
+</span><span class='line'> 'scheduler/dequeued': 597,
+</span><span class='line'> 'scheduler/dequeued/memory': 597,
+</span><span class='line'> 'scheduler/enqueued': 11938,
+</span><span class='line'> 'scheduler/enqueued/memory': 11938,
+</span><span class='line'> 'start_time': datetime.datetime(2016, 11, 23, 5, 56, 48, 450531)}
+</span><span class='line'>2016-11-23 13:56:59 [scrapy] INFO: Spider closed (closespider_timeout)
+</span><span class='line'>
+</span><span class='line'>D:\BaiduYunDownload\first&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1534,84 +1800,6 @@ Python读写文件
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/13/cs-001-delete-event-function-resolve-error/">C# 001 --- 正确的删除一个控件的事件函数 --- 解决错误： “A”不包含“B”的定义，并且找不到可接受类型为“A”的第一个参数的扩展方法“B”(是否缺少 Using 指令或程序集引用?)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-13T13:54:49+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>先添加一个控件。比如添加一个<code>GroupBox</code>控件。</p>
-
-<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479014826968.png" alt="Alt text" /></p>
-
-<p>当然，这个控件你不需要任何事件函数，但是如果你已经双击这个控件，开始编辑这个控件的事件函数了，那么这个时候要删除这个控件的事件函数需要2步：</p>
-
-<p><strong>Step 1 . </strong> 在 <code>Form11.cs</code> 文件中，将这个控件所有的事件函数删除。对于我们这个例子，删除的代码是：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">private</span> <span class="k">void</span> <span class="nf">groupBox1_Enter</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果这个时候，你运行程序会出错：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="err">错误</span>    <span class="m">1</span>    <span class="err">“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”不包含“</span><span class="n">groupBox1_Enter</span><span class="err">”的定义，并且找不到可接受类型为“</span><span class="n">WindowsFormsApplication1_demo</span><span class="p">.</span><span class="n">Form1</span><span class="err">”的第一个参数的扩展方法“</span><span class="n">groupBox1_Enter</span><span class="err">”</span><span class="p">(</span><span class="err">是否缺少</span> <span class="k">using</span> <span class="err">指令或程序集引用?) </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>它提示你：你已经给<code>groupBox1</code>这个控件对象定义了一个<code>groupBox1_Enter</code>的方法了，但是编译器却没有找到这个函数。为什么没有找到？因为刚刚我们给它删除了。所以第2步：</p>
-
-<p><strong>Step 2 . </strong> 在<strong>解决方案资源管理器</strong>，打开：<code>Form1.Designer.cs</code>文件：</p>
-
-<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015257166.png" alt="Alt text" /></p>
-
-<p>你会看到，一个小加号：</p>
-
-<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015310058.png" alt="Alt text" /></p>
-
-<p>点开这个小加号，里面就是所有空间的参数和方法的定义汇总。我们找到对应控件的事件函数：</p>
-
-<p><img src="/images/2016-11-13-cs-001-delete-event-function-resolve-error/1479015437616.png" alt="Alt text" /></p>
-
-<p><strong>VS</strong> 软件已经将有错误的地方，用波浪线标注了。我们直接删除这一行，即可：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">groupBox1</span><span class="p">.</span><span class="n">Enter</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">EventHandler</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">groupBox1_Enter</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在，再运行程序，就不会有错误了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -1629,6 +1817,10 @@ Python读写文件
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/">解决问题：Qt5 OpenCV “uring Startup Program Exited With Code 0xc0000135” “ Exited With Code -1073741515”</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
       </li>
     
@@ -1642,10 +1834,6 @@ Python读写文件
     
       <li class="post">
         <a href="/blog/2017/02/21/SolidWorks-How-to-make-Assemblies/">SolidWorks 如何制作装配体</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/3D-printer-Best-to-run-offline/">在3D打印的时候，不要给电脑拔出其他的USB设备</a>
       </li>
     
   </ul>
@@ -1675,7 +1863,7 @@ Python读写文件
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 184%" href="/tags/windows/">Windows</a>
+<a style="font-size: 187%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
@@ -1717,13 +1905,14 @@ Python读写文件
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/meshmixer/'>meshmixer (1)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (1)</a></li>
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
 <li class='category'><a href='/blog/categories/python-shi-zhan/'>python 实战 (1)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
-<li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/qt/'>qt (2)</a></li>
 <li class='category'><a href='/blog/categories/ros/'>ros (2)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (13)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>

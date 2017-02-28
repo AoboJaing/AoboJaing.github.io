@@ -9,7 +9,24 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="但你在制作 装配体的时候，发现有个零部件零件需要修改，这个时候，我们可以这样做： 对着这个零部件点击鼠标左键，选择里面的 打开零件 图标工具。 这个时候，就进入了这个零部件文件里面。我们现在就可以对其进行编辑了。 当你修改完成后，记得要保存（按 Ctrl + S）。然后在点击下面截图里面的 叉号 &hellip;">
+  <meta name="description" content="前言 之前已经搭建好的Qt5 和 OpenCV的环境（并且我之前写过博文，在这里），今天我运行了一下之前可以运行的程序， 竟然出现了问题： 代码： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+#include &lt;QCoreApplication&gt;
+# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +83,244 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/">解决问题：Qt5 OpenCV “uring Startup Program Exited With Code 0xc0000135” “ Exited With Code -1073741515”</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-28T14:29:00+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>2:29 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h2>前言</h2>
+
+<p>之前已经搭建好的Qt5 和 OpenCV的环境（并且我之前写过博文，在<a href="http://blog.csdn.net/github_35160620/article/details/52364252">这里</a>），今天我运行了一下之前可以运行的程序， 竟然出现了问题：</p>
+
+<p>代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;QCoreApplication&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/highgui/highgui.hpp&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/imgproc/imgproc.hpp&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/core/core.hpp&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">QCoreApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;..</span><span class="se">\\</span><span class="s">helloWorld</span><span class="se">\\</span><span class="s">image.jpg&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">namedWindow</span><span class="p">(</span><span class="s">&quot;Image&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Image&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">QT</span> <span class="o">+=</span> <span class="n">core</span>
+</span><span class='line'><span class="n">QT</span> <span class="o">-=</span> <span class="n">gui</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">c</span><span class="o">++</span><span class="mi">11</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">TARGET</span> <span class="o">=</span> <span class="n">helloWorld</span>
+</span><span class='line'><span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">console</span>
+</span><span class='line'><span class="n">CONFIG</span> <span class="o">-=</span> <span class="n">app_bundle</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">TEMPLATE</span> <span class="o">=</span> <span class="n">app</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">SOURCES</span> <span class="o">+=</span> <span class="n">main</span><span class="p">.</span><span class="n">cpp</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">INCLUDEPATH</span><span class="o">+=</span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">include</span><span class="err">\</span><span class="n">opencv</span> \
+</span><span class='line'>             <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">include</span><span class="err">\</span><span class="n">opencv2</span> \
+</span><span class='line'>             <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">include</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">LIBS</span><span class="o">+=</span>  <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_calib3d2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_contrib2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_core2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_features2d2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_flann2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_gpu2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_highgui2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_imgproc2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_legacy2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_ml2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_nonfree2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_objdetect2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_ocl2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_photo2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_stitching2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_ts2410</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_video2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span><span class='line'>        <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">third_packages</span><span class="err">\</span><span class="n">opencv</span><span class="err">\</span><span class="n">opencv2410</span><span class="o">-</span><span class="n">qt5</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">libopencv_videostab2410</span><span class="p">.</span><span class="n">dll</span><span class="p">.</span><span class="n">a</span> \
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>出现的问题</h2>
+
+<p>调试的时候出现了下面的错误：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257248592.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257255314.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257261932.png" alt="Alt text" /></p>
+
+<p>运行程序的时候，什么的没有。但是在<strong>应用程序输出栏里面有这面截图是如数</strong></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257401005.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488257952750.png" alt="Alt text" /></p>
+
+<p>我简单的用语言叙述一下出现的这个问题：</p>
+
+<p>当我点击运行的时候，程序会弹出黑色的终端窗口，在<strong>应用程序窗口</strong>里面，程序会显示自动退出，然后代码是：<strong>-1073741515</strong>。</p>
+
+<p>我想研究一下，究竟是什么地方出现看错误，所以，我点击 <strong>调试</strong> 按钮，然后就出现了上面三个错误提示窗口。</p>
+
+<hr />
+
+<h2>解决办法</h2>
+
+<p>在我没有上网上找解决办法之前，我猜测是因为我后来在电脑上安装了什么软件或者又搭建了什么环境，然后可能是影响到了Qt 和 OpenCV 的开发环境了，可能是被神不知鬼不觉的给改了什么地方。</p>
+
+<p>网上说：是因为环境变量没有添加的原因，但是我之前都添加过环境变量了。我想可能是因为其他的软件把我添加的环境变量个删除了或者挤下去了。所以现在我来查看一下当前的环境变量：</p>
+
+<p>通过查看，环境变量都在：</p>
+
+<hr />
+
+<p>我使用下面的程序测试Qt5软件。程序是可以正常运行的。正常的输出的 <code>Hello World!</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;QCoreApplication&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/highgui/highgui.hpp&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/imgproc/imgproc.hpp&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;opencv2/core/core.hpp&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">QCoreApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//    cv::Mat image = cv::imread(&quot;..\\helloWorld\\image.jpg&quot;);</span>
+</span><span class='line'><span class="c1">//    cv::namedWindow(&quot;Image&quot;);</span>
+</span><span class='line'><span class="c1">//    cv::imshow(&quot;Image&quot;, image);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//    cv::waitKey(0);</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>我刚刚再次查看了一下系统的环境变量，还真的发现：OpenCV-Qt的编译生成的<code>bin</code>的路径不在了。（也不知道是我之前根本就没有添加，我也忘记了）</p>
+
+<p>将我之前编译的OpenCV-Qt的<code>bin</code>路径添加到当前的系统的环境变量里面：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488262534186.png" alt="Alt text" /></p>
+
+<p>然后现在，关掉Qt软件（必须要关闭，然后重新启动）。然后重新启动Qt5软件。</p>
+
+<p>现在再次运行程序，问题解决：</p>
+
+<p><img src="/images/2017-2-28-solve-qt-opencv-exited-with-code-0xc0000135--1073741515/1488262593875.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1930,65 +2185,6 @@ SW Electrical 2D
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/19/SolidWorks-how-to-use-border-removal-tool/">SolidWorks 如何使用 边界切除 工具</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-19T16:37:56+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>先画好一些草图，并准备一个实体。</p>
-
-<p>实体，我已经画好了：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357916858.png" alt="Alt text" /></p>
-
-<p>基准面我也画好了：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487357999645.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358141137.png" alt="Alt text" /></p>
-
-<p>接下来，我们就来使用  <strong>边界切除</strong> 工具，将这个实体中间掏空：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358161740.png" alt="Alt text" /></p>
-
-<p>然后在 <strong>方向1</strong> 里面，按照顺序添加已经绘制好的草图：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358184913.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358658059.png" alt="Alt text" /></p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358750812.png" alt="Alt text" /></p>
-
-<p>最后 <strong>确定</strong> 即可。</p>
-
-<p>完成后，我们看看横切面图：</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-use-border-removal-tool/1487358868183.png" alt="Alt text" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2004,6 +2200,10 @@ SW Electrical 2D
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/">解决问题：Qt5 OpenCV “uring Startup Program Exited With Code 0xc0000135” “ Exited With Code -1073741515”</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
       </li>
     
@@ -2017,10 +2217,6 @@ SW Electrical 2D
     
       <li class="post">
         <a href="/blog/2017/02/21/SolidWorks-How-to-make-Assemblies/">SolidWorks 如何制作装配体</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/3D-printer-Best-to-run-offline/">在3D打印的时候，不要给电脑拔出其他的USB设备</a>
       </li>
     
   </ul>
@@ -2050,7 +2246,7 @@ SW Electrical 2D
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
-<a style="font-size: 184%" href="/tags/windows/">Windows</a>
+<a style="font-size: 187%" href="/tags/windows/">Windows</a>
 <a style="font-size: 115%" href="/tags/gbk/">gbk</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
@@ -2092,13 +2288,14 @@ SW Electrical 2D
 <li class='category'><a href='/blog/categories/linux/'>linux (2)</a></li>
 <li class='category'><a href='/blog/categories/linux-ming-ling/'>linux 命令 (1)</a></li>
 <li class='category'><a href='/blog/categories/meshmixer/'>meshmixer (1)</a></li>
+<li class='category'><a href='/blog/categories/opencv/'>opencv (1)</a></li>
 <li class='category'><a href='/blog/categories/openni/'>openni (2)</a></li>
 <li class='category'><a href='/blog/categories/pcduino/'>pcduino (3)</a></li>
 <li class='category'><a href='/blog/categories/pcl/'>pcl (2)</a></li>
 <li class='category'><a href='/blog/categories/python/'>python (19)</a></li>
 <li class='category'><a href='/blog/categories/python-shi-zhan/'>python 实战 (1)</a></li>
 <li class='category'><a href='/blog/categories/python3-da-xing-wang-luo-pa-chong-shi-zhan/'>python3 大型网络爬虫实战 (11)</a></li>
-<li class='category'><a href='/blog/categories/qt/'>qt (1)</a></li>
+<li class='category'><a href='/blog/categories/qt/'>qt (2)</a></li>
 <li class='category'><a href='/blog/categories/ros/'>ros (2)</a></li>
 <li class='category'><a href='/blog/categories/solidworks/'>solidworks (13)</a></li>
 <li class='category'><a href='/blog/categories/sql/'>sql (29)</a></li>
