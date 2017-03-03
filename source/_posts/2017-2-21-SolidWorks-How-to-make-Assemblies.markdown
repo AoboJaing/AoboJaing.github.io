@@ -15,7 +15,7 @@ tags: [SolidWorks, 装配体]
 
 我们以一个例子来学习如何制作装配体。
 
-![Alt text](/images/2017-2-21-SolidWorks-How-to-make-Assemblies/装配的概念.zip)
+** 装配的概念.zip ** ： 链接：http://pan.baidu.com/s/1skBX41v 密码：kff7
 
 
 这里有包含一个机器人的所有零件的压缩包，这里面都是单独的零件。
