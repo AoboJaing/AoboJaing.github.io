@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-02-28T14:30:02+08:00</updated>
+  <updated>2017-03-06T19:21:44+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 如何使用桂电ipclient出校器上网 --- 最新的方法 --- 可以使用]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/"/>
+    <updated>2017-03-06T19:20:43+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我之前写过在Linux系统或者树莓派上使用ipclient上网的教程，但是自从 2016年9月1号，学校换了新的ipclient出校器后，我之前记录的那些方法都不能使用了。</p>
+
+<p>下面介绍一种新的方法。这个方法我已经测试过，可行！！</p>
+
+<hr />
+
+<h2>树莓派等开发板（比如pcduino） 使用ipclient出校器上网</h2>
+
+<p>对于树莓派，如果你在桂电这个学校，如果一个初学者，你手头没有一个树莓派专用的Wifi USB无线模块的话，你都不知道如何使用网线让你的树莓派连接外网。</p>
+
+<p>下面介绍一个方法，你学会了这个方法后，你没有树莓派Wifi USB专用模块，只需要一根网线，就可以上网。（前提是：我没有在宿舍试过。）</p>
+
+<hr />
+
+<p>到GitHub上，下载这个网站里面的源代码：<a href="https://github.com/xuzhipengnt/ipclient_gxnu">https://github.com/xuzhipengnt/ipclient_gxnu</a></p>
+
+<p>下载完成后，在终端中来到刚刚下载后的源代码的这个路径下：<code>ipclient_gxnu /ipclient_python/</code></p>
+
+<p>我们先使用文本编辑器打开这个路径里面的<code>ipclient.py</code>文件，然后修改一个地方：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-3-6-Linux-Raspberry-Pi-use-guet-ipclient-Internet/1488798468322.png" alt="Alt text" /></p>
+
+<p>将第8行的代码修改为：（如果你是桂电的，需要修改；但是如果你是师大的，就不需要改动。）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">server</span> <span class="o">=</span>  <span class="s">&#39; 172.16.1.1 &#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>广西师范大学的服务器地址为：202.193.160.123</p>
+
+<p>桂林电子科大服务器地址为：172.16.1.1</p></blockquote>
+
+<p>保存文件后，执行下面的命令：</p>
+
+<blockquote><p>在执行下面的命令之前，你需要树莓派连接网线。</p></blockquote>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">sudo</span> <span class="n">chmod</span> <span class="mi">777</span> <span class="n">ipclient</span><span class="o">.</span><span class="n">py</span>
+</span><span class='line'><span class="n">python</span> <span class="n">ipclient</span><span class="o">.</span><span class="n">py</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你看到下面的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">pi</span><span class="nd">@raspberrypi</span><span class="p">:</span><span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">ipclient_gxnu</span><span class="o">/</span><span class="n">ipclient_python</span> <span class="err">$</span> <span class="n">python</span> <span class="n">ipclient</span><span class="o">.</span><span class="n">py</span>
+</span><span class='line'><span class="n">IP</span> <span class="n">Client</span> <span class="k">for</span> <span class="n">GXNU</span>  <span class="p">(</span><span class="n">xzpmail</span><span class="nd">@gmail.com</span><span class="p">)</span>
+</span><span class='line'><span class="o">...........................................</span>
+</span><span class='line'><span class="n">Please</span> <span class="nb">input</span> <span class="n">username</span> <span class="ow">and</span> <span class="n">password</span><span class="p">:</span>
+</span><span class='line'><span class="n">Username</span><span class="p">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个时候，你输入你的学号和密码，就可以上网了。</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-3-6-Linux-Raspberry-Pi-use-guet-ipclient-Internet/1488798987751.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<h2>Linux系统（比如：Ubuntu） 使用ipclient出校器上网</h2>
+
+<p>同理。就不啰嗦了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解决问题：Qt5 OpenCV “uring Startup Program Exited With Code 0xc0000135” “ Exited With Code -1073741515”]]></title>
@@ -2498,64 +2578,6 @@ SW Electrical 2D
 <hr />
 
 <p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-sketching/1486028600613.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 2011 软件下载、安装和破解 图文教程]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial/"/>
-    <updated>2017-02-19T01:09:34+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/download-install-crack-graphic-tutorial</id>
-    <content type="html"><![CDATA[<hr />
-
-<h2>下载</h2>
-
-<p>下载网站：
-<a href="http://www.mfcad.com/solidworks/xiazai/18672.html">http://www.mfcad.com/solidworks/xiazai/18672.html</a></p>
-
-<p>下载两个文件：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485673406500.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>安装教程参考：<a href="http://www.mfcad.com/solidworks/anzhuang/18673.html">http://www.mfcad.com/solidworks/anzhuang/18673.html</a></p>
-
-<blockquote><p>有可以有用的网站：<a href="http://www.cr173.com/soft/21633.html">http://www.cr173.com/soft/21633.html</a></p></blockquote>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884501366.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884513219.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884517992.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884546919.png" alt="Alt text" /></p>
-
-<p>把网断了：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884575289.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884593341.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485884896255.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885016566.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885215977.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885272645.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885282456.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885175012.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885331226.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-download-install-crack-graphic-tutorial/1485885337667.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

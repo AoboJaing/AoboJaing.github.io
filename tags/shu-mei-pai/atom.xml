@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 树莓派 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/shu-mei-pai/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-03-06T19:21:44+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 如何使用桂电ipclient出校器上网 --- 最新的方法 --- 可以使用]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/"/>
+    <updated>2017-03-06T19:20:43+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我之前写过在Linux系统或者树莓派上使用ipclient上网的教程，但是自从 2016年9月1号，学校换了新的ipclient出校器后，我之前记录的那些方法都不能使用了。</p>
+
+<p>下面介绍一种新的方法。这个方法我已经测试过，可行！！</p>
+
+<hr />
+
+<h2>树莓派等开发板（比如pcduino） 使用ipclient出校器上网</h2>
+
+<p>对于树莓派，如果你在桂电这个学校，如果一个初学者，你手头没有一个树莓派专用的Wifi USB无线模块的话，你都不知道如何使用网线让你的树莓派连接外网。</p>
+
+<p>下面介绍一个方法，你学会了这个方法后，你没有树莓派Wifi USB专用模块，只需要一根网线，就可以上网。（前提是：我没有在宿舍试过。）</p>
+
+<hr />
+
+<p>到GitHub上，下载这个网站里面的源代码：<a href="https://github.com/xuzhipengnt/ipclient_gxnu">https://github.com/xuzhipengnt/ipclient_gxnu</a></p>
+
+<p>下载完成后，在终端中来到刚刚下载后的源代码的这个路径下：<code>ipclient_gxnu /ipclient_python/</code></p>
+
+<p>我们先使用文本编辑器打开这个路径里面的<code>ipclient.py</code>文件，然后修改一个地方：</p>
+
+<p><img src="/images/2017-3-6-Linux-Raspberry-Pi-use-guet-ipclient-Internet/1488798468322.png" alt="Alt text" /></p>
+
+<p>将第8行的代码修改为：（如果你是桂电的，需要修改；但是如果你是师大的，就不需要改动。）</p>
+
+<pre><code class="python">server =  ' 172.16.1.1 '
+</code></pre>
+
+<blockquote><p>广西师范大学的服务器地址为：202.193.160.123</p>
+
+<p>桂林电子科大服务器地址为：172.16.1.1</p></blockquote>
+
+<p>保存文件后，执行下面的命令：</p>
+
+<blockquote><p>在执行下面的命令之前，你需要树莓派连接网线。</p></blockquote>
+
+<pre><code>sudo chmod 777 ipclient.py
+python ipclient.py
+</code></pre>
+
+<p>如果你看到下面的输出：</p>
+
+<pre><code>pi@raspberrypi:~/Downloads/ipclient_gxnu/ipclient_python $ python ipclient.py 
+IP Client for GXNU  (xzpmail@gmail.com)
+...........................................
+Please input username and password:
+Username:
+</code></pre>
+
+<p>这个时候，你输入你的学号和密码，就可以上网了。</p>
+
+<p><img src="/images/2017-3-6-Linux-Raspberry-Pi-use-guet-ipclient-Internet/1488798987751.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<h2>Linux系统（比如：Ubuntu） 使用ipclient出校器上网</h2>
+
+<p>同理。就不啰嗦了。</p>
+]]></content>
+  </entry>
+  
+</feed>
