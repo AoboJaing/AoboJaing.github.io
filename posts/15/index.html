@@ -9,8 +9,14 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="README.md 文件里面是有中文的。在 GitHub For Windows 客户端软件里面显示中文是乱码的。 解决办法： Step 1 . 将 README.md 文件使用 Notepad++ 软件打开。
-（如果你的电脑上没有 Notepad++ 软件，你可以参考这篇博客来下载安装它。） &hellip;">
+  <meta name="description" content="字体配置文件在 octopress/sass/custom/ 文件里面：_fonts.scss 文件。 默认情况下字体配置都是被注释掉的。我们将注释都去掉。 1
+2
+3
+4
+5
+6
+$sans: "Optima", sans-serif;
+$serif: "Baskerville", serif &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +73,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/10/use-octopress-build-blog-site-custom-fonts/">Octopress 搭建静态博客站点 --- 自定义字体设置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-10T10:04:40+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:04 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>字体配置文件在 <code>octopress/sass/custom/</code> 文件里面：<code>_fonts.scss</code> 文件。</p>
+
+<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063413831.png" alt="Alt text" /></p>
+
+<p>默认情况下字体配置都是被注释掉的。我们将注释都去掉。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Optima", sans-serif;
+</span><span class='line'>$serif: "Baskerville", serif;
+</span><span class='line'>$mono: "Courier", monospace;
+</span><span class='line'>$heading-font-family: "Verdana", sans-serif;
+</span><span class='line'>$header-title-font-family: "Futura", sans-serif;
+</span><span class='line'>$header-subtitle-font-family: "Futura", sans-serif;</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>引号里面的是：<strong>字体名</strong>。后面跟的是：<code>sans-serif</code>(无衬线字体)、<code>serif</code>（衬线）、<code>monospace</code>（等宽字体）。</p></blockquote>
+
+<ul>
+<li><code>$sans</code>：定义的是无衬线正文的字体
+
+<ul>
+<li><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476063715659.png" alt="Alt text" /></li>
+</ul>
+</li>
+<li><code>$serif</code>：定义的是衬线正文的字体</li>
+<li><code>$mono</code>：定义的是代码的字体</li>
+<li><code>$heading-font-family</code>：定义的是文章标题的字体</li>
+<li><code>$header-title-font-family</code>：定义的是博客标题的字体</li>
+<li><code>$header-subtitle-font-family</code>：定义的是博客子标题的字体</li>
+</ul>
+
+
+<p>我将它们修改为下面这样的配置。（就是将所有的字体都设置为：<code>Comic Sans MS</code>）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sans: "Comic Sans MS", sans-serif;
+</span><span class='line'>$serif: "Comic Sans MS", serif;
+</span><span class='line'>$mono: "Comic Sans MS", monospace;
+</span><span class='line'>$heading-font-family: "Comic Sans MS", sans-serif;
+</span><span class='line'>$header-title-font-family: "Comic Sans MS", sans-serif;
+</span><span class='line'>$header-subtitle-font-family: "Comic Sans MS", sans-serif;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在执行 <code>rake generate</code> 命令生成博客站点。在执行 <code>rake preview</code> 命令在本地开设4000端口。在浏览器中浏览 <code>localhost:4000</code> 端口进行预览。（效果不错。）</p>
+
+<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064562554.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-10-10-use-octopress-build-blog-site-custom-fonts/1476064543308.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>参考网站：
+利用Octopress和Github搭建个人博客（四）：自定义字体
+<a href="http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-%28si-%29:zi-ding-yi-zi-ti/">http://glgjing.github.io/blog/2015/01/31/li-yong-octopresshe-githubda-jian-ge-ren-bo-ke-(si-):zi-ding-yi-zi-ti/</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -144,6 +244,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/">Linux 如何使用桂电ipclient出校器上网 --- 最新的方法 --- 可以使用</a>
       </li>
     
@@ -157,10 +261,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/">SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/21/SolidWorks-2012-download-install-cracked/">Windows 10 下载、安装、破解 SolidWorks 2012 Sp5.0 软件 图文教程</a>
       </li>
     
   </ul>
@@ -178,20 +278,20 @@
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 139%" href="/tags/linux/">Linux</a>
-<a style="font-size: 115%" href="/tags/meshmixer/">Meshmixer</a>
 <a style="font-size: 154%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
+<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 181%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 187%" href="/tags/windows/">Windows</a>
-<a style="font-size: 115%" href="/tags/gbk/">gbk</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
@@ -202,6 +302,7 @@
 <a style="font-size: 129%" href="/tags/python2/">python2</a>
 <a style="font-size: 168%" href="/tags/python3/">python3</a>
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
+<a style="font-size: 129%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
@@ -209,7 +310,6 @@
 <a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
-<a style="font-size: 115%" href="/tags/jing-yan/">经验</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 129%" href="/tags/zhuang-pei-ti/">装配体</a>
 <a style="font-size: 159%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -246,6 +346,7 @@
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/sw-urdf-exporter/'>sw_urdf_exporter (1)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (1)</a></li>
 <li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>

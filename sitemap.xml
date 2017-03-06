@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/03/06/solve-SecureCRT-display-Garbled/</loc>
+<lastmod>2017-03-06T20:17:43+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/</loc>
 <lastmod>2017-03-06T19:20:43+08:00</lastmod>
 </url>
@@ -674,6 +678,9 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/blog/categories/opencv/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/blog/categories/shu-mei-pai/</loc>
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/git/</loc>

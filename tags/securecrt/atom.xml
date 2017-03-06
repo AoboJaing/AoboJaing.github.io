@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: SecureCRT | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/securecrt/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-03-06T19:21:44+08:00</updated>
+  <updated>2017-03-06T20:18:43+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/06/solve-SecureCRT-display-Garbled/"/>
+    <updated>2017-03-06T20:17:43+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/06/solve-SecureCRT-display-Garbled</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<p>如果你已经将你的树莓派上面默认字体设置为了：中文。（编码方式为：<code>UTF-8</code>）（如果不是，你可以参考<a href="http://blog.csdn.net/github_35160620/article/details/52048308">这篇博文</a>进行设置）</p>
+
+<p> 当你使用SecureCRT软件连接上树莓派后，回看到原本应该显示中文的，但是是乱码。</p>
+
+<p><img src="/images/2017-3-6-solve-SecureCRT-display-Garbled/1488802132379.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>解决办法：</h2>
+
+<p><img src="/images/2017-3-6-solve-SecureCRT-display-Garbled/1488802163692.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-3-6-solve-SecureCRT-display-Garbled/1488802225722.png" alt="Alt text" /></p>
+
+<p>然后，点击 <strong>OK</strong></p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<p>现在在执行一下 <code>sudo apt-get update</code>。中文就正常的显示了：</p>
+
+<p><img src="/images/2017-3-6-solve-SecureCRT-display-Garbled/1488802268905.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>参考网站：<a href="http://riching.iteye.com/blog/349754">http://riching.iteye.com/blog/349754</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Windows上使用SecureCRT软件连接Linux终端 — 解决问题；The remote system refused the connection]]></title>
