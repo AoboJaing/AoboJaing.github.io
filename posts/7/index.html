@@ -9,10 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="使用的虚拟机软件：VMware 11
-我的Ubuntu系统：Ubuntu 14.04.10 TLS
-Arduino 软件的版本：Arduino 1.6.11
-Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的Ubuntu 系统的界面。 &hellip;">
+  <meta name="description" content="在我的Windows电脑里面，Arduino IDE软件安装在C:\Program Files (x86)\Arduino路径里面。 我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。 添加 I2Cdev 及其相关模块库到Arduino IDE软件里面 Step 0 . 关闭 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +66,61 @@ Arduino 板子的型号：Arduino UNO R3 Step 0 . 来到 VMware 虚拟机里的U
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/Arduino-Windows-add-module-libraries/">Arduino 004 Windows上给Arduino IDE添加模块库</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-06T13:54:54+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>在我的Windows电脑里面，Arduino IDE软件安装在<code>C:\Program Files (x86)\Arduino</code>路径里面。</p>
+
+<p>我们以一个例子来说明，如果将模块库添加到Arduino IDE软件中。</p>
+
+<h2>添加 I2Cdev 及其相关模块库到Arduino IDE软件里面</h2>
+
+<p><strong>Step 0 . </strong> 关闭 Arduino IDE 软件</p>
+
+<p><strong>Step 1 . </strong> 下载 i2cdev 及其相关的模块库</p>
+
+<p>到<a href="https://github.com/jrowberg/i2cdevlib">这个网址</a>里面下载所有i2cdev相关的模块库。</p>
+
+<p><strong>Step 2 . </strong> 下载后，解压，将<code>/Arduino/</code>路径里面的所有文件夹复制，并拷贝到：<code>C:\Program Files (x86)\Arduino\libraries</code>路径里面。</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001787595.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 启动Arduino IDE 软件。在 <strong>文件</strong> -> <strong>示例</strong> 里面就可以看到刚刚添加到Arduino IDE的模块库。（现在就可以正常使用了）</p>
+
+<p><img src="/images/2016-12-6-Arduino-Windows-add-module-libraries/1481001851166.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>注意：</p>
+
+<p>如果是Ubuntu系统，Arduino IDE 一般被安装在：<code>/opt/arduino/</code></p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1109,206 +1161,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/02/python-get-command-line-arguments/">Learning Python 028 获取命令行参数</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-02T02:07:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>2:07 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python2.7.10 或者 python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<blockquote><p>本博文对Python2和Python3都适用。</p></blockquote>
-
-<hr />
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">optparse</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">(</span><span class="s">&#39;usage%prog &#39;</span> <span class="o">+</span>\
-</span><span class='line'>                                   <span class="s">&#39;-f &lt;zipfile&gt; -d &lt;dictionary&gt;&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;zname&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span>\
-</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;specify zip file&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-d&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dname&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span>\
-</span><span class='line'>                      <span class="n">help</span><span class="o">=</span><span class="s">&#39;specify dictionary file&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">zname</span> <span class="o">==</span> <span class="bp">None</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">dname</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
-</span><span class='line'>        <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">zname</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">zname</span>
-</span><span class='line'>        <span class="n">dname</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">dname</span>
-</span><span class='line'>        <span class="n">dlist</span> <span class="o">=</span> <span class="n">dname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">pass</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;zname is &#39;</span><span class="p">,</span> <span class="n">zname</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;dname is &#39;</span><span class="p">,</span> <span class="n">dname</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;dlist is &#39;</span><span class="p">,</span> <span class="n">dlist</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
-</span><span class='line'>    <span class="k">pass</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Python3 的运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span>  <span class="o">-</span><span class="n">d</span> <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;sir&#39;</span><span class="p">,</span> <span class="s">&#39;patty&#39;</span><span class="p">,</span> <span class="s">&#39;re&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Python2 的运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">C</span><span class="p">:</span>\<span class="n">Python27</span>\<span class="n">python</span><span class="o">.</span><span class="n">exe</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span> <span class="o">-</span><span class="n">d</span> <span class="n">sir</span><span class="p">,</span><span class="n">patty</span><span class="p">,</span><span class="n">re</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;zname is &#39;</span><span class="p">,</span> <span class="s">&#39;aobo&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;dname is &#39;</span><span class="p">,</span> <span class="s">&#39;sir,patty,re&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="s">&#39;dlist is &#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;sir&#39;</span><span class="p">,</span> <span class="s">&#39;patty&#39;</span><span class="p">,</span> <span class="s">&#39;re&#39;</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面这个几个命令运行的效果是一样的：（Python2 和 Python3 运行的效果都一样）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">h</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
-</span><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">help</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Usage</span><span class="p">:</span> <span class="n">usagelearningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">zipfile</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">dictionary</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Options</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>  <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">f</span> <span class="n">ZNAME</span>    <span class="n">specify</span> <span class="nb">zip</span> <span class="nb">file</span>
-</span><span class='line'>  <span class="o">-</span><span class="n">d</span> <span class="n">DNAME</span>    <span class="n">specify</span> <span class="n">dictionary</span> <span class="nb">file</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<h2>注意：如果传入的参数是<code>string</code>类型的，最好使用<code>""</code> 引上</h2>
-
-<p>为什么？ 因为字符串里面难免可能会有 <code></code> （空格），所以，最好使用<code>""</code>（双引号）引上。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="s">&quot;aobo fd g&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="s">&quot;ava,dssd,hg&quot;</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span> <span class="n">fd</span> <span class="n">g</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;ava&#39;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&#39;hg&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你用单引号或者不用引号，虽然说运行不会报错，但是运行的结果就不是你想要的。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="s">&#39;aobo fd g&#39;</span> <span class="o">-</span><span class="n">d</span> <span class="s">&#39;ava,dssd,hg&#39;</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="s">&#39;aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="s">&#39;ava,dssd,hg&#39;</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&quot;&#39;ava&quot;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&quot;hg&#39;&quot;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span><span class="n">python</span> <span class="n">learningpython28</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">aobo</span> <span class="n">fd</span> <span class="n">g</span> <span class="o">-</span><span class="n">d</span> <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">zname</span> <span class="ow">is</span>  <span class="n">aobo</span>
-</span><span class='line'><span class="n">dname</span> <span class="ow">is</span>  <span class="n">ava</span><span class="p">,</span><span class="n">dssd</span><span class="p">,</span><span class="n">hg</span>
-</span><span class='line'><span class="n">dlist</span> <span class="ow">is</span>  <span class="p">[</span><span class="s">&#39;ava&#39;</span><span class="p">,</span> <span class="s">&#39;dssd&#39;</span><span class="p">,</span> <span class="s">&#39;hg&#39;</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1326,6 +1178,10 @@ ls
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
       </li>
     
@@ -1339,10 +1195,6 @@ ls
     
       <li class="post">
         <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/">SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动</a>
       </li>
     
   </ul>
@@ -1360,20 +1212,19 @@ ls
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 139%" href="/tags/linux/">Linux</a>
+<a style="font-size: 115%" href="/tags/meshmixer/">Meshmixer</a>
 <a style="font-size: 154%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
-<a style="font-size: 115%" href="/tags/sr300/">SR300</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
 <a style="font-size: 181%" href="/tags/solidworks/">SolidWorks</a>
 <a style="font-size: 129%" href="/tags/ubuntu/">Ubuntu</a>
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 187%" href="/tags/windows/">Windows</a>
-<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
 <a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
@@ -1386,12 +1237,13 @@ ls
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
 <a style="font-size: 129%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
-<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
+<a style="font-size: 129%" href="/tags/shu-mei-pai/">树莓派</a>
 <a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
+<a style="font-size: 115%" href="/tags/bian-ma/">编码</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 129%" href="/tags/zhuang-pei-ti/">装配体</a>
 <a style="font-size: 159%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -1428,7 +1280,7 @@ ls
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/sw-urdf-exporter/'>sw_urdf_exporter (1)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
-<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (2)</a></li>
 <li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>

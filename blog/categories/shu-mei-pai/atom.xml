@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 树莓派 | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/blog/categories/shu-mei-pai/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-03-06T20:18:43+08:00</updated>
+  <updated>2017-03-06T21:36:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 001 — 点亮一个LED]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/"/>
+    <updated>2017-03-06T21:36:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<p>我们使用Python程序来编写树莓派的程序</p>
+
+<h2>导入 <code>RPi.GPIO</code> 模块 &mdash; 检测当前树莓派中，是否含有 <code>RPi.GPIO</code>模块，如果没有，我们就安装</h2>
+
+<p>我们在终端中执行：</p>
+
+<pre><code>python
+</code></pre>
+
+<p>默认启动的是Python2的终端交互程序：</p>
+
+<pre><code>pi@raspberrypi:~$ python
+Python 2.7.9 (default, Mar  8 2015, 00:52:26) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; 
+</code></pre>
+
+<p>接着，我们试着导入 <code>RPi.GPIO</code> 模块 来看看有没有这个模块。</p>
+
+<pre><code class="python">&gt;&gt;&gt; import RPi.GPIO
+</code></pre>
+
+<blockquote><p>如果出现了<code>ImportError</code>错误提示：没有这个模块。我们可以先按<code>Ctrl + D</code> 来退出Python终端交互程序，然后执行下面的命令来安装<code>RPi.GPIO</code>模块：</p>
+
+<pre><code>sudo apt-get install RPi.GPIO
+</code></pre></blockquote>
+
+<hr />
+
+<blockquote><p>如果你的树莓派里面已经存在<code>RPi.GPIO</code>模块，但是它不能正常的工作的话，我们可以这样解决这个问题：删除现有的<code>RPi.GPIO</code>模块，然后在重新安装它：</p>
+
+<pre><code>sudo apt-get remove RPi.GPIO
+sudo apt-get install RPi.GPIO
+</code></pre></blockquote>
+
+<hr />
+
+<h2>编写第一个程序：<code>hello_raspberrypi.py</code> 程序脚本</h2>
+
+<p>你可以参考我之前写的这篇博文：（操了，我都他妈的忘记了之前写过树莓派点亮LED）<a href="http://blog.csdn.net/github_35160620/article/details/52140967">树莓派 Learning 003 &mdash; GPIO 001 &mdash; 点亮LED</a>。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题]]></title>

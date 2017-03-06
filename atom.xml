@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-03-06T20:18:43+08:00</updated>
+  <updated>2017-03-06T21:36:49+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 001 — 点亮一个LED]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/"/>
+    <updated>2017-03-06T21:36:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<p>我们使用Python程序来编写树莓派的程序</p>
+
+<h2>导入 <code>RPi.GPIO</code> 模块 &mdash; 检测当前树莓派中，是否含有 <code>RPi.GPIO</code>模块，如果没有，我们就安装</h2>
+
+<p>我们在终端中执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>python</span></code></pre></td></tr></table></div></figure>
+
+
+<p>默认启动的是Python2的终端交互程序：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pi@raspberrypi:~$ python
+</span><span class='line'>Python 2.7.9 (default, Mar  8 2015, 00:52:26) 
+</span><span class='line'>[GCC 4.9.2] on linux2
+</span><span class='line'>Type "help", "copyright", "credits" or "license" for more information.
+</span><span class='line'>&gt;&gt;&gt; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着，我们试着导入 <code>RPi.GPIO</code> 模块 来看看有没有这个模块。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">RPi.GPIO</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>如果出现了<code>ImportError</code>错误提示：没有这个模块。我们可以先按<code>Ctrl + D</code> 来退出Python终端交互程序，然后执行下面的命令来安装<code>RPi.GPIO</code>模块：</p>
+
+<pre><code>sudo apt-get install RPi.GPIO
+</code></pre></blockquote>
+
+<hr />
+
+<blockquote><p>如果你的树莓派里面已经存在<code>RPi.GPIO</code>模块，但是它不能正常的工作的话，我们可以这样解决这个问题：删除现有的<code>RPi.GPIO</code>模块，然后在重新安装它：</p>
+
+<pre><code>sudo apt-get remove RPi.GPIO
+sudo apt-get install RPi.GPIO
+</code></pre></blockquote>
+
+<hr />
+
+<h2>编写第一个程序：<code>hello_raspberrypi.py</code> 程序脚本</h2>
+
+<p>你可以参考我之前写的这篇博文：（操了，我都他妈的忘记了之前写过树莓派点亮LED）<a href="http://blog.csdn.net/github_35160620/article/details/52140967">树莓派 Learning 003 &mdash; GPIO 001 &mdash; 点亮LED</a>。</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题]]></title>
@@ -2314,33 +2380,6 @@ SW Electrical 2D
 <blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
 
 <p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 如何复制 基准面]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane/"/>
-    <updated>2017-02-19T16:05:30+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-copy-datum-plane</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>先点击将要复制的基准面：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247435981.png" alt="Alt text" /></p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247441983.png" alt="Alt text" /></p>
-
-<p>现在按住 <strong>Ctrl</strong> ，然后将鼠标移动到基准面的一个点上，然后按住鼠标左键推动。</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247459958.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-copy-datum-plane/1487247600485.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>搞定</h2>
 ]]></content>
   </entry>
   
