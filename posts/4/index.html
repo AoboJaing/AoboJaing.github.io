@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content=" 下载 到这个网站下载：https://structure.io/openni 我们下载 x86的，就是32位的。 下载完成后，解压： 双击这个 .msi 文件，开始安装OpenNI2： ">
+  <meta name="description" content="下载 VTK （7.1.0 版本） 下载网站：http://www.vtk.org/download/ 下载下面这个：大约40多M 使用CMake-GUI软件生成编译文件 解压VTK。然后使用CMake-GUI软件，生成编译文件： 第一次点击 Configure 按钮，选择的编译器是： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,151 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/11/Windows-Compile-vtk-source/">Windows上手动编译VTK源代码</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-11T08:25:21+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>8:25 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<h1>下载 VTK （7.1.0 版本）</h1>
+
+<p>下载网站：<a href="http://www.vtk.org/download/">http://www.vtk.org/download/</a></p>
+
+<p>下载下面这个：大约40多M</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486664521880.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>使用CMake-GUI软件生成编译文件</h2>
+
+<p>解压VTK。然后使用CMake-GUI软件，生成编译文件：</p>
+
+<p>第一次点击 <strong>Configure</strong> 按钮，选择的编译器是：<strong>Visual Studio 10 2010</strong>（就是VS2010 软件 32位的），大约要执行3分多钟。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486667440556.png" alt="Alt text" /></p>
+
+<p>出现了红色的条目。然后，在点击<strong>Configure</strong> 按钮一次。</p>
+
+<p>不在有红色条目。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486667504849.png" alt="Alt text" /></p>
+
+<p>点击<strong>Generate</strong> 按钮。</p>
+
+<p>搞定：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486667544319.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>开始编译VTK：</h2>
+
+<p>我们使用VS2010软件编译。使用VS2010软件打开下面的文件：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486667661222.png" alt="Alt text" /></p>
+
+<p>点击生成：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486667698053.png" alt="Alt text" /></p>
+
+<blockquote><p>VTK库是一个比较底层的库，它没有什么依赖库，所以编译VTK库是一件比较容易的事情。</p></blockquote>
+
+<p>执行了30多分钟，现在，全部编译成功：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486669531270.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>然后我们在生成 <strong>INSTALL</strong></p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486670425630.png" alt="Alt text" /></p>
+
+<p>有一个执行失败：失败的原因是：需要管理员权限。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486670387856.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>解决办法：（参考网站：<a href="http://public.kitware.com/pipermail/vtkusers/2010-August/061898.html">这里</a>）</p>
+
+<p>所以，我们现在关闭这个VS2010软件。打开CMake-GUI，重新生成编译文件：</p>
+
+<p>我们将 <strong>CMAKE_INSTALL_PREFIX</strong> 条目设置为一个我们有权限新建文件的路径：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671350467.png" alt="Alt text" /></p>
+
+<p>再次点击 <strong>Configure</strong> 按钮。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671408818.png" alt="Alt text" /></p>
+
+<p>最后在点击 <strong>Generates</strong> 按钮。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671440035.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在点击：<strong>VTK.sln</strong> 文件</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671467333.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>对着<strong>ALL_BUILD</strong> 右键，点击 <strong>生成</strong></p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671511547.png" alt="Alt text" /></p>
+
+<p>这次执行，也就5分钟左右。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671854513.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在，我们生成 <strong>INSTALL</strong> ：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671928418.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486671904455.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>然后，我们再将这个文件夹剪切到<code>C:\Program Files (x86)</code> 路径里面：</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486672083636.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486672171677.png" alt="Alt text" /></p>
+
+<p>我们需要将<code>\bin\</code> 路径（<code>C:\Program Files (x86)\VTK\bin</code>）添加到环境变量里面。</p>
+
+<p><img src="/images/2017-2-11-Windows-Compile-vtk-source/1486672352228.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>搞定</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1255,39 +1400,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">Arduino 000 — Arduino UNO R3 板子引脚定义</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-05T15:59:01+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>3:59 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p><img src="/images/2017-2-5-Arduino-UNO-R3-pin-definition/1486280649241.png" alt="Alt text" /></p>
-
-<p>Arduino UNO R3 板子的官方介绍：<a href="https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn">https://www.arduino.cc/en/main/arduinoBoardUno?setlang=cn</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1305,6 +1417,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/08/record-notes-two-life-truths/">记录笔记时得到的人生的两个道理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led/">树莓派 Learning 003 — GPIO 003 中断模式 — 按键控制LED</a>
       </li>
     
@@ -1318,10 +1434,6 @@
     
       <li class="post">
         <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/">Linux 如何使用桂电ipclient出校器上网 --- 最新的方法 --- 可以使用</a>
       </li>
     
   </ul>
@@ -1343,7 +1455,6 @@
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
-<a style="font-size: 115%" href="/tags/ros/">ROS</a>
 <a style="font-size: 129%" href="/tags/rpi-dot-gpio/">RPi.GPIO</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
@@ -1365,6 +1476,7 @@
 <a style="font-size: 115%" href="/tags/tag/">tag</a>
 <a style="font-size: 129%" href="/tags/luan-ma/">乱码</a>
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
+<a style="font-size: 115%" href="/tags/ming-ling-xing/">命令行</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
 <a style="font-size: 147%" href="/tags/shu-mei-pai/">树莓派</a>
@@ -1412,6 +1524,7 @@
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>
 <li class='category'><a href='/blog/categories/ruan-jian-an-zhuang/'>软件安装 (8)</a></li>
+<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (1)</a></li>
 
   </ul>
 </section><section>
