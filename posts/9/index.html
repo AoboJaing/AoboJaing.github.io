@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 知识点：生成器 生成器只能用于迭代操作。 一个函数，其中带 yield 关键字的代码，它不会执行， &hellip;">
+使用的Python的版本：python 2.7.10 和 python 3.5.0 本篇博客对 Python2 和 Python3 都适用。 Python 创建文件夹 参考网站： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,183 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-create-file-create-folder-open/">Learning Python 021 创建文件夹、创建文件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T04:45:53+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:45 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>本篇博客对 Python2 和 Python3 都适用。</p></blockquote>
+
+<h2>Python 创建文件夹</h2>
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://www.qttc.net/201209207.html">Python创建目录文件夹</a></li>
+<li><a href="http://www.cnblogs.com/zhoujie/archive/2013/04/10/python7.html">python学习笔记（七）——文件和目录操作</a></li>
+</ul>
+
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">folder_name</span> <span class="o">=</span> <span class="s">&#39;2016-11-27-demo&#39;</span>
+</span><span class='line'><span class="n">root_directory</span> <span class="o">=</span> <span class="s">&#39;D:/WorkSpace/test_ws/&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>注意：如果想要创建的文件夹是已经存在的，那么执行上面的程序会出现下面的错误：<code>FileExistsError: [WinError 183] 当文件已存在时，无法创建该文件。</code></p></blockquote>
+
+<p>所以这段代码容易出现错误：如果文件夹已存在或者文件夹名中有不允许使用的字符时，<code>os.mkdir()</code>函数都会执行失败。所以，这段代码需要进行异常处理：</p>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">root_directory</span><span class="o">+</span><span class="n">folder_name</span><span class="p">)</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样，在运行程序的时候就不会再出现错误了。但是当你给定的文件名中有非法字符时，创建文件夹是不会成功的，但是程序不会报错。</p>
+
+<h2>Python 创建文件</h2>
+
+<p>参考网站：<a href="https://blog.linuxeye.com/365.html">Python文件处理 open()</a></p>
+
+<p>比如你想在<code>F:\</code>根目录里面创建一个名为 <code>data.txt</code> 文件，你可以这样做：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">file_path</span> <span class="o">=</span> <span class="s">r&#39;F:\data.txt&#39;</span>
+</span><span class='line'><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第二个参数 <code>'w'</code> 也可以写成：<code>'wt'</code>。它们等价。</p>
+
+<p>或者</p>
+
+<p>如果你想创建以指定编码的文件，请参考这篇博客：<a href="http://www.aobosir.com/blog/2016/11/29/python-open-save-file-specify-encoding-utf-8/">写文件时，将其用指定的编码方式保存（比如：UTF-8无BOM编码方式）</a>。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/python-pass/">Learning Python 020 Pass 的用法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T04:12:13+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 2.7.10 和 python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h2>pass 的用法</h2>
+
+<p>参考网站：<a href="http://www.runoob.com/python/python-pass-statement.html">Python pass 语句</a></p>
+
+<blockquote><p>Python2 和 Python3 中 pass 的用法都是一样的。</p></blockquote>
+
+<p><code>pass</code> 就是一个空语句，没有任何实际意义，作用是保存程序结构的完整性。</p>
+
+<p>因为Python不像C/C++语言那样，定义一个代码块使用 <code>{}</code>。Python是使用<strong>缩进</strong>的形式来表述一个代码块的。</p>
+
+<p>比如说想C语言里面的下面这段代码，如果换成Python，怎么写呢？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>换成Python，这样写：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>  <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1167,180 +1344,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/PyCharm-software-professional-download-install-Crack-Registration/">PyCharm 软件（professional版 专业版）在Windows系统上的下载、安装、破解图文教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T06:04:12+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:04 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<h2>下载 PyCharm 软件（professional版 专业版）</h2>
-
-<p>官网下载：<a href="https://www.jetbrains.com/pycharm/download/#section=windows">https://www.jetbrains.com/pycharm/download/#section=windows</a></p>
-
-<p><img src="/images/2016-11-29-PyCharm-software-professional-download-install-Crack-Registration/1480370112104.png" alt="Alt text" /></p>
-
-<h2>安装</h2>
-
-<p>傻瓜式安装，无需多言。</p>
-
-<h2>破解</h2>
-
-<p>破解就是注册的意思。这个软件是付费试用的，如果你不输入注册码，这个软件你只能用30天。</p>
-
-<p>破解方法在这里：
-<a href="http://blog.csdn.net/tianzhaixing2013/article/details/44997881">http://blog.csdn.net/tianzhaixing2013/article/details/44997881</a>
-（这里有PyCharm软件 2014、2015、2016 版本的注册方法，都可行。）</p>
-
-<p>PyCharm 2016 （professional版）的激活码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>43B4A73YYJ-eyJsaWNlbnNlSWQiOiI0M0I0QTczWVlKIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTctMDItMjUifSx7ImNvZGUiOiJBQyIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9LHsiY29kZSI6IkRQTiIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9LHsiY29kZSI6IlBTIiwicGFpZFVwVG8iOiIyMDE3LTAyLTI1In0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwMTctMDItMjUifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9LHsiY29kZSI6IlJTMCIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9LHsiY29kZSI6IlJDIiwicGFpZFVwVG8iOiIyMDE3LTAyLTI1In0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMTctMDItMjUifSx7ImNvZGUiOiJSTSIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9LHsiY29kZSI6IldTIiwicGFpZFVwVG8iOiIyMDE3LTAyLTI1In0seyJjb2RlIjoiREIiLCJwYWlkVXBUbyI6IjIwMTctMDItMjUifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxNy0wMi0yNSJ9XSwiaGFzaCI6IjMzOTgyOTkvMCIsImdyYWNlUGVyaW9kRGF5cyI6MCwiYXV0b1Byb2xvbmdhdGVkIjpmYWxzZSwiaXNBdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlfQ==-keaxIkRgXPKE4BR/ZTs7s7UkP92LBxRe57HvWamu1EHVXTcV1B4f/KNQIrpOpN6dgpjig5eMVMPmo7yMPl+bmwQ8pTZaCGFuLqCHD1ngo6ywHKIQy0nR249sAUVaCl2wGJwaO4JeOh1opUx8chzSBVRZBMz0/MGyygi7duYAff9JQqfH3p/BhDTNM8eKl6z5tnneZ8ZG5bG1XvqFTqWk4FhGsEWdK7B+He44hPjBxKQl2gmZAodb6g9YxfTHhVRKQY5hQ7KPXNvh3ikerHkoaL5apgsVBZJOTDE2KdYTnGLmqxghFx6L0ofqKI6hMr48ergMyflDk6wLNGWJvYHLWw==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==  
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/Git-GitHub-001-For-Windows-download-install-tutorial/">Git(Github) 001 介绍和下载安装图文教程 for Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T04:29:52+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:29 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>我的电脑：Windows 10 系统 64位</p>
-
-<hr />
-
-<h2>介绍</h2>
-
-<p>Git for Windows 软件就是 Git；GitHub For Windows 软件是GitHub公司做的一个超级低门槛的使用软件，非常好。</p>
-
-<hr />
-
-<h2>安装</h2>
-
-<p>在Windows上</p>
-
-<p>下载：<a href="https://desktop.github.com/">https://desktop.github.com/</a></p>
-
-<p>安装时，不管是<strong>以普通用户的身份</strong>，还是<strong>以管理员的身份</strong>运行 <strong>GitHubSetup.exe</strong> 软件。都会出现下面的结果：</p>
-
-<p>（这是在线下载，国内防火墙的原因，导致下载速度巨慢，最后连资源都找不到了。）
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067064738.png" alt="Alt text" /></p>
-
-<p>是没有办法成功安装的。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067095197.png" alt="Alt text" /></p>
-
-<p>点击 <strong>详细信息(D)&hellip;</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475067512031.png" alt="Alt text" /></p>
-
-<p>如果你看到的内容大致和我的一样的话，那么下面的解决方法很适合你。</p>
-
-<hr />
-
-<h2>Step 1 不使用Github 官方的这个在线下载软件，而是去我的百度云盘里下载离线版的Github For Windows软件</h2>
-
-<blockquote><p>Github For Windows软件：你可以使用GUI可视化界面来使用GitHub，而不需要使用一些繁琐的Git命令，只需点点鼠标即可。</p></blockquote>
-
-<p>我在我的百度云盘里面有离线版的Github For Windows 文件，你可以去那下载。但是版本不是最新的，是2015/09/08 时候的版本。</p>
-
-<p>链接：<a href="http://pan.baidu.com/s/1o8CSgI2">http://pan.baidu.com/s/1o8CSgI2</a> 密码：cbos</p>
-
-<p>下载后，解压，直接双击里面的 <strong>GitHub.application</strong> 文件，进行安装。</p>
-
-<p>安装后，自动出现下面的窗口。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068914780.png" alt="Alt text" /></p>
-
-<p>现在你输入你的Github 用户名和密码，并点击 <strong>Log in</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069085322.png" alt="Alt text" /></p>
-
-<p>点击 <strong>Continue</strong> 按钮。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475069097529.png" alt="Alt text" /></p>
-
-<p>&hellip;</p>
-
-<hr />
-
-<p>现在你就可以使用它了。
-<img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070434905.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>Step 2 下载安装 Git For Windows</h2>
-
-<blockquote><p>Git For Windows 软件：你可以在任何文件夹里面空白的位置，点击鼠标右键，里面会有两项：Git Bash  和 Git GUI 。其中 最常用的就是 <strong>Git Bash</strong> ，它就是 一个命令行终端，你需要使用繁琐的<strong>Git</strong>命令来将你的工程代码放到<strong>Github</strong>网站里面管理。</p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475070635983.png" alt="Alt text" /></p></blockquote>
-
-<p>我们下载 Git For Windows 。现在路径：<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a></p>
-
-<p>下载完，直接双击安装，一路 <strong>下一步</strong>，所有选项全部默认即可。</p>
-
-<hr />
-
-<p><strong>启动：</strong></p>
-
-<p><img src="/images/2016-11-29-Git-GitHub-001-For-Windows-download-install-tutorial/1475068623495.png" alt="Alt text" /></p>
-
-<hr />
-
-<hr />
-
-<blockquote><p><strong>总结：</strong></p>
-
-<p>上面两个软件，我都需要你使用，我们即安装 <strong>GitHub For Windows</strong> 的软件，也安装 <strong>Git For Windows</strong> 的软件。</p>
-
-<p>因为，虽然，<strong>在命令行终端中输入 Git 命令</strong> 相比 <strong>GUI界面里面点按钮</strong> 来说要繁琐得多，但是我们必须要学会这个 <strong>Git</strong> 命令。这个命令行工具指令实在是太有用了，它就像是一个木工的工具箱里面的锯条。这是程序员必须要具备的能力。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/10">&larr; Older</a>
@@ -1358,6 +1361,14 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led/">树莓派 Learning 003 — GPIO 003 中断模式 — 按键控制LED</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led/">树莓派 Learning 003 — GPIO 002 输入模式 — 按键控制LED</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
       </li>
     
@@ -1367,14 +1378,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2017/03/06/Linux-Raspberry-Pi-use-guet-ipclient-Internet/">Linux 如何使用桂电ipclient出校器上网 --- 最新的方法 --- 可以使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/28/solve-qt-opencv-exited-with-code-0xc0000135--1073741515/">解决问题：Qt5 OpenCV “uring Startup Program Exited With Code 0xc0000135” “ Exited With Code -1073741515”</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/22/SolidWorks-how-to-modify-a-spare-parts-in-Assembly/">SolidWorks 在装配体中，如果想修改里面其中一个零部件，要怎么做</a>
       </li>
     
   </ul>
@@ -1392,11 +1395,12 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 147%" href="/tags/intel-realsense/">Intel RealSense</a>
 <a style="font-size: 129%" href="/tags/intel-realsense-sdk/">Intel RealSense SDK</a>
 <a style="font-size: 139%" href="/tags/linux/">Linux</a>
-<a style="font-size: 115%" href="/tags/meshmixer/">Meshmixer</a>
 <a style="font-size: 154%" href="/tags/octopress/">Octopress</a>
 <a style="font-size: 129%" href="/tags/pycharm/">PyCharm</a>
 <a style="font-size: 168%" href="/tags/python/">Python</a>
 <a style="font-size: 159%" href="/tags/python3/">Python3</a>
+<a style="font-size: 115%" href="/tags/ros/">ROS</a>
+<a style="font-size: 129%" href="/tags/rpi-dot-gpio/">RPi.GPIO</a>
 <a style="font-size: 210%" href="/tags/sql/">SQL</a>
 <a style="font-size: 210%" href="/tags/sql-server/">SQL Server</a>
 <a style="font-size: 139%" href="/tags/scrapy/">Scrapy</a>
@@ -1419,11 +1423,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <a style="font-size: 115%" href="/tags/can-shu/">参数</a>
 <a style="font-size: 115%" href="/tags/zi-fu-chuan/">字符串</a>
 <a style="font-size: 187%" href="/tags/cha-xun/">查询</a>
-<a style="font-size: 129%" href="/tags/shu-mei-pai/">树莓派</a>
+<a style="font-size: 147%" href="/tags/shu-mei-pai/">树莓派</a>
 <a style="font-size: 129%" href="/tags/zheng-ze-biao-da-shi/">正则表达式</a>
 <a style="font-size: 147%" href="/tags/pa-chong/">爬虫</a>
 <a style="font-size: 115%" href="/tags/sheng-cheng-qi/">生成器</a>
-<a style="font-size: 115%" href="/tags/bian-ma/">编码</a>
 <a style="font-size: 139%" href="/tags/zi-dong-kong-zhi-yuan-li/">自动控制原理</a>
 <a style="font-size: 129%" href="/tags/zhuang-pei-ti/">装配体</a>
 <a style="font-size: 159%" href="/tags/ruan-jian-an-zhuang/">软件安装</a>
@@ -1460,7 +1463,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
 <li class='category'><a href='/blog/categories/sql-server/'>sql server (29)</a></li>
 <li class='category'><a href='/blog/categories/sw-urdf-exporter/'>sw_urdf_exporter (1)</a></li>
 <li class='category'><a href='/blog/categories/use-octopress-build-blog-site/'>use octopress build blog site (5)</a></li>
-<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (2)</a></li>
+<li class='category'><a href='/blog/categories/shu-mei-pai/'>树莓派 (4)</a></li>
 <li class='category'><a href='/blog/categories/zheng-ze-biao-da-shi/'>正则表达式 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/zi-dong-kong-zhi-yuan-li/'>自动控制原理 (4)</a></li>

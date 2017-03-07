@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-03-07T13:14:42+08:00</updated>
+  <updated>2017-03-08T04:35:52+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,246 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 003 中断模式 — 按键控制LED]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led/"/>
+    <updated>2017-03-08T04:34:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding:UTF-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="kn">as</span> <span class="nn">GPIO</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">pull_up_dwon</span><span class="o">=</span><span class="n">GPIO</span><span class="o">.</span><span class="n">PUD_DOWN</span><span class="p">)</span>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ledStatus</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;button pressed!&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">global</span> <span class="n">ledStatus</span>
+</span><span class='line'>    <span class="n">ledStatus</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">ledStatus</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">ledStatus</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">LOW</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">add_event_detect</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&quot;I&#39;m working...&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">break</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>代码讲解：</p>
+
+<ul>
+<li><code>global ledStatus</code> ：<a href="http://c.biancheng.net/cpp/html/1827.html">http://c.biancheng.net/cpp/html/1827.html</a></li>
+<li><code>GPIO.add_event_detect(24, GPIO.RISING, callback=my_callback)</code> ：给<code>24</code>引脚添加一个事件函数，触发条件是：捕获到上升沿（<code>GPIO.RISING</code>）。这个参数还可以是：<code>GPIO.FALLING</code>（下降沿）、<code>GPIO.BOTH</code>（两者都有）</li>
+<li><code>except KeyboardInterrupt:</code> 是用来捕获用户是否按了<code>Ctrl + C</code> 组合键。退出程序</li>
+<li><code>GPIO.cleanup()</code>：之前都没有使用过这个函数。这个函数的功能是：jaingaobo所有的GPIO还原回初始输入状态。我们建议在使用RPi.GPIO模块的所有Python程序的最后，都写上这个函数。</li>
+</ul>
+
+
+<p>现在这个程序我们来运行一下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">key_control_led_callback</span><span class="o">.</span><span class="n">py</span>
+</span><span class='line'><span class="n">python</span> <span class="n">key_control_led_callback</span><span class="o">.</span><span class="n">py</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在的运行效果就已经很好的，即使我们上面写的程序脚本里面没有编写按键去抖的相关程序，并且我们也没有安装硬件去抖的电容。但是为了安全起见，我们还是应该摆去抖的程序给它加上。</p>
+
+<p>对于中断模式的检测按键，我们给这种程序添加去抖程序，相当的简单，我们只需要将上面的程序中的这行语句：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">add_event_detect</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">add_event_detect</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">RISING</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">my_callback</span><span class="p">,</span> <span class="n">bouncetime</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>bouncetime=200</code> 是延时200ms的意思。就是当检测到上升沿后，进入这个中断，要延时200ms才会执行这个中断里面的程序。</p>
+
+<p>这就是软件去抖。</p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：<a href="https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/">https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 002 输入模式 — 按键控制LED]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led/"/>
+    <updated>2017-03-08T04:32:07+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<p>我们在之前学会了如何进行输出，现在来讲讲如何进行输入：</p>
+
+<p>使用按键为例。</p>
+
+<p>我们先按照下面这幅图片连接电路：</p>
+
+<p><img src="http://aobojaing.github.io/images/2017-3-8-raspberrypi-GPIO-input-key-control-led/1488807661102.png" alt="Alt text" /></p>
+
+<p>知识点：当你设置一个GPIO为输入模式的，这个GPIO口要么是连接到信号端，要么是接GND。注意设置为输入模式的GPIO口不允许悬空（floating）。（因为这种情况下GPIO输入的值是不确定的。）</p>
+
+<p>上面这个图中， 按键的一个引脚连接一个10K电阻和树莓派的24引脚上，然后10K电阻连接GND。按键的另一个引脚连接到3V3。</p>
+
+<p>LED还是正极连接到25引脚上，另一个引脚连接GND。</p>
+
+<hr />
+
+<h2>写程序</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding:UTF-8 -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="kn">as</span> <span class="nn">GPIO</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">pull_up_down</span><span class="o">=</span><span class="n">GPIO</span><span class="o">.</span><span class="n">PUD_DOWN</span><span class="p">)</span>
+</span><span class='line'><span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ledStatus</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">HIGH</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">print</span><span class="p">(</span><span class="s">&quot;button pressed!&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">ledStatus</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">ledStatus</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">ledStatus</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">pass</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">LOW</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">pass</span>
+</span><span class='line'>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.03</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">pass</span>
+</span><span class='line'>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行下面的命令，来启动这个程序脚本：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">key_control_led</span><span class="o">.</span><span class="n">py</span>
+</span><span class='line'><span class="n">python</span> <span class="n">key_control_led</span><span class="o">.</span><span class="n">py</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你会发现这个运行效果并不是很好：主要的原因就是因为按键的去抖。你可以使用硬件去抖（就是在按键的引脚上并联一个电容），也可以软件去抖，上面的程序中已经进行软件去抖了（你可以通过增大延时时间来改善程序运行效果）。</p>
+
+<hr />
+
+<p>到现在应该学会了如何使用GPIO的输入模式了。</p>
+
+<p>上面检测按键的程序，它是用轮询的方式，接下来，我们来学习，如果使用GPIO的中断模式，来实现使用中断的方式来检测一个按键是否被按下。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 001 — 点亮一个LED]]></title>
@@ -2310,76 +2550,6 @@ SW Electrical 2D
 <p>这样，就创建了一个穿透点。</p>
 
 <h2>搞定</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 如何添加放样基准面]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum/"/>
-    <updated>2017-02-19T16:11:17+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-stakeout-datum</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>对着放样曲面 右键，选择：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424065921.png" alt="Alt text" /></p>
-
-<hr />
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-stakeout-datum/1487424349928.png" alt="Alt text" /></p>
-
-<p>选好一个面后，就可以按 <strong>确定</strong> 图标（绿色的对号）。</p>
-
-<p>这样，我们就生成了一个放样基准面。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Solidworks 如何在曲面添加文字]]></title>
-    <link href="http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface/"/>
-    <updated>2017-02-19T16:08:17+08:00</updated>
-    <id>http://aobojaing.github.io/blog/2017/02/19/SolidWorks-how-to-add-text-to-a-surface</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>参考网站：</p>
-
-<p><a href="http://www.xmj1688.com/solidworks2012qm/1581.html">http://www.xmj1688.com/solidworks2012qm/1581.html</a></p>
-
-<hr />
-
-<p>新建一个基准面：（如何创建基准面：这里）</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305868464.png" alt="Alt text" /></p>
-
-<p>然后选中这个基准面，在进行下面的操作：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305437670.png" alt="Alt text" /></p>
-
-<p>此时生成了一个草图：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487305985643.png" alt="Alt text" /></p>
-
-<hr />
-
-<p>点击 插入文字 的图标：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306013079.png" alt="Alt text" /></p>
-
-<p>输入要插入的文字，然后调整尺寸和位置：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306102092.png" alt="Alt text" /></p>
-
-<p>草图绘制完成后，点击完成：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306136366.png" alt="Alt text" /></p>
-
-<p>这个时候会出现下面的 <strong>包覆</strong> 工具提示：</p>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487306174421.png" alt="Alt text" /></p>
-
-<blockquote><p>注意：包覆工具只能接受：平面、圆柱面、圆锥面、拉伸面和旋转面。对于放样形成的曲面，这个工具无效。</p></blockquote>
-
-<p><img src="http://aobojaing.github.io/images/2017-2-19-SolidWorks-how-to-add-text-to-a-surface/1487307109618.png" alt="Alt text" /></p>
 ]]></content>
   </entry>
   

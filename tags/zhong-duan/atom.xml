@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 中断 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/zhong-duan/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-03-08T04:35:52+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派 Learning 003 — GPIO 003 中断模式 — 按键控制LED]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led/"/>
+    <updated>2017-03-08T04:34:01+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/03/08/raspberrypi-GPIO-interrupted-key-control-led</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>我的树莓派型号：Raspberry Pi <strong>2</strong> Model <strong>B</strong> V1.1
+装机系统：<a href="https://www.raspberrypi.org/downloads/noobs/">NOOBS v1.9.2</a></p>
+
+<hr />
+
+<pre><code class="python"># -*- coding:UTF-8 -*-
+
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(24, GPIO.IN, pull_up_dwon=GPIO.PUD_DOWN)
+GPIO.setup(25, GPIO.OUT)
+
+ledStatus = True
+
+def my_callback(channel):
+    print("button pressed!")
+    global ledStatus
+    ledStatus = not ledStatus
+    if ledStatus:
+        GPIO.output(25, GPIO.HIGH)
+        pass
+    else:
+        GPIO.output(25, GPIO.LOW)
+        pass
+    pass
+
+GPIO.add_event_detect(24, GPIO.RISING, callback=my_callback)
+
+while True:
+    try:
+        print("I'm working...")
+        time.sleep(5)
+        pass
+    except KeyboardInterrupt:
+        break
+        pass
+    pass
+
+GPIO.cleanup()
+</code></pre>
+
+<p>代码讲解：</p>
+
+<ul>
+<li><code>global ledStatus</code> ：<a href="http://c.biancheng.net/cpp/html/1827.html">http://c.biancheng.net/cpp/html/1827.html</a></li>
+<li><code>GPIO.add_event_detect(24, GPIO.RISING, callback=my_callback)</code> ：给<code>24</code>引脚添加一个事件函数，触发条件是：捕获到上升沿（<code>GPIO.RISING</code>）。这个参数还可以是：<code>GPIO.FALLING</code>（下降沿）、<code>GPIO.BOTH</code>（两者都有）</li>
+<li><code>except KeyboardInterrupt:</code> 是用来捕获用户是否按了<code>Ctrl + C</code> 组合键。退出程序</li>
+<li><code>GPIO.cleanup()</code>：之前都没有使用过这个函数。这个函数的功能是：jaingaobo所有的GPIO还原回初始输入状态。我们建议在使用RPi.GPIO模块的所有Python程序的最后，都写上这个函数。</li>
+</ul>
+
+
+<p>现在这个程序我们来运行一下：</p>
+
+<pre><code>sudo chmod +x key_control_led_callback.py
+python key_control_led_callback.py
+</code></pre>
+
+<p>现在的运行效果就已经很好的，即使我们上面写的程序脚本里面没有编写按键去抖的相关程序，并且我们也没有安装硬件去抖的电容。但是为了安全起见，我们还是应该摆去抖的程序给它加上。</p>
+
+<p>对于中断模式的检测按键，我们给这种程序添加去抖程序，相当的简单，我们只需要将上面的程序中的这行语句：</p>
+
+<pre><code class="python">GPIO.add_event_detect(24, GPIO.RISING, callback=my_callback)
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>GPIO.add_event_detect(24, GPIO.RISING, callback=my_callback, bouncetime=200)
+</code></pre>
+
+<p>其中<code>bouncetime=200</code> 是延时200ms的意思。就是当检测到上升沿后，进入这个中断，要延时200ms才会执行这个中断里面的程序。</p>
+
+<p>这就是软件去抖。</p>
+
+<hr />
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：<a href="https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/">https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/</a></p>
+]]></content>
+  </entry>
+  
+</feed>
