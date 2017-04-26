@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Windows | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/windows/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-03-08T05:00:09+08:00</updated>
+  <updated>2017-04-26T20:40:10+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -424,6 +424,15 @@ aobosir@ubuntu:~$
 <p>查看<strong>Linux</strong>这端的当前进程：（正常你会看大下面的4个。（我也不知道是什么东西））</p>
 
 <p><img src="/images/2016-12-26-SecureCRT-on-windows-connect-to-Linux-solve-remote-system-refused-the-connection/1482552750155.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>如果还是不行，你就执行下面的命令：</p>
+
+<pre><code>ssh start
+</code></pre>
+
+<p>我就不信现在还是不行，现在肯定是可以正常的连接了。</p>
 
 <h2>搞定</h2>
 
