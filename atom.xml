@@ -4,7 +4,7 @@
   <title><![CDATA[AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-10-16T02:42:24+08:00</updated>
+  <updated>2017-10-16T02:49:19+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -18,11 +18,7 @@
     <link href="http://aobojaing.github.io/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/"/>
     <updated>2017-10-16T02:34:04+08:00</updated>
     <id>http://aobojaing.github.io/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender</id>
-    <content type="html"><![CDATA[<h1>Blender 如何创建一个中空圆柱（圆筒、空心柱） &mdash; 2017年10月16日 星期一</h1>
-
-<p>标签 ： Blender</p>
-
-<hr />
+    <content type="html"><![CDATA[<hr />
 
 <ul>
 <li>我使用的Blender版本：Blender v2.77</li>
