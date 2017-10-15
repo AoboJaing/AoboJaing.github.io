@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 空心圆柱 | AoboSir 博客]]></title>
+  <link href="http://aobojaing.github.io/tags/kong-xin-yuan-zhu/atom.xml" rel="self"/>
+  <link href="http://aobojaing.github.io/"/>
+  <updated>2017-10-16T02:42:24+08:00</updated>
+  <id>http://aobojaing.github.io/</id>
+  <author>
+    <name><![CDATA[Aobo Jaing]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Blender 如何创建一个中空圆柱（圆筒、空心柱）]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/"/>
+    <updated>2017-10-16T02:34:04+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender</id>
+    <content type="html"><![CDATA[<h1>Blender 如何创建一个中空圆柱（圆筒、空心柱） &mdash; 2017年10月16日 星期一</h1>
+
+<p>标签 ： Blender</p>
+
+<hr />
+
+<ul>
+<li>我使用的Blender版本：Blender v2.77</li>
+<li>我使用的电脑系统：Windows 10 64位</li>
+</ul>
+
+
+<hr />
+
+<blockquote><p>扩展：
+* 如何制作一个四视图界面：<a href="http://blog.csdn.net/github_35160620/article/details/52198635">Blender 软件 四视图布局的创建方法</a>
+* 如何在Blender上显示键鼠操作：<a href="http://blog.csdn.net/github_35160620/article/details/51712706">Blender 工具使用——显示键盘和鼠标操作</a></p></blockquote>
+
+<hr />
+
+<h2>1. 在场景中添加一个无上下底面的圆柱：（添加模型的快捷键是：Shift+A）</h2>
+
+<p><img src="http://static.zybuluo.com/AoboSir/vck5dytod6td0yidb86jj9i2/image_1bsgisdjd100v1i47vde4itt4a9.png" alt="image_1bsgisdjd100v1i47vde4itt4a9.png-80.6kB" /></p>
+
+<p>在其中一个视图中，按快捷键<strong>T</strong>，弹出左边栏：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/5pe1bkxncaqx36a6d7jwl4ib/image_1bsgivk2s1m39a7rub3131um09m.png" alt="image_1bsgivk2s1m39a7rub3131um09m.png-68.8kB" /></p>
+
+<p>这里的<strong>Cap Fill Type</strong>（类型）选择：<strong>Nothing</strong>：（即：无上下底面的圆柱）</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/r1l38zo0lrytb1v84xxfkx30/image_1bsgj19ti1opgi5d1hmmjiv8vk13.png" alt="image_1bsgj19ti1opgi5d1hmmjiv8vk13.png-70.9kB" /></p>
+
+<p>然后我们将<strong>Align to View</strong>（正对视角创建）这个复选框的勾选去掉：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/q6agiukll5qfsltnwt0wyvut/image_1bsgj49qf1j45nqdeaqmn3tdv1g.png" alt="image_1bsgj49qf1j45nqdeaqmn3tdv1g.png-73.4kB" /></p>
+
+<p>好，这样我们就创建了一个没有上下底面的圆柱。</p>
+
+<p>接下来，将这个没有上下底面的圆柱变成一个圆筒。</p>
+
+<hr />
+
+<h2>2. <strong>挤出</strong> 成圆筒</h2>
+
+<p>按<strong>Tab</strong>键，从<strong>Object Mode</strong>模式切换到<strong>Edit Mode</strong>：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/39i46kpw8jlye3i91osyicct/image_1bsgk7mhe1191rkj81ohjseh51m.png" alt="image_1bsgk7mhe1191rkj81ohjseh51m.png-69.1kB" /></p>
+
+<p>接下，切换到<strong>面显示</strong>：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/lvdr1ki2g4nqg8h85bktpejv/image_1bsgk9e1p147p1a1ab2spec14er23.png" alt="image_1bsgk9e1p147p1a1ab2spec14er23.png-66kB" /></p>
+
+<p>刚好，现在是全选的状态。我们现在按键盘上的<strong>E</strong>（挤出），然后再鼠标右键。</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/kmdzkmj67y49iztgk8m7t0og/image_1bsgkcpnp1ut21lqu1igbl381r252g.png" alt="image_1bsgkcpnp1ut21lqu1igbl381r252g.png-72.7kB" /></p>
+
+<p>接下来，按快捷键<strong>S</strong>（缩放），确定好了之后，按鼠标左键：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/hco3v33bo2m43adatp3j7bj9/image_1bsgkebd81hbv6hfk481kd3kv2t.png" alt="image_1bsgkebd81hbv6hfk481kd3kv2t.png-84.4kB" /></p>
+
+<p>最后，在场景的左边栏里的<strong>Constraint Axis</strong>下，勾选<strong>X</strong>、<strong>Y</strong> 复选框：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/5rchqzjx574yqqr423z2opco/image_1bsgkfuvh1t5l1te11q5d1kj01pa23a.png" alt="image_1bsgkfuvh1t5l1te11q5d1kj01pa23a.png-75.9kB" /></p>
+
+<hr />
+
+<p>搞定，现在我们已经成功的创建了一个圆筒：（按<strong>Tab</strong>键切换回<strong>Object Mode</strong>模式，看看我们创建好的圆筒）</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/2nizcsdepaostnmbp133sj21/image_1bsgkjl7u13d97h6vqc1ib0c5j3n.png" alt="image_1bsgkjl7u13d97h6vqc1ib0c5j3n.png-150.7kB" /></p>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,8 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="什么是pcduino pcduino = mini PC + Arduino 简单的说，就是一个板子，它所具有的功能 等价于：一个装有系统的微型笔记本电脑再连接一个Arduino UNO 的板子。 pcduino 3B 购买网站：pcDuino3B A20开发板 pcduino3 与 &hellip;">
+  <meta name="description" content="我使用的pcduino板卡型号：pcduino 3B
+我使用的TF卡大小：32G 参考网站： [Video] Run built-in Arduino IDE on pcDuino3 下载需要的东西 下载 内核镜像文件、系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,190 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/05/pcduino-programming-sysytem-Ubuntu-NAND-image/">Learning Pcduino 001 给pcduino烧写系统 — 之 烧写Ubuntu NAND系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-05T21:50:42+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:50 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
+<li>我使用的TF卡大小：32G</li>
+</ul>
+
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="http://learn.linksprite.com/pcduino/quick-start/pcduino3/video-run-built-in-arduino-ide-on-pcduino3/">[Video] Run built-in Arduino IDE on pcDuino3</a></li>
+</ul>
+
+
+<h2>下载需要的东西</h2>
+
+<p>下载 内核镜像文件、系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
+
+<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
+
+<ol>
+<li>一个内核文件镜像文件。</li>
+<li>一个是系统镜像文件。</li>
+<li>一个烧写工具。</li>
+</ol>
+
+
+<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
+
+<p><strong>Step 1 . </strong> 下载Kernel(内核)镜像文件</p>
+
+<p>下面的4个都是同一个内核文件，随便点击一个下载即可。（这里面说的：<strong>PhoenixCard</strong> 就是烧写工具）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480777105671.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：如果你给pcduino板子连接的是<strong>LVDS Screen</strong>显示屏，那么你需要下载的是上面图片中的<strong>LVDS Screen</strong>的<strong>Kernel</strong>内核文件。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480938335315.png" alt="Alt text" /></p></blockquote>
+
+<p><strong>Step 2 . </strong> 下载烧写工具</p>
+
+<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480744828441.png" alt="Alt text" /></p>
+
+<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
+
+<p><strong>Step 3 . </strong> 下载镜像文件</p>
+
+<p>镜像文件随便选择一个 Ubuntu NAND 下载即可：（注意，要对应上面下载的内核文件。）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480938647531.png" alt="Alt text" /></p>
+
+<hr />
+
+<h2>给pcduino板子烧写内核</h2>
+
+<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480939221029.png" alt="Alt text" /></p>
+
+<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
+
+<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480745667635.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480745770272.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 给TF卡烧写Kernel(内核)镜像</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480939466523.png" alt="Alt text" /></p>
+
+<p><strong>Step 4 . </strong> 将TF卡从电脑上拔下来，将TF卡插到pcduino板子上，给pcduino板子上电。</p>
+
+<blockquote><p>注意：</p>
+
+<ul>
+<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
+<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
+<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
+</ul>
+</blockquote>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480781160131.png" alt="Alt text" /></p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480779553594.png" alt="Alt text" /></p>
+
+<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核程序（pcduino板子全自动烧写），大约不到23秒钟左右，中间这个LED不在闪烁，说明：内核文件烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
+
+<hr />
+
+<h2>给pcduino板子烧写Ubuntu NAND系统</h2>
+
+<p><strong>Step 1 . </strong> 再将TF卡通过读卡器连接到电脑，然后使用上面同样的方法（用<strong>SD Formatter</strong>软件）对TF卡进行格式化操作。</p>
+
+<p><strong>Step 2 . </strong> 选择要烧写的镜像文件</p>
+
+<p>将解压后的系统镜像文件（<code>pcduino3_ubuntu_20140807.img</code> 和 <code>update.sh</code>）直接拷贝到TF卡上。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480782215024.png" alt="Alt text" /></p>
+
+<p><strong>Step 3 . </strong> 检查 <code>update.sh</code> 文件</p>
+
+<p>如果你下载的这个：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480940230049.png" alt="Alt text" /></p>
+
+<p>我们现在使用记事本软件打开<code>update.sh</code> 启动文件，检查里面指定的镜像文件名是否正确，可以看到，我现在这个情况，是不正确的：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480780631220.png" alt="Alt text" /></p>
+
+<p>如果我们TF卡根目录里面的镜像文件名为：<code>pcduino3nano_ubuntu_20140807.img</code>。所以我们需要手动修改<code>update.sh</code> 文件：</p>
+
+<p>将其修改为下面这样，并保存文件。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480780787224.png" alt="Alt text" /></p>
+
+<p>总之，这一步（<strong>Step 3 . </strong>）的目的就是：让<code>update.sh</code>文件里面的<code>IMG</code>变量指向正确的镜像文件路径。</p>
+
+<blockquote><p><strong>注意：</strong> 如果你使用的镜像文件是：<strong>pcduino3_ubuntu_20140807.img</strong>，它是有GUI界面的；如果你使用的镜像文件是<strong>pcduino3nano_ubuntu_20140807.img</strong>，它是没有GUI界面的，它只有命令行界面。</p></blockquote>
+
+<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480943598183.png" alt="Alt text" /></p>
+
+<p>这时观察pcduino连接的显示屏，当出现下面的信息时：</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480945409839.png" alt="Alt text" /></p>
+
+<p><strong>Step 5 . </strong> 现在将烧写好的系统的TF卡插到pcduino板子上。然后pcduino自动将TF卡里面的系统镜像安装到pcduino芯片里。（等待大约8分钟）</p>
+
+<p>当你看看到下面的信息的时候，说明系统已经安装完成了。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480944718209.png" alt="Alt text" /></p>
+
+<p><strong>Step 6 . </strong> 这个时候，关闭电源，你可以将SD卡去下来（TF卡已经没有用了，你可以把它扔了，呵呵）。</p>
+
+<p>现在，给板子重新上电，板子自动运行系统。</p>
+
+<p><img src="/images/2016-12-5-pcduino-programming-sysytem-Ubuntu-NAND-image/1480945185981.png" alt="Alt text" /></p>
+
+<h2>搞定</h2>
+
+<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
+<li><a href="http://www.itdadao.com/articles/c15a578261p0.html">Pcduino烧写系统Pcduino 3 Nano 烧写系统小记</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -957,96 +1142,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/01/class-programming-object/">Learning Python 023 类编程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-01T07:03:26+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>使用的电脑系统：Windows 10 64位</li>
-<li>使用的开发集成环境：PyCharm 2016.1.4</li>
-<li>使用的Python的版本：python 3.5.0</li>
-</ul>
-
-
-<hr />
-
-<h1>怎么使用python编写一个 <strong>类</strong></h1>
-
-<p>参考网站：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p01_change_string_representation_of_instances.html">Python3-cookbook 类与对象</a></p>
-
-<p>随便编写一个Python类，类里面至少有下面三个函数：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Pair</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;Pair({0.x!r}, {0.y!r})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;({0.x!s}, {0.y!s})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>__init__()</code> 函数就是类的构造函数。</li>
-<li><code>__repr__()</code>  和 <code>__str__()</code> 函数 都是用来输出字符串用的。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span>
-</span><span class='line'><span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __repr__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __str__() output</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1064,6 +1159,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/08/record-notes-two-life-truths/">记录笔记时得到的人生的两个道理</a>
       </li>
     
@@ -1077,10 +1176,6 @@
     
       <li class="post">
         <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
       </li>
     
   </ul>
@@ -1141,6 +1236,7 @@
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>

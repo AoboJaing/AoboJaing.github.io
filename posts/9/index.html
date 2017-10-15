@@ -11,7 +11,7 @@
   
   <meta name="description" content="使用的电脑系统：Windows 10 64位
 使用的开发集成环境：PyCharm 2016.1.4
-使用的Python的版本：python 2.7.10 和 python 3.5.0 本篇博客对 Python2 和 Python3 都适用。 实例：调用Windows里面的copy命令 比如现在， &hellip;">
+使用的Python的版本：python 3.5.0 怎么使用python编写一个 类 参考网站：Python3-cookbook 类与对象 随便编写一个Python类，类里面至少有下面三个函数： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +70,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/01/class-programming-object/">Learning Python 023 类编程</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-01T07:03:26+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>7:03 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<ul>
+<li>使用的电脑系统：Windows 10 64位</li>
+<li>使用的开发集成环境：PyCharm 2016.1.4</li>
+<li>使用的Python的版本：python 3.5.0</li>
+</ul>
+
+
+<hr />
+
+<h1>怎么使用python编写一个 <strong>类</strong></h1>
+
+<p>参考网站：<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p01_change_string_representation_of_instances.html">Python3-cookbook 类与对象</a></p>
+
+<p>随便编写一个Python类，类里面至少有下面三个函数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Pair</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;Pair({0.x!r}, {0.y!r})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&#39;({0.x!s}, {0.y!s})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>__init__()</code> 函数就是类的构造函数。</li>
+<li><code>__repr__()</code>  和 <code>__str__()</code> 函数 都是用来输出字符串用的。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">p</span>
+</span><span class='line'><span class="n">Pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __repr__() output</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c"># __str__() output</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1298,89 +1388,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/29/octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/">Octopress 搭建静态博客站点 --- 添加访客统计</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-11-29T13:26:33+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:26 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>参考网站：<a href="http://tianweili.github.io/blog/2015/01/11/setup-octopress-blog/#h28">Octopress博客的个性化配置：添加访客统计</a></p>
-
-<hr />
-
-<p><strong>Step 1 . </strong> 本博客的访客统计系统使用的是<strong>Flag Counter</strong>，所以要先去<a href="http://www.flagcounter.com/"><strong>Flag Counter</strong></a>获取代码。</p>
-
-<p><strong>Step 2 . </strong> 拿到代码后添加<code>.\source\_includes\custom\asides\flag_counter.html</code>文件：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;访客统计&lt;/h1&gt;
-</span><span class='line'>  &lt;br/&gt;
-</span><span class='line'>  &lt;a href="http://s07.flagcounter.com/more/2SH"&gt;&lt;img src="http://s07.flagcounter.com/count/2SH/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_12/viewers_0/labels_0/pageviews_1/flags_0/" alt="Flag Counter" border="0"&gt;&lt;/a&gt;
-</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Step 3 . </strong> 将页面添加到侧边栏，在<code>./_config.yml</code>配置文件中添加下面一行配置：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [……, custom/asides/flag_counter.html]</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Step 4 . </strong> 最后添加控制开关，在<code>./_config.yml</code>配置文件中添加下面一行配置：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Flag Counter
-</span><span class='line'>flag_counter: true</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>搞定</h2>
-
-<hr />
-
-<p>现在执行 <code>rake generate</code> 来生成博客站点。</p>
-
-<blockquote><p>如果你在执行这一步的时候不到了下面这个问题：</p>
-
-<pre><code>  Liquid Exception: invalid byte sequence in UTF-8 in _layouts/page.html
-jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
-</code></pre>
-
-<p><img src="/images/2016-11-29-octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/1480394392417.png" alt="Alt text" /></p>
-
-<p>解决办法：</p>
-
-<p><code>.\source\_includes\custom\asides\flag_counter.html</code> 文件使用 <a href="http://www.aobosir.com/blog/2016/10/10/Windows-install-Notepad++/"><strong>Notepad++</strong> 软件</a> 转换为UTF-8无BOM编码格式，即可解决问题。</p>
-
-<p><img src="/images/2016-11-29-octopress-build-static-blog-site-add-Visitors-Pageviews-Counter/1480394475393.png" alt="Alt text" /></p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/10">&larr; Older</a>
@@ -1398,6 +1405,10 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/08/record-notes-two-life-truths/">记录笔记时得到的人生的两个道理</a>
       </li>
     
@@ -1411,10 +1422,6 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     
       <li class="post">
         <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
       </li>
     
   </ul>
@@ -1475,6 +1482,7 @@ jekyll 2.5.3 | Error:  invalid byte sequence in UTF-8
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>

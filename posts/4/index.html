@@ -9,7 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="下载 VTK （7.1.0 版本） 下载网站：http://www.vtk.org/download/ 下载下面这个：大约40多M 使用CMake-GUI软件生成编译文件 解压VTK。然后使用CMake-GUI软件，生成编译文件： 第一次点击 Configure 按钮，选择的编译器是： &hellip;">
+  <meta name="description" content="1 . 注意 需要注意电源线一定要插好，插牢，不可以断电了。 我之前一次，就是，电源线插头由于没有插紧，打到一半的，断电了。 2 . 同时挤出料的步进电机的位置的PLA料线要下面这个样子摆放： 简单的说：就是，靠近挤出料步进电机的PLA线，它不可以在顶部框里面太多圈，最好、最理想的是一圈， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,181 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/18/3D-printer-experience-and-precautions-when-printing-large-models/">3D 打印大型模型时的经验和注意事项</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-18T22:09:58+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>1 . 注意 需要注意电源线一定要插好，插牢，不可以断电了。</p>
+
+<blockquote><p>我之前一次，就是，电源线插头由于没有插紧，打到一半的，断电了。</p></blockquote>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485307588623.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>2 . 同时挤出料的步进电机的位置的PLA料线要下面这个样子摆放：</p>
+
+<p>简单的说：就是，靠近挤出料步进电机的PLA线，它不可以在顶部框里面太多圈，最好、最理想的是一圈，就像下图这样：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485308021035.png" alt="Alt text" /></p>
+
+<blockquote><p>错误的放法：（这是非常不可以的做法，因为这样会导致，在挤出PLA线的步进电机连接PLA线圈的那端的入口，入口出在运行一会儿的时间后，会出现死扣现象。）</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485309295046.png" alt="Alt text" /></p></blockquote>
+
+<p>3 . 同时要注意：要不断的转动：（逆时针转动）</p>
+
+<blockquote><p>这样做的好处是：防止打印一段时间后，PLA线出现拧紧现象。</p></blockquote>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485307763855.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>3 . 最好要使用SD卡，就是将生成的程序保存到SD卡里面，然后在使用读取SD卡的方式来进行打印。（详细的通过SD卡打印模型的介绍，请参考这篇笔记：使用SD卡打印模型）</p>
+
+<blockquote><p>使用SD卡的好处是：</p>
+
+<p>主要是这个软件的原因，如果我们不将生成的程序保存到SD卡上而是直接使用实时的方式，让电脑控制打印机，这个软件消耗的内存特别大：4700M多的内存，我的天啊，每次都是打印到不一会儿，就提示内存不足，然后软件自动异常关闭，然后打印就停止了。</p>
+
+<p>而使用SD卡就可以解决这个问题：</p>
+
+<p>你可以看到，现在所消耗的内存就很小了。属于正常的情况了。</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485304742210.png" alt="Alt text" /></p></blockquote>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485303479812.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485303763458.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>在SD卡启动打印，和在电脑启动打印，在开始的时候是一样的：先加入热床，然后出料口移动到热床位置，然后加入挤出口。热床的温度和挤出口的温度都达到了指定的温度后，就开始打印了。</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485304615579.png" alt="Alt text" /></p>
+
+<blockquote><p>但是使用SD卡时，比较奇怪的是：当先加热热床的时候，两个（热床和挤出口）都显示的是：关闭 状态。热床的当前温度在不断的上升，当热床达到指定温度后（显示方面，是不能判断热床是否加入热成功的。），热床还是显示为：关闭状态，它的<code>/</code>右侧仍然没有变成指定的指定温度。接着挤出头下降，挤出头开始升温。升到指定温度。打印机就开始工作了。</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485304630660.png" alt="Alt text" /></p></blockquote>
+
+<hr />
+
+<p>得到的模型：</p>
+
+<p>正面：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485310579275.png" alt="Alt text" /></p>
+
+<p>反面：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485310602262.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>用砂纸处理后：</p>
+
+<p>正面：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485310642550.png" alt="Alt text" /></p>
+
+<p>反面：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485310659869.png" alt="Alt text" /></p>
+
+<hr />
+
+<blockquote><p>简单的评论一下这个得到的模型：</p>
+
+<p>下面不是很好，为什么不好呢。可能是因为圆环下面窄，中间宽，上面窄，所以开始打印的时候，是窄的，然后慢慢变宽。可能就是打印，从窄到宽这个过程，就得到的效果就不是很好。所以，就会出现现在得到的效果。</p>
+
+<p>但是上面非常好，就是从宽到窄的一个过程，打印机打印的非常好。</p>
+
+<p>所以，我推测，出现上面的下体打印效果差的原因可能有两个。</p>
+
+<p>1 . 可能是打印机打印从窄到宽的模型部分时，效果就比较差。这是无法修复的，属于打印机的与生俱来的毛病。</p>
+
+<p>2 . 也可能是因为，打印机打印接近底板地方的时候，打印的效果就是不怎么好。这个我们就可以修复它。</p>
+
+<p>对于可能性2，我们需要通过实验来验证是不是这个原因。所以，我们又做了一个模型。</p>
+
+<p>我们直接使用这个模型来验证：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485330460807.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485330717421.png" alt="Alt text" /></p>
+
+<p>经过了接近两个小时的打印，得到了最终的结果：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390402045.png" alt="Alt text | 480x0" /></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390431885.png" alt="Alt text | 480x0" /></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485390455275.png" alt="Alt text | 480x0" /></p>
+
+<p>从得到的结果，我们可以看到，从窄到宽的两个部分都不怎么好。</p>
+
+<p>所以，我猜测最可能的原因就是因为：我的模型不够“光滑”。</p></blockquote>
+
+<p>我重新设计一个模型：</p>
+
+<p>这个模型，我分了很多面。（之前的只是横竖都是50个分面），现在是横竖都是255个分面。</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485391232182.png" alt="Alt text" /></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485391327521.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>现在打印看看效果：</p>
+
+<p>你可以从打印的效果，可以看出：跟之前没有什么却别。并没有任何效果的提升。</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485394881419.png" alt="Alt text" /></p>
+
+<hr />
+
+<p>我们再打印一个模型：</p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485403493320.png" alt="Alt text" /></p>
+
+<p>如果模型有问题，你可以把模型上传到下面这个网络里面，进行修复。</p>
+
+<p><a href="https://tools3d.azurewebsites.net/">https://tools3d.azurewebsites.net/</a></p>
+
+<p><img src="/images/2017-2-18-3D-printer-experience-and-precautions-when-printing-large-models/1485449251335.png" alt="Alt text" /></p>
+
+<blockquote><p>或者是 Windows 10系统里面自带的软件：<strong>3D Builder</strong> 软件进行修复。（我的电脑是Windows 10 的，所以，我比较习惯使用这个<strong>3D Builder</strong>软件来修复我使用SolidWorks软件设计好的模型。）</p></blockquote>
+
+<hr />
+
+<h2>解决问题：当打印从小面积到大面积的模型部分的时候出现的打印效果很差问题</h2>
+
+<p>解决办法就是：我现在习惯，不管我打印什么样的模型，我都习惯将模型倾斜45度角进行打印。这样可以有效的解决上面说的这个问题。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1347,61 +1522,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/05/Arduino-ADC-AREF/">Arduino 005 ADC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-05T16:38:21+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:38 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>我使用的Arduino板子是：Arduino UNO R3 （<a href="http://www.aobosir.com/blog/2017/02/05/Arduino-UNO-R3-pin-definition/">这里</a> 关于这个板子的引脚介绍。）</p>
-
-<p>参考文献：《Arduino程序设计基础》 3.4 设置ADC参考电压</p>
-
-<hr />
-
-<p>好的，现在我们知道使用<code>analogRead()</code>函数来获取模拟输入口的电压。</p>
-
-<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283071912.png" alt="Alt text" /></p>
-
-<h2>设置参考电压</h2>
-
-<p>Arduino板子上有一个引脚：<strong>AREF</strong> 引脚，它就是用来连接参考电压的。如果我们没有设置参考电压的话，Arduino会默认使用工作电压作为参考电压。工作电压一般都是5V，所以默认的参考电压也为5V。</p>
-
-<p>如果我们给Arduino的ADC设置参考电压，除了上面我们说的：要在Arduino板子上的<strong>AREF</strong>引脚上给一个参考电压外，我们可以还需要在程序初始化的地方使用<code>analogReference()</code>函数来设置Arduino使用外部参考电压。</p>
-
-<p><img src="/images/2017-2-5-Arduino-ADC-AREF/1486283448260.png" alt="Alt text" /></p>
-
-<hr />
-
-<h2>设置参考电压是需要注意</h2>
-
-<p>如果你要设置参考电压，注意：这个电压必须大于0，并且小于当前的工作电压（Arduino的工作电压一般为5V），否则可能会损坏Arduino控制器。</p>
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1419,6 +1539,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/08/record-notes-two-life-truths/">记录笔记时得到的人生的两个道理</a>
       </li>
     
@@ -1432,10 +1556,6 @@
     
       <li class="post">
         <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/solve-SecureCRT-display-Garbled/">树莓派 Learning 002 装机后的必要操作 11 解决在使用SecureCRT软件链接树莓派时，SecureCRT软件的终端中显示树莓派的中文字体乱码的问题</a>
       </li>
     
   </ul>
@@ -1496,6 +1616,7 @@
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
