@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://aobojaing.github.io/blog/2017/10/23/Blender-addon-completion-in-Text-Editor/</loc>
+<lastmod>2017-10-23T04:18:29+08:00</lastmod>
+</url>
+<url>
 <loc>http://aobojaing.github.io/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/</loc>
 <lastmod>2017-10-16T02:34:04+08:00</lastmod>
 </url>
@@ -1577,5 +1581,11 @@
 </url>
 <url>
 <loc>http://aobojaing.github.io/tags/kong-xin-yuan-zhu/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/zi-dong-bu-quan/</loc>
+</url>
+<url>
+<loc>http://aobojaing.github.io/tags/cha-jian-an-zhuang/</loc>
 </url>
 </urlset>

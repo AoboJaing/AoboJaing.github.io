@@ -9,7 +9,12 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="1 . 注意 需要注意电源线一定要插好，插牢，不可以断电了。 我之前一次，就是，电源线插头由于没有插紧，打到一半的，断电了。 2 . 同时挤出料的步进电机的位置的PLA料线要下面这个样子摆放： 简单的说：就是，靠近挤出料步进电机的PLA线，它不可以在顶部框里面太多圈，最好、最理想的是一圈， &hellip;">
+  <meta name="description" content="可能的原因： 料 出的少
+没有热板，地板最好是热的，这样比较容易上料（打第一层的时候。）
+温度没有掌握好
+设置没有配置好
+打第一层的时候，低板与出料头的距离太大。 2017-1-19 05:33:24 不管了，我这几天，3D打印方面，主要做的方面是： 总结经验
+学习建模型 &mdash; （3D &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +73,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/18/3D-printer-First-test-a-problem-not-print-out/">第一次 测试3D打印机 — 出现问题：打不出来</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-18T22:12:49+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:12 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>可能的原因：</p>
+
+<ul>
+<li>料 出的少</li>
+<li>没有热板，地板最好是热的，这样比较容易上料（打第一层的时候。）</li>
+<li>温度没有掌握好</li>
+<li>设置没有配置好</li>
+<li>打第一层的时候，低板与出料头的距离太大。</li>
+</ul>
+
+
+<hr />
+
+<p>2017-1-19 05:33:24</p>
+
+<p>不管了，我这几天，3D打印方面，主要做的方面是：</p>
+
+<ul>
+<li>总结经验</li>
+<li>学习建模型 &mdash; （3D 打印的六足机器人模型 和 URDF中六足机器人的虚拟模型。）</li>
+</ul>
+
+
+<hr />
+
+<p>这个前几层打不上料的问题，现在视乎已经解决了。</p>
+
+<p>解决方法就是，将底板与出料口的距离竟可以的缩短，最好做到0距离。</p>
+
+<hr />
+
+<p>但是现在还有一个问题：开始的时候挺好的，但打一会，就不再出料。这是怎么回事？</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1446,82 +1513,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/07/cpp-cmake-aux_source_directory/">C++ 编写类文件的时候，需要注意的问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-07T00:13:15+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>一段时间不编写程序了，基本上都忘记了。今天我来介绍一下：当我们编写类文件的时候，需要注意的问题：</p>
-
-<hr />
-
-<p>比如，我现在写了<code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件。</p>
-
-<p>我在<code>pairAlign.hpp</code>文件里面</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">class</span> <span class="nc">PairAlign</span><span class="p">{</span>
-</span><span class='line'><span class="k">public</span><span class="o">:</span>
-</span><span class='line'>  <span class="n">PairAlign</span><span class="p">();</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>你会发现：这个文件的名字和里面的类的名字不同。一个是<code>pairAlign</code>的文件名，一个是<code>PairAlign</code>类。这是没有关系的。这个随便。</p>
-
-<hr />
-
-<p>但是，我在使用<code>make</code>命令编译程序的时候，上面没有错误的程序竟然编译不了。</p>
-
-<p>后来，我们知道了问题。其实是我们的<code>CMakeLists.txt</code>文件里面的问题。因为 <code>pairAlgin.hpp</code>文件 和 <code>pairAlgin.cpp</code>文件是放在<code>pairAlgin</code>文件夹里面的。而我却没有将这个文件夹添加的被编译的<code>SRC_LIST</code>变量里面。</p>
-
-<p>我们需要在<code>CMakeLists.txt</code>文件里面的<code>aux_source_directory(. SRC_LIST)</code>下面添加下面这个代码，就可以解决问题：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="nb">aux_source_directory</span><span class="p">(</span><span class="s">./pairAlign/</span> <span class="s">SRC_LIST</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>现在我们在重新执行：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cmake'><span class='line'><span class="err">cmake</span> <span class="err">..</span>
-</span><span class='line'><span class="err">make</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就可以编译成功了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1539,6 +1530,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/23/Blender-addon-completion-in-Text-Editor/">Blender：下载并安装文本编辑器（Text Editor）代码自动补全插件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
       </li>
     
@@ -1552,10 +1547,6 @@
     
       <li class="post">
         <a href="/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led/">树莓派 Learning 003 — GPIO 002 输入模式 — 按键控制LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
       </li>
     
   </ul>
@@ -1586,8 +1577,8 @@
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 187%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
-<a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
 <a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
@@ -1616,7 +1607,7 @@
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (2)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>

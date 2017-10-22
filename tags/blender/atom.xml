@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Blender | AoboSir 博客]]></title>
   <link href="http://aobojaing.github.io/tags/blender/atom.xml" rel="self"/>
   <link href="http://aobojaing.github.io/"/>
-  <updated>2017-10-16T02:49:19+08:00</updated>
+  <updated>2017-10-23T04:22:34+08:00</updated>
   <id>http://aobojaing.github.io/</id>
   <author>
     <name><![CDATA[Aobo Jaing]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blender：下载并安装文本编辑器（Text Editor）代码自动补全插件]]></title>
+    <link href="http://aobojaing.github.io/blog/2017/10/23/Blender-addon-completion-in-Text-Editor/"/>
+    <updated>2017-10-23T04:18:29+08:00</updated>
+    <id>http://aobojaing.github.io/blog/2017/10/23/Blender-addon-completion-in-Text-Editor</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>参考网站：</p>
+
+<ul>
+<li><p><a href="https://blenderartists.org/forum/showthread.php?355858-Addon-Auto-Completion-in-Blenders-Text-Editor">[Addon] Auto Completion in Blenders Text Editor</a></p></li>
+<li><p><a href="http://code-autocomplete-manual.readthedocs.io/en/latest/setup.html#installation">Code Autocomplete Manual#Installation</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=2idzkdoNZ2M">[Youtube] Blender python autocomplete addon for FREE</a></p></li>
+<li><p><a href="https://github.com/JacquesLucke/code_autocomplete">[Github] Auto Completion and more in Blenders text editor.</a></p></li>
+<li><p><a href="https://github.com/davidhalter/jedi/tree/7651157487511aadc118f7a8753adf709fad1708">[Github] Awesome autocompletion and static analysis library for python</a></p></li>
+</ul>
+
+
+<hr />
+
+<h2>一. 下载</h2>
+
+<p>到这个GitHub网页上下载：<a href="https://github.com/JacquesLucke/code_autocomplete">https://github.com/JacquesLucke/code_autocomplete</a></p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/4gy6kumfw3owfs27lvymcyof/image_1bt2nufct11ueb6u8611pa51c8m9.png" alt="image_1bt2nufct11ueb6u8611pa51c8m9.png-96.5kB" /></p>
+
+<blockquote><p>注意：无需解压</p></blockquote>
+
+<h2>二. 安装</h2>
+
+<p>第1步：启动Blender，然后点击：File -> User Preferences&hellip;</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/6uc47d5q6fpm0k0b957b5ldr/image_1bt2ogbpl15ch190776k1tc18m.png" alt="image_1bt2ogbpl15ch190776k1tc18m.png-89.3kB" /></p>
+
+<p>第2步：选择 <strong>Add-ons</strong> 选项卡，然后点击下面的<strong>Install from File..</strong> 按钮：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/rq47bsicczvqux9og7o6ndys/image_1bt2oj47jt921v237bh1kflfav13.png" alt="image_1bt2oj47jt921v237bh1kflfav13.png-81.2kB" /></p>
+
+<p>第3步：然后选择刚下载的压缩文件，然后点击 <strong>Install from File&hellip;</strong> 按钮：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/9s98wxqsblv08qaui316idyr/image_1bt2oltvlk36ls1pbo1dqn5nh1g.png" alt="image_1bt2oltvlk36ls1pbo1dqn5nh1g.png-63.8kB" /></p>
+
+<p>第4步：勾选它，如下。大功告成。（现在被安装在红色框框里面的这个目录下。）</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/gr7m80rgj9sgqyn91ioo3ouy/image_1bt2oohndsnvd2p1sv0nok15dg1t.png" alt="image_1bt2oohndsnvd2p1sv0nok15dg1t.png-85.8kB" /></p>
+
+<blockquote><p>注意，最后不要忘记点击 <strong>Save User Settings</strong> 这个按钮来保存你当前的设置。</p></blockquote>
+
+<hr />
+
+<h2>三. 如何启动 <strong>Autocomplete</strong> 插件</h2>
+
+<p>第1步：先将Blender的场景布局切换为 <strong>Scpriting</strong> 布局，然后新建一个文件。</p>
+
+<p>你可以看到在<strong>Text Editor</strong>（文本编辑器）窗口的左侧上角的位置有一个小小的加号：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/2xu7cink99enzddz7v7tml0z/image_1bt2pec1i1ekc1jve1pg39nc105f2a.png" alt="image_1bt2pec1i1ekc1jve1pg39nc105f2a.png-18.6kB" /></p>
+
+<p>第2步：点击它（当鼠标放到这个小小的加号上面时，会变成双箭头图标），会将文本编辑器的左边栏弹出来。鼠标往下滚，会看到<strong>Autocomplete</strong> 选项，直接点击 <strong>Start</strong> 按钮，就可以启动文本编辑器的自动补全功能：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/3ft5wzw43ot67vtxhh5x7mtz/image_1bt2pin6edvm1gpg3g516eot8o37.png" alt="image_1bt2pin6edvm1gpg3g516eot8o37.png-37.8kB" /></p>
+
+<blockquote><p>提示：文本编辑器的左边栏如何缩回去：直接使用鼠标拖动就可以缩回去。</p></blockquote>
+
+<p>但是现在这里有一个错误：Jedi library not found</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/d9zl78z21tyfbkwjwv7aa5f8/image_1bt2prpvm1n09ndhao51svc1ada3k.png" alt="image_1bt2prpvm1n09ndhao51svc1ada3k.png-14.1kB" /></p>
+
+<p>第3步：好的，我们现在就来修复这个错误。带GitHub上下载Jedi库，网页地址：<a href="https://github.com/davidhalter/jedi/tree/7651157487511aadc118f7a8753adf709fad1708">https://github.com/davidhalter/jedi/tree/7651157487511aadc118f7a8753adf709fad1708</a></p>
+
+<p>第4步：下载好了后，解压它，然后在将里面的所有文件全部拷贝到刚刚安装的<strong>code_autocomplete-master/Jedi</strong>文件夹里面：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/sm714vp3ju40xerz98ec0r2m/image_1bt2qbkdi1nehk21n721v1pudg41.png" alt="image_1bt2qbkdi1nehk21n721v1pudg41.png-94.5kB" /></p>
+
+<p>拷贝好了：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/iiv76ossm3t8bh8n41kxg7bw/image_1bt2qcpvo1has70v1hct9cv88u4e.png" alt="image_1bt2qcpvo1has70v1hct9cv88u4e.png-66.5kB" /></p>
+
+<p>第5步：现在重新启动Blender软件。现在上面的错误就解决了：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/3dop4mawn83eeihrf2ljq7yc/image_1bt2qhlpc1mo38hj1o1a7f21o675b.png" alt="image_1bt2qhlpc1mo38hj1o1a7f21o675b.png-16.6kB" /></p>
+
+<h2>四. 如何使用</h2>
+
+<blockquote><p>注意，使用前，需要点击<strong>Start</strong>按钮。</p></blockquote>
+
+<p>就和其他的编程软件一样，全自动，自动补全：</p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/vvq968wtm7axrodl91so0y1u/image_1bt2qjo1k1e4kbl31jmhlofe65o.png" alt="image_1bt2qjo1k1e4kbl31jmhlofe65o.png-6.3kB" /></p>
+
+<p><img src="http://static.zybuluo.com/AoboSir/5tiqmhu2y317nwyply72gk65/image_1bt2qlub21i5iej26aj18tpf7365.png" alt="image_1bt2qlub21i5iej26aj18tpf7365.png-11kB" /></p>
+
+<h1>Over</h1>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blender 如何创建一个中空圆柱（圆筒、空心柱）]]></title>
@@ -29,8 +127,12 @@
 <hr />
 
 <blockquote><p>扩展：
-* 如何制作一个四视图界面：<a href="http://blog.csdn.net/github_35160620/article/details/52198635">Blender 软件 四视图布局的创建方法</a>
-* 如何在Blender上显示键鼠操作：<a href="http://blog.csdn.net/github_35160620/article/details/51712706">Blender 工具使用——显示键盘和鼠标操作</a></p></blockquote>
+* 如何制作一个四视图界面：<a href="http://blog.csdn.net/github_35160620/article/details/52198635">Blender 软件 四视图布局的创建方法</a></p>
+
+<ul>
+<li>如何在Blender上显示键鼠操作：<a href="http://blog.csdn.net/github_35160620/article/details/51712706">Blender 工具使用——显示键盘和鼠标操作</a></li>
+</ul>
+</blockquote>
 
 <hr />
 

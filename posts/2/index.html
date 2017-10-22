@@ -9,8 +9,7 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="我使用的电脑的系统：Windows 10 64位
-我之前在电脑里面安装过SolidWorks 2011软件，然后我又给它卸载了。 下载 下载网站：http://www.mfcad.com/solidworks/xiazai/18686.html 我们下载两个文件， &hellip;">
+  <meta name="description" content="如果你在装配体里面插入一个装配体的话，如果被插入的装配体原本是有可动关节的，但是被插入后，可动的关节不能运动了。 要想让它还能动， 其他很简单，我们只需要这样做： 对着我们需要恢复可动的关节的转配体： 然后将 求解为 选为 柔性(F)。（被插入到装配体中的装配体默认这一项是为 刚性&reg;的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/22/how-to-activation-Movable-joint-move-in-assembly/">SolidWorks 如果装配体里面的的装配体有动态关节，如何让它活动</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-22T03:47:59+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>3:47 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<p>如果你在装配体里面插入一个装配体的话，如果被插入的装配体原本是有可动关节的，但是被插入后，可动的关节不能运动了。</p>
+
+<p>要想让它还能动， 其他很简单，我们只需要这样做：</p>
+
+<p>对着我们需要恢复可动的关节的转配体：</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706079338.png" alt="Alt text" /></p>
+
+<p>然后将 <strong>求解为</strong> 选为 <strong>柔性(F)</strong>。（被插入到装配体中的装配体默认这一项是为 <strong>刚性&reg;</strong>的。）</p>
+
+<p><img src="/images/2017-2-22-how-to-activation-Movable-joint-move-in-assembly/1487706131122.png" alt="Alt text" /></p>
+
+<p>现在转配体里面的包含的装配体的可动关节就可以动了。（如果可动的关节太多，你会明显的感觉到SolidWorks软件运行有点卡。）</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2027,41 +2071,6 @@ SW Electrical 2D
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/19/SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/">SolidWorks 如何在曲面上获取与基准线相交的分割线</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-02-19T16:33:25+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:33 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356248650.png" alt="Alt text" /></p>
-
-<p>分割类型选择： <strong>交叉点</strong>，然后选择一个基准面 再选择一个 面。</p>
-
-<p><img src="/images/2017-2-19-SolidWorks-how-to-get-split-line-on-surface-that-intersects-baseline/1487356275589.png" alt="Alt text" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -2079,6 +2088,10 @@ SW Electrical 2D
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/23/Blender-addon-completion-in-Text-Editor/">Blender：下载并安装文本编辑器（Text Editor）代码自动补全插件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
       </li>
     
@@ -2092,10 +2105,6 @@ SW Electrical 2D
     
       <li class="post">
         <a href="/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led/">树莓派 Learning 003 — GPIO 002 输入模式 — 按键控制LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
       </li>
     
   </ul>
@@ -2126,8 +2135,8 @@ SW Electrical 2D
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 187%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
-<a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
 <a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
@@ -2156,7 +2165,7 @@ SW Electrical 2D
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (2)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>

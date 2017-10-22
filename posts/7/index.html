@@ -9,10 +9,9 @@
   <meta name="author" content="Aobo Jaing">
 
   
-  <meta name="description" content="开发环境 Python第三方库：lxml、Twisted、pywin32、scrapy
-Python 版本：python-3.5.0-amd64
-PyCharm软件版本：pycharm-professional-2016.1.4
-电脑系统：Windows 10 64位 如果你还没有搭建好开发环境 &hellip;">
+  <meta name="description" content="目前的Intel RealSense摄像头一共有三款：F200、SR300、R200。 SR300 和 F200 都属于：近距离摄像头（Front Facing）。
+R200 属于：远距离摄像头（Rear Facing）
+在Intel RealSense 官方示例程序中，总会在程序的前缀出现： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +70,102 @@ PyCharm软件版本：pycharm-professional-2016.1.4
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/14/Intel-RealSense-Camera-Introduction-F200-SR300-R200/">Intel RealSense 000 Intel RealSense摄像头介绍：F200、SR300、R200</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-14T18:47:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><hr />
+
+<hr />
+
+<p>目前的Intel RealSense摄像头一共有三款：<strong>F200</strong>、<strong>SR300</strong>、<strong>R200</strong>。</p>
+
+<ul>
+<li>SR300 和 F200 都属于：近距离摄像头（Front Facing）。</li>
+<li>R200 属于：远距离摄像头（Rear Facing）</li>
+<li>在Intel RealSense 官方示例程序中，总会在程序的前缀出现：<code>FF_</code>、<code>RF_</code>或者<code>DF_</code>，它们分别表示：<strong>适用于近距离摄像头</strong>（Front Facing）、<strong>适用于远距离摄像头</strong>（Rear Facing） 和 <strong>两者都适用</strong>（Dual Facing）。</li>
+</ul>
+
+
+<hr />
+
+<h2>SR300</h2>
+
+<p>官网介绍：<a href="https://software.intel.com/en-us/articles/introducing-the-intel-realsense-camera-sr300">Introducing the Intel® RealSense™ Camera SR300</a></p>
+
+<p>外部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614405367.png" alt="Alt text" /></p>
+
+<p>内部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614321225.png" alt="Alt text" /></p>
+
+<hr />
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481614483853.png" alt="Alt text" /></p>
+
+<p>SR300 只有：</p>
+
+<ul>
+<li>测量范围：0.2m ~ 1.2m （要求：室内，并且）</li>
+<li>深度摄像头（640x480 60fps）</li>
+<li>彩色摄像头（1080p 30fps 或者 720p 60fps 可调）</li>
+<li>红外线摄像头（640x480 200fps ）</li>
+<li>无<strong>左</strong>（left）、<strong>右</strong>（right）摄像头</li>
+</ul>
+
+
+<hr />
+
+<h2>R200</h2>
+
+<p>参考网站：<a href="https://software.intel.com/en-us/articles/realsense-r200-camera">Developing for the Intel® RealSense™ Camera (R200)</a></p>
+
+<p>外部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707509944.png" alt="Alt text" /></p>
+
+<p>内部：</p>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481707878472.png" alt="Alt text" /></p>
+
+<p>R200 有：</p>
+
+<ul>
+<li>测量范围：</li>
+</ul>
+
+
+<hr />
+
+<h2><a href="https://software.intel.com/en-us/articles/intel-realsense-data-ranges">Intel RealSense 测量范围</a></h2>
+
+<p><img src="/images/2016-12-14-Intel-RealSense-Camera-Introduction-F200-SR300-R200/1481708072967.png" alt="Alt text" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -967,115 +1062,6 @@ ls
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/05/pcduino-programming-system-ubuntu-14/">Learning Pcduino 002 给pcduino烧写系统 — 之 烧写Ubuntu 14系统</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-12-05T22:19:23+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<ul>
-<li>我使用的pcduino板卡型号：<a href="http://www.aobosir.com/blog/2016/12/05/pcduino-3B-Board-Introduction/">pcduino 3B</a></li>
-<li>我使用的TF卡大小：32G</li>
-</ul>
-
-
-<hr />
-
-<p>参考网站：</p>
-
-<ul>
-<li><a href="https://www.youtube.com/watch?v=XXauYnwElpQ">Installing Ubuntu 14 on a pcDuino3B</a></li>
-</ul>
-
-
-<hr />
-
-<h2>下载需要的东西</h2>
-
-<p>下载 系统镜像文件 和 必要的烧写工具。（我使用的下载软件是迅雷，不是浏览器自带的下载器）</p>
-
-<p>以我现在使用的板子（pcduino3B）为例，所以在<a href="http://www.linksprite.com/image-for-pcduino3-nano-pcduino3b/">这个网站</a>里面下载。需要现在三个东西：</p>
-
-<ol>
-<li>一个是系统镜像文件。</li>
-<li>一个烧写工具。</li>
-</ol>
-
-
-<blockquote><p>如果你使用的不是pcduino3B板子，那么请到 <a href="http://www.linksprite.com/pcduino-download/">这个网站</a>里选择你使用的板子，到对应的板子链接里下载对应板子的内核镜像文件、系统镜像文件和必要的烧写工具。</p></blockquote>
-
-<p><strong>Step 1 . </strong> 下载镜像文件</p>
-
-<p>镜像文件选择下面的 Ubuntu 14 下载：（注意，这个Ubuntu 14 只需要下载这个文件即可，因为它是一个 <strong>内核+系统</strong> 的镜像文件。）</p>
-
-<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480946917168.png" alt="Alt text" /></p>
-
-<p><strong>Step 2 . </strong> 下载烧写工具</p>
-
-<p>所以，我下载 <strong>PhoenixCard</strong> 烧写工具：（烧写工具在网页的下面，往下滚就能看到。）</p>
-
-<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947440669.png" alt="Alt text" /></p>
-
-<blockquote><p>注意：注意它的下载提示。如果是给pcduino3系列使用，必须要使用 Phonenix card这个 软件的 V309 版本。很不错的是：这个下载链接默认下载的就是 Phonenix card V309。</p></blockquote>
-
-<hr />
-
-<h2>给pcduino板子烧写Ubuntu 14系统</h2>
-
-<p><strong>Step 1 . </strong> 用读卡器将TF卡（小型的SD卡）连接到电脑。（必须）使用<strong>SD Formatter</strong>工具（专业格式化SD卡的软件）对TF卡进行格式化。</p>
-
-<blockquote><p><strong>SD Formatter</strong>工具具体的下载、安装和使用，请到<a href="http://blog.csdn.net/github_35160620/article/details/52038918">这篇博客</a>中进行了解。</p></blockquote>
-
-<p><strong>Step 2 . </strong> 烧写工具 <strong>PhoenixCard</strong> 下载完，解压后，直接双击<strong>PhoenixCard.exe</strong>就可以启动 <strong>PhoenixCard</strong>烧写软件。</p>
-
-<p>点击<strong>镜像文件</strong>按钮，选择刚刚下载解压后的镜像文件。</p>
-
-<p>然后点击 <strong>烧录</strong> 按钮，进行烧录。（大于5分钟时间。）</p>
-
-<p><strong>Step 3 . </strong> 将TF卡插到pcduino板子上，只给板子供电即可。</p>
-
-<blockquote><p>注意：</p>
-
-<ul>
-<li>pcduino板子只需要插上TF卡和接通电源即可，其他的什么设备都不需要连接。</li>
-<li>接通电源一定要是5V2A，最好是使用充电宝或者充电头直接给板子供电。<strong>不可以使用电脑USB接口给板子供电。因为电流不够。</strong></li>
-<li>如果你真的使用电脑的USB接口给板子供电，后面板子安装系统镜像的时候，是不会成功的。</li>
-</ul>
-</blockquote>
-
-<p><img src="/images/2016-12-5-pcduino-programming-system-ubuntu-14/1480947234663.png" alt="Alt text" /></p>
-
-<p>中间的LED4（TX）一1秒的间隔闪烁，说明正在烧写内核和系统程序（pcduino板子全自动烧写），大约不到3分钟左右，中间这个LED不再闪烁（熄灭），说明：内核和系统烧写完成。这时拔下TF卡，再将pcduino板子断开电源。</p>
-
-<p><strong>Step 4 . </strong> 给pcduino板子连接显示器，再接通电源：（这时pcduino板子还不插TF卡）</p>
-
-<p>Ubuntu 14系统成功运行。</p>
-
-<h2>搞定</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1093,6 +1079,10 @@ ls
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/23/Blender-addon-completion-in-Text-Editor/">Blender：下载并安装文本编辑器（Text Editor）代码自动补全插件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/16/How-to-create-a-Hollow-Cylinder-with-Blender/">Blender 如何创建一个中空圆柱（圆筒、空心柱）</a>
       </li>
     
@@ -1106,10 +1096,6 @@ ls
     
       <li class="post">
         <a href="/blog/2017/03/08/raspberrypi-GPIO-input-key-control-led/">树莓派 Learning 003 — GPIO 002 输入模式 — 按键控制LED</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/06/raspberrypi-GPIO-blinkled-LED/">树莓派 Learning 003 — GPIO 001 — 点亮一个LED</a>
       </li>
     
   </ul>
@@ -1140,8 +1126,8 @@ ls
 <a style="font-size: 129%" href="/tags/vs2015/">VS2015</a>
 <a style="font-size: 129%" href="/tags/visual-studio-2015/">Visual Studio 2015</a>
 <a style="font-size: 187%" href="/tags/windows/">Windows</a>
+<a style="font-size: 115%" href="/tags/args/">args</a>
 <a style="font-size: 147%" href="/tags/git/">git</a>
-<a style="font-size: 115%" href="/tags/open/">open</a>
 <a style="font-size: 115%" href="/tags/os/">os</a>
 <a style="font-size: 129%" href="/tags/pcduino/">pcduino</a>
 <a style="font-size: 129%" href="/tags/pcduino3b/">pcduino3B</a>
@@ -1170,7 +1156,7 @@ ls
     <li class='category'><a href='/blog/categories/3dda-yin/'>3d打印 (6)</a></li>
 <li class='category'><a href='/blog/categories/arduino/'>arduino (6)</a></li>
 <li class='category'><a href='/blog/categories/auto-control/'>auto control (4)</a></li>
-<li class='category'><a href='/blog/categories/blender/'>blender (1)</a></li>
+<li class='category'><a href='/blog/categories/blender/'>blender (2)</a></li>
 <li class='category'><a href='/blog/categories/c-number/'>c# (3)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus/'>c++ (4)</a></li>
 <li class='category'><a href='/blog/categories/c-plus-plus-error/'>c++ error (1)</a></li>
